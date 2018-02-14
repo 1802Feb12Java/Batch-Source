@@ -1,57 +1,6 @@
 package com.revature;
 
 public class Scopes {
-<<<<<<< HEAD
-
-	static int numOfPuppies; //static variable, lifetime = class
-	
-	//instance
-	private int numOfLegs;
-	static private boolean goodBoy;
-	private String nameColor;
-	
-	//identifiers
-	//begin with letters, underscores, or currency characters
-	//after first, can include numbers also
-	private int $isadumbvariablename;
-	
-	
-	
-	public Scopes(int numOfLegs, boolean goodBoy, String nameColor) {
-		//the parameter "nameColor" is a method scope
-		this.numOfLegs = numOfLegs; //this.[] is instance scope
-		this.goodBoy = goodBoy; 
-		this.nameColor = nameColor; //Shadowing - what occurs when variables in different 
-									// scopes have the same identifier
-	}
-
-	public static void main(String[] args) {
-
-		System.out.println(numOfPuppies);
-		System.out.println(goodBoy);
-
-		
-
-	}
-	
-	public int methodTest(int a) { // a and test are method variables, lifetime= method
-		int test = 3+a;
-		return test;
-		
-	}
-	
-	public void staticTest() {
-		static int test =3;
-		System.out.println(test);
-	} 
-	
-	public void loopy() {
-		for(int i=0; i<5; i++) {// i is a block scope variable, lifetime = loop
-			System.out.println(i + "is a number! Roll tide!");
-		}
-	}
-
-=======
 	static int numOfPuppies; // static variable, lifetime= class;
 	
 	//instance
@@ -110,5 +59,4 @@ public class Scopes {
 		static int test= 3;
 		System.out.println(test);
 	}
->>>>>>> origin/KnightenM
 }
