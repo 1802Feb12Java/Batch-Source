@@ -1,10 +1,18 @@
 package com.revature.beans;
 
+<<<<<<< HEAD
 //POJO- Plain Ol' Java Object:
 //private variables
 //constructors
 //getters and setters
 //toString()
+=======
+//POJO-Plain Ol' Java Object:
+//private variables
+//constructors
+//getters and setters
+// toString()
+>>>>>>> origin/KnightenM
 
 public class Jelly {
 
@@ -14,8 +22,13 @@ public class Jelly {
 	private String flavor;
 	private int id;
 	
+<<<<<<< HEAD
 	public Jelly() {
 		
+=======
+	public Jelly() {	
+	
+>>>>>>> origin/KnightenM
 	}
 
 	public String getColor() {
@@ -26,6 +39,11 @@ public class Jelly {
 		this.color = color;
 	}
 
+<<<<<<< HEAD
+=======
+	
+
+>>>>>>> origin/KnightenM
 	public String getShape() {
 		return shape;
 	}
@@ -64,6 +82,9 @@ public class Jelly {
 				+ "]";
 	}
 	
+<<<<<<< HEAD
 		
 	
+=======
+>>>>>>> origin/KnightenM
 }
