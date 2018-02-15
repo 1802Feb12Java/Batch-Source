@@ -18,7 +18,7 @@ public class Main {
 		new Q4(8);
 		
 		// Question five - substring based on index
-		new Q5("antidisestablishmentarianism", 28);
+		new Q5("antidisestablishmentarianism", 10);
 		
 		// Question six - determine if given number is even
 		new Q6(30);

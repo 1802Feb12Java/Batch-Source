@@ -5,7 +5,7 @@ public class Q5 {
 	public Q5(String str, int index) {
 		
 		int len = str.length();
-		String[] arr = str.split("(?!^)");
+		String[] arr = str.split("");
 		String substr = "";
 		
 		if(index > len) {
