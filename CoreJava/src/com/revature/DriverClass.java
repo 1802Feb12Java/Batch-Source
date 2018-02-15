@@ -1,9 +1,9 @@
 package com.revature;
 
-public class Main {
+public class DriverClass {
 
 	public static void main(String[] args) {
-		System.out.println("Justin did a thing again!");
+		// TODO Auto-generated method stub
 
 	}
 
