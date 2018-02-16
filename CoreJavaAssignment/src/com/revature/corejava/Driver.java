@@ -70,7 +70,7 @@ public class Driver {
 		
 		System.out.println("------Begin Question 9 Output------");
 		Question9.printPrimes();
-		System.out.println("------End Question 9 Output------");*/
+		System.out.println("------End Question 9 Output------");
 		
 		System.out.println("------Begin Question 10 Output------");
 		System.out.println("Enter First Number");
@@ -81,21 +81,22 @@ public class Driver {
 		scanner.nextLine();
 		System.out.println("The smaller number is: " + Question10.findMinimum(a, b));
 		System.out.println("------End Question 10 Output------");
+		
 		System.out.println("------Begin Question 11 Output------");
-
+		Question11.accessOtherPackage();
 		System.out.println("------End Question 11 Output------");
 		
 		System.out.println("------Begin Question 12 Output------");
-
+		Question12.printEvenNumbers();
 		System.out.println("------End Question 12 Output------");
 		System.out.println("------Begin Question 13 Output------");
-
+		Question13.printTriangle();
 		System.out.println("------End Question 13 Output------");
 		System.out.println("------Begin Question 14 Output------");
-
-		System.out.println("------End Question 14 Output------");
+		Question14.demonstrateSwitch();
+		System.out.println("------End Question 14 Output------");*/
 		System.out.println("------Begin Question 15 Output------");
-
+		
 		System.out.println("------End Question 15 Output------");
 		System.out.println("------Begin Question 16 Output------");
 
