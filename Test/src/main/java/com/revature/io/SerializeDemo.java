@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-
+import com.revature.beans.*;
 public class SerializeDemo {
 	public static void writeObject(Serializable s, String filename)
 	{
