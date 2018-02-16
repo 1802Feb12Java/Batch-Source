@@ -13,7 +13,7 @@ public class Scopes {
 	private int $isadumbvariablename;
 	
 	/*Reference types are objects. 
-	 * They‚Äôre more than just a number;
+	 * Theyíre more than just a number;
 	 *  they hold bits which refer to an object.
 	Primitive types are just a value (e.g. int, double, byte, char).*/
 	//Java is a language that passes by value.
@@ -31,7 +31,7 @@ public class Scopes {
 	
 
 	public Scopes(int numOfLegs, boolean goodBoy,
-			String nameColor) {//the parameter ‚ÄúnameColor‚Äù is a method scope
+			String nameColor) {//the parameter ìnameColorî is a method scope
 		this.numOfLegs = numOfLegs; //this.[] is instance scope
 		this.goodBoy = goodBoy;
 		this.nameColor = nameColor;//Shadowing -What occurs when variables 
@@ -56,7 +56,7 @@ public class Scopes {
 	}
 	
 	public void staticTest() {
-		static int test= 3;
+		int test= 3;
 		System.out.println(test);
 	}
 }
