@@ -2,13 +2,21 @@ package com.revature.classtypes;
 
 import java.util.Arrays;
 
+<<<<<<< HEAD
 public class Guppie extends Fishes{
 	private int fins;
 	private String name;
+=======
+public class Guppie extends Fishes  {
+	private int fins=this.numofFins;
+	private String name;
+	private String type;
+>>>>>>> KnightenM
 	
 	public Guppie() {
 		super();
 	}
+<<<<<<< HEAD
 	public Guppie(String name, String type) {
 		super();
 		this.fins = this.numOfFins;
@@ -17,6 +25,15 @@ public class Guppie extends Fishes{
 	}
 	private String type;
 
+=======
+	public Guppie( String name, String type) {
+		super();
+		//this.fins = this.numofFins;
+		this.name = name;
+		this.type = type;
+	}
+	
+>>>>>>> KnightenM
 	public int getFins() {
 		return fins;
 	}
@@ -36,6 +53,7 @@ public class Guppie extends Fishes{
 		this.type = type;
 	}
 	@Override
+<<<<<<< HEAD
 	public void typeOFish(String [] a) {
 		System.out.println(Arrays.toString(a));		
 	}
@@ -48,6 +66,21 @@ public class Guppie extends Fishes{
 	public void eat() {
 		System.out.println("eat");
 		
+=======
+	public void typeOFish(String[] a) {
+		System.out.println(Arrays.toString(a));
+		
+	}
+	@Override
+	public void swim(int speed) {
+		// TODO Auto-generated method stub
+		System.out.println("swim!");
+	}
+	@Override
+	public void eat() {
+		// TODO Auto-generated method stub
+		System.out.println("nom nom nom");
+>>>>>>> KnightenM
 	}
 	
 }
