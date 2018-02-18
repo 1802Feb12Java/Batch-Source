@@ -1,9 +1,0 @@
-package com.revature;
-
-import com.revature.otherpackage.Q11b;;
-
-public class Q11 {
-	public void run() {
-		
-	}
-}

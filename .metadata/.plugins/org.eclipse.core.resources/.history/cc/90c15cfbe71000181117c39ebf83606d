@@ -1,9 +1,0 @@
-package com.revature;
-
-public class TestClass {
-	{System.out.println("@@@@@@@@@@@");}
-	
-	public TestClass() {
-		System.out.println("jhasdglgdsahgdakljgdaf");
-	}
-}

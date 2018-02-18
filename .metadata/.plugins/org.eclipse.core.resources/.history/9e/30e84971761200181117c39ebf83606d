@@ -1,7 +1,0 @@
-package com.revature;
-
-public class Q6 {
-	public void run() {
-		System.out.println();
-	}
-}

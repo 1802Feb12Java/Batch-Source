@@ -1,7 +1,0 @@
-package com.revature.io;
-
-public class IO {
-	public void writeOutputStreamContents(String contents) {
-		
-	}
-}

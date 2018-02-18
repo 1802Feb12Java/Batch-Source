@@ -1,7 +1,0 @@
-package com.revature;
-
-public class Q15 implements Q15b{
-	public void run() {
-		
-	}
-}

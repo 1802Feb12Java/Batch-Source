@@ -1,6 +1,0 @@
-package com.revature;
-
-public class Wrapperz {
-	//wrappers allow primitive to be treated as objects
-	
-}

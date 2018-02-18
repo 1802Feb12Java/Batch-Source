@@ -1,8 +1,0 @@
-package com.revature;
-
-public class miniMouse {
-
-	miniMouse(){
-		System.out.println("@@@@@@@@@@@@@@");
-	}
-}

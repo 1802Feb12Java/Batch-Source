@@ -1,6 +1,0 @@
-package com.revature.classtypes;
-
-public abstract class Fishes {
-	public abstract void swim(int speed);
-	public abstract void eat();
-}

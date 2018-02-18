@@ -1,9 +1,0 @@
-package com.revature;
-
-import java.util.ArrayList;
-
-public class Q19 {
-	public void run() {
-		ArrayList<int> arrList = new ArrayList<int>();
-	}
-}
