@@ -1,9 +1,9 @@
 package com.revature.corejava;
 
-//Question 1: Perform Bubble Sort
+//Q1. Perform a bubble sort on the following integer array:  1,0,5,6,3,2,3,7,9,8,4
 public class Q1BubbleSort {
 
-	public static int [] BubbleSort(int [] array) {
+	public static int [] bubbleSort(int [] array) {
 		boolean swapOccurred;   //loop control value
 		int temp = 0;  			//temp variable for swapping
 		
@@ -13,6 +13,7 @@ public class Q1BubbleSort {
 			swapOccurred = false;	//at the start of each loop iteration, a swap has not occurred
 			for(int counter = 0; counter < array.length - 1; counter++) {
 				//determine if the value in the lower index is smaller than the value in index + 1
+				//if the values are equal, or the index + 1 is larger, there is no swap
 				if(array[counter] > array[counter + 1]) {
 					//copy the value in the higher index to the temporary variable
 					temp = array[counter + 1];
