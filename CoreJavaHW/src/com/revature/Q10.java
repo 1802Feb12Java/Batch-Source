@@ -1,7 +1,7 @@
 package com.revature;
 
 public class Q10 {
-	public void run() {
+	public static void run() {
 		double[] numArr = {0.457, 5.78345, 10.4516, 1.645132, 4.651, 9.1237, 3.119, 7.546, 8.789};
 		
 		boolean result;
@@ -16,7 +16,7 @@ public class Q10 {
 		}
 	}
 	
-	public boolean firstIsMin(double a, double b) { //return true if the first is smaller
+	public static boolean firstIsMin(double a, double b) { //return true if the first is smaller
 		return a<=b ? true:false;	//here's the ternary
 	}
 }

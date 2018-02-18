@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Q17 {
 	//Interest = Principal* Rate* Time
 	
-	public void run() {
+	public static void run() {
 		Scanner scan = new Scanner(System.in);
 		
 		System.out.print("Enter your principal: ");

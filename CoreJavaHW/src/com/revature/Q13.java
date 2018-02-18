@@ -1,7 +1,7 @@
 package com.revature;
 
 public class Q13 {
-	public void run() {
+	public static void run() {
 		String str = "";
 		for(int i=0; i<4; i++) {	//print 4 lines
 			if(i<=1) {

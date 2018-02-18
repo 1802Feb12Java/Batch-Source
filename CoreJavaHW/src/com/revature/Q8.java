@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class Q8 {
-	public void run() {
+	public static void run() {
 		ArrayList<String> stringList = new ArrayList<String>();
 		Collections.addAll(stringList, "karan", "madam", "tom", "civic", "radar", "jimmy", "kayak", "john",  "refer", "billy", "did");
 		//storing them all in the the arraylist

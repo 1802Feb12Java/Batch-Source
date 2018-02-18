@@ -16,7 +16,7 @@ public class Q7 implements Comparator<Employee> {
 		
 		for(int i=0; i<empArray.length-1; i++) {
 			if(compare(empArray[0], empArray[i+1])<0) {	//comparing the first employee to the other three
-				//if .compare, overridden from the comparator interface, returns that the first one is before the one being checked 
+				//if .compare, overridden from the comparator interface, returns that the first Employee is before the second argument
 				System.out.println(empArray[0].toString() + " goes before " + empArray[i+1].toString());	//print the first one, then the second
 			}
 			else {	//if they're equal or the one being checked goes before the first employee
@@ -73,7 +73,7 @@ class Employee{
 	//everything below is just default stuff from Ctrl+Alt+S
 	@Override
 	public String toString() {
-		return "[" + name + ", department=" + department + ", age=" + age + "]";
+		return "[" + name + ", " + department + ", " + age + "]";
 	}
 	public String getName() {
 		return name;

@@ -3,7 +3,7 @@ package com.revature;
 import com.revature.otherpackage.Q11b;	//have to import the other package to get access to the class
 
 public class Q11 {
-	public void run() {
+	public static void run() {
 		Q11b q11b = new Q11b();		//create an instance of the class to use them
 		System.out.println("Getting default float values:\tf1 = " + q11b.getF1() + "\tf2 = " + q11b.getF2());	//"getting" the variables
 		System.out.print("Changing f1 to 25.4: ");

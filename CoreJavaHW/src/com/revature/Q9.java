@@ -3,7 +3,7 @@ package com.revature;
 import java.util.ArrayList;
 
 public class Q9 {
-	public void run() {
+	public static void run() {
 		ArrayList<Integer> intList = new ArrayList<Integer>();
 		for(int i=1; i<=100; i++) {
 			intList.add(i);		//adding 1-100 to the list
@@ -14,7 +14,7 @@ public class Q9 {
 		System.out.println();	//formatting
 	}
 	
-	public void findAndPrintAllPrimes(ArrayList<Integer> list) {
+	public static void findAndPrintAllPrimes(ArrayList<Integer> list) {
 		boolean prime;	//like Q8, assumed true unless something doesn't match up
 		for(Integer num : list) {
 			prime = true;	//reset the prime boolean to assume it would be

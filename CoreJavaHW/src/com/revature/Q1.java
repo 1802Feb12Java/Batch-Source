@@ -3,7 +3,7 @@ package com.revature;
 import java.util.Arrays;
 
 public class Q1 {	
-	public void run() {		
+	public static void run() {		
 		int[] givenArray = {1,0,5,6,3,2,3,7,9,8,4};
 		System.out.println("Pre-sorted:\t"+Arrays.toString(givenArray));
 		
@@ -11,7 +11,7 @@ public class Q1 {
 		System.out.println("Sorted:\t\t"+Arrays.toString(sortedArray));
 	}
 	
-	public int[] bubbleSort(int[] arr) {
+	public static int[] bubbleSort(int[] arr) {
 		boolean numsWereSwapped = true;	//this will be used to keep track of if there was a swap in each passing of the array
 		while(numsWereSwapped == true) {	//this while represents every passing through the whole array
 										//check if there was a swap to see if it was already sorted

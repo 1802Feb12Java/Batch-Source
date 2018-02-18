@@ -1,7 +1,7 @@
 package com.revature;
 
 public class Q12 {
-	public void run() {
+	public static void run() {
 		int[] arr = new int[100];
 		for(int i=1; i<=100; i++) {
 			arr[i-1] = i;	//fill up the array with 1-100

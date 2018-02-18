@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.Scanner;
 
 public class Q14 {
-	public void run() {
+	public static void run() {
 		Scanner scan = new Scanner(System.in);
 		System.out.print("Hi. Please input 1, 2, or 3: ");
 		int choice = scan.nextInt();		//get the user input for if they want to do 1, 2, or 3

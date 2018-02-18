@@ -1,7 +1,7 @@
 package com.revature;
 
 public class Q16 {
-	public void run(String[] input) {
+	public static void run(String[] input) {
 		int inputLength = 0;
 		for(String s : input) {
 			inputLength += s.length();	//go through the array, add up all the string lengths

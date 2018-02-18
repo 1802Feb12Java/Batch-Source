@@ -3,7 +3,7 @@ package com.revature;
 import java.util.Scanner;
 
 public class Q4 {
-	public void run() {
+	public static void run() {
 		System.out.println("1! = " +factorial(1));	//print out a couple samples
 		System.out.println("4! = " +factorial(4));
 		System.out.println("7! = " +factorial(7));
@@ -14,7 +14,7 @@ public class Q4 {
 		System.out.println(userInput + "! = "+factorial(userInput));
 	}
 	
-	public long factorial(int n) {
+	public static long factorial(int n) {
 		if(n==0) {
 			return 1;
 		}

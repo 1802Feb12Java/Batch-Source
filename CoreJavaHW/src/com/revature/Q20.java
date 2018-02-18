@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Q20 {
-	public void run() {
+	public static void run() {
 		File file = new File("Data.txt");	//make the File object to give to the inputstream to tell it to read Data.txt
 		int charAsInt = 0;		//for later
 		StringBuilder sb = new StringBuilder();		//will store the entire file contents basically

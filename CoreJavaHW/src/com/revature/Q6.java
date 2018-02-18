@@ -3,7 +3,7 @@ package com.revature;
 import java.util.Scanner;
 
 public class Q6 {
-	public void run() {
+	public static void run() {
 		System.out.println("0 is "+isEvenOrOdd(0)+".");		//print test cases
 		System.out.println("1 is "+isEvenOrOdd(1)+".");
 		System.out.println("2 is "+isEvenOrOdd(2)+".");
@@ -19,7 +19,7 @@ public class Q6 {
 		System.out.println(userInput + " is " + isEvenOrOdd(userInput)+".");
 	}
 	
-	public String isEvenOrOdd(int i) {
+	public static String isEvenOrOdd(int i) {
 		if(i>2) {		//for positive numbers
 			while(i>2) {	//do this until we get i <= 2
 				i -= 2;	//subtract 2 from i
