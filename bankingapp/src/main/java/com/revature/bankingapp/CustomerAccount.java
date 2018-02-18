@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -62,11 +63,11 @@ public class CustomerAccount {
 					account = "checking";
 				else
 					account = "savings";
-				if (jointAccount == "Y" || jointAccount == "y")
-					account += " joint";
+				if (jointAccount.contains("y") || jointAccount.contains("y"))
+					account += " joint ";
 				else
 					account += " single ";
-				account += (new Random().nextLong());
+				account += Math.abs((new Random().nextLong()));
 				account += " 0 ";
 				account += " PENDING\n";
 				writer.write(account);
@@ -84,7 +85,69 @@ public class CustomerAccount {
 		
 	}
 	public void withdrawMoney() {
-		// TODO Auto-generated method stub
+		System.out.println("Enter the username of the customer to withdraw money.");
+		String userName = scanner.next();
+		scanner.nextLine();
+		
+		File file = new File("./customerAccounts/" + userName);
+		if (file.exists()) {
+			try {
+				BufferedReader reader = new BufferedReader(new FileReader(file));
+				String line;
+				ArrayList<String> accounts = new ArrayList<String>();
+				while ((line = reader.readLine()) != null) {
+					accounts.add(line);
+				}
+				reader.close();
+				System.out.println("Enter index number to select an account");
+				int i = 0;
+				for (String account : accounts) {
+					System.out.println(i + " " + account.toString());
+					i++;
+				}
+				
+				int accountSelection = scanner.nextInt();
+				scanner.nextLine();
+				String[] accountInfo = accounts.get(accountSelection).split(" ");
+				accounts.remove(accountSelection);
+				int accountMoney = Integer.valueOf(accountInfo[3]);
+				System.out.println("How much would you like to withdraw?");
+				int withdrawl = scanner.nextInt();
+				scanner.nextLine();
+				if (withdrawl > accountMoney) {
+					System.out.println("You don't have enough money!");
+					MenuSystem.runMenu();
+				}
+				else
+				{
+					accountMoney -= withdrawl;
+					accountInfo[3] = String.valueOf(accountMoney);
+				}
+				String accountToAdd = "";
+				for (String info : accountInfo) {
+					accountToAdd += info + " ";
+				}
+				accounts.add(accountToAdd);
+				
+				//readd accounts to file
+				BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
+				for (String account : accounts) {
+					bufferedWriter.write(account+"\n");
+				}
+				
+				bufferedWriter.close();
+				MenuSystem.runMenu();
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		else {
+			System.out.println("Sorry. No such customer.");
+			scanner.nextLine();
+			MenuSystem.runMenu();
+		}
 		
 	}
 	public void depositMoney() {
