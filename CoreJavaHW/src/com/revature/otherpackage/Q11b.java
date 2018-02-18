@@ -1,7 +1,7 @@
 package com.revature.otherpackage;
 
 public class Q11b {
-	private float f1 = 0.243754f;
+	private float f1 = 0.243754f;	//wanted to do good encapsulation
 	private float f2 = 134675.73582f;
 	
 	public float getF1() {

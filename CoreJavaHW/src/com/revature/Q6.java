@@ -15,7 +15,7 @@ public class Q6 {
 		System.out.println("-125 is "+isEvenOrOdd(-125)+".");
 		System.out.print("Is your number even or odd? Try out an integer (~ -2.147 to 2.147 billion): ");
 		Scanner s = new Scanner(System.in);
-		int userInput = s.nextInt();
+		int userInput = s.nextInt();	//get some user input
 		System.out.println(userInput + " is " + isEvenOrOdd(userInput)+".");
 	}
 	

@@ -10,7 +10,7 @@ public class Q4 {
 		System.out.println("10! = " +factorial(10));
 		Scanner scan = new Scanner(System.in);
 		System.out.print("Want to test your own? Type an integer between 0 and 20 (inclusive, but 21! exceeds long's range): ");
-		int userInput = scan.nextInt();
+		int userInput = scan.nextInt();		//get some user input because Matt said to
 		System.out.println(userInput + "! = "+factorial(userInput));
 	}
 	

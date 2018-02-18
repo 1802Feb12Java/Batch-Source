@@ -3,8 +3,8 @@ package com.revature;
 public class Driver {
 
 	public static void main(String[] args) {
-		System.out.println("Q1");
-		Q1 q1 = new Q1();
+		System.out.println("Q1");	//pretty much does these same 3 things for each class
+		Q1 q1 = new Q1();			//except 15, because that specified to do something in the main function
 		q1.run();
 
 		System.out.println("\nQ2");
