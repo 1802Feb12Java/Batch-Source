@@ -151,7 +151,62 @@ public class CustomerAccount {
 		
 	}
 	public void depositMoney() {
-		// TODO Auto-generated method stub
+		System.out.println("Enter the username of the customer to deposit money.");
+		String userName = scanner.next();
+		scanner.nextLine();
+		
+		File file = new File("./customerAccounts/" + userName);
+		if (file.exists()) {
+			try {
+				BufferedReader reader = new BufferedReader(new FileReader(file));
+				String line;
+				ArrayList<String> accounts = new ArrayList<String>();
+				while ((line = reader.readLine()) != null) {
+					accounts.add(line);
+				}
+				reader.close();
+				System.out.println("Enter index number to select an account");
+				int i = 0;
+				for (String account : accounts) {
+					System.out.println(i + " " + account.toString());
+					i++;
+				}
+				
+				int accountSelection = scanner.nextInt();
+				scanner.nextLine();
+				String[] accountInfo = accounts.get(accountSelection).split(" ");
+				accounts.remove(accountSelection);
+				int accountMoney = Integer.valueOf(accountInfo[3]);
+				System.out.println("How much would you like to deposit?");
+				int deposit = scanner.nextInt();
+				scanner.nextLine();
+				accountMoney += deposit;
+				accountInfo[3] = String.valueOf(accountMoney);
+				String accountToAdd = "";
+				for (String info : accountInfo) {
+					accountToAdd += info + " ";
+				}
+				accounts.add(accountToAdd);
+				
+				//write accounts to file
+				BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
+				for (String account : accounts) {
+					bufferedWriter.write(account+"\n");
+				}
+				
+				bufferedWriter.close();
+				MenuSystem.runMenu();
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		else {
+			System.out.println("Sorry. No such customer.");
+			scanner.nextLine();
+			MenuSystem.runMenu();
+		}
 		
 	}
 	public void transferMoney() {
