@@ -2,14 +2,13 @@ package com.revature.corejava;
 
 public class Question3 {
 	public static String reverseString(String string) {
-		//loop will swap letters until entire string is reversed
-		//credit to: stivlo @ 
-		//https://stackoverflow.com/questions/7612396/reverse-string-in-java-without-using-any-temporary-string-char-or-string-builder
-		for (int i = 0; i < string.length(); i++) {
-			string = string.substring(1, string.length() - i)
-		        + string.substring(0, 1)
-		        + string.substring(string.length() - i, string.length());
-		 }
+	    int length = string.length(); //save original length of string
+	    for (int i = (length - 1); i >= 0; --i) { //loop through string starting at back
+	    	string += string.charAt(i); //append each char to the back of string
+	    }
+	    //original string is now: [originalString] + [reversedString]
+	    string = string.substring(length); //strip off original string only leaving reversed version
+
 		return string;
 	}
 }
