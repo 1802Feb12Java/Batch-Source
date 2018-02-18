@@ -28,7 +28,7 @@ public class SerializeDemo {
 		try(FileInputStream fileIn= new FileInputStream(filename);
 				ObjectInputStream in = new ObjectInputStream(fileIn))
 		{	
-			s= (Serializable) in.readObject();	
+			s = (Serializable) in.readObject();	
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

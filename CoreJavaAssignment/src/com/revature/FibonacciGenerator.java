@@ -13,6 +13,10 @@ public class FibonacciGenerator {
 
 	public static void fibonacciList(int a) {
 		//argument specifies how many fibonacci numbers are to be returned
+		
+		//the first two numbers in the fibonacci numbers are the base cases
+		//needed to compute the next numbers, so those are considered special
+		//cases and are treated as such using if - else if statements below
 		if(a == 1) {
 			System.out.println(0);
 		} else if (a == 2) {
@@ -33,6 +37,6 @@ public class FibonacciGenerator {
 			System.out.println("");
 		}
 		
-	}
+	}//end fibonacciList method
 	
-}
+}//end class

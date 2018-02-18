@@ -3,17 +3,20 @@ package com.revature;
 import java.util.Arrays;
 
 public class BubbleSort {
+	/*
+	 * The purpose of this class is to create a bubble sort method.
+	 */
 
 	public static void main(String[] args) {
-		int[] myArray = {1,0,5,6,3,2,3,7,9,8,4};
-		System.out.println(Arrays.toString(myArray));
-		myBubbleSort(myArray);
-		System.out.println(Arrays.toString(myArray));
+		int[] myArray = {1,0,5,6,3,2,3,7,9,8,4}; //initialize array
+		System.out.println(Arrays.toString(myArray)); //print unsorted array
+		myBubbleSort(myArray); //sort array
+		System.out.println(Arrays.toString(myArray)); //print sorted array
 
 	}
 
 	public static void myBubbleSort(int[] array) {
-		int s = array.length;
+		int s = array.length; 
 		for (int i = 0; i < s-1; i++) { 
 			//want to iterate over all of the positions in the array
 			//don't need to check the last position as by default it should be the largest at the
@@ -37,4 +40,4 @@ public class BubbleSort {
 		
 	}//end myBubbleSort
 	
-}
+}//end class

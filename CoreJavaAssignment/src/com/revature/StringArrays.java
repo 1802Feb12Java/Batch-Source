@@ -3,9 +3,21 @@ package com.revature;
 import java.util.ArrayList;
 
 public class StringArrays {
-
+	/*
+	 * The purpose of this class is to demonstrate using ArrayLists
+	 * and comparing characters within strings to identify palindromes.
+	 */
 	public static void main(String[] args) {
 		
+		runStringArrays();
+		/* 
+		 * This method is calling code that would typically be run in the main method,
+		 * but for the sake of the driver I created a separate method for it
+		*/
+
+	}//end main
+	
+	public static void runStringArrays() {
 		ArrayList<String> plainList = new ArrayList<String>();
 		plainList.add("karan");
 		plainList.add("madam");
@@ -28,13 +40,7 @@ public class StringArrays {
 		
 		System.out.println("The Full List: " + plainList);
 		System.out.println("The Palindrome List: " + palindromeList);
-		
-		//System.out.println(isPalindrome("aabba"));
-		//System.out.println(isPalindrome("aabaa"));
-		//String s = "aabba";
-		//System.out.println(s.length()/2);
-
-	}//end main
+	}//end runStringArrays method
 
 	public static Boolean isPalindrome(String s) {
 		
