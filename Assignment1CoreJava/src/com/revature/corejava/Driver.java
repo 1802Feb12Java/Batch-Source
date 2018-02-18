@@ -106,7 +106,19 @@ public class Driver {
 
 		//Question 13:  Print triangle
 		Q13Triangle.printTriangle(4);
-*/
-		
+
+		//Question 14:  Demonstrate case switching
+		Q14CaseSwitch.switchUp(1);
+		Q14CaseSwitch.switchUp(2);
+		Q14CaseSwitch.switchUp(3);
+
+		//Question 15:  Implement an interface
+		ShutYourInterface interfaceTest = new ShutYourInterface();
+		System.out.println("Adding 2 and 4: " + interfaceTest.Add(2, 4));
+		System.out.println("Subtracting 2 and 4: " + interfaceTest.Subtract(2, 4));
+		System.out.println("Multiplying 2 and 4: " + interfaceTest.Multiply(2, 4));
+		System.out.println("Dividing 2 and 4: " + interfaceTest.Divide(2, 4));
+*/		
+		System.out.println(args[0]);
 	}//end main
 }
