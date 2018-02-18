@@ -45,37 +45,42 @@ public class MenuSystem {
 
 	private static void displayCustomerOptions() {
 		System.out.println("What would you like to do? Please enter a numerical value.");
-		System.out.println("1. Register a new customer");
-		System.out.println("2. View customer information");
-		System.out.println("3. Open new account");
-		System.out.println("4. Make a withdrawl");
-		System.out.println("5. Make a deposit");
-		System.out.println("6. Make a transfer");
-		System.out.println("7. Go back to main menu");
+		System.out.println("1. Register");
+		System.out.println("2. View your information");
+		System.out.println("3. View your accounts");
+		System.out.println("4. Open new account");
+		System.out.println("5. Make a withdrawl");
+		System.out.println("6. Make a deposit");
+		System.out.println("7. Make a transfer");
+		System.out.println("8. Go back to main menu");
 		int userOption = scanner.nextInt();
 		scanner.nextLine();
 		
+		CustomerInformation customerInformation = new CustomerInformation();
 		CustomerAccount customerAccount = new CustomerAccount();
 		switch (userOption) {
 		case 1:
-			customerAccount.enterCustomerInformation();
+			customerInformation.enterCustomerInformation();
 			break;
 		case 2:
-			customerAccount.viewCustomerInformation();
+			customerInformation.viewCustomerInformation();
 			break;
 		case 3:
-			customerAccount.openCustomerAccount();
+			customerAccount.viewCustomerAccounts();
 			break;
 		case 4:
-			customerAccount.withdrawMoney();
+			customerAccount.openCustomerAccount();
 			break;
 		case 5:
-			customerAccount.depositMoney();
+			customerAccount.withdrawMoney();
 			break;
 		case 6:
-			customerAccount.transferMoney();
+			customerAccount.depositMoney();
 			break;
 		case 7:
+			customerAccount.transferMoney();
+			break;
+		case 8:
 			runMenu();
 			break;
 

@@ -1,97 +1,86 @@
 package com.revature.bankingapp;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Random;
 import java.util.Scanner;
 
 public class CustomerAccount {
-	private int customerId;
-	private String lastName;
-	private String firstName;
-	private String userName;
-	private String password;
+	private static Scanner scanner = new Scanner(System.in);
 	
-	public void enterCustomerInformation() {
-		Scanner scanner =  new Scanner(System.in);
-		System.out.println("Enter First Name");
-		this.firstName = scanner.next();
-		scanner.nextLine();
-		System.out.println("Enter Last Name");
-		this.lastName = scanner.next();
-		scanner.nextLine();
-		System.out.println("Enter a User Name");
-		this.userName = scanner.next();
-		scanner.nextLine();
-		System.out.println("Enter a password");
-		this.password = scanner.next();
+	public void viewCustomerAccounts() {
+		System.out.println("Enter the username of the customer to view accounts.");
+		String userName = scanner.next();
 		scanner.nextLine();
 		
-		//validate info
-		File file = new File("bankingapp/customerProfiles/" + this.userName);
-		while (file.exists()) {
-			System.out.println("Sorry. That username is already taken. Please enter a new username");
-			scanner.next();
-			scanner.nextLine();
-			file = new File("./" + this.userName);
-		}
-		scanner.close();
-		registerCustomer(this.firstName, this.lastName, this.userName, this.password);
-	}
-	void registerCustomer(String firstName, String lastName,
-				String userName, String password) {
-		File file = new File("./" + userName);
-		try {
-			if (file.createNewFile()) {
-				FileWriter writer = new FileWriter(file);
-				writer.write(customerId);
-				writer.write(userName);
-				writer.write(password);
-				writer.write(lastName);
-				writer.write(password);
-				writer.close();
+		File file = new File("./customerAccounts/" + userName);
+		if (file.exists()) {
+			try {
+				BufferedReader reader = new BufferedReader(new FileReader(file));
+				String line;
+				while ((line = reader.readLine()) != null) {
+					System.out.println(line);
+				}
+				reader.close();
+				MenuSystem.runMenu();
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
-		} catch (IOException e) {
-			e.printStackTrace();
+		}
+		else {
+			System.out.println("Sorry. No such customer.");
+			scanner.nextLine();
+			MenuSystem.runMenu();
 		}
 	}
 	
-	public int getCustomerId() {
-		return customerId;
-	}
-	public void setCustomerId(int customerId) {
-		this.customerId = customerId;
-	}
-	public String getLastName() {
-		return lastName;
-	}
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-	public String getFirstName() {
-		return firstName;
-	}
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-	public String getUserName() {
-		return userName;
-	}
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	public void viewCustomerInformation() {
-		// TODO Auto-generated method stub
-		
-	}
 	public void openCustomerAccount() {
-		// TODO Auto-generated method stub
+		System.out.println("Enter username to apply for an account.");
+		String userName = scanner.next();
+		scanner.nextLine();
+		File file = new File("./customerAccounts/" + userName);
+		if (file.exists()) {
+			System.out.println("Which type of account would you like? Enter a numeric value.");
+			System.out.println("1. Checking\n2. Savings");
+			int accountType = scanner.nextInt();
+			scanner.nextLine();
+			System.out.println("Is this a joint account? Y/N?");
+			String jointAccount = scanner.next();
+			scanner.nextLine();
+			try {
+				BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));
+				String account;
+				//set up account info string
+				if (accountType == 1)
+					account = "checking";
+				else
+					account = "savings";
+				if (jointAccount == "Y" || jointAccount == "y")
+					account += " joint";
+				else
+					account += " single ";
+				account += (new Random().nextLong());
+				account += " 0 ";
+				account += " PENDING\n";
+				writer.write(account);
+				writer.close();
+				MenuSystem.runMenu();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}		
+		else {
+			System.out.println("Sorry. No such customer.");
+			MenuSystem.runMenu();
+		}
+
 		
 	}
 	public void withdrawMoney() {
@@ -106,5 +95,4 @@ public class CustomerAccount {
 		// TODO Auto-generated method stub
 		
 	}
-	
 }

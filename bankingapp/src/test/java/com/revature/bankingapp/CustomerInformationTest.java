@@ -6,12 +6,12 @@ import java.io.File;
 
 import org.junit.Test;
 
-public class CustomerAccountTest {
+public class CustomerInformationTest {
 
 	@Test
 	public void testRegistration() {
 		//create and save a new account
-		CustomerAccount customerAccount = new CustomerAccount();
+		CustomerInformation customerAccount = new CustomerInformation();
 		String testFirstName = "John";
 		String testLastName = "Smith";
 		String testUsername = "JSmith";
