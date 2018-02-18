@@ -1,0 +1,6 @@
+package com.revature.otherpackage;
+
+public class Q11b {
+	public float f1;
+	public float f2;
+}

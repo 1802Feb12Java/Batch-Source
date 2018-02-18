@@ -1,0 +1,15 @@
+package com.revature;
+
+public class Q5 {
+	public void run() {
+		
+	}
+	
+	public String subString(String str, int idx) {
+		String subString = "";
+		for(int i=0; i<idx; i++) {
+			subString += str.charAt(i);
+		}
+		return subString;
+	}
+}

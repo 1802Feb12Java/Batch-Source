@@ -1,0 +1,23 @@
+package com.revature.controlflow;
+
+public class LoopyLoop {
+	//if
+	//switch
+	//loops
+	
+	static boolean mattIsDoingWell;
+	
+	public static void main(String[] args) {
+		ifFun(mattIsDoingWell);
+	}
+	
+	public static void ifFun(boolean a) {
+		if(a) {
+			System.out.println("True");
+		}
+		else {
+			System.out.println("Now you fricked up");
+		}
+	}
+	
+}

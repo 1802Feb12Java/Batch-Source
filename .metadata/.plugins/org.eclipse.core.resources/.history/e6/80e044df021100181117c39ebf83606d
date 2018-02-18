@@ -1,0 +1,13 @@
+package com.revature;
+
+public class Wrapperz {
+	//wrappers allow primitives to be treated as objects
+	//utility methods
+	
+	public Integer i;
+	
+	
+	public static void main(String[] args) {
+		
+	}
+}

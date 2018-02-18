@@ -1,0 +1,35 @@
+package com.revature;
+
+public class CodeBlocks extends Joe {
+	//instance code block that executes before constructor
+	//when object is instantiated.  Note that we can't reference
+	//the object using "this," since the object isn't instantiated yet.
+	
+//	{...}
+	public static void main(String[] args) {
+		System.out.println("init");
+		new CodeBlocks();
+	}
+	//Static code blocks are similar.
+	//These execute once, when the class is loaded in JVM.
+	//These code blocks give us a window upon the creation of these objects.
+	//We can use these code blocks to inject behavior when we instantiate objects.
+	
+//	static {...}
+}
+
+class Joe extends JoeSuper {
+	Joe(){
+		System.out.println("joe con");
+	}
+	{System.out.println("sdjkghksdfg");}
+	static {System.out.println("hi");}
+}
+
+class JoeSuper {
+	JoeSuper(){
+		System.out.println("JoeSuper");
+	}
+	{System.out.println("hand");}
+	static {System.out.println("moo");}
+}

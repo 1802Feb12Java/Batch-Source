@@ -1,0 +1,12 @@
+package com.revature;
+
+public class Q16 {
+	public void run(String[] input) {
+		int inputLength = 0;
+		for(String s : input) {
+			inputLength += s.length();	//go through the array, add up all the string lengths
+		}
+		//see note in Driver (by Q16) if this returns 0 for how to set a command line argument in eclipse
+		System.out.println("Number of characters in your command line argument: " + inputLength);
+	}
+}

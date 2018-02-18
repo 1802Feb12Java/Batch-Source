@@ -1,0 +1,20 @@
+package com.revature;
+
+public class Wrapperz {
+	//wrappers allow primitives to be treated as objects
+	//utility methods
+	
+	public Integer i = 6;
+	public Integer j = 6;
+	
+	public static void main(String[] args) {
+		funky();
+	}
+	
+	public static void funky() {
+		if(i.equals(j)) {
+			System.out.println(";jkdfhgkljdfs");
+		}
+		System.out.println("Now you fricked up");
+	}
+}

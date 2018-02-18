@@ -1,0 +1,28 @@
+package com.revature;
+
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.Scanner;
+
+public class Q14 {
+	public void run() {
+		Scanner scan = new Scanner(System.in);
+		System.out.print("Hi. Please input 1, 2, or 3: ");
+		int choice = scan.nextInt();		//get the user input for if they want to do 1, 2, or 3
+		switch(choice) {
+			case 1:
+				System.out.print("Please input any number: ");
+				double numToRoot = scan.nextDouble();		//get whatever number the user types in
+				System.out.println("The square root is: "+Math.pow(numToRoot, 0.5));	//raise it to the 1/2 power to take square root
+				break;
+			case 2:
+				GregorianCalendar cal = new GregorianCalendar();
+				System.out.println("Today's date is: " + cal.get(Calendar.DAY_OF_YEAR));
+				break;
+			case 3:
+				
+				break;
+		}
+		scan.close();
+	}
+}

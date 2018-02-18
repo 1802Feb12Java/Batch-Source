@@ -1,0 +1,16 @@
+package com.revature;
+
+public class Q13 {
+	public void run() {
+		String str = "";
+		for(int i=0; i<4; i++) {
+			if(i==1) {
+				str = "1" + str;
+			}
+			else {
+				str += i%2 + " ";
+			}
+			System.out.println(str);
+		}
+	}
+}

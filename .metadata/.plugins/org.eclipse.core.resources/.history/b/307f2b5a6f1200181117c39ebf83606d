@@ -1,0 +1,15 @@
+package com.revature.classtypes;
+
+public class Driver {
+
+	public static void main(String[] args) {
+		String[] fishTypes = {"One","two","red","blue"};
+		Guppie bob = new Guppie("Bob","Clown");
+		
+		bob.eat();
+		bob.swim(9001);
+		bob.typeOfFFFFFFFFFFFFFIIIIIIIIIIIIIIIIIISSSSSSSSSSSSSSSSSSSHHHHHHHHHHHHHHHHHHH(fishTypes);
+		System.out.println(bob.getName());
+	}
+
+}

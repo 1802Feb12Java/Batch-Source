@@ -1,0 +1,22 @@
+package com.revature.classtypes;
+
+import java.util.ArrayList;
+
+public class Driver {
+
+	public static void main(String[] args) {
+		String[] fishTypes = {"One","two","red","blue"};
+		Guppie bob = new Guppie("Bob","Clown");
+		
+		ArrayList hotdog = new ArrayList();
+		
+		bob.eat();
+		bob.swim(9001);
+		bob.typeOfFFFFFFFFFFFFFIIIIIIIIIIIIIIIIIISSSSSSSSSSSSSSSSSSSHHHHHHHHHHHHHHHHHHH(fishTypes);
+		System.out.println(bob.getName());
+	}
+
+	public Guppie fishToHotdog(Guppie g) {
+		
+	}
+}

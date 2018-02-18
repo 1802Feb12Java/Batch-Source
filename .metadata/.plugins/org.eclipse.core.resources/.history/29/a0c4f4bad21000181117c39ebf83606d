@@ -1,0 +1,13 @@
+package com.revature;
+
+public class Mouse {
+	private int numTeeth;
+	private int numWhiskers;
+	private int weight;
+	
+	public Mouse(int numTeeth, int numWhiskers, int weight) {
+		this.numTeeth = numTeeth;
+		this.numWhiskers = numWhiskers;
+		this.weight = weight;
+	}
+}

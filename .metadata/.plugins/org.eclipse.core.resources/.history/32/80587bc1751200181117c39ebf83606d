@@ -1,0 +1,20 @@
+package com.revature;
+
+public class Q4 {
+	public void run() {
+		System.out.println("1! = " +factorial(1));
+		System.out.println("4! = " +factorial(4));
+		System.out.println("7! = " +factorial(7));
+		System.out.println("10! = " +factorial(10));
+	}
+	
+	public int factorial(int n) {
+		int nFactorial = n;
+		int numToMultiplyBy = n-1;
+		while(numToMultiplyBy > 0) {
+			nFactorial *= numToMultiplyBy;
+			numToMultiplyBy--;
+		}
+		return nFactorial;
+	}
+}

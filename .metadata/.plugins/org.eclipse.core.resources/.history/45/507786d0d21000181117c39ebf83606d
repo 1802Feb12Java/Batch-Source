@@ -1,0 +1,10 @@
+package com.revature;
+
+public class Chainz {
+	private Mouse mouse = new Mouse();
+	
+	public static void main(String[] args) {
+		
+		
+	}
+}

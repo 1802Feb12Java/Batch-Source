@@ -1,0 +1,24 @@
+package com.revature;
+
+public class Q6 {
+	public void run() {
+		System.out.println(isEvenOrOdd(126));
+	}
+	
+	public String isEvenOrOdd(int i) {
+		while(i>2) {
+			i -= 2;	//subtract 2 from i
+			if(i==1) {	
+				return "Odd";
+			}
+			else if(i==2) {	//because 2/2 will give 1
+				return "Even";
+			}
+			else if(i==0) {
+				return "Neither? Technically?";
+			}
+			//otherwise keep going in the loop
+		}
+		return true;
+	}
+}

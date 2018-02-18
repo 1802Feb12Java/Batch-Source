@@ -1,0 +1,24 @@
+package com.revature;
+
+//Overloading
+//The first thing we look for is:
+	//Exact Match
+	//Conversion -> Primitives/Objects cast themselves to other types.
+	//Boxing -> Primitives/Objects will undergo Auto Boxing/UnBoxing
+	//Varargs -> arguments wrapped into arrays.
+		//Method that will take in a variable number of String arguments
+		//Vararg must be the last argument, can be of any type
+
+public class Wrapper {
+	public static void main(String[] args) {
+		//conversion
+		int a = 4;
+		//boxing
+		Double objectDouble = 6.6;
+		System.out.println(addThis(a));
+		System.out.println(addThis(objectDouble));
+	}
+	public static double addThis(double deez) {
+		return deez+5;
+	}
+}

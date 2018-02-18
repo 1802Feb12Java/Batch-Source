@@ -1,0 +1,12 @@
+package com.revature;
+
+public class Wrapperz {
+	//wrappers allow primitives to be treated as objects
+	//utility methods
+	
+	public static Integer i = 6;
+	
+	public static void main(String[] args) {
+		System.out.println(i.byteValue());
+	}
+}

@@ -1,0 +1,25 @@
+package com.revature;
+
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Q8 {
+	public void run() {
+		ArrayList<String> stringList = new ArrayList<String>();
+		Collections.addAll(stringList, "karan", "madam", "tom", "civic", "radar", "jimmy", "kayak", "john",  "refer", "billy", "did");
+		System.out.println("All strings in arraylist: " + stringList.toString());
+		
+
+		ArrayList<String> palindromeList = new ArrayList<String>();
+		for(String s: stringList) {
+			for(int i=0; i<s.length()/2; i++) {
+				if(s.charAt(i) != s.charAt(s.length()-i-1)) {
+					break;
+				}
+			}
+		}
+		
+		System.out.println("Only palindromes in arraylist: " + palindromeList.toString());
+		
+	}
+}

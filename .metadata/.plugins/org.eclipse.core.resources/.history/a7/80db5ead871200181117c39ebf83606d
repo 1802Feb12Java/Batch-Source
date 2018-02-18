@@ -1,0 +1,24 @@
+package com.revature.reflection;
+
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
+
+public class Reflection {
+	public static void main(String[] args) {
+		SecretDocuments s = new SecretDocuments(1, "I am a secret", "Me");
+		Class<SecretDocuments> secretClass = SecretDocuments.class;
+		System.out.println(secretClass.getName());
+		
+		System.out.println("\tMethods");
+		Method[] methods = secretClass.getMethods();
+		for(Method m : methods) {
+			System.out.println("\t\t"+m);
+		}
+		
+		System.out.println("\tConstructor");
+		Constructor<SecretDocuments>[] constructors = (Constructor<SecretDocuments>[]) secretClass.getConstructors()
+		for(Constructor c : constructors) {
+			System.out.println("\t\t"+c);
+		}
+	}
+}

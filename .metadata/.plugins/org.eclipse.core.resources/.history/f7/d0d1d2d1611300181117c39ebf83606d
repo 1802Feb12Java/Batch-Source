@@ -1,0 +1,14 @@
+package com.revature;
+
+public class Q13 {
+	public void run() {
+		String str = "";
+		for(int i=0; i<4; i++) {
+			if(i==1) {
+				str = "1" + str.substring(1);
+			}
+			str += i%2 + " ";				//prints 01 on second line but otherwise works idk
+			System.out.println(str);
+		}
+	}
+}

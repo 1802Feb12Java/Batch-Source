@@ -1,0 +1,22 @@
+package com.revature;
+
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Q8 {
+	public void run() {
+		ArrayList<String> stringList = new ArrayList<String>();
+		Collections.addAll(stringList, "karan", "madam", "tom", "civic", "radar", "jimmy", "kayak", "john",  "refer", "billy", "did");
+		
+		String currentWord = stringList.get(0);
+		int currentWordLength = currentWord.length();
+		for(String s: stringList) {
+			for(int i=0; i<currentWordLength/2; i++) {
+				if(currentWord.charAt(i) != currentWord.charAt(currentWordLength-i-1)) {
+					break;
+				}
+			}
+		}
+		
+	}
+}

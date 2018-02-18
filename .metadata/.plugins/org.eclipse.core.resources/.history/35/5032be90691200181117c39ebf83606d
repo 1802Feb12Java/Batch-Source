@@ -1,0 +1,6 @@
+package com.revature.classtypes;
+
+public interface InterfaceFun {
+	public int FISH = 5;
+	
+}

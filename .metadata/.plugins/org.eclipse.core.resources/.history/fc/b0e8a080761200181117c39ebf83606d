@@ -1,0 +1,17 @@
+package com.revature;
+
+public class Q6 {
+	public void run() {
+		System.out.println(1/2);
+	}
+	
+	public boolean isEven(int i) {
+		while(i>=2) {
+			i /= 2;	//divide i by 2
+			if(i==0) {	//because if u divide 1 by 2 it'll do 1/2, which in int would round down to 0
+				
+			}
+		}
+		return true;
+	}
+}

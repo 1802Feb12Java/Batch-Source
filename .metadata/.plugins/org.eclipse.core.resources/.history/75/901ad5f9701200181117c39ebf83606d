@@ -1,0 +1,23 @@
+package com.revature.classtypes;
+
+public class Clown extends Fishes{
+	private int fins = Fishes.numOfFins;
+	private String name;
+	private String type;
+
+	@Override
+	public void typeOfFFFFFFFFFFFFFIIIIIIIIIIIIIIIIIISSSSSSSSSSSSSSSSSSSHHHHHHHHHHHHHHHHHHH(String[] a) {
+		
+	}
+
+	@Override
+	public void swim(int speed) {
+		
+	}
+
+	@Override
+	public void eat() {
+		
+	}
+	
+}

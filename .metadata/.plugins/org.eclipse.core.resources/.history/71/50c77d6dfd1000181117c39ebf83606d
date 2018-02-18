@@ -1,0 +1,34 @@
+package com.revature;
+
+public class Scopes {
+	static int numOfPuppies; // static variable, lifetime = class lifetime
+
+	private int numOfLegs;
+	private boolean goodBoye;
+	private String nameColor;
+
+	public Scopes(int numOfLegs, boolean goodBoye, String nameColor) {
+		super();
+		this.numOfLegs = numOfLegs;
+		this.goodBoye = goodBoye;
+		this.nameColor = nameColor;
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+	public int methodTest(int a) { // a and test are method variables, lifetime = method
+		int test = 3 + a;
+		System.out.println(test);
+		return test;
+	}
+
+	public void loopy() {
+		for (int i = 0; i < 5; i++) { // i is a block scope variable, lifetime = loop
+			System.out.println(i + " is a number!");
+		}
+	}
+
+}

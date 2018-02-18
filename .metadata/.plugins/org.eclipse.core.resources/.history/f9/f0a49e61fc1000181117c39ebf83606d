@@ -1,0 +1,17 @@
+package com.revature;
+
+public class Scopes {
+	static int numOfPuppies; //static variable, lifetime = lifetime of class
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+	
+	public int methodTest(int a) {	//a and test are method variables 
+		int test = 3 + a;
+		System.out.println(test);
+		return test;
+	}
+
+}

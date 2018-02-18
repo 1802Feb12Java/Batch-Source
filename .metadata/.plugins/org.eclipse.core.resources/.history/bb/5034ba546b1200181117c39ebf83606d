@@ -1,0 +1,23 @@
+package com.revature;
+
+public class Q1 {	
+	public void run() {		
+		int[] givenArray = {1,0,5,6,3,2,3,7,9,8,4};
+		System.out.print(printArray(givenArray) + " -> ");
+		int[] sortedArray = bubbleSort(givenArray);
+		System.out.println(printArray(sortedArray));
+	}
+	
+	
+	public String printArray(int[] arr) {
+		String s = "[";
+		for(int i=0; i<arr.length; i++) {
+			s+= arr[i]+",";
+		}
+		s += "]";
+		return s;
+	}
+	public int[] bubbleSort(int[] arr) {
+		return arr;
+	}
+}

@@ -1,0 +1,10 @@
+package com.revature;
+
+public class Q4 {
+	public void run() {
+		factorial(1);
+		factorial(4);
+		factorial(7);
+		factorial(15);
+	}
+}

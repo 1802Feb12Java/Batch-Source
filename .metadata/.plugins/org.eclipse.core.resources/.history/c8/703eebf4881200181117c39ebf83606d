@@ -1,0 +1,42 @@
+package com.revature.reflection;
+
+public class SecretDocuments {
+	private int number;
+	private String idk;
+	private String idk2;
+	
+	public SecretDocuments() {
+		super();
+	}
+
+	public int getNumber() {
+		return number;
+	}
+
+	public void setNumber(int number) {
+		this.number = number;
+	}
+
+	public String getIdk() {
+		return idk;
+	}
+
+	public void setIdk(String idk) {
+		this.idk = idk;
+	}
+
+	public String getIdk2() {
+		return idk2;
+	}
+
+	public void setIdk2(String idk2) {
+		this.idk2 = idk2;
+	}
+
+	public SecretDocuments(int number, String idk, String idk2) {
+		super();
+		this.number = number;
+		this.idk = idk;
+		this.idk2 = idk2;
+	}
+}

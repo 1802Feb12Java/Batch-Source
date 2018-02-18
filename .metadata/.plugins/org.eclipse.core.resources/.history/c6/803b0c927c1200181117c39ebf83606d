@@ -1,0 +1,82 @@
+package com.revature;
+
+import java.util.Comparator;
+
+public class Q7 implements Comparator<Employee> {
+	public void run() {
+		Employee e1 = new Employee("Joe", "Sales", 25);
+		Employee e2 = new Employee("Joe", "Sales", 24);
+		Employee e3 = new Employee("Beth", "Sales", 25);
+		Employee e4 = new Employee("Joe", "IT", 25);
+		Employee e5 = new Employee("Marie", "Management", 42);
+		System.out.println("Sorting by name, then department (both alphabetically), then age (greater than is first)");
+		compare(e1,e2);
+		compare(e1,e3);
+		compare(e1,e4);
+		compare(e1,e5);
+	}
+
+	@Override
+	public int compare(Employee employee1, Employee employee2) {
+		//from comparator documentation through eclipse:
+		//compare(Object o1, Object o2) returns: a negative integer, zero, or a positive integer 
+		//as the first argument is less than, equal to, or greater than the second. 
+		if(employee1.getName().compareTo(employee2.getName()) < 0) {	
+			//String.compareTo(String) returns negative if first is before second alphabetically
+			//so... if employee1's name is alphabetically before the second...
+			System.out.println(employee1.getName()+" is before "+employee2.getName());
+		}
+		else if(employee1.getName().compareTo(employee2.getName()) > 0) {	
+			//if employee1's name is after 2's in the alphabet
+			System.out.println(employee1.getName()+" is after "+employee2.getName());
+		}
+		else {	//if employee names are the same, check the departments
+			if(employee1.getDepartment().compareTo(employee2.getDepartment()) < 0) {
+				System.out.println(employee1.getDepartment()+" is before "+employee2.getDepartment());
+			}
+			else if(employee1.getDepartment().compareTo(employee2.getDepartment()) > 0) {
+				System.out.println(employee1.getDepartment()+" is after "+employee2.getDepartment());
+			}
+			else {	//if names AND departments are same
+				if(employee1.getAge() < employee2.getAge()) {
+					System.out.println(employee1.getAge()+" is less than "+employee2.getAge());
+				}
+				else if(employee1.getAge() > employee2.getAge()) {
+					System.out.println(employee1.getAge()+" is greater than "+employee2.getAge());
+				}
+			}
+		}
+		return 0;	//if everything's all the same
+	}
+}
+
+class Employee{
+	private String name;
+	private String department;
+	private int age;
+	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getDepartment() {
+		return department;
+	}
+	public void setDepartment(String department) {
+		this.department = department;
+	}
+	public int getAge() {
+		return age;
+	}
+	public void setAge(int age) {
+		this.age = age;
+	}
+	public Employee(String name, String department, int age) {
+		super();
+		this.name = name;
+		this.department = department;
+		this.age = age;
+	}
+}

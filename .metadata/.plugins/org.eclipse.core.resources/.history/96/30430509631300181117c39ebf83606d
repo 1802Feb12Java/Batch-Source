@@ -1,0 +1,19 @@
+package com.revature;
+
+public class Q13 {
+	public void run() {
+		String str = "";
+		for(int i=0; i<4; i++) {
+			if(i<=1) {
+				str = i%2 + " " + str;
+			}
+			else if(i==2){
+				str += (i+1)%2 + " ";
+			}
+			else {
+				str = i%2 + " " + str;
+			}
+			System.out.println(str);
+		}
+	}
+}

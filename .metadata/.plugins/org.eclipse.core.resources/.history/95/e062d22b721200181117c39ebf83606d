@@ -1,0 +1,11 @@
+package com.revature;
+
+public class Q2 {
+	public void run() {
+		fibonacci(25);
+	}
+	
+	public void fibonacci(int length) {
+		
+	}
+}
