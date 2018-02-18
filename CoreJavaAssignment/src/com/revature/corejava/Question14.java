@@ -38,5 +38,7 @@ public class Question14 {
 			System.out.println("Did you enter a number between 1 and 3?");
 			break;
 		}
+		
+		scanner.close();
 	}
 }
