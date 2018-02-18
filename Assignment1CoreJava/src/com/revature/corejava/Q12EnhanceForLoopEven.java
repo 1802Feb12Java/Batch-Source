@@ -5,5 +5,11 @@ the even numbers from the array. Use the enhanced FOR loop for printing out the 
 */
 
 public class Q12EnhanceForLoopEven {
-
+	public static void printEvens(int [] numbers) {
+		for(int current : numbers) {
+			if (current % 2 == 0) {
+				System.out.println(current);
+			}
+		}
+	}
 }
