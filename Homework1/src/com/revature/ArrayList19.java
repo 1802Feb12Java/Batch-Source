@@ -38,7 +38,7 @@ public class ArrayList19 {
 
 	private static void removePrimes() {	// parses through list a and removes primes encountered
 		
-		for(Integer i : a) {
+		for(int i = 0; i < a.size(); i++) {
 			
 			for(int j = 2; j < i; j++) {
 		        
@@ -49,9 +49,7 @@ public class ArrayList19 {
 				 
 				 if(j == i-1) {	// it is prime
 					 
-					 // a.remove(i-1);
-					 System.out.println(a);
-					 System.out.println(i);
+					 a.remove(i);
 				 }
 			}
 		}
