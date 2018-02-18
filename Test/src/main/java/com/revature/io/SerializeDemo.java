@@ -11,8 +11,8 @@ import java.io.Serializable;
 public class SerializeDemo {
 	public static void writeObject(Serializable s, String filename)
 	{
-		try(FileOutputStream fileOut= new FileOutputStream(filename);
-				ObjectOutputStream out = new ObjectOutputStream(fileOut))
+		try(FileOutputStream fileOut = new FileOutputStream(filename);
+			ObjectOutputStream out = new ObjectOutputStream(fileOut))
 		{
 			out.writeObject(s);
 		} catch (FileNotFoundException e) {
@@ -26,7 +26,7 @@ public class SerializeDemo {
 	{
 		Serializable s = null;
 		try(FileInputStream fileIn= new FileInputStream(filename);
-				ObjectInputStream in = new ObjectInputStream(fileIn))
+			ObjectInputStream in = new ObjectInputStream(fileIn))
 		{	
 			s= (Serializable) in.readObject();	
 		} catch (FileNotFoundException e) {
