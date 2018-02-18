@@ -140,6 +140,7 @@ public class Driver {
 		Question20.readFromFile();
 		System.out.println("------End Question 20 Output------");
 		scanner.close();
+		System.out.println("End Assignment");
 
 	}
 
