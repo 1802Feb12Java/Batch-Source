@@ -15,6 +15,7 @@ public class CustomerInformation {
 	private String userName;
 	private String password;
 	private static Scanner scanner =  new Scanner(System.in);
+	private PasswordChecker passwordChecker = new PasswordChecker();
 	
 	public void enterCustomerInformation() {
 		
@@ -66,21 +67,29 @@ public class CustomerInformation {
 		String userName = scanner.next();
 		scanner.nextLine();
 		File file = new File("./customerProfiles/" + userName);
-		BufferedReader reader;
-		try {
-			reader = new BufferedReader(new FileReader(file));
-			String customerInformation = reader.readLine();
-			String[] customerArray = customerInformation.split(":");
-			System.out.println("Username: " + customerArray[0] + 
-								"\nPassword: " + customerArray[1] +
-								"\nFirst Name: " + customerArray[2] +
-								"\nLast Name: " + customerArray[3]);
-			reader.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-		catch (IOException e) {
-			e.printStackTrace();
+		if (file.exists()) {
+			if (passwordChecker.checkPassword(userName, "customer")) {
+				BufferedReader reader;
+				try {
+					reader = new BufferedReader(new FileReader(file));
+					String customerInformation = reader.readLine();
+					String[] customerArray = customerInformation.split(":");
+					System.out.println("Username: " + customerArray[0] + 
+										"\nPassword: " + customerArray[1] +
+										"\nFirst Name: " + customerArray[2] +
+										"\nLast Name " + customerArray[3]);
+					reader.close();
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				}
+				catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			}
+			
+		else {
+			System.out.println("No such customer!");
 		}
 		MenuSystem.runMenu();
 	}
