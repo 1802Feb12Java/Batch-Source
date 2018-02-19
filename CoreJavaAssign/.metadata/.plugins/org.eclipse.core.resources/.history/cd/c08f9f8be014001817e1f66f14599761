@@ -1,5 +1,0 @@
-package com.revature.core.java.q15;
-
-public interface Operation {
-
-}

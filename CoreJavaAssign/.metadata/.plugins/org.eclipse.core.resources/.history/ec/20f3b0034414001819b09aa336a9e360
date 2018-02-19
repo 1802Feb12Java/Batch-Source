@@ -1,7 +1,0 @@
-package com.revature.core.java.q7;
-
-import java.util.Comparator;
-
-public class EmployeesSortName implements Comparator<Employees>{
-
-}
