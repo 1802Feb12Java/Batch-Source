@@ -14,11 +14,11 @@ public class Question12 {
 			numArr[i] = i+1;
 		}
 		for(int i : numArr) {						
-			if(i == 100) {								//makes sure I don't hit a null pointer
+			/*if(i == 100) {								//makes sure I don't hit a null pointer
 				return;
-			}
-			if(numArr[i]%2 == 0) {							//even test.
-				System.out.println(numArr[i]);
+			}*/
+			if(i%2 == 0) {							//even test.
+				System.out.println(i);
 			}
 		}
 	}
