@@ -9,7 +9,7 @@ import org.junit.Test;
 import com.revature.Account;
 import com.revature.Customer;
 
-public class AccountTest extends Account {
+public class AccountTest {
 	private Account a1;
 	private Account a2;
 	

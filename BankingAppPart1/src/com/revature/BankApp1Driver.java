@@ -1,10 +1,8 @@
 package com.revature;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -19,7 +17,7 @@ public class BankApp1Driver {
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Hi, welcome to Trevor's banking app!");
-		System.out.println("Please indicate whether you are a customer, employee, or admin by typing C, E, or A, respectively, then pressing ENTER.");
+		System.out.print("Please indicate whether you are a customer, employee, or admin by typing C, E, or A, respectively, then pressing ENTER: ");
 		String userType = scan.nextLine();
 		String[] validUserTypes = {"C","c","E","e","A","a"};
 		while(!(Arrays.stream(validUserTypes).parallel().anyMatch(userType::equals))){	
@@ -28,17 +26,6 @@ public class BankApp1Driver {
 			userType = scan.nextLine();
 		}
 		
-		allCustomers.add(new Customer("joe", "@@", "Jim George"));
-		allAccounts.add(new Account());
-		allAccounts.get(0).deposit(500);
-		allAccounts.add(new Account());
-		allAccounts.get(1).deposit(250);
-		allAccounts.add(new Account());
-		allCustomers.get(0).addAccount(allAccounts.get(0));
-		allCustomers.get(0).addAccount(allAccounts.get(1));
-		allAccounts.get(0).setApproved(true);
-		allAccounts.get(1).setApproved(true);
-
 		String endChoice = "";
 		switch(userType) {
 			case "c":	//chain them into each other without a break to do the same for both
@@ -64,7 +51,7 @@ public class BankApp1Driver {
 				} while(!endChoice.equals("quit"));
 				break;
 		}
-		System.out.println("Thanks for using Trevor's banking app!");
+		System.out.println("\nThanks for using Trevor's banking app!");
 		
 		ArrayList<Serializable> serList = new ArrayList<Serializable>();
 		serList.add(allAccounts);
@@ -93,8 +80,8 @@ public class BankApp1Driver {
 //		allAccounts = (ArrayList<Account>) newSerList.get(0);
 //		allCustomers = (ArrayList<Customer>) newSerList.get(1);
 //		
-//		System.out.println("Account 1 - " + allAccounts.get(0));
-//		System.out.println("Customer 1 - " + allCustomers.get(0));
+//		System.out.println("Account 1 - \n" + allAccounts.get(0));
+//		System.out.println("Customer 1 - \n" + allCustomers.get(0));
 		
 		scan.close();
 	}
@@ -289,8 +276,9 @@ public class BankApp1Driver {
 			case "ra":
 				System.out.print("Available account ID's: ");
 				for(Account acc : allAccounts) {
-					System.out.println(acc.getAccountID() + " ");
+					System.out.print(acc.getAccountID() + " ");
 				}
+				System.out.println();
 				System.out.print("Please input the account ID that you wish to read: ");
 				int accountID = scan.nextInt();
 				System.out.println("\nAttempting to read account " + accountID + ":");
@@ -318,7 +306,9 @@ public class BankApp1Driver {
 				break;
 		}
 		System.out.println("\nIf you would like to quit, type \"quit\", otherwise press enter.");
-		scan.nextLine();	//otherwise it'd skip the nextLine(), don't ask me why
+		if(!(empChoice.equals("R")||empChoice.equals("r"))){
+			scan.nextLine();	//otherwise it'd skip the nextLine(), don't ask me why
+		}
 		String endChoice = scan.nextLine();
 		return endChoice;
 	}
@@ -354,8 +344,9 @@ public class BankApp1Driver {
 			case "ra":
 				System.out.print("Available account ID's: ");
 				for(Account acc : allAccounts) {
-					System.out.println(acc.getAccountID() + " ");
+					System.out.print(acc.getAccountID() + " ");
 				}
+				System.out.println();
 				System.out.print("Please input the account ID that you wish to read: ");
 				int accountID = scan.nextInt();
 				System.out.println("\nAttempting to read account " + accountID + ":");
@@ -397,7 +388,12 @@ public class BankApp1Driver {
 			case "d":
 				System.out.print("Please enter the account ID: ");
 				accountID = scan.nextInt();
-				System.out.print("Please enter the amount to withdraw: ");
+				if(adminChoice.equals("W") || adminChoice.equals("w")) {
+					System.out.print("Please enter the amount to withdraw: ");
+				}
+				if(adminChoice.equals("D") || adminChoice.equals("d")) {
+					System.out.print("Please enter the amount to deposit: ");
+				}
 				amount = scan.nextInt();
 				admin.editAccount(adminChoice.toUpperCase(), accountID, amount);
 				break;
@@ -409,8 +405,10 @@ public class BankApp1Driver {
 				break;
 		}
 
-		System.out.println("\nIf you would like to quit, type \"quit\", otherwise press enter.");
-		scan.nextLine();	//otherwise it'd skip the nextLine(), don't ask me why
+		System.out.print("\nIf you would like to quit, type \"quit\", otherwise press enter. ");
+		if(!(adminChoice.equals("R")||adminChoice.equals("r"))){
+			scan.nextLine();	//otherwise it'd skip the nextLine(), don't ask me why
+		}
 		String endChoice = scan.nextLine();
 		return endChoice;
 	}
