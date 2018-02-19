@@ -8,8 +8,9 @@ public class Q12EnhanceForLoopEven {
 	public static void printEvens(int [] numbers) {
 		for(int current : numbers) {
 			if (current % 2 == 0) {
-				System.out.println(current);
+				System.out.print(current + " ");
 			}
 		}
+		System.out.println();
 	}
 }

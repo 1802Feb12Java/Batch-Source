@@ -21,8 +21,9 @@ public class Q19AddAddPrime {
 		//display the ArrayList
 		System.out.println("Populated array list:");
 		for(int current : testArray) {
-			System.out.println(current);
+			System.out.print(current + " ");
 		}
+		System.out.println();
 		
 		//calculate the odd and even sums
 		for(int current : testArray) {
@@ -46,7 +47,9 @@ public class Q19AddAddPrime {
 		System.out.println("ArrayList with primes removed:");
 		
 		for(int current : testArray) {
-			System.out.println(current);
+			System.out.print(current + " ");
 		}
+		
+		System.out.println();
 	}
 }

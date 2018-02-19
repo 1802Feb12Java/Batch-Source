@@ -10,15 +10,16 @@ public class Driver {
 		int [] q1Array = {1,0,5,6,3,2,3,7,9,8,4};  //unsorted array
 		System.out.println("Unsorted Array:");
 		for (int index = 0; index < q1Array.length; index++) {
-			System.out.println(q1Array[index]);
+			System.out.print(q1Array[index] + " ");
 		}
+		System.out.println();
 		q1Array = Q1BubbleSort.bubbleSort(q1Array);
 		
 		System.out.println("Sorted Array:");
 		for (int index = 0; index < q1Array.length; index++) {
-			System.out.println(q1Array[index]);
+			System.out.print(q1Array[index] + " ");
 		}
-		
+		System.out.println();
 		//Question 2:  Fibonacci Sequence
 		System.out.println();
 		System.out.println("Question 2:");
@@ -27,8 +28,9 @@ public class Driver {
 		int [] fibonacciArray = new int[numOfElements];  //the array to hold the sequence		
 		fibonacciArray = Q2Fibonacci.generateFibonacciSequence(numOfElements);
 		for (int index = 0; index < fibonacciArray.length; index++) {
-			System.out.println(fibonacciArray[index]);
+			System.out.print(fibonacciArray[index] + " ");
 		}
+		System.out.println();
 		
 		//Question 3:  String reversal
 		System.out.println();
@@ -103,9 +105,10 @@ public class Driver {
 		palindromes = Q8Palindrome.creaePalindromeArray(normal);
 		System.out.println("Palindromes:");
 		for (String current : palindromes) {
-			System.out.println(current);
+			System.out.print(current + " ");
 		}
-
+		System.out.println();
+		
 		//Question 9: Print Primes
 		System.out.println();
 		System.out.println("Question 9:");
@@ -117,9 +120,10 @@ public class Driver {
 		System.out.println("Primes from 1-100:");
 		for (Integer current : numbers) {
 			if(Q9PrimePrinter.isPrime(current)) {
-				System.out.println(current);
+				System.out.print(current + " ");
 			}
 		}
+		System.out.println();
 
 		//Question 10:  Find minimum using ternary operator
 		System.out.println();
