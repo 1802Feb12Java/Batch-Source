@@ -7,6 +7,7 @@ import java.util.Arrays;
  * @author Johne Vang
  * Q2 Fibonacci numbers 
  * Write a program to display the first 25 Fibonacci numbers beginning at 0.
+ * 
  */
 public class Q2_FibonacciNumbers {
 
