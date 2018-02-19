@@ -32,21 +32,26 @@ public class Q20FileReader {
 			scanner = new Scanner(file);
 		} 
 		catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
+		//set the delimiter for the scanner
 		scanner.useDelimiter(":");
+		
+		//loop through each item in the file, stopping at the delimiter ':'
 		while(scanner.hasNext()) {
 			firstName = scanner.next();
 			lastName = scanner.next();
 			age = scanner.next();
 			state = scanner.nextLine();
 			
+			//print out the values formatted for each line
 			System.out.println("Name: " + firstName + " " + lastName);
 			System.out.println("Age: " + age);
 			System.out.println("State" + state + " State");
+			System.out.println();
 		}
-		
+		//close the scanner connection to the file
+		scanner.close();
 	}
 }	

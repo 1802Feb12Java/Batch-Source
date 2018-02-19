@@ -13,6 +13,8 @@ public class Q8Palindrome {
 		
 		for (String current : normal) {
 			for(int index = 0; index < current.length(); index++) {
+				//check to see if the outer characters match, if a single pair of
+				//characters does not match, the word is not a palindrome
 				if (current.charAt(index) == current.charAt(current.length() - index - 1)) {
 					isPalindrome = true;
 				}

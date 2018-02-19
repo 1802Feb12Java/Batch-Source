@@ -34,7 +34,8 @@ public class Q19AddAddPrime {
 				sumOdd += current;
 			}
 		}
-		
+
+		//remove the primes from the list using the isPrime tester from Q9
 		for(int index = 9; index >= 0; index--) {
 			if (Q9PrimePrinter.isPrime(testArray.get(index))) {
 				testArray.remove(index);

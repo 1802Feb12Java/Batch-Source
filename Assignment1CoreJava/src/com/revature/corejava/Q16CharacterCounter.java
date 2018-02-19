@@ -7,6 +7,7 @@ public class Q16CharacterCounter {
 	public static int countChars(String[] token) {
 		int numOfCharacters = 0;
 
+		//iterate through the args and add up the total length of each arg
 		for (String current : token) {
 			numOfCharacters += current.length();
 		}

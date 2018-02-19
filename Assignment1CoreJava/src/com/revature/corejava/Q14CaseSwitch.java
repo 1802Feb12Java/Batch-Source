@@ -24,10 +24,12 @@ public class Q14CaseSwitch {
 			break;
 			
 		case 3:
+			//tokenize the string
 			StringTokenizer string = new StringTokenizer("I am learning Core Java");
 			String [] tokenized = new String[string.countTokens()];
 			int index = 0;
 			
+			//add the tokens into an array
 			while(string.hasMoreTokens()) {
 				tokenized[index] = string.nextToken();
 				index++;
