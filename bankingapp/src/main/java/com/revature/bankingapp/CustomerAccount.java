@@ -71,11 +71,11 @@ public class CustomerAccount {
 					else
 						account = "savings";
 					if (jointAccount.contains("Y") || jointAccount.contains("y"))
-						account += " joint ";
+						account += " joint";
 					else
-						account += " single ";
-					account += Math.abs((new Random().nextLong()));
-					account += " 0 ";
+						account += " single";
+					account += " " + Math.abs((new Random().nextLong()));
+					account += " 0";
 					account += " PENDING\n";
 					writer.write(account);
 					writer.close();

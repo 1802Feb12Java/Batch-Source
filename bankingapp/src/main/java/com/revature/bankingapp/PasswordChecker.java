@@ -19,7 +19,7 @@ public class PasswordChecker {
 				file = new File("./employeeProfiles/" + userName);
 			}
 			else if (accountType.equals("admin")) {
-				file = new File("./adminProfiles" + userName);
+				file = new File("./adminProfiles/" + userName);
 			}
 			else {
 				System.out.println("Error in password checker");

@@ -77,7 +77,7 @@ public class CustomerInformation {
 					System.out.println("Username: " + customerArray[0] + 
 										"\nPassword: " + customerArray[1] +
 										"\nFirst Name: " + customerArray[2] +
-										"\nLast Name " + customerArray[3]);
+										"\nLast Name: " + customerArray[3]);
 					reader.close();
 				} catch (FileNotFoundException e) {
 					e.printStackTrace();
