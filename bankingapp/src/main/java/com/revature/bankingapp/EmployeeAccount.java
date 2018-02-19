@@ -66,7 +66,7 @@ public class EmployeeAccount {
 	}
 
 	public void approveCustomerAccount() {
-		System.out.println("To view customer info, please enter your username.");
+		System.out.println("To approve or deny accounts, please enter your username.");
 		String userName = scanner.nextLine();
 		
 		File file = new File("./employeeProfiles/" + userName);

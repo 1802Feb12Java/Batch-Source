@@ -38,7 +38,7 @@ public class MenuSystem {
 		System.out.println("What would you like to do? Please enter a numerical value.");
 		System.out.println("1. Register a new employee");
 		System.out.println("2. View employee information");
-		System.out.println("3. View edit or cancel customer account");
+		System.out.println("3. View, edit, or cancel customer account");
 		int userOption = scanner.nextInt();
 		scanner.nextLine();
 		AdminAccount adminAccount = new AdminAccount();
@@ -51,11 +51,39 @@ public class MenuSystem {
 			adminAccount.viewEmployeeInformation();
 			break;
 		case 3:
-			adminAccount.editCustomerAccount();
+			displayEditsFromAdminAccount();
 			break;
 		default:
 			break;
 		}
+	}
+	private static void displayEditsFromAdminAccount() {
+		System.out.println("Enter a number to perform an action on a customer account");
+		System.out.println("1. Adjust balance");
+		System.out.println("2. Force Transfer");
+		System.out.println("3. Delete Customer Account");
+		System.out.println("4. Approve Customer Account");
+		int userOption = scanner.nextInt();
+		scanner.nextLine();
+		AdminAccount adminAccount = new AdminAccount();
+		
+		switch (userOption) {
+		case 1:
+			adminAccount.adjustBalance();
+			break;
+		case 2:
+			adminAccount.forceTransfer();
+			break;
+		case 3:
+			adminAccount.deleteAccount();
+			break;
+		case 4:
+			adminAccount.approveAccounts();
+			break;
+		default:
+			break;
+		}
+		
 	}
 
 	private static void displayEmployeeOptions() {

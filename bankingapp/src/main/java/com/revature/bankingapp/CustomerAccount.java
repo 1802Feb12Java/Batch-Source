@@ -145,7 +145,7 @@ public class CustomerAccount {
 					}
 					accounts.add(accountToAdd);
 					
-					//read accounts to file
+					//write accounts to file
 					BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
 					for (String account : accounts) {
 						bufferedWriter.write(account+"\n");
@@ -243,6 +243,16 @@ public class CustomerAccount {
 		if (file.exists()) {
 			if (passwordChecker.checkPassword(userName, "customer")) {
 				try {
+					System.out.println("Do you want to transfer to one of your accounts? Y/N?");
+					String transferChoice = scanner.nextLine();
+					if (transferChoice.contains("y") || transferChoice.contains("Y")) {
+						
+					}
+					else {
+						//transfer to other user
+					}
+					
+					//TODO EDIT THIS
 					BufferedReader reader = new BufferedReader(new FileReader(file));
 					String line;
 					ArrayList<String> accounts = new ArrayList<String>();
