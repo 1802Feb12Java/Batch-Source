@@ -4,5 +4,12 @@ package com.revature.corejava;
 The string should be entered as a command line argument using (String [ ] args).*/
 
 public class Q16CharacterCounter {
+	public static int countChars(String[] token) {
+		int numOfCharacters = 0;
 
+		for (String current : token) {
+			numOfCharacters += current.length();
+		}
+		return numOfCharacters;
+	}
 }

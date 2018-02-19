@@ -8,6 +8,11 @@ Provide the following three implementations in the subclass corresponding to the
 	3. 	Convert the input string to integer and add 10, output the result to the console.
 	Create an appropriate class having a main method to test the above setup.*/
 
-public class Q18AbstractInheritence {
-
+abstract public class Q18AbstractInheritence {
+	abstract public boolean uppercaseInString(String string);
+	
+	abstract public String toUpperCase(String string);
+	
+	abstract public int toIntPlus10(String string);
 }
+
