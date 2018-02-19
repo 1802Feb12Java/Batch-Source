@@ -3,8 +3,8 @@ package com.revature;
 public class Q16 implements Runnable {
 	private final String[] args;
 	
-	public Q16(String... args) {
-		this.args = args;
+	public Q16(String... args) {		
+		this.args = (args == null ? new String[0] : args);
 	}
 	
 	public static void main(String[] args) {

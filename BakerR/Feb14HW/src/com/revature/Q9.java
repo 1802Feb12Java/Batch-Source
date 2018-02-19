@@ -5,38 +5,41 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-class PrimeGenerator {
-	public static Set<Integer> generatePrimes(int lowerBounds, int upperBounds) {
-		// Bounds: [lowerBounds, upperBounds]
-		
-		// Fill the set with all numbers within the range.
-		Set<Integer> primeSet = new HashSet<>();
-		for(int i = 2; i <= upperBounds; ++i) {
-			primeSet.add(i);
-		}
-		
-		// Sieve of Eratosthenes
-		// Only need to check for multiples up until sqrt(upperBounds)
-		final int UPPER_CHECKING_BOUNDS = (int)Math.ceil(Math.sqrt(upperBounds));
-		for(int i = 2; i <= UPPER_CHECKING_BOUNDS; ++i) {
-			// i is prime if it is found in the set when iterated to it.
-			if(primeSet.contains(i)) {
-				// Remove multiples from the set (starting with the square of the prime)
-				for(int multiple = i*i; multiple <= upperBounds; multiple += i) {
-					primeSet.remove(multiple);
-				}
-			}
-		}
-		
-		// Truncate everything less than lowerBounds from the set.
-		primeSet.removeIf((Integer i) -> (i < lowerBounds));
-		
-		return primeSet;
-	}
-}
+
 
 
 public class Q9 implements Runnable {
+	public static class PrimeGenerator {
+		public static Set<Integer> generatePrimes(int lowerBounds, int upperBounds) {
+			// Bounds: [lowerBounds, upperBounds]
+			
+			// Fill the set with all numbers within the range.
+			Set<Integer> primeSet = new HashSet<>();
+			for(int i = 2; i <= upperBounds; ++i) {
+				primeSet.add(i);
+			}
+			
+			// Sieve of Eratosthenes
+			// Only need to check for multiples up until sqrt(upperBounds)
+			final int UPPER_CHECKING_BOUNDS = (int)Math.ceil(Math.sqrt(upperBounds));
+			for(int i = 2; i <= UPPER_CHECKING_BOUNDS; ++i) {
+				// i is prime if it is found in the set when iterated to it.
+				if(primeSet.contains(i)) {
+					// Remove multiples from the set (starting with the square of the prime)
+					for(int multiple = i*i; multiple <= upperBounds; multiple += i) {
+						primeSet.remove(multiple);
+					}
+				}
+			}
+			
+			// Truncate everything less than lowerBounds from the set.
+			primeSet.removeIf((Integer i) -> (i < lowerBounds));
+			
+			return primeSet;
+		}
+	}
+	
+	
 	private final int LOWER_BOUND;
 	private final int UPPER_BOUND;
 	

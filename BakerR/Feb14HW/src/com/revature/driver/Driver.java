@@ -1,5 +1,7 @@
 package com.revature.driver;
 
+import java.io.File;
+
 import com.revature.Employee;
 import com.revature.Q1;
 import com.revature.Q10;
@@ -10,7 +12,10 @@ import com.revature.Q14;
 import com.revature.Q15;
 import com.revature.Q16;
 import com.revature.Q17;
+import com.revature.Q18;
+import com.revature.Q19;
 import com.revature.Q2;
+import com.revature.Q20;
 import com.revature.Q3;
 import com.revature.Q4;
 import com.revature.Q5;
@@ -43,11 +48,20 @@ public class Driver {
 			new Q15(), // Math Operations & Interfaces
 			new Q16("This is the input argument string"), // Input argument String Length
 			new Q17(), // User-Input Simple Interest Calculation
+			new Q18("Übergröße", "weiß いえ", "8991"), // Abstract class & Simple String Ops
+			new Q19(1, 10), // Operating on collections
+			new Q20(new File("Data.txt")) // File Input
 	};
 	
 	public static void main(String[] args) {
 		for(Runnable r : qtnPrinter) {
-			r.run();
+			try {
+				r.run();
+			} catch(Exception ex) {
+				// Catch exceptions that occur in any single tests and print its message
+				// to avoid stopping the other tests.
+				System.out.println(ex.toString());
+			}
 			System.out.println("--------------------------------------------------------------------------------");
 		}
 	

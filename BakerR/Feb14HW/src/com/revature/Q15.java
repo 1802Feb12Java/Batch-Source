@@ -123,7 +123,7 @@ public class Q15 implements Runnable {
 	
 	@Override
 	public void run() {
-		Q15.main(null);
+		Q15.main(new String[0]);
 	}
 
 }

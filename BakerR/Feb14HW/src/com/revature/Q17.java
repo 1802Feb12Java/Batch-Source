@@ -1,12 +1,13 @@
 package com.revature;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Scanner;
-import java.util.regex.Pattern;
 
 // Simple Interest calculation
 // I = P*R*T
 class FinancialUtils {
-	public static double simpleInterest(double principal, double rate, double yrs) {
+	public static double simpleInterest(double principal, double rate, int yrs) {
 		return principal * rate * yrs;
 	}
 }
@@ -35,20 +36,34 @@ public class Q17 implements Runnable {
 	
 	@Override
 	public void run() {
-		Double principal, rate, years, interest;
+		Double principal, rate;
+		Integer years;
+		InputProcessor<Double> dblProcessor = (String in) -> {
+			Double d;
+			try {
+				d = Double.parseDouble(in);
+			} catch(NumberFormatException ex) {
+				throw new InvalidInputException("Input could not be parsed into a Double.", in);
+			}
+			return d;
+		};
 		
-		principal = requestFromUser("Enter principal:", (String in) -> {
-			// EBNF: (Skipped whitespace)
-			// CURRENCYSYM (DIGIT+ ('.' DIGIT+)?
-			//    | '.' DIGIT+)
-			//     
-			Pattern p = Pattern.compile("\\p{Sc}\\s*(?<value>\d+)");
-			Double p;
+		System.out.println("Question 17: Simple Interest Calculation with User-Input");
+		
+		principal = requestFromUser("Enter principal:", dblProcessor, true);
+		rate = requestFromUser("Enter interest rate (decimal format):", dblProcessor, true);
+		years = requestFromUser("Enter elapsed time (years):", (String in) -> {
+			Integer yrs;
 			
-			
-			
-			return p;
+			try {
+				yrs = Integer.parseInt(in); 
+			} catch(NumberFormatException ex) {
+				throw new InvalidInputException("Input could not be parased into an Integer.", in);
+			}
+			return yrs;
 		}, true);
+		
+		System.out.println(TAB + "Total Interest: " + FinancialUtils.simpleInterest(principal, rate, years));
 	}
 	
 	/**
@@ -66,21 +81,76 @@ public class Q17 implements Runnable {
 			boolean repeatOnFail) {
 		T inputResult = null;
 		boolean failed;
-		Scanner scan = new Scanner(System.in);
-		
-		do {
-			System.out.print(TAB + request + " ");
-			String input = scan.nextLine();
+		try(Scanner scan = new Scanner(new InputStream() {
+			private final InputStream input = System.in;
 			
-			try {
-				inputResult = inputProcessor.process(input);
-				failed = false;
-			} catch(InvalidInputException ex) {
-				System.out.println(TAB + "Given input [" + ex.getInput() + "] is not valid.");
-				failed = true;
+			@Override
+			public int available() throws IOException {
+				return input.available();
 			}
-		} while(repeatOnFail && failed);
-		
+			
+			@Override
+			public void close() {
+				// Do nothing; keep System.in open.
+			}
+			
+			@Override
+			public void mark(int readlimit) {
+				input.mark(readlimit);
+			}
+			
+			@Override
+			public boolean markSupported() {
+				return input.markSupported();
+			}
+			
+			@Override
+			public int read() throws IOException {
+				return input.read();
+			}
+			
+
+			@Override
+			public int read(byte[] b) throws IOException {
+				return input.read(b);
+			}
+			
+			@Override
+			public int read(byte[] b, int off, int len) throws IOException {
+				return input.read(b, off, len);
+			}
+			
+			@Override
+			public void reset() throws IOException {
+				input.reset();
+			}
+			
+			@Override
+			public long skip(long n) throws IOException {
+				return input.skip(n);
+			}
+			
+		})) {
+			do {
+				System.out.print(TAB + request + " ");
+				String input = scan.nextLine();
+				
+				try {
+					inputResult = inputProcessor.process(input);
+					failed = false;
+				} catch(Exception ex) {
+					if(ex instanceof InvalidInputException) {
+						System.out.println(TAB + "Given input [" + ((InvalidInputException)ex).getInput() 
+								+ "] is not valid.");
+					} else {
+						System.out.println(TAB + "Unspecified exception has occurred:");
+					}
+					
+					System.out.println(TAB + ex.getMessage());
+					failed = true;
+				}
+			} while(repeatOnFail && failed);
+		} // end try
 		return inputResult;
 	}
 
