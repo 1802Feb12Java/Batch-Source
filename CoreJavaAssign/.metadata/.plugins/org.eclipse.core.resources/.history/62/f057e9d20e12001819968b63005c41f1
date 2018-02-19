@@ -1,0 +1,10 @@
+package com.revature;
+
+/*
+ * Johne Vang
+ * Q6. Write a program to determine if an
+ * integer is even without using the modulus operator (%)
+ */
+public class Q6_IsEven {
+
+}

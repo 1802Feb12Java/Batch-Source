@@ -1,0 +1,44 @@
+package com.revature.core.java;
+
+import java.util.ArrayList;
+
+/**
+ * 
+ * @author johne
+ * Q8. Write a program that stores the following strings 
+ * in an ArrayList and saves all the palindromes in another ArrayList.
+ * 
+ * “karan”, “madam”, ”tom”, “civic”, “radar”, “jimmy”, “kayak”, “john”,  “refer”, “billy”, “did”
+
+ */
+public class Q8_Palindromes {
+
+	public static void main(String[] args) {
+		ArrayList<String> namesList = new ArrayList();
+		
+		namesList.add("karan");
+		namesList.add("madam");
+		namesList.add("tom");
+		namesList.add("civic");
+		namesList.add("radar");
+		namesList.add("jimmy");
+		namesList.add("kayak");
+		namesList.add("john");
+		namesList.add("refer");
+		namesList.add("billy");
+		namesList.add("did");
+		
+		
+		/*
+		 * iterate through each element and check each string 
+		 * if first letter is the same as last letter.
+		 */
+		for(String s : namesList) {
+			if(s.charAt(0) == s.charAt(s.length()-1)) {
+				
+			}
+		}
+
+	}
+
+}

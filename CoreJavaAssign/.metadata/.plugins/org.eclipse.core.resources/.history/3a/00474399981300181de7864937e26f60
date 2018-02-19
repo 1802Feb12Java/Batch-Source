@@ -1,0 +1,31 @@
+package com.revature.core.java;
+
+import java.util.Scanner;
+
+/**
+ * 
+ * @author johne
+ * Q3. Reverse a string without using a temporary variable.  
+ * Do NOT use reverse() in the StringBuffer or the StringBuilder APIs.
+ */
+public class Q3_ReverseString {
+
+	public static void main(String[] args) {
+		Scanner input = new Scanner(System.in);
+		
+		System.out.print("Enter a string: ");
+		String str = input.next();
+		
+		/*
+		 * do not know how long string is, so
+		 * use a while loop and print reverse 
+		 * string with charAt().
+		 * 
+		 * counter is set to length of string
+		 * as long as the counter is less the length of the string,
+		 * display 
+		 */
+		
+	}
+
+}

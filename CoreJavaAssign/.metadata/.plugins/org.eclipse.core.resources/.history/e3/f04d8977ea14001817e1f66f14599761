@@ -1,0 +1,79 @@
+package com.revature.core.java;
+
+/**
+ * 
+ * @author johne
+ * Q18. Write a program having a concrete subclass that inherits 
+ * three abstract methods from a superclass.  
+ * Provide the following three implementations in 
+ * the subclass corresponding to the abstract methods in the superclass:
+ * 
+ 
+	1. 	Check for uppercase characters in a string, and return ‘true’ or ‘false’ depending if any are found.
+	2. 	Convert all of the lower case characters to uppercase in the input string, and return the result.
+	3. 	Convert the input string to integer and add 10, output the result to the console.
+	Create an appropriate class having a main method to test the above setup.
+
+ */
+
+public class Q18_Test extends Q18_AbstractClass {
+
+	public static void main(String[] args) {
+		Q18_Class t1 = new Q18_Class("llo");
+		System.out.println(t1.checkUpperCase(t1.getStr()));
+		
+	} //end of main
+	
+	private String str;
+	
+	
+	
+	/**
+	 * @param str
+	 */
+	public Q18_Test(String str) {
+		this.str = str;
+	}
+
+	/**
+	 * @return the str
+	 */
+	public String getStr() {
+		return str;
+	}
+
+	/**
+	 * @param str the str to set
+	 */
+	public void setStr(String str) {
+		this.str = str;
+	}
+
+	/**
+	 * loop through string and check each character in String with charAt()
+	 */
+	@Override
+	public boolean checkUpperCase(String st) {
+		int strLength = st.length() - 1;
+		int strIndex = 0;
+		boolean isUpperCase = false;
+		while(strIndex <= strLength) {
+			if(Character.isUpperCase(str.charAt(strIndex))) {
+				isUpperCase = true; 
+			}
+			strIndex++;
+		}
+		return isUpperCase;
+	}
+
+	@Override
+	public void convertToUpper() {
+		
+	}
+
+	@Override
+	public int addToString(String str) {
+		return 0;
+	}
+
+}	//end of class
