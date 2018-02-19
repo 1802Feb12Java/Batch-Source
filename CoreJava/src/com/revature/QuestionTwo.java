@@ -6,9 +6,11 @@ public class QuestionTwo {
 
 		int[] fibonnaciSeries = new int[iterations];
 		try {
-			fibonnaciSeries[0] = 1;
+			// 1st 2 numbers of fibonnaci series
+			fibonnaciSeries[0] = 0;
 			fibonnaciSeries[1] = 1;
 
+			// adds previous 2 values to get current value
 			for (int i = 2; i < iterations; i++) {
 				fibonnaciSeries[i] = fibonnaciSeries[i - 2] + fibonnaciSeries[i - 1];
 			}
@@ -16,6 +18,7 @@ public class QuestionTwo {
 
 		}
 
+		// text formatting
 		System.out.print("[");
 
 		try {
