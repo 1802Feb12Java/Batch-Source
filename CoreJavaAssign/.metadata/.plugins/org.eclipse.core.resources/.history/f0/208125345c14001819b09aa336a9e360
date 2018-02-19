@@ -1,0 +1,16 @@
+package com.revature.core.java.q11.a;
+
+import com.revature.core.java.q11.Q7_Float;
+
+public class Q7_Float2 {
+	public static void main(String[] args) {
+		Q7_Float f1 = new Q7_Float();
+		Q7_Float f2 = new Q7_Float();
+		
+		f1.setNum1(43.24f);
+		f2.setNum2(23.31f);
+		
+		System.out.println("f1 float value: " + f1.getNum1());
+		System.out.println("f2 float value: " + f2.getNum2());
+	}	//end of main
+}	//end of class

@@ -1,0 +1,20 @@
+package com.revature.core.java;
+
+import java.util.ArrayList;
+
+/**
+ * 
+ * @author Johne Vang
+ *	Q9. Create an ArrayList which stores numbers from 1 to 100 
+ *	and prints out all the prime numbers to the console.
+ */
+public class Q9_PrimeNumbers {
+
+	public static void main(String[] args) {
+		
+		ArrayList<Integer> intList = new ArrayList<Integer>();
+		
+		
+	}
+
+}

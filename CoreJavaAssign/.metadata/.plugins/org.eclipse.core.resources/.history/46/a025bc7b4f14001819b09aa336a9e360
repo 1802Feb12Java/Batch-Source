@@ -1,0 +1,24 @@
+package com.revature.core.java.q7;
+
+import java.util.Comparator;
+
+/**
+ * 
+ * @author johne
+ * this class compares the dept of employees
+ */
+public class EmployeesSortDept implements Comparator<Employees>{
+
+	/**
+	 * Used compareTo to compare Strings.
+	 * If first string is lexicographically greater than second string, 
+	 * it returns positive number (difference of character value). 
+	 * If first string is less than second string lexicographically, 
+	 * it returns negative number and if first string is lexicographically equal to second string, it returns 0.
+	 */
+	@Override
+	public int compare(Employees e1, Employees e2) {
+		return e1.getDept().compareTo(e2.getDept());
+	}
+	
+}

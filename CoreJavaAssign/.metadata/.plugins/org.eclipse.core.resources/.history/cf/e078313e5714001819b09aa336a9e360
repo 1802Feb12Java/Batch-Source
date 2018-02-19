@@ -1,0 +1,16 @@
+package com.revature.core.java.q11;
+
+/**
+ * 
+ * @author johne
+ * Q11. Write a program that would access two float-variables 
+ * from a class that exists in another package. Note, you will 
+ * need to create two packages to demonstrate the solution.
+ * 
+ * use protected access modifier to be accessed within package and
+ * outside package
+ */
+public class Q7_Float {
+	protected float num1 = 9.999f;
+	protected float num2 = 3.4f;
+}
