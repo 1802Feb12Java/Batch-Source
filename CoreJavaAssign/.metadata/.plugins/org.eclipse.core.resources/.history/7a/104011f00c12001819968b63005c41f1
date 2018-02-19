@@ -1,0 +1,21 @@
+package com.revature;
+
+/*
+ * Johne Vang
+ * Q4 N Factorial
+ * Write a program to compute N factorial.
+ */
+public class Q4_NFactorial {
+	public static void main(String[] args) {
+		
+	}
+	
+	/**
+	 * 
+	 * @param num
+	 * @return
+	 */
+	public static int factorial(int num) {
+		int result = 0;
+	}
+}

@@ -1,0 +1,18 @@
+package com.revature;
+import java.util.*;
+/*
+ * Johne Vang
+ * Q10. Find the minimum of two numbers using ternary operators.
+ */
+public class Q10_MinOfTwoNum {
+	public static void main(String[] args) {
+		Scanner input = new Scanner(System.in);
+		
+		System.out.print("Enter two numbers: ");
+		int num1 = input.nextInt();
+		int num2 = input.nextInt();
+		
+		
+		int minVal = num1 > num2 ? num2 : num1;
+	}
+}

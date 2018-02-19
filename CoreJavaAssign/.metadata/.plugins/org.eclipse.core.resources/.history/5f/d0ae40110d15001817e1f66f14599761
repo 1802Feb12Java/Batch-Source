@@ -1,0 +1,30 @@
+package com.revature.core.java;
+
+/**
+ * 
+ * @author johne
+ * Q1. Perform a bubble sort on the following integer array:  1,0,5,6,3,2,3,7,9,8,4
+ */
+public class Q1_BubbleSort {
+
+	public static void main(String[] args) {
+		int[] intArray = {1,0,5,6,3,2,3,7,9,8,4};
+		
+	}//end of main
+	
+	/**
+	 * loop through array, check first index and see if it is on the correct spot,
+	 * otherwise move to the next index
+	 * @param a
+	 */
+	public static void bubbleSort(int[] a) {
+		int temp;
+		for(int i = 0; i < a.length; i++) {
+			for(int j = 0; j < a.length; j++) {
+				if(a[i] > a[i + 1]) {
+					
+				}
+			}
+		}
+	}
+}

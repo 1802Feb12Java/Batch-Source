@@ -1,0 +1,27 @@
+package com.revature;
+
+import java.util.Scanner;
+
+/*
+ * Johne Vang
+ * Q6. Write a program to determine if an
+ * integer is even without using the modulus operator (%)
+ */
+public class Q6_IsEven {
+	public static void main(String[] args) {
+		Scanner input = new Scanner(System.in);
+		
+		System.out.print("Enter a number: ");
+		int number = input.nextInt();
+		
+		/* since we cannot use the modulus to as a divisibility test, 
+		 * we will have to check last digit of the number is
+		 * 0, 2, 4, 6, 8. 
+		 */
+		if(number / 2 == 0) {
+			System.out.println("is even");
+		} else {
+			System.out.println("not even");
+		}
+	}	//end of main
+}	// end of class

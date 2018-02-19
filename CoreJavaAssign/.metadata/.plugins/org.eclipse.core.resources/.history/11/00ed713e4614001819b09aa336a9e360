@@ -1,0 +1,13 @@
+package com.revature.core.java.q7;
+
+import java.util.Comparator;
+
+public class EmployeesSortDept implements Comparator<Employees>{
+
+	@Override
+	public int compare(Employees o1, Employees o2) {
+		
+		return 0;
+	}
+	
+}
