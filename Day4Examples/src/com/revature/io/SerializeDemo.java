@@ -6,8 +6,9 @@ public class SerializeDemo {
 		// TODO Auto-generated method stub
 
 		IO io = new IO();
-		io.writeOutputStreamContents("For Narnia!");
-		io.writeOutputStreamContents(io.readInputStreamContents());
+		//io.writeOutputStreamContents("For Narnia!");
+		//io.writeOutputStreamContents(io.readInputStreamContents());
+		System.out.println(io.readInputStreamContents());
 	}
 
 }

@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class Question1 {
 
-	public static void main(String[] args) {
+	public static void run() {
 	
 		int arr[] = {1,0,5,6,3,2,3,7,9,8,4};
 		System.out.println(Arrays.toString(arr));
