@@ -1,5 +1,10 @@
 package com.revature;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -72,6 +77,26 @@ public class Administrator implements Serializable{
 			{
 				custList.remove(i);
 			}
+		}
+		try {	
+			//update file
+			FileOutputStream f = new FileOutputStream(new File("CustomerInfo.txt")); 
+			ObjectOutputStream o = new ObjectOutputStream(f);			
+			//write original file first
+			for(int i = 0; i< custList.size(); i++)
+			{
+				o.writeObject(custList.get(i));
+			}
+	
+			//close files
+			o.close();
+			f.close();		
+			System.out.println("Account Removed Successfully");
+		} catch (FileNotFoundException e11) {
+			System.out.println("File not found");
+		} catch (IOException e1) {
+			System.out.println("Error initializing stream");
+		
 		}
 		//loop back
 		BankInterface bi = new BankInterface();
