@@ -14,6 +14,7 @@ import java.util.Scanner;
 public class CustomerAccount {
 	private static Scanner scanner = new Scanner(System.in);
 	private PasswordChecker passwordChecker = new PasswordChecker();
+	private AccountChecker accountChecker = new AccountChecker();
 	
 	public void viewCustomerAccounts() {
 		System.out.println("Enter the username of the customer to view accounts.");
@@ -118,6 +119,10 @@ public class CustomerAccount {
 					
 					int accountSelection = scanner.nextInt();
 					scanner.nextLine();
+					if (!accountChecker.canDoTransactions(accounts.get(accountSelection))) {
+						System.out.println("Sorry. Accounts must be approved first");
+						MenuSystem.runMenu();
+					}
 					String[] accountInfo = accounts.get(accountSelection).split(" ");
 					accounts.remove(accountSelection);
 					int accountMoney = Integer.valueOf(accountInfo[3]);
@@ -195,7 +200,12 @@ public class CustomerAccount {
 					
 					int accountSelection = scanner.nextInt();
 					scanner.nextLine();
+					if (!accountChecker.canDoTransactions(accounts.get(accountSelection))) {
+						System.out.println("Sorry. Accounts must be approved first");
+						MenuSystem.runMenu();
+					}
 					String[] accountInfo = accounts.get(accountSelection).split(" ");
+					
 					accounts.remove(accountSelection);
 					int accountMoney = Integer.valueOf(accountInfo[3]);
 					System.out.println("How much would you like to deposit?");
@@ -262,6 +272,10 @@ public class CustomerAccount {
 					
 					int accountFromSelection = scanner.nextInt();
 					scanner.nextLine();
+					if (!accountChecker.canDoTransactions(accounts.get(accountFromSelection))) {
+						System.out.println("Sorry. Accounts must be approved first");
+						MenuSystem.runMenu();
+					}
 					String[] fromAccount = accounts.get(accountFromSelection).split(" "); 
 					System.out.println("Enter index number to select an account to tranfer TO");
 					int accountToSelection = scanner.nextInt();
@@ -270,6 +284,10 @@ public class CustomerAccount {
 					System.out.println("Enter an amount to transfer");
 					int amount = scanner.nextInt();
 					scanner.nextLine();
+					if (!accountChecker.canDoTransactions(accounts.get(accountToSelection))) {
+						System.out.println("Sorry. Accounts must be approved first");
+						MenuSystem.runMenu();
+					}
 					if (amount < 0 || amount > Integer.valueOf(fromAccount[3])) {
 						System.out.println("Error Bad amount input");
 						MenuSystem.runMenu();
@@ -352,6 +370,10 @@ public class CustomerAccount {
 			
 			int accountFromSelection = scanner.nextInt();
 			scanner.nextLine();
+			if (!accountChecker.canDoTransactions(accounts.get(accountFromSelection))) {
+				System.out.println("Sorry. Accounts must be approved first");
+				MenuSystem.runMenu();
+			}
 			String[] fromAccount = accounts.get(accountFromSelection).split(" "); 
 			
 			//get external account info
@@ -375,6 +397,10 @@ public class CustomerAccount {
 				}
 				int accountToSelection = scanner.nextInt();
 				scanner.nextLine();
+				if (!accountChecker.canDoTransactions(accounts.get(accountToSelection))) {
+					System.out.println("Sorry. Accounts must be approved first");
+					MenuSystem.runMenu();
+				}
 				String[] toAccountString = accountsTo.get(accountToSelection).split(" ");
 				
 				System.out.println("Enter an amount to transfer");

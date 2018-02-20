@@ -14,6 +14,7 @@ import java.util.Scanner;
 public class AdminAccount {
 	static Scanner scanner = new Scanner(System.in);
 	private PasswordChecker passwordChecker = new PasswordChecker();
+	private AccountChecker accountChecker = new AccountChecker();;
 	
 	public void registerEmployee() {
 		System.out.println("To register a new employee, enter your admin username");
@@ -59,9 +60,11 @@ public class AdminAccount {
 					while ((line = br.readLine()) != null) {
 						System.out.println(line);
 					}
+					br.close();
+					MenuSystem.runMenu();
 				} catch (FileNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					System.out.println("No such employee");
+					MenuSystem.runMenu();
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -70,6 +73,10 @@ public class AdminAccount {
 			else {
 				MenuSystem.runMenu();
 			}
+		}
+		else {
+			System.out.println("Nope.");
+			MenuSystem.runMenu();
 		}
 		
 	}
@@ -141,19 +148,6 @@ public class AdminAccount {
 			}
 		}
 		
-	}
-
-	public void forceTransfer() {
-		System.out.println("To force a transfer, please enter your username.");
-		String userName = scanner.nextLine();
-		
-		File file = new File("./adminProfiles/" + userName);
-		if (file.exists()) {
-			if (passwordChecker.checkPassword(userName, "admin")) {
-				CustomerAccount ca = new CustomerAccount();
-				ca.transferMoney();
-			}
-		}
 	}
 
 	public void deleteAccount() {
@@ -321,4 +315,240 @@ public class AdminAccount {
 		
 	}
 
+	public void doTransfer() {
+		System.out.println("To force a transfer, enter an admin username");
+		String username = scanner.nextLine();
+		File file = new File("./adminProfiles/" + username);
+		if (file.exists()) {
+			if (passwordChecker.checkPassword(username, "admin"))
+			transferMoney();
+		}
+		else {
+			System.out.println("Sorry. No such user.");
+			MenuSystem.runMenu();
+		}
+	}
+	
+	private void transferMoney() {
+		System.out.println("Enter the username of the customer to transfer money.");
+		String userName = scanner.next();
+		scanner.nextLine();
+		
+		File file = new File("./customerAccounts/" + userName);
+		if (file.exists()) {
+				try {
+					System.out.println("Do you want to transfer to one of your accounts? Y/N?");
+					String transferChoice = scanner.nextLine();
+					if (transferChoice.contains("y") || transferChoice.contains("Y")) {
+					BufferedReader reader = new BufferedReader(new FileReader(file));
+					String line;
+					ArrayList<String> accounts = new ArrayList<String>();
+					while ((line = reader.readLine()) != null) {
+						accounts.add(line);
+					}
+					reader.close();
+					System.out.println("Enter index number to select an account to tranfer FROM");
+					int i = 0;
+					for (String account : accounts) {
+						System.out.println(i + " " + account.toString());
+						i++;
+					}
+					
+					int accountFromSelection = scanner.nextInt();
+					scanner.nextLine();
+					if (!accountChecker .canDoTransactions(accounts.get(accountFromSelection))) {
+						System.out.println("Sorry. Accounts must be approved first");
+						MenuSystem.runMenu();
+					}
+					String[] fromAccount = accounts.get(accountFromSelection).split(" "); 
+					System.out.println("Enter index number to select an account to tranfer TO");
+					int accountToSelection = scanner.nextInt();
+					scanner.nextLine();
+					if (!accountChecker.canDoTransactions(accounts.get(accountToSelection))) {
+						System.out.println("Sorry. Accounts must be approved first");
+						MenuSystem.runMenu();
+					}
+					String[] toAccount = accounts.get(accountToSelection).split(" ");
+					System.out.println("Enter an amount to transfer");
+					int amount = scanner.nextInt();
+					scanner.nextLine();
+					if (amount < 0 || amount > Integer.valueOf(fromAccount[3])) {
+						System.out.println("Error Bad amount input");
+						MenuSystem.runMenu();
+					}
+					else {
+						int from = Integer.valueOf(fromAccount[3]);
+						int to = Integer.valueOf(toAccount[3]);
+						from -= amount;
+						to += amount;
+						fromAccount[3] = String.valueOf(from);
+						toAccount[3] = String.valueOf(to);
+						//remove old info from file
+						if (accountToSelection > accountFromSelection) {
+							accounts.remove(accountToSelection);
+							accounts.remove(accountFromSelection);
+						}
+						else {
+							accounts.remove(accountFromSelection);
+							accounts.remove(accountToSelection);
+						}
+						
+						
+						
+						String accountToAdd = "";
+						for(String accountInfo : fromAccount) {
+							accountToAdd += accountInfo + " ";
+						}
+								
+						//add from account
+						accounts.add(accountToAdd);
+						
+						//add to account
+						accountToAdd = "";
+						for(String accountInfo : toAccount) {
+							accountToAdd += accountInfo + " ";
+						}
+						accounts.add(accountToAdd);
+						
+						//write accounts to file
+						BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
+						for (String account : accounts) {
+							bufferedWriter.write(account+"\n");
+						}
+						
+						bufferedWriter.close();
+						MenuSystem.runMenu();
+					}
+					
+				}
+					//Transfer to  external Account
+					else {
+						externalTransfer(file);
+					}
+			}
+				catch(Exception e) {
+					e.printStackTrace();
+				}
+			}
+			else {
+				MenuSystem.runMenu();
+			}
+		
+		}
+	
+private void externalTransfer(File fromMember) {
+		try {
+			BufferedReader reader = new BufferedReader(new FileReader(fromMember));
+			String line;
+			ArrayList<String> accounts = new ArrayList<String>();
+			while ((line = reader.readLine()) != null) {
+				accounts.add(line);
+			}
+			reader.close();
+			System.out.println("Enter index number to select an account to tranfer FROM");
+			int i = 0;
+			for (String account : accounts) {
+				System.out.println(i + " " + account.toString());
+				i++;
+			}
+			
+			int accountFromSelection = scanner.nextInt();
+			scanner.nextLine();
+			if (!accountChecker.canDoTransactions(accounts.get(accountFromSelection))) {
+				System.out.println("Sorry. Accounts must be approved first");
+				MenuSystem.runMenu();
+			}
+			String[] fromAccount = accounts.get(accountFromSelection).split(" "); 
+			
+			//get external account info
+			System.out.println("Type the user ID of the account owner you would like to transfer TO");
+			String toMember = scanner.next();
+			scanner.nextLine();
+			File toAccount = new File("./customerAccounts/" + toMember);
+			if (toAccount.exists()) {
+				BufferedReader readerTo = new BufferedReader(new FileReader(toAccount));
+				String lineTo;
+				ArrayList<String> accountsTo = new ArrayList<String>();
+				while ((lineTo = readerTo.readLine()) != null) {
+					accountsTo.add(lineTo);
+				}
+				readerTo.close();
+				System.out.println("Enter index number to select an account to tranfer TO");
+				i = 0;
+				for (String account : accountsTo) {
+					System.out.println(i + " " + account.toString());
+					i++;
+				}
+				int accountToSelection = scanner.nextInt();
+				scanner.nextLine();
+				if (!accountChecker.canDoTransactions(accounts.get(accountToSelection))) {
+					System.out.println("Sorry. Accounts must be approved first");
+					MenuSystem.runMenu();
+				}
+				String[] toAccountString = accountsTo.get(accountToSelection).split(" ");
+				
+				System.out.println("Enter an amount to transfer");
+				int amount = scanner.nextInt();
+				scanner.nextLine();
+				if (amount < 0 || amount > Integer.valueOf(fromAccount[3])) {
+					System.out.println("Error Bad amount input");
+					MenuSystem.runMenu();
+				}
+				else {
+					int from = Integer.valueOf(fromAccount[3]);
+					int to = Integer.valueOf(toAccountString[3]);
+					from -= amount;
+					to += amount;
+					fromAccount[3] = String.valueOf(from);
+					toAccountString[3] = String.valueOf(to);
+					//remove old info from file
+					accountsTo.remove(accountToSelection);
+					accounts.remove(accountFromSelection);
+					String accountToAdd = "";
+					for(String accountInfo : fromAccount) {
+						accountToAdd += accountInfo + " ";
+					}
+							
+					//add from account
+					accounts.add(accountToAdd);
+					
+					//add to account
+					String toAccountToAdd = "";
+					for(String accountInfo : toAccountString) {
+						toAccountToAdd += accountInfo + " ";
+					}
+					accountsTo.add(toAccountToAdd);
+					
+					//write accounts to file
+					try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fromMember))) {
+						for (String account : accounts) {
+							bufferedWriter.write(account+"\n");
+						}
+
+					}
+					
+					try (BufferedWriter bufferedToWriter = new BufferedWriter(new FileWriter(toAccount))){
+						for (String accountTo : accountsTo) {
+							bufferedToWriter.write(accountTo+"\n");
+						}
+					
+					}
+					//bufferedToWriter.close();
+					//bufferedWriter.close();
+					MenuSystem.runMenu();
+				}
+				
+
+			}
+			else {
+				System.out.println("Sorry. No such user");
+				MenuSystem.runMenu();
+			}
+			
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 }

@@ -72,7 +72,7 @@ public class MenuSystem {
 			adminAccount.adjustBalance();
 			break;
 		case 2:
-			adminAccount.forceTransfer();
+			adminAccount.doTransfer();
 			break;
 		case 3:
 			adminAccount.deleteAccount();
