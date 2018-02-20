@@ -1,7 +1,10 @@
 package com.revature.driver;
 
+import java.io.EOFException;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
@@ -32,34 +35,14 @@ public class Driver {
 		HashMap <String, Employee> employees = new HashMap<>();
 		HashMap <String, Admin> admins = new HashMap<>();
 		HashMap <String, List<Account>> accounts = new HashMap<>();
-
-		//Output stream objects
-		FileOutputStream customerFileStreamOut = null;
-		FileOutputStream employeeFileStreamOut = null;
-		FileOutputStream adminFileStreamOut = null;
-		FileOutputStream accountFileStreamOut = null;
-		
-		ObjectOutputStream writeCustomers = null;
-		ObjectOutputStream writeEmployees = null;
-		ObjectOutputStream writeAdmins = null;
-		ObjectOutputStream writeAccounts = null;
-		
-		//Input stream objects
-		FileInputStream customerFileStreamIn = null;
-		FileInputStream employeeFileStreamIn = null;
-		FileInputStream adminFileStreamIn = null;
-		FileInputStream accountFileStreamIn = null;
-		
-		ObjectInputStream readCustomers = null;
-		ObjectInputStream readEmployees = null;
-		ObjectInputStream readAdmins = null;
-		ObjectInputStream readAccounts = null;
 		
 		//active session objects
 		Customer customer = null;
 		Employee employee = null;
 		Admin admin = null;
 		Account account = null;
+		Object currentObject = null;
+		ObjectInputStream inputStream = null;
 		char userType = 'n';
 		
 		//login and validation variables
@@ -70,8 +53,45 @@ public class Driver {
 		Scanner getInput = null;
 
 
-		//open files and populate the HashMaps
-		
+		System.out.print("Populating HashMaps...");
+		try {
+			//open files and populate the HashMaps
+			inputStream = new ObjectInputStream(new FileInputStream("users.dat"));
+			
+			while ((currentObject = inputStream.readObject()) != null) {
+				if(currentObject instanceof Customer) {
+					customers.put(((Customer) currentObject).getUserName(), (Customer) currentObject);
+				}
+				
+				if(currentObject instanceof Employee) {
+					employees.put(((Employee) currentObject).getUserName(), (Employee) currentObject);
+	
+				}
+				
+				if (currentObject instanceof Admin) {
+					admins.put(((Admin) currentObject).getUserName(), (Admin) currentObject);
+	
+				}
+			}//end inputStream while loop
+		}catch (EOFException e) {  //This exception will be caught when EOF is reached
+	        System.out.println("Success!");
+	    }catch (ClassNotFoundException e) {
+	        e.printStackTrace();
+	    }catch (FileNotFoundException e) {
+	        e.printStackTrace();
+	    }catch (IOException e) {
+	        e.printStackTrace();
+	    }finally {
+	        //Close the ObjectInputStream
+	        try {
+	            if (inputStream != null) {
+	                inputStream.close();
+	            }
+	        }catch (IOException e) {
+	            e.printStackTrace();
+	        }
+	    }//end finally
+			
 		while(userConnected) {			
 			//initiate login		
 			while(loggingIn) {
