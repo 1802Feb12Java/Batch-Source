@@ -40,6 +40,9 @@ public class Admin extends Employee {	//have all the same access to view as empl
 				return a.deposit(amount);
 			case "C":
 				System.out.println("Account " + accountID + " closed.");
+				for(Customer c : a.getCustomers()) {
+					c.removeAccount(a);
+				}
 				return allAccounts.remove(a);
 		}
 		

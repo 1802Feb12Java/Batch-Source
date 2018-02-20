@@ -14,9 +14,9 @@ public class BankApp1Driver {
 
 	private static ArrayList<Customer> allCustomers = new ArrayList<Customer>();
 	private static ArrayList<Account> allAccounts = new ArrayList<Account>();
+	private static Scanner scan = new Scanner(System.in);
 	
 	public static void main(String[] args) {
-		Scanner scan = new Scanner(System.in);
 		System.out.println("Hi, welcome to Trevor's banking app!\n");
 		System.out.print("Please indicate whether you are a customer, employee, or admin by typing C, E, or A, respectively, then pressing ENTER: ");
 		String userType = scan.nextLine();
@@ -49,9 +49,9 @@ public class BankApp1Driver {
 		switch(userType) {
 			case "c":	//chain them into each other without a break to do the same for both
 			case "C":
-				Customer c = loginCustomer(scan);
+				Customer c = loginCustomer();
 				do{
-					endChoice = doCustomerStuff(scan, c);
+					endChoice = doCustomerStuff(c);
 				} while(!endChoice.equals("quit"));
 				System.out.println();	//formatting
 				break;
@@ -59,14 +59,14 @@ public class BankApp1Driver {
 			case "e":
 			case "E":
 				do{
-					endChoice = doEmployeeStuff(scan);
+					endChoice = doEmployeeStuff();
 				} while(!endChoice.equals("quit"));
 				break;
 				
 			case "a":
 			case "A":
 				do{
-					endChoice = doAdminStuff(scan);
+					endChoice = doAdminStuff();
 				} while(!endChoice.equals("quit"));
 				break;
 		}
@@ -117,7 +117,7 @@ public class BankApp1Driver {
 		scan.close();
 	}
 	
-	public static Customer loginCustomer(Scanner scan) {
+	public static Customer loginCustomer() {
 		Customer user = null;
 		String[] currentUsernames = new String[allCustomers.size()];
 		for(int i=0; i<allCustomers.size(); i++) {
@@ -174,7 +174,7 @@ public class BankApp1Driver {
 		return user;
 	}
 	
-	public static String doCustomerStuff(Scanner scan, Customer user) {
+	public static String doCustomerStuff(Customer user) {
 		//outside of switch for new/login
 		System.out.println("Your account list:\n");
 		for(Account a : user.getAccounts()) {
@@ -326,7 +326,7 @@ public class BankApp1Driver {
 		return endChoice;
 	}
 	
-	public static String doEmployeeStuff(Scanner scan) {
+	public static String doEmployeeStuff() {
 		Employee emp = new Employee(allAccounts, allCustomers);
 		System.out.println("\nHi employee.");
 		String optionsList = "Possible choices - \n"
@@ -395,7 +395,7 @@ public class BankApp1Driver {
 		return endChoice;
 	}
 	
-	public static String doAdminStuff(Scanner scan) {
+	public static String doAdminStuff() {
 		Admin admin = new Admin(allAccounts, allCustomers);
 		System.out.println("\nHi admin.");
 		String optionsList = "Possible choices - \n"
