@@ -1,24 +1,69 @@
 package com.revature.driver;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.HashMap;
 import java.util.Scanner;
 
+import com.revature.accounts.Account;
 import com.revature.userfunctions.UserFunctions;
 import com.revature.users.*;
 
 public class Driver {
 	public static void main(String[] args) {
+		//loop controllers
 		boolean userConnected = true;
 		boolean loggingIn = true;
 		boolean loggedIn = false;
-		String userFilename = "sysusers.dat";
+		
+		//filenames
+		String customerFilename = "customers.dat";
+		String employeeFilename = "employees.dat";
+		String adminFilename = "admins.dat";
 		String accountFilename = "accounts.dat";
-		String userName = null;
-		String password = null;
+		
+		//storage maps
+		HashMap <String, Customer> customers = new HashMap<String, Customer>();
+		HashMap <String, Employee> employees = new HashMap<String, Employee>();
+		HashMap <String, Admin> admins = new HashMap<String, Admin>();
+		HashMap <String, Account> accounts = new HashMap<String, Account>();
 
+		//Output stream objects
+		FileOutputStream customerFileStreamOut = null;
+		FileOutputStream employeeFileStreamOut = null;
+		FileOutputStream adminFileStreamOut = null;
+		FileOutputStream accountFileStreamOut = null;
+		
+		ObjectOutputStream writeCustomers = null;
+		ObjectOutputStream writeEmployees = null;
+		ObjectOutputStream writeAdmins = null;
+		ObjectOutputStream writeAccounts = null;
+		
+		//Input stream objects
+		FileInputStream customerFileStreamIn = null;
+		FileInputStream employeeFileStreamIn = null;
+		FileInputStream adminFileStreamIn = null;
+		FileInputStream accountFileStreamIn = null;
+		
+		ObjectInputStream readCustomers = null;
+		ObjectInputStream readEmployees = null;
+		ObjectInputStream readAdmins = null;
+		ObjectInputStream readAccounts = null;
+		
+		//active session objects
+		Customer user = null;
+		Employee employee = null;
+		Admin admin = null;
+		Account account = null;
+		
+		//login and validation variables
 		int option = 0;
 		int loginAttempts = 0;
+		String userName = null;
 		Scanner getInput = null;
-		Customer user = null;
+
 
 		//open system user file: sysusers.dat and read the data into the collection
 		//open account file: accounts.dat and read it into the collection
@@ -44,7 +89,7 @@ public class Driver {
 				case 1:
 					//validate user
 					System.out.print("Please enter your user name: ");
-					user = UserFunctions.validate(userName, password);
+					loggedIn = UserFunctions.validate(userName, password);
 					if (loggedIn) {
 						loggingIn = false;
 					}

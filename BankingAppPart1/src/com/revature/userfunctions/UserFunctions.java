@@ -41,8 +41,8 @@ public class UserFunctions {
 
 	}
 	
-	public static Customer validate(String userName, String password) {
+	public static boolean validate(String userName, String password) {
 		
-		return null;  //stub
+		return true;  //stub
 	}
 }
