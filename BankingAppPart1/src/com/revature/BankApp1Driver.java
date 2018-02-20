@@ -1,13 +1,15 @@
 package com.revature;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class BankApp1Driver {
@@ -72,35 +74,47 @@ public class BankApp1Driver {
 		}
 		System.out.println("\nThanks for using Trevor's banking app!");
 		
-		ArrayList<Serializable> serList = new ArrayList<Serializable>();
-		serList.add(allAccounts);
-		serList.add(allCustomers);
-		File file = new File("out.txt");
+		File fileAcc = new File("AccountsList.txt");
+		File fileCust = new File("CustomersList.txt");
 		try {
-			FileOutputStream fos = new FileOutputStream(file);
-			ObjectOutputStream oos = new ObjectOutputStream(fos);
-			oos.writeObject(serList);
+			FileOutputStream fosAcc = new FileOutputStream(fileAcc);
+			FileOutputStream fosCust = new FileOutputStream(fileCust);
+			ObjectOutputStream oos = new ObjectOutputStream(fosAcc);
+			ObjectOutputStream oos2 = new ObjectOutputStream(fosCust);
+			oos.writeObject(allAccounts);
+			oos2.writeObject(allCustomers);
 			if(oos != null)
 				oos.close();
+			if(oos2 != null)
+				oos2.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		System.out.println("Check out \"out.txt\" for some garbled ArrayLists! :)");
+		System.out.println("Check out \"AccountsList.txt\" and \"CustomersList.txt\" for some garbled ArrayLists! :)");
 		
-//		ArrayList<Serializable> newSerList = null;
+		
+		
+//		ArrayList<Account> allAccCopy = null;
+//		ArrayList<Customer> allCustCopy = null;
 //		try {
-//			FileInputStream fis = new FileInputStream(file);
-//			ObjectInputStream oos = new ObjectInputStream(fis);
-//			newSerList = (ArrayList<Serializable>) oos.readObject();
+//			FileInputStream fisAcc = new FileInputStream(fileAcc);
+//			FileInputStream fisCust = new FileInputStream(fileCust);
+//			ObjectInputStream ois = new ObjectInputStream(fisAcc);
+//			ObjectInputStream ois2 = new ObjectInputStream(fisCust);
+//			allAccCopy = (ArrayList<Account>) ois.readObject();
+//			allCustCopy = (ArrayList<Customer>) ois2.readObject();
+//			if(ois != null)
+//				ois.close();
+//			if(ois2 != null)
+//				ois2.close();
 //		} catch (Exception e) {
 //			e.printStackTrace();
 //		}
 //		
-//		allAccounts = (ArrayList<Account>) newSerList.get(0);
-//		allCustomers = (ArrayList<Customer>) newSerList.get(1);
-//		
-//		System.out.println("Account 1 - \n" + allAccounts.get(0));
-//		System.out.println("Customer 1 - \n" + allCustomers.get(0));
+//		System.out.println("\nAccount 3 - \n" + allAccCopy.get(2));
+//		System.out.println("Customer 2 - \n" + allCustCopy.get(1));
+		
+		
 		
 		scan.close();
 	}
