@@ -1,6 +1,5 @@
 package com.revature;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -92,12 +91,12 @@ public class MyScanner {
 			Customer cust = new Customer(id, firstName, lastName, username, password);
 			
 			// Create string to store in users.txt
-			String custStr = id + ":" + firstName + ":" + lastName + ":" + username + ":" + password;
+			String custStr = cust.getCustomerId() + ":" + cust.getFirstName() + ":" + cust.getLastName() + ":" + cust.getUsername() + ":" + cust.getPassword();
 			
 			// Write to users.txt
 			fi.addNewCustomer(custStr);
 			
-			// Restart this class
+			// Re-instantiate class
 			new MyScanner();
 			
 		} else {
@@ -132,7 +131,7 @@ public class MyScanner {
 			String password = sc.next();
 			
 			// Validate password
-			if(password != cust.getPassword()) {
+			if(!password.equals(cust.getPassword())) {
 				boolean wrongPassword = true;
 				while(wrongPassword) {
 					System.out.println("Error! Wrong password. Please try again.");
@@ -143,19 +142,134 @@ public class MyScanner {
 				}
 			}
 			
-			// Welcome to account statement
-			System.out.println("Hi! " + cust.getFirstName() + " " + cust.getLastName() + ". Please choose an action!");
-			
 			// Check for existing account
 			boolean hasAccount = fi.checkForAccount(custId);
 			
 			if(hasAccount) {
 				
+				ArrayList<String> cal = fi.getCustAccount(custId);
 				
-				System.out.println("You have an account!");
+				// id
+				String cal0 = cal.get(0);
+				int cal00 = Integer.parseInt(cal0);
 				
+				// is_approved
+				String cal1 = cal.get(1);
+				int cal11 = Integer.parseInt(cal1);
+				
+				// is_joint
+				String cal2 = cal.get(2);
+				int cal22 = Integer.parseInt(cal2);
+				
+				// custIdOne
+				String cal3 = cal.get(3);
+				int cal33 = Integer.parseInt(cal3);
+				
+				// custIdTwo
+				String cal4 = cal.get(4);
+				int cal44 = Integer.parseInt(cal4);
+				
+				// accountBalance
+				String cal5 = cal.get(5);
+				double cal55 = Double.parseDouble(cal5);
+				
+				Account custAccount = new Account(cal00, cal11, cal22, cal33, cal44, cal55);
+				
+				if(cal.get(1).equals("0")) {
+					System.out.println("Hi " + cust.getFirstName() + " " + cust.getLastName() + "! Your account is currently pending approval! Please check back later.");
+					System.out.println("1. Logout");
+					int choice = sc.nextInt();
+					if(choice == 1) {
+						new MyScanner();
+					}
+				} else {
+					
+					System.out.println("Hi " + cust.getFirstName() + " " + cust.getLastName() + "! Welcome to your account!");
+					System.out.println("Please choose from one of the following:");
+					System.out.println("1. View account balance");
+					System.out.println("2. Make a withdrawl");
+					System.out.println("3. Make a deposit");
+					System.out.println("4. Logout");
+					int choice = sc.nextInt();
+					
+					boolean loggedIn = true;
+					boolean mainMenu = false;
+					
+					while(loggedIn) {
+						
+						if(mainMenu) {
+							
+							mainMenu = false;
+							
+							System.out.println("Please choose from one of the following:");
+							System.out.println("1. View account balance");
+							System.out.println("2. Make a withdrawl");
+							System.out.println("3. Make a deposit");
+							System.out.println("4. Logout");
+							choice = sc.nextInt();
+						}
+						
+						switch(choice) {
+							case 1:
+								System.out.println("Your current account balance is: $" + custAccount.getAccountBalance());
+								System.out.println("1. Main Menu");
+								int result = sc.nextInt();
+								if(result == 1) {
+									mainMenu = true;
+								}
+								break;
+								
+							case 2:
+								System.out.println("How much would you like to withdraw from your account?");
+								double withdrawAmount = sc.nextDouble();
+								
+								boolean withdrawing = true;
+								
+								while(withdrawing) {
+									if(withdrawAmount > custAccount.getAccountBalance()) {
+										System.out.println("Error! Please enter an amount less than or equal to $" + custAccount.getAccountBalance());
+										withdrawAmount = sc.nextDouble();
+									} else {
+										double newAmount = custAccount.getAccountBalance() - withdrawAmount;
+										custAccount.setAccountBalance(newAmount);
+										
+										fi.updateAccountBalance(custAccount.getId(), custAccount.getAccountBalance());
+										
+										withdrawing = false;
+									}
+								}
+								
+								
+								break;
+								
+							default:
+								break;
+						}
+					}
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+				}
 				
 			} else {
+				System.out.println("Hi! " + cust.getFirstName() + " " + cust.getLastName() + ". Please choose an action!");
 				System.out.println("1. Apply for bank account");
 				System.out.println("2. Logout");
 				int action = sc.nextInt();
@@ -222,13 +336,6 @@ public class MyScanner {
 				}
 				
 			}
-			
-			
-			
-			
-			
-			
-			
 			
 		}
 			

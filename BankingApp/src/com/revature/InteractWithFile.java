@@ -208,9 +208,12 @@ public class InteractWithFile {
 			while((line = br.readLine()) != null) {
 				
 				String[] lineArray = line.split(":");
-				String accountCustId = lineArray[2];
+				String accountCustId = lineArray[3];
+				String accountCustIdTwo = lineArray[4];
 				int accountCustIdParsed = Integer.parseInt(accountCustId);
-				if(accountCustIdParsed == custId) {
+				int accountCustIdParsedTwo = Integer.parseInt(accountCustIdTwo);
+				
+				if(accountCustIdParsed == custId || accountCustIdParsedTwo == custId) {
 					hasAccount = true;
 				}
 				
@@ -225,5 +228,90 @@ public class InteractWithFile {
 		
 		return hasAccount;
 	}
+	
+	public ArrayList<String> getCustAccount(int custId) {
 
+		
+		ArrayList<String> custAccount = new ArrayList<String>();
+		
+		try {
+			// Open users.txt file with the FileInputStream class
+			FileInputStream fstream = new FileInputStream("accounts.txt");
+			
+			// Get the object of DataInputStream
+			DataInputStream in = new DataInputStream(fstream);
+			BufferedReader br = new BufferedReader(new InputStreamReader(in));
+			
+			String line;
+			// Read file line by line
+			while((line = br.readLine()) != null) {
+				
+				String[] lineArray = line.split(":");
+				String accountCustId = lineArray[3];
+				String accountCustIdTwo = lineArray[4];
+				int accountCustIdParsed = Integer.parseInt(accountCustId);
+				int accountCustIdParsedTwo = Integer.parseInt(accountCustIdTwo);
+				
+				if(accountCustIdParsed == custId || accountCustIdParsedTwo == custId) {
+					custAccount.add(lineArray[0]);
+					custAccount.add(lineArray[1]);
+					custAccount.add(lineArray[2]);
+					custAccount.add(lineArray[3]);
+					custAccount.add(lineArray[4]);
+					custAccount.add(lineArray[5]);
+				}
+				
+			}
+			
+			// Close input stream
+			in.close();
+			
+		} catch (Exception e) {
+			System.out.println("Error: " + e.getMessage());
+		}
+		
+		return custAccount;
+	}
+
+	public void updateAccountBalance(int accountId, double balance) {
+		
+		try {
+			// Open users.txt file with the FileInputStream class
+			FileInputStream fstream = new FileInputStream("accounts.txt");
+			
+			// Get the object of DataInputStream
+			DataInputStream in = new DataInputStream(fstream);
+			BufferedReader br = new BufferedReader(new InputStreamReader(in));
+			
+			String line = "";
+			String input = "";
+			// Read file line by line
+			while((line = br.readLine()) != null) {
+				
+				String[] lineArray = line.split(":");
+				String idStr = lineArray[0];
+				int id = Integer.parseInt(idStr);
+				
+				if(id == accountId) {
+					
+					String newLine = lineArray[0] + ":" + lineArray[1] + ":" + lineArray[2] + ":" + lineArray[3] + ":" + lineArray[4] + ":" + balance;
+					input += newLine + System.lineSeparator();
+					
+				} else {
+					input += line + System.lineSeparator();
+				}
+			}
+			
+			BufferedWriter writer = new BufferedWriter(new FileWriter("accounts.txt"));
+			writer.append(input);
+			writer.close();
+			
+			// Close input stream
+			in.close();
+			
+		} catch (Exception e) {
+			System.out.println("Error: " + e.getMessage());
+		}
+		
+	}
 }
