@@ -5,7 +5,6 @@ import java.util.Scanner;
 import java.util.Set;
 
 import com.revature.managers.AccountManager;
-import com.revature.managers.Linker;
 import com.revature.managers.SessionManager;
 import com.revature.managers.UserManager;
 import com.revature.model.Account;
@@ -21,10 +20,6 @@ public class EmployeeScreen extends DisplayState {
 		Scanner userIn = new Scanner(new UnclosableInputStream(System.in));
 		String cmd;
 		String[] cmdSplit;
-		
-		AccountManager acctMng = AccountManager.getInstance();
-		UserManager usrMng = UserManager.getInstance();
-		Customer currentUser = (Customer)(SessionManager.getInstance().getCurrentUser());
 		
 		do {
 			System.out.println(">>> ");

@@ -10,22 +10,16 @@ public final class StateManager implements Runnable {
 	
 	private StateManager() {
 		startState = new DisplayState() {
-			private DisplayState nextState;
 			
 			@Override
 			public void execute() {
 				UserManager usrMng = UserManager.getInstance();
 				
 				if(usrMng.getUsers().isEmpty()) {
-					// TODO nextState -> AdminAcctSetup 
+					setNextState(new AdminAccountSetupState());
 				} else {
-					// TODO nextState -> EntryScreen
+					setNextState(new EntryScreen());
 				}
-			}
-
-			@Override
-			public DisplayState getNextState() {
-				return nextState;
 			}
 		};
 		
