@@ -39,6 +39,7 @@ public class MenuSystem {
 		System.out.println("1. Register a new employee");
 		System.out.println("2. View employee information");
 		System.out.println("3. View, edit, or cancel customer account");
+		System.out.println("4. Go Back to main menu");
 		int userOption = scanner.nextInt();
 		scanner.nextLine();
 		AdminAccount adminAccount = new AdminAccount();
@@ -53,6 +54,8 @@ public class MenuSystem {
 		case 3:
 			displayEditsFromAdminAccount();
 			break;
+		case 4:
+			MenuSystem.runMenu();
 		default:
 			break;
 		}
@@ -63,6 +66,7 @@ public class MenuSystem {
 		System.out.println("2. Force Transfer");
 		System.out.println("3. Delete Customer Account");
 		System.out.println("4. Approve Customer Account");
+		System.out.println("5. Go back to main menu");
 		int userOption = scanner.nextInt();
 		scanner.nextLine();
 		AdminAccount adminAccount = new AdminAccount();
@@ -79,6 +83,9 @@ public class MenuSystem {
 			break;
 		case 4:
 			adminAccount.approveAccounts();
+			break;
+		case 5: 
+			MenuSystem.runMenu();
 			break;
 		default:
 			break;

@@ -136,9 +136,14 @@ public class EmployeeAccount {
 						}
 						accounts.add(String.join(" ", info));
 						BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
+						AccountChecker ac = new AccountChecker();
 						for (String accountToWrite : accounts) {
 							bufferedWriter.write(accountToWrite + "\n");
+							if (ac.isJointAccount(accountToWrite)) {
+								ac.applyToJointOwner(accountToWrite, customerId);
+							}
 						}
+						
 						bufferedWriter.close();
 						reader.close();
 						MenuSystem.runMenu();

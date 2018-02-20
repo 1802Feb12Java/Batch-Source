@@ -126,6 +126,9 @@ public class AdminAccount {
 						}
 						accounts.remove(accountChoice);
 						accounts.add(accountToAdd);
+						if(accountChecker.isJointAccount(accountToAdd)) {
+							accountChecker.applyToJointOwner(accountToAdd, customerId);
+						}
 						BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
 						for (String account : accounts) {
 							bufferedWriter.write(account+"\n");
@@ -157,7 +160,7 @@ public class AdminAccount {
 		File file = new File("./adminProfiles/" + userName);
 		if (file.exists()) {
 			if (passwordChecker.checkPassword(userName, "admin")) {
-				System.out.println("Enter a customer ID to approve accounts");
+				System.out.println("Enter a customer ID to delete accounts");
 				String customerId = scanner.nextLine();
 				file = new File("./customerAccounts/" + customerId);
 				if (file.exists()) {
@@ -288,6 +291,9 @@ public class AdminAccount {
 							}
 						}
 						accounts.add(String.join(" ", info));
+						if(accountChecker.isJointAccount(String.join(" ", info))) {
+							accountChecker.applyToJointOwner(String.join(" ", info), customerId);
+						}
 						BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
 						for (String accountToWrite : accounts) {
 							bufferedWriter.write(accountToWrite + "\n");
@@ -402,6 +408,9 @@ public class AdminAccount {
 								
 						//add from account
 						accounts.add(accountToAdd);
+						if (accountChecker.isJointAccount(accountToAdd)) {
+							accountChecker.applyToJointOwner(accountToAdd, userName);
+						}
 						
 						//add to account
 						accountToAdd = "";
@@ -511,6 +520,10 @@ private void externalTransfer(File fromMember) {
 							
 					//add from account
 					accounts.add(accountToAdd);
+					if (accountChecker.isJointAccount(accountToAdd)) {
+						accountChecker.applyToJointOwner(accountToAdd, fromMember.getName());
+					}
+					
 					
 					//add to account
 					String toAccountToAdd = "";
@@ -518,6 +531,10 @@ private void externalTransfer(File fromMember) {
 						toAccountToAdd += accountInfo + " ";
 					}
 					accountsTo.add(toAccountToAdd);
+					if (accountChecker.isJointAccount(accountToAdd)) {
+						accountChecker.applyToJointOwner(accountToAdd, toMember);
+					}
+					
 					
 					//write accounts to file
 					try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fromMember))) {

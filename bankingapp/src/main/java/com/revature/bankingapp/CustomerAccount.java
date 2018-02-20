@@ -72,13 +72,15 @@ public class CustomerAccount {
 					else
 						account = "savings";
 					if (jointAccount.contains("Y") || jointAccount.contains("y"))
-						account += " joint";
+						account += addJointOwner();
 					else
 						account += " single";
 					account += " " + Math.abs((new Random().nextLong()));
 					account += " 0";
 					account += " PENDING\n";
 					writer.write(account);
+					if (jointAccount.contains("Y") || jointAccount.contains("y"))
+						accountChecker.applyToJointOwner(account, userName);
 					writer.close();
 					MenuSystem.runMenu();
 				} catch (IOException e) {
@@ -134,7 +136,7 @@ public class CustomerAccount {
 						if (withdrawl < 0) {
 							System.out.println("Error. Withdrawl must be bigger than 0");
 						}
-					} while (withdrawl >= 0);
+					} while (withdrawl <= 0);
 					if (withdrawl > accountMoney) {
 						System.out.println("You don't have enough money!");
 						MenuSystem.runMenu();
@@ -154,6 +156,9 @@ public class CustomerAccount {
 					BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
 					for (String account : accounts) {
 						bufferedWriter.write(account+"\n");
+						if (accountChecker.isJointAccount(account)) {
+							accountChecker.applyToJointOwner(accountToAdd, userName);
+						}
 					}
 					
 					bufferedWriter.close();
@@ -226,6 +231,9 @@ public class CustomerAccount {
 					}
 					
 					bufferedWriter.close();
+					if(accountChecker.isJointAccount(accountToAdd)) {
+						accountChecker.applyToJointOwner(accountToAdd, userName);
+					}
 					MenuSystem.runMenu();
 				} catch (FileNotFoundException e) {
 					e.printStackTrace();
@@ -318,6 +326,9 @@ public class CustomerAccount {
 								
 						//add from account
 						accounts.add(accountToAdd);
+						if(accountChecker.isJointAccount(accountToAdd)) {
+							accountChecker.applyToJointOwner(accountToAdd, userName);
+						}
 						
 						//add to account
 						accountToAdd = "";
@@ -325,6 +336,9 @@ public class CustomerAccount {
 							accountToAdd += accountInfo + " ";
 						}
 						accounts.add(accountToAdd);
+						if(accountChecker.isJointAccount(accountToAdd)) {
+							accountChecker.applyToJointOwner(accountToAdd, userName);
+						}
 						
 						//write accounts to file
 						BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
@@ -427,6 +441,9 @@ public class CustomerAccount {
 							
 					//add from account
 					accounts.add(accountToAdd);
+					if(accountChecker.isJointAccount(accountToAdd)) {
+						accountChecker.applyToJointOwner(accountToAdd, toMember);
+					}
 					
 					//add to account
 					String toAccountToAdd = "";
@@ -434,6 +451,9 @@ public class CustomerAccount {
 						toAccountToAdd += accountInfo + " ";
 					}
 					accountsTo.add(toAccountToAdd);
+					if(accountChecker.isJointAccount(accountToAdd)) {
+						accountChecker.applyToJointOwner(accountToAdd, fromMember.getName());
+					}
 					
 					//write accounts to file
 					try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fromMember))) {
@@ -466,5 +486,19 @@ public class CustomerAccount {
 			e.printStackTrace();
 		}
 	}
-
+	private String addJointOwner() {
+		String jointOwner = "";
+		System.out.println("Who would you like to add to your account?");
+		System.out.println("Type his/her username");
+		jointOwner = scanner.nextLine();
+		File file = new File("./customerAccounts/" + jointOwner);
+		if (file.exists())
+			return " joint-" + jointOwner;
+		else {
+			System.out.println("Sorry. That person isn't a customer");
+			MenuSystem.runMenu();
+			return "";
+		}
+	}
+	
 }
