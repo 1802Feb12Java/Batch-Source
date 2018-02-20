@@ -102,12 +102,15 @@ public class Customers implements Serializable {
 				index = x;
 			} 
 		}
+		if (amount > 0 ) {
 		if (all.get(index).getBalance() >= amount) {
 		bal = all.get(index).getBalance();
 		all.get(index).setBalance(bal -= amount);
 		System.out.println(all.get(index).getUsername()+" withrew $"+amount+" and now has total of $"+bal);
 		} else {
 			System.out.println("You cant withdraw more than you have. Try depositing first");
+		}} else {
+			System.out.println("Learn some math plz. No negative withdrawal");
 		}
 	}
 	
@@ -126,6 +129,7 @@ public class Customers implements Serializable {
 				index1 = x;
 			} 
 		}
+		if (amount > 0 ) {
 		if (all.get(index).getBalance() > amount) {
 			bal = all.get(index).getBalance();
 			bal1 = all.get(index1).getBalance();
@@ -135,6 +139,10 @@ public class Customers implements Serializable {
 		} else {
 			System.out.println("You are too broke to help your friend");
 		}
+		} else {
+			System.out.println("Cant transfer negative money");
+		}
+		
 	}
 	
 

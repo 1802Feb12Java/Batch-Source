@@ -22,31 +22,38 @@ public class Driver {
 		// They are good employees who wont share it to non employees
 		int empass = 1010;		// employee password to get in
 		Employee emp = new Employee(empass);
-		emp.setEmpId(empass);
 		
 		// Assuming all Admins share one ID which serves as their pass
 		// They are good admins who wont share it to non admins
-		int Adpass = 2020;
+		int Adpass = 2020;		// admin password
 		Admin adm = new Admin(Adpass);
-		adm.setAdminid(Adpass);
 		
 		// Creating Arraylists of Customers and Appliers to keep track of all their data
 		ArrayList<Customers> cus = new ArrayList<Customers>();
 		ArrayList<Applier> app = new ArrayList<Applier>();
 		
-		
-		// Some Customers and applicants created to fill some data
-		// Passwords are made username123 just for simplicity currently
-		// For this project, it is assumed every username is unique and no one will attempt to use same username as applicant
-		cus.add(new Customers("John","John123", "personal", 5400));
-		cus.add(new Customers("Michael","Michael123", "personal", 1500));
-		cus.add(new Customers("Carson","Carson123", "personal", 78000));
-		cus.add(new Customers("Dave","Dave123", "joint","Henry", 10000));
-		cus.add(new Customers("Henry","Henry123", "joint","Dave", 10000));
-		
-		app.add(new Applier("Mikela","Mikela123","personal",500));
-		app.add(new Applier("Ronnie","Ronnie123","personal",9800));
+		// Reading from the txt files and updating Customer lists
+		try {
+			ObjectInputStream isa = new ObjectInputStream(new FileInputStream(fileNameA));
+			ObjectInputStream isb = new ObjectInputStream(new FileInputStream(fileNameB)); 
+
+			ArrayList <Customers> readCus = (ArrayList<Customers>) isa.readObject();
+			ArrayList<Applier> readApp = (ArrayList<Applier>) isb.readObject();
 			
+			cus = readCus;
+			app = readApp;
+			
+			isa.close();
+			isb.close();
+			
+		} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+						
 		System.out.println("-----------------------------------------------------------");
 		System.out.println("Welcome to the Bank of Gods");
 		System.out.println("-----------------------------------------------------------");
@@ -75,6 +82,7 @@ public class Driver {
 				String joint;	// placeholder for name of joint partner
 				double fund;	// New customer bank fund
 				System.out.println("Welcome! Thank you for choosing to bank with the Gods");
+				System.out.println("-----------------------------------------------------------");
 				System.out.println("Please choose a username");
 				nus = sc.next();
 				sc.reset();
@@ -92,6 +100,7 @@ public class Driver {
 					fund = sc.nextDouble();
 					app.add(new Applier(nus,nps,act,joint,fund));
 					System.out.println("Please enter 0 to logout so we can process your application:");
+					System.out.println("-----------------------------------------------------------");
 					rep = sc.nextInt();
 				} else {
 					System.out.println("How much will you be depositing to start with?");
@@ -99,6 +108,7 @@ public class Driver {
 					app.add(new Applier(nus,nps,act,fund));
 					System.out.println("Please enter 0 to logout so we can process your application:");
 					rep = sc.nextInt();
+					System.out.println("-----------------------------------------------------------");
 				}
 				break;
 				
@@ -107,8 +117,8 @@ public class Driver {
 				String cps;				// Customer Password
 				String tran = null;		// transfer target user
 				String choice = null;	// variable for switch case for customer options
-				double dep;		// Existing Customer deposit amount
-				double wit;		// Existing Customer withdrawal amount
+				double dep;				// Existing Customer deposit amount
+				double wit;				// Existing Customer withdrawal amount
 				double tmoney = 0;		// money to be transfered
 				System.out.println("Enter your username:");
 				cname = sc.next();
@@ -148,10 +158,12 @@ public class Driver {
 					}
 				} else {
 					System.out.println("Wrong!!! We dont like frauds in our bank");
+					System.out.println("-----------------------------------------------------------");
 				}
 				System.out.println("Thank you for your business");
 				System.out.println("Please enter 0 to logout, 2 for some business or 5 to exit:");
 				rep = sc.nextInt();
+				System.out.println("-----------------------------------------------------------");
 				break;
 				
 			case 3: // Employee
@@ -163,6 +175,7 @@ public class Driver {
 				Eid = sc.nextInt();
 				if (Eid == empass) {
 					System.out.println("You really are a great employee!");
+					System.out.println("-----------------------------------------------------------");
 					System.out.println("What would you like to do?");
 					System.out.println("a. Oversee all accounts");
 					System.out.println("b. Approve account application");
@@ -192,9 +205,11 @@ public class Driver {
 					}
 				} else {
 					System.out.println("You are not an employee here!!!! Try again");
+					System.out.println("-----------------------------------------------------------");
 				}
 				System.out.println("Please enter 0 to logout, 3 to login again, or 5 to exit:");
 				rep = sc.nextInt();
+				System.out.println("-----------------------------------------------------------");
 				break;
 				
 			case 4: // Admin
@@ -214,6 +229,7 @@ public class Driver {
 				Aid = sc.nextInt();
 				if (Aid == Adpass) {
 					System.out.println("You are a great admin");
+					System.out.println("-----------------------------------------------------------");
 					System.out.println("What would you like to do?");
 					System.out.println("a. Oversee all accounts");
 					System.out.println("b. Approve account application");
@@ -277,13 +293,14 @@ public class Driver {
 					}
 				} else {
 					System.out.println("You are not an admin here. Try again");
+					System.out.println("-----------------------------------------------------------");
 					rep = 4;
 				}
 				System.out.println("Please enter 0 to logout, 4 to login again, or 5 to exit:");
 				rep = sc.nextInt();
 				break;
 				
-			case 5:
+			case 5: // Exit
 				System.out.println("Goodbye! Come by again");
 				try {
 					ObjectOutputStream os1 = new ObjectOutputStream(new FileOutputStream(fileNameA));
@@ -300,33 +317,13 @@ public class Driver {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-				
-				try {
-					ObjectInputStream isa = new ObjectInputStream(new FileInputStream(fileNameA));
-					ObjectInputStream isb = new ObjectInputStream(new FileInputStream(fileNameB)); 
-	
-					ArrayList <Customers> readCus = (ArrayList<Customers>) isa.readObject();
-					System.out.println(readCus);
-					
-					ArrayList<Applier> readApp = (ArrayList<Applier>) isb.readObject();
-					System.out.println(readApp);
-					
-					isa.close();
-					isb.close();
-					
-				} catch (ClassNotFoundException e) {
-						e.printStackTrace();
-				} catch (FileNotFoundException e) {
-					e.printStackTrace();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-				
+								
 				running = false;			// breaks out of the infinite while loop
 				break;
 				
 			default:
 				System.out.println("How could you go wrong on such a simple instruction");
+				System.out.println("-----------------------------------------------------------");
 				break;
 			}
 		}

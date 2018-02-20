@@ -80,6 +80,7 @@ public class Admin {
 				index = x;
 			} 
 		}
+		if (amount > 0) {
 		if (all.get(index).getBalance() >= amount) {
 		balance = all.get(index).getBalance();
 		all.get(index).setBalance(balance -= amount);
@@ -87,6 +88,10 @@ public class Admin {
 		} else {
 			System.out.println("They dont have enough to be withdrawn");
 		}
+		} else {
+			System.out.println("Cant be withrawing negative amount");
+		}
+		
 	}
 	
 	// transfer money for a customer to his friend
@@ -105,6 +110,7 @@ public class Admin {
 				index1 = x;
 			} 
 		}
+		if(amount > 0 ) {
 		if (all.get(index).getBalance() > amount) {
 			balance = all.get(index).getBalance();
 			balance1 = all.get(index).getBalance();
@@ -113,10 +119,12 @@ public class Admin {
 			System.out.println(user+" transfered $"+amount+ " to "+target+" and now has "+balance);
 		} else {
 			System.out.println("They are too broke to help your friend");
+		}} else {
+			System.out.println("No negative transfer admin. How did you get this job again?");
 		}
 	}
 	
-	// cancel a customer acount
+	// cancel a customer account
 	public void cancel (String name, ArrayList<Customers> all) {
 		for( int x = 0; x < all.size(); x++) {
 			if (all.get(x).getUsername().equals(name)) {
