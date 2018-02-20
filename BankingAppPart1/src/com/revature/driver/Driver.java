@@ -52,10 +52,9 @@ public class Driver {
 		String password = null;
 		Scanner getInput = null;
 
-
+		//open files and populate the HashMaps
 		System.out.print("Populating HashMaps...");
 		try {
-			//open files and populate the HashMaps
 			inputStream = new ObjectInputStream(new FileInputStream("users.dat"));
 			
 			while ((currentObject = inputStream.readObject()) != null) {
@@ -91,7 +90,36 @@ public class Driver {
 	            e.printStackTrace();
 	        }
 	    }//end finally
+
+		System.out.print("Reading in accounts");
+		try {
+			inputStream = new ObjectInputStream(new FileInputStream("accounts.dat"));
 			
+			while ((currentObject = inputStream.readObject()) != null) {
+				if(currentObject instanceof Account) {
+					accounts.put(((Account) currentObject).getUserName(), (Account) currentObject);
+				}
+			}//end inputStream while loop
+		}catch (EOFException e) {  //This exception will be caught when EOF is reached
+	        System.out.println("Success!");
+	    }catch (ClassNotFoundException e) {
+	        e.printStackTrace();
+	    }catch (FileNotFoundException e) {
+	        e.printStackTrace();
+	    }catch (IOException e) {
+	        e.printStackTrace();
+	    }finally {
+	        //Close the ObjectInputStream
+	        try {
+	            if (inputStream != null) {
+	                inputStream.close();
+	            }
+	        }catch (IOException e) {
+	            e.printStackTrace();
+	        }
+	    }//end finally
+		
+		
 		while(userConnected) {			
 			//initiate login		
 			while(loggingIn) {
