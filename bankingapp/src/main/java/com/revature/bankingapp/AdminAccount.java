@@ -51,23 +51,24 @@ public class AdminAccount {
 		File file = new File("./adminProfiles/" + userName);
 		if (file.exists()) {
 			if(passwordChecker.checkPassword(userName, "admin")) {
-				
+				System.out.println("Enter the name of the employee to view info");
+				String employeeName = scanner.nextLine();
+				try {
+					BufferedReader br = new BufferedReader(new FileReader("./employeeProfiles/" + employeeName));
+					String line ;
+					while ((line = br.readLine()) != null) {
+						System.out.println(line);
+					}
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 			else {
 				MenuSystem.runMenu();
-			}
-		}
-		
-	}
-
-	public void editCustomerAccount() {
-		System.out.println("To register a new employee, enter your admin username");
-		String userName = scanner.nextLine();
-		File file = new File("./adminProfiles/" + userName);
-		if (file.exists()) {
-			if(passwordChecker.checkPassword(userName, "admin")) {
-				System.out.println("What would you like to do?");
-				System.out.println("Enter a nu");
 			}
 		}
 		
@@ -143,8 +144,16 @@ public class AdminAccount {
 	}
 
 	public void forceTransfer() {
-		// TODO Auto-generated method stub
+		System.out.println("To force a transfer, please enter your username.");
+		String userName = scanner.nextLine();
 		
+		File file = new File("./adminProfiles/" + userName);
+		if (file.exists()) {
+			if (passwordChecker.checkPassword(userName, "admin")) {
+				CustomerAccount ca = new CustomerAccount();
+				ca.transferMoney();
+			}
+		}
 	}
 
 	public void deleteAccount() {
