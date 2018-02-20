@@ -1,0 +1,5 @@
+Customer 1 Details:
+	Username:poo
+	Password:priya
+	Names:[Ljava.lang.String;@42a57993
+	Balance:300.0
