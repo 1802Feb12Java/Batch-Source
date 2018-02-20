@@ -7,7 +7,6 @@ import com.revature.users.*;
 public class UserFunctions {
 
 	public static Customer register(Scanner getInput) {
-		String input = "";
 		Customer newCustomer = new Customer();		
 
 		System.out.print("Enter a user name: ");
@@ -41,8 +40,27 @@ public class UserFunctions {
 
 	}
 	
-	public static boolean validate(String userName, String password) {
+	public static boolean validateCustomer(String password, Customer customer) {
+		if(password == customer.getPassword()) {
+			return true;
+		}
 		
-		return true;  //stub
+		return false;
+	}
+	
+	public static boolean validateEmployee(String password, Employee employee) {
+		if(password == employee.getPassword()) {
+			return true;
+		}
+		
+		return false;
+	}
+	
+	public static boolean validateAdmin(String password, Admin admin) {
+		if(password == admin.getPassword()) {
+			return true;
+		}
+		
+		return false;
 	}
 }

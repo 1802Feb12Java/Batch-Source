@@ -1,0 +1,12 @@
+					//if user fails validation, and still has login attempts available, increment loginAttempts
+					if (!loggedIn && loginAttempts < 5) {
+						loginAttempts++;
+						System.out.println("Error:  Incorrect user name or password, please try again.");
+						System.out.println("(" + (5 - loginAttempts) + " remaining)");
+					}
+					
+					//if user fails validation and exceeds login attempts, exit the login loop
+					if (!loggedIn && loginAttempts >= 5) {
+						System.out.println("Login attempts exceeded.  Please try again later.");
+						loggingIn = false;
+					}

@@ -4,7 +4,9 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
 
 import com.revature.accounts.Account;
@@ -17,6 +19,7 @@ public class Driver {
 		boolean userConnected = true;
 		boolean loggingIn = true;
 		boolean loggedIn = false;
+		boolean userFound = false;
 		
 		//filenames
 		String customerFilename = "customers.dat";
@@ -24,11 +27,11 @@ public class Driver {
 		String adminFilename = "admins.dat";
 		String accountFilename = "accounts.dat";
 		
-		//storage maps
-		HashMap <String, Customer> customers = new HashMap<String, Customer>();
-		HashMap <String, Employee> employees = new HashMap<String, Employee>();
-		HashMap <String, Admin> admins = new HashMap<String, Admin>();
-		HashMap <String, Account> accounts = new HashMap<String, Account>();
+		//storage structures
+		HashMap <String, Customer> customers = new HashMap<>();
+		HashMap <String, Employee> employees = new HashMap<>();
+		HashMap <String, Admin> admins = new HashMap<>();
+		HashMap <String, List<Account>> accounts = new HashMap<>();
 
 		//Output stream objects
 		FileOutputStream customerFileStreamOut = null;
@@ -53,20 +56,21 @@ public class Driver {
 		ObjectInputStream readAccounts = null;
 		
 		//active session objects
-		Customer user = null;
+		Customer customer = null;
 		Employee employee = null;
 		Admin admin = null;
 		Account account = null;
+		char userType = 'n';
 		
 		//login and validation variables
 		int option = 0;
 		int loginAttempts = 0;
 		String userName = null;
+		String password = null;
 		Scanner getInput = null;
 
 
-		//open system user file: sysusers.dat and read the data into the collection
-		//open account file: accounts.dat and read it into the collection
+		//open files and populate the HashMaps
 		
 		while(userConnected) {			
 			//initiate login		
@@ -89,28 +93,80 @@ public class Driver {
 				case 1:
 					//validate user
 					System.out.print("Please enter your user name: ");
-					loggedIn = UserFunctions.validate(userName, password);
-					if (loggedIn) {
-						loggingIn = false;
+					userName = getInput.next();
+					
+					//search the customer database
+					if (customers.containsKey(userName)) {
+						customer = customers.get(userName);
+						userType = 'c';
 					}
-					//if user fails validation, and still has login attempts available, increment loginAttempts
-					if (!loggedIn && loginAttempts < 5) {
-						loginAttempts++;
-						System.out.println("Error:  Incorrect user name or password, please try again.");
-						System.out.println("(" + (5 - loginAttempts) + " remaining)");
+						
+					//search the employee database
+					else if(employees.containsKey(userName)) {
+						employee = employees.get(userName);
+						userType = 'e';
+					}
+						
+					//search the admin database
+					else if (admins.containsKey(userName)) {
+						admin = admins.get(userName);
+						userType = 'a';
 					}
 					
-					//if user fails validation and exceeds login attempts, exit the login loop
-					if (!loggedIn && loginAttempts >= 5) {
-						System.out.println("Login attempts exceeded.  Please try again later.");
-						loggingIn = false;
+					else {
+						System.out.println();
+						break;
 					}
 					
-					break;
+					System.out.print("Please enter your password: ");
+					password = getInput.next();
+					
+					switch(userType) {
+					case 'c':
+						loggedIn = UserFunctions.validateCustomer(password, customer);
+						if(loggedIn) {
+							loggingIn = false;
+							break;
+						}
+						
+						else { 
+							System.out.println();
+							userType = 'n';
+							customer = null;
+						}
+						
+					case 'e':
+						loggedIn = UserFunctions.validateEmployee(password, employee);
+						if(loggedIn) {
+							loggingIn = false;
+							break;
+						}
+						
+						else {
+							System.out.println();
+							userType = 'n';
+							employee = null;
+						}
+						
+					case 'a':
+						loggedIn = UserFunctions.validateAdmin(password, admin);
+						if(loggedIn) {
+							loggingIn = false;
+							break;
+						}
+						
+						else {
+							System.out.println();
+							userType = 'n';
+							admin = null;
+						}
+					}
+						
 
 				case 2:
-					user = (Customer) UserFunctions.register(getInput);
-					System.out.println();
+					customer = UserFunctions.register(getInput);
+					loggedIn = true;
+					loggingIn = false;
 					break; 
 					
 				default:

@@ -2,7 +2,7 @@ package com.revature.users;
 
 import java.io.Serializable;
 
-public class Customer implements Serializable{
+public class Customer implements Serializable {
 
 	/**
 	 * 
@@ -18,6 +18,15 @@ public class Customer implements Serializable{
 	private String state;
 	private String phoneNumber;
 
+	public Customer() {
+		super();
+	}
+	
+	public Customer(String userName) {
+		super();
+		this.userName = userName;
+	}
+	
 	public String getUserName() {
 		return userName;
 	}

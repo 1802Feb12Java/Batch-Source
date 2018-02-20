@@ -12,6 +12,18 @@ public class Employee implements Serializable {
 	private String firstName;
 	private String lastName;
 
+	public Employee() {
+		super();
+	}
+
+	public Employee(String userName, String password, String firstName, String lastName) {
+		super();
+		this.userName = userName;
+		this.password = password;
+		this.firstName = firstName;
+		this.lastName = lastName;
+	}
+
 	public String getUserName() {
 		return userName;
 	}
