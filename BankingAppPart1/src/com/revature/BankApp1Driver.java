@@ -16,6 +16,7 @@ public class BankApp1Driver {
 	private static ArrayList<Account> allAccounts = new ArrayList<Account>();
 	private static Scanner scan = new Scanner(System.in);
 	
+	@SuppressWarnings("unchecked")
 	public static void main(String[] args) {
 		System.out.println("Hi, welcome to Trevor's banking app!\n");
 		System.out.print("Please indicate whether you are a customer, employee, or admin by typing C, E, or A, respectively, then pressing ENTER: ");
@@ -26,24 +27,27 @@ public class BankApp1Driver {
 			System.out.println("Invalid input. Please put either C, E, or A.");
 			userType = scan.nextLine();
 		}
-		
-		allCustomers.add(new Customer("joe", "@@", "Jim George"));	//making some initial stuff for the start of a bank
-		allCustomers.add(new Customer("jim", "@13", "Joe Johnson"));
-		allAccounts.add(new Account());
-		allAccounts.get(0).setBalance(500);
-		allAccounts.add(new Account());
-		allAccounts.get(1).setBalance(250);
-		allAccounts.add(new Account());
-		allAccounts.get(2).setBalance(200);
-		allAccounts.add(new Account());
-		allAccounts.get(3).setBalance(80);	//purposefully not approved
-		allCustomers.get(0).addAccount(allAccounts.get(0));
-		allCustomers.get(0).addAccount(allAccounts.get(1));
-		allCustomers.get(1).addAccount(allAccounts.get(2));	//given to second person
-		allCustomers.get(1).addAccount(allAccounts.get(3));
-		allAccounts.get(0).setApproved(true);
-		allAccounts.get(1).setApproved(true);
-		allAccounts.get(2).setApproved(true);
+
+		File fileAcc = new File("AccountsList.txt");
+		File fileCust = new File("CustomersList.txt");
+		ArrayList<Account> allAccCopy = null;
+		ArrayList<Customer> allCustCopy = null;
+		try {
+			FileInputStream fisAcc = new FileInputStream(fileAcc);
+			FileInputStream fisCust = new FileInputStream(fileCust);
+			ObjectInputStream ois = new ObjectInputStream(fisAcc);
+			ObjectInputStream ois2 = new ObjectInputStream(fisCust);
+			allAccCopy = (ArrayList<Account>) ois.readObject();
+			allCustCopy = (ArrayList<Customer>) ois2.readObject();
+			if(ois != null)
+				ois.close();
+			if(ois2 != null)
+				ois2.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		allAccounts = allAccCopy;
+		allCustomers = allCustCopy;
 		
 		String endChoice = "";
 		switch(userType) {
@@ -72,8 +76,6 @@ public class BankApp1Driver {
 		}
 		System.out.println("\nThanks for using Trevor's banking app!");
 		
-		File fileAcc = new File("AccountsList.txt");
-		File fileCust = new File("CustomersList.txt");
 		try {
 			FileOutputStream fosAcc = new FileOutputStream(fileAcc);
 			FileOutputStream fosCust = new FileOutputStream(fileCust);
@@ -89,30 +91,6 @@ public class BankApp1Driver {
 			e.printStackTrace();
 		}
 		System.out.println("Check out \"AccountsList.txt\" and \"CustomersList.txt\" for some garbled ArrayLists! :)");
-		
-		
-		
-//		ArrayList<Account> allAccCopy = null;
-//		ArrayList<Customer> allCustCopy = null;
-//		try {
-//			FileInputStream fisAcc = new FileInputStream(fileAcc);
-//			FileInputStream fisCust = new FileInputStream(fileCust);
-//			ObjectInputStream ois = new ObjectInputStream(fisAcc);
-//			ObjectInputStream ois2 = new ObjectInputStream(fisCust);
-//			allAccCopy = (ArrayList<Account>) ois.readObject();
-//			allCustCopy = (ArrayList<Customer>) ois2.readObject();
-//			if(ois != null)
-//				ois.close();
-//			if(ois2 != null)
-//				ois2.close();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		
-//		System.out.println("\nAccount 3 - \n" + allAccCopy.get(2));
-//		System.out.println("Customer 2 - \n" + allCustCopy.get(1));
-		
-		
 		
 		scan.close();
 	}
