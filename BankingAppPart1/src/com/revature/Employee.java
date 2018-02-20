@@ -22,23 +22,17 @@ public class Employee {
 		Account a = allAccounts.get(index);
 		return a.toString();
 	}
-	public String readCustomer(String username, int customerID) {
+	public String readCustomer(int customerID) {
 		Customer c = null;		
 		boolean foundCustomer = false;
 		for(int i=0; i<allCustomers.size(); i++) {
-			if(allCustomers.get(i).getUsername().equals(username) && allCustomers.get(i).getCustomerID() == customerID) {
+			if(allCustomers.get(i).getCustomerID() == customerID) {
 				c = allCustomers.get(i);
 				foundCustomer = true;
 			}
-			if(allCustomers.get(i).getUsername().equals(username) && !(allCustomers.get(i).getCustomerID() == customerID)) {
-				return "Incorrect ID for username.";
-			}
-			if(!(allCustomers.get(i).getUsername().equals(username)) && allCustomers.get(i).getCustomerID() == customerID) {
-				return "Incorrect username for ID.";
-			}
 		}
 		if(!foundCustomer) {
-			return "Customer username/ID doesn't exist currently.";
+			return "ID doesn't exist currently.";
 		} 
 		return c.toString();
 	}
@@ -57,11 +51,11 @@ public class Employee {
 				}
 				if(choice.equals("y") || choice.equals("Y")) {
 					a.setApproved(true);
-					System.out.println("Account " + a.getAccountID() + " approved!\n");
+					System.out.println("Account " + a.getAccountID() + " approved!");
 				}
 			}
 		}
-		System.out.println("No more unapproved accounts.");
+		System.out.println("\nNo more unapproved accounts.");
 	}
 
 	public ArrayList<Account> getAllAccounts() {

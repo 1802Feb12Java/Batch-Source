@@ -7,6 +7,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class BankApp1Driver {
@@ -25,6 +26,24 @@ public class BankApp1Driver {
 			System.out.println("Invalid input. Please put either C, E, or A.");
 			userType = scan.nextLine();
 		}
+		
+		allCustomers.add(new Customer("joe", "@@", "Jim George"));	//making some initial stuff for the start of a bank
+		allCustomers.add(new Customer("jim", "@13", "Joe Johnson"));
+		allAccounts.add(new Account());
+		allAccounts.get(0).setBalance(500);
+		allAccounts.add(new Account());
+		allAccounts.get(1).setBalance(250);
+		allAccounts.add(new Account());
+		allAccounts.get(2).setBalance(200);
+		allAccounts.add(new Account());
+		allAccounts.get(3).setBalance(80);	//purposefully not approved
+		allCustomers.get(0).addAccount(allAccounts.get(0));
+		allCustomers.get(0).addAccount(allAccounts.get(1));
+		allCustomers.get(1).addAccount(allAccounts.get(2));	//given to second person
+		allCustomers.get(1).addAccount(allAccounts.get(3));
+		allAccounts.get(0).setApproved(true);
+		allAccounts.get(1).setApproved(true);
+		allAccounts.get(2).setApproved(true);
 		
 		String endChoice = "";
 		switch(userType) {
@@ -176,8 +195,16 @@ public class BankApp1Driver {
 			case "T":
 			case "t":
 				System.out.print("Please enter the ID of the account to withdraw from: ");
-				int withdrawAccountID = scan.nextInt();
+			    while (!scan.hasNextInt()) {
+					System.out.print("Please enter a number.\nEnter the ID of the account to withdraw from: ");
+			        scan.next(); 
+			    }
+			    int withdrawAccountID = scan.nextInt();
 				System.out.print("Please enter the ID of the account to deposit into: ");
+			    while (!scan.hasNextInt()) {
+					System.out.print("Please enter a number.\nEnter the ID of the account to deposit into: ");
+			        scan.next(); 
+			    }
 				int depositAccountID = scan.nextInt();
 				
 				Account withdrawAccount = null;
@@ -193,16 +220,14 @@ public class BankApp1Driver {
 						}
 					}
 					if(a.getAccountID() == depositAccountID) {
-						if(!user.getAccounts().contains(a)) {
-							System.out.println("You are not an owner of account " + depositAccountID);
-							return "";
-						}
-						else {
-							depositAccount = a;
-						}
+						depositAccount = a;
 					}
 				}
 				System.out.print("Please input the amount to transfer: ");
+			    while (!scan.hasNextInt()) {
+					System.out.print("Please enter a number.\nInput the amount to transfer: ");
+			        scan.next(); 
+			    }
 				int amount = scan.nextInt();
 				withdrawAccount.transfer(depositAccount, amount);
 				break;
@@ -214,6 +239,11 @@ public class BankApp1Driver {
 					System.out.print("Please enter the ID of the account to withdraw from: ");
 				if(customerChoice.equals("D") || customerChoice.equals("d"))
 					System.out.print("Please enter the ID of the account to deposit to: ");
+
+			    while (!scan.hasNextInt()) {
+					System.out.print("Please enter a number.\nInput the account ID: ");
+			        scan.next(); 
+			    }
 				int accountID = scan.nextInt();
 				
 				Account account = null;
@@ -230,11 +260,19 @@ public class BankApp1Driver {
 				}
 				if(customerChoice.equals("W") || customerChoice.equals("w")) {
 					System.out.print("Please input the amount to withdraw: ");
+				    while (!scan.hasNextInt()) {
+						System.out.print("Please enter a number.\nInput the amount to withdraw: ");
+				        scan.next(); 
+				    }
 					amount = scan.nextInt();
 					account.withdraw(amount);
 				}
 				if(customerChoice.equals("D") || customerChoice.equals("d")) {
 					System.out.print("Please input the amount to deposit: ");
+				    while (!scan.hasNextInt()) {
+						System.out.print("Please enter a number.\nInput the amount to deposit: ");
+				        scan.next(); 
+				    }
 					amount = scan.nextInt();
 					account.deposit(amount);
 				}
@@ -280,6 +318,10 @@ public class BankApp1Driver {
 				}
 				System.out.println();
 				System.out.print("Please input the account ID that you wish to read: ");
+			    while (!scan.hasNextInt()) {
+					System.out.print("Please enter a number.\nInput the ID of the account to read: ");
+			        scan.next(); 
+			    }
 				int accountID = scan.nextInt();
 				System.out.println("\nAttempting to read account " + accountID + ":");
 				System.out.print(emp.readAccount(accountID));
@@ -288,17 +330,18 @@ public class BankApp1Driver {
 			case "Rc":
 			case "rC":
 			case "rc":
-				System.out.println("Available customer ID's: ");
+				System.out.print("Available customer ID's: ");
 				for(Customer crustomer : allCustomers) {
-					System.out.println(crustomer.getCustomerID());
+					System.out.print(crustomer.getCustomerID() + " ");
 				}
-				
-				System.out.print("Please enter the customer's username: ");
-				String username = scan.nextLine();
-				System.out.print("Please enter the customer's ID: ");
+				System.out.print("\nPlease enter the customer's ID: ");
+			    while (!scan.hasNextInt()) {
+					System.out.print("Please enter a number.\nInput the customer ID: ");
+			        scan.next(); 
+			    }
 				int customerID = scan.nextInt();
 				System.out.println("\nAttempting to read customer " + customerID + ":");
-				System.out.println(emp.readCustomer(username, customerID));
+				System.out.println(emp.readCustomer(customerID));
 				break;
 			case "R":
 			case "r":
@@ -348,6 +391,10 @@ public class BankApp1Driver {
 				}
 				System.out.println();
 				System.out.print("Please input the account ID that you wish to read: ");
+			    while (!scan.hasNextInt()) {
+					System.out.print("Please enter a number.\nInput the account ID: ");
+			        scan.next(); 
+			    }
 				int accountID = scan.nextInt();
 				System.out.println("\nAttempting to read account " + accountID + ":");
 				System.out.print(admin.readAccount(accountID));
@@ -356,17 +403,18 @@ public class BankApp1Driver {
 			case "Rc":
 			case "rC":
 			case "rc":
-				System.out.println("Available customer ID's: ");
+				System.out.print("Available customer ID's: ");
 				for(Customer crustomer : allCustomers) {
-					System.out.println(crustomer.getCustomerID());
+					System.out.print(crustomer.getCustomerID() + " ");
 				}
-				
-				System.out.print("Please enter the customer's username: ");
-				String username = scan.nextLine();
-				System.out.print("Please enter the customer's ID: ");
+				System.out.print("\nPlease enter the customer's ID: ");
+			    while (!scan.hasNextInt()) {
+					System.out.print("Please enter a number.\nInput the customer ID: ");
+			        scan.next(); 
+			    }
 				int customerID = scan.nextInt();
 				System.out.println("\nAttempting to read customer " + customerID + ":");
-				System.out.println(admin.readCustomer(username, customerID));
+				System.out.println(admin.readCustomer(customerID));
 				break;
 			case "R":
 			case "r":
@@ -375,10 +423,22 @@ public class BankApp1Driver {
 			case "T":
 			case "t":
 				System.out.print("Please enter the ID of the account to withdraw from: ");
-				int withdrawAccountID = scan.nextInt();
+			    while (!scan.hasNextInt()) {
+					System.out.print("Please enter a number.\nEnter the ID of the account to withdraw from: ");
+			        scan.next(); 
+			    }
+			    int withdrawAccountID = scan.nextInt();
 				System.out.print("Please enter the ID of the account to deposit into: ");
+			    while (!scan.hasNextInt()) {
+					System.out.print("Please enter a number.\nEnter the ID of the account to deposit into: ");
+			        scan.next(); 
+			    }
 				int depositAccountID = scan.nextInt();
 				System.out.print("Please input the amount to transfer: ");
+			    while (!scan.hasNextInt()) {
+					System.out.print("Please enter a number.\nInput the amount to transfer: ");
+			        scan.next(); 
+			    }
 				int amount = scan.nextInt();
 				admin.transferMoney(withdrawAccountID, depositAccountID, amount);
 				break;
@@ -387,6 +447,10 @@ public class BankApp1Driver {
 			case "D":
 			case "d":
 				System.out.print("Please enter the account ID: ");
+			    while (!scan.hasNextInt()) {
+					System.out.print("Please enter a number.\nInput the account ID: ");
+			        scan.next(); 
+			    }
 				accountID = scan.nextInt();
 				if(adminChoice.equals("W") || adminChoice.equals("w")) {
 					System.out.print("Please enter the amount to withdraw: ");
@@ -394,12 +458,20 @@ public class BankApp1Driver {
 				if(adminChoice.equals("D") || adminChoice.equals("d")) {
 					System.out.print("Please enter the amount to deposit: ");
 				}
+			    while (!scan.hasNextInt()) {
+					System.out.print("Please enter a number.\nInput the amount: ");
+			        scan.next(); 
+			    }
 				amount = scan.nextInt();
 				admin.editAccount(adminChoice.toUpperCase(), accountID, amount);
 				break;
 			case "C":
 			case "c":
 				System.out.print("Please enter the account ID: ");
+			    while (!scan.hasNextInt()) {
+					System.out.print("Please enter a number.\nInput the account ID: ");
+			        scan.next(); 
+			    }
 				accountID = scan.nextInt();
 				admin.editAccount("C", accountID, 0);
 				break;
