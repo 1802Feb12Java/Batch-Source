@@ -162,5 +162,6 @@ public class CustomerScreen extends DisplayState {
 			
 		} while(true);
 		
+		userIn.close();
 	}
 }
