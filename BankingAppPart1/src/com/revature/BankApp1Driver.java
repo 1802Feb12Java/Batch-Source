@@ -4,10 +4,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -19,7 +17,7 @@ public class BankApp1Driver {
 	
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
-		System.out.println("Hi, welcome to Trevor's banking app!");
+		System.out.println("Hi, welcome to Trevor's banking app!\n");
 		System.out.print("Please indicate whether you are a customer, employee, or admin by typing C, E, or A, respectively, then pressing ENTER: ");
 		String userType = scan.nextLine();
 		String[] validUserTypes = {"C","c","E","e","A","a"};
@@ -187,12 +185,12 @@ public class BankApp1Driver {
 				+ "\tW: Withdraw from account\n"
 				+ "\tD: Deposit to account\n";
 		String[] validCustomerOptions = {"A","a","T","t","W","w","D","d","quit"};
-		System.out.println("What would you like to do?\n"+optionsList);
+		System.out.print("What would you like to do?\n"+optionsList);
 		System.out.print("Please input the letter(s) corresponding to what you'd like to do: ");
 		String customerChoice = scan.nextLine();
 		while(!(Arrays.stream(validCustomerOptions).parallel().anyMatch(customerChoice::equals))) {	
 			//while they didn't put in a valid option string
-			System.out.println("\nInvalid input. Try again.\n" + optionsList);
+			System.out.print("\nInvalid input. Try again.\n" + optionsList);
 			System.out.print("Please input the letter(s) corresponding to what you'd like to do: ");
 			customerChoice = scan.nextLine();
 		}
@@ -201,9 +199,36 @@ public class BankApp1Driver {
 				return "quit";
 			case "A":
 			case "a":
+				System.out.print("Would you like to add anyone else to this account? Please type Y or N: ");
+				String addAcc = scan.nextLine();
+				while(!(addAcc.equals("y") || addAcc.equals("n") || addAcc.equals("Y") || addAcc.equals("N"))) {	
+					//while they didn't put in c, e, or a (or their capital versions)
+					System.out.println("Invalid input. Please put either Y or N.");
+					addAcc = scan.nextLine();
+				}
+				Customer otherCustomer = null;
+				if(addAcc.equals("y") || addAcc.equals("Y")) {
+					System.out.println("Please enter the username of the person you would like to own this account with: ");
+					String secondUser = scan.nextLine();
+					String[] currentUsernames = new String[allCustomers.size()];
+					for(int i=0; i<allCustomers.size(); i++) {
+						currentUsernames[i] = allCustomers.get(i).getUsername();
+					}
+					while(!Arrays.stream(currentUsernames).parallel().anyMatch(secondUser::equals)) {
+						System.out.print("Username not found. Please try again.\n\nNew username: ");
+						secondUser = scan.nextLine();
+					}
+					for(int i=0; i<allCustomers.size(); i++) {
+						if(currentUsernames[i].equals(secondUser))
+							otherCustomer = allCustomers.get(i);
+					}
+				}
 				Account newAccount = new Account();
 				allAccounts.add(newAccount);
 				user.addAccount(newAccount);
+				if(otherCustomer != null) {
+					otherCustomer.addAccount(newAccount);
+				}
 				System.out.println("Account applied for. New Account's ID = " + newAccount.getAccountID());
 				break;
 			case "T":
@@ -308,13 +333,13 @@ public class BankApp1Driver {
 				+ "\tRA: Read account information\n"
 				+ "\tRC: Read customer information\n"
 				+ "\tR: Review (approve/deny) account applications\n";
-		System.out.println(optionsList);
+		System.out.print(optionsList);
 		System.out.print("Please input the letter(s) corresponding to what you'd like to do: ");
 		String empChoice = scan.nextLine();
 		String[] validOptions = {"RA","Ra","rA","ra","RC","Rc","rC","rc","R","r", "quit"};
 		while(!(Arrays.stream(validOptions).parallel().anyMatch(empChoice::equals))) {	
 			//while they didn't put in a valid option string
-			System.out.println("\nInvalid input. Try again.\n" + optionsList);
+			System.out.print("\nInvalid input. Try again.\n" + optionsList);
 			System.out.print("Please input the letter(s) corresponding to what you'd like to do: ");
 			empChoice = scan.nextLine();
 		}

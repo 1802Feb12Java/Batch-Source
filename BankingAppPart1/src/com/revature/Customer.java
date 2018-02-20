@@ -35,6 +35,7 @@ public class Customer implements Serializable {
 		return true;
 	}
 	
+	//past this point is mostly Alt+Shift+S, minor modification in toString and constructors
 	public String getUsername() {
 		return username;
 	}
@@ -60,7 +61,6 @@ public class Customer implements Serializable {
 		this.username = username;
 		this.password = password;
 		this.fullName = fullName;
-		//System.out.println("Customer " + username+"#"+customerID + " created!");	//TODO: Dear god remove, this is disgusting in test cases
 	}
 	@Override
 	public String toString() {

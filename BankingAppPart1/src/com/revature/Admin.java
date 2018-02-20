@@ -46,6 +46,7 @@ public class Admin extends Employee {	//have all the same access to view as empl
 		return false;
 	}
 
+	//past this point is mostly Alt+Shift+S, minor modification in toString and constructors
 	public Admin() {
 		super();
 	}
@@ -53,11 +54,4 @@ public class Admin extends Employee {	//have all the same access to view as empl
 		super(allAccounts, allCustomers);
 		this.allAccounts = allAccounts;
 	}
-
-//	Bank admins should be able to view and edit all accounts
-//	This includes:
-//		Approving/denying accounts
-//		Withdrawing, depositing, transferring from all accounts
-//		Canceling accounts
-
 }

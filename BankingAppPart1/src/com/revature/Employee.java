@@ -58,6 +58,7 @@ public class Employee {
 		System.out.println("\nNo more unapproved accounts.");
 	}
 
+	//past this point is mostly Alt+Shift+S, minor modification in toString and constructors
 	public ArrayList<Account> getAllAccounts() {
 		return allAccounts;
 	}
@@ -72,12 +73,4 @@ public class Employee {
 		this.allAccounts = allAccounts;
 		this.allCustomers = allCustomers;
 	}
-
-//	Employees of the bank should be able to view all of their customers information
-//	This includes:
-//		account information
-//		Account balances
-//		Personal information
-//	Employees should be able to approve/deny open applications for accounts
-
 }

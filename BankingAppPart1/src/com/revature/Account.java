@@ -58,7 +58,7 @@ public class Account implements Serializable {
 		return true;
 	}
 	
-	public boolean withdraw(double amount) {	//returns true if withdrawl successful
+	public boolean withdraw(double amount) {	//returns true if withdrawal successful
 		if(amount < 0) {
 			System.out.println("Attempted to withdraw negative amount. No balance changes.");
 			return false;
@@ -72,7 +72,7 @@ public class Account implements Serializable {
 		return true;
 	}
 	
-	//basic getters and setters and constructors from Alt+Shift+S
+	//past this point is mostly Alt+Shift+S, minor modification in toString and constructors
 	public int getAccountID() {
 		return accountID;
 	}
@@ -99,9 +99,7 @@ public class Account implements Serializable {
 		for(Customer c : customers) {
 			this.customers.add(c);
 		}
-		//System.out.println("Account " + accountID + " created!");	//TODO: Dear god remove, this is disgusting in test cases
 	}
-
 	@Override
 	public String toString() {
 		String str = "Account ID = " + accountID + "\nBalance = $" + String.format("%.2f", balance) + "\nCustomers = ";
