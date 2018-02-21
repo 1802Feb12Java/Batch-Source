@@ -18,6 +18,79 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class FileKeeping {
+	
+	//New Testing Code
+	public static void addToUserLog(ArrayList<String> userLog, Customer newUser) {
+		String username = newUser.getUsername();
+		String password = newUser.getPassword();
+		String accessType = newUser.getAccessType();
+		String newLogEntry = username + ":" + password + ":" + accessType;
+		userLog.add(newLogEntry);
+		//writeToUsernamePasswordFile(userLog);
+	}//end addToUserLog
+	
+	public static void addToUserLog(ArrayList<String> userLog, BankEmployee newUser) {
+		String username = newUser.getUsername();
+		String password = newUser.getPassword();
+		String accessType = newUser.getAccessType();
+		String newLogEntry = username + ":" + password + ":" + accessType;
+		userLog.add(newLogEntry);
+		//writeToUsernamePasswordFile(userLog);
+	}//end addToUserLog
+	
+	public static void addToUserLog(ArrayList<String> userLog, BankAdmin newUser) {
+		String username = newUser.getUsername();
+		String password = newUser.getPassword();
+		String accessType = newUser.getAccessType();
+		String newLogEntry = username + ":" + password + ":" + accessType;
+		userLog.add(newLogEntry);
+		//writeToUsernamePasswordFile(userLog);
+	}//end addToUserLog
+	
+	public static void writeToAdminLogFile(ArrayList<BankAdmin> adminLog) {
+		FileOutputStream fileOS;
+		
+		try {
+			fileOS = new FileOutputStream("C:\\Users\\colso\\Desktop\\Git Things\\Batch-Source\\BankingApp\\src\\com\\revature\\bankingapp1\\AdminLog.txt");
+			ObjectOutputStream objectOS = new ObjectOutputStream(fileOS);
+			
+			objectOS.writeObject(adminLog);
+			
+			objectOS.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}//end writeToAdminLogFile method
+	
+	@SuppressWarnings("unchecked")
+	public static ArrayList<BankAdmin> readInAdminLog(){
+		Serializable s = null;
+		
+		FileInputStream fileIS;
+		try {
+			fileIS = new FileInputStream("C:\\Users\\colso\\Desktop\\Git Things\\Batch-Source\\BankingApp\\src\\com\\revature\\bankingapp1\\AdminLog.txt");
+			ObjectInputStream objectIS = new ObjectInputStream(fileIS);
+			s = (Serializable) objectIS.readObject();
+			
+			objectIS.close();
+			
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		
+		return (ArrayList<BankAdmin>) s;
+	}//end readInAdminLog method
+	
+	
+	
+	//END NEW TEST CODE---------------------------------------------------------------------------------------
 
 	public static ArrayList<String> readInUsernamePasswordLog(){
 		Scanner input = null;

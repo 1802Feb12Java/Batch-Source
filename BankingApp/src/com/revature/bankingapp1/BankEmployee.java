@@ -5,14 +5,24 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
-public class BankEmployee implements Serializable, User{
+public class BankEmployee implements Serializable{
 	
 	private static final long serialVersionUID = 782690677086110916L;
 	private String username;
 	private String password;
 	private static final String accessType = "Employee";
+	//private String accessType;
 	private String firstName;
 	private String lastName;
+	
+	public BankEmployee(String username, String password, String firstName, String lastName) {
+		//need validation to make sure user name is unique
+		this.username = username;
+		this.password = password;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		//this.accessType = "Employee";
+	}//end  initial constructor
 	
 	public BankEmployee(ArrayList<String> userLog, String username, String password, String firstName, String lastName) {
 		//need validation to make sure user name is unique
@@ -20,15 +30,16 @@ public class BankEmployee implements Serializable, User{
 		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
+		//this.accessType = "Employee";
 		FileKeeping.addToUsernamePasswordLog(userLog, this);
 	}//end  constructor
 	
 	public BankEmployee(ArrayList<String> userLog, ArrayList<BankEmployee> employeeLog, String username, String password, String firstName, String lastName) {
-		//need validation to make sure user name is unique
 		this.username = validateUsername(userLog, username);
 		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
+		//this.accessType = "Employee";
 		FileKeeping.addToUsernamePasswordLog(userLog, this);
 		FileKeeping.addToEmployeeLog(employeeLog, this);
 	}//end constructor
@@ -91,6 +102,7 @@ public class BankEmployee implements Serializable, User{
 								+ applicationType + " account has been " + newStatus + ".");
 						if(newStatus.equalsIgnoreCase("Approved")) {
 							createNewAccount(c, applicationType);
+							//c.applicationList.remove(a);
 							
 						}
 						return;
@@ -169,7 +181,7 @@ public class BankEmployee implements Serializable, User{
 	}
 
 
-	public static String getAccessType() {
+	public String getAccessType() {
 		return accessType;
 	}
 

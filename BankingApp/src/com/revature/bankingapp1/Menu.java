@@ -9,7 +9,21 @@ import java.util.Scanner;
 	 */
 public class Menu {
 	
-	public static int mainMenu() {
+//	public static int mainMenu() {
+//		Scanner read = new Scanner(System.in);
+//		System.out.println("Welcome to myFirstBank.");
+//		System.out.println();
+//		System.out.println("1. Log In.");
+//		System.out.println("2. New User.");
+//		System.out.println("3. Exit. ");
+//		System.out.print("Your selection: ");
+//		int userSelection = read.nextInt();
+//		System.out.println();
+//		return userSelection;
+//		
+//	}//end mainMenu method
+	
+	public static void mainMenu(ArrayList<String> userLog, ArrayList<Customer> customerLog, ArrayList<BankEmployee> employeeLog) {
 		Scanner read = new Scanner(System.in);
 		System.out.println("Welcome to myFirstBank.");
 		System.out.println();
@@ -19,12 +33,8 @@ public class Menu {
 		System.out.print("Your selection: ");
 		int userSelection = read.nextInt();
 		System.out.println();
-		return userSelection;
-		
-	}//end mainMenu method
 	
-	public static void chooseOption(ArrayList<String> userLog, ArrayList<Customer> customerLog, ArrayList<BankEmployee> employeeLog, int selection) {
-		switch(selection) {
+		switch(userSelection) {
 			case 1:
 				returningUserMenu(userLog, customerLog, employeeLog);
 				break;
@@ -37,7 +47,7 @@ public class Menu {
 			default:
 				System.out.println();
 				System.out.println("Invalid Input. Please enter either 1 or 2.");
-				mainMenu();
+				mainMenu(userLog, customerLog, employeeLog);
 				break;
 		}//end switch
 	}//end chooseOption method
@@ -69,11 +79,12 @@ public class Menu {
 		if(result.equals("Customer")) {
 			customerMenu(userLog, customerLog, employeeLog, username);
 		} else if(result.equals("Employee")) {
-			employeeMenu(employeeLog, customerLog, username);
+			employeeMenu(userLog, employeeLog, customerLog, username);
 		} else if(result.equals("Admin")) {
 			adminMenu(userLog, employeeLog, customerLog, username);
 		}else {
 			System.out.println(result);
+			returningUserMenu(userLog, customerLog, employeeLog);
 		}
 		
 	}//end returningUserMenu method
@@ -93,7 +104,7 @@ public class Menu {
 				case 2:
 					System.out.println("I'm sorry for the inconvinience, but this page is under maintenance.");
 					System.out.println("New employees cannot be added to the system at this time.");
-					mainMenu();
+					mainMenu(userLog, customerLog, employeeLog);
 //					System.out.println("You must be an Admin to create a new employee account.");
 //					System.out.print("Please enter your username: ");maintenance 
 //					String username = read.nextLine();
@@ -213,6 +224,7 @@ public class Menu {
 					break;
 					
 			}//end switch
+			System.out.println();
 			System.out.print("Would you like to return to the Customer Menu? ");
 			String reply = read.next();
 			if(reply.startsWith("y")) {
@@ -223,11 +235,12 @@ public class Menu {
 			
 		}//end while
 		
-		chooseOption(userLog, customerLog, employeeLog, mainMenu());
+		mainMenu(userLog, customerLog, employeeLog);
 		
 	}//end customerMenu method
 	
 	public static void createApplication(ArrayList<Customer> customerLog, String username) {
+		System.out.println();
 		Scanner read = new Scanner(System.in);
 		
 		String accountType = "";
@@ -293,7 +306,7 @@ public class Menu {
 		customerLog = FileKeeping.readInCustomerLog();
 	}//end createApplication method
 	
-	public static void employeeMenu(ArrayList<BankEmployee> employeeLog, ArrayList<Customer> customerLog, String empUsername) {
+	public static void employeeMenu(ArrayList<String> userLog, ArrayList<BankEmployee> employeeLog, ArrayList<Customer> customerLog, String empUsername) {
 		System.out.println();
 		System.out.println();
 		
@@ -379,7 +392,7 @@ public class Menu {
 					System.out.println("Invalid Input.");
 			
 			}//end switch
-			System.out.print("Would you like to return to the Customer Menu? ");
+			System.out.print("Would you like to return to the Employee Menu? ");
 			String reply = read.next();
 			if(reply.startsWith("y")) {
 				doMore = true;
@@ -387,7 +400,7 @@ public class Menu {
 				doMore = false;
 			}
 		}//end while
-		mainMenu();
+		mainMenu(userLog, customerLog, employeeLog);
 		
 	}//end employeeMenu method
 	
@@ -398,14 +411,17 @@ public class Menu {
 		System.out.println("2. No.");
 		System.out.print("Your selection: ");
 		int selection = read.nextInt();
+		read.nextLine();
 		
 		switch(selection) {
 			case 1:
+				System.out.println();
 				System.out.print("Please enter the account number for the account you would like to close: ");
 				int accountNum = read.nextInt();
 				BankAdmin.changeAccountStatus(customerLog, accountNum);
 				break;
 			case 2:
+				System.out.println();
 				System.out.println("Would you like to handle Customer Accounts or Customer Applications?");
 				System.out.println("1. Customer Accounts.");
 				System.out.println("2. Customer Applications.");
@@ -413,15 +429,18 @@ public class Menu {
 				int selection2 = read.nextInt();
 				switch(selection2) {
 					case 1: 
-						customerMenu(userLog, customerLog, employeeLog, adminUsername);
+						System.out.print("What is the username of the customer whos account you would like access to?: ");
+						String custUsername = read.nextLine();
+						customerMenu(userLog, customerLog, employeeLog, custUsername);
 						break;
 					case 2:
-						employeeMenu(employeeLog, customerLog, adminUsername);
+						employeeMenu(userLog, employeeLog, customerLog, adminUsername);
 						break;
 					default:
 						System.out.println("Invalid Selection.");
 						break;
 				}
+				break;
 			default:
 				System.out.println("Invalid Selection.");
 				adminMenu(userLog, employeeLog, customerLog, adminUsername);

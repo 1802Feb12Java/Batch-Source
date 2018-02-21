@@ -5,11 +5,18 @@ import java.util.ArrayList;
 public class BankAdmin extends BankEmployee{
 	
 	private static final long serialVersionUID = 2194305704613266756L;
+	//private String accessType = "Admin";
 	private static final String accessType = "Admin";
 
-	public BankAdmin(ArrayList<String> userLog, String username, String password, String firstName, String lastName) {
-		super(userLog, username, password, firstName, lastName);
-
+	public BankAdmin(String username, String password, String firstName, String lastName) {
+		super(username, password, firstName, lastName);
+		//this.setAccessType("Admin");
+		//System.out.println("ACCESS TYPE: " + accessType);
+	}//end initial constructor
+	
+	public BankAdmin(ArrayList<String> userLog, ArrayList<BankEmployee> employeeLog, String username, String password, String firstName, String lastName) {
+		super(userLog, employeeLog, username, password, firstName, lastName);
+		//this.accessType = "Admin";
 	}//end 4 parameter constructor
 	
 	public static void changeAccountStatus(ArrayList<Customer> customerLog, long accountNumber) {
@@ -76,9 +83,10 @@ public class BankAdmin extends BankEmployee{
 	}//end transfer method
 	
 		
-	public static String getAccesstype() {
+	public String getAccesstype() {
 		return accessType;
 	}
-		
+
+	
 	
 }//end class

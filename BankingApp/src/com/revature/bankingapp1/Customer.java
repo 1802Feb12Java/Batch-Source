@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
-public class Customer implements Serializable, User{
+public class Customer implements Serializable{
 	
 	private static final long serialVersionUID = 6047116377920406502L;
 	private String username;
@@ -16,17 +16,25 @@ public class Customer implements Serializable, User{
 	public ArrayList<Account> accountList; //will hold accounts associated with this customer
 	public ArrayList<Application> applicationList; //will hold applications associated with this customer
 	
-	
-	
-	public Customer(ArrayList<String> userLog, String username, String password, String firstName, String lastName) {
-		this.username = validateUsername(userLog, username);
+	public Customer(String username, String password, String firstName, String lastName) {
+		this.username = username;
 		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.accountList = new ArrayList<Account>();
 		this.applicationList = new ArrayList<Application>();
-		FileKeeping.addToUsernamePasswordLog(userLog, this);
-	}//end constructor
+	}//end initial constructor
+	
+	
+//	public Customer(ArrayList<String> userLog, String username, String password, String firstName, String lastName) {
+//		this.username = validateUsername(userLog, username);
+//		this.password = password;
+//		this.firstName = firstName;
+//		this.lastName = lastName;
+//		this.accountList = new ArrayList<Account>();
+//		this.applicationList = new ArrayList<Application>();
+//		FileKeeping.addToUsernamePasswordLog(userLog, this);
+//	}//end constructor
 	
 	public Customer(ArrayList<Customer> customerLog, ArrayList<String> userLog, String username, String password, String firstName, String lastName) {
 		this.username = validateUsername(userLog, username);
@@ -49,10 +57,18 @@ public class Customer implements Serializable, User{
 		System.out.println();
 		System.out.println("Name: " + firstName + " " + lastName);
 		System.out.println("Number of Accounts: " + accountList.size());
-		System.out.println("Number of Pending Applications: " + this.applicationList.size());
+		int pendingAppsCount = 0;
+		for(Application a : this.applicationList) {
+			if(a.getApplicationStatus().equals("Pending")) {
+				pendingAppsCount++;
+			}
+		}
+		System.out.println("Number of Pending Applications: " + pendingAppsCount);
 		System.out.println();
 		
+		
 	}//end viewCustomerDetails method
+	
 	
 	public void createApplication(ArrayList<Customer> customerList, String applicationType) {
 		this.applicationList.add(new Application(customerList, applicationType));
