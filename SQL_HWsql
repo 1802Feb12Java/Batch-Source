@@ -1,0 +1,78 @@
+--Q1 
+Select * from Employee;                                                          
+--Q2                                                       
+Select * from Employee where LastName=’King’;
+--Q3                                                       
+Select * from Employee where FirstName=’Andrew’ AND ReportsTo IS NULL;
+--Q4                                                       
+Select Title from Album ORDER BY Title Desc;
+--Q5                                                       
+Select FirstName from Customer ORDER BY city asc;                                                      
+--Q6                                                       
+INSERT ALL 
+INTO Genre(GenreID,Name) VALUES (26,'Music For Babies') 
+INTO Genre(GenreID,Name) VALUES (27,'Babies for Music')
+SELECT 1 FROM DUAL;                                                     
+--Q7  
+INSERT ALL 
+INTO Employee(EmployeeID,LastName,FirstName) VALUES (9,'Bob','Dylan') 
+INTO Employee(EmployeeID,LastName,FirstName) VALUES (10,'Kanye','West')
+SELECT 1 FROM DUAL;                                                       
+--Q8
+INSERT ALL 
+INTO Customer(CustomerID,FirstName,LastName,Email) VALUES (60,'Bob','Dylan','bobdylan@hotmail.com') 
+INTO Customer(CustomerID,FirstName,LastName,Email) VALUES (61,'Kanye','West','yeaboi@gmail.com')
+SELECT 1 FROM DUAL;                                                    
+--Q9 
+UPDATE Customer SET FirstNAME='Robert', LastName='Walter' WHERE FirstName='Aaron' AND LastName='Mitchell';                                             
+--Q10                                                      
+UPDATE Artist SET Name='CCR' WHERE Name='Creedence Clearwater Revival';
+--Q11                                                      
+Select * From Invoice Where BILLINGADDRESS LIKE 'T%';                                                        
+--Q12                                                      
+Select * from Invoice Where Total > 15 AND Total < 50;                                                     
+--Q13 
+Select * from Employee where HireDate > '01-JUN-03' and HireDate < '01-MAR-04';
+--Q14                                                      
+Delete From Customer,Invoice where Customer.FirstName='Robert' and Customer.LastName='Walter' and Invoice.CustomerID=;
+--Q15                                                      
+                                                           
+--Q16                                                      
+                                                           
+--Q17                                                      
+                                                           
+--Q18                                                      
+                                                           
+--Q19                                                      
+                                                           
+--Q20                                                      
+                                                           
+--Q21                                                      
+                                                           
+--Q22                                                      
+                                                           
+--Q23                                                      
+                                                           
+--Q24
+
+--Q25
+
+--Q26
+
+--Q27
+
+--Q28
+
+--Q29
+
+--Q30
+
+--Q31
+
+--Q32
+
+--Q33
+
+--Q34
+
+--Q35
