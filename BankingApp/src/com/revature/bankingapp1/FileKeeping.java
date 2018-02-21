@@ -7,7 +7,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
+//import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -17,76 +17,78 @@ import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class FileKeeping {
+public class FileKeeping implements Serializable{
 	
-	//New Testing Code
-	public static void addToUserLog(ArrayList<String> userLog, Customer newUser) {
-		String username = newUser.getUsername();
-		String password = newUser.getPassword();
-		String accessType = newUser.getAccessType();
-		String newLogEntry = username + ":" + password + ":" + accessType;
-		userLog.add(newLogEntry);
-		//writeToUsernamePasswordFile(userLog);
-	}//end addToUserLog
+	private static final long serialVersionUID = 1L;
+
+//	//New Testing Code
+//	public static void addToUserLog(ArrayList<String> userLog, Customer newUser) {
+//		String username = newUser.getUsername();
+//		String password = newUser.getPassword();
+//		String accessType = newUser.getAccessType();
+//		String newLogEntry = username + ":" + password + ":" + accessType;
+//		userLog.add(newLogEntry);
+//		//writeToUsernamePasswordFile(userLog);
+//	}//end addToUserLog
+//	
+//	public static void addToUserLog(ArrayList<String> userLog, BankEmployee newUser) {
+//		String username = newUser.getUsername();
+//		String password = newUser.getPassword();
+//		String accessType = newUser.getAccessType();
+//		String newLogEntry = username + ":" + password + ":" + accessType;
+//		userLog.add(newLogEntry);
+//		//writeToUsernamePasswordFile(userLog);
+//	}//end addToUserLog
+//	
+//	public static void addToUserLog(ArrayList<String> userLog, BankAdmin newUser) {
+//		String username = newUser.getUsername();
+//		String password = newUser.getPassword();
+//		String accessType = newUser.getAccessType();
+//		String newLogEntry = username + ":" + password + ":" + accessType;
+//		userLog.add(newLogEntry);
+//		//writeToUsernamePasswordFile(userLog);
+//	}//end addToUserLog
 	
-	public static void addToUserLog(ArrayList<String> userLog, BankEmployee newUser) {
-		String username = newUser.getUsername();
-		String password = newUser.getPassword();
-		String accessType = newUser.getAccessType();
-		String newLogEntry = username + ":" + password + ":" + accessType;
-		userLog.add(newLogEntry);
-		//writeToUsernamePasswordFile(userLog);
-	}//end addToUserLog
-	
-	public static void addToUserLog(ArrayList<String> userLog, BankAdmin newUser) {
-		String username = newUser.getUsername();
-		String password = newUser.getPassword();
-		String accessType = newUser.getAccessType();
-		String newLogEntry = username + ":" + password + ":" + accessType;
-		userLog.add(newLogEntry);
-		//writeToUsernamePasswordFile(userLog);
-	}//end addToUserLog
-	
-	public static void writeToAdminLogFile(ArrayList<BankAdmin> adminLog) {
-		FileOutputStream fileOS;
-		
-		try {
-			fileOS = new FileOutputStream("C:\\Users\\colso\\Desktop\\Git Things\\Batch-Source\\BankingApp\\src\\com\\revature\\bankingapp1\\AdminLog.txt");
-			ObjectOutputStream objectOS = new ObjectOutputStream(fileOS);
-			
-			objectOS.writeObject(adminLog);
-			
-			objectOS.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}//end writeToAdminLogFile method
-	
-	@SuppressWarnings("unchecked")
-	public static ArrayList<BankAdmin> readInAdminLog(){
-		Serializable s = null;
-		
-		FileInputStream fileIS;
-		try {
-			fileIS = new FileInputStream("C:\\Users\\colso\\Desktop\\Git Things\\Batch-Source\\BankingApp\\src\\com\\revature\\bankingapp1\\AdminLog.txt");
-			ObjectInputStream objectIS = new ObjectInputStream(fileIS);
-			s = (Serializable) objectIS.readObject();
-			
-			objectIS.close();
-			
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		
-		
-		return (ArrayList<BankAdmin>) s;
-	}//end readInAdminLog method
+//	public static void writeToAdminLogFile(ArrayList<BankAdmin> adminLog) {
+//		FileOutputStream fileOS;
+//		
+//		try {
+//			fileOS = new FileOutputStream("BankingApp\\src\\com\\revature\\bankingapp1\\AdminLog.txt");
+//			ObjectOutputStream objectOS = new ObjectOutputStream(fileOS);
+//			
+//			objectOS.writeObject(adminLog);
+//			
+//			objectOS.close();
+//		} catch (FileNotFoundException e) {
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//	}//end writeToAdminLogFile method
+//	
+//	@SuppressWarnings("unchecked")
+//	public static ArrayList<BankAdmin> readInAdminLog(){
+//		Serializable s = null;
+//		
+//		FileInputStream fileIS;
+//		try {
+//			fileIS = new FileInputStream("BankingApp\\src\\com\\revature\\bankingapp1\\AdminLog.txt");
+//			ObjectInputStream objectIS = new ObjectInputStream(fileIS);
+//			s = (Serializable) objectIS.readObject();
+//			
+//			objectIS.close();
+//			
+//		} catch (FileNotFoundException e) {
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		} catch (ClassNotFoundException e) {
+//			e.printStackTrace();
+//		}
+//		
+//		
+//		return (ArrayList<BankAdmin>) s;
+//	}//end readInAdminLog method
 	
 	
 	
@@ -94,7 +96,7 @@ public class FileKeeping {
 
 	public static ArrayList<String> readInUsernamePasswordLog(){
 		Scanner input = null;
-		String userNamePasswordLog = "src\\com\\revature\\bankingapp1\\UsernamePasswordLog.txt";
+		String userNamePasswordLog = "UsernamePasswordLog.txt";
 		try{
 			input = new Scanner(new File(userNamePasswordLog));
 		}
@@ -110,13 +112,38 @@ public class FileKeeping {
 		
 	}//end readInUsernamePasswordLog method
 	
+//	@SuppressWarnings("unchecked")
+//	public static ArrayList<String> readInUsernamePasswordLog(){
+//		Serializable s = null;
+//		
+//		FileInputStream fileIS;
+//		try {
+//			fileIS = new FileInputStream("UsernamePasswordLog.txt");
+//			ObjectInputStream objectIS = new ObjectInputStream(fileIS);
+//			s = (Serializable) objectIS.readObject();
+//			
+//			objectIS.close();
+//			
+//		} catch (FileNotFoundException e) {
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		} catch (ClassNotFoundException e) {
+//			e.printStackTrace();
+//		}
+//		
+//		
+//		return (ArrayList<String>) s;
+//		
+//	}//end readInUsernamePasswordLog method
+	
 	@SuppressWarnings("unchecked")
 	public static ArrayList<Integer> readInAccountNumberLog(){
 		Serializable s = null;
 		
 		FileInputStream fileIS;
 		try {
-			fileIS = new FileInputStream("C:\\Users\\colso\\Desktop\\Git Things\\Batch-Source\\BankingApp\\src\\com\\revature\\bankingapp1\\AccountNumberLog.txt");
+			fileIS = new FileInputStream("AccountNumberLog.txt");
 			ObjectInputStream objectIS = new ObjectInputStream(fileIS);
 			s = (Serializable) objectIS.readObject();
 			
@@ -141,7 +168,7 @@ public class FileKeeping {
 		
 		FileInputStream fileIS;
 		try {
-			fileIS = new FileInputStream("C:\\Users\\colso\\Desktop\\Git Things\\Batch-Source\\BankingApp\\src\\com\\revature\\bankingapp1\\CustomerLog.txt");
+			fileIS = new FileInputStream("CustomerLog.txt");
 			ObjectInputStream objectIS = new ObjectInputStream(fileIS);
 			s = (Serializable) objectIS.readObject();
 			
@@ -170,7 +197,7 @@ public class FileKeeping {
 		
 		FileInputStream fileIS;
 		try {
-			fileIS = new FileInputStream("C:\\Users\\colso\\Desktop\\Git Things\\Batch-Source\\BankingApp\\src\\com\\revature\\bankingapp1\\EmployeeLog.txt");
+			fileIS = new FileInputStream("EmployeeLog.txt");
 			ObjectInputStream objectIS = new ObjectInputStream(fileIS);
 			s = (Serializable) objectIS.readObject();
 			
@@ -193,6 +220,7 @@ public class FileKeeping {
 		
 	}//end addToEmployeeLog
 	
+	@SuppressWarnings("static-access")
 	public static void addToUsernamePasswordLog(ArrayList<String> usernamePassLog, Customer newUser) {
 		String username = newUser.getUsername();
 		String password = newUser.getPassword();
@@ -252,7 +280,7 @@ public class FileKeeping {
 		FileOutputStream fileOS;
 		
 		try {
-			fileOS = new FileOutputStream("C:\\Users\\colso\\Desktop\\Git Things\\Batch-Source\\BankingApp\\src\\com\\revature\\bankingapp1\\AccountNumberLog.txt");
+			fileOS = new FileOutputStream("AccountNumberLog.txt");
 			ObjectOutputStream objectOS = new ObjectOutputStream(fileOS);
 			
 			objectOS.writeObject(accountNumLog);
@@ -271,7 +299,7 @@ public class FileKeeping {
 			 for(String s : usernamePasswordLog) {
 				 toWrite = toWrite.concat(s + "\n");
 			 }
-			 File file = new File("C:\\Users\\colso\\Desktop\\Git Things\\Batch-Source\\BankingApp\\src\\com\\revature\\bankingapp1\\UsernamePasswordLog.txt");
+			 File file = new File("UsernamePasswordLog.txt");
 			  
 			 Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), "utf-8"));
 			 writer.write(toWrite);
@@ -288,7 +316,7 @@ public class FileKeeping {
 		FileOutputStream fileOS;
 		
 		try {
-			fileOS = new FileOutputStream("C:\\Users\\colso\\Desktop\\Git Things\\Batch-Source\\BankingApp\\src\\com\\revature\\bankingapp1\\CustomerLog.txt");
+			fileOS = new FileOutputStream("CustomerLog.txt");
 			ObjectOutputStream objectOS = new ObjectOutputStream(fileOS);
 			
 			objectOS.writeObject(customerLog);
@@ -305,7 +333,7 @@ public class FileKeeping {
 		FileOutputStream fileOS;
 		
 		try {
-			fileOS = new FileOutputStream("C:\\Users\\colso\\Desktop\\Git Things\\Batch-Source\\BankingApp\\src\\com\\revature\\bankingapp1\\EmployeeLog.txt");
+			fileOS = new FileOutputStream("EmployeeLog.txt");
 			ObjectOutputStream objectOS = new ObjectOutputStream(fileOS);
 			
 			objectOS.writeObject(employeeLog);
