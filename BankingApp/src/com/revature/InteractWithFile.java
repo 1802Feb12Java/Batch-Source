@@ -46,11 +46,9 @@ public class InteractWithFile {
 		int result = 0;
 		
 		try {
-			// Open users.txt file with the FileInputStream class
-			FileInputStream fstream = new FileInputStream("accounts.txt");
 			
-			// Get the object of DataInputStream
-			DataInputStream in = new DataInputStream(fstream);
+			// DataInputStream object
+			DataInputStream in = new DataInputStream(new FileInputStream("accounts.txt"));
 			BufferedReader br = new BufferedReader(new InputStreamReader(in));
 			
 			// Read file line by line
@@ -162,6 +160,46 @@ public class InteractWithFile {
 		return user;
 	}
 	
+	public ArrayList<String> getUserById(int idParam) {
+		
+		ArrayList<String> user = new ArrayList<String>();
+		
+		try {
+			// Open users.txt file with the FileInputStream class
+			FileInputStream fstream = new FileInputStream("users.txt");
+			
+			// Get the object of DataInputStream
+			DataInputStream in = new DataInputStream(fstream);
+			BufferedReader br = new BufferedReader(new InputStreamReader(in));
+			
+			String line;
+			// Read file line by line
+			while((line = br.readLine()) != null) {
+				
+				String[] lineArray = line.split(":");
+				String custIdStr = lineArray[0];
+				int custId = Integer.parseInt(custIdStr);
+				
+				if(custId == idParam) {
+					user.add(lineArray[0]);
+					user.add(lineArray[1]);
+					user.add(lineArray[2]);
+					user.add(lineArray[3]);
+					user.add(lineArray[4]);
+				}
+			
+			}
+			
+			// Close input stream
+			in.close();
+			
+		} catch (Exception e) {
+			System.out.println("Error: " + e.getMessage());
+		}
+		
+		return user;
+	}
+	
 	public void createNewAccount(String str) {
 		try {
 	    	
@@ -208,8 +246,8 @@ public class InteractWithFile {
 			while((line = br.readLine()) != null) {
 				
 				String[] lineArray = line.split(":");
-				String accountCustId = lineArray[3];
-				String accountCustIdTwo = lineArray[4];
+				String accountCustId = lineArray[2];
+				String accountCustIdTwo = lineArray[3];
 				int accountCustIdParsed = Integer.parseInt(accountCustId);
 				int accountCustIdParsedTwo = Integer.parseInt(accountCustIdTwo);
 				
@@ -247,8 +285,8 @@ public class InteractWithFile {
 			while((line = br.readLine()) != null) {
 				
 				String[] lineArray = line.split(":");
-				String accountCustId = lineArray[3];
-				String accountCustIdTwo = lineArray[4];
+				String accountCustId = lineArray[2];
+				String accountCustIdTwo = lineArray[3];
 				int accountCustIdParsed = Integer.parseInt(accountCustId);
 				int accountCustIdParsedTwo = Integer.parseInt(accountCustIdTwo);
 				
@@ -258,7 +296,6 @@ public class InteractWithFile {
 					custAccount.add(lineArray[2]);
 					custAccount.add(lineArray[3]);
 					custAccount.add(lineArray[4]);
-					custAccount.add(lineArray[5]);
 				}
 				
 			}
@@ -294,7 +331,7 @@ public class InteractWithFile {
 				
 				if(id == accountId) {
 					
-					String newLine = lineArray[0] + ":" + lineArray[1] + ":" + lineArray[2] + ":" + lineArray[3] + ":" + lineArray[4] + ":" + balance;
+					String newLine = lineArray[0] + ":" + lineArray[1] + ":" + lineArray[2] + ":" + lineArray[3] + ":" + balance;
 					input += newLine + System.lineSeparator();
 					
 				} else {
@@ -314,4 +351,120 @@ public class InteractWithFile {
 		}
 		
 	}
+	
+	public ArrayList<String> getPendingApplications() {
+		
+		ArrayList<String> pendingApplications = new ArrayList<String>();
+		
+		try {
+			// Open users.txt file with the FileInputStream class
+			FileInputStream fstream = new FileInputStream("accounts.txt");
+			
+			// Get the object of DataInputStream
+			DataInputStream in = new DataInputStream(fstream);
+			BufferedReader br = new BufferedReader(new InputStreamReader(in));
+			
+			String line;
+			// Read file line by line
+			while((line = br.readLine()) != null) {
+				
+				String[] lineArray = line.split(":");
+				String isApprovedStr = lineArray[1];
+				int isApproved = Integer.parseInt(isApprovedStr);
+				
+				if(isApproved == 0) {
+					pendingApplications.add(line);
+				}
+			}
+			
+			// Close input stream
+			in.close();
+			
+		} catch (Exception e) {
+			System.out.println("Error: " + e.getMessage());
+		}
+		
+		return pendingApplications;
+	}
+	
+	public void approveApplication(int appId) {
+		
+		try {
+			// Open users.txt file with the FileInputStream class
+			FileInputStream fstream = new FileInputStream("accounts.txt");
+			
+			// Get the object of DataInputStream
+			DataInputStream in = new DataInputStream(fstream);
+			BufferedReader br = new BufferedReader(new InputStreamReader(in));
+			
+			String line = "";
+			String input = "";
+			// Read file line by line
+			while((line = br.readLine()) != null) {
+				
+				String[] lineArray = line.split(":");
+				String idStr = lineArray[0];
+				int id = Integer.parseInt(idStr);
+				
+				if(id == appId) {
+					
+					String newLine = lineArray[0] + ":1:" + lineArray[2] + ":" + lineArray[3] + ":" + lineArray[4];
+					input += newLine + System.lineSeparator();
+					
+				} else {
+					input += line + System.lineSeparator();
+				}
+			}
+			
+			BufferedWriter writer = new BufferedWriter(new FileWriter("accounts.txt"));
+			writer.append(input);
+			writer.close();
+			
+			// Close input stream
+			in.close();
+			
+		} catch (Exception e) {
+			System.out.println("Error: " + e.getMessage());
+		}
+		
+		
+		
+		
+		
+	}
+
+	public ArrayList<String> getCustomers() {
+		
+		ArrayList<String> customers = new ArrayList<String>();
+		
+		try {
+			// Open users.txt file with the FileInputStream class
+			FileInputStream fstream = new FileInputStream("users.txt");
+			
+			// Get the object of DataInputStream
+			DataInputStream in = new DataInputStream(fstream);
+			BufferedReader br = new BufferedReader(new InputStreamReader(in));
+			
+			String line;
+			// Read file line by line
+			while((line = br.readLine()) != null) {
+				
+				String[] split = line.split("");
+				
+				if(!split[0].equals("1")) {
+					customers.add(line);
+				}
+				
+			}
+			
+			// Close input stream
+			in.close();
+			
+		} catch (Exception e) {
+			System.out.println("Error: " + e.getMessage());
+		}
+		
+		return customers;
+	}
+
 }
