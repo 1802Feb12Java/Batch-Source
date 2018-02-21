@@ -3,6 +3,7 @@ package com.revature.driver;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import com.revature.beans.BankAccount;
 import com.revature.beans.CheckingsAccount;
 import com.revature.beans.Customers;
 import com.revature.beans.SavingsAccount;
@@ -22,18 +23,17 @@ public class CustomerDriver {
 		SavingsAccount savings = new SavingsAccount();
 		checkings.setBalance(1000);
 		savings.setBalance(100);
-		Customers cust1 = new Customers("newUser", "password", checkings, savings);
-		
+		Customers newUser = new Customers("newUser", "password", checkings, savings);
 		
 		CheckingsAccount checkings2 = new CheckingsAccount();
 		SavingsAccount savings2 = new SavingsAccount();
 		checkings2.setBalance(2000);
 		savings2.setBalance(4000);
-		Customers cust2 = new Customers("newUser2", "password1", checkings2, savings2);
+		Customers newUser2 = new Customers("newUser2", "password1", checkings2, savings2);
 		
 		ArrayList<Customers> customersList = new ArrayList<Customers>();
-		customersList.add(cust1);
-		customersList.add(cust2);
+		customersList.add(newUser);
+		customersList.add(newUser2);
 		
 		CheckingsAccount checkings3 = new CheckingsAccount();
 		SavingsAccount savings3 = new SavingsAccount();
@@ -48,7 +48,7 @@ public class CustomerDriver {
 		int option = input.nextInt();
 		
 		if(option == 1) {	//sign up for new account
-				System.out.print("Create a username: ");
+				System.out.print("\nCreate a username: ");
 				String username = input.next();
 				System.out.print("Create a password: ");
 				String password = input.next();
@@ -228,14 +228,17 @@ public class CustomerDriver {
 							}
 							break;
 						case 3 :
+							System.out.println("GoodBye");
 							break;
 					} //end of main menu
-				}
-			}
-		}
+				}	//end of logging in 
+				
+			}	//end of enhanced for loop for logging in
+		}//	end of logging in
 		else {	//log out
-			System.out.println("GoodBye");;
+			System.out.println("GoodBye");
 		}//end of sign up or sign in
+		
 		System.out.println();
 		for(Customers c : customersList) {
 			System.out.println(c + "\n");

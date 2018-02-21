@@ -5,13 +5,13 @@ package com.revature.beans;
  * @author johne
  *
  */
-public class Account {
+public class BankAccount {
 	private double balance; // total amount in customer's account
 	private int accountID = 0; // accountID associated with customer, increments every time it is instantiated
 	private static int count = 0;
 	private String accountType;
 
-	public Account() {
+	public BankAccount() {
 		this.balance = 0;
 		this.accountType = "";
 		this.accountID = count++;
@@ -22,7 +22,7 @@ public class Account {
 	 * @param balance
 	 * @param transactionID
 	 */
-	public Account(String accountType, double balance) {
+	public BankAccount(String accountType, double balance) {
 		this.setAccountType(accountType);
 		this.balance = balance;
 		this.accountID = count++;
@@ -54,7 +54,7 @@ public class Account {
 	 * @param account
 	 *            targeted account to transfer to
 	 */
-	public void transfer(double amount, Account otherAccount) {
+	public void transfer(double amount, BankAccount otherAccount) {
 		this.balance = this.balance - amount;
 		otherAccount.balance = otherAccount.balance + amount;
 	}
