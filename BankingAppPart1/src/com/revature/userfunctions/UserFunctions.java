@@ -41,26 +41,28 @@ public class UserFunctions {
 	}
 	
 	public static boolean validateCustomer(String password, Customer customer) {
-		if(password == customer.getPassword()) {
+		if(password.equals(customer.getPassword())) {
 			return true;
 		}
 		
+		System.out.println("Password does not match");
 		return false;
 	}
 	
 	public static boolean validateEmployee(String password, Employee employee) {
-		if(password == employee.getPassword()) {
+		if(password.equals(employee.getPassword())) {
 			return true;
 		}
 		
+		System.out.println("Password does not match");
 		return false;
 	}
 	
 	public static boolean validateAdmin(String password, Admin admin) {
-		if(password == admin.getPassword()) {
+		if(password.equals(admin.getPassword())) {
 			return true;
 		}
-		
+		System.out.println("Password does not match");
 		return false;
 	}
 }

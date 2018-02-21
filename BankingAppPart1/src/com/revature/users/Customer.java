@@ -8,7 +8,6 @@ public class Customer implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -2795373050638956075L;
-	private long userID;
 	private String userName;
 	private String password;
 	private String firstName;
@@ -97,16 +96,4 @@ public class Customer implements Serializable {
 				+ lastName + ", streetAddress=" + streetAddress + ", city=" + city + ", state=" + state
 				+ ", phoneNumber=" + phoneNumber + "]";
 	}
-
-	
-	public long getUserID() {
-		return userID;
-	}
-
-	
-	public void setUserID(long userID) {
-		this.userID = userID;
-	}
-
-
 }
