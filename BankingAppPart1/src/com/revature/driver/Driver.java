@@ -304,8 +304,48 @@ public class Driver {
 				}//end logging in while loop
 				
 				while(validated) {
-					System.out.println(userType);
-				//access the banking system	
+					switch(userType) {
+					case 'c':
+						Menus.displayCustomerMenu(customer.getFirstName(), customer.getLastName());
+						System.out.print("Please make a selection: ");
+						
+						try {
+							option = getInput.nextInt();
+							}catch(Exception e) {
+								System.out.println("Please enter an appropriate selection");
+							}
+							
+						getInput.nextLine();
+
+						break;
+						
+					case 'e':
+						Menus.displayEmployeeMenu(employee.getFirstName(), employee.getLastName());
+						System.out.print("Please make a selection: ");
+						
+						try {
+							option = getInput.nextInt();
+							}catch(Exception e) {
+								System.out.println("Please enter an appropriate selection");
+							}
+							
+						getInput.nextLine();
+						break;
+						
+					case 'a':
+						Menus.displayAdminMenu(admin.getFirstName(), admin.getLastName());
+						System.out.print("Please make a selection: ");
+						
+						try {
+							option = getInput.nextInt();
+							}catch(Exception e) {
+								System.out.println("Please enter an appropriate selection");
+							}
+							
+						getInput.nextLine();
+						break;
+					}//end switch
+				break;
 				}//end banking system loop
 
 			}//end user connected while loop
