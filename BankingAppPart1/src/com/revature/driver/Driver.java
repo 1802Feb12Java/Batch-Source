@@ -1,6 +1,7 @@
 package com.revature.driver;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -25,6 +26,11 @@ public class Driver {
 		String customerFilename = "customers.dat";
 		String accountFilename = "accounts.dat";
 		
+		//HashMaps
+		HashMap<String, Admin> adminsMap = new HashMap<>();
+		HashMap<String, Employee> employeesMap = new HashMap<>();
+		HashMap<String, Customer> customersMap = new HashMap<>();
+		
 		//active session objects
 		Customer customer = null;
 		Employee employee = null;
@@ -38,11 +44,40 @@ public class Driver {
 		Scanner getInput = null;
 
 		//open files and populate the HashMaps
-		System.out.print("Populating HashMaps...");
-		HashMap<String, Admin> adminsMap = FileOperations.readAdmins(adminFilename);
-		HashMap<String, Employee> employeesMap = FileOperations.readEmployees(employeeFilename);
-		HashMap<String, Customer> customersMap = FileOperations.readCustomers(customerFilename);
-		System.out.println("Success!");
+		System.out.println("Populating HashMaps...");
+		System.out.print("  Loading administrators...");
+
+		try {
+			adminsMap = FileOperations.readAdmins(adminFilename);
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			System.out.println("none found.");
+		}
+		
+		System.out.print("  Loading employees...");
+		try {
+			employeesMap = FileOperations.readEmployees(employeeFilename);
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			System.out.println("none found.");
+		}
+		
+		System.out.print("  Loading customers...");
+		try {
+			customersMap = FileOperations.readCustomers(customerFilename);
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			System.out.println("none found.");
+		}
+		
+		System.out.println("HashMaps loaded.");
 		
 		//open the scanner to be used for all input
 		getInput = new Scanner(System.in);
@@ -64,10 +99,13 @@ public class Driver {
 					switch(option) {
 					case 1:
 						Admin newAdmin = BackendAdministration.createAdmin(getInput);
+						System.out.println("Adding to hashmap");
 						adminsMap.put(newAdmin.getUserName(), newAdmin);
+						System.out.print("Saving...");
 						try {
 							FileOperations.writeAdmins(adminsMap, adminFilename);
-						} catch (FileNotFoundException e) {
+						} catch (IOException e) {
+							System.out.println("IO error in writeAdmins");
 							e.printStackTrace();
 						}
 						break;
@@ -126,6 +164,7 @@ public class Driver {
 							
 						//search the admin database
 						else if (adminsMap.containsKey(userName)) {
+							System.out.println("key found");
 							admin = adminsMap.get(userName);
 							userType = 'a';
 						}
@@ -145,6 +184,7 @@ public class Driver {
 							//validate customer login
 							validated = UserFunctions.validateCustomer(password, customer);
 							if(validated) {
+								System.out.println("success");
 								loggingIn = false;
 								break;
 							}
