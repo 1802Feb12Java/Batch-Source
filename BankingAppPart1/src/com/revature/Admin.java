@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Admin extends Employee {	//have all the same access to view as employees, but with additional modification access
 	private ArrayList<Account> allAccounts = super.getAllAccounts();
+	private String adminPassword = "let the admin in";
 	
 	public boolean transferMoney(int accountIDa, int accountIDb, int amount) {
 		Account a = null;
@@ -50,6 +51,9 @@ public class Admin extends Employee {	//have all the same access to view as empl
 	}
 
 	//past this point is mostly Alt+Shift+S, minor modification in toString and constructors
+	public String getAdminPassword() {
+		return adminPassword;
+	}
 	public Admin() {
 		super();
 	}

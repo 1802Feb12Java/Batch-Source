@@ -5,7 +5,8 @@ import java.util.Scanner;
 
 public class Employee {
 	private ArrayList<Account> allAccounts;		//each employee will have a reference to all available accounts and customers
-	private ArrayList<Customer> allCustomers;	
+	private ArrayList<Customer> allCustomers;
+	private String employeePassword = "let the employee in";
 	
 	public String readAccount(int accountID) {
 		boolean foundAccount = false;
@@ -64,6 +65,9 @@ public class Employee {
 	}
 	public ArrayList<Customer> getAllCustomers() {
 		return allCustomers;
+	}
+	public String getEmployeePassword() {
+		return employeePassword;
 	}
 	public Employee() {
 		super();

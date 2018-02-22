@@ -133,7 +133,7 @@ public class BankApp1Driver {
 						user = c;
 				}
 				System.out.print("Please enter your password: ");
-				int failCounter = 0;
+				int failCounter = 1;	//keeps track of how many failed attempts
 				password = scan.nextLine();
 				while(!user.getPassword().equals(password) && failCounter < 3) {
 					System.out.print("Incorrect password for username \"" + username + "\", please try again.\nPassword: ");
@@ -142,7 +142,7 @@ public class BankApp1Driver {
 						failCounter++;
 				}
 				if(failCounter == 3) {
-					System.out.println("Too many failed passwords. Exiting.");
+					System.out.println("\nToo many failed passwords. Exiting.");
 					System.exit(0);
 					break;
 				}
@@ -306,6 +306,21 @@ public class BankApp1Driver {
 	
 	public static String doEmployeeStuff() {
 		Employee emp = new Employee(allAccounts, allCustomers);
+		
+		System.out.print("Please input the employee password: ");
+		int failCounter = 1;	//keeps track of how many failed attempts
+		String password = scan.nextLine();
+		while(!emp.getEmployeePassword().equals(password) && failCounter < 3) {
+			System.out.print("Incorrect password for an employee, please try again.\nPassword: ");
+			password = scan.nextLine();
+			if(!emp.getEmployeePassword().equals(password))
+				failCounter++;
+		}
+		if(failCounter == 3) {
+			System.out.println("\nYou're not an employee! Ending program.");
+			System.exit(0);
+		}
+		
 		System.out.println("\nHi employee.");
 		String optionsList = "Possible choices - \n"
 				+ "\tRA: Read account information\n"
@@ -375,6 +390,21 @@ public class BankApp1Driver {
 	
 	public static String doAdminStuff() {
 		Admin admin = new Admin(allAccounts, allCustomers);
+		
+		System.out.print("Please input the admin password: ");
+		int failCounter = 1;
+		String password = scan.nextLine();
+		while(!admin.getAdminPassword().equals(password) && failCounter < 3) {
+			System.out.print("Incorrect password for an admin, please try again.\nPassword: ");
+			password = scan.nextLine();
+			if(!admin.getAdminPassword().equals(password))
+				failCounter++;
+		}
+		if(failCounter == 3) {
+			System.out.println("\nYou're not an admin! Ending program.");
+			System.exit(0);
+		}
+		
 		System.out.println("\nHi admin.");
 		String optionsList = "Possible choices - \n"
 				+ "\tRA: Read account information\n"
