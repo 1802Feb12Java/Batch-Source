@@ -1,0 +1,4 @@
+starkjosh:bill:employee
+billbob:frank:customer
+admin:admin:admin
+frank:tank:customer

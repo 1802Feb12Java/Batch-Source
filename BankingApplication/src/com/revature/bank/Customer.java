@@ -16,7 +16,7 @@ public class Customer extends User{
 	public String accountNumber = "";
 	
 	public Customer(String firstname, String lastname, String username, String password) {
-		super(password, password, password, password);
+		super(username, password, firstname, lastname);
 
 	}
 	
