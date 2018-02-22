@@ -464,6 +464,7 @@ public class Driver {
 						switch(option) {
 						case 1:
 							//View customer information
+							UserFunctions.viewCustomerInformation(customersMap, getInput);
 							option = 0;
 							break;
 
