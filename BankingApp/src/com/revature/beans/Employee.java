@@ -1,11 +1,6 @@
-package com.revature;
+package com.revature.beans;
 
 import java.util.ArrayList;
-import java.util.Scanner;
-
-import javax.sound.midi.Synthesizer;
-
-import com.revature.beans.Customer;
 
 public class Employee {
 	
@@ -34,14 +29,6 @@ public class Employee {
 		for(Customer c : a) {
 			System.out.println(c.toString());
 		}
-	}
-	
-	public void approveAccount() {
-		
-	}
-	
-	public void denyAccount() {
-		
 	}
 
 	

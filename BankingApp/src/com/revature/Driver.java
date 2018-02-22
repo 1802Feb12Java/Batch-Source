@@ -17,10 +17,12 @@ public class Driver {
 		
 		Customer test = new Customer("sal", "allen");
 		Customer test2= new Customer("julian", "chris");
+		Customer test3= new Customer("sonam", "john");
 		
 		ArrayList<Customer> allCusts = new ArrayList<>();
 		addToList(test, allCusts);
 		addToList(test2,allCusts);
+		addToList(test3,allCusts);
 		
 		//((List<Customer>) allCusts.get(0)).contains("sal");
 		
@@ -28,13 +30,15 @@ public class Driver {
 		
 		//String custInfo = "CustomerAccounts.txt";
 		//Customer currentCust = new Customer("","");
-		
+		boolean run = true;
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Welcome to Goliath National Bank!\n");
-		while(true) {
+		while(run) {
 			System.out.println("Are you a <customer>, <employee>, or <admin>?");
 			String user = sc.next();
-			while(true) {
+			
+			boolean enter1 = true;
+			while(enter1) {
 				if(user.equals("customer")) {
 					Customer currentCust = new Customer("","");
 					System.out.println("Create <new> account, or <login> to an existing one?");
@@ -49,8 +53,11 @@ public class Driver {
 							addToList(newCust, allCusts);
 							//writeAccToFile(newCust, custInfo);
 							currentCust = newCust;
-							currentCust.runCustomerApp();
-							break;
+							runCustomerApp(currentCust);
+							//user = sc.next();
+							enter1 = false;
+							
+							//break;
 							
 						}else if(customer.equals("login")) {
 							while(true) {
@@ -64,13 +71,18 @@ public class Driver {
 								       Customer login = allCusts.get(i);
 								       if(login.getUsername().equals(un) && login.getPassword().equals(pw)) {
 								           currentCust = login;
-								           currentCust.runCustomerApp();
-								           break;
-								       }else {
-								    	   System.out.println("Credentials don't match. Try Again");
-											continue;
-								       }
+								           runCustomerApp(currentCust);
+								           //run = false;
+								           System.out.println("TESTING");
+								       } 
+								       // System.out.println("Credentials don't match. Try Again");
+										//	continue;
+								       
 								}
+								
+								System.out.println("Credentials don't match. Try Again");
+								
+								
 								
 								
 								break;
@@ -82,7 +94,7 @@ public class Driver {
 							}
 						break;
 					}
-				break;
+					break;
 				}else if(user.equals("employee")) {
 					//Employee slave = new Employee(0);
 					System.out.print("Enter Employee ID: ");
@@ -116,7 +128,7 @@ public class Driver {
 								}
 							}
 						}else if(option.equals("logout")) {
-							return;
+							enter1 = false;
 						}
 						else {
 							System.out.println("Invalid input. Try again.");
@@ -128,12 +140,11 @@ public class Driver {
 					
 				}else if(user.equals("admin")) {
 					
-				}
-				
-				else {
+				}else {
 					System.out.println("Invalid input. Try Again.");
 					user= sc.next();
 				}
+				enter1 = false;
 			}
 			break;
 		}
@@ -172,6 +183,57 @@ public class Driver {
 		
 		}
 		return false;
+	}
+	
+	public static void runCustomerApp(Customer c) {
+		Scanner sc = new Scanner(System.in);
+		boolean running = true;
+		//if approved == true then run code below
+		while(true) {
+			System.out.println("\nEnter <withdraw>, <deposit>, or <transfer> to make changes to your account"
+					+ "\n Or type <logout> to exit");
+			
+			String action = sc.next();
+			if(action.equals("withdraw")) {
+				System.out.print("How much do you want to take out?   $");
+				double withdraw = sc.nextDouble();
+				while(true) {
+					if(withdraw>c.getAccBalance()) {
+						System.out.print("Invalid amount. Please enter value < your account balance \n$");
+						withdraw = sc.nextDouble();
+					}else if(withdraw<0) {
+						System.out.print("Invalid amount. Please enter value >= 0 \n$");
+						withdraw = sc.nextDouble();
+					} else {
+						break;
+					}
+				}
+				c.withdrawMoney(withdraw);
+				continue;
+				
+			} else if(action.equals("deposit")) {
+				System.out.print("How much do you want to deposit?   $");
+				double deposit = sc.nextDouble();
+				while(deposit < 0) {
+					System.out.print("Invalid amount. Please enter value >= 0 \n$");
+					deposit = sc.nextDouble();
+				}
+				c.depositMoney(deposit);
+				continue;
+				
+			} else if(action.equals("transfer")) {
+				//transfer money to different account
+				continue;
+				
+			} else if(action.equals("logout")) {
+				break;
+			} else {
+				System.out.println("Invalid input. Try Again.");
+				action = sc.next();
+			}
+			//return;
+		}
+		sc.close();
 	}
 	
 }
