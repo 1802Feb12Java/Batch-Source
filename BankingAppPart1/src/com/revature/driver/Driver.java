@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.revature.accounts.Account;
+import com.revature.accounts.Pending;
 import com.revature.fileoperations.FileOperations;
 import com.revature.menus.Menus;
 import com.revature.userfunctions.*;
@@ -33,9 +34,9 @@ public class Driver {
 		HashMap<String, Employee> employeesMap = new HashMap<>();
 		HashMap<String, Customer> customersMap = new HashMap<>();
 		HashMap<String, List> accountsMap = new HashMap<>();
-		List<Account> accounts = new ArrayList<>();
-		List<Account> customerAccounts = new ArrayList<>();
-		List<Customer> pendingRequests = new ArrayList<>();
+		ArrayList<Account> accounts = new ArrayList<>();
+		ArrayList<Account> customerAccounts = new ArrayList<>();
+		ArrayList<Customer> pendingRequests = new ArrayList<>();
 		
 		//active session objects
 		Customer customer = null;
@@ -437,6 +438,9 @@ public class Driver {
 	
 							case 3:
 								//View pending account applications
+								userName = Pending.view(pendingRequests, getInput);
+								
+								//if applicable, create the approved account
 								option = 0;
 								break;
 	
@@ -474,7 +478,11 @@ public class Driver {
 							break;
 
 						case 3:
-							//view pending accounts
+							//View pending account applications
+							userName = Pending.view(pendingRequests, getInput);
+							
+							//if applicable, create the approved account
+							
 							option = 0;
 							break;
 
