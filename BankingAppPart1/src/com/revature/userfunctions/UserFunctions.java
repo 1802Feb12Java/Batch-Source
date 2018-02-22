@@ -10,31 +10,31 @@ public class UserFunctions {
 		Customer newCustomer = new Customer();		
 
 		System.out.print("Enter a user name: ");
-		newCustomer.setUserName(getInput.next());
+		newCustomer.setUserName(getInput.nextLine());
 		//check for user name availability
 		
 		System.out.print("Enter a password: ");
-		newCustomer.setPassword(getInput.next());
+		newCustomer.setPassword(getInput.nextLine());
 		
 		//check password complexity
 		
 		System.out.print("Enter your first name: ");
-		newCustomer.setFirstName(getInput.next());
+		newCustomer.setFirstName(getInput.nextLine());
 		
 		System.out.print("Enter your last name: ");
-		newCustomer.setLastName(getInput.next());
+		newCustomer.setLastName(getInput.nextLine());
 		
 		System.out.print("Enter your street address: ");
-		newCustomer.setStreetAddress(getInput.next());
+		newCustomer.setStreetAddress(getInput.nextLine());
 		
 		System.out.print("Enter your city: ");
-		newCustomer.setCity(getInput.next());
+		newCustomer.setCity(getInput.nextLine());
 		
 		System.out.print("Enter your two letter state abbreviation: ");
-		newCustomer.setState(getInput.next());
+		newCustomer.setState(getInput.nextLine());
 		
-		System.out.print("Enter your phone number (123-456-7890): ");
-		newCustomer.setPassword(getInput.next());
+		System.out.print("Enter your phone number (1234567890): ");
+		newCustomer.setPassword(getInput.nextLine());
 
 		return newCustomer;
 

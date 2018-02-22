@@ -1,11 +1,8 @@
 package com.revature.driver;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Scanner;
-
-import com.revature.accounts.Account;
 import com.revature.fileoperations.FileOperations;
 import com.revature.menus.Menus;
 import com.revature.userfunctions.*;
@@ -14,7 +11,7 @@ import com.revature.users.*;
 public class Driver {
 	public static void main(String[] args) {
 		//loop controllers
-		boolean userConnected = true;  
+		boolean userConnected = false;  
 		boolean loggingIn = true;
 		boolean validated = false;
 		boolean runningBackend = true;
@@ -90,18 +87,21 @@ public class Driver {
 					
 				if (option == 1) {
 					runningBackend = false;
+					userConnected = true;
 				}//end option 1
 						
 				if (option == 2) {	
 					Menus.displayBackendAccountCreationMenu();							
 					option = getInput.nextInt();
+					getInput.nextLine();
 						
 					switch(option) {
 					case 1:
+						//create a new administrator account and add it to the map
 						Admin newAdmin = BackendAdministration.createAdmin(getInput);
-						System.out.println("Adding to hashmap");
 						adminsMap.put(newAdmin.getUserName(), newAdmin);
-						System.out.print("Saving...");
+
+						//update the admins.dat file
 						try {
 							FileOperations.writeAdmins(adminsMap, adminFilename);
 						} catch (IOException e) {
@@ -111,16 +111,36 @@ public class Driver {
 						break;
 							
 					case 2:
+						//create a new employee account and add it to the map
 						Employee newEmployee= BackendAdministration.createEmployee(getInput);
 						employeesMap.put(newEmployee.getUserName(), newEmployee);
+						
+						//update the employees.dat file
+						try {
+							FileOperations.writeEmployees(employeesMap, employeeFilename);
+						} catch (IOException e) {
+							System.out.println("IO error in writeEmployees");
+							e.printStackTrace();
+						}											
 						break;
 								
 					case 3:
+						//create a new customer account and add it to the map
 						Customer newCustomer = BackendAdministration.createCustomer(getInput);
 						customersMap.put(newCustomer.getUserName(), newCustomer);
+						
+						//update the customers.dat file
+						try {
+							FileOperations.writeCustomers(customersMap, employeeFilename);
+						} catch (IOException e) {
+							System.out.println("IO error in writeEmployees");
+							e.printStackTrace();
+						}											
+
 						break;
 								
 					case 4:
+						userConnected = true;
 						runningBackend = false;
 						break;
 								
@@ -138,6 +158,7 @@ public class Driver {
 					
 					try {
 						option = getInput.nextInt();
+						getInput.nextLine();
 					}catch(Exception e) {
 						System.out.println("Please enter an appropriate selection");
 					}
@@ -148,7 +169,7 @@ public class Driver {
 					case 1:
 						//validate user
 						System.out.print("Please enter your user name: ");
-						userName = getInput.next();
+						userName = getInput.nextLine();
 						
 						//search the customer database
 						if (customersMap.containsKey(userName)) {
@@ -164,18 +185,18 @@ public class Driver {
 							
 						//search the admin database
 						else if (adminsMap.containsKey(userName)) {
-							System.out.println("key found");
 							admin = adminsMap.get(userName);
 							userType = 'a';
 						}
 						
 						else {
-							System.out.println();
+							System.out.println("User not found.");
 							break;
 						}
 						
 						System.out.print("Please enter your password: ");
 						password = getInput.next();
+						getInput.next();
 						
 						//identify login type and validate login
 						switch(userType) {
@@ -227,14 +248,24 @@ public class Driver {
 							
 	
 					case 2:
+						//register the user
 						customer = UserFunctions.register(getInput);
 						customersMap.put(customer.getUserName(), customer);
 						
-	
+						//update the customers.dat file
+						try {
+							FileOperations.writeCustomers(customersMap, customerFilename);
+						} catch (IOException e) {
+							System.out.println("IO error in writeEmployees");
+							e.printStackTrace();
+						}											
+
 						validated = true;
 						loggingIn = false;
 						break; 
 						
+					case 3:
+						userConnected = false;
 					default:
 						break;
 					}//end login/register switch			
@@ -242,8 +273,8 @@ public class Driver {
 				
 				while(validated) {
 				//access the banking system	
-	
 				}//end banking system loop
+
 			}//end user connected while loop
 		}//system running loop
 	}//end main
