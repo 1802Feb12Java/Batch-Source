@@ -56,7 +56,7 @@ public class Scopes {
 	}
 	
 	public void staticTest() {
-		static int test= 3;
+		final int test= 3;
 		System.out.println(test);
 	}
 }
