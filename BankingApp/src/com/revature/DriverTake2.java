@@ -25,9 +25,9 @@ public class DriverTake2 {
 		overwriteFile(allCusts , outfile);
 			
 		Scanner sc = new Scanner(System.in);
-		
-		mainInterface(allCusts); //this runs the app
-								//unfortunately it never stops
+		while(true) {
+			mainInterface(allCusts); //this runs the app
+		}					//unfortunately it never stops
 	}
 	
 	public static void addToList(Customer c, ArrayList<Customer> a) {
