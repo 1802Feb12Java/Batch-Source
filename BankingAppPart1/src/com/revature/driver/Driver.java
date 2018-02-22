@@ -53,43 +53,25 @@ public class Driver {
 
 		//initialize the system
 		System.out.println("Populating HashMaps...");
-		System.out.print("  Loading administrators...");
+
 
 		//load the admin HashMap
-		try {
-			adminsMap = FileOperations.readAdmins(adminFilename);
-		} catch (ClassNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			System.out.println("none found.");
-		}
+		System.out.print("  Loading administrators...");
+		adminsMap = FileOperations.readAdmins(adminFilename);
 		
 		//load the employee HashMap
 		System.out.print("  Loading employees...");
-		try {
-			employeesMap = FileOperations.readEmployees(employeeFilename);
-		} catch (ClassNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			System.out.println("none found.");
-		}
-		
+		employeesMap = FileOperations.readEmployees(employeeFilename);
+
 		//load the customer HashMap
-		System.out.print("  Loading customers...");
-		try {
-			customersMap = FileOperations.readCustomers(customerFilename);
-		} catch (ClassNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			System.out.println("none found.");
-		}
+		System.out.println("  Loading customers...");
+		customersMap = FileOperations.readCustomers(customerFilename);
 		
 		System.out.println("HashMaps loaded.");
-		
+		System.out.println("  Number of customers: " + customersMap.size());
+		System.out.println("  Number of employees: " + employeesMap.size());
+		System.out.println("  Number of administrators: " + adminsMap.size());
+		System.out.println("  Number of accounts pending: " + pendingRequests.size());
 		//open the scanner to be used for all input
 		getInput = new Scanner(System.in);
 
@@ -163,12 +145,13 @@ public class Driver {
 						//create a new customer account and add it to the map
 						Customer newCustomer = BackendAdministration.createCustomer(getInput);
 						customersMap.put(newCustomer.getUserName(), newCustomer);
+						System.out.println("  Number of customers: " + customersMap.size());
 						
 						//update the customers.dat file
 						try {
-							FileOperations.writeCustomers(customersMap, employeeFilename);
+							FileOperations.writeCustomers(customersMap, customerFilename);
 						} catch (IOException e) {
-							System.out.println("IO error in writeEmployees");
+							System.out.println("IO error in writeCustomers");
 							e.printStackTrace();
 						}											
 
@@ -296,7 +279,7 @@ public class Driver {
 						try {
 							FileOperations.writeCustomers(customersMap, customerFilename);
 						} catch (IOException e) {
-							System.out.println("IO error in writeEmployees");
+							System.out.println("IO error in writeCustomers");
 							e.printStackTrace();
 						}											
 
