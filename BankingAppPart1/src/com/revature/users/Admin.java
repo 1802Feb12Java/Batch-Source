@@ -13,14 +13,10 @@ public class Admin extends Employee {
 	
 	public Admin(String userName, String password, String firstName, String lastName) {
 		super(userName, password, firstName, lastName);
-		// TODO Auto-generated constructor stub
 	}
 
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
-	
-
 }

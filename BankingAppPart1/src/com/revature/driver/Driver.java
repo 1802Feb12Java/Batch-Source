@@ -1,8 +1,12 @@
 package com.revature.driver;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
+
+import com.revature.accounts.Account;
 import com.revature.fileoperations.FileOperations;
 import com.revature.menus.Menus;
 import com.revature.userfunctions.*;
@@ -23,10 +27,13 @@ public class Driver {
 		String customerFilename = "customers.dat";
 		String accountFilename = "accounts.dat";
 		
-		//HashMaps
+		//Data structures
 		HashMap<String, Admin> adminsMap = new HashMap<>();
 		HashMap<String, Employee> employeesMap = new HashMap<>();
 		HashMap<String, Customer> customersMap = new HashMap<>();
+		HashMap<String, Customer> pendingRequestsMap = new HashMap<>();
+		HashMap<String, List> accountsMap = new HashMap<>();
+		List<Account> accounts = new ArrayList<>();
 		
 		//active session objects
 		Customer customer = null;
@@ -345,9 +352,9 @@ public class Driver {
 						getInput.nextLine();
 						break;
 					}//end switch
+					
 				break;
 				}//end banking system loop
-
 			}//end user connected while loop
 		}//system running loop
 	}//end main

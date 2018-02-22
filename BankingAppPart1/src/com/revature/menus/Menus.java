@@ -25,9 +25,9 @@ public class Menus {
 	
 	public static void displayCustomerMenu(String fname, String lname) {
 		System.out.println("Welcome, " + fname + " " + lname);
-		System.out.println("  1.  List accounts");
-		System.out.println("  2.  View an account");
-		System.out.println("  3.  Apply for an account");
+		System.out.println("  1.  Apply for an account");
+		System.out.println("  2.  List accounts");
+		System.out.println("  3.  View an account");
 		System.out.println("  4.  Withdraw from an account");
 		System.out.println("  5.  Deposit to an account");
 		System.out.println("  6.  Transfer funds");
