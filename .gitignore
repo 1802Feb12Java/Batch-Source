@@ -18,6 +18,12 @@
 *.tar.gz 
 *.rar 
 
+<<<<<<< HEAD
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+/.metadata/
+/.recommenders/
+=======
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml 
 hs_err_pid* 
 
@@ -82,3 +88,4 @@ Servers/
 .worksheet 
 
 # End of https://www.gitignore.io/api/eclipse
+>>>>>>> origin/KnightenM
