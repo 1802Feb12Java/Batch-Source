@@ -1,5 +1,6 @@
 package com.revature.userfunctions;
 
+import java.util.HashMap;
 import java.util.Scanner;
 
 import com.revature.users.*;
@@ -65,5 +66,20 @@ public class UserFunctions {
 		}
 		System.out.println("Password does not match");
 		return false;
+	}
+	
+	public static void viewCustomerInformation(HashMap<String, Customer> map, Scanner getInput) {
+		System.out.println("Enter a customer user name to view: ");
+		String userName = getInput.nextLine();
+		
+		if(map.containsKey(userName)) {
+			Customer customer = map.get(userName);
+			System.out.println(customer.toString());
+		}
+		
+		else {
+			System.out.println("User not found");
+			System.out.println();
+		}
 	}
 }

@@ -51,4 +51,10 @@ public class Menus {
 		System.out.println("  5.  Exit the system");
 		
 	}
+	
+	public static void displayAccountCreationMenu() {
+		System.out.println();
+		System.out.println("1.  Standard Account");
+		System.out.println("2.  Joint Account");
+	}
 }

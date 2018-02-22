@@ -16,9 +16,13 @@ public class Customer implements Serializable {
 	private String city;
 	private String state;
 	private String phoneNumber;
+	private boolean jointAccountHolder;
+	private boolean accountHolder;
 
 	public Customer() {
 		super();
+		this.jointAccountHolder = false;
+		this.accountHolder = false;
 	}
 	
 	public Customer(String userName) {
@@ -90,10 +94,27 @@ public class Customer implements Serializable {
 		this.phoneNumber = phoneNumber;
 	}
 
+	public boolean isJointAccountHolder() {
+		return jointAccountHolder;
+	}
+
+	public void setJointAccountHolder(boolean jointAccountHolder) {
+		this.jointAccountHolder = jointAccountHolder;
+	}
+	
+	
+	public boolean isAccountHolder() {
+		return accountHolder;
+	}
+
+	public void setAccountHolder(boolean accountHolder) {
+		this.accountHolder = accountHolder;
+	}
+
 	@Override
 	public String toString() {
-		return "Customer [userName=" + userName + ", password=" + password + ", firstName=" + firstName + ", lastName="
-				+ lastName + ", streetAddress=" + streetAddress + ", city=" + city + ", state=" + state
-				+ ", phoneNumber=" + phoneNumber + "]";
+		return "User name:  " + userName + "\nName:  " + firstName + " "+ lastName + 
+				"\nAddress:  " + streetAddress + "\nCity:  " + city + "\nState: " + state
+				+ "\nTelephone number:  " + phoneNumber;
 	}
 }

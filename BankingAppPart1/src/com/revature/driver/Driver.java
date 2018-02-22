@@ -20,6 +20,7 @@ public class Driver {
 		boolean validated = false;
 		boolean runningBackend = true;
 		boolean systemRunning = true;
+		boolean logoff = false;
 		
 		//filenames
 		String adminFilename = "admins.dat";
@@ -31,15 +32,17 @@ public class Driver {
 		HashMap<String, Admin> adminsMap = new HashMap<>();
 		HashMap<String, Employee> employeesMap = new HashMap<>();
 		HashMap<String, Customer> customersMap = new HashMap<>();
-		HashMap<String, Customer> pendingRequestsMap = new HashMap<>();
 		HashMap<String, List> accountsMap = new HashMap<>();
 		List<Account> accounts = new ArrayList<>();
+		List<Account> customerAccounts = new ArrayList<>();
+		List<Customer> pendingRequests = new ArrayList<>();
 		
 		//active session objects
 		Customer customer = null;
 		Employee employee = null;
 		Admin admin = null;
 		char userType = 'n';
+		boolean customerPending = false;
 		
 		//login and validation variables
 		int option = 0;
@@ -107,6 +110,7 @@ public class Driver {
 					option = 0;
 					runningBackend = false;
 					userConnected = true;
+					loggingIn = true;
 					System.out.println();
 				}//end option 1
 						
@@ -191,16 +195,16 @@ public class Driver {
 					
 					try {
 						option = getInput.nextInt();
-						getInput.nextLine();
 					}catch(Exception e) {
 						System.out.println("Please enter an appropriate selection");
 					}
+					
+					getInput.nextLine();
 					
 					switch(option) {
 					
 					//begin login procedure
 					case 1:
-						option = 0;
 						//validate user
 						System.out.print("Please enter your user name: ");
 						userName = getInput.nextLine();
@@ -278,13 +282,12 @@ public class Driver {
 							}
 							
 							break;
-						}//end user type switch							
+						}//end user type switch	
+						option = 0;
 						break;
 					
 					case 2:
-						System.out.println(option);
-						option = 0;
-						//register the user
+						//register new customer
 						customer = UserFunctions.register(getInput);
 						customersMap.put(customer.getUserName(), customer);
 						
@@ -298,11 +301,15 @@ public class Driver {
 
 						validated = true;
 						loggingIn = false;
+						option = 0;
 						break; 
 						
 					case 3:
+						//logout
 						option = 0;
+						loggingIn = false;
 						userConnected = false;
+						validated = false;
 						break;
 						
 					default:
@@ -313,6 +320,7 @@ public class Driver {
 				while(validated) {
 					switch(userType) {
 					case 'c':
+						//CUSTOMER
 						Menus.displayCustomerMenu(customer.getFirstName(), customer.getLastName());
 						System.out.print("Please make a selection: ");
 						
@@ -324,22 +332,124 @@ public class Driver {
 							
 						getInput.nextLine();
 
+						switch(option) {
+						case 1:
+							//Apply for an account
+							Menus.displayAccountCreationMenu();
+							System.out.println("Select the type of account you would like to apply for: ");
+
+							try {
+								option = getInput.nextInt();
+								}catch(Exception e) {
+									System.out.println("Please enter an appropriate selection");
+								}
+							getInput.nextLine();
+							
+							//customer opted for joint account
+							if(option == 2) {
+								customer.setJointAccountHolder(true);
+							}
+							
+							for(Customer current : pendingRequests) {
+								if(current.equals(customer)) {
+									customerPending = false;
+								}
+							}
+							
+							if(customerPending) {
+								System.out.println("You are already awaiting account approval");
+							}
+							
+							else {
+								pendingRequests.add(customer);
+							}
+
+							option = 0;
+							break;
+							
+						case 2:
+							//List customer's accounts
+							if(!customer.isAccountHolder()) {
+								System.out.println("You currently have no open accounts");
+							}
+							
+							option = 0;
+							break;
+							
+						case 3:
+							//View account
+							option = 0;
+							break;
+							
+						case 4:
+							//Withdraw from account
+							option = 0;
+							break;
+							
+						case 5:
+							//Deposit to account
+							option = 0;
+							break;
+							
+						case 6:
+							//Transfer funds
+							option = 0;
+							break;
+							
+						case 7:
+							//exit the system
+							option = 0;
+							validated = false;
+							
+							break;
+							
+					    default:
+					    	System.out.println();
+					    	break;
+						}
 						break;
 						
 					case 'e':
-						Menus.displayEmployeeMenu(employee.getFirstName(), employee.getLastName());
-						System.out.print("Please make a selection: ");
-						
-						try {
-							option = getInput.nextInt();
-							}catch(Exception e) {
-								System.out.println("Please enter an appropriate selection");
-							}
+						while(!logoff) {
+							//EMPLOYEE
+							Menus.displayEmployeeMenu(employee.getFirstName(), employee.getLastName());
+							System.out.print("Please make a selection: ");
 							
-						getInput.nextLine();
+							try {
+								option = getInput.nextInt();
+								}catch(Exception e) {
+									System.out.println("Please enter an appropriate selection");
+								}
+								
+							getInput.nextLine();
+							
+							switch(option) {
+							case 1:
+								//View customer information
+								UserFunctions.viewCustomerInformation(customersMap, getInput);
+								option = 0;
+								break;
+								
+							case 2:
+								//view customer accounts
+								option = 0;
+								break;
+	
+							case 3:
+								//View pending account applications
+								option = 0;
+								break;
+	
+							case 4:
+								logoff = true;
+								break;
+							}//end switch
+
+						}//end while
 						break;
 						
 					case 'a':
+						//ADMIN
 						Menus.displayAdminMenu(admin.getFirstName(), admin.getLastName());
 						System.out.print("Please make a selection: ");
 						
@@ -350,11 +460,42 @@ public class Driver {
 							}
 							
 						getInput.nextLine();
+						
+						switch(option) {
+						case 1:
+							//View customer information
+							option = 0;
+							break;
+
+						case 2:
+							//view customer accounts
+							option = 0;
+							break;
+
+						case 3:
+							//view pending accounts
+							option = 0;
+							break;
+
+						case 4:
+							//modify accounts
+							option = 0;
+							break;
+
+						case 5:
+							//exit
+							option = 0;
+							break;
+
+						}
 						break;
 					}//end switch
 					
 				break;
 				}//end banking system loop
+			System.out.println();
+			logoff = false;
+			break;
 			}//end user connected while loop
 		}//system running loop
 	}//end main

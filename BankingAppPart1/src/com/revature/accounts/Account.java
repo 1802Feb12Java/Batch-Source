@@ -3,6 +3,8 @@ package com.revature.accounts;
 public class Account {
 	private double balance;
 	private boolean active;
+	private boolean jointAccount;
+	private int accountNumber;
 	private String userName;
 	
 	public void withdraw(double amount) {
@@ -40,6 +42,22 @@ public class Account {
 
 	public void setUserName(String userName) {
 		this.userName = userName;
+	}
+
+	public boolean isJointAccount() {
+		return jointAccount;
+	}
+
+	public void setJointAccount(boolean jointAccount) {
+		this.jointAccount = jointAccount;
+	}
+
+	public int getAccountNumber() {
+		return accountNumber;
+	}
+
+	public void setAccountNumber(int accountNumber) {
+		this.accountNumber = accountNumber;
 	}
 	
 	
