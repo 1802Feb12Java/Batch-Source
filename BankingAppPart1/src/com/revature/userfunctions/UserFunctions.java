@@ -43,7 +43,6 @@ public class UserFunctions {
 	
 	public static boolean validateCustomer(String password, Customer customer) {
 		if(password.equals(customer.getPassword())) {
-			System.out.println("password match");
 			return true;
 		}
 		
