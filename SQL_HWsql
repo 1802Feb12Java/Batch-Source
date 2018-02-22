@@ -34,15 +34,21 @@ Select * from Invoice Where Total > 15 AND Total < 50;
 --Q13 
 Select * from Employee where HireDate > '01-JUN-03' and HireDate < '01-MAR-04';
 --Q14                                                      
-Delete From Customer,Invoice where Customer.FirstName='Robert' and Customer.LastName='Walter' and Invoice.CustomerID=;
---Q15                                                      
-                                                           
+ALTER TABLE InvoiceLine
+DROP CONSTRAINT FK_INVOICELINEINVOICEID;
+ALTER TABLE Invoice
+DROP CONSTRAINT FK_INVOICECUSTOMERID;
+Delete From Customer where FirstName='Robert' and LastName='Walter';
+--Q15  //START                                                    
+Select CURRENT_TIMESTAMP from DUAL;                                                   
 --Q16                                                      
-                                                           
+Select LENGTH(Name) from MediaType;
 --Q17                                                      
-                                                           
+Select AVG(Total) from INVOICE;
 --Q18                                                      
-                                                           
+Select * from (
+Select a.*, ROWNUM rnum from (
+Select 
 --Q19                                                      
                                                            
 --Q20                                                      
@@ -68,11 +74,16 @@ Delete From Customer,Invoice where Customer.FirstName='Robert' and Customer.Last
 --Q30
 
 --Q31
-
+Select Customer.FirstName, Invoice.InvoiceID
+from Customer
+Inner Join Invoice on Invoice.CUSTOMERID=Customer.CustomerID;
 --Q32
-
+Select Customer.CustomerID,Customer.FirstName, Customer.LastName, Invoice.InvoiceID,Invoice.total
+from Customer
+Full Outer Join Invoice on Invoice.CustomerID=Customer.CustomerID;
 --Q33
-
+Select artist.name,album.title from Artist Right Join Album on Album.ARTISTID=Artist.ArtistID;
 --Q34
-
+Select artist.name,album.title from artist cross join album Order by artist.name asc
 --Q35
+Select * from Employee D, Employee B where D.Reportsto=B.Reportsto;
