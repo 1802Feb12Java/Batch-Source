@@ -202,8 +202,9 @@ public class InteractWithFile {
 	
 	public void createNewAccount(String str) {
 		try {
-	    	
-	    		BufferedWriter writer = new BufferedWriter(new FileWriter("accounts.txt", true));
+			
+			FileWriter fw = new FileWriter("accounts.txt", true);
+	    		BufferedWriter writer = new BufferedWriter(fw);
 	    		writer.newLine();
 			writer.append(str);
 			writer.close();

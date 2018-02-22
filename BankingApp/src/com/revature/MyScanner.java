@@ -86,7 +86,7 @@ public class MyScanner {
 			boolean passTooShort = true;
 			while(passTooShort) {
 				if(password.length() < 6) {
-					System.out.println("Error! Your password must be at least 8 characters long.");
+					System.out.println("Error! Your password must be at least 6 characters long.");
 					password = sc.next();
 				} else {
 					passTooShort = false;
@@ -139,7 +139,9 @@ public class MyScanner {
 				System.out.println("Please enter your password:");
 				String password = sc.next();
 				
-				if(!password.equals("bobcat")) {
+				ArrayList<String> admin = fi.getUser("jboud1217");
+				
+				if(!password.equals(admin.get(4))) {
 					boolean wrongPassword = true;
 					while(wrongPassword) {
 						System.out.println("Error! Wrong password. Please try again.");
