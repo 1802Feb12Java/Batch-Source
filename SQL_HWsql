@@ -39,9 +39,19 @@ DROP CONSTRAINT FK_INVOICELINEINVOICEID;
 ALTER TABLE Invoice
 DROP CONSTRAINT FK_INVOICECUSTOMERID;
 Delete From Customer where FirstName='Robert' and LastName='Walter';
---Q15  //START                                                    
-Select CURRENT_TIMESTAMP from DUAL;                                                   
---Q16                                                      
+--Q15  //START 
+Create or Replace Function CurrTime
+Return TIMESTAMP WITH TIME ZONE AS
+timeofday TIMESTAMP WITH TIME ZONE;
+Begin
+Select CURRENT_TIMESTAMP Into timeofday from DUAL; 
+return timeofday;
+End;
+
+Select CURRTIME() from dual;                                             
+--Q16
+Create or Replace Function 
+Return Number as
 Select LENGTH(Name) from MediaType;
 --Q17                                                      
 Select AVG(Total) from INVOICE;
@@ -68,7 +78,14 @@ Select
 --Q27
 
 --Q28
-
+Create OR Replace Trigger NewEmployee
+After Insert On Employee
+For Each Row
+Declare
+@yea=number;
+Begin
+    Select yea=EmployeeID from Employee;
+End;
 --Q29
 
 --Q30
