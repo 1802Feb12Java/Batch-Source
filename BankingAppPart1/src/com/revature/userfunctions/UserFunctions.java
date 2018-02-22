@@ -34,7 +34,7 @@ public class UserFunctions {
 		newCustomer.setState(getInput.nextLine());
 		
 		System.out.print("Enter your phone number (1234567890): ");
-		newCustomer.setPassword(getInput.nextLine());
+		newCustomer.setPhoneNumber(getInput.nextLine());
 
 		return newCustomer;
 
@@ -42,6 +42,7 @@ public class UserFunctions {
 	
 	public static boolean validateCustomer(String password, Customer customer) {
 		if(password.equals(customer.getPassword())) {
+			System.out.println("password match");
 			return true;
 		}
 		

@@ -12,6 +12,7 @@ import java.util.HashMap;
 import com.revature.users.*;
 
 public class FileOperations {
+	
 	public static void writeAdmins(HashMap <String, Admin> map,String filename) throws IOException {
 		FileOutputStream fileOut = new FileOutputStream(new File(filename));
 		ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);

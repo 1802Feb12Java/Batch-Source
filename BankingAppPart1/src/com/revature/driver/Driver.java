@@ -40,10 +40,11 @@ public class Driver {
 		String password = null;
 		Scanner getInput = null;
 
-		//open files and populate the HashMaps
+		//initialize the system
 		System.out.println("Populating HashMaps...");
 		System.out.print("  Loading administrators...");
 
+		//load the admin HashMap
 		try {
 			adminsMap = FileOperations.readAdmins(adminFilename);
 		} catch (ClassNotFoundException e1) {
@@ -53,6 +54,7 @@ public class Driver {
 			System.out.println("none found.");
 		}
 		
+		//load the employee HashMap
 		System.out.print("  Loading employees...");
 		try {
 			employeesMap = FileOperations.readEmployees(employeeFilename);
@@ -63,6 +65,7 @@ public class Driver {
 			System.out.println("none found.");
 		}
 		
+		//load the customer HashMap
 		System.out.print("  Loading customers...");
 		try {
 			customersMap = FileOperations.readCustomers(customerFilename);
@@ -79,24 +82,42 @@ public class Driver {
 		//open the scanner to be used for all input
 		getInput = new Scanner(System.in);
 
+		//start the system
 		while(systemRunning) {
 			do {
 				Menus.displayStartMenu();
 			
+				try {
 				option = getInput.nextInt();
-					
+				}catch(Exception e) {
+					System.out.println("Please enter an appropriate selection");
+				}
+				
+				getInput.nextLine();
+				
 				if (option == 1) {
+					//exit the start menu and launch the front end
+					option = 0;
 					runningBackend = false;
 					userConnected = true;
+					System.out.println();
 				}//end option 1
 						
 				if (option == 2) {	
-					Menus.displayBackendAccountCreationMenu();							
-					option = getInput.nextInt();
+					option = 0;
+					Menus.displayBackendAccountCreationMenu();	
+					System.out.print("Please select an option: ");
+					try {
+						option = getInput.nextInt();
+					}catch(Exception e) {
+						System.out.println("Please enter an appropriate selection");
+					}
+					
 					getInput.nextLine();
 						
 					switch(option) {
 					case 1:
+						option = 0;
 						//create a new administrator account and add it to the map
 						Admin newAdmin = BackendAdministration.createAdmin(getInput);
 						adminsMap.put(newAdmin.getUserName(), newAdmin);
@@ -111,6 +132,7 @@ public class Driver {
 						break;
 							
 					case 2:
+						option = 0;
 						//create a new employee account and add it to the map
 						Employee newEmployee= BackendAdministration.createEmployee(getInput);
 						employeesMap.put(newEmployee.getUserName(), newEmployee);
@@ -125,6 +147,7 @@ public class Driver {
 						break;
 								
 					case 3:
+						option = 0;
 						//create a new customer account and add it to the map
 						Customer newCustomer = BackendAdministration.createCustomer(getInput);
 						customersMap.put(newCustomer.getUserName(), newCustomer);
@@ -140,11 +163,14 @@ public class Driver {
 						break;
 								
 					case 4:
+						option = 0;
 						userConnected = true;
 						runningBackend = false;
 						break;
 								
 					default:
+						option = 0;
+						System.out.println("Please enter an approriate selection.");
 						break;
 					}//end backend administration switch
 				}//end option 2
@@ -167,6 +193,7 @@ public class Driver {
 					
 					//begin login procedure
 					case 1:
+						option = 0;
 						//validate user
 						System.out.print("Please enter your user name: ");
 						userName = getInput.nextLine();
@@ -180,12 +207,14 @@ public class Driver {
 						//search the employee database
 						else if(employeesMap.containsKey(userName)) {
 							employee = employeesMap.get(userName);
+							System.out.println("Found, pass: "+ employee.getPassword());
 							userType = 'e';
 						}
 							
 						//search the admin database
 						else if (adminsMap.containsKey(userName)) {
 							admin = adminsMap.get(userName);
+							System.out.println("Found, pass: "+ admin.getPassword());
 							userType = 'a';
 						}
 						
@@ -195,8 +224,7 @@ public class Driver {
 						}
 						
 						System.out.print("Please enter your password: ");
-						password = getInput.next();
-						getInput.next();
+						password = getInput.nextLine();
 						
 						//identify login type and validate login
 						switch(userType) {
@@ -205,23 +233,21 @@ public class Driver {
 							//validate customer login
 							validated = UserFunctions.validateCustomer(password, customer);
 							if(validated) {
-								System.out.println("success");
 								loggingIn = false;
-								break;
+
 							}
 							
 							else { 
-								System.out.println();
 								userType = 'n';
 								customer = null;
 							}
+							break;
 						
 						case 'e':
 							//validate employee login
 							validated = UserFunctions.validateEmployee(password, employee);
 							if(validated) {
 								loggingIn = false;
-								break;
 							}
 							
 							else {
@@ -229,14 +255,13 @@ public class Driver {
 								userType = 'n';
 								employee = null;
 							}
-							
+							break;
 						
 						case 'a':
 							//validate admin login
 							validated = UserFunctions.validateAdmin(password, admin);
 							if(validated) {
 								loggingIn = false;
-								break;
 							}
 							
 							else {
@@ -244,10 +269,14 @@ public class Driver {
 								userType = 'n';
 								admin = null;
 							}
-						}//end user type switch
 							
-	
+							break;
+						}//end user type switch							
+						break;
+					
 					case 2:
+						System.out.println(option);
+						option = 0;
 						//register the user
 						customer = UserFunctions.register(getInput);
 						customersMap.put(customer.getUserName(), customer);
@@ -265,13 +294,17 @@ public class Driver {
 						break; 
 						
 					case 3:
+						option = 0;
 						userConnected = false;
+						break;
+						
 					default:
 						break;
-					}//end login/register switch			
+					}//end login/register switch
 				}//end logging in while loop
 				
 				while(validated) {
+					System.out.println(userType);
 				//access the banking system	
 				}//end banking system loop
 
