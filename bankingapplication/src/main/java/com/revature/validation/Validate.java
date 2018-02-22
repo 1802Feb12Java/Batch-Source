@@ -10,6 +10,8 @@ public class Validate {
 		if (username.length() < 6)
 			return false;
 		// validate unique
+		if (DataStore.readUsersFromFile() == null)
+			return true;
 		for (User u : DataStore.readUsersFromFile()) {
 			if (u.getUsername().equals(username))
 				return false;
@@ -24,11 +26,6 @@ public class Validate {
 		// validate contains number
 		if (!containsNumber(password))
 			return false;
-		// validate unique
-		for (User u : DataStore.readUsersFromFile()) {
-			if (u.getUsername().equals(password))
-				return false;
-		}
 		return true;
 	}
 

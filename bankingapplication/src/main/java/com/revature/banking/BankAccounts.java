@@ -13,6 +13,8 @@ public class BankAccounts {
 
 	public static BankAccount findAccount(String accountNumber) {
 		ArrayList<BankAccount> bankAccounts = DataStore.readBankAccountsFromFile();
+		if (bankAccounts == null)
+			return null;
 		for (BankAccount b : bankAccounts)
 			if (b.getAccountId().equals(accountNumber)) {
 				// logger.info("Found account matching number " + accountNumber);
