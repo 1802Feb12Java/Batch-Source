@@ -35,20 +35,29 @@ public class Account {
 
 	public static void listAccounts(ArrayList<Account> accountList, String userName) {
 		for(Account current : accountList) {
-			System.out.println("Account: " + current.getAccountNumber() + "  " + current.getAccountType() +
+			int index = 1;
+			System.out.println(index + ".  Account: " + current.getAccountNumber() + "  " + current.getAccountType() +
 					"  " + "Balance: " + current.getBalance());
+			index++;
 		}
 	}
 	
+
 	public static HashMap<String, ArrayList<Account>> createAccount(Customer customer, 
 			HashMap<String, ArrayList<Account>> accountsMap) {
 		Account newAccount = null;
 		
+		ArrayList<Account> accountsList = null;
+		
 		//get the customer's account list
-		ArrayList<Account>accountsList = accountsMap.get(customer.getUserName());
-		if(accountsList == null) {
+		if(accountsMap.containsKey(customer.getUserName())) {
+			 accountsList = accountsMap.get(customer.getUserName());
+		}
+		
+		else {
 			accountsList = new ArrayList<>();
 		}
+		
 		//CHECKING
 		//Regular checking
 		if(!customer.isApplyingForSavings() &&
@@ -56,9 +65,9 @@ public class Account {
 			newAccount = new Account(customer.getUserName(), "Checking");
 			
 			//add the new account to the accounts list
-			System.out.println("Adding account to list");
 			accountsList.add(newAccount);
-			System.out.println("Added");
+			accountsMap.put(customer.getUserName(), accountsList);
+			
 		}
 		//Joint checking
 		else if(!customer.isApplyingForSavings()){

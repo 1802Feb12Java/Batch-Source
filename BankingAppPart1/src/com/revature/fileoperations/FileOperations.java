@@ -7,8 +7,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.revature.accounts.Account;
 import com.revature.users.*;
 
 public class FileOperations {
@@ -152,6 +154,7 @@ public class FileOperations {
 	}
 	
 	public static HashMap <String, Customer> readCustomers(String filename) {
+
 		HashMap <String, Customer> map = new HashMap <>();
 		FileInputStream fileIn = null;
 		Customer current = null;

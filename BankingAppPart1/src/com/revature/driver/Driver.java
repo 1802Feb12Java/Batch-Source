@@ -27,22 +27,18 @@ public class Driver {
 		String adminFilename = "admins.dat";
 		String employeeFilename = "employees.dat";
 		String customerFilename = "customers.dat";
-		String accountFilename = "accounts.dat";
 		
 		//Data structures
 		HashMap<String, Admin> adminsMap = new HashMap<>();
 		HashMap<String, Employee> employeesMap = new HashMap<>();
 		HashMap<String, Customer> customersMap = new HashMap<>();
 		HashMap<String, ArrayList<Account>> accountsMap = new HashMap<>();
-		ArrayList<Account> accountsList = new ArrayList<>();
-		ArrayList<Account> customerAccounts = new ArrayList<>();
 		ArrayList<Customer> pendingRequests = new ArrayList<>();
 		
 		//active session objects
 		Customer customer = null;
 		Employee employee = null;
 		Admin admin = null;
-		Account newAccount = null;
 		char userType = 'n';
 		boolean customerPending = false;
 		
@@ -373,10 +369,11 @@ public class Driver {
 							break;
 							
 						case 2:
+							//LIST ACCOUNTS
 							//List customer's accounts
 							if(!customer.isAccountHolder()) {
 								System.out.print("You currently have no open accounts");
-								if(customer.getUserName() == "js") {
+								if(customer.getUserName().equals("js")) {
 									System.out.print(" (Loser)");
 								}
 								System.out.println();
@@ -390,27 +387,123 @@ public class Driver {
 							break;
 							
 						case 3:
-							//View account
+							//VIEW ACCOUNT
+							//List customer's accounts
+							if(!customer.isAccountHolder()) {
+								System.out.print("You currently have no open accounts");
+								if(customer.getUserName().equals("js")) {
+									System.out.print(" (Loser)");
+								}
+								System.out.println();
+							}
+							
+							else {
+								Account.listAccounts(accountsMap.get(userName), userName);
+								System.out.print("Select an account to view: ");
+								
+								try {
+									option = getInput.nextInt();
+									}catch(Exception e) {
+										System.out.println("Please enter an appropriate selection");
+										break;
+									}
+								
+								System.out.println();
+								System.out.println(accountsMap.get(userName).get(option - 1).toString());
+								System.out.println();
+								getInput.nextLine();
+								
+							}
+													
 							option = 0;
 							break;
 							
 						case 4:
-							//Withdraw from account
+							//WITHDRAW
+							//List customer's accounts
+							if(!customer.isAccountHolder()) {
+								System.out.print("You currently have no open accounts");
+								if(customer.getUserName().equals("js")) {
+									System.out.print(" (Loser)");
+								}
+								System.out.println();
+							}
+							
+							else {
+								Account.listAccounts(accountsMap.get(userName), userName);
+								System.out.print("Select an account to withdraw from: ");
+								
+								try {
+									option = getInput.nextInt();
+									}catch(Exception e) {
+										System.out.println("Please enter an appropriate selection");
+										break;
+									}
+								System.out.print("Enter an amount to withdraw: ");
+								accountsMap.get(userName).get(option - 1).withdraw(getInput.nextDouble());
+								System.out.println();
+								System.out.println(accountsMap.get(userName).get(option - 1).toString());
+								System.out.println();
+								getInput.nextLine();
+							}
+												
 							option = 0;
 							break;
 							
 						case 5:
-							//Deposit to account
+							//DEPOSIT
+							//List customer's accounts
+							if(!customer.isAccountHolder()) {
+								System.out.print("You currently have no open accounts");
+								if(customer.getUserName().equals("js")) {
+									System.out.print(" (Loser)");
+								}
+								System.out.println();
+							}
+							
+							else {
+								Account.listAccounts(accountsMap.get(userName), userName);
+								System.out.print("Select an account to deposit to: ");
+								
+								try {
+									option = getInput.nextInt();
+									}catch(Exception e) {
+										System.out.println("Please enter an appropriate selection");
+										break;
+									}
+								getInput.nextLine();
+								System.out.print("Enter an amount to deposit: ");
+								accountsMap.get(userName).get(option - 1).deposit(getInput.nextDouble());
+								System.out.println();
+								System.out.println(accountsMap.get(userName).get(option - 1).toString());
+								System.out.println();
+								getInput.nextLine();
+
+							}
+							
 							option = 0;
 							break;
 							
 						case 6:
-							//Transfer funds
+							//TRANSFER
+							//List customer's accounts
+							if(!customer.isAccountHolder()) {
+								System.out.print("You currently have no open accounts");
+								if(customer.getUserName().equals("js")) {
+									System.out.print(" (Loser)");
+								}
+								System.out.println();
+							}
+							
+							else {
+								Account.listAccounts(accountsMap.get(userName), userName);
+							}
+							
 							option = 0;
 							break;
 							
 						case 7:
-							//exit the system
+							//EXIT
 							option = 0;
 							validated = false;
 							
