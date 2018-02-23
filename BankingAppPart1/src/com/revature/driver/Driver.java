@@ -375,10 +375,11 @@ public class Driver {
 						case 2:
 							//List customer's accounts
 							if(!customer.isAccountHolder()) {
-								System.out.println("You currently have no open accounts");
+								System.out.print("You currently have no open accounts");
 								if(customer.getUserName() == "js") {
-									System.out.println("You suck, Jerry.");
+									System.out.print(" (Loser)");
 								}
+								System.out.println();
 							}
 							
 							option = 0;
@@ -449,28 +450,9 @@ public class Driver {
 								
 								//if applicable, create the approved account
 								if(customer != null) {
-									//CHECKING
-									//Regular checking
-									if(!customer.isApplyingForSavings() &&
-											!customer.isApplyingForJoint()) {
-										newAccount = new Account(customer.getUserName(), "Checking");
-									}
-									//Joint checking
-									if(!customer.isApplyingForSavings()){
-										newAccount = new Account(customer.getUserName(), "Checking",
-												customer.getHoldsJointAccountWith());
-									}
-									
-									//SAVINGS
-									//Regular savings
-									if(!customer.isApplyingForJoint()) {
-										newAccount = new Account(customer.getUserName(), "Savings");
-									}
-									//Joint savings
-									else {
-										newAccount = new Account(customer.getUserName(), "Savings",
-												customer.getHoldsJointAccountWith());
-									}
+									accountsMap = Account.createAccount(customer);
+									System.out.println("Account created:");
+
 								}
 								option = 0;
 								break;

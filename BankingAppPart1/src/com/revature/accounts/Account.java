@@ -1,6 +1,9 @@
 package com.revature.accounts;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+
+import com.revature.users.Customer;
 
 public class Account {
 	private double balance = 25.00;
@@ -27,6 +30,61 @@ public class Account {
 		this(primaryAccountHolder, accountType);
 		this.secondaryAccountHolder = secondaryAccountHolder;
 		this.jointAccount = true;
+	}
+
+	public static HashMap<String, ArrayList<Account>> createAccount(Customer customer) {
+		HashMap<String, ArrayList<Account>> accountsMap = new HashMap<>();
+		ArrayList<Account> accountsList = new ArrayList<>();
+		Account newAccount = null;
+		
+		//CHECKING
+		//Regular checking
+		if(!customer.isApplyingForSavings() &&
+				!customer.isApplyingForJoint()) {
+			newAccount = new Account(customer.getUserName(), "Checking");
+			
+			//add the new account to the accounts list
+			accountsList.add(newAccount);
+			
+			//add the list to the account map
+			accountsMap.put(customer.getUserName(), accountsList);
+		}
+		//Joint checking
+		if(!customer.isApplyingForSavings()){
+			newAccount = new Account(customer.getUserName(), "Checking",
+					customer.getHoldsJointAccountWith());
+			
+			//add the new account to the accounts list
+			accountsList.add(newAccount);
+			
+			//add the list to the account map
+			accountsMap.put(customer.getUserName(), accountsList);
+		}
+		
+		//SAVINGS
+		//Regular savings
+		if(!customer.isApplyingForJoint()) {
+			newAccount = new Account(customer.getUserName(), "Savings");
+			
+			//add the new account to the accounts list
+			accountsList.add(newAccount);
+			
+			//add the list to the account map
+			accountsMap.put(customer.getUserName(), accountsList);
+		}
+		//Joint savings
+		else {
+			newAccount = new Account(customer.getUserName(), "Savings",
+					customer.getHoldsJointAccountWith());
+			
+			//add the new account to the accounts list
+			accountsList.add(newAccount);
+			
+			//add the list to the account map
+			accountsMap.put(customer.getUserName(), accountsList);
+		}
+
+		return accountsMap;
 	}
 	
 	public void withdraw(double amount) {
