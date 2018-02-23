@@ -39,57 +39,83 @@ DROP CONSTRAINT FK_INVOICELINEINVOICEID;
 ALTER TABLE Invoice
 DROP CONSTRAINT FK_INVOICECUSTOMERID;
 Delete From Customer where FirstName='Robert' and LastName='Walter';
---Q15  //START 
-Create or Replace Function CurrTime
-Return TIMESTAMP WITH TIME ZONE AS
-timeofday TIMESTAMP WITH TIME ZONE;
-Begin
-Select CURRENT_TIMESTAMP Into timeofday from DUAL; 
-return timeofday;
-End;
-
-Select CURRTIME() from dual;                                             
+--Q15
+Select CURRENT_TIMESTAMP from DUAL;                                           
 --Q16
-Create or Replace Function 
-Return Number as
 Select LENGTH(Name) from MediaType;
 --Q17                                                      
 Select AVG(Total) from INVOICE;
 --Q18                                                      
-Select * from (
-Select a.*, ROWNUM rnum from (
-Select 
+Select Name from Track Order by UNITPRICE Desc Fetch First 1 Rows Only;
 --Q19                                                      
-                                                           
---Q20                                                      
-                                                           
+Create or Replace Function AveragePrice
+Return Number AS
+Average Number;
+Begin
+Select AVG(Total) into Average from INVOICE;
+return Average;
+End;
+
+Select AveragePrice from Dual;
+--Q20    
+Create or Replace Function Above68(Bday in Date)
+Return Number AS
+Bool Number;
+Begin
+If(Bday) >= '01-JAN-69' THEN
+return 1;
+Else
+return 0;
+End if;
+End;
+
+Select FirstName,Birthdate from Employee where Above68(Birthdate)=1;                                                        
 --Q21                                                      
-                                                           
+
 --Q22                                                      
                                                            
 --Q23                                                      
                                                            
 --Q24
 
+
 --Q25
 
 --Q26
 
 --Q27
+Create OR Replace Procedure NameandComp (CustID Int)
+As
+custfname OUT varchar2(80 Byte);
+custlname OUT varchar2(80 BYTE);
+custcomp OUT varchar2(80 BYTE);
+Begin
+Select FirstName,LastName,Company Into custfname,custlname,custcomp from Customer where CustID=CustomerID;
+End;
 
---Q28
+Execute NameandComp(1);
+
+--6.1
 Create OR Replace Trigger NewEmployee
 After Insert On Employee
 For Each Row
-Declare
-@yea=number;
 Begin
-    Select yea=EmployeeID from Employee;
+    DBMS_OUTPUT.PUT_LINE('Yeah');
 End;
---Q29
-
---Q30
-
+--
+Create OR Replace Trigger NewAlbum
+After Insert On Album
+For Each Row
+Begin
+    DBMS_OUTPUT.PUT_LINE('Yeah');
+End;
+--
+Create OR Replace Trigger RemoveCustomer
+After Delete On Customer
+For Each Row
+Begin
+    DBMS_OUTPUT.PUT_LINE('Yeah');
+End;
 --Q31
 Select Customer.FirstName, Invoice.InvoiceID
 from Customer
