@@ -82,6 +82,7 @@ public final class AccountManager implements Persistent {
 		for(Customer c : owners) {
 			acct.getOwnerIds().add(c.getId());
 		}
+		requests.put(acct.getId(), acct);
 		
 		return true;
 	}

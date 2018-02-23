@@ -61,13 +61,13 @@ public class LoginState extends DisplayState {
 		
 		// Login
 		if(usr instanceof Customer) {
-			// TODO next state -> CustomerScreen
+			setNextState(new CustomerScreen());
 			SessionManager.getInstance().login(usr);
 		} else if(usr instanceof Admin) {
-			// TODO next state -> AdminScreen
+			setNextState(new AdminScreen());
 			SessionManager.getInstance().login(usr);
 		} else if(usr instanceof Employee) {
-			// TODO next state -> Employee
+			setNextState(new EmployeeScreen());
 			SessionManager.getInstance().login(usr);
 		} else {
 			System.out.println("Unknown User Type. Returning to Entry Screen.");

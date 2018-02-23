@@ -25,15 +25,13 @@ public class CustomerScreen extends DisplayState {
 		Customer currentUser = (Customer)(SessionManager.getInstance().getCurrentUser());
 		
 		do {
-			System.out.println(">>> ");
+			System.out.print(">>> ");
 			cmd = userIn.nextLine();
 			cmdSplit = cmd.split("\\s+");
 			
 			if(cmdSplit.length == 0) {
 				continue;
 			}
-			
-			
 			
 			if(cmdSplit[0].equals("apply")) {
 				
@@ -155,6 +153,24 @@ public class CustomerScreen extends DisplayState {
 					System.out.println("Invalid invocation of this command.");
 				}
 				continue;
+			} else if(cmdSplit[0].equals("stat")) {
+				// Print out user info
+				User self = SessionManager.getInstance().getCurrentUser();
+				System.out.println("User ID: " + self.getId());
+				
+				// Create name
+				String name;
+				if(self.getFirstName().matches("\\s*")) {
+					name = self.getFirstName().trim();
+				} else if(self.getLastName().matches("\\s*")) {
+					name = self.getFirstName().trim();
+				} else {
+					name = self.getLastName().trim() + ", " + self.getFirstName().trim();
+				}
+				
+				System.out.println("Name: " + name);
+			} else if(cmdSplit[0].equals("lscmd")) {
+				lscmd(cmdSplit);
 			} else {
 				System.out.println("Unknown command.");
 				continue;
@@ -163,5 +179,9 @@ public class CustomerScreen extends DisplayState {
 		} while(true);
 		
 		userIn.close();
+	}
+	
+	public void lscmd(String[] args) {
+		System.out.println("apply, deposit, withdraw, transfer, lsacct, logout, exit");
 	}
 }

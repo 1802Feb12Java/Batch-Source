@@ -18,6 +18,7 @@ public class AdminAccountSetupState extends DisplayState {
 		Scanner scan = new Scanner(new UnclosableInputStream(System.in));
 		
 		// Prompt for info
+		System.out.println("Initial System Setup: Administrator Account Setup");
 		System.out.print("First Name: ");
 		fName = scan.nextLine();
 		
@@ -34,15 +35,22 @@ public class AdminAccountSetupState extends DisplayState {
 		usr.setFirstName(fName);
 		usr.setLastName(lName);
 		
-		// Register the user.
+		// Register the user
 		UserManager usrMng = UserManager.getInstance();
-		usrMng.registerUser(usr);
+		if(usrMng.registerUser(usr)) {
+			System.out.println("Registration Successful. User ID: " + usr.getId());
+
+			// Set the next state
+			setNextState(new EntryScreen());
+		} else {
+			System.out.println("Registration Error.");
+			
+			// Set the next state
+			setNextState(new AdminAccountSetupState());
+		}
 		
 		// Persist the changes.
 		usrMng.save();
-		
-		// Set the next state
-		setNextState(new EntryScreen());
 	}
 
 }

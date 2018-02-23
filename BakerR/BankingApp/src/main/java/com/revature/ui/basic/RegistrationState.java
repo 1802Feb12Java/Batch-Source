@@ -20,6 +20,7 @@ public class RegistrationState extends DisplayState {
 		Scanner scan = new Scanner(new UnclosableInputStream(System.in));
 		
 		// Choose account type
+		System.out.println("Registration");
 		Integer choice = null;
 		do {
 			System.out.print(
@@ -68,8 +69,16 @@ public class RegistrationState extends DisplayState {
 		usr.setFirstName(fName);
 		usr.setLastName(lName);
 		
+		
 		// Register the user
-		usrMng.registerUser(usr);
+		if(usrMng.registerUser(usr)) {
+			System.out.println("Registration Successful. User ID: " + usr.getId());
+		} else {
+			System.out.println("Registration Error.");
+		}
+
+		// Save
+		UserManager.getInstance().save();
 		
 		// Set the next state
 		setNextState(new EntryScreen());

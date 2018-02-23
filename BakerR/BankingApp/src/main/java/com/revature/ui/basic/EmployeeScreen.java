@@ -43,6 +43,10 @@ public class EmployeeScreen extends DisplayState {
 			} else if(cmdSplit[0].equals("exit")) {
 				exit(cmdSplit);
 				break;
+			} else if(cmdSplit[0].equals("stat")) {
+				stat(cmdSplit);
+			} else if(cmdSplit[0].equals("lscmd")) {
+				lscmd(cmdSplit);
 			} else {
 				System.out.println("Unknown command.");
 				continue;
@@ -51,7 +55,29 @@ public class EmployeeScreen extends DisplayState {
 		
 		userIn.close();
 	}
+	
 
+	public void lscmd(String[] args) {
+		System.out.println("deposit, withdraw, transfer, lsacct, lsusr, logout, exit");
+	}
+	
+	protected void stat(String[] args) {
+		// Print out user info
+		User self = SessionManager.getInstance().getCurrentUser();
+		System.out.println("User ID: " + self.getId());
+		
+		// Create name
+		String name;
+		if(self.getFirstName().matches("\\s*")) {
+			name = self.getFirstName().trim();
+		} else if(self.getLastName().matches("\\s*")) {
+			name = self.getFirstName().trim();
+		} else {
+			name = self.getLastName().trim() + ", " + self.getFirstName().trim();
+		}
+		
+		System.out.println("Name: " + name);
+	}
 	
 	protected void deposit(String[] args) {
 		AccountManager acctMng = AccountManager.getInstance();
@@ -105,7 +131,7 @@ public class EmployeeScreen extends DisplayState {
 				System.out.println("The destination account does not exist.");
 				return;
 			} else if(amt < 0.0 || acctMng.getAccount(fromAcctId).getBalance() < amt) {
-				System.out.println("Withdrawal cannot be negative or over your balance.");
+				System.out.println("Withdrawal cannot be negative or over the source account balance.");
 				return;
 			}
 			
@@ -126,7 +152,7 @@ public class EmployeeScreen extends DisplayState {
 				UserManager usrMng = UserManager.getInstance();
 				User u = usrMng.getUser(id);
 				System.out.print("[" + u.getId() + "]: " + 
-				u.getLastName() + ", " + u.getFirstName() + ";");
+				u.getLastName() + ", " + u.getFirstName() + "; ");
 			});
 			System.out.println();
 		});
