@@ -16,18 +16,14 @@ public class Customer implements Serializable {
 	private String city;
 	private String state;
 	private String phoneNumber;
-	private boolean jointAccountHolder;
-	private boolean accountHolder;
+	private String holdsJointAccountWith = null;
+	private boolean jointAccountHolder = false;
+	private boolean accountHolder = false;
+	private boolean applyingForJoint = false;
+	private boolean applyingForSavings = false;
 
 	public Customer() {
 		super();
-		this.jointAccountHolder = false;
-		this.accountHolder = false;
-	}
-	
-	public Customer(String userName) {
-		super();
-		this.userName = userName;
 	}
 	
 	public String getUserName() {
@@ -101,8 +97,7 @@ public class Customer implements Serializable {
 	public void setJointAccountHolder(boolean jointAccountHolder) {
 		this.jointAccountHolder = jointAccountHolder;
 	}
-	
-	
+		
 	public boolean isAccountHolder() {
 		return accountHolder;
 	}
@@ -111,10 +106,36 @@ public class Customer implements Serializable {
 		this.accountHolder = accountHolder;
 	}
 
+	public boolean isApplyingForJoint() {
+		return applyingForJoint;
+	}
+
+	public void setApplyingForJoint(boolean applyingForJoint) {
+		this.applyingForJoint = applyingForJoint;
+	}
+
+	public boolean isApplyingForSavings() {
+		return applyingForSavings;
+	}
+
+	public void setApplyingForSavings(boolean applyingForSavings) {
+		this.applyingForSavings = applyingForSavings;
+	}
+	
+	public String getHoldsJointAccountWith() {
+		return holdsJointAccountWith;
+	}
+
+	public void setHoldsJointAccountWith(String holdsJointAccountWith) {
+		this.holdsJointAccountWith = holdsJointAccountWith;
+	}
+	
 	@Override
 	public String toString() {
 		return "User name:  " + userName + "\nName:  " + firstName + " "+ lastName + 
 				"\nAddress:  " + streetAddress + "\nCity:  " + city + "\nState: " + state
 				+ "\nTelephone number:  " + phoneNumber;
 	}
+
+
 }

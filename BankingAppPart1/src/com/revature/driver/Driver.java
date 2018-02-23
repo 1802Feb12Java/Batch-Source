@@ -42,9 +42,8 @@ public class Driver {
 		Customer customer = null;
 		Employee employee = null;
 		Admin admin = null;
+		Account newAccount = null;
 		char userType = 'n';
-		char accountType = 'n';
-		boolean applyingForJointAccount = false;
 		boolean customerPending = false;
 		
 		//login and validation variables
@@ -329,12 +328,30 @@ public class Driver {
 								}catch(Exception e) {
 									System.out.println("Please enter an appropriate selection");
 								}
+							
 							getInput.nextLine();
 							
-							//customer opted for joint account
-							if(option == 2) {
-								customer.setJointAccountHolder(true);
-							}
+							switch(option) {
+							case 1:
+								customer.setApplyingForJoint(false); 
+								customer.setApplyingForSavings(false);
+								break;
+								
+							case 2:
+								customer.setApplyingForJoint(true);
+								customer.setApplyingForSavings(false);
+								break;
+								
+							case 3:
+								customer.setApplyingForJoint(false);
+								customer.setApplyingForSavings(true);
+								break;
+								
+							case 4:
+								customer.setApplyingForJoint(true);
+								customer.setApplyingForSavings(true);
+								break;
+							}//end account type switch
 							
 							for(Customer current : pendingRequests) {
 								if(current.equals(customer)) {
@@ -342,13 +359,15 @@ public class Driver {
 								}
 							}
 							
+							//if the customer already has already applied for an account, they must await approval
 							if(customerPending) {
 								System.out.println("You are already awaiting account approval");
 							}
 							
-							else {
+							//otherwise, add the customer to the pending list
+							else {								
 								pendingRequests.add(customer);
-							}
+							}//end account request else
 
 							option = 0;
 							break;
@@ -357,6 +376,9 @@ public class Driver {
 							//List customer's accounts
 							if(!customer.isAccountHolder()) {
 								System.out.println("You currently have no open accounts");
+								if(customer.getUserName() == "js") {
+									System.out.println("You suck, Jerry.");
+								}
 							}
 							
 							option = 0;
@@ -423,9 +445,33 @@ public class Driver {
 	
 							case 3:
 								//View pending account applications
-								userName = Pending.view(pendingRequests, getInput);
+								customer = Pending.view(pendingRequests, getInput);
 								
 								//if applicable, create the approved account
+								if(customer != null) {
+									//CHECKING
+									//Regular checking
+									if(!customer.isApplyingForSavings() &&
+											!customer.isApplyingForJoint()) {
+										newAccount = new Account(customer.getUserName(), "Checking");
+									}
+									//Joint checking
+									if(!customer.isApplyingForSavings()){
+										newAccount = new Account(customer.getUserName(), "Checking",
+												customer.getHoldsJointAccountWith());
+									}
+									
+									//SAVINGS
+									//Regular savings
+									if(!customer.isApplyingForJoint()) {
+										newAccount = new Account(customer.getUserName(), "Savings");
+									}
+									//Joint savings
+									else {
+										newAccount = new Account(customer.getUserName(), "Savings",
+												customer.getHoldsJointAccountWith());
+									}
+								}
 								option = 0;
 								break;
 	
@@ -464,12 +510,8 @@ public class Driver {
 
 						case 3:
 							//View pending account applications
-							userName = Pending.view(pendingRequests, getInput);
+							customer = Pending.view(pendingRequests, getInput);
 							
-							//if applicable, create the approved account
-							if(userName != null) {
-								accountsList.add(new Account(userName, accountType));
-							}
 							option = 0;
 							break;
 

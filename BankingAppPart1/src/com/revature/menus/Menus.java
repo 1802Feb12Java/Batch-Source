@@ -48,13 +48,14 @@ public class Menus {
 		System.out.println("  2.  View customer account");
 		System.out.println("  3.  View pending account applications");
 		System.out.println("  4.  Modify accounts");
-		System.out.println("  5.  Exit the system");
-		
+		System.out.println("  5.  Exit the system");	
 	}
 	
 	public static void displayAccountCreationMenu() {
 		System.out.println();
-		System.out.println("1.  Standard Account");
-		System.out.println("2.  Joint Account");
+		System.out.println("1.  Standard Checking Account");
+		System.out.println("2.  Joint Checking Account");
+		System.out.println("3.  Standard Savings Account");
+		System.out.println("4.  Joint Savings Account");
 	}
 }

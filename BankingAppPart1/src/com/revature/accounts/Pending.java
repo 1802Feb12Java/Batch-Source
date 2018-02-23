@@ -6,12 +6,11 @@ import java.util.Scanner;
 import com.revature.users.Customer;
 
 public class Pending {
-	public static String view(ArrayList<Customer> pending, Scanner getInput) {
+	public static Customer view(ArrayList<Customer> pending, Scanner getInput) {
 		int option = 0;
 		
 		if(pending.isEmpty()) {
 			System.out.println("There are no pending accounts at this time");
-			return null;
 		}
 		
 		else {
@@ -31,7 +30,7 @@ public class Pending {
 					getInput.nextLine();
 						
 					if(option == 1) {
-						return current.getUserName();
+						return current;
 					}
 						
 					if(option == 2) {

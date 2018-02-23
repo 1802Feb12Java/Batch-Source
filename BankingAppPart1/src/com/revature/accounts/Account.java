@@ -8,7 +8,7 @@ public class Account {
 	private boolean jointAccount = false;
 	private boolean goodStanding = true;
 	private static int accountNumber = 10000;
-	private char accountType;
+	private String accountType;
 	private String primaryAccountHolder = null;
 	private String secondaryAccountHolder = null;
 	
@@ -16,14 +16,14 @@ public class Account {
 		super();
 	}
 	
-	public Account(String primaryAccountHolder, char accountType) {
+	public Account(String primaryAccountHolder, String accountType) {
 		super();
 		this.primaryAccountHolder = primaryAccountHolder;
 		this.accountType = accountType;
 
 	}
 	
-	public Account(String primaryAccountHolder, char accountType, String secondaryAccountHolder) {
+	public Account(String primaryAccountHolder, String accountType, String secondaryAccountHolder) {
 		this(primaryAccountHolder, accountType);
 		this.secondaryAccountHolder = secondaryAccountHolder;
 		this.jointAccount = true;
@@ -88,11 +88,11 @@ public class Account {
 		Account.accountNumber = accountNumber;
 	}
 
-	public char getAccountType() {
+	public String getAccountType() {
 		return accountType;
 	}
 
-	public void setAccountType(char accountType) {
+	public void setAccountType(String accountType) {
 		this.accountType = accountType;
 	}
 
