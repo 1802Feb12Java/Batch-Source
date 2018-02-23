@@ -17,6 +17,7 @@
 *.zip
 *.tar.gz
 *.rar
+C:\Users\scott\OneDrive\Documents\RevatureRepository\Batch-Source\BankingAppPt2\src\main\java\com\revature\BankingAppPt2\credentials.java
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
