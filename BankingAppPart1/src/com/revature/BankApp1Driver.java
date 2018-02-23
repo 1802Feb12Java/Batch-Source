@@ -28,6 +28,8 @@ public class BankApp1Driver {
 			userType = scan.nextLine();
 		}
 
+		//TODO: (low priority) change all checks like the one above to use .toUppercase(), remove lowercase from valid string arrays
+		
 		File fileAcc = new File("AccountsList.txt");
 		File fileCust = new File("CustomersList.txt");
 		ArrayList<Account> allAccCopy = null;
@@ -74,7 +76,7 @@ public class BankApp1Driver {
 				} while(!endChoice.equals("quit"));
 				break;
 		}
-		System.out.println("\nThanks for using Trevor's banking app!");
+		System.out.println("\nThanks for using Trevor's banking app!\nCome again soon!\n");
 		
 		try {
 			FileOutputStream fosAcc = new FileOutputStream(fileAcc);
@@ -90,7 +92,6 @@ public class BankApp1Driver {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		System.out.println("Check out \"AccountsList.txt\" and \"CustomersList.txt\" for some garbled ArrayLists! :)");
 		
 		scan.close();
 	}
@@ -177,6 +178,7 @@ public class BankApp1Driver {
 				return "quit";
 			case "A":
 			case "a":
+				//TODO: Add log statements to each of these cases so there's only one for transfer, withdraw, deposit, etc
 				System.out.print("Would you like to add anyone else to this account? Please type Y or N: ");
 				String addAcc = scan.nextLine();
 				while(!(addAcc.equals("y") || addAcc.equals("n") || addAcc.equals("Y") || addAcc.equals("N"))) {	
@@ -344,6 +346,7 @@ public class BankApp1Driver {
 			case "Ra":
 			case "rA":
 			case "ra":
+				//TODO: Add log statements to each of these cases so there's only one for transfer, withdraw, deposit, etc
 				System.out.print("Available account ID's: ");
 				for(Account acc : allAccounts) {
 					System.out.print(acc.getAccountID() + " ");
@@ -432,6 +435,7 @@ public class BankApp1Driver {
 			case "Ra":
 			case "rA":
 			case "ra":
+				//TODO: Add log statements to each of these cases so there's only one for transfer, withdraw, deposit, etc
 				System.out.print("Available account ID's: ");
 				for(Account acc : allAccounts) {
 					System.out.print(acc.getAccountID() + " ");
