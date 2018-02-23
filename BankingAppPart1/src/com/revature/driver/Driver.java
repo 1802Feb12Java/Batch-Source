@@ -33,8 +33,8 @@ public class Driver {
 		HashMap<String, Admin> adminsMap = new HashMap<>();
 		HashMap<String, Employee> employeesMap = new HashMap<>();
 		HashMap<String, Customer> customersMap = new HashMap<>();
-		HashMap<String, List> accountsMap = new HashMap<>();
-		ArrayList<Account> accounts = new ArrayList<>();
+		HashMap<String, ArrayList<Account>> accountsMap = new HashMap<>();
+		ArrayList<Account> accountsList = new ArrayList<>();
 		ArrayList<Account> customerAccounts = new ArrayList<>();
 		ArrayList<Customer> pendingRequests = new ArrayList<>();
 		
@@ -43,6 +43,8 @@ public class Driver {
 		Employee employee = null;
 		Admin admin = null;
 		char userType = 'n';
+		char accountType = 'n';
+		boolean applyingForJointAccount = false;
 		boolean customerPending = false;
 		
 		//login and validation variables
@@ -465,7 +467,9 @@ public class Driver {
 							userName = Pending.view(pendingRequests, getInput);
 							
 							//if applicable, create the approved account
-							
+							if(userName != null) {
+								accountsList.add(new Account(userName, accountType));
+							}
 							option = 0;
 							break;
 

@@ -1,11 +1,33 @@
 package com.revature.accounts;
 
+import java.util.ArrayList;
+
 public class Account {
-	private double balance;
-	private boolean active;
-	private boolean jointAccount;
-	private int accountNumber;
-	private String userName;
+	private double balance = 25.00;
+	private boolean active = true;
+	private boolean jointAccount = false;
+	private boolean goodStanding = true;
+	private static int accountNumber = 10000;
+	private char accountType;
+	private String primaryAccountHolder = null;
+	private String secondaryAccountHolder = null;
+	
+	public Account() {
+		super();
+	}
+	
+	public Account(String primaryAccountHolder, char accountType) {
+		super();
+		this.primaryAccountHolder = primaryAccountHolder;
+		this.accountType = accountType;
+
+	}
+	
+	public Account(String primaryAccountHolder, char accountType, String secondaryAccountHolder) {
+		this(primaryAccountHolder, accountType);
+		this.secondaryAccountHolder = secondaryAccountHolder;
+		this.jointAccount = true;
+	}
 	
 	public void withdraw(double amount) {
 		balance -= amount;
@@ -20,6 +42,12 @@ public class Account {
 		destination.setBalance(destination.getBalance() + amount);		
 	}
 
+	public void listAccounts(ArrayList<Account> accounts) {
+		for (Account current : accounts) {
+			current.toString();
+		}
+	}
+		
 	public double getBalance() {
 		return balance;
 	}
@@ -36,14 +64,6 @@ public class Account {
 		this.active = active;
 	}
 
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-
 	public boolean isJointAccount() {
 		return jointAccount;
 	}
@@ -52,13 +72,53 @@ public class Account {
 		this.jointAccount = jointAccount;
 	}
 
-	public int getAccountNumber() {
+	public boolean isGoodStanding() {
+		return goodStanding;
+	}
+
+	public void setGoodStanding(boolean goodStanding) {
+		this.goodStanding = goodStanding;
+	}
+
+	public static int getAccountNumber() {
 		return accountNumber;
 	}
 
-	public void setAccountNumber(int accountNumber) {
-		this.accountNumber = accountNumber;
+	public static void setAccountNumber(int accountNumber) {
+		Account.accountNumber = accountNumber;
 	}
-	
+
+	public char getAccountType() {
+		return accountType;
+	}
+
+	public void setAccountType(char accountType) {
+		this.accountType = accountType;
+	}
+
+	public String getPrimaryAccountHolder() {
+		return primaryAccountHolder;
+	}
+
+	public void setPrimaryAccountHolder(String primaryAccountHolder) {
+		this.primaryAccountHolder = primaryAccountHolder;
+	}
+
+	public String getSecondaryAccountHolder() {
+		return secondaryAccountHolder;
+	}
+
+	public void setSecondaryAccountHolder(String secondaryAccountHolder) {
+		this.secondaryAccountHolder = secondaryAccountHolder;
+	}
+
+	@Override
+	public String toString() {
+		return "Account balance: " + balance + "\nAccount active: " + active + "\nJoint account: " + jointAccount
+				+ "\nAccount in good standing: " + goodStanding + "\nAccount type: " + accountType + 
+				"Primary account holder: " + primaryAccountHolder + "\nSecondary Account Holder: " 
+				+ secondaryAccountHolder;
+	}
+
 	
 }
