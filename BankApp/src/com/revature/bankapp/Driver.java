@@ -1,9 +1,15 @@
 package com.revature.bankapp;
 
+
+import org.json.*;
+
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.List;
 import java.io.FileWriter;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.File;
 public class Driver {
 
 	static ArrayList<Customer> customers = new ArrayList<Customer>();
@@ -54,9 +60,22 @@ public class Driver {
 		
 	}
 	
-	static void save()
+	static String getData()
 	{
+		String data = new String();
+		try {
+			FileReader reader = new FileReader("Data.txt");
+			int i;
+			while ( (i=reader.read()) != -1)
+				data = data+(char)i;
+			reader.close();
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
+		return data;
 	}
 	
 	public static void main (String[] args)
@@ -78,7 +97,9 @@ public class Driver {
 		double amount;
 		Integer source;
 		Integer dest;
-
+		
+		temp = getData();
+		System.out.println(temp);
 		while (true)
 		{
 	
@@ -335,11 +356,13 @@ public class Driver {
 			{
 				allData.add(c.toString());
 			}
+			String dataout = new String();
+			dataout = allData.toString();
 			try {
 				FileWriter writer = new FileWriter("Data.txt");
-				for (String str: allData)
+				for (Customer c: customers)
 				{
-					writer.write(str);
+					writer.write(dataout);
 				}
 				writer.close();
 			} catch (IOException e) {
