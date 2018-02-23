@@ -116,15 +116,11 @@ public class Bank implements Serializable {
 		Customer customer = null;
 		System.out.println(customers.toString());
 		for (Customer customer2: customers) {
-			System.out.println(customer2.getID() + " vs "+ id);
 			if(customer2.getID() == id) {
 				customer = customer2;
-				System.out.println("----------Found Customer------------");
 				break;
 			}
 		}
-		if(customer==null)
-			System.out.println("----------Did not Find Customer------------");
 		return customer;
 	}
 	public Account getAccountByAccountNumber(int accountNumber) {
@@ -211,12 +207,12 @@ public class Bank implements Serializable {
 		
 		Application app = null;
 		if (secondaryCustomer !=null) {
-			app = new Application(5000000+this.numApplications, primaryCustomer, secondaryCustomer);
+			app = new Application(5000000+this.getNumApplications(), primaryCustomer, secondaryCustomer);
 			primaryCustomer.add(app);
 			secondaryCustomer.add(app);
 		}
 		else {
-			app = new Application(5000000+this.numApplications, primaryCustomer, null);
+			app = new Application(5000000+this.getNumApplications(), primaryCustomer, null);
 			primaryCustomer.add(app);
 		}
 		//this.addNumApplications();
