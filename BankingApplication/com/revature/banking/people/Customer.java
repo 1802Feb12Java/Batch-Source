@@ -38,7 +38,7 @@ public class Customer extends Person {
 
 	@Override
 	public String toString() {
-		return "Customer \n\t[bankAccountId=" + bankAccountId + "\n\t" + super.toString() + "]";
+		return super.toString() + "\nCustomer [bankAccountId=" + bankAccountId + "]";
 	}
 
 }

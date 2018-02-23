@@ -38,14 +38,14 @@ public class Driver {
 			do {
 				// Ask User Log in or Register
 				drawLoginCow();
-				System.out.println("\t+============================+");
-				System.out.println("\t|          MAIN MENU         |");
-				System.out.println("\t+============================+");
-				System.out.println("\t| Options:                   |");
-				System.out.println("\t|    0. to quit              |");
-				System.out.println("\t|    1. to login             |");
-				System.out.println("\t|    2. to create an account |");
-				System.out.println("\t+============================+");
+				System.out.println("+============================+");
+				System.out.println("|          MAIN MENU         |");
+				System.out.println("+============================+");
+				System.out.println("| Options:                   |");
+				System.out.println("|    0. to quit              |");
+				System.out.println("|    1. to login             |");
+				System.out.println("|    2. to create an account |");
+				System.out.println("+============================+");
 				String choice = scan.nextLine();
 				switch (choice) {
 				case "0":
@@ -229,7 +229,6 @@ public class Driver {
 
 		// add the new Person to the datastore
 		People.addPersonToFile(p);
-		System.out.println("Thank you, your account has been created\n");
 
 		return true;
 	}
@@ -244,7 +243,7 @@ public class Driver {
 		}
 		for (Request r : reqs) {
 			System.out.println(r.toString());
-			System.out.println("\n1 to approve\n2 to deny\n3 to skip\n0 to go back");
+			System.out.println("1 to approve\n2 to deny\n3 to skip\n0 to go back");
 			String select = scan.nextLine();
 			switch (select) {
 			case "0":
@@ -268,7 +267,7 @@ public class Driver {
 		// View customer info
 		System.out.println("Enter Customer Name");
 		String customerName = scan.nextLine();
-		System.out.println("\n1 to view account info\n2 to view balances\n3 personal info");
+		System.out.println("1 to view account info\n2 to view balances\n3 personal info");
 		String option = scan.nextLine();
 		Person person = People.getPersonByName(customerName);
 		switch (option) {
@@ -333,7 +332,7 @@ public class Driver {
 				BankAccounts.updateAccountFromFile(customerAccount);
 				break;
 			case "4":
-				System.out.println("\tBalance = $" + customerAccount.getBalance());
+				System.out.println(customerAccount.getBalance());
 				break;
 			case "0":
 				// save banking changes

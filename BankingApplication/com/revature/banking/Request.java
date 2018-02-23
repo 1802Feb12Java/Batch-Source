@@ -5,6 +5,9 @@ import java.io.Serializable;
 import com.revature.banking.people.Customer;
 import com.revature.banking.people.People;
 
+import src.main.java.com.revature.banking.BankAccount;
+import src.main.java.com.revature.banking.BankAccounts;
+
 /**
  * Class for creating account requests
  */
@@ -63,8 +66,8 @@ public class Request implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Request \n\t[userId=" + userId + "\n\tcustomer=" + customer + "\n\tjointAccountNumber="
-				+ jointAccountNumber + "]";
+		return "Request [userId=" + userId + "\ncustomer=" + customer + "\njointAccountNumber=" + jointAccountNumber
+				+ "]";
 	}
 
 }

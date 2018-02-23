@@ -57,8 +57,8 @@ public abstract class Person implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Person \n\t[name=" + name + "\n\taddress=" + address + "\n\tbirthdate=" + birthdate + "\n\tpersonId="
-				+ personId + "]";
+		return "Person [name=" + name + "\naddress=" + address + "\nbirthdate=" + birthdate + "\npersonId=" + personId
+				+ "]";
 	}
 
 }

@@ -14,9 +14,11 @@ import com.revature.database.DataStore;
 public class BankAccount implements Transactional<Double> {
 
 	// private static final Logger logger = LogManager.getLogger(BankAccount.class);
-	private static final long serialVersionUID = -7726335122582693123L;
-	private static final DecimalFormat MONEY_FORMAT = new DecimalFormat("##.00");
+	private static final long serialVersionUID = 3L;
 	private BigDecimal balance;
+	private static final DecimalFormat MONEY_FORMAT = new DecimalFormat("##.00");
+
+	// PK
 	private final String accountId = DataStore.generateUID();
 
 	public BankAccount(Double balance) {
@@ -72,14 +74,6 @@ public class BankAccount implements Transactional<Double> {
 		return transfer(new BigDecimal(amount), BankAccounts.findAccount(accountName));
 	}
 
-	public void closeAccount() {
-		try {
-			finalize();
-		} catch (Throwable e) {
-			e.printStackTrace();
-		}
-	}
-
 	private boolean transfer(BigDecimal amount, BankAccount recipientAccount) {
 		if (withdraw(amount))
 			return recipientAccount.deposit(amount);
@@ -104,6 +98,14 @@ public class BankAccount implements Transactional<Double> {
 		return accountId;
 	}
 
+	public void closeAccount() {
+		try {
+			finalize();
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+	}
+
 	@Override
 	protected void finalize() {
 		// logger.info("Closed account " + toString());
@@ -113,7 +115,7 @@ public class BankAccount implements Transactional<Double> {
 
 	@Override
 	public String toString() {
-		return "BankAccount \n\t[accountId=" + accountId + "\n\tbalance=" + balance + "]";
+		return "BankAccount [balance=" + balance + ", accountId=" + accountId + "]";
 	}
 
 }

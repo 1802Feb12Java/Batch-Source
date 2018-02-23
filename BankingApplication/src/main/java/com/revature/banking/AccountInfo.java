@@ -21,7 +21,7 @@ public class AccountInfo {
 
 	@Override
 	public String toString() {
-		return "AccountInfo [accountId=" + accountId + ", personId=" + personId + "]";
+		return "AccountInfo \n\t[accountId=" + accountId + "\npersonId=" + personId + "]";
 	}
 
 }

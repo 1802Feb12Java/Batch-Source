@@ -40,6 +40,6 @@ public class User implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Users \n\t[username=" + username + "\n\tpassword=" + password + "\n\tpersonID=" + personID + "]";
+		return "Users [username=" + username + ", password=" + password + ", personID=" + personID + "]";
 	}
 }
