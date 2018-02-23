@@ -382,6 +382,10 @@ public class Driver {
 								System.out.println();
 							}
 							
+							else {
+								Account.listAccounts(accountsMap.get(userName), userName);
+							}
+							
 							option = 0;
 							break;
 							
@@ -450,8 +454,8 @@ public class Driver {
 								
 								//if applicable, create the approved account
 								if(customer != null) {
-									accountsMap = Account.createAccount(customer);
-									System.out.println("Account created:");
+									accountsMap = Account.createAccount(customer, accountsMap);
+									System.out.println("Account created.");
 
 								}
 								option = 0;
@@ -493,6 +497,13 @@ public class Driver {
 						case 3:
 							//View pending account applications
 							customer = Pending.view(pendingRequests, getInput);
+
+							//if applicable, create the approved account
+							if(customer != null) {
+								accountsMap = Account.createAccount(customer, accountsMap);
+								System.out.println("Account created.");
+
+							}
 							
 							option = 0;
 							break;

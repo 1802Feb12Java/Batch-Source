@@ -2,6 +2,7 @@ package com.revature.accounts;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 import com.revature.users.Customer;
 
@@ -10,7 +11,7 @@ public class Account {
 	private boolean active = true;
 	private boolean jointAccount = false;
 	private boolean goodStanding = true;
-	private static int accountNumber = 10000;
+	private int accountNumber = new Random().nextInt(1000) + 10000;
 	private String accountType;
 	private String primaryAccountHolder = null;
 	private String secondaryAccountHolder = null;
@@ -32,11 +33,22 @@ public class Account {
 		this.jointAccount = true;
 	}
 
-	public static HashMap<String, ArrayList<Account>> createAccount(Customer customer) {
-		HashMap<String, ArrayList<Account>> accountsMap = new HashMap<>();
-		ArrayList<Account> accountsList = new ArrayList<>();
+	public static void listAccounts(ArrayList<Account> accountList, String userName) {
+		for(Account current : accountList) {
+			System.out.println("Account: " + current.getAccountNumber() + "  " + current.getAccountType() +
+					"  " + "Balance: " + current.getBalance());
+		}
+	}
+	
+	public static HashMap<String, ArrayList<Account>> createAccount(Customer customer, 
+			HashMap<String, ArrayList<Account>> accountsMap) {
 		Account newAccount = null;
 		
+		//get the customer's account list
+		ArrayList<Account>accountsList = accountsMap.get(customer.getUserName());
+		if(accountsList == null) {
+			accountsList = new ArrayList<>();
+		}
 		//CHECKING
 		//Regular checking
 		if(!customer.isApplyingForSavings() &&
@@ -44,13 +56,12 @@ public class Account {
 			newAccount = new Account(customer.getUserName(), "Checking");
 			
 			//add the new account to the accounts list
+			System.out.println("Adding account to list");
 			accountsList.add(newAccount);
-			
-			//add the list to the account map
-			accountsMap.put(customer.getUserName(), accountsList);
+			System.out.println("Added");
 		}
 		//Joint checking
-		if(!customer.isApplyingForSavings()){
+		else if(!customer.isApplyingForSavings()){
 			newAccount = new Account(customer.getUserName(), "Checking",
 					customer.getHoldsJointAccountWith());
 			
@@ -63,7 +74,7 @@ public class Account {
 		
 		//SAVINGS
 		//Regular savings
-		if(!customer.isApplyingForJoint()) {
+		else if(!customer.isApplyingForJoint()) {
 			newAccount = new Account(customer.getUserName(), "Savings");
 			
 			//add the new account to the accounts list
@@ -84,6 +95,7 @@ public class Account {
 			accountsMap.put(customer.getUserName(), accountsList);
 		}
 
+		customer.setAccountHolder(true);
 		return accountsMap;
 	}
 	
@@ -138,12 +150,12 @@ public class Account {
 		this.goodStanding = goodStanding;
 	}
 
-	public static int getAccountNumber() {
+	public int getAccountNumber() {
 		return accountNumber;
 	}
 
-	public static void setAccountNumber(int accountNumber) {
-		Account.accountNumber = accountNumber;
+	public void setAccountNumber(int accountNumber) {
+		this.accountNumber = accountNumber;
 	}
 
 	public String getAccountType() {

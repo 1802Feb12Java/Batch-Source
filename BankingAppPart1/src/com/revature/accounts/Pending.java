@@ -30,6 +30,7 @@ public class Pending {
 					getInput.nextLine();
 						
 					if(option == 1) {
+						pending.remove(current);
 						return current;
 					}
 						
