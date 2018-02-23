@@ -1,53 +1,62 @@
---Q1 
+--2.1 
 Select * from Employee;                                                          
---Q2                                                       
+                                                      
 Select * from Employee where LastName=’King’;
---Q3                                                       
+                                                    
 Select * from Employee where FirstName=’Andrew’ AND ReportsTo IS NULL;
---Q4                                                       
+
+--2.2                                                      
 Select Title from Album ORDER BY Title Desc;
---Q5                                                       
-Select FirstName from Customer ORDER BY city asc;                                                      
---Q6                                                       
+                                                      
+Select FirstName from Customer ORDER BY city asc;
+
+--2.3                                                       
 INSERT ALL 
 INTO Genre(GenreID,Name) VALUES (26,'Music For Babies') 
 INTO Genre(GenreID,Name) VALUES (27,'Babies for Music')
 SELECT 1 FROM DUAL;                                                     
---Q7  
+
 INSERT ALL 
 INTO Employee(EmployeeID,LastName,FirstName) VALUES (9,'Bob','Dylan') 
 INTO Employee(EmployeeID,LastName,FirstName) VALUES (10,'Kanye','West')
 SELECT 1 FROM DUAL;                                                       
---Q8
+
 INSERT ALL 
 INTO Customer(CustomerID,FirstName,LastName,Email) VALUES (60,'Bob','Dylan','bobdylan@hotmail.com') 
 INTO Customer(CustomerID,FirstName,LastName,Email) VALUES (61,'Kanye','West','yeaboi@gmail.com')
-SELECT 1 FROM DUAL;                                                    
---Q9 
+SELECT 1 FROM DUAL;  
+
+--2.4
 UPDATE Customer SET FirstNAME='Robert', LastName='Walter' WHERE FirstName='Aaron' AND LastName='Mitchell';                                             
---Q10                                                      
+                                                      
 UPDATE Artist SET Name='CCR' WHERE Name='Creedence Clearwater Revival';
---Q11                                                      
-Select * From Invoice Where BILLINGADDRESS LIKE 'T%';                                                        
---Q12                                                      
+
+--2.5                                                      
+Select * From Invoice Where BILLINGADDRESS LIKE 'T%'; 
+
+--2.6                                                     
 Select * from Invoice Where Total > 15 AND Total < 50;                                                     
---Q13 
+
 Select * from Employee where HireDate > '01-JUN-03' and HireDate < '01-MAR-04';
---Q14                                                      
+
+--2.7                                                      
 ALTER TABLE InvoiceLine
 DROP CONSTRAINT FK_INVOICELINEINVOICEID;
 ALTER TABLE Invoice
 DROP CONSTRAINT FK_INVOICECUSTOMERID;
 Delete From Customer where FirstName='Robert' and LastName='Walter';
---Q15
+
+--3.1
 Select CURRENT_TIMESTAMP from DUAL;                                           
---Q16
+
 Select LENGTH(Name) from MediaType;
---Q17                                                      
+
+--3.2                                                      
 Select AVG(Total) from INVOICE;
---Q18                                                      
+                                                    
 Select Name from Track Order by UNITPRICE Desc Fetch First 1 Rows Only;
---Q19                                                      
+
+--3.3                                                      
 Create or Replace Function AveragePrice
 Return Number AS
 Average Number;
@@ -57,7 +66,8 @@ return Average;
 End;
 
 Select AveragePrice from Dual;
---Q20    
+
+--3.4
 Create or Replace Function Above68(Bday in Date)
 Return Number AS
 Bool Number;
@@ -69,31 +79,55 @@ return 0;
 End if;
 End;
 
-Select FirstName,Birthdate from Employee where Above68(Birthdate)=1;                                                        
---Q21                                                      
+Select FirstName,Birthdate from Employee where Above68(Birthdate)=1;    
 
---Q22                                                      
-                                                           
---Q23                                                      
-                                                           
---Q24
-
-
---Q25
-
---Q26
-
---Q27
-Create OR Replace Procedure NameandComp (CustID Int)
-As
-custfname OUT varchar2(80 Byte);
-custlname OUT varchar2(80 BYTE);
-custcomp OUT varchar2(80 BYTE);
-Begin
-Select FirstName,LastName,Company Into custfname,custlname,custcomp from Customer where CustID=CustomerID;
+--4.1
+Create or Replace Procedure EmployeeNames
+(empcursor out sys_refcursor)
+AS BEGIN
+OPEN empcursor for 
+Select FirstName,LastName from Employee;
 End;
 
-Execute NameandComp(1);
+--4.2
+Create or Replace PROCEDURE PersonalInfo 
+(empID IN number, Fname in varchar2, Lname in varchar2) 
+AS  
+BEGIN
+UPDATE employee SET firstname= Fname, lastname = Lname  WHERE employeeid = empId; 
+END;
+
+Create or Replace PROCEDURE Managers 
+(empID IN number, FnameMan out varchar2, LnameMan out varchar2) 
+AS  
+BEGIN
+Select FirstName,LastName INTO FnameMan,LnameMan from employee 
+where employeeid=(Select reportsto from employee where employeeid=empid);
+END;
+
+--4.3
+Create or Replace PROCEDURE NameandComp
+(CustID IN number, FName out varchar2, Comp out varchar2) 
+AS  
+BEGIN
+Select FirstName,Company INTO Fname,Comp from Customer where CustomerID=Custid;
+END;
+
+--5
+Create or Replace PROCEDURE InvoicDelete
+(InvID IN number) 
+AS  
+BEGIN
+Delete From Invoice where InvoiceID=InvID;
+Commit;
+END;
+
+Create or Replace PROCEDURE NewCustomer
+AS  
+BEGIN
+Insert INTO Customer(CustomerID,FirstName,LastName,Email) VALUES (62,'Bob','Dylan','bobdylan@hotmail.com'); 
+Commit;
+END;
 
 --6.1
 Create OR Replace Trigger NewEmployee
@@ -102,31 +136,36 @@ For Each Row
 Begin
     DBMS_OUTPUT.PUT_LINE('Yeah');
 End;
---
+
 Create OR Replace Trigger NewAlbum
 After Insert On Album
 For Each Row
 Begin
     DBMS_OUTPUT.PUT_LINE('Yeah');
 End;
---
+
 Create OR Replace Trigger RemoveCustomer
 After Delete On Customer
 For Each Row
 Begin
     DBMS_OUTPUT.PUT_LINE('Yeah');
 End;
---Q31
+
+--7.1
 Select Customer.FirstName, Invoice.InvoiceID
 from Customer
 Inner Join Invoice on Invoice.CUSTOMERID=Customer.CustomerID;
---Q32
+
+--7.2
 Select Customer.CustomerID,Customer.FirstName, Customer.LastName, Invoice.InvoiceID,Invoice.total
 from Customer
 Full Outer Join Invoice on Invoice.CustomerID=Customer.CustomerID;
---Q33
+
+--7.3
 Select artist.name,album.title from Artist Right Join Album on Album.ARTISTID=Artist.ArtistID;
---Q34
+
+--7.4
 Select artist.name,album.title from artist cross join album Order by artist.name asc
---Q35
+
+--7.5
 Select * from Employee D, Employee B where D.Reportsto=B.Reportsto;
