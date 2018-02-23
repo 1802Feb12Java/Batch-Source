@@ -1,7 +1,6 @@
 package com.revature.managers;
 
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.Console;
 import java.nio.charset.Charset;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -131,11 +130,21 @@ public final class PasswordUtils {
 	
 	public static char[] promptPassword() {
 		System.out.print("Enter password: ");
+		char[] pw;
 		
-		Scanner scan = new Scanner(new UnclosableInputStream(System.in));
-		String pw = scan.nextLine();
-		scan.close();
+		Console console = System.console();
 		
-		return pw.toCharArray();
+		if(console != null) {
+			pw = console.readPassword();
+		} else {
+			Scanner scan = new Scanner(new UnclosableInputStream(System.in));
+			String pwStr = scan.nextLine();
+			scan.close();
+			pw = pwStr.toCharArray();
+		}
+		
+		
+		
+		return pw;
 	}
 }

@@ -58,7 +58,7 @@ public class EmployeeScreen extends DisplayState {
 	
 
 	public void lscmd(String[] args) {
-		System.out.println("deposit, withdraw, transfer, lsacct, lsusr, logout, exit");
+		System.out.println("stat, deposit, withdraw, transfer, lsacct, lsusr, logout, exit");
 	}
 	
 	protected void stat(String[] args) {
@@ -81,6 +81,7 @@ public class EmployeeScreen extends DisplayState {
 	
 	protected void deposit(String[] args) {
 		AccountManager acctMng = AccountManager.getInstance();
+		UserManager usrMng = UserManager.getInstance();
 		
 		try {
 			Long acctId = Long.parseLong(args[1]);
@@ -90,6 +91,12 @@ public class EmployeeScreen extends DisplayState {
 				System.out.println("Deposit cannot be negative.");
 				return;
 			}
+			
+			
+			usrMng.getUsers().stream().anyMatch((User u) -> {
+				
+				return true;
+			});
 			
 			acctMng.deposit(acctId, amt);
 		} catch(NumberFormatException ex) {

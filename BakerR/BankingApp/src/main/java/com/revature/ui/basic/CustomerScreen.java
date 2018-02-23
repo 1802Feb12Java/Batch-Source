@@ -182,6 +182,6 @@ public class CustomerScreen extends DisplayState {
 	}
 	
 	public void lscmd(String[] args) {
-		System.out.println("apply, deposit, withdraw, transfer, lsacct, logout, exit");
+		System.out.println("stat, apply, deposit, withdraw, transfer, lsacct, logout, exit");
 	}
 }
