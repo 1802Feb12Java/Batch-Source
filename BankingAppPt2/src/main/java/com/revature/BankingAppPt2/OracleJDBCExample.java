@@ -1,8 +1,5 @@
 package com.revature.BankingAppPt2;
-
-import java.sql.DriverManager;
 import java.sql.Connection;
-import java.sql.SQLException;
 
 public class OracleJDBCExample {
 
@@ -26,18 +23,7 @@ public class OracleJDBCExample {
 
         Connection connection = null;
 
-        try {
-
-            connection = DriverManager.getConnection(
-                    "jdbc:oracle:thin:@feb12usf.cxboj8vmeqoq.us-east-2.rds.amazonaws.com:1521:ORCL", "nimchimpsky", "shpongle1");
-
-        } catch (SQLException e) {
-
-            System.out.println("Connection Failed! Check output console");
-            e.printStackTrace();
-            return;
-
-        }
+        connection = DatabaseConnection.getDatabaseConnection();
 
         if (connection != null) {
             System.out.println("You made it, take control your database now!");
