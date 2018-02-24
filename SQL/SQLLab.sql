@@ -1,3 +1,6 @@
+--Chinook Lab
+--SQL homework for week two
+
 --2.1 SELECT
 SELECT * FROM EMPLOYEE;
 SELECT * FROM EMPLOYEE WHERE LASTNAME='King';
