@@ -25,6 +25,7 @@ import java.io.*;
  * 		boolean addApp(Application a) - add an App
  * 		boolean removeApp(Application a) - remove an app
 */
+
 final class Server {
 	final private String accListFileName = "AccountList.txt";
 	final private String clientListFileName = "ClientList.txt";
@@ -32,6 +33,7 @@ final class Server {
 	final private String adminListFileName = "AdminList.txt";
 	final private String appListFileName = "ApplicationList.txt";
 	
+	//using private static, don't need to re-instanciate
 	private static Scanner sc = new Scanner(System.in);
 	//Default Constructor
 	Server() {}
@@ -653,7 +655,7 @@ final class Server {
 		ArrayList<Application> appList = new ArrayList<Application>(20);
 		
 		Server s = new Server();
-		s.hardCodeBank(accountList, clientList, employeeList, adminList, appList);
+		//s.hardCodeBank(accountList, clientList, employeeList, adminList, appList);
 		
 		accountList = (ArrayList<Account>) s.readFile(s.accListFileName);
 		clientList = (ArrayList<Client>) s.readFile(s.clientListFileName);
