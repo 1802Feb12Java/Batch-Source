@@ -1,5 +1,5 @@
 -- SQL Lab
--- rollback
+-- rollback;
 SET SERVEROUTPUT ON;
 
 -- 2.1 select
@@ -244,13 +244,12 @@ END;
 /
 
 
--- 6.1 Triggers [After/For]
+-- 6.1 Triggers [After/For]:
 -- Task: After-insert trigger on employee table; fired on new record insert.
---          Trigger simply performs a commit on a new insert.
 CREATE OR REPLACE TRIGGER NEW_EMPLOYEE_TRIGGER
 AFTER INSERT ON EMPLOYEE
 BEGIN
-    COMMIT;
+    DBMS_OUTPUT.PUT_LINE('TRIGGERED EMPLOYEE AFTER INSERT');
 END;
 /
 
@@ -258,6 +257,55 @@ END;
 CREATE OR REPLACE TRIGGER UPDATE_ALBUM_TRIGGER
 AFTER UPDATE ON ALBUM
 BEGIN
-    COMMIT;
+    DBMS_OUTPUT.PUT-LINE('TRIGGERED ALBUM AFTER UPDATE');
 END;
-    
+/
+
+-- Task: After-delete trigger on CUSTOMER; fires after row deleted
+CREATE OR REPLACE TRIGGER DEL_CUSTOMER_TRIGGER
+AFTER DELETE ON CUSTOMER
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('TRIGGERED CUSTOMER AFTER DELETION');
+END;
+/
+
+
+-- 7.0 Joins
+-- 7.1 INNER JOIN
+-- Task: Inner Join -> Customers and Orders; specify customer name and invoice id
+SELECT INVO.INVOICEID, CUST.FIRSTNAME, CUST.LASTNAME
+    FROM CUSTOMER CUST
+INNER JOIN INVOICE INVO
+ON CUST.CUSTOMERID=INVO.CUSTOMERID;
+/
+
+-- 7.2 OUTER JOIN
+-- Task: Outer Join -> Customer & Invoice tables; customer first/last names, invoice id, & total 
+SELECT INVO.INVOICEID, CUST.FIRSTNAME, CUST.LASTNAME, INVO.TOTAL
+    FROM CUSTOMER CUST
+FULL JOIN INVOICE INVO
+ON CUST.CUSTOMERID=INVO.CUSTOMERID;
+/
+
+-- 7.3 RIGHT JOIN
+-- Task: Right Join -> album and artist tables; artist name & album title
+SELECT ART.NAME, ALB.TITLE
+    FROM ALBUM ALB
+RIGHT JOIN ARTIST ART
+ON ALB.ARTISTID =ART.ARTISTID;
+/
+
+-- 7.4 CROSS JOIN
+-- Task: Cross join -> album and artist; sort by artist name, ascending
+SELECT ART.NAME, ALB.TITLE
+    FROM ALBUM ALB
+CROSS JOIN ARTIST ART
+ORDER BY ART.NAME ASC;
+/
+
+-- 7.5 SELF JOIN
+-- Task: Self join -> employee table, join on REPORTSTO column
+SELECT E1.FIRSTNAME, E1.LASTNAME, E2.FIRSTNAME, E2.LASTNAME
+    FROM EMPLOYEE E1, EMPLOYEE E2
+    WHERE E1.REPORTSTO=E2.EMPLOYEEID;
+/
