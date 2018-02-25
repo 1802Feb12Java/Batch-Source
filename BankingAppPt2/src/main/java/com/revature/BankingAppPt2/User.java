@@ -1,43 +1,23 @@
 package com.revature.BankingAppPt2;
 
+import java.sql.Connection;
+
 public abstract class User {
-	private String userType;
-	private String userName;
-	private String firstName;
-	private String lastName;
+	protected String userName;
+	protected String firstName;
+	protected String lastName;
+	protected String userType;
+	protected int userId;
+	protected Connection connection;
 	
-	abstract void runMenu();
+	protected User(int userId, String userType, Connection connection) {
+		this.userId = userId;
+		this.connection = connection;
+		this.userType = userType;
+	}
 	
 	public String getUserType() {
 		return userType;
-	}
-
-	public void setUserType(String userType) {
-		this.userType = userType;
-	}
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
 	}
 
 	@Override
@@ -45,6 +25,8 @@ public abstract class User {
 		return "User [userType=" + userType + ", userName=" + userName + ", firstName=" + firstName + ", lastName="
 				+ lastName + "]";
 	}
+
+	abstract void runMenu();
 	
 	
 }

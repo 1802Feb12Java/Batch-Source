@@ -23,6 +23,7 @@ public class LoginService {
 	
 	public User logIn() {
 		String userName = null, password = null, userType = null;
+		int userId = -1;
 		//get user info
 		System.out.println("Enter your username:");
 		userName = scanner.nextLine();
@@ -31,7 +32,7 @@ public class LoginService {
 		
 		//query userAccounts database
 		PreparedStatement loginQuery = null;
-		String loginString = "SELECT userPassword, userType FROM userAccounts WHERE userName = ?";
+		String loginString = "SELECT userPassword, userType, userID FROM userAccounts WHERE userName = ?";
 		try {
 			String queryResultPassword = null;
 			loginQuery = connection.prepareStatement(loginString);
@@ -41,6 +42,7 @@ public class LoginService {
 			if (resultSet.next()) {
 				queryResultPassword = resultSet.getString(1);
 				userType = resultSet.getString(2);
+				userId = resultSet.getInt(3);
 			}
 			else {
 				//no user found
@@ -55,6 +57,7 @@ public class LoginService {
 			else {
 				System.out.println("Wrong password!");
 				logger.info("Failed log in occured with user info username:" + userName + ", password: " + password);
+				return null;
 			}
 			
 		} catch (SQLException e) {
@@ -63,20 +66,20 @@ public class LoginService {
 			System.out.println("Error. No Such User.");
 			logger.info("A non existent user tried to log in using username: " + userName);
 		}
-		return createUser(userName, userType);
+		return createUser(userId, userType);
 	}
 	
-	private User createUser(String userName, String userType) {
+	private User createUser(int userId, String userType) {
 		User user = null;
 		switch (userType) {
 		case "C":
-			user = new Customer();
+			user = new Customer(userId, userType, connection);
 			break;
 		case "E":
-			user = new Employee();
+			user = new Employee(userId, userType, connection);
 			break;
 		case "A":
-			user = new Administrator();
+			user = new Administrator(userId, userType, connection);
 			break;
 		default:
 			System.out.println("Error creating user from database.");

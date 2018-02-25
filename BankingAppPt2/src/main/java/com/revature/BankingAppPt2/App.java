@@ -1,6 +1,7 @@
 package com.revature.BankingAppPt2;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 import org.apache.log4j.Logger;
@@ -22,6 +23,7 @@ public class App
     	   try {
 			menuOption = Integer.valueOf(scanner.nextLine());
 		} catch (NumberFormatException e) {
+			System.out.println("Number conversion error in log in menu");
 			logger.error("Number conversion error in log in menu.");
 		}
     	   switch (menuOption) {
@@ -32,9 +34,20 @@ public class App
 		case 2:
 			LoginService loginService = new LoginService(connection);
 			User user = loginService.logIn();
-			user.runMenu();
+			if (user == null) {
+				break;
+			}
+			else {
+				user.runMenu();
+			}
 			break;
 		case 3:
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				System.out.println("Error closing connection");
+				logger.error(e.toString());
+			}
 			break;
 		default:
 			System.out.println("Error. Not a valid option. Please try again");

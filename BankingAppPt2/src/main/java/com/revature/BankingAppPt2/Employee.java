@@ -1,10 +1,18 @@
 package com.revature.BankingAppPt2;
 
-public class Employee extends User{
+import java.sql.Connection;
 
+public class Employee extends User{
+	private EmployeeDAO employeeDAO;
+	
+	public Employee(int userId, String userType, Connection connection) {
+		super(userId, userType, connection);
+		employeeDAO = new EmployeeDAO(connection);
+		
+	}
 	@Override
 	void runMenu() {
-		// TODO Auto-generated method stub
+		System.out.println("This is a ");
 		
 	}
 
