@@ -127,7 +127,7 @@ execute proc1(2, :refcurs);
 create or replace procedure proc1
 (idnum in int, printer out sys_refcursor) is
 begin
-  open printer for select firstname, lastname, company from customer where customerid = idnum;  --fillthe cursor with every first/last name from employee
+  open printer for select firstname, lastname, company from customer where customerid = idnum;  --fill the cursor with every first/last name from employee
   DBMS_SQL.RETURN_RESULT(printer);  --print the results
 end;
 /
