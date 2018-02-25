@@ -255,4 +255,3 @@ ORDER BY ar.name ASC;
 --7.5 SELF join--
 SELECT * FROM employee e1, employee e2
 WHERE e1.reportsto = e2.reportsto;
-EXECUTE DELETE_BY_INVOICEID(324);
