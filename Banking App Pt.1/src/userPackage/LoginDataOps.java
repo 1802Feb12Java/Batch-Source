@@ -166,8 +166,8 @@ public class LoginDataOps {
 			String[] arr = names.split(";");
 			double balance = s.nextDouble();
 			
-			String ignore = s.nextLine();
-			String ign = s.nextLine();
+			s.nextLine();
+			s.nextLine();
 			
 			String full = s.nextLine();
 			String birth = s.nextLine();	// its now reading full name*****************

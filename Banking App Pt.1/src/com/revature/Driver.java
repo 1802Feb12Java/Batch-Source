@@ -39,7 +39,7 @@ public class Driver {
 		while(true) {
 			
 			System.out.println("Are you a Customer or Employee? If your the admin, type Admin");		// identify yourself		
-			String occ = sc.next();
+			String occ = sc.nextLine();
 			
 			if(occ.equals("Employee") || occ.equals("employee")) {
 				
@@ -54,6 +54,7 @@ public class Driver {
 							+ "5.\tQuit");
 					
 					int res = sc.nextInt();
+					sc.nextLine();
 					
 					switch(res) {
 					
@@ -62,7 +63,7 @@ public class Driver {
 						int j = 0, v = 0;
 						
 						System.out.println("Provide the name under which the account is made");
-						String name = sc.next();
+						String name = sc.nextLine();
 						
 						LoginDataNode n = LoginDataOps.check(name);
 	
@@ -72,14 +73,14 @@ public class Driver {
 							continue;
 						}
 						
-						System.out.println("User "+n.fullName+"'s Account Information:");
+						System.out.println("User "+n.fullName+"'s Account Information:\n");
 						System.out.println("Username: "+n.username);
 						System.out.println("Password: "+n.password);
 						System.out.println("Account Holders: ");
 						
 						while(j < n.users.length) {
 					    	
-				    		System.out.println((n.users)[j]);
+				    		System.out.println("\t"+(n.users)[j]);
 					    	j++;
 					    }
 						
@@ -88,7 +89,7 @@ public class Driver {
 					case 2:								// Employee can review a customer's balance by looking up the node linked to the name
 						
 						System.out.println("Provide the name under which the account is made");
-						String name2 = sc.next();
+						String name2 = sc.nextLine();
 						LoginDataNode k = LoginDataOps.check(name2);
 						
 						if(k == null) {
@@ -103,7 +104,7 @@ public class Driver {
 					case 3:								// Employee can review a customer's personal info by looking up the node linked to the name
 						
 						System.out.println("Provide the name under which the account is made");
-						String name3 = sc.next();
+						String name3 = sc.nextLine();
 						LoginDataNode  i= LoginDataOps.check(name3);
 	
 						if(i == null) {
@@ -112,7 +113,7 @@ public class Driver {
 							continue;
 						}
 						
-						System.out.println("User "+i.fullName+"'s Personal Information:");
+						System.out.println("User "+i.fullName+"'s Personal Information:\n");
 						System.out.println("Full Name: "+i.fullName);
 						System.out.println("Birth date: "+i.birth);
 						System.out.println("Age: "+i.age);
@@ -183,7 +184,7 @@ public class Driver {
 								
 								String decision = null;
 								System.out.println("Would you want to approve this application?\n");		// Employee accepts or denies, after verifying details
-								decision = sc.next();
+								decision = sc.nextLine();
 								
 								if(decision.equals("yes")) {		// if employee accepts
 									
@@ -194,28 +195,30 @@ public class Driver {
 									
 									System.out.println("How much money would like to deposit");
 									double depo = scanInput.nextDouble();
-										
+									scanInput.nextLine();	
+									
 									while(depo < 0 && depo == 0) {			// error check for negative or 0 dollar amount transfers
 											
 										System.out.println("That is an invalid amount to transfer. Try Again.");
 										System.out.println("How much money would they like to initially deposit?\n");
-										depo = scanInput.nextDouble();				
+										depo = scanInput.nextDouble();
+										scanInput.nextLine();	
 									}
 									
 									System.out.println("Enter username");
-									user = scanInput.next();
+									user = scanInput.nextLine();
 								
 									System.out.println("Enter password");
-									pwd = scanInput.next();
+									pwd = scanInput.nextLine();
 									
 									while(LoginDataOps.traverse(user, pwd) != null) {		// error check for whether that login has been taken
 										
 										System.out.println("That username and password combination is taken. Try Again\n");
 										System.out.println("Enter username");
-										user = scanInput.next();
+										user = scanInput.nextLine();
 									
 										System.out.println("Enter password");
-										pwd = scanInput.next();
+										pwd = scanInput.nextLine();
 									}
 									
 									LoginDataNode temp = LoginDataOps.createNode(user, pwd, depo, users);		// node made for account with data collected
@@ -252,15 +255,15 @@ public class Driver {
 			} else if(occ.equals("Customer") || occ.equals("customer")) {
 				
 				System.out.println("Do you have an account with us?");			// if yes, then prompted to login
-				String res = sc.next(), username = null, password = null;
+				String res = sc.nextLine(), username = null, password = null;
 				
 				if(res.equals("yes")) {
 					
 					System.out.println("Username: ");
-					username = sc.next();
+					username = sc.nextLine();
 					
 					System.out.println("Password: ");
-					password = sc.next();
+					password = sc.nextLine();
 				}
 				
 				User.runThis(username, password);
@@ -270,7 +273,7 @@ public class Driver {
 				while(true) {
 					
 					System.out.println("Whose account details would you like to view or change");		// only option for admins
-					String name = sc.next();
+					String name = sc.nextLine();
 					
 					if(name.equals("quit")) {		// quit out of loop
 						
@@ -300,19 +303,19 @@ public class Driver {
 					System.out.println("Names: "+tmp.users+"\n");
 					
 					System.out.println("Would you like to edit anything?");			// admin can edit any field of info
-					String y = sc.next();
+					String y = sc.nextLine();
 					
 					if(y.equals("yes")) {		// if yes, then prompted
 						
 						System.out.println("What field would you like to edit");
-						String field = sc.next();
+						String field = sc.nextLine();
 						
 						switch(field) {
 						
 						case "name":
 							
 							System.out.println("What do you want to change "+tmp.fullName+" to?");
-							String full = sc.next();
+							String full = sc.nextLine();
 							
 							tmp.fullName = full;
 							System.out.println(tmp.fullName+"'s name is now "+full);
@@ -321,7 +324,7 @@ public class Driver {
 						case "birthdate":
 							
 							System.out.println("What do you want to change "+tmp.birth+" to?");
-							String birth = sc.next();
+							String birth = sc.nextLine();
 							
 							tmp.birth = birth;
 							System.out.println(tmp.fullName+"'s birth date is now "+birth);
@@ -340,7 +343,7 @@ public class Driver {
 						case "phone":
 							
 							System.out.println("What do you want to change "+tmp.phone+" to?");
-							String phone = sc.next();
+							String phone = sc.nextLine();
 							
 							tmp.phone = phone;
 							System.out.println(tmp.fullName+"'s phone number is now "+phone);
@@ -349,7 +352,7 @@ public class Driver {
 						case "username":
 							
 							System.out.println("What do you want to change "+tmp.username+" to?");
-							String user = sc.next();
+							String user = sc.nextLine();
 							
 							tmp.username = user;
 							System.out.println(tmp.fullName+"'s username is now "+user);
@@ -358,7 +361,7 @@ public class Driver {
 						case "password":
 							
 							System.out.println("What do you want to change "+tmp.password+" to?");
-							String pwd = sc.next();
+							String pwd = sc.nextLine();
 							
 							tmp.password = pwd;
 							System.out.println(tmp.fullName+"'s password is now "+pwd);

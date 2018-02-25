@@ -6,6 +6,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Scanner;
 
+import org.junit.platform.commons.util.StringUtils;
+
 public class User {
 
 	public static void runThis(String user, String pwd) {
@@ -44,29 +46,62 @@ public class User {
 					+ "\n\tEnter 7 to exit the banking transactions.");
 	
 			int in = sc.nextInt();
+			sc.nextLine();
 			System.out.println(in);
 			
 			switch(in) {
 			
 			case 1:			// fill out an application
 					
-				System.out.println("Enter your name:");
-				String name = sc.next();
+				System.out.println("Enter your full name:");
+				String name = sc.nextLine();
+				
+				while(name.matches("^.*[^a-zA-Z ].*$")) {
+					
+					System.out.println("Your name must contain only letters of the alphabet.");
+					System.out.println("Enter your full name:");
+					name = sc.nextLine();
+				}
 				
 			    try {
 				
 			    	outputStream.write((name+"\n").getBytes());
 			    	
 			    	System.out.println("Enter your birth date: ");
-			    	name = sc.next();
+			    	name = sc.nextLine();
+			    	
+					while(name.matches("^.*[^0-9.].*$")) {
+						
+						System.out.println("Your birth date must be contained of integers in the format 'mm.dd.yyyy'.");
+						System.out.println("Enter your birth date:");
+						name = sc.nextLine();
+					}
+			    	
+			    	
 			    	outputStream.write((name+"\n").getBytes());
 			    	
 			    	System.out.println("Enter your age: ");
-			    	name = sc.next();
+			    	name = sc.nextLine();
+			    	
+					while(name.matches("^.*[^0-9].*$")) {
+						
+						System.out.println("Your age must be entered as an integer.");
+						System.out.println("Enter your age:");
+						name = sc.nextLine();
+					}
+			    	
 			    	outputStream.write((name+"\n").getBytes());
 			    	
 			    	System.out.println("Enter your phone number: ");
-			    	name = sc.next();
+			    	name = sc.nextLine();
+			    	
+					while(name.matches("^.*[^0-9-].*$")) {
+						
+						System.out.println("Your phone number must contain only integers in the format nnn-nnn-nnnn.");
+						System.out.println("Enter your phone number:");
+						name = sc.nextLine();
+					}
+			    	
 			    	outputStream.write((name+"\n").getBytes());
 			    
 			    	System.out.println("Your request will be answered by an Employee once they log in.");
@@ -101,6 +136,17 @@ public class User {
 				
 				System.out.println("How much money would you like to deposit?");
 				double deposits = sc.nextDouble();
+				sc.nextLine();
+				
+				while(deposits == 0 || deposits < 0 || deposits > 500) {
+					
+					System.out.println("That is not an amount we can deposit to your account.");
+					System.out.println("How much money would you like to deposit?");
+					deposits = sc.nextDouble();
+					sc.nextLine();
+				}
+				
+				
 				temp.Balance = temp.Balance + deposits;				// file users doesn't change amount ******************************
 				
 				System.out.println("You have deposited an additional "+deposits+" dollars successfully.");
@@ -117,6 +163,16 @@ public class User {
 				
 				System.out.println("How much money would you like to withdraw?");
 				double withdraw = sc.nextDouble();
+				sc.nextLine();
+				
+				while(withdraw < 0 || withdraw == 0 || withdraw > temp.Balance) {
+					
+					System.out.println("That is not an amount we can withdraw for you. Make sure your account has the amount you wish to withdraw.");
+					System.out.println("How much money would you like to withdraw?");
+					withdraw = sc.nextDouble();
+					sc.nextLine();					
+				}
+				
 				temp.Balance = temp.Balance - withdraw;							// file users doesn't change amount ******************************
 				
 				System.out.println("You have withdrawn "+withdraw+" dollars successfully.");
@@ -132,12 +188,12 @@ public class User {
 				}
 				
 				System.out.println("What name is the account under?");
-				String names = sc.next();
+				String names = sc.nextLine();
 				LoginDataNode ptr = LoginDataOps.check(names);
 				
 				if(ptr == null) {
 					
-					System.out.println("The account was not found. Try again.");
+					System.out.println("The account was not found. Try again.\n");
 					break;
 				}
 				
@@ -169,7 +225,7 @@ public class User {
 					LoginDataOps.front = null;
 				}
 				
-				while(iter.next != temp) {
+				while(iter.next != null && iter.next != temp) {
 					
 					iter = iter.next;
 				}
@@ -178,6 +234,8 @@ public class User {
 					
 					iter.next = temp.next;
 				}
+				
+				temp = null;
 				
 				System.out.println("Your account has been deleted.");
 				break;
