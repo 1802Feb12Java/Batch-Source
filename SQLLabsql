@@ -1,0 +1,224 @@
+--2.1 SELECT
+--Task – Select all records from the Employee table.
+SELECT * FROM Employee; --selects everything from employee table
+--Task – Select all records from the Employee table where last name is King.
+SELECT * FROM Employee WHERE Lastname = 'King';  --select everything from employee table with lastname = king
+--Task – Select all records from the Employee table where first name is Andrew and REPORTSTO is NULL
+SELECT * FROM Employee WHERE Firstname = 'Andrew' AND Reportsto = NULL; -- selects with Firstname = 'Andrew' and reportisto = NULL
+--2.2 ORDER BY
+--Task – Select all albums in Album table and sort result set in descending order by title.
+SELECT Title FROM Album ORDER BY Title DESC; --select all album titles and sort in descending order by title
+--Task – Select first name from Customer and sort result set in ascending order by city
+SELECT Firstname FROM Customer ORDER BY City; --sorted by city in ascending order
+--2.3 INSERT INTO
+--Task – Insert two new records into Genre table 
+INSERT INTO GENRE  VALUES (26,'Kpop'); --insert info into Genre table
+INSERT INTO GENRE  VALUES (27,'Jpop'); --insert info into Genre table
+--Task – Insert two new records into Employee table
+INSERT INTO Employee VALUES (2004, 'Nguyen', 'Nicole','Manager',2,'13-JUL-94','02-FEB-18','1234 Street Dr','Houston','TX','US',77073,
+        '1234568452','215846','wondergirls@gmail.com'); --insert info into employee table
+INSERT INTO Employee VALUES (2008, 'Kwon', 'Yuri','IT Staff',4,'16-JAN-89','01-JUN-17','2541 Honor Street Dr','Woodlands','TX','US',77846,
+        '5218547123','548201','snsd23@gmail.com'); --insert info into employee table
+--Task – Insert two new records into Customer table
+INSERT INTO Customer VALUES (2014,'Jung','Chai','Revature','6521 Jump Street','New York','New York','US','56601','4126598201','5454881',
+        'thisisanemail123@yahoo.com',6); --insert info into Customer table
+INSERT INTO Customer VALUES (4587,'Nameless','Jon','ABC Comp','21 Jump Street','New York','New York','US','56601','8750136549','0125874',
+        'mightbeanemail@yahoo.com',4);--insert info into Customer table
+--2.4 UPDATE
+--Task – Update Aaron Mitchell in Customer table to Robert Walter
+UPDATE CUSTOMER SET Lastname = 'Walter', Firstname = 'Robert'
+    WHERE Lastname = 'Mitchell' AND firstname = 'Aaron';  --update customer's name
+--Task – Update name of artist in the Artist table “Creedence Clearwater Revival” to “CCR”    
+UPDATE Artist SET Name = 'CCR' WHERE Name = 'Creedence Clearwater Revival'; --update arist's name in artis table
+--2.5 LIKE
+--Task – Select all invoices with a billing address like “T%” 
+SELECT invoiceid, customerid, total, billingaddress FROM Invoice WHERE BILLINGADDRESS LIKE 'T%'; -- 
+                                        --select invoiceid, customerid,total where billing address starts with T and ends with everythin else
+--2.6 BETWEEN
+--Task – Select all invoices that have a total between 15 and 50
+SELECT invoiceid, customerid, total from invoice WHERE total between 15 and 50; --select from invoice table with total
+                                                                        -- is greater than 15 and less than 50
+--Task – Select all employees hired between 1st of June 2003 and 1st of March 2004
+SELECT employeeid, lastname, firstname, title from employee where hiredate between '01-JUN-03' and '01-MAR-04'; --select employees hired that date
+--2.7 DELETE
+--Task – Delete a record in Customer table where the name is Robert Walter 
+--(There may be constraints that rely on this, find out how to resolve them).
+-- delete foreign keys in invoice table
+delete from invoiceline where invoiceid in (select invoiceid from invoice where customerid in 
+    (select customerid from customer where lastname = 'Walter' and firstname = 'Robert')); -- delete invoices from invoiceline
+    --delete customer from invoice table
+Delete FROM invoice where customerid = (Select customerid from customer where firstname ='Robert' and lastname = 'Walter');  
+Delete from customer where firstname ='Robert' and lastname = 'Walter'; -- delete record in customer table
+
+--3.1 System Defined Functions
+--Task – Create a function that returns the current time.
+select current_timestamp from dual; --gets current time
+--create a function that returns the length of name in MEDIATYPE table
+select name, length(name) from mediatype; --gets name's length
+
+--3.2 System Defined Aggregate Functions
+--Task – Create a function that returns the average total of all invoices 
+CREATE or replace function avarageTotal -- function that returns avarage total of all invoices
+    return number as avarage_total number(10,2);
+begin 
+    Select avg(total) into avarage_total from invoice;
+    return avarage_total;
+    End;
+    /
+select avarageTotal from dual;
+-----
+--Task – Create a function that returns the most expensive track
+
+CREATE OR REPLACE FUNCTION expensive_track -- return most expensive track from track table
+    return number as most_expensive number(10,2);
+begin
+    select max(unitprice) into most_expensive from track;
+    return most_expensive;
+    end;
+    /
+   
+select expensive_track from dual; -- calls function expensive_track
+--3.3 User Defined Scalar Functions
+--Task – Create a function that returns the average price of invoiceline items (for each invoice) in the invoiceline table
+Create or replace function invoiceline_avg (i_id IN number)
+    return number as avg_price number(10,2);
+begin
+    select avg(unitprice) into avg_price from invoiceline where invoiceid = i_id;
+    return avg_price;
+    end;
+    /
+    
+    select invoiceline_avg(130) from dual; --calls invoiceline_avg function with user input 130
+--3.4 User Defined Table Valued Functions
+--Task – Create a function that returns all employees who are born after 1968.
+create or replace function employeetable 
+    return sys_refcursor as tablename sys_refcursor; -- returns cursor 
+begin
+    open tablename for select firstname, lastname from employee where birthdate > '01-JAN-69';
+    return tablename;
+    end;
+    /
+select employeetable from dual; --select function
+--4.1 Basic Stored Procedure
+--Task – Create a stored procedure that selects the first and last names of all the employees.
+create or replace procedure displayview (cur out sys_refcursor) as 
+begin
+    open cur for select firstname, lastname from employee;
+    commit;
+    end;
+    /
+    var refcurs refcursor; --create a cursor
+    execute displayview(:refcurs); -- pass cursor to the function
+    
+--4.2 Stored Procedure Input Parameters
+--Task – Create a stored procedure that updates the personal information of an employee.
+create or replace procedure update_employee_personal -- update address by using empoyee id
+(addr in varchar2, ci in varchar2, stat in varchar2, countr in varchar2, e_id in number) as
+begin
+    update employee set address = addr, city = ci, state = stat, country = countr where employeeid = e_id;
+    commit;
+    end;
+    /
+    --execute procedure
+    execute update_employee_personal('111 Jumper street','TL', 'AZ', 'US', 7);
+--Task – Create a stored procedure that returns the managers of an employee.
+create or replace procedure getManager
+(id in int, cur out sys_refcursor) is
+begin
+  open cur for select firstname, lastname, company from customer where customerid = id; --use cursor to get data
+end;
+/
+var refcurs refcursor; -- declare cursor variable
+execute getManager(14, :refcurs); --execute cursor
+--4.3 Stored Procedure Output Parameters
+--Task – Create a stored procedure that returns the name and company of a customer.
+create or replace procedure proc1
+(idnumber in int, cur out sys_refcursor) is
+begin
+  open cur for select firstname, lastname, company from customer where customerid = idnumber;--retrieves data
+end;
+/
+var refcurs refcursor; --declare a cursor
+execute proc1(7, :refcurs); -- execute cursor
+
+--5.0 Transactions
+--In this section you will be working with transactions. 
+--Transactions are usually nested within a stored procedure.
+--Task – Create a transaction that given a invoiceId will delete that invoice 
+--(There may be constraints that rely on this, find out how to resolve them).
+create or replace procedure deleteInvoice( i_id in number) as
+begin
+    delete from invoiceline where invoiceid = i_id; --delete data from foreign key
+    delete from invoice where invoiceid = i_id; --delete actual invoice
+    commit; -- commit to database after delete is completed
+end;
+/
+execute deleteInvoice(237); --delete invoice number 237
+
+--Task – Create a transaction nested within a stored procedure that inserts a new record in the Customer table
+create or replace procedure insertCustomer
+(cid in number, fname in varchar2, lname in varchar2) as
+begin
+ insert into customer (customerid,firstname,lastname) values (cid,fname,lname);--initialze customerid, firstname, lastname. everything else is null
+ commit;
+ end;
+ /
+---------------------------------------------------------------------------------
+--6.0 Trigger
+--6.1 AFTER/FOR
+-- Create an after insert trigger on the employee table fired after a new record is inserted into the table.
+create or replace trigger insert_artist
+after insert on artist
+begin
+   update artist set name = 'bobsan'; --set artist name to bobsan after insert
+end;
+/
+insert into artist values (1234,'jsfhkgs');--testing trigger
+
+--Task – Create an after update trigger on the album table that fires after a row is inserted in the table
+create or replace trigger update_album
+after insert on album
+begin
+    update album set title = 'Lost in paradise' where title = 'boy'; --change title of song's name is boy;
+    
+end;
+/
+insert into album values(1232, 'boy', 1315);
+--Task – Create an after delete trigger on the customer table that fires after a row is deleted from the table.
+create or replace trigger delete_trigger_on_customer
+after delete on customer
+begin
+    update customer set state = 'NC' where city = 'Melbourne' ; --change state if city is Melbourne
+end;
+/
+delete customer where customerid = 4587;
+------------------------------------------------------
+----------------------------------------------------------------
+--7.1 INNER
+--Task – Create an inner join that joins customers and orders and specifies the name of the customer and the invoiceId.
+SELECT customer.firstname, customer.lastname, invoice.invoiceid
+FROM customer
+INNER JOIN invoice ON customer.customerid = invoice.customerid;
+--7.2 OUTER/left join
+--Task – Create an outer join that joins the customer and invoice table, specifying the .
+--CustomerId, firstname, lastname, invoiceId, and total.
+SELECT customer.customerid,customer.firstname, customer.lastname, invoice.invoiceid, invoice.total
+FROM customer
+LEfT JOIN invoice ON customer.customerid = invoice.customerid;
+--7.3 RIGHT
+--Task – Create a right join that joins album and artist specifying artist name and title.
+SELECT B.name, A.title
+FROM album A
+RIGHT JOIN artist B ON A.artistID = B.artistID;
+
+--7.4 CROSS
+--Task – Create a cross join that joins album and artist and sorts by artist name in ascending order.
+Select *
+From album A
+cross join artist B where  A.artistid = b.artistid
+Order by b.name ASC ;
+--7.5 SELF 
+--Task – Perform a self-join on the employee table, joining on the reportsto column.
+select a.reportsto as reportsto1, b.reportsto as reportsto2 from employee a, employee b 
+where b.reportsto = a.reportsto;
+
