@@ -1,4 +1,4 @@
-package revature.maven.bankingapp;
+package com.revature.util;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -12,7 +12,7 @@ public class ConnFactory {
 	
 	private static ConnFactory cf = null;
 	
-	ConnFactory(){
+	public ConnFactory(){
 		super();
 	}
 	
