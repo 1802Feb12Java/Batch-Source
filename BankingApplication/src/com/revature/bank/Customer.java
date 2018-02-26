@@ -9,14 +9,10 @@ public class Customer extends User{
 	public String firstName = "";
 	public String lastName = "";
 	public String address = "";
-	public String city = "";
-	public String state = "";
 	public String phoneNumber = "";
-	public String acctNum = "";
-	public boolean hasAcct = false;
-	public double accountBal = 0;
-	public String accountNumber = "";
+	public int customerID = -1;
 	
+
 	public Customer(String username, String password, String firstname, String lastname) {
 		super();
 		this.username = username;
@@ -26,27 +22,31 @@ public class Customer extends User{
 	}
 	
 	public Customer(String username, String password, String firstName, String lastName, String address,
-			String city, String state, String phoneNumber) {
+			 String phoneNumber) {
 		super();
 		this.username = username;
 		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.address = address;
-		this.city = city;
-		this.state = state;
 		this.phoneNumber = phoneNumber;
 	}
 	
 
-	public String getAddress() {
-		return address + "\n" + city + ", " + state;
+	public int getCustomerID() {
+		return customerID;
 	}
 
-	public void setAddress(String address, String city, String state) {
+	public void setCustomerID(int customerID) {
+		this.customerID = customerID;
+	}
+	
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
 		this.address = address;
-		this.city = city;
-		this.state = state;
 	}
 
 
@@ -89,47 +89,55 @@ public class Customer extends User{
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	
-	public double getAccountBal() {
-		return accountBal;
-	}
 
-	public void setAccountBal(double accountBal) {
-		this.accountBal = accountBal;
+	@Override
+	public String toString() {
+		return "Customer [ customerID=" + customerID + ", firstName=" + firstName + ", lastName=" + lastName + ", address=" + address + ", phoneNumber="
+				+ phoneNumber + "]";
 	}
 	
-	public String getAccountNumber() {
-		return accountNumber;
-	}
-	public void setAccountNumber(String x) {
-		accountNumber = x;
-	}
+
 	
-	public void withdraw(double w) {
-		if(accountBal < w) {
-			System.out.println("You do not have the appropriate funds to withdraw that much.");
-		}else if(w < 0) {
-			System.out.println("You cannot withdraw a negative amount.");
-		}else {
-			accountBal = accountBal - w;
-			System.out.println("You have withdrawn $" + w);
-			System.out.println("Your new balance is $" + accountBal);
-		}
-	}
-	
-	public void deposit(double d) {
-		if(d < 0) {
-			System.out.println("You cannot deposit a negative amount.");
-		} else {
-			accountBal = accountBal + d;
-			System.out.println("You deposited $" + d);
-			System.out.println("Your new balance is $" + accountBal);
-		}
-	}
-	
-	
-	public void getAcct() {
-		hasAcct = true;
-	}
+//	public double getAccountBal() {
+//		return accountBal;
+//	}
+//
+//	public void setAccountBal(double accountBal) {
+//		this.accountBal = accountBal;
+//	}
+//	
+//	public String getAccountNumber() {
+//		return accountNumber;
+//	}
+//	public void setAccountNumber(String x) {
+//		accountNumber = x;
+//	}
+//	
+//	public void withdraw(double w) {
+//		if(accountBal < w) {
+//			System.out.println("You do not have the appropriate funds to withdraw that much.");
+//		}else if(w < 0) {
+//			System.out.println("You cannot withdraw a negative amount.");
+//		}else {
+//			accountBal = accountBal - w;
+//			System.out.println("You have withdrawn $" + w);
+//			System.out.println("Your new balance is $" + accountBal);
+//		}
+//	}
+//	
+//	public void deposit(double d) {
+//		if(d < 0) {
+//			System.out.println("You cannot deposit a negative amount.");
+//		} else {
+//			accountBal = accountBal + d;
+//			System.out.println("You deposited $" + d);
+//			System.out.println("Your new balance is $" + accountBal);
+//		}
+//	}
+//	
+//	
+//	public void getAcct() {
+//		hasAcct = true;
+//	}
 	
 }

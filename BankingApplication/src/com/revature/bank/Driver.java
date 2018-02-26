@@ -10,6 +10,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -26,15 +27,15 @@ public class Driver implements Serializable {
 	public static ArrayList<String> loginInfo = new ArrayList<>();
 	private static final String userFile = "Users.txt";
 	private static final String loglog = "LoginInfo.txt";
+	private static CustomerServices custwork;
 	
-	public static void main(String[] args) {
-		Customer c = new Customer("frank", "tank", "frank", "tank");
-		c.getAcct();
-		customs.add(c);
-		users.add(c);
-		//readLogIn();
+	public static void main(String[] args) throws SQLException {
+		//Customer c = new Customer("frank", "tank", "frank", "tank");
+		//c.getAcct();
+		//customs.add(c);
+		//users.add(c);
+		readLogIn();
 		do {
-			readLogIn();
 			logOn();
 			printCToFile(customs, cust);
 			printToFile(users, userFile);
@@ -44,7 +45,7 @@ public class Driver implements Serializable {
 			
 	}
 	
-	public static void createCustomer() {
+	public static void createCustomer() throws SQLException {
 		System.out.println("First name:");
 		String firstname = sc.next();
 		System.out.println("Last name:");
@@ -53,13 +54,19 @@ public class Driver implements Serializable {
 		String username = sc.next();
 		System.out.println("Password:");
 		String password = sc.next();
+		System.out.println("Address:");
+		String address = sc.next();
+		System.out.println("Phone #:");
+		String phonenum = sc.next();
 		Customer c = new Customer(firstname, lastname, username, password);
+		c.setAddress(address);
+		c.setPhoneNumber(phonenum);
 		System.out.println("Would you like to apply for an account?");
 		String contents = sc.next();
 		if(contents.toLowerCase().startsWith("y")) {
 			makeApplication(c);
-			customs.add(c);
-			users.add(c);
+			//customs.add(c);
+			//users.add(c);
 			loginInfo.add(username + ":" + password + ":" + "customer");
 		} else {
 			System.out.println("Well why are you here then?!\n");
@@ -95,14 +102,15 @@ public class Driver implements Serializable {
 		loginInfo.add(username + ":" + password + ":" + "admin");
 	}
 	
-	public static void logOn() {
+	public static void logOn() throws SQLException {
 		int cases = 0;
 		
 		System.out.println("Welcome to Yo Mama's Bank.");
 		System.out.println("What would you like to do?");
-		System.out.println("1. Login");
-		System.out.println("2. New Customer");
-		System.out.println("3. Log off");
+		System.out.println("1. Customer Login");		
+		System.out.println("2. Employee Login");
+		System.out.println("3. New Customer");
+		System.out.println("4. Log off");
 		if(sc.hasNextInt()) {
 			cases = sc.nextInt();
 		}else {
@@ -117,49 +125,37 @@ public class Driver implements Serializable {
 				newScreen = true;
 				logIn();
 				break;
-			case 2: 
+			case 2:
+				newScreen = true;
+				empLogIn();
+				break;
+			case 3: 
 				newScreen = true;
 				createCustomer();
 				break;
-			case 3:
+			case 4:
 				newScreen = true;
 				active = false;
 				
 				break;
 			default:
 				System.out.println("What would you like to do?");
-				System.out.println("1. Login");
-				System.out.println("2. New Customer");
-				System.out.println("3. Log off");
+				System.out.println("1. Customer Login");		
+				System.out.println("2. Employee Login");
+				System.out.println("3. New Customer");
+				System.out.println("4. Log off");
 				cases = sc.nextInt();
 				}
 			} while(!newScreen);
 	}
 	
-	public static void makeApplication(Customer c) {
-		FileOutputStream fs = null;
-		ObjectOutputStream os = null;
-		File file = new File(apps);
-		try {
-			fs = new FileOutputStream(file);
-			os = new ObjectOutputStream(fs);
-			os.writeObject(c);
-		}
-		catch(FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		if(os != null) {
-			try {
-				os.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
+	public static void makeApplication(Customer c) throws SQLException {
+		custwork.addCustomer(c);
+		System.out.println("You have been added to the system.");
+		System.out.println("An administrator will look over your account shortly.");
 	}
 	
-	public static void logIn() {
+	public static void logIn() throws SQLException {
 		String username = "";
 		String password = "";
 		System.out.println("Username: ");
@@ -187,7 +183,35 @@ public class Driver implements Serializable {
 		}
 	}
 	
-	public static void logIn(String s, String u) {
+	public static void empLogIn() throws SQLException {
+		String username = "";
+		String password = "";
+		System.out.println("Username: ");
+		username = sc.next();
+		System.out.println("password: ");
+		password = sc.next();
+				
+		System.out.println("");
+		for(int i = 0; i < loginInfo.size(); i++) {
+			if(loginInfo.get(i).startsWith(username + ":" + password)) {
+				String[] arr = loginInfo.get(i).split(":");
+				String tipe = arr[2];
+				String user = arr[0];
+				empLogIn(tipe, user);
+				return;
+			}
+		}
+		System.out.println("That combination does not work.");
+		System.out.println("Try again?");
+		String contents = sc.next();
+		if(contents.contains("y")) {
+			logIn();
+		}else {
+			return;
+		}
+	}
+	
+	public static void logIn(String s, String u) throws SQLException {
 		if(s.trim().equals("customer")) {
 			Customer c;
 			for(int i = 0; i < customs.size(); i++) {
@@ -196,16 +220,26 @@ public class Driver implements Serializable {
 					doCustomerStuff(c);
 				}
 			}
-		}else if(s.trim().equals("admin")) {
-			doAdminStuff();
-		}else {						//if they made it this far and they aren't a customer or admin, they must be 
-			doEmployeeStuff();		//an employee.
+		}else {
+			System.out.println("You are not a customer, please login through the appropriate portal.");
 		}
 	}
 	
-	public static void doCustomerStuff(Customer c) {
+	public static void empLogIn(String s, String u) throws SQLException {
+		if(s.trim().equals("admin")) {
+			doAdminStuff();
+		}else if(s.trim().equals("employee")){						//if they made it this far and they aren't a customer or admin, they must be 
+			doEmployeeStuff();		//an employee.
+		}else {
+			System.out.println("You are not an employee, please login through the appropriate portal.");
+
+		}
+	}
+	
+	public static void doCustomerStuff(Customer c) throws SQLException {
 		int cases = 0;
 		newScreen = false;
+		System.out.println("Welcome, " + c.getFirstName());
 		System.out.println("What would you like to do?");
 		System.out.println("1. Withdraw");
 		System.out.println("2. Deposit");
@@ -227,7 +261,7 @@ public class Driver implements Serializable {
 				System.out.println("How much?");
 				if(sc.hasNextInt()) {
 					int x = sc.nextInt();
-					c.withdraw(x);
+					//c.withdraw(x);
 					doCustomerStuff(c);
 				}else {
 					//catches the input if the user puts in something other than a number
@@ -241,7 +275,7 @@ public class Driver implements Serializable {
 				System.out.println("How much?");
 				if(sc.hasNextInt()) {
 					int y = sc.nextInt();
-					c.deposit(y);
+					//c.deposit(y);
 					doCustomerStuff(c);
 				}else {
 					//catches the input if the user puts in something other than a number
@@ -278,13 +312,17 @@ public class Driver implements Serializable {
 		}while(!newScreen);
 	}
 	
-	public static void doAdminStuff() {
+	public static void doAdminStuff() throws SQLException {
 		int cases = 0;
 		newScreen = false;
+		System.out.println("----Admin console----");
 		System.out.println("What would you like to do?");
 		System.out.println("1. Approve Accounts");
-		System.out.println("2. Customer info");
-		System.out.println("3. Log off");
+		System.out.println("2. View customer info");
+		System.out.println("3. Update customer info");
+		System.out.println("4. Create new user");
+		System.out.println("5. Delete a user");
+		System.out.println("6. Log off");
 		if(sc.hasNextInt()) {
 			cases = sc.nextInt();
 		}else {
@@ -302,32 +340,58 @@ public class Driver implements Serializable {
 					break;
 				case 2: 
 					newScreen = true;
-					
+					custwork.getAllCustomers();
+					doAdminStuff();
 					break;
-				case 3:
+				case 3: 
+					newScreen = true;
+					doAdminStuff();
+					break;
+				case 4: 
+					newScreen = true;
+					System.out.println("Would you like to create a new (1)Employee or (2)Admin?");
+					String i = sc.nextLine();
+					if(i == "1") {
+						createEmployee();
+					} else if(i == "2") {
+						createAdmin();
+					}else {
+						System.out.println("Please input a valid choice.");
+					}
+					doAdminStuff();
+					break;
+				case 5: 
+					newScreen = true;
+					doAdminStuff();
+					break;
+				case 6:
 					newScreen = true;
 					logOn();
 					break;
 				default:
+					System.out.println("----Admin console----");
 					System.out.println("What would you like to do?");
-					System.out.println("1. Approve Account");
-					System.out.println("2. Customer info");
-					System.out.println("3. Log off");
+					System.out.println("1. Approve Accounts");
+					System.out.println("2. View customer info");
+					System.out.println("3. Update customer info");
+					System.out.println("4. Create new user");
+					System.out.println("5. Delete a user");
+					System.out.println("6. Log off");
 					cases = sc.nextInt();
 				
 			}
 			}while(!newScreen);
 	}
 	
-	public static void doEmployeeStuff() {
+	public static void doEmployeeStuff() throws SQLException {
 		int cases = 0;
 		newScreen = false;
 		System.out.println("What would you like to do?");
-		System.out.println("1. ");
-		System.out.println("2. ");
-		System.out.println("3. ");
+		System.out.println("1. View Customer Accounts");
+		System.out.println("2. Update Existing Accounts");
+		System.out.println("3. Delete an account");
 		System.out.println("4. ");
-		System.out.println("5. ");
+		System.out.println("5. Log off");
 		if(sc.hasNextInt()) {
 			cases = sc.nextInt();
 		}else {
@@ -336,18 +400,50 @@ public class Driver implements Serializable {
 			System.out.println("Please provide a number for input.");
 			
 		}
+		do {
+			switch(cases) {
+			case 1:
+				newScreen = true;
+					
+					doEmployeeStuff();
+				break;
+			case 2: 
+				newScreen = true;
+				doEmployeeStuff();
+				break;
+			case 3:
+				newScreen = true;
+				logOn();
+				break;
+			default:
+				System.out.println("What would you like to do?");
+				System.out.println("1. Approve Account");
+				System.out.println("2. Customer info");
+				System.out.println("3. Log off");
+				cases = sc.nextInt();
+			
+		}
+		}while(!newScreen);
 	}
 	
-	public static void approveApp(){
+	public static void approveApp() throws SQLException{
 		System.out.println("Which application would you like to look at?");
-		Customer c;
-		for(int i = 0; i < customs.size(); i++) {
-			c = customs.get(i);
-			if(c.hasAcct == false) {
-				System.out.println(c.getFirstName() + " " + c.getLastName());
-			}
+		System.out.println("Choose the number of the account to verify."); 
+		System.out.println(custwork.approveCustomer1());
+		if(custwork.approveCustomer1().equals("There are no applicants pending approval.")) {
+			
+		}else {
+			int i = sc.nextInt();
+			custwork.approveCustomer(i);
 		}
-		String ip = sc.nextLine();
+//		Customer c;
+//		for(int i = 0; i < customs.size(); i++) {
+//			c = customs.get(i);
+//			if(c.hasAcct == false) {
+//				System.out.println(c.getFirstName() + " " + c.getLastName());
+//			}
+//		}
+//		String ip = sc.nextLine();
 		
 	}
 	

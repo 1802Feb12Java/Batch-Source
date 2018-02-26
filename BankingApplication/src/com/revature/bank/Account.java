@@ -1,15 +1,32 @@
 package com.revature.bank;
 
-import java.util.UUID;
-
 public class Account{
 
 	public double accountBal = 0;
 	public String accountNumber = "";
+	public String customerID = "";
 
 	
+	public String getCustomerID() {
+		return customerID;
+	}
+
+
+
+	public void setCustomerID(String customerID) {
+		this.customerID = customerID;
+	}
+
+
+
+	public void setAccountNumber(String accountNumber) {
+		this.accountNumber = accountNumber;
+	}
+
+
+
 	public Account() {
-		accountNumber = UUID.randomUUID().toString();
+		
 	}
 	
 

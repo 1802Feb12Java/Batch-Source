@@ -17,9 +17,6 @@ public class Admin extends Employee{
 	
 	//
 	public static void approveAccount(Customer c) {
-		Account a = new Account();
-		c.setAccountNumber(a.getAccountNumber());
-		c.getAcct();
 
 	}
 	
