@@ -7,10 +7,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.ArrayList;
 import java.util.HashMap;
-
-import com.revature.accounts.Account;
 import com.revature.users.*;
 
 public class FileOperations {
@@ -26,22 +23,7 @@ public class FileOperations {
 		objectOut.close();
 		fileOut.close();
 	}
-	
-	public static void writeEmployees(HashMap <String, Employee> map, String filename) throws IOException {
-		FileOutputStream fileOut = new FileOutputStream(new File(filename));
-		ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
 		
-		for(String key : map.keySet()) {
-			System.out.println("Writing user " + key);
-			objectOut.writeObject(map.get(key));			
-		}
-		
-		System.out.println("complete.");
-		objectOut.close();
-		fileOut.close();
-		
-	}
-	
 	public static void writeCustomers(HashMap <String, Customer> map, String filename) throws IOException {
 		FileOutputStream fileOut = new FileOutputStream(new File(filename));
 		ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
@@ -105,54 +87,7 @@ public class FileOperations {
 		
 		return map;
 	}
-	
-	public static HashMap <String, Employee> readEmployees(String filename) {
-		HashMap <String, Employee> map = new HashMap <>();
-		FileInputStream fileIn = null;
-		Employee current = null;
 		
-		try {
-			fileIn = new FileInputStream(new File(filename));
-		} catch (FileNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		ObjectInputStream objectIn = null;
-		try {
-			objectIn = new ObjectInputStream(fileIn);
-		} catch (IOException e1) {
-			System.out.println("none found.");
-			return map;
-		}		
-		
-		while(true) {
-			try {
-				current = (Employee) objectIn.readObject();
-				map.put(current.getUserName(), current);
-			}
-			catch (IOException e) {
-                break;
-             } catch (ClassNotFoundException e) {
-                 System.out.println();
-             }
-		}
-		
-		try {
-			objectIn.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
-			fileIn.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return map;		
-	}
-	
 	public static HashMap <String, Customer> readCustomers(String filename) {
 
 		HashMap <String, Customer> map = new HashMap <>();

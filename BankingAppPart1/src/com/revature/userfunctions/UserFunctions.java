@@ -12,7 +12,7 @@ public class UserFunctions {
 
 		System.out.print("Enter a user name: ");
 		newCustomer.setUserName(getInput.nextLine());
-		//check for user name availability
+		//TODO: check for user name availability
 		
 		System.out.print("Enter a password: ");
 		newCustomer.setPassword(getInput.nextLine());
@@ -34,7 +34,7 @@ public class UserFunctions {
 		System.out.print("Enter your two letter state abbreviation: ");
 		newCustomer.setState(getInput.nextLine());
 		
-		System.out.print("Enter your phone number (1234567890): ");
+		System.out.print("Enter your phone number (123-456-7890): ");
 		newCustomer.setPhoneNumber(getInput.nextLine());
 
 		return newCustomer;
@@ -43,15 +43,6 @@ public class UserFunctions {
 	
 	public static boolean validateCustomer(String password, Customer customer) {
 		if(password.equals(customer.getPassword())) {
-			return true;
-		}
-		
-		System.out.println("Password does not match");
-		return false;
-	}
-	
-	public static boolean validateEmployee(String password, Employee employee) {
-		if(password.equals(employee.getPassword())) {
 			return true;
 		}
 		

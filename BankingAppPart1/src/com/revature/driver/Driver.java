@@ -20,23 +20,19 @@ public class Driver {
 		boolean validated = false;
 		boolean runningBackend = true;
 		boolean systemRunning = true;
-		boolean logoff = false;
 		
 		//filenames
 		String adminFilename = "admins.dat";
-		String employeeFilename = "employees.dat";
 		String customerFilename = "customers.dat";
 		
 		//Data structures
 		HashMap<String, Admin> adminsMap = new HashMap<>();
-		HashMap<String, Employee> employeesMap = new HashMap<>();
 		HashMap<String, Customer> customersMap = new HashMap<>();
 		HashMap<String, ArrayList<Account>> accountsMap = new HashMap<>();
 		ArrayList<Customer> pendingRequests = new ArrayList<>();
 		
 		//active session objects
 		Customer customer = null;
-		Employee employee = null;
 		Admin admin = null;
 		char userType = 'n';
 		boolean customerPending = false;
@@ -54,10 +50,6 @@ public class Driver {
 		//load the admin HashMap
 		System.out.print("  Loading administrators...");
 		adminsMap = FileOperations.readAdmins(adminFilename);
-		
-		//load the employee HashMap
-		System.out.print("  Loading employees...");
-		employeesMap = FileOperations.readEmployees(employeeFilename);
 
 		//load the customer HashMap
 		System.out.println("  Loading customers...");
@@ -65,7 +57,6 @@ public class Driver {
 		
 		System.out.println("HashMaps loaded.");
 		System.out.println("  Number of customers: " + customersMap.size());
-		System.out.println("  Number of employees: " + employeesMap.size());
 		System.out.println("  Number of administrators: " + adminsMap.size());
 		System.out.println("  Number of accounts pending: " + pendingRequests.size());
 		//open the scanner to be used for all input
@@ -120,23 +111,8 @@ public class Driver {
 							e.printStackTrace();
 						}
 						break;
-							
-					case 2:
-						option = 0;
-						//create a new employee account and add it to the map
-						Employee newEmployee= BackendAdministration.createEmployee(getInput);
-						employeesMap.put(newEmployee.getUserName(), newEmployee);
-						
-						//update the employees.dat file
-						try {
-							FileOperations.writeEmployees(employeesMap, employeeFilename);
-						} catch (IOException e) {
-							System.out.println("IO error in writeEmployees");
-							e.printStackTrace();
-						}											
-						break;
 								
-					case 3:
+					case 2:
 						option = 0;
 						//create a new customer account and add it to the map
 						Customer newCustomer = BackendAdministration.createCustomer(getInput);
@@ -153,9 +129,9 @@ public class Driver {
 
 						break;
 								
-					case 4:
+					case 3:
 						option = 0;
-						userConnected = true;
+						userConnected = false;
 						runningBackend = false;
 						break;
 								
@@ -195,13 +171,6 @@ public class Driver {
 							userType = 'c';
 						}
 							
-						//search the employee database
-						else if(employeesMap.containsKey(userName)) {
-							employee = employeesMap.get(userName);
-							System.out.println("Found, pass: "+ employee.getPassword());
-							userType = 'e';
-						}
-							
 						//search the admin database
 						else if (adminsMap.containsKey(userName)) {
 							admin = adminsMap.get(userName);
@@ -225,26 +194,11 @@ public class Driver {
 							validated = UserFunctions.validateCustomer(password, customer);
 							if(validated) {
 								loggingIn = false;
-
 							}
 							
 							else { 
 								userType = 'n';
 								customer = null;
-							}
-							break;
-						
-						case 'e':
-							//validate employee login
-							validated = UserFunctions.validateEmployee(password, employee);
-							if(validated) {
-								loggingIn = false;
-							}
-							
-							else {
-								System.out.println();
-								userType = 'n';
-								employee = null;
 							}
 							break;
 						
@@ -279,6 +233,7 @@ public class Driver {
 							e.printStackTrace();
 						}											
 
+						userType = 'c';
 						validated = true;
 						loggingIn = false;
 						option = 0;
@@ -514,53 +469,6 @@ public class Driver {
 						}
 						break;
 						
-					case 'e':
-						while(!logoff) {
-							//EMPLOYEE
-							Menus.displayEmployeeMenu(employee.getFirstName(), employee.getLastName());
-							System.out.print("Please make a selection: ");
-							
-							try {
-								option = getInput.nextInt();
-								}catch(Exception e) {
-									System.out.println("Please enter an appropriate selection");
-								}
-								
-							getInput.nextLine();
-							
-							switch(option) {
-							case 1:
-								//View customer information
-								UserFunctions.viewCustomerInformation(customersMap, getInput);
-								option = 0;
-								break;
-								
-							case 2:
-								//view customer accounts
-								option = 0;
-								break;
-	
-							case 3:
-								//View pending account applications
-								customer = Pending.view(pendingRequests, getInput);
-								
-								//if applicable, create the approved account
-								if(customer != null) {
-									accountsMap = Account.createAccount(customer, accountsMap);
-									System.out.println("Account created.");
-
-								}
-								option = 0;
-								break;
-	
-							case 4:
-								logoff = true;
-								break;
-							}//end switch
-
-						}//end while
-						break;
-						
 					case 'a':
 						//ADMIN
 						Menus.displayAdminMenu(admin.getFirstName(), admin.getLastName());
@@ -608,16 +516,14 @@ public class Driver {
 						case 5:
 							//exit
 							option = 0;
+							validated = false;
 							break;
-
 						}
 						break;
 					}//end switch
-					
-				break;
+				option = 0;	
 				}//end banking system loop
 			System.out.println();
-			logoff = false;
 			break;
 			}//end user connected while loop
 		}//system running loop

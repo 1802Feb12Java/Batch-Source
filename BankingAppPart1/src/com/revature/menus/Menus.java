@@ -10,9 +10,8 @@ public class Menus {
 	public static void displayBackendAccountCreationMenu() {
 		System.out.println("Which type of account would you like to create:");
 		System.out.println("  1. Administrative");
-		System.out.println("  2. Employee");
-		System.out.println("  3. Customer");
-		System.out.println("  4. Exit backend administration");
+		System.out.println("  2. Customer");
+		System.out.println("  3. Exit backend administration");
 	}
 	
 	public static void displayLogInMenu() {
@@ -34,14 +33,6 @@ public class Menus {
 		System.out.println("  7.  Exit the system");
 	}
 	
-	public static void displayEmployeeMenu(String fname, String lname) {
-		System.out.println("Welcome, " + fname + " " + lname);
-		System.out.println("  1.  View customer information");
-		System.out.println("  2.  View customer account");
-		System.out.println("  3.  View pending account applications");
-		System.out.println("  4.  Exit the system");
-	}
-	
 	public static void displayAdminMenu(String fname, String lname) {
 		System.out.println("Welcome, " + fname + " " + lname);	
 		System.out.println("  1.  View customer information");
@@ -49,6 +40,9 @@ public class Menus {
 		System.out.println("  3.  View pending account applications");
 		System.out.println("  4.  Modify accounts");
 		System.out.println("  5.  Exit the system");	
+	}
+	public static void displayAdminModificationMenu() {
+		System.out.println("  1.  ");
 	}
 	
 	public static void displayAccountCreationMenu() {
