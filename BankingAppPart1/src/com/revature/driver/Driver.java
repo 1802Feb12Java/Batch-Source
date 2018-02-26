@@ -1,15 +1,15 @@
 package com.revature.driver;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
-
-import com.revature.JDBC.connect.ConnectDB;
 import com.revature.accounts.Account;
 import com.revature.accounts.Pending;
 import com.revature.fileoperations.FileOperations;
 import com.revature.menus.Menus;
+import com.revature.services.CustomerServices;
 import com.revature.userfunctions.*;
 import com.revature.users.*;
 
@@ -45,7 +45,6 @@ public class Driver {
 		Scanner getInput = null;
 
 		//initialize the system
-		ConnectDB.connect();
 		System.out.println("Populating HashMaps...");
 
 
@@ -226,7 +225,13 @@ public class Driver {
 						//register new customer
 						customer = UserFunctions.register(getInput);
 						customersMap.put(customer.getUserName(), customer);
-						
+						CustomerServices cs = new CustomerServices();
+						try {
+							cs.addCustomer(customer);
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 						//update the customers.dat file
 						try {
 							FileOperations.writeCustomers(customersMap, customerFilename);
@@ -285,22 +290,10 @@ public class Driver {
 							
 							switch(option) {
 							case 1:
-								customer.setApplyingForJoint(false); 
 								customer.setApplyingForSavings(false);
 								break;
 								
 							case 2:
-								customer.setApplyingForJoint(true);
-								customer.setApplyingForSavings(false);
-								break;
-								
-							case 3:
-								customer.setApplyingForJoint(false);
-								customer.setApplyingForSavings(true);
-								break;
-								
-							case 4:
-								customer.setApplyingForJoint(true);
 								customer.setApplyingForSavings(true);
 								break;
 							}//end account type switch
@@ -329,9 +322,6 @@ public class Driver {
 							//List customer's accounts
 							if(!customer.isAccountHolder()) {
 								System.out.print("You currently have no open accounts");
-								if(customer.getUserName().equals("js")) {
-									System.out.print(" (Loser)");
-								}
 								System.out.println();
 							}
 							
@@ -347,9 +337,6 @@ public class Driver {
 							//List customer's accounts
 							if(!customer.isAccountHolder()) {
 								System.out.print("You currently have no open accounts");
-								if(customer.getUserName().equals("js")) {
-									System.out.print(" (Loser)");
-								}
 								System.out.println();
 							}
 							

@@ -15,7 +15,6 @@ public class Account {
 	private int accountNumber = new Random().nextInt(1000) + 10000;
 	private String accountType;
 	private String primaryAccountHolder = null;
-	private String secondaryAccountHolder = null;
 	private Logger log = Logger.getRootLogger();
 	
 	public Account() {
@@ -27,12 +26,6 @@ public class Account {
 		this.primaryAccountHolder = primaryAccountHolder;
 		this.accountType = accountType;
 
-	}
-	
-	public Account(String primaryAccountHolder, String accountType, String secondaryAccountHolder) {
-		this(primaryAccountHolder, accountType);
-		this.secondaryAccountHolder = secondaryAccountHolder;
-		this.jointAccount = true;
 	}
 
 	public static void listAccounts(ArrayList<Account> accountList, String userName) {
@@ -63,8 +56,7 @@ public class Account {
 		
 		//CHECKING
 		//Regular checking
-		if(!customer.isApplyingForSavings() &&
-				!customer.isApplyingForJoint()) {
+		if(!customer.isApplyingForSavings()) {
 			newAccount = new Account(customer.getUserName(), "Checking");
 			
 			//add the new account to the accounts list
@@ -72,33 +64,11 @@ public class Account {
 			accountsMap.put(customer.getUserName(), accountsList);
 			
 		}
-		//Joint checking
-		else if(!customer.isApplyingForSavings()){
-			newAccount = new Account(customer.getUserName(), "Checking",
-					customer.getHoldsJointAccountWith());
-			
-			//add the new account to the accounts list
-			accountsList.add(newAccount);
-			
-			//add the list to the account map
-			accountsMap.put(customer.getUserName(), accountsList);
-		}
 		
 		//SAVINGS
 		//Regular savings
-		else if(!customer.isApplyingForJoint()) {
-			newAccount = new Account(customer.getUserName(), "Savings");
-			
-			//add the new account to the accounts list
-			accountsList.add(newAccount);
-			
-			//add the list to the account map
-			accountsMap.put(customer.getUserName(), accountsList);
-		}
-		//Joint savings
 		else {
-			newAccount = new Account(customer.getUserName(), "Savings",
-					customer.getHoldsJointAccountWith());
+			newAccount = new Account(customer.getUserName(), "Savings");
 			
 			//add the new account to the accounts list
 			accountsList.add(newAccount);
@@ -187,21 +157,10 @@ public class Account {
 		this.primaryAccountHolder = primaryAccountHolder;
 	}
 
-	public String getSecondaryAccountHolder() {
-		return secondaryAccountHolder;
-	}
-
-	public void setSecondaryAccountHolder(String secondaryAccountHolder) {
-		this.secondaryAccountHolder = secondaryAccountHolder;
-	}
-
 	@Override
 	public String toString() {
 		return "Account balance: " + balance + "\nAccount active: " + active + "\nJoint account: " + jointAccount
 				+ "\nAccount in good standing: " + goodStanding + "\nAccount type: " + accountType + 
-				"Primary account holder: " + primaryAccountHolder + "\nSecondary Account Holder: " 
-				+ secondaryAccountHolder;
-	}
-
-	
+				"Primary account holder: " + primaryAccountHolder;
+	}	
 }

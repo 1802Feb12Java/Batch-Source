@@ -4,9 +4,6 @@ import java.io.Serializable;
 
 public class Customer implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -2795373050638956075L;
 	private String userName;
 	private String password;
@@ -16,10 +13,7 @@ public class Customer implements Serializable {
 	private String city;
 	private String state;
 	private String phoneNumber;
-	private String holdsJointAccountWith = null;
-	private boolean jointAccountHolder = false;
 	private boolean accountHolder = false;
-	private boolean applyingForJoint = false;
 	private boolean applyingForSavings = false;
 
 	public Customer() {
@@ -89,14 +83,6 @@ public class Customer implements Serializable {
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
-
-	public boolean isJointAccountHolder() {
-		return jointAccountHolder;
-	}
-
-	public void setJointAccountHolder(boolean jointAccountHolder) {
-		this.jointAccountHolder = jointAccountHolder;
-	}
 		
 	public boolean isAccountHolder() {
 		return accountHolder;
@@ -104,14 +90,6 @@ public class Customer implements Serializable {
 
 	public void setAccountHolder(boolean accountHolder) {
 		this.accountHolder = accountHolder;
-	}
-
-	public boolean isApplyingForJoint() {
-		return applyingForJoint;
-	}
-
-	public void setApplyingForJoint(boolean applyingForJoint) {
-		this.applyingForJoint = applyingForJoint;
 	}
 
 	public boolean isApplyingForSavings() {
@@ -122,20 +100,10 @@ public class Customer implements Serializable {
 		this.applyingForSavings = applyingForSavings;
 	}
 	
-	public String getHoldsJointAccountWith() {
-		return holdsJointAccountWith;
-	}
-
-	public void setHoldsJointAccountWith(String holdsJointAccountWith) {
-		this.holdsJointAccountWith = holdsJointAccountWith;
-	}
-	
 	@Override
 	public String toString() {
 		return "User name:  " + userName + "\nName:  " + firstName + " "+ lastName + 
 				"\nAddress:  " + streetAddress + "\nCity:  " + city + "\nState: " + state
 				+ "\nTelephone number:  " + phoneNumber;
 	}
-
-
 }
