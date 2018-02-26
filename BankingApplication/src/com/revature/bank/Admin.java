@@ -1,11 +1,11 @@
 package com.revature.bank;
 
-import java.util.UUID;
-
 public class Admin extends Employee{
 
 	
 	
+	private static final long serialVersionUID = 1L;
+
 	public Admin(String username, String password, String firstName, String lastName) {
 		super(username, password, firstName, lastName);
 		// TODO Auto-generated constructor stub
@@ -16,14 +16,11 @@ public class Admin extends Employee{
 	}
 	
 	//
-	public static String approveAccount() {
-		String accountNumber = UUID.randomUUID().toString();
-		return accountNumber;
+	public static void approveAccount(Customer c) {
+		Account a = new Account();
+		c.setAccountNumber(a.getAccountNumber());
+		c.getAcct();
 
-	}
-	
-	public void denyAccount() {
-		
 	}
 	
 }

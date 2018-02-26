@@ -10,10 +10,14 @@ public class User implements Serializable {
 	public String firstName = "";
 	public String lastName = "";
 	
-	public User(String username, String password, String firstName, String lastName) {
-		this.username = username;
-		this.password = password;
-		this.firstName = firstName;
-		this.lastName = lastName;
+	public User() {
+		super();
 	}
+	
+//	public User(String username, String password, String firstName, String lastName) {
+//		this.username = username;
+//		this.password = password;
+//		this.firstName = firstName;
+//		this.lastName = lastName;
+//	}
 }

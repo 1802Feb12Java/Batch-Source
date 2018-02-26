@@ -102,9 +102,7 @@ public class Driver implements Serializable {
 		System.out.println("What would you like to do?");
 		System.out.println("1. Login");
 		System.out.println("2. New Customer");
-		System.out.println("3. New Employee");
-		System.out.println("4. New Admin");
-		System.out.println("5. Log off");
+		System.out.println("3. Log off");
 		if(sc.hasNextInt()) {
 			cases = sc.nextInt();
 		}else {
@@ -125,14 +123,6 @@ public class Driver implements Serializable {
 				break;
 			case 3:
 				newScreen = true;
-				createEmployee();
-				break;
-			case 4:
-				newScreen = true;
-				createAdmin();
-				break;
-			case 5:
-				newScreen = true;
 				active = false;
 				
 				break;
@@ -140,9 +130,7 @@ public class Driver implements Serializable {
 				System.out.println("What would you like to do?");
 				System.out.println("1. Login");
 				System.out.println("2. New Customer");
-				System.out.println("3. New Employee");
-				System.out.println("4. New Admin");
-				System.out.println("5. Log off");
+				System.out.println("3. Log off");
 				cases = sc.nextInt();
 				}
 			} while(!newScreen);
@@ -203,17 +191,15 @@ public class Driver implements Serializable {
 		if(s.trim().equals("customer")) {
 			Customer c;
 			for(int i = 0; i < customs.size(); i++) {
-//				if(u.equals(customs.get(i).username)) {
-//					c = customs.get(i);
-//					doCustomerStuff(c);
-//				}
-				c = customs.get(0);
-				doCustomerStuff(c);
+				c = customs.get(i);
+				if(u.equals(c.getUsername())) {
+					doCustomerStuff(c);
+				}
 			}
 		}else if(s.trim().equals("admin")) {
 			doAdminStuff();
-		}else {
-			doEmployeeStuff();
+		}else {						//if they made it this far and they aren't a customer or admin, they must be 
+			doEmployeeStuff();		//an employee.
 		}
 	}
 	
@@ -228,7 +214,7 @@ public class Driver implements Serializable {
 		if(sc.hasNextInt()) {
 			cases = sc.nextInt();
 		}else {
-			//show this
+			//catches the input if the user puts in something other than a number
 			String garbage = sc.nextLine();
 			System.out.println("Please provide a number for input.");
 			
@@ -236,6 +222,7 @@ public class Driver implements Serializable {
 		do {
 		switch(cases) {
 			case 1:
+				//gets us out of the loop.
 				newScreen = true;
 				System.out.println("How much?");
 				if(sc.hasNextInt()) {
@@ -243,7 +230,7 @@ public class Driver implements Serializable {
 					c.withdraw(x);
 					doCustomerStuff(c);
 				}else {
-					//show this
+					//catches the input if the user puts in something other than a number
 					String garbage = sc.nextLine();
 					System.out.println("Please provide a number for input.");
 					
@@ -257,7 +244,7 @@ public class Driver implements Serializable {
 					c.deposit(y);
 					doCustomerStuff(c);
 				}else {
-					//show this
+					//catches the input if the user puts in something other than a number
 					String garbage = sc.nextLine();
 					System.out.println("Please provide a number for input.");
 					
@@ -268,7 +255,7 @@ public class Driver implements Serializable {
 				if(sc.hasNextInt()) {
 					cases = sc.nextInt();
 				}else {
-					//show this
+					//catches the input if the user puts in something other than a number
 					String garbage = sc.nextLine();
 					System.out.println("Please provide a number for input.");
 					
@@ -301,7 +288,7 @@ public class Driver implements Serializable {
 		if(sc.hasNextInt()) {
 			cases = sc.nextInt();
 		}else {
-			//show this
+			//catches the input if the user puts in something other than a number
 			String garbage = sc.nextLine();
 			System.out.println("Please provide a number for input.");
 			
@@ -344,7 +331,7 @@ public class Driver implements Serializable {
 		if(sc.hasNextInt()) {
 			cases = sc.nextInt();
 		}else {
-			//show this
+			//catches the input if the user puts in something other than a number
 			String garbage = sc.nextLine();
 			System.out.println("Please provide a number for input.");
 			
@@ -352,38 +339,16 @@ public class Driver implements Serializable {
 	}
 	
 	public static void approveApp(){
-		FileInputStream fs = null;
-		ObjectInputStream os = null;
-		File file = new File(apps);
-		try {
-			fs = new FileInputStream(file);
-			os = new ObjectInputStream(fs);
-		}
-		catch(FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		System.out.println("Which application would you like to look at?");
 		Customer c;
-		
-		//show this
-		try {
-			c = (Customer) os.readObject();
-			c.getAcct();
-			
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		
-		if(os != null) {
-			try {
-				os.close();
-			} catch (IOException e) {
-				e.printStackTrace();
+		for(int i = 0; i < customs.size(); i++) {
+			c = customs.get(i);
+			if(c.hasAcct == false) {
+				System.out.println(c.getFirstName() + " " + c.getLastName());
 			}
 		}
+		String ip = sc.nextLine();
+		
 	}
 	
 	public static void printToFile(ArrayList<Serializable> t, String s) {

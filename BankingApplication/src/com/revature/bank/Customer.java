@@ -2,6 +2,8 @@ package com.revature.bank;
 
 public class Customer extends User{
 
+	
+	private static final long serialVersionUID = 1L;
 	public String username = "";
 	public String password = "";
 	public String firstName = "";
@@ -15,14 +17,21 @@ public class Customer extends User{
 	public double accountBal = 0;
 	public String accountNumber = "";
 	
-	public Customer(String firstname, String lastname, String username, String password) {
-		super(username, password, firstname, lastname);
-
+	public Customer(String username, String password, String firstname, String lastname) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.firstName = firstname;
+		this.lastName = lastname;
 	}
 	
 	public Customer(String username, String password, String firstName, String lastName, String address,
 			String city, String state, String phoneNumber) {
-		super(phoneNumber, phoneNumber, phoneNumber, phoneNumber);
+		super();
+		this.username = username;
+		this.password = password;
+		this.firstName = firstName;
+		this.lastName = lastName;
 		this.address = address;
 		this.city = city;
 		this.state = state;
