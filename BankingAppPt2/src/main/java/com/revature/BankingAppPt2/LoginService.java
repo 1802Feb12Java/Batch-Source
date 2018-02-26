@@ -55,16 +55,19 @@ public class LoginService {
 				logger.info("New log in from " + userName + " with account type: " + userType);
 			}
 			else {
-				System.out.println("Wrong password!");
+				System.out.println("Error logging in. Try again.");
 				logger.info("Failed log in occured with user info username:" + userName + ", password: " + password);
-				return null;
+				String [] args = new String[0];
+				App.main(args);
 			}
 			
 		} catch (SQLException e) {
 			logger.error(e.toString());
 		} catch (Exception e) {
-			System.out.println("Error. No Such User.");
+			System.out.println("Error logging in. Try again.");
 			logger.info("A non existent user tried to log in using username: " + userName);
+			String [] args = new String[0];
+			App.main(args);
 		}
 		return createUser(userId, userType);
 	}

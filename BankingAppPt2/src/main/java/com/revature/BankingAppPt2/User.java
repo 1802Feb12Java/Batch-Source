@@ -16,6 +16,8 @@ public abstract class User {
 		this.userType = userType;
 	}
 	
+	abstract void runMenu();
+	
 	public String getUserType() {
 		return userType;
 	}
@@ -26,7 +28,7 @@ public abstract class User {
 				+ lastName + "]";
 	}
 
-	abstract void runMenu();
+
 	
 	
 }

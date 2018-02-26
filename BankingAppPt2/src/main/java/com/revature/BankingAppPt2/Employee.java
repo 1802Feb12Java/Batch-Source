@@ -1,18 +1,41 @@
 package com.revature.BankingAppPt2;
 
 import java.sql.Connection;
+import java.util.Scanner;
+
+import org.apache.log4j.Logger;
 
 public class Employee extends User{
-	private EmployeeDAO employeeDAO;
-	
+	private EmployeeServices employeeServices;
+	static Scanner scanner = new Scanner(System.in);
+	final static Logger logger = Logger.getLogger(Employee.class);
 	public Employee(int userId, String userType, Connection connection) {
 		super(userId, userType, connection);
-		employeeDAO = new EmployeeDAO(connection);
+		this.employeeServices = new EmployeeServices(connection);
 		
 	}
 	@Override
 	void runMenu() {
-		System.out.println("This is a ");
+		int menuOption = 0;
+		System.out.println("Hello, " + this.firstName);
+		while (menuOption != 3) {
+			System.out.println("Which employee function would you like to perform?");
+			System.out.println("1. Approve or Deny Accounts");
+			System.out.println("2. View customer information");
+			System.out.println("3. Log Out");
+			menuOption = Integer.valueOf(scanner.nextLine());
+			switch (menuOption) {
+			case 1:
+				employeeServices.approveAccounts();
+				break;
+			case 2:
+				employeeServices.viewCustomerInformation();
+				break;
+			default:
+				System.out.println("Error. Please enter a valid option");
+				break;
+			}
+		}
 		
 	}
 
