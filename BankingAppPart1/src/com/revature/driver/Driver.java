@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
+import com.revature.JDBC.connect.ConnectDB;
 import com.revature.accounts.Account;
 import com.revature.accounts.Pending;
 import com.revature.fileoperations.FileOperations;
@@ -44,6 +45,7 @@ public class Driver {
 		Scanner getInput = null;
 
 		//initialize the system
+		ConnectDB.connect();
 		System.out.println("Populating HashMaps...");
 
 
