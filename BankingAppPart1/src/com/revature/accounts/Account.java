@@ -1,8 +1,9 @@
 package com.revature.accounts;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
+
+import org.apache.log4j.Logger;
 
 import com.revature.users.Customer;
 
@@ -15,6 +16,7 @@ public class Account {
 	private String accountType;
 	private String primaryAccountHolder = null;
 	private String secondaryAccountHolder = null;
+	private Logger log = Logger.getRootLogger();
 	
 	public Account() {
 		super();
@@ -45,6 +47,7 @@ public class Account {
 
 	public static HashMap<String, ArrayList<Account>> createAccount(Customer customer, 
 			HashMap<String, ArrayList<Account>> accountsMap) {
+		
 		Account newAccount = null;
 		
 		ArrayList<Account> accountsList = null;
@@ -110,6 +113,7 @@ public class Account {
 	
 	public void withdraw(double amount) {
 		balance -= amount;
+		log.info("customer withdrew some stuff");
 	}
 	
 	public void deposit(double amount) {
