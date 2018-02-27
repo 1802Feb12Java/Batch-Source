@@ -1,6 +1,8 @@
 No log4j
 You can't approve accounts but that wasn't a requirement in the doc (i think)
 
+database.properties is in src/main/java
+
 Admin (need to use capital A)
 b     (most my passwords were b)
 
