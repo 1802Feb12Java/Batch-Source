@@ -1,4 +1,4 @@
-package com.revature.dao.bl;
+package com.revature.bl;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -39,8 +39,8 @@ public class Accounts {
 
 		} catch (SQLException e) {
 			// log for now
-			// TODO CHECK FOR PK VIOLATION
 			logger.error("SQL Error while adding bank account " + account);
+			logger.error(e.getMessage());
 			return false;
 		} finally {
 
@@ -56,6 +56,7 @@ public class Accounts {
 		} catch (SQLException e) {
 			// log for now
 			logger.error("No Bank Account Exists with the ID " + accountId);
+			logger.error(e.getMessage());
 		} finally {
 
 		}
@@ -78,6 +79,7 @@ public class Accounts {
 		} catch (SQLException e) {
 			// log for now
 			logger.error("SQL Error while fetching all the user's bank accounts with the id " + userId);
+			logger.error(e.getMessage());
 		} finally {
 
 		}
@@ -90,6 +92,7 @@ public class Accounts {
 		} catch (SQLException e) {
 			// log for now
 			logger.error("SQL Error while updating bank account to " + account);
+			logger.error(e.getMessage());
 			return false;
 		} finally {
 
@@ -98,12 +101,19 @@ public class Accounts {
 		return true;
 	}
 
-	public static boolean deleteBankAccount(int accountId) {
+	public static boolean deleteBankAccount(int accountId, int userId) {
 		try {
+
+			// delete user bank account entry
+			userBankAccDao.deleteUserBankAccount(userId, accountId);
+
+			// then delete bank account #PK constraint
 			bankAccDao.deleteBankAccount(accountId);
+
 		} catch (SQLException e) {
 			// log for now
 			logger.error("SQL Error while deleting bank account with ID " + accountId);
+			logger.error(e.getMessage());
 			return false;
 		} finally {
 
@@ -118,6 +128,7 @@ public class Accounts {
 		} catch (SQLException e) {
 			// log for now
 			logger.error("SQL Error while fetching all bank accounts");
+			logger.error(e.getMessage());
 		} finally {
 
 		}

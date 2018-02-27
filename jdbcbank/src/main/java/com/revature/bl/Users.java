@@ -1,4 +1,4 @@
-package com.revature.dao.bl;
+package com.revature.bl;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -32,8 +32,8 @@ public class Users {
 
 		} catch (SQLException e) {
 			// log for now
-			// TODO CHECK FOR PK VIOLATION
 			logger.error("SQL Error while adding user " + user);
+			logger.error(e.getMessage());
 			return false;
 		} finally {
 
@@ -49,6 +49,21 @@ public class Users {
 		} catch (SQLException e) {
 			// log for now
 			logger.error("No User Exists with the ID " + userId);
+			logger.error(e.getMessage());
+		} finally {
+
+		}
+
+		return null;
+	}
+
+	public static User getUser(String username) {
+		try {
+			return userDao.getUser(username);
+
+		} catch (SQLException e) {
+			logger.debug("No User Exists with the Username " + username);
+			logger.error(e.getMessage());
 		} finally {
 
 		}
@@ -62,6 +77,7 @@ public class Users {
 		} catch (SQLException e) {
 			// log for now
 			logger.error("No User Exists with the USERNAME " + username + " and PASSWORD " + password);
+			logger.error(e.getMessage());
 		} finally {
 
 		}
@@ -75,6 +91,7 @@ public class Users {
 		} catch (SQLException e) {
 			// log for now
 			logger.error("SQL Error while updating user to " + user);
+			logger.error(e.getMessage());
 			return false;
 		} finally {
 
@@ -89,6 +106,7 @@ public class Users {
 		} catch (SQLException e) {
 			// log for now
 			logger.error("SQL Error while deleting user with ID " + userId);
+			logger.error(e.getMessage());
 			return false;
 		} finally {
 
@@ -103,6 +121,7 @@ public class Users {
 		} catch (SQLException e) {
 			// log for now
 			logger.error("SQL Error while fetching all user");
+			logger.error(e.getMessage());
 		} finally {
 
 		}

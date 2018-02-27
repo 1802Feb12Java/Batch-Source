@@ -1,9 +1,9 @@
 package com.revature;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.sql.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -11,36 +11,33 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import com.revature.beans.BankAccount;
+import com.revature.beans.Transaction;
 import com.revature.beans.User;
-import com.revature.dao.bl.Accounts;
-import com.revature.dao.bl.Users;
-import com.revature.exceptions.InvalidMenuOptionException;
+import com.revature.bl.Accounting;
+import com.revature.bl.Accounts;
+import com.revature.bl.Transactions;
+import com.revature.bl.Users;
 import com.revature.validation.Validate;
 
 public class Driver {
 	// no actual logging done in main, declared to load the logger property files
 	private static final Logger logger = LogManager.getLogger(Driver.class);
 	private static Scanner scan = new Scanner(System.in);
-	private static SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 
 	public static void main(String[] args) {
 		int check = 0;
 		boolean bankSysOn = true;
 		while (bankSysOn) {
 			do {
-				System.out.println("\n---------------------------------------------");
-				System.out.println("\tWelcome to the Banking App");
-				System.out.println("\t\t1. To Login");
-				System.out.println("\t\t2. To Register");
-				System.out.println("\t\t3. To Quit");
-				System.out.println("---------------------------------------------\n");
-				String input = scan.nextLine();
+				logger.info("\n---------------------------------------------");
+				logger.info("\tWelcome to the Banking App Part II");
+				logger.info("\t\t1. To Login");
+				logger.info("\t\t2. To Register");
+				logger.info("\t\t3. To Quit");
+				logger.info("---------------------------------------------\n");
+				String input = scan.nextLine().trim();
 				// check input
-				try {
-					check = Validate.safeParse(input);
-				} catch (InvalidMenuOptionException e) {
-					e.printStackTrace();
-				}
+				check = Validate.safeParse(input);
 
 			} while (check < 1 || check > 3);
 			// use input to give next menu
@@ -63,17 +60,17 @@ public class Driver {
 		String username = null, password = null;
 		User user = null;
 		do {
-			System.out.println("---------------------------------------------");
-			System.out.println("\tEnter Username");
-			username = scan.nextLine();
-			System.out.println("\tEnter Password");
-			password = scan.nextLine();
-			System.out.println("---------------------------------------------");
+			logger.info("---------------------------------------------");
+			logger.info("\tEnter Username");
+			username = scan.nextLine().trim();
+			logger.info("\tEnter Password");
+			password = scan.nextLine().trim();
+			logger.info("---------------------------------------------");
 
 			if ((user = Users.getUser(username, password)) != null)
 				check = 0;
 			else
-				System.out.println("\n\tInvalid, please input valid credentials!\n");
+				logger.info("\n\tInvalid, please input valid credentials!\n");
 		} while (check < 0);
 
 		userMenu(user);
@@ -82,115 +79,93 @@ public class Driver {
 	public static void registerUserMenu() {
 
 		String username = null, password = null;
-		System.out.println("---------------------------------------------");
+		logger.info("---------------------------------------------");
 		do {
-			System.out.println("\tCreate a valid username, must be unique and more than 6 characters long");
-			username = scan.nextLine();
+			logger.info("\tCreate a valid username, must be unique and more than 6 characters long");
+			username = scan.nextLine().trim();
 
 		} while (!Validate.validUsername(username));
 
-		System.out.println("\tCreate a password");
-		password = scan.nextLine();
+		logger.info("\tCreate a password");
+		password = scan.nextLine().trim();
 
-		System.out.println("\tInput First Name");
-		String fname = scan.nextLine();
+		logger.info("\tInput First Name");
+		String fname = scan.nextLine().trim();
 
-		System.out.println("\tInput Last Name");
-		String lname = scan.nextLine();
+		logger.info("\tInput Last Name");
+		String lname = scan.nextLine().trim();
 
 		Date birthdate = null;
 
 		do {
-			System.out.println("\tInput Birthdate mm/dd/yyyy");
-
-			try {
-				java.util.Date date = formatter.parse(scan.nextLine());
-				birthdate = new Date(date.getTime());
+			logger.info("\tInput Birthdate mm/dd/yyyy");
+			if ((birthdate = Validate.validDate(scan.nextLine())) != null)
 				break;
-			} catch (ParseException e) {
-				// e.printStackTrace();
-				System.out.println("\n\tInvalid date, please retry\n");
-			}
+			logger.info("\n\tInvalid date, please retry\n");
 		} while (true);
 
 		// super check
-		System.out.println("\tInput user code, if you have one");
+		logger.info("\tInput user code, if you have one");
 		boolean areSuper = Validate.validSuperCode(scan.nextLine());
 
 		User user = new User(0, username, password, fname, lname, birthdate, areSuper, null);
 
 		// add user
 		if (Users.addUser(user)) {
-			System.out.println("\n\tUser was successfully created");
-			System.out.println("\t\tUsername: " + user.getUsername());
-			System.out.println("\t\tFirst Name: " + user.getFirstName());
-			System.out.println("\t\tLast Name: " + user.getLastName());
-			System.out.println("\t\tBirthdate: " + formatter.format(user.getBirthdate()));
+			logger.info("\n\tUser was successfully created");
+			logger.info("\t\tUsername: " + user.getUsername());
+			logger.info("\t\tFirst Name: " + user.getFirstName());
+			logger.info("\t\tLast Name: " + user.getLastName());
+			logger.info("\t\tBirthdate: " + Validate.formatter.format(user.getBirthdate()));
 			if (areSuper)
-				System.out.println("\t\tSuper User Status: " + user.isSuper());
+				logger.info("\t\tSuper User Status: " + user.isSuper());
 		} else
-			System.out.println("\n\tUser creation failed");
-		System.out.println("\n\n");
+			logger.info("\n\tUser creation failed");
+		logger.info("\n\n");
 
 	}
 
 	public static void userMenu(User user) {
-		System.out.println("\n\tWelcome " + user.getFirstName() + " " + user.getLastName() + "!");
+		logger.info("\n\tWelcome " + user.getFirstName() + " " + user.getLastName() + "!");
 		int check = 0;
 		boolean condi = true;
 		while (condi) {
 			do {
-				System.out.println("---------------------------------------------");
-				System.out.println("\t1. View Accounts and Balances");
-				System.out.println("\t2. Create Account");
-				System.out.println("\t3. Delete Account");
-				System.out.println("\t4. Deposit or Withdraw from Account");
-				System.out.println("\t5. Logout");
-				System.out.println("\t6. View Transactions");
+				logger.info("---------------------------------------------");
+				logger.info("\t1. View Bank Accounts and Balances");
+				logger.info("\t2. Create Bank Account");
+				logger.info("\t3. Delete Bank Account");
+				logger.info("\t4. Logout");
+				logger.info("\t5. View Transactions");
 				if (user.isSuper()) {
-					System.out.println("\t7. Create User");
-					System.out.println("\t8. Read User");
-					System.out.println("\t9. Update User");
-					System.out.println("\t10. Destroy User");
+					logger.info("\t6. Create User");
+					logger.info("\t7. View Users");
 				}
-				System.out.println("---------------------------------------------");
-				try {
-					check = Validate.safeParse(scan.nextLine());
-				} catch (InvalidMenuOptionException e) {
-					e.printStackTrace();
-				}
+				logger.info("---------------------------------------------");
+				check = Validate.safeParse(scan.nextLine().trim());
 
-			} while (user.isSuper() && (check < 1 || check > 10) || !user.isSuper() && (check < 1 || check > 6));
+			} while (user.isSuper() && (check < 1 || check > 7) || !user.isSuper() && (check < 1 || check > 5));
 
 			switch (check) {
 			case 1:
-				viewBankAccounts(user);
+				viewBankAccounts(user.getUserId());
 				break;
 			case 2:
-				createBankAccount(user);
+				createBankAccount(user.getUserId());
 				break;
 			case 3:
-				deleteAccount();
+				deleteAccount(user.getUserId());
 				break;
 			case 4:
-				accountTransaction();
-				break;
-			case 5:
 				logout();
-			case 6:
-				viewTransaction();
+			case 5:
+				viewTransactions(user.getUserId());
 				break;
-			case 7:
+			case 6:
 				createUser();
 				break;
-			case 8:
-				readUser();
-				break;
-			case 9:
-				updateUser();
-				break;
-			case 10:
-				deleteUser();
+			case 7:
+				readUsers();
 				break;
 
 			}
@@ -198,57 +173,312 @@ public class Driver {
 
 	}
 
-	public static void viewBankAccounts(User user) {
+	public static void viewBankAccounts(int userId) {
 
-		ArrayList<BankAccount> accounts = Accounts.getAllBankAccounts(user.getUserId());
+		ArrayList<BankAccount> accounts = Accounts.getAllBankAccounts(userId);
 		if (accounts == null || accounts.size() == 0) {
-			System.out.println("Sorry, there are no accounts tied to this user at this time");
+			logger.info("Sorry, there are no bank accounts tied to this user at this time");
 			return;
 		}
-		for (BankAccount ba : accounts) {
-			System.out.println("\t" + ba);
+
+		// READ ONLY
+
+		int choice = -1, accountSize = accounts.size();
+		// Account Access Menu Loop
+		while (true) {
+			// User Input Loop
+			do {
+				logger.info("\n\tPlease enter the index of a bank account you would like to access");
+				for (int i = 0; i < accountSize; i++) {
+					logger.info("\t[" + (i + 1) + "] " + accounts.get(i));
+				}
+				logger.info("\t[0] To Go Back");
+				// get user menu choice
+				choice = Validate.safeParse(scan.nextLine().trim());
+				// quit menu condi
+				if (choice == 0)
+					return;
+
+			} while (choice < 0 || choice > accountSize);
+
+			// Access account with index
+			doBankAccountTransaction(accounts.get(choice - 1), userId);
 		}
-		System.out.println("\n");
 	}
 
-	public static void createBankAccount(User user) {
+	public static void createBankAccount(int userId) {
 
 		String balance = "";
 		do {
-			System.out.println("\tInput a Valid Initial Bank Account Balance");
-			balance = scan.nextLine();
+			logger.info("\tInput a Valid Initial Bank Account Balance");
+			balance = scan.nextLine().trim();
 		} while (Validate.validAmount(balance));
 
 		// create bank account POJO
 		BankAccount bAccount = new BankAccount(0, new BigDecimal(balance), null);
+
 		// store in DB
-		Accounts.addBankAccount(bAccount, user.getUserId());
+		if (Accounts.addBankAccount(bAccount, userId)) {
+			logger.info("\nBank Account was successfully created");
+			logger.info("\tBank Account ID: " + bAccount.getAccountId());
+			logger.info("\tStarting Balance: " + bAccount.getBalance());
+		} else {
+			logger.info("\tBank Account was not created");
+		}
+		logger.info("\n");
 
 	}
 
-	public static void deleteAccount() {
+	public static void deleteAccount(int userId) {
+		int choice = -1, numAccounts = 0;
+
+		while (true) {
+			// check if there are any accounts left
+			ArrayList<BankAccount> accounts = Accounts.getAllBankAccounts(userId);
+			if (accounts == null || accounts.size() == 0) {
+				logger.info("Sorry, there are no bank accounts tied to this user at this time");
+				return;
+			}
+			numAccounts = accounts.size();
+
+			// loop through existing accounts and display options
+			do {
+				logger.info("\n\tPlease enter the index number of account you would like to delete\n");
+				logger.info("\n\tBank Account must have 0 balance to be deletable");
+				for (int i = 0; i < accounts.size(); i++) {
+					logger.info("\t[" + (i + 1) + "] to Delete " + accounts.get(i));
+				}
+				logger.info("\t[0] to quit");
+
+				// get user menu choice
+				choice = Validate.safeParse(scan.nextLine().trim());
+				// quit menu condi
+				if (choice == 0)
+					return;
+
+			} while (choice < 0 || choice > numAccounts);
+
+			BankAccount accountPicked = accounts.get(choice - 1);
+
+			// Check if balance is 0, before attempting delete
+			if (accountPicked.getBalance().compareTo(BigDecimal.ZERO) > 0) {
+				logger.info("\n\tBank Account's balance has to be 0 to remove");
+				continue;
+			}
+
+			if (Accounts.deleteBankAccount(accountPicked.getAccountId(), userId)) {
+				logger.info("\n\tDeleted Bank Account");
+			} else {
+				logger.info("\n\tUnable to delete Bank Account");
+			}
+		}
+
 	}
 
-	public static void accountTransaction() {
+	public static void doBankAccountTransaction(BankAccount ba, int userId) {
+		int choice = -1;
+		// Bank Account Option Menu Loop
+		while (true) {
+			// User Input Validation Loop
+			do {
+				logger.info("---------------------------------------------");
+				logger.info("\n\t1. To Deposit");
+				logger.info("\n\t2. To Withdraw");
+				logger.info("\n\t3. To Transfer");
+				logger.info("\n\t4. To Go Back");
+				logger.info("---------------------------------------------");
+				// get user menu choice
+				choice = Validate.safeParse(scan.nextLine().trim());
+				// quit this menu condition
+				if (choice == 4)
+					return;
+
+			} while (choice < 0 || choice > 4);
+
+			switch (choice) {
+			case 1:
+				depositMenu(ba, userId);
+				break;
+			case 2:
+				withdrawMenu(ba, userId);
+				break;
+			case 3:
+				transferMenu(ba, userId);
+				break;
+			}
+		}
 	}
 
-	public static void viewTransaction() {
+	public static void viewTransactions(int userId) {
+
+		// get all account ids
+		ArrayList<BankAccount> accountList = Accounts.getAllBankAccounts(userId);
+		if (accountList == null || accountList.size() == 0) {
+			logger.info("Sorry, this user does not have any bank accounts currently");
+			return;
+		}
+		// get all transactions associated with those
+		ArrayList<Transaction> transactions = new ArrayList<Transaction>();
+
+		for (BankAccount ba : accountList) {
+			transactions.addAll((ArrayList<Transaction>) Transactions.getTransactions(ba.getAccountId()));
+		}
+		if (transactions.size() == 0) {
+			logger.info("Sorry, there are no transactions tied to this user's accounts at this time");
+			return;
+		}
+
+		for (Transaction t : transactions)
+			logger.info("\t" + t);
+
+		logger.info("\tEnter Any Key To Go Back");
+		scan.nextLine();
+
 	}
 
 	public static void createUser() {
+		logger.info("\n\tInput Username, Password, firstname, lastname, birthdate (mm/dd/yyy)");
+		String info = scan.nextLine();
+		logger.info("\tAre they a super user? true/false");
+		String superUser = scan.nextLine();
+
+		String[] userInfo = info.split(",");
+
+		User user = new User(0, userInfo[0], userInfo[1], userInfo[2], userInfo[3], Validate.validDate(userInfo[4]),
+				Validate.validBoolean(superUser), null);
+		if (Users.addUser(user))
+			logger.info("\n\tAdded User " + user + " to the Database");
+		else
+			logger.info("\n\tFailed to Add user " + user + " to the Database");
+
 	}
 
-	public static void readUser() {
+	public static void readUsers() {
+
+		ArrayList<User> users = (ArrayList<User>) Users.getAllUsers();
+		if (users == null || users.size() == 0) {
+			logger.info("Sorry, there are no users registered at this time");
+			return;
+		}
+		int choice = 0, userSize = users.size();
+		// User Access Menu Loop
+		while (true) {
+			// Admin Input Loop
+			do {
+				logger.info("\n\tPlease enter the index of a user account you would like to access");
+				for (int i = 0; i < userSize; i++) {
+					logger.info("\t[" + (i + 1) + "] " + users.get(i));
+				}
+				logger.info("\t[0] To Go Back");
+				// get user menu choice
+				choice = Validate.safeParse(scan.nextLine().trim());
+				// quit menu condi
+				if (choice == 0)
+					return;
+
+			} while (choice < 0 || choice > userSize);
+
+			// Access user with index
+			editUser(users.get(choice - 1));
+		}
 	}
 
-	public static void updateUser() {
+	private static void depositMenu(BankAccount ba, int userId) {
+		String amount = "";
+		do {
+			logger.info("\tInput a Valid Deposit Amount");
+			amount = scan.nextLine().trim();
+		} while (Validate.validAmount(amount));
+
+		if (Accounting.createDeposit(new BigDecimal(amount), ba, userId)) {
+			logger.info("\n\tDeposited " + amount);
+		} else {
+			logger.info("\n\tAmount was not deposited");
+		}
+
 	}
 
-	public static void deleteUser() {
+	private static void withdrawMenu(BankAccount ba, int userId) {
+		String amount = "";
+		do {
+			logger.info("\tInput a Valid Withdraw Amount");
+			amount = scan.nextLine().trim();
+		} while (Validate.validAmount(amount));
+
+		if (Accounting.createWithdraw(new BigDecimal(amount), ba, userId)) {
+			logger.info("\n\tWithdrew " + amount);
+		} else {
+			logger.info("\n\tAmount was not withdrawn");
+		}
+	}
+
+	private static void transferMenu(BankAccount ba, int userId) {
+
+	}
+
+	private static void editUser(User user) {
+		int choice = -1;
+		do {
+			logger.info("---------------------------------------------");
+			logger.info("\n\t1. To Update User Info");
+			logger.info("\n\t2. To Delete This User");
+			logger.info("\n\t3. To Go Back");
+			logger.info("---------------------------------------------");
+			choice = Validate.safeParse(scan.nextLine());
+			if (choice == 3)
+				return;
+
+		} while (choice < 0 || choice > 3);
+		if (choice == 2) {
+			deleteUser(user.getUserId());
+		} else
+			updateUser(user);
+
+	}
+
+	private static void deleteUser(int userId) {
+		if (Users.deleteUser(userId))
+			logger.info("\n\tUser with id " + userId + " was deleted");
+		else
+			logger.info("\n\t User was not deleted");
+
+	}
+
+	private static void updateUser(User user) {
+		Method methodFound = null;
+
+		while (true) {
+			logger.info("\n\tEnter user attribute you want to edit");
+			String fieldName = scan.nextLine();
+
+			// find a match
+			for (Method m : user.getClass().getMethods()) {
+				// match input choice to a method name in the Person Class
+				if (m.getName().toLowerCase().contains(fieldName.toLowerCase()) && m.getName().startsWith("set")) {
+					methodFound = m;
+				}
+			}
+			logger.info("\t" + methodFound.getName());
+			logger.info("\tIs this the field you want to edit?");
+
+			logger.info("\tEnter value you would like to change it to");
+			String fieldValue = scan.nextLine();
+			try {
+				methodFound.invoke(user, fieldValue);
+				// update user in database as well
+				Users.updateUser(user);
+			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+				logger.error(e.getMessage());
+			}
+			logger.info("\tEnter 0 to exit, or anything else to continue editing this user");
+			if (scan.nextLine().equals("0"))
+				return;
+		}
+
 	}
 
 	public static void logout() {
-		System.out.println("\nYou are now logged out, have a great day!\n");
+		logger.info("\nYou are now logged out, have a great day!\n");
 		System.exit(0);
 
 	}

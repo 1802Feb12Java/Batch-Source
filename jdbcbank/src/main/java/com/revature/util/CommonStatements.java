@@ -20,7 +20,7 @@ public interface CommonStatements {
 			statement += cols[i] + " = ? ";
 		}
 		statement += " WHERE " + cols[0] + " = ?";
-		logger.info("Created update statement: " + statement);
+		logger.debug("Created update statement: " + statement);
 		return statement;
 	};
 	// "INSERT INTO ? Values( value1, ...)
@@ -32,7 +32,7 @@ public interface CommonStatements {
 		// remove last ','
 		statement = statement.substring(0, statement.length() - 2);
 		statement += " )";
-		logger.info("Created insert statement: " + statement);
+		logger.debug("Created insert statement: " + statement);
 		return statement;
 	};
 
@@ -45,7 +45,7 @@ public interface CommonStatements {
 		// remove last ','
 		statement = statement.substring(0, statement.length() - 1);
 		statement += " )";
-		logger.info("Created insert statement: " + statement);
+		logger.debug("Created insert statement: " + statement);
 		return statement;
 	};
 

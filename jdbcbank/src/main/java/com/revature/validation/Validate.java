@@ -1,16 +1,31 @@
 package com.revature.validation;
 
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
+import com.revature.bl.Users;
 import com.revature.exceptions.InvalidMenuOptionException;
 
 public class Validate {
+	private static final Logger logger = LogManager.getLogger(Validate.class);
 
-	public static int safeParse(String input) throws InvalidMenuOptionException {
+	public static SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+
+	public static int safeParse(String input) {
 		try {
-			return Integer.parseInt(input);
+			return Integer.parseInt(input.trim());
 
 		} catch (NumberFormatException e) {
-			throw new InvalidMenuOptionException(input);
+
+			logger.info(new InvalidMenuOptionException(input).getMessage());
+		} catch (Exception e) {
+
 		}
+		return -1;
 	}
 
 	public static boolean validUsername(String username) {
@@ -18,13 +33,9 @@ public class Validate {
 		if (username.length() < 6)
 			return false;
 		// validate unique
-		// if (DataStore.readUsersFromFile() == null)
-		// return true;
-		// for (User u : DataStore.readUsersFromFile()) {
-		// if (u.getUsername().equals(username))
-		// return false;
-		// }
-		return true;
+		if (Users.getUser(username) == null)
+			return true;
+		return false;
 	}
 
 	public static boolean validPassword(String password) {
@@ -39,6 +50,24 @@ public class Validate {
 
 	public static boolean validSuperCode(String input) {
 		if (input != null && input.toLowerCase().replaceAll("\\s", "").equals("iamsuper"))
+			return true;
+		return false;
+	}
+
+	public static Date validDate(String input) {
+		if (input == null)
+			return null;
+		try {
+			java.util.Date date = formatter.parse(input.trim());
+			return new Date(date.getTime());
+		} catch (ParseException e) {
+			logger.error(e.getMessage());
+		}
+		return null;
+	}
+
+	public static boolean validBoolean(String input) {
+		if (input.toLowerCase().trim().equals("true"))
 			return true;
 		return false;
 	}

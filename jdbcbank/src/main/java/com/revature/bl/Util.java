@@ -1,4 +1,4 @@
-package com.revature.dao.bl;
+package com.revature.bl;
 
 import java.sql.SQLException;
 
@@ -22,6 +22,7 @@ public class Util {
 		} catch (SQLException e) {
 			// log for now
 			logger.error("SQL Error executing getNextSeq on " + sequenceName);
+			logger.error(e.getMessage());
 		} finally {
 
 		}

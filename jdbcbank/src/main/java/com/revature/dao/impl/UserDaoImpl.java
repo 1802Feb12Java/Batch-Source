@@ -32,19 +32,18 @@ public class UserDaoImpl implements UserDao {
 
 	private final static String TABLE_COLS[] = { USER_ID, USERNAME, PASSWORD, FIRST_NAME, LAST_NAME, BIRTHDATE,
 			IS_SUPER };
-	private static final String UPDATE = "UPDATE users SET firstName=?, lastName=?, joinDate=?, cardId=?, email=?, password=?, phoneNumber=?, accountType=?, location=? WHERE id=?";
-
-	private Connection con = ConnectionFactory.getInstance().getConnection();
 
 	public void addUser(User user) throws SQLException {
+		Connection con = null;
 		PreparedStatement s = null;
 		String statement = "INSERT INTO BANK_USER" + " (USER_ID, USERNAME, PASSWORD, FNAME, LNAME, BIRTHDATE, SUPER)"
 				+ " VALUES(?,?,?,?,?,?,?)";
 
 		// CommonStatements.InsertIntoFill.apply(TABLE_NAME, TABLE_COLS.length);
-		logger.info("Created statement = " + statement + " with user " + user);
+		logger.debug("Created statement = " + statement + " with user " + user);
 
 		try {
+			con = ConnectionFactory.getInstance().getConnection();
 			s = con.prepareStatement(statement);
 			s.setInt(1, user.getUserId());
 			s.setString(2, user.getUsername());
@@ -59,6 +58,8 @@ public class UserDaoImpl implements UserDao {
 		} finally {
 			if (s != null)
 				s.close();
+			if (con != null)
+				con.close();
 		}
 
 	}
@@ -67,18 +68,20 @@ public class UserDaoImpl implements UserDao {
 	 * Returns a user with matching USER_ID
 	 */
 	public User getUser(int userId) throws SQLException {
+		Connection con = null;
 		PreparedStatement s = null;
 		ResultSet rs = null;
 
 		String statement = "SELECT * FROM " + TABLE_NAME + " WHERE USER_ID=?";
-		logger.info("Created SQL Statement: " + statement + " With USER_ID " + userId);
+		logger.debug("Created SQL Statement: " + statement + " With USER_ID " + userId);
 
 		try {
+			con = ConnectionFactory.getInstance().getConnection();
 			s = con.prepareStatement(statement);
 			s.setInt(1, userId);
 
 			rs = s.executeQuery();
-			logger.info("Fetched User with userId: " + userId + " from Database");
+			logger.debug("Fetched User with userId: " + userId + " from Database");
 
 			if (rs.next())
 				return processRow(rs);
@@ -87,25 +90,58 @@ public class UserDaoImpl implements UserDao {
 				s.close();
 			if (rs != null)
 				rs.close();
+			if (con != null)
+				con.close();
 		}
 
 		return null;
 	}
 
+	public User getUser(String username) throws SQLException {
+		Connection con = null;
+		PreparedStatement s = null;
+		ResultSet rs = null;
+
+		String statement = "SELECT * FROM " + TABLE_NAME + " WHERE USERNAME=? ";
+		logger.debug("Created SQL Statement: " + statement + " With USERNAME " + username);
+
+		try {
+			con = ConnectionFactory.getInstance().getConnection();
+			s = con.prepareStatement(statement);
+			s.setString(1, username);
+
+			rs = s.executeQuery();
+			logger.debug("Fetched User with username: " + username);
+
+			if (rs.next())
+				return processRow(rs);
+		} finally {
+			if (s != null)
+				s.close();
+			if (rs != null)
+				rs.close();
+			if (con != null)
+				con.close();
+		}
+		return null;
+	}
+
 	public User getUser(String username, String password) throws SQLException {
+		Connection con = null;
 		PreparedStatement s = null;
 		ResultSet rs = null;
 
 		String statement = "SELECT * FROM " + TABLE_NAME + " WHERE USERNAME=? AND PASSWORD = ?";
-		logger.info("Created SQL Statement: " + statement + " With USERNAME " + username + ", PASSWORD" + password);
+		logger.debug("Created SQL Statement: " + statement + " With USERNAME " + username + ", PASSWORD" + password);
 
 		try {
+			con = ConnectionFactory.getInstance().getConnection();
 			s = con.prepareStatement(statement);
 			s.setString(1, username);
 			s.setString(2, password);
 
 			rs = s.executeQuery();
-			logger.info("Fetched User with username: " + username + ", password: " + password + " from Database");
+			logger.debug("Fetched User with username: " + username + ", password: " + password + " from Database");
 
 			if (rs.next())
 				return processRow(rs);
@@ -114,16 +150,20 @@ public class UserDaoImpl implements UserDao {
 				s.close();
 			if (rs != null)
 				rs.close();
+			if (con != null)
+				con.close();
 		}
 		return null;
 	}
 
 	public void updateUser(User user) throws SQLException {
+		Connection con = null;
 		PreparedStatement s = null;
 		String statement = CommonStatements.Update.apply(TABLE_NAME, TABLE_COLS);
-		logger.info("Created SQL Statement: " + statement + " with user " + user);
+		logger.debug("Created SQL Statement: " + statement + " with user " + user);
 
 		try {
+			con = ConnectionFactory.getInstance().getConnection();
 			s = con.prepareStatement(statement);
 			// fill in the ???s
 			s.setString(1, TABLE_NAME);
@@ -134,27 +174,34 @@ public class UserDaoImpl implements UserDao {
 			s.setString(TABLE_COLS.length, TABLE_COLS[0]);
 
 			s.executeQuery();
-			logger.info("Updated User to " + user);
+			logger.debug("Updated User to " + user);
 		} finally {
 			if (s != null)
 				s.close();
+			if (con != null)
+				con.close();
 		}
 
 	}
 
 	public void deleteUser(int userId) throws SQLException {
+		Connection con = null;
 		PreparedStatement s = null;
-		String statement = "DELETE FROM " + TABLE_NAME + " WHERE USER_ID = " + userId;
-		logger.info("Created statement = " + statement + " with USER_ID " + userId);
+		String statement = "DELETE FROM " + TABLE_NAME + " WHERE USER_ID = ?";
+		logger.debug("Created statement = " + statement + " with USER_ID " + userId);
 
 		try {
+			con = ConnectionFactory.getInstance().getConnection();
 			s = con.prepareStatement(statement);
+			s.setInt(1, userId);
 
 			s.executeQuery();
-			logger.info("Deleted user from database with USER_ID " + userId);
+			logger.debug("Deleted user from database with USER_ID " + userId);
 		} finally {
 			if (s != null)
 				s.close();
+			if (con != null)
+				con.close();
 		}
 
 	}
@@ -163,17 +210,19 @@ public class UserDaoImpl implements UserDao {
 	 * Gets a list of all the User objects in the DB BANK_USER Table
 	 */
 	public List<User> getAllUsers() throws SQLException {
+		Connection con = null;
 		PreparedStatement s = null;
 		ResultSet rs = null;
 		List<User> list = new ArrayList<>();
 
 		String sqlStatement = ("SELECT * FROM " + TABLE_NAME);
-		logger.info("Created SQL Statement: " + sqlStatement);
+		logger.debug("Created SQL Statement: " + sqlStatement);
 
 		try {
+			con = ConnectionFactory.getInstance().getConnection();
 			s = con.prepareStatement(sqlStatement);
 			rs = s.executeQuery();
-			logger.info("Fetched All Users from Database");
+			logger.debug("Fetched All Users from Database");
 
 			while (rs.next()) {
 				list.add(processRow(rs));
@@ -183,6 +232,8 @@ public class UserDaoImpl implements UserDao {
 				s.close();
 			if (rs != null)
 				rs.close();
+			if (con != null)
+				con.close();
 		}
 		return list;
 	}
@@ -196,6 +247,8 @@ public class UserDaoImpl implements UserDao {
 	private User processRow(ResultSet rs) throws SQLException {
 		User user = new User();
 		user.setUserId(rs.getInt(USER_ID));
+		user.setUsername(rs.getString(USERNAME));
+		user.setPassword(rs.getString(PASSWORD));
 		user.setFirstName(rs.getString(FIRST_NAME));
 		user.setLastName(rs.getString(LAST_NAME));
 		user.setBirthdate(rs.getDate(BIRTHDATE));

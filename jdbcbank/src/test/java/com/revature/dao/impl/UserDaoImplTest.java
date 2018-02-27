@@ -10,27 +10,26 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.revature.beans.User;
+import com.revature.bl.Users;
 
 public class UserDaoImplTest {
-	private UserDaoImpl userDao;
-	private User permanentUser = new User(111, "Permanent", "Forever", null, false, null);
-	private User updatableUser = new User(999, "Update", "Update", null, false, null);
-	private User deleteUser = new User(666, "Delete", "Last Delete Name", null, false, null);
+	private User permanentUser = new User(1, "Permanent", "Forever", "test", "test", null, false, null);
+	private User updatableUser = new User(2, "Update", "Update", "tset", "test", null, false, null);
+	private User deleteUser = new User(3, "Delete", "Last Delete Name", "test", "test", null, false, null);
 
 	@Before
 	public void refreshDatabase() {
 		// RefreshDatabase.main(null);
 		// input test data
-		userDao = new UserDaoImpl();
 		// add user to delete
-		userDao.addUser(deleteUser);
+		Users.addUser(deleteUser);
 
 	}
 
 	@Test
-	public void testGetAllUsers() {
+	public void testGetAllUsersNotNull() {
 
-		List<User> fetched = userDao.getAllUsers();
+		List<User> fetched = Users.getAllUsers();
 		assertTrue(fetched.size() > 0);
 		boolean found = false;
 		for (User u : fetched)
@@ -42,7 +41,7 @@ public class UserDaoImplTest {
 
 	@Test
 	public void testGetUser() {
-		assertTrue(userDao.getUser(permanentUser.getUserId()).equals(permanentUser));
+		assertTrue(Users.getUser(permanentUser.getUserId()).getUserId() == permanentUser.getUserId());
 	}
 
 	@Test
@@ -52,17 +51,17 @@ public class UserDaoImplTest {
 		updatableUser.setLastName("Changed");
 		updatableUser.setSuper(!updatableUser.isSuper());
 
-		userDao.updateUser(updatableUser);
-		assertTrue(userDao.getUser(updatableUser.getUserId()).equals(updatableUser));
+		Users.updateUser(updatableUser);
+		assertTrue(Users.getUser(updatableUser.getUserId()).equals(updatableUser));
 
 	}
 
 	@Test
 	public void testDeleteUser() {
 		int userId = deleteUser.getUserId();
-		userDao.deleteUser(userId);
+		Users.deleteUser(userId);
 		boolean found = false;
-		for (User u : userDao.getAllUsers())
+		for (User u : Users.getAllUsers())
 			if (u.getUserId() == userId)
 				found = true;
 		assertFalse(found);
@@ -71,9 +70,9 @@ public class UserDaoImplTest {
 
 	@Test
 	public void testAddUser() {
-		User user = new User(100, "Test", "LastName", null, false, null);
-		userDao.addUser(user);
-		User user2 = userDao.getUser(user.getUserId());
+		User user = new User(100, "Test", "LastName", "a", "a", null, false, null);
+		Users.addUser(user);
+		User user2 = Users.getUser(user.getUserId());
 		assertTrue(user2.equals(user));
 
 	}

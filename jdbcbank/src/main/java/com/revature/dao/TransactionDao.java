@@ -14,11 +14,13 @@ public interface TransactionDao {
 
 	public void addTransaction(Transaction transaction) throws SQLException;
 
-	public Transaction getTransaction(String TransactionId) throws SQLException;
+	public Transaction getTransaction(int TransactionId) throws SQLException;
 
 	public void updateTransaction(Transaction transaction) throws SQLException;
 
-	public void deleteTransaction(Transaction transaction) throws SQLException;
+	public void deleteTransaction(int transactionId) throws SQLException;
 
 	public List<Transaction> getAllTransactions() throws SQLException;
+
+	public List<Transaction> getAllTransactions(int userId) throws SQLException;
 }

@@ -68,10 +68,10 @@ public class RefreshDatabase {
 			logger.info("CREATE_USER_BANK_ACCOUNT_TABLE TABLE CREATED");
 
 		} catch (SQLException e1) {
-			System.out.println("SQL ERROR");
-			System.out.println(e1.getSQLState());
-			System.out.println(e1.getMessage());
-			System.out.println(e1.getErrorCode());
+			logger.error("SQL ERROR");
+			logger.error(e1.getSQLState());
+			logger.error(e1.getMessage());
+			logger.error(e1.getErrorCode());
 			e1.printStackTrace();
 		}
 

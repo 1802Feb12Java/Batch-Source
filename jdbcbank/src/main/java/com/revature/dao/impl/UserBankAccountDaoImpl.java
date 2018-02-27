@@ -18,111 +18,131 @@ public class UserBankAccountDaoImpl implements UserBankAccountDao {
 	private static final Logger logger = LogManager.getLogger(UserBankAccountDaoImpl.class);
 	public final static String TABLE_NAME = "USER_BANK_ACCOUNT";
 
-	private Connection con = ConnectionFactory.getInstance().getConnection();
-
 	@Override
 	public void addUserBankAccount(int userId, int accountId) throws SQLException {
+		Connection con = null;
 		PreparedStatement s = null;
 
 		String statement = "INSERT INTO " + TABLE_NAME + "(USER_ID, ACCOUNT_ID) VALUES(?,?)";
-		logger.info("Creating SQL Statement: " + statement + " with USER_ID= " + userId + ", ACCOUNT_ID= " + accountId);
+		logger.debug(
+				"Creating SQL Statement: " + statement + " with USER_ID= " + userId + ", ACCOUNT_ID= " + accountId);
 
 		try {
+			con = ConnectionFactory.getInstance().getConnection();
 			s = con.prepareStatement(statement);
 			// fill in values
 			s.setInt(1, userId);
 			s.setInt(2, accountId);
 
 			s.executeQuery();
-			logger.info("Executed Insert User Bank Account with USER_ID " + userId + ", and ACCOUNT_ID " + accountId
+			logger.debug("Executed Insert User Bank Account with USER_ID " + userId + ", and ACCOUNT_ID " + accountId
 					+ " Successfully");
 		} finally {
 			if (s != null)
 				s.close();
+			if (con != null)
+				con.close();
 		}
 	}
 
 	@Override
 	public void getUserBankAccount(int userId, int accountId) throws SQLException {
+		Connection con = null;
 		PreparedStatement s = null;
 
 		String statement = "SELECT FROM " + TABLE_NAME + " WHERE USER_ID=? AND ACCOUNT_ID)=?";
-		logger.info("Creating SQL Statement: " + statement + " with USER_ID= " + userId + ", ACCOUNT_ID= " + accountId);
+		logger.debug(
+				"Creating SQL Statement: " + statement + " with USER_ID= " + userId + ", ACCOUNT_ID= " + accountId);
 
 		try {
+			con = ConnectionFactory.getInstance().getConnection();
 			s = con.prepareStatement(statement);
 			// fill in values
 			s.setInt(1, userId);
 			s.setInt(2, accountId);
 
 			s.executeQuery();
-			logger.info("Executed Insert User Bank Account with USER_ID " + userId + ", and ACCOUNT_ID " + accountId
+			logger.debug("Executed Insert User Bank Account with USER_ID " + userId + ", and ACCOUNT_ID " + accountId
 					+ " Successfully");
 
 		} finally {
 			if (s != null)
 				s.close();
+			if (con != null)
+				con.close();
 		}
 	}
 
 	@Override
 	public void updateUserBankAccountUserId(int userId, int accountId) throws SQLException {
+		Connection con = null;
 		PreparedStatement s = null;
 
 		String statement = "UPDATE " + TABLE_NAME + " SET USER_ID = ? WHERE ACCOUNT_ID =?";
-		logger.info("Creating SQL Statement: " + statement);
+		logger.debug("Creating SQL Statement: " + statement);
 
 		try {
+			con = ConnectionFactory.getInstance().getConnection();
 			s = con.prepareStatement(statement);
 			// fill in values
 			s.setInt(1, userId);
 			s.setInt(2, accountId);
 
 			s.executeQuery();
-			logger.info("Executed Update User Bank Account with USER_ID " + userId + ", and ACCOUNT_ID " + accountId
+			logger.debug("Executed Update User Bank Account with USER_ID " + userId + ", and ACCOUNT_ID " + accountId
 					+ " Successfully");
 
 		} finally {
 			if (s != null)
 				s.close();
+			if (con != null)
+				con.close();
 		}
 
 	}
 
 	@Override
 	public void deleteUserBankAccount(int userId, int accountId) throws SQLException {
+		Connection con = null;
 		PreparedStatement s = null;
 
 		String statement = "DELETE " + TABLE_NAME + " WHERE ACCOUNT_ID = ? AND USER_ID =?";
-		logger.info("Creating SQL Statement: " + statement);
+		logger.debug("Creating SQL Statement: " + statement);
 
 		try {
+			con = ConnectionFactory.getInstance().getConnection();
 			s = con.prepareStatement(statement);
 			// fill in values
 			s.setInt(1, accountId);
 			s.setInt(2, userId);
 
 			s.executeQuery();
-			logger.info("Executed Delete User Bank Account with USER_ID " + userId + ", and ACCOUNT_ID " + accountId
+			logger.debug("Executed Delete User Bank Account with USER_ID " + userId + ", and ACCOUNT_ID " + accountId
 					+ " Successfully");
 
 		} finally {
 			if (s != null)
 				s.close();
+			if (con != null)
+				con.close();
 		}
 	}
 
 	@Override
 	public ArrayList<Integer> getAllUserBankAccounts() throws SQLException {
+		Connection con = null;
 		PreparedStatement s = null;
 		ResultSet rs = null;
 
 		ArrayList<Integer> userIdList = new ArrayList<Integer>();
 		String statement = "SELECT ACCOUNT_ID FROM " + TABLE_NAME;
+		logger.debug("Created SQL Statement: " + statement);
 
 		try {
+			con = ConnectionFactory.getInstance().getConnection();
 			s = con.prepareStatement(statement);
 			rs = s.executeQuery();
+			logger.debug("Executed SQL Statement");
 			if (rs.next())
 				userIdList.add(rs.getInt("ACCOUNT_ID"));
 		} finally {
@@ -130,6 +150,8 @@ public class UserBankAccountDaoImpl implements UserBankAccountDao {
 				s.close();
 			if (rs != null)
 				rs.close();
+			if (con != null)
+				con.close();
 		}
 
 		return userIdList;
@@ -137,23 +159,29 @@ public class UserBankAccountDaoImpl implements UserBankAccountDao {
 
 	@Override
 	public List<Integer> getAllUserBankAccountsWithUserId(int userId) throws SQLException {
+		Connection con = null;
 		PreparedStatement s = null;
 		ResultSet rs = null;
 
 		List<Integer> userIdList = new ArrayList<Integer>();
 		String statement = "SELECT ACCOUNT_ID FROM " + TABLE_NAME + " WHERE USER_ID=?";
+		logger.debug("Created SQL Statement: " + statement);
 
 		try {
+			con = ConnectionFactory.getInstance().getConnection();
 			s = con.prepareStatement(statement);
 			s.setInt(1, userId);
 			rs = s.executeQuery();
-			if (rs.next())
+			logger.debug("Executed SQL Statement");
+			while (rs.next())
 				userIdList.add(rs.getInt("ACCOUNT_ID"));
 		} finally {
 			if (s != null)
 				s.close();
 			if (rs != null)
 				rs.close();
+			if (con != null)
+				con.close();
 		}
 
 		return userIdList;

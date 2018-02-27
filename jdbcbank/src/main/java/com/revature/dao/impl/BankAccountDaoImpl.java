@@ -18,17 +18,16 @@ public class BankAccountDaoImpl implements BankAccountDao {
 
 	private static final Logger logger = LogManager.getLogger(BankAccountDaoImpl.class);
 	public final static String TABLE_NAME = "BANK_ACCOUNT";
-	private final static String TABLE_COLS[] = { "ACCOUNT_ID", "BALANCE", "DATE_CREATED" };
-
-	private Connection con = ConnectionFactory.getInstance().getConnection();
 
 	@Override
 	public void addBankAccount(BankAccount account) throws SQLException {
+		Connection con = null;
 		PreparedStatement s = null;
 
 		String statement = "INSERT INTO " + TABLE_NAME + "(ACCOUNT_ID, BALANCE) VALUES(?,?)";
-		logger.info("Created SQL Statement: " + statement);
+		logger.debug("Created SQL Statement: " + statement);
 		try {
+			con = ConnectionFactory.getInstance().getConnection();
 			s = con.prepareStatement(statement);
 
 			// fill in values
@@ -36,21 +35,26 @@ public class BankAccountDaoImpl implements BankAccountDao {
 			s.setBigDecimal(2, account.getBalance());
 
 			s.executeQuery();
-			logger.info("Execute Insert Bank Account with ID " + account.getAccountId() + " Successfully");
+			logger.debug("Execute Insert Bank Account with ID " + account.getAccountId() + " Successfully");
 		} finally {
 			if (s != null)
 				s.close();
+			if (con != null)
+				con.close();
 		}
 
 	}
 
 	@Override
 	public BankAccount getBankAccount(int accountId) throws SQLException {
+		Connection con = null;
 		PreparedStatement s = null;
 		ResultSet rs = null;
 
 		String statement = "SELECT * FROM " + TABLE_NAME + " WHERE ACCOUNT_ID = " + accountId;
+		logger.debug("Created SQL Statement: " + statement + " with ACCOUNT_ID " + accountId);
 		try {
+			con = ConnectionFactory.getInstance().getConnection();
 			s = con.prepareStatement(statement);
 			rs = s.executeQuery();
 			if (rs.next())
@@ -60,59 +64,72 @@ public class BankAccountDaoImpl implements BankAccountDao {
 				s.close();
 			if (rs != null)
 				rs.close();
+			if (con != null)
+				con.close();
 		}
 		return null;
 	}
 
 	@Override
 	public void updateBankAccount(BankAccount account) throws SQLException {
+		Connection con = null;
 		PreparedStatement s = null;
+		String statement = "UPDATE " + TABLE_NAME + " SET BALANCE=?, DATE_CREATED=? " + " WHERE ACCOUNT_ID =?";
+		logger.debug("Created statement = " + statement + " with account " + account);
 
 		try {
-			s = con.prepareStatement(CommonStatements.Update.apply(TABLE_NAME, TABLE_COLS));
+			con = ConnectionFactory.getInstance().getConnection();
+			s = con.prepareStatement(statement);
 			// fill in the ???s
-			s.setString(1, TABLE_NAME);
-			for (int i = 1; i < TABLE_COLS.length; i++) {
-				s.setString(i + 1, TABLE_COLS[i]);
-			}
-			// set id ?
-			s.setString(TABLE_COLS.length, TABLE_COLS[0]);
-			logger.info("Created statement = " + s);
+			s.setBigDecimal(1, account.getBalance());
+			s.setDate(2, account.getDateCreated());
+			s.setInt(3, account.getAccountId());
 
 			s.executeQuery();
-			logger.info("Executed Statement");
+			logger.debug("Executed update bank account on " + account);
 		} finally {
 			if (s != null)
 				s.close();
+			if (con != null)
+				con.close();
 		}
 
 	}
 
 	@Override
 	public void deleteBankAccount(int accountId) throws SQLException {
+		Connection con = null;
 		PreparedStatement s = null;
+		String statement = "DELETE FROM " + TABLE_NAME + " WHERE ACCOUNT_ID = " + accountId;
+		logger.debug("Create SQL Statement: " + statement + " WITH ACCOUNT_ID " + accountId);
 		try {
-			s = con.prepareStatement("DELETE FROM " + TABLE_NAME + " WHERE ACCOUNT_ID = " + accountId);
-			logger.info("Created statement = " + s);
+			con = ConnectionFactory.getInstance().getConnection();
+			s = con.prepareStatement(statement);
 			s.executeQuery();
-			logger.info("Executed Statement");
+			logger.debug("Executed Statement");
 		} finally {
 			if (s != null)
 				s.close();
+			if (con != null)
+				con.close();
 		}
 
 	}
 
 	@Override
 	public ArrayList<BankAccount> getAllBankAccounts() throws SQLException {
+		Connection con = null;
 		PreparedStatement s = null;
 		ResultSet rs = null;
 		ArrayList<BankAccount> list = new ArrayList<>();
+		String statement = CommonStatements.SelectAll.apply(TABLE_NAME);
+		logger.debug("Create SQL Statement: " + statement);
 
 		try {
-			s = con.prepareStatement(CommonStatements.SelectAll.apply(TABLE_NAME));
+			con = ConnectionFactory.getInstance().getConnection();
+			s = con.prepareStatement(statement);
 			rs = s.executeQuery();
-			logger.info("Fetched All Bank Accounts from Database");
+			logger.debug("Fetched All Bank Accounts from Database");
 			while (rs.next()) {
 				list.add(processRow(rs));
 			}
@@ -121,6 +138,8 @@ public class BankAccountDaoImpl implements BankAccountDao {
 				s.close();
 			if (rs != null)
 				rs.close();
+			if (con != null)
+				con.close();
 		}
 		return list;
 	}
