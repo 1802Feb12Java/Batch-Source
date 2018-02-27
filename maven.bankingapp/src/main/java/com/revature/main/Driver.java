@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.Properties;
 import java.util.Scanner;
 
@@ -12,16 +13,11 @@ import com.revature.services.UserServices;
 
 public class Driver 
 {
-    public static void main(String[] args) throws FileNotFoundException, IOException
+    public static void main(String[] args) throws FileNotFoundException, IOException, SQLException
     {
     		// insert example
 //    		UserServices userDao = new UserServices();
 //    		userDao.insertNewUser(3, "Sonam", "asdjfklasd", "bbob@gmail.com", "2394023904", "bobbo", "passfda");
-    	
-    		System.out.println();
-    		System.out.println("*******************************************************");
-		System.out.println("************* WELCOME TO BANK OF BOUDREAU *************");
-		System.out.println("*******************************************************");
     		
     		// Instantiate menu object
     		Menu menu = new Menu();

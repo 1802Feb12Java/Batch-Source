@@ -12,4 +12,28 @@ public class Account {
 		this.balance=balance;
 	}
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public int getIs_approved() {
+		return is_approved;
+	}
+
+	public void setIs_approved(int is_approved) {
+		this.is_approved = is_approved;
+	}
+
+	public double getBalance() {
+		return balance;
+	}
+
+	public void setBalance(double balance) {
+		this.balance = balance;
+	}
+
 }
