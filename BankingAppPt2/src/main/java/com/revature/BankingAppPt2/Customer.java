@@ -52,12 +52,10 @@ public class Customer extends User {
 			switch (menuOption) {
 			case 1:
 				bankAccountServices.applyForAccount(this.userId);
-				//this.runMenu();
 				break;
 			case 2:
 				if (bankAccounts.isEmpty()) {
 					System.out.println("You don't have any accounts yet.");
-					//this.runMenu();
 				}
 				else {
 					System.out.println("Here are the accounts we have on file for you:\n");
@@ -65,7 +63,6 @@ public class Customer extends User {
 						System.out.println(bankAccount.toString());
 						System.out.println("\n");
 					}
-					//this.runMenu();
 				}
 				break;
 			case 3:
@@ -83,6 +80,7 @@ public class Customer extends User {
 				break;
 			case 6:
 				customerServices.deleteAccount(bankAccounts);
+				this.bankAccounts = bankAccountServices.getBankAccountList(this.userId);
 				break;
 			default:
 				System.out.println("Please enter a valid option.");
