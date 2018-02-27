@@ -1,6 +1,7 @@
 # JDBC Banking App Part II
 
-Project is in JDBCBank directory
+Project is in JDBCBank directory  
+JDBC file is in SQL directory  
 
 ## Path Change
 
