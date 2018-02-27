@@ -40,6 +40,18 @@ public class Menu {
 		
 	}	
 	
+	private static void loginSuccessJoint() {
+		System.out.println("--------------------------------------------------------");
+		System.out.println("Please choose an option");
+		System.out.println("1. Withdraw from checking");
+		System.out.println("2. Withdraw from savings");
+		System.out.println("3. Deposit into checking");
+		System.out.println("4. Deposit into savings");
+		System.out.println("5. View Account Information");
+		System.out.println("6. Logout");	
+		
+	}	
+	
 	public static void loginSuccessCustomerFunctionality(CustomerAccount customer, ArrayList<CustomerAccount> customers) {
 
 		String option = "";
@@ -299,7 +311,7 @@ public static void loginJointFunctionality(JointAccount customer) {
 	
 		while(!exit) {
 			//display menu
-			loginSuccessCustomer();
+			loginSuccessJoint();
 				
 			option = sc.next();
 			sc.nextLine();
@@ -326,7 +338,7 @@ public static void loginJointFunctionality(JointAccount customer) {
 			default:
 				log.debug(customer.getUsername() + " logged out.");
 				System.out.println("INVALID OPTION");
-				loginSuccessCustomer();
+				loginSuccessJoint();
 				break;
 			}
 			
