@@ -13,21 +13,12 @@ public class Customer implements Serializable
     							//consists of an arbitrary precision integer unscaled value and a 32-bit integer scale
     							//useful for financial figures
     
-    public BigDecimal getBalance() {
-		return balance;
-	}
-
-	public Customer(String username, String password, String name, int id)
+    public Customer(String username, String password, String name)
     {
         super();
-        this.setIdentity(new Identity(username, password, name, id));
+        this.identity = new Identity(username, password, name);
         this.balance = BigDecimal.ZERO;
         return;
-    }
-    
-    public Customer()
-    {
-        super();
     }
 
     //format toString with the mutators/accessors
@@ -38,36 +29,25 @@ public class Customer implements Serializable
 
     public boolean usernameMatches(String username)
     {
-        return this.getIdentity().usernameMatches(username);
+        return this.identity.usernameMatches(username);
     }
 
     public boolean authenticate(String password)
     {
-        return this.getIdentity().authenticate(password);
+        return this.identity.authenticate(password);
     }
 
     public String username()
     {
-        return getIdentity().username();
+        return identity.username();
     }
     public String password()
     {
-        return getIdentity().password();
+        return identity.password();
     }
-
-	public int getID() 
-	{
-		return getIdentity().getID();
-	}
-
-	public void setID(int id) 
-	{
-		this.getIdentity().setID(id);
-	}
-    
     public String name()
     {
-        return getIdentity().name();
+        return identity.name();
     }
     public BigDecimal balance()
     {
@@ -75,11 +55,11 @@ public class Customer implements Serializable
     }
     public boolean approved()
     {
-        return this.getIdentity().approved();
+        return this.identity.approved();
     }
     public boolean cancelled()
     {
-        return this.getIdentity().cancelled();
+        return this.identity.cancelled();
     }
 
     public void setBalance(BigDecimal balance)
@@ -88,7 +68,7 @@ public class Customer implements Serializable
     }
     public void setApproved(boolean approved)
     {
-        this.getIdentity().setApproved(approved);
+        this.identity.setApproved(approved);
     }
     public void setCancelled(boolean cancelled)
     {
@@ -154,12 +134,4 @@ public class Customer implements Serializable
             return false;
         }
     }
-
-	public Identity getIdentity() {
-		return identity;
-	}
-
-	public void setIdentity(Identity identity) {
-		this.identity = identity;
-	}
 }

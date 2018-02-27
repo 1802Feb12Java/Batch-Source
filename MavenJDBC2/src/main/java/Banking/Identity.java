@@ -15,51 +15,17 @@ public class Identity implements Serializable
     private String username, password, name;
     private boolean approved;
     private boolean cancelled;
-    private int id;
 
-    public Identity(String username, String password, String name, int id) //constructor
+    public Identity(String username, String password, String name) //constructor
     {
         this.username = username;
         this.password = password;
         this.name = name;
         this.approved = false;
         this.cancelled = false;
-        this.id = id;
     }
 
-    public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String toString() //toString
+    public String toString() //toString
     {
         return String.format("Identity {name: %s, username: %s, password: %s}", this.name(), this.username(), this.password());
     }
@@ -93,15 +59,6 @@ public class Identity implements Serializable
     public boolean cancelled() {
         return this.cancelled;
     }
-	public int getID() 
-	{
-		return id;
-	}
-
-	public void setID(int id) 
-	{
-		this.id = id;
-	}
 
     public void setApproved(boolean approved) {
         this.approved = approved;

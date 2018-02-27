@@ -1,9 +1,6 @@
 package Banking;
 
 import java.math.BigDecimal;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.util.Optional;
 import java.io.File;
 import java.io.RandomAccessFile;
@@ -101,52 +98,6 @@ public class BankingApplication
 
 		return amount;
 	}
-	
-	private static boolean connectToDatabase()
-	{
-	       try
-	        {
-
-	            Class.forName("oracle.jdbc.driver.OracleDriver");
-
-	        }
-	        catch (ClassNotFoundException e)
-	        {
-
-	            System.out.println("Where is your Oracle JDBC Driver?");
-	            e.printStackTrace();
-	            return false;
-
-	        }
-
-	        System.out.println("Oracle JDBC Driver Registered!");
-
-	        Connection connection = null;
-
-	        try
-	        {
-	            connection = DriverManager.getConnection("jdbc:oracle:thin:@mydatabase.ckcbgjmfavpl.us-east-2.rds.amazonaws.com:1521:ORCL", "talanianj", "password");
-
-	        }
-	        catch (SQLException e)
-	        {
-
-	            System.out.println("Connection Failed! Check output console");
-	            e.printStackTrace();
-	            return false;
-	        }
-
-	        if (connection != null)
-	        {
-	            System.out.println("You made it, take control your database now!");
-	            return true;
-	        } 
-	        else 
-	        {
-	            System.out.println("Failed to make connection!");
-	            return false;
-	        }
-	}
 
 	public static BigDecimal readTransferAmount(ArrayList<Customer> accounts, Scanner scan, Customer account)
 	{
@@ -171,8 +122,6 @@ public class BankingApplication
 	@SuppressWarnings("unchecked")
 	public static void main(String[] args) throws IOException
 	{
-		connectToDatabase();
-		
 		ArrayList<Customer> accounts = new ArrayList<>();
 		Scanner scan = new Scanner(System.in);
 
