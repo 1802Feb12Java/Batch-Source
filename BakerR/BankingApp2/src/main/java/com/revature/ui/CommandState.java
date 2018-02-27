@@ -161,10 +161,12 @@ public class CommandState extends DisplayState {
 
 					@Override
 					public void setParams(String[] args, int begin, int end) {
+						if((end - begin) == 0) return;
+						
 						if(args == null) {
 							throw new IllegalArgumentException("args cannot be null");
 						}
-						
+						if((end - begin) == 0) return;
 						if(begin < 0 || begin >= args.length || end <= 0 || end > args.length) {
 							throw new IllegalArgumentException("begin and/or end are out of bounds.");
 						}

@@ -27,7 +27,7 @@ public class SessionState extends CommandState {
 			InputStream in, PrintStream disp, DisplayState nextState) {
 		super(in, disp, nextState);
 		
-		if(user == null) {
+		if(currentUser == null) {
 			throw new IllegalArgumentException("User must not be null.");
 		}
 		

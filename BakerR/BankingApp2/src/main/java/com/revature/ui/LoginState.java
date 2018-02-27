@@ -40,7 +40,7 @@ public class LoginState extends PromptState {
 		}
 		
 		// Failed password verification -> back to EntryState
-		if(tryCount <= 5) {
+		if(tryCount >= 5) {
 			setNextState(new EntryState());
 		} else {
 			// Password verification successful.

@@ -178,8 +178,10 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	public User createUser(User usr, String pw) throws SQLException {
-		String query = "{call REGISTER_USER[(?, ?, ?, ?, ?, ?)]}";
-		CallableStatement cs = conn.prepareCall(query);
+//		String query = "{call REGISTER_USER[(?, ?, ?, ?, ?, ?)]}";
+//		CallableStatement cs = conn.prepareCall(query);
+		String query = "INSERT INTO USERS VALUES(PK_USERS.NEXTVAL, ?, ?, ?, ?, ?)";
+		PreparedStatement ps = conn.prepareStatement(query);
 		// UID OUT NUMBER, UNAME IN VARCHAR2, UTYPE IN NUMBER, 
 		// FNAME IN VARCHAR2, LNAME IN VARCHAR2, PWHASH IN VARCHAR2
 		
@@ -193,18 +195,27 @@ public class UserDAOImpl implements UserDAO {
 			uType = UserType.EMPLOYEE;
 		}
 		
-		cs.registerOutParameter(1, Types.NUMERIC);
-		cs.setString(2, usr.getUserName());
-		cs.setInt(3, uType.getId());
-		cs.setString(4, usr.getFirstName());
-		cs.setString(5, usr.getLastName());
-		cs.setString(6, pw);
+//		ps.registerOutParameter(1, Types.NUMERIC);
+		ps.setString(1, usr.getUserName());
+		ps.setInt(2, uType.getId());
+		ps.setString(3, usr.getFirstName());
+		ps.setString(4, usr.getLastName());
+		ps.setString(5, pw);
 		
-		cs.executeUpdate();
+		ps.executeUpdate();
+//		cs.registerOutParameter(1, Types.NUMERIC);
+//		cs.setString(2, usr.getUserName());
+//		cs.setInt(3, uType.getId());
+//		cs.setString(4, usr.getFirstName());
+//		cs.setString(5, usr.getLastName());
+//		cs.setString(6, pw);
 		
-		usr.setUserId(cs.getInt(1));
+//		cs.executeUpdate();
 		
-		cs.close();
+//		usr.setUserId(cs.getInt(1));
+//		cs.close();
+		usr = getUserByUsername(usr.getUserName());
+		ps.close();
 		return usr;
 	}
 

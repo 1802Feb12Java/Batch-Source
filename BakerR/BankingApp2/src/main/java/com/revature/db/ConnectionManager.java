@@ -32,6 +32,7 @@ public final class ConnectionManager implements Closeable {
 		password = props.getProperty("Oracle.pass");
 		
 		conn = DriverManager.getConnection(url, username, password);
+		conn.setAutoCommit(true);
 	}
 	
 	public static ConnectionManager getInstance() throws ClassNotFoundException, SQLException {

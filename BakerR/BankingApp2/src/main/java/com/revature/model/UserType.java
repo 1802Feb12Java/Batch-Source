@@ -6,7 +6,7 @@ public enum UserType {
 	private int id;
 	
 	private UserType(int id) {
-		
+		this.id = id;
 	}
 	
 	public int getId() {
