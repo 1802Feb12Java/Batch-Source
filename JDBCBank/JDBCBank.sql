@@ -81,30 +81,30 @@ end;
 /
 
 --RESET (in case I messed up with jdbc)
-truncate table transactions;
-truncate table accounts;
-delete from usertable;
-
-drop trigger user_insert_trigger;   --wouldn't let me put -1 if that happened
-insert into usertable values (-1, 0, 'deleted user', 'deleted user', 'deleted user');   --dummy value for transactions to point to if a user is deleted (see user_delete_procedure)
-insert into usertable values (-2, 0, 'super user', 'super user', 'super user');   --reference for the super user to use
-create or replace trigger user_insert_trigger
-after insert on usertable
-for each row
-begin
-  insert into transactions values (useridsequence.currval, current_timestamp, 'New user ' || useridsequence.currval || ' created');
-end;
-/
-drop sequence accountidsequence;
-drop sequence useridsequence;
-create sequence useridsequence
-minvalue 1
-maxvalue 99999999999999999
-start with 1
-increment by 1;
-
-create sequence accountidsequence
-minvalue 1
-maxvalue 99999999999999999
-start with 1
-increment by 1;
+--truncate table transactions;
+--truncate table accounts;
+--delete from usertable;
+--
+--drop trigger user_insert_trigger;   --wouldn't let me put -1 if that happened
+--insert into usertable values (-1, 0, 'deleted user', 'deleted user', 'deleted user');   --dummy value for transactions to point to if a user is deleted (see user_delete_procedure)
+--insert into usertable values (-2, 0, 'super user', 'super user', 'super user');   --reference for the super user to use
+--create or replace trigger user_insert_trigger
+--after insert on usertable
+--for each row
+--begin
+--  insert into transactions values (useridsequence.currval, current_timestamp, 'New user ' || useridsequence.currval || ' created');
+--end;
+--/
+--drop sequence accountidsequence;
+--drop sequence useridsequence;
+--create sequence useridsequence
+--minvalue 1
+--maxvalue 99999999999999999
+--start with 1
+--increment by 1;
+--
+--create sequence accountidsequence
+--minvalue 1
+--maxvalue 99999999999999999
+--start with 1
+--increment by 1;
