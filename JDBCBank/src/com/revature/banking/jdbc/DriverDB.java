@@ -65,8 +65,11 @@ public class DriverDB {
 						}
 						break;
 					case 2:
-						System.out.print("Register\nPick a Username: \t");
+						System.out.print("Register\nPick a Username [Enter \"c\" to cancel]: \t");
 						user = input.nextLine();
+						if (user.toUpperCase().equals("C")) {
+							break;
+						}
 						System.out.print("Create a password:\t");
 						pass = input.nextLine();
 

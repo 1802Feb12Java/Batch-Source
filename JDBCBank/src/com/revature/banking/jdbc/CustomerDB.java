@@ -106,8 +106,14 @@ public class CustomerDB extends UserDB {
 		String[] returnThis = new String[5];
 
 		while (!done) {
-			System.out.println("Please enter first and last name.");
+			System.out.println("Please enter first and last name. [Enter \"c\" to cancel]");
 			name = sc.nextLine();
+			
+			if (name.toUpperCase().equals("C")) {
+				done = true;
+				return null;
+			}
+			
 			String[] splitName = name.split(" ");
 			if (splitName.length != 2) {
 				continue;
@@ -159,7 +165,13 @@ public class CustomerDB extends UserDB {
 		Scanner scan = new Scanner(System.in);
 		float amount = 0;
 		ArrayList<Integer> balanceList = UserDB.getBalances(username);
-		System.out.print("Enter account to withdraw from:\t");
+		
+		//no accounts
+		if (balanceList.size() == 0) {
+			return 0.0F;
+		}
+		
+		System.out.print("Select account to withdraw from (number to the left of [account #]):\t");
 		int accountOption = Integer.valueOf(scan.nextLine());
 		if (accountOption > 0 && accountOption <= balanceList.size()) {
 			int accountChosen = balanceList.get(accountOption - 1);
@@ -234,7 +246,7 @@ public class CustomerDB extends UserDB {
 	 */
 	public static void transfer(String username) throws SQLException {
 		Scanner beamMeUpScotty = new Scanner(System.in);
-		System.out.print("Enter recipient account number:\t");
+		System.out.print("Enter recipient account number (9 digits):\t");
 		int recipient = Integer.valueOf(beamMeUpScotty.nextLine());
 		// check if account number exists
 		if (UserDB.getApproved(recipient)) {
