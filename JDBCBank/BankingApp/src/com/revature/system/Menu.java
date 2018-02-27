@@ -165,7 +165,8 @@ public class Menu {
 				}
 				break;
 			case "7":
-				customer.toString();
+				System.out.println(customer.toString());
+				break;
 			case "8":
 				log.debug(customer.getUsername() + " logged out.");
 				exit = true;
