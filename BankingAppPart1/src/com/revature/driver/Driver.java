@@ -1,5 +1,26 @@
 package com.revature.driver;
 
+/*********************************************************
+ * There's still quite a bit of the requirements that haven't been 
+ * fulfilled:  superuser is kind of weak, he can only approve accounts.
+ * JUnit hasn't been used.  Logging is barely there, if at all.  I can't really remember
+ * Customer account transfer doesn't work.
+ * Everything else is fully functional, and fairly bulletproof, I think.
+ * I'm not sure about the withdraw/deposit/view code.  It may be solid, but I haven't
+ * looked closely enough to say for certain.  It MAY crash if you choose an account
+ * out of bounds but I don't think so. 
+ * 
+ * Customer functions and database interactions are fully functional (minus the ability
+ * to transfer accounts)
+ * 
+ * Customer account:
+ * user name:  mm
+ * pass: lookatme
+ * 
+ * Superuser account:
+ * user name: pm
+ * pass: eyepatch
+ */
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -22,6 +43,7 @@ public class Driver {
 		//active session objects
 		User user = null;
 		User locatedUser = null;
+		double amount;
 		String locateUserName = null;
 		Account account = null;
 		ArrayList<Account> accountList = null;
@@ -310,10 +332,11 @@ public class Driver {
 										break;
 									}
 								
-								System.out.println();
-								System.out.println();
-
-								
+								if(option > 0 && option <= accountList.size()) {
+									account = accountList.get(option - 1);
+									System.out.println(account.toString());
+								}
+								System.out.println();								
 							}
 													
 							option = 0;
@@ -327,34 +350,74 @@ public class Driver {
 							}
 							
 							else {
-								//TODO: List customer's accounts
+								try {
+									accountList = as.getCustomerAccounts(user);
+								} catch (SQLException e) {
+									System.out.println("Something went wrong trying to access the account list.");
+									e.printStackTrace();
+								}
+								
+								if(accountList != null) {
+									Account.listAccounts(accountList);
+								}
+
 								System.out.print("Select an account to withdraw from: ");
 								
 								try {
 									option = getInput.nextInt();
+									getInput.nextLine();
 									}catch(Exception e) {
 										System.out.println("Please enter an appropriate selection");
 										break;
 									}
+								
+								if(option > 0 && option <= accountList.size()) {
+									account = accountList.get(option - 1);
+								}
+
 								System.out.print("Enter an amount to withdraw: ");
-								System.out.println();
-								System.out.println();
+								amount = getInput.nextDouble();
 								getInput.nextLine();
+								
+								if(account.getBalance() - amount > 0) {
+									account.withdraw(amount);
+									try {
+										as.updateAccount(account);
+									} catch (SQLException e) {
+										System.out.println("Something went wrong");
+										e.printStackTrace();
+									}
+									break;
+								}
+								
+								else {
+									System.out.println("Sorry, but that would leave you with a negative balance.  Transaction cancelled.");
+								}
+
+								amount = 0;
+								option = 0;
+								break;
 							}
-												
-							option = 0;
-							break;
-							
+
 						case 5:
 							//DEPOSIT
-							//List customer's accounts
+							try {
+								accountList = as.getCustomerAccounts(user);
+							} catch (SQLException e) {
+								System.out.println("Something went wrong trying to access the account list.");
+								e.printStackTrace();
+							}
+							
+							if(accountList != null) {
+								Account.listAccounts(accountList);
+							}
+
 							if(!user.isAccountHolder()) {
 								System.out.print("You currently have no open accounts");
 								System.out.println();
 							}
 							
 							else {
-								//TODO: List accounts
 								System.out.print("Select an account to deposit to: ");
 								
 								try {
@@ -363,13 +426,26 @@ public class Driver {
 										System.out.println("Please enter an appropriate selection");
 										break;
 									}
+								
+								if(option > 0 && option <= accountList.size()) {
+									account = accountList.get(option - 1);
+								}
+								
 								getInput.nextLine();
 								System.out.print("Enter an amount to deposit: ");
 								System.out.println();
-								System.out.println();
+								amount = getInput.nextDouble();
 								getInput.nextLine();
+								account.deposit(amount);
+								try {
+									as.updateAccount(account);
+								} catch (SQLException e) {
+									System.out.println("Something went wrong");
+									e.printStackTrace();
+								}
 							}
 							
+							amount = 0;
 							option = 0;
 							break;
 							
@@ -488,7 +564,7 @@ public class Driver {
 											locateUserName = account.getPrimaryAccountHolder();
 											account = null;
 										} catch (SQLException e) {
-											// TODO Auto-generated catch block
+											System.out.println("Something broke.");
 											e.printStackTrace();
 										}
 										
@@ -496,7 +572,7 @@ public class Driver {
 										try {
 											locatedUser = cs.getUser(locateUserName);
 										} catch (SQLException e) {
-											// TODO Auto-generated catch block
+											System.out.println("Something broke.");
 											e.printStackTrace();
 										}
 										locatedUser.setAccountHolder(true);
@@ -505,7 +581,7 @@ public class Driver {
 										try {
 											cs.updateUser(locatedUser);
 										} catch (SQLException e) {
-											// TODO Auto-generated catch block
+											System.out.println("Something went wrong.");
 											e.printStackTrace();
 										}
 										locatedUser = null;
@@ -514,12 +590,12 @@ public class Driver {
 									
 									//Deny account
 									else if(option == 2) {
-										
+										account.setStatus("Denied");
 										System.out.println(account.getStatus());
 										try {
 											as.updateAccount(account);
 										} catch (SQLException e) {
-											// TODO Auto-generated catch block
+											System.out.println("Something went wrong");
 											e.printStackTrace();
 										}
 										break;

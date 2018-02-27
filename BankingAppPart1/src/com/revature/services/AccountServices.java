@@ -62,8 +62,7 @@ public class AccountServices implements AccountDAO{
 		ps.setDouble(1, account.getBalance());
 		ps.setString(2, account.getStatus());
 		ps.setInt(3, account.getAccountNumber());
-		
-		
+				
 		ps.executeUpdate();
 		ps.close();		
 	}

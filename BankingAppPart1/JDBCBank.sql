@@ -10,10 +10,6 @@ create table users (
 	state           varchar2(2),
 	phoneNumber     varchar2(12),
     userType        varchar2(13)    NOT NULL,
-    account1        int,
-    account2        int,
-    account3        int,
-    account4        int,
 	accountHolder   varchar2(1));
 /
 

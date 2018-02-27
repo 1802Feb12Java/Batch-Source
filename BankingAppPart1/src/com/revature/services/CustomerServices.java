@@ -63,15 +63,14 @@ public class CustomerServices implements CustomerDAO {
 			user.setState(rs.getString("state"));
 			user.setPhoneNumber(rs.getString("phoneNumber"));
 			user.setUserType(rs.getString("userType"));
-		}
-		
-		if(rs.getString("accountHolder") == "Y") {
-			user.setAccountHolder(true);
-		}
-
-		
-		else {
-			user.setAccountHolder(false);
+			user.setUserID(rs.getInt("userID"));
+			if (rs.getString("accountHolder").equals("Y")) {
+				user.setAccountHolder(true);
+			}
+			
+			else {
+				user.setAccountHolder(false);
+			}
 		}
 
 		ps.close();
@@ -81,21 +80,24 @@ public class CustomerServices implements CustomerDAO {
 
 	public void updateUser(User user) throws SQLException {
 		//set the string to use in the prepared statement and create the statement
-		String sql = "UPDATE USERS SET userName = ?, pass = ?, firstName = ?, lastName =?, streetAddress = ?, city = ?, state = ?, phoneNumber = ?, userType = ?, accountHolder = ? WHERE userID = ?";
+		String accHolder = "N";
+		String sql = "UPDATE USERS SET pass = ?, firstName = ?, lastName = ?, streetAddress = ?, city = ?, state = ?, phoneNumber = ?, userType = ?, accountHolder = ? WHERE userID = ?";
 		PreparedStatement ps = conn.prepareStatement(sql);
-		
+
+		if(user.isAccountHolder()) {
+			accHolder = "Y";
+		}
 		//use the user values to set the sql variables
-		ps.setString(1, user.getUserName());
-		ps.setString(2, user.getPassword());
-		ps.setString(3, user.getFirstName());
-		ps.setString(4, user.getLastName());
-		ps.setString(5, user.getStreetAddress());
-		ps.setString(6, user.getCity());
-		ps.setString(7, user.getState());
-		ps.setString(8, user.getPhoneNumber());
-		ps.setString(9, user.getUserType());
-		ps.setBoolean(10, user.isAccountHolder());
-		ps.setInt(11, user.getUserID());
+		ps.setString(1, user.getPassword());
+		ps.setString(2, user.getFirstName());
+		ps.setString(3, user.getLastName());
+		ps.setString(4, user.getStreetAddress());
+		ps.setString(5, user.getCity());
+		ps.setString(6, user.getState());
+		ps.setString(7, user.getPhoneNumber());
+		ps.setString(8, user.getUserType());
+		ps.setString(9, accHolder);
+		ps.setInt(10, user.getUserID());
 
 		
 		ps.executeUpdate();

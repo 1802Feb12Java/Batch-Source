@@ -103,6 +103,6 @@ public class Account {
 	@Override
 	public String toString() {
 		return "Account balance: " + balance + "\nAccount status: " + status + "\nAccount type: " + accountType + 
-				"Primary account holder: " + primaryAccountHolder;
+				"\nPrimary account holder user name:: " + primaryAccountHolder;
 	}	
 }
