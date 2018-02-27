@@ -34,15 +34,14 @@ public class ConnectionFlexion {
 
      }
 
-     System.out.println("Oracle JDBC Driver Registered!");
+     //System.out.println("Oracle JDBC Driver Registered!");
 
      Connection connection = null;
 
      try {
 
          connection = DriverManager.getConnection(
-                 "jdbc:oracle:thin:@feb12usf.ccvmvbzmtg8b.us-east-1.rds.amazonaws.com"
-                 + ":1521:ORCL", "starkjosh", "mattsfav1");
+                 "jdbc:oracle:thin:@feb12usf.ccvmvbzmtg8b.us-east-1.rds.amazonaws.com:1521:ORCL", "starkjosh", "mattsfav1");
 
      } catch (SQLException e) {
 
@@ -53,7 +52,7 @@ public class ConnectionFlexion {
      }
 
      if (connection != null) {
-         System.out.println("You made it, take control your database now!");
+         //System.out.println("You made it, take control your database now!");
          return connection;
      } else {
          System.out.println("Failed to make connection!");

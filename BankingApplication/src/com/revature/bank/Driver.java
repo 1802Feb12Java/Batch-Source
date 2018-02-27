@@ -1,14 +1,5 @@
 package com.revature.bank;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.OutputStream;
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -18,28 +9,19 @@ public class Driver implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	public static Scanner sc = new Scanner(System.in);
-	private static final String cust = "Customers.txt";
 	public static boolean active = true;
 	public static boolean newScreen = false;
 	public static ArrayList<Customer> customs = new ArrayList<>();
 	public static ArrayList<Serializable> users = new ArrayList<>();
-	private static final String apps = "Applications";
 	public static ArrayList<String> loginInfo = new ArrayList<>();
-	private static final String userFile = "Users.txt";
-	private static final String loglog = "LoginInfo.txt";
-	private static CustomerServices custwork;
+	public static CustomerServices custwork = new CustomerServices();
+	public static LoginServices logwork = new LoginServices();
+	public static AccountServices acctwork = new AccountServices();
 	
 	public static void main(String[] args) throws SQLException {
-		//Customer c = new Customer("frank", "tank", "frank", "tank");
-		//c.getAcct();
-		//customs.add(c);
-		//users.add(c);
-		readLogIn();
+		
 		do {
 			logOn();
-			printCToFile(customs, cust);
-			printToFile(users, userFile);
-			printTo(loginInfo, loglog);
 				
 		}while(active);	
 			
@@ -47,18 +29,19 @@ public class Driver implements Serializable {
 	
 	public static void createCustomer() throws SQLException {
 		System.out.println("First name:");
-		String firstname = sc.next();
+		String fname = sc.next();
 		System.out.println("Last name:");
-		String lastname = sc.next();
+		String lname = sc.next();
 		System.out.println("Username:");
 		String username = sc.next();
 		System.out.println("Password:");
 		String password = sc.next();
-		System.out.println("Address:");
+		Customer c = new Customer(fname, lname, username, password);
+		System.out.println("Address in this format: Street#.StreetName");
 		String address = sc.next();
 		System.out.println("Phone #:");
 		String phonenum = sc.next();
-		Customer c = new Customer(firstname, lastname, username, password);
+		//Customer c = new Customer(fname, lname, username, password);
 		c.setAddress(address);
 		c.setPhoneNumber(phonenum);
 		System.out.println("Would you like to apply for an account?");
@@ -74,7 +57,7 @@ public class Driver implements Serializable {
 		}
 	}
 	
-	public static void createEmployee() {
+	public static void createEmployee() throws SQLException {
 		System.out.println("First name:");
 		String firstname = sc.next();
 		System.out.println("Last name:");
@@ -83,12 +66,12 @@ public class Driver implements Serializable {
 		String username = sc.next();
 		System.out.println("Password:");
 		String password = sc.next();
-		Employee e = new Employee(firstname, lastname, username, password);
+		Employee e = new Employee(firstname, lastname, username, password); //does nothing, can get rid of
 		users.add(e);
-		loginInfo.add(username + ":" + password + ":" + "employee");
+		logwork.addLogin(username, password, "EMPLOYEE"); //creates a new login for someone with employee access
 	}
 	
-	public static void createAdmin() {
+	public static void createAdmin() throws SQLException {
 		System.out.println("First name:");
 		String firstname = sc.next();
 		System.out.println("Last name:");
@@ -97,15 +80,15 @@ public class Driver implements Serializable {
 		String username = sc.next();
 		System.out.println("Password:");
 		String password = sc.next();
-		Admin a = new Admin(firstname, lastname, username, password);
+		Admin a = new Admin(firstname, lastname, username, password); //does nothing, can get rid of
 		users.add(a);
-		loginInfo.add(username + ":" + password + ":" + "admin");
+		logwork.addLogin(username, password, "ADMIN"); //creates a new login for someone with admin access
 	}
 	
 	public static void logOn() throws SQLException {
 		int cases = 0;
 		
-		System.out.println("Welcome to Yo Mama's Bank.");
+		System.out.println("Welcome to the bank of Gilead.");
 		System.out.println("What would you like to do?");
 		System.out.println("1. Customer Login");		
 		System.out.println("2. Employee Login");
@@ -162,21 +145,16 @@ public class Driver implements Serializable {
 		username = sc.next();
 		System.out.println("password: ");
 		password = sc.next();
-				
-		System.out.println("");
-		for(int i = 0; i < loginInfo.size(); i++) {
-			if(loginInfo.get(i).startsWith(username + ":" + password)) {
-				String[] arr = loginInfo.get(i).split(":");
-				String tipe = arr[2];
-				String user = arr[0];
-				logIn(tipe, user);
-				return;
-			}
+		Customer c = custwork.login(username, password);  //gets the customer with that login info
+		if(c != null) {		//makes sure you have grabbed a customer to do things with
+			doCustomerStuff(c);
+			return;
 		}
 		System.out.println("That combination does not work.");
+		System.out.println("Make sure you're trying to login to the right console.");
 		System.out.println("Try again?");
 		String contents = sc.next();
-		if(contents.contains("y")) {
+		if(contents.contains("y")) {		//recursion to stay in this window
 			logIn();
 		}else {
 			return;
@@ -190,51 +168,26 @@ public class Driver implements Serializable {
 		username = sc.next();
 		System.out.println("password: ");
 		password = sc.next();
-				
-		System.out.println("");
-		for(int i = 0; i < loginInfo.size(); i++) {
-			if(loginInfo.get(i).startsWith(username + ":" + password)) {
-				String[] arr = loginInfo.get(i).split(":");
-				String tipe = arr[2];
-				String user = arr[0];
-				empLogIn(tipe, user);
+		String now = logwork.getLogin(username, password);	//returns the type of emp logging in
+		if(now != null) {
+			if(now.toLowerCase().equals("admin")) {	//checks to see if login is for admin or employee
+				doAdminStuff();
+				return;
+			}else {								//the only other option would be employee
+				doEmployeeStuff();
 				return;
 			}
 		}
-		System.out.println("That combination does not work.");
 		System.out.println("Try again?");
 		String contents = sc.next();
 		if(contents.contains("y")) {
-			logIn();
+			empLogIn();
 		}else {
 			return;
 		}
 	}
 	
-	public static void logIn(String s, String u) throws SQLException {
-		if(s.trim().equals("customer")) {
-			Customer c;
-			for(int i = 0; i < customs.size(); i++) {
-				c = customs.get(i);
-				if(u.equals(c.getUsername())) {
-					doCustomerStuff(c);
-				}
-			}
-		}else {
-			System.out.println("You are not a customer, please login through the appropriate portal.");
-		}
-	}
 	
-	public static void empLogIn(String s, String u) throws SQLException {
-		if(s.trim().equals("admin")) {
-			doAdminStuff();
-		}else if(s.trim().equals("employee")){						//if they made it this far and they aren't a customer or admin, they must be 
-			doEmployeeStuff();		//an employee.
-		}else {
-			System.out.println("You are not an employee, please login through the appropriate portal.");
-
-		}
-	}
 	
 	public static void doCustomerStuff(Customer c) throws SQLException {
 		int cases = 0;
@@ -245,6 +198,7 @@ public class Driver implements Serializable {
 		System.out.println("2. Deposit");
 		System.out.println("3. Transfer");
 		System.out.println("4. Log off");
+		Account a = null;
 		if(sc.hasNextInt()) {
 			cases = sc.nextInt();
 		}else {
@@ -258,36 +212,76 @@ public class Driver implements Serializable {
 			case 1:
 				//gets us out of the loop.
 				newScreen = true;
+				System.out.println("Which Account?");
+				custwork.showAccounts(c);
+				
+				if(sc.hasNextInt()) {
+					int x = sc.nextInt();
+					a = acctwork.getAccount(x);
+				}else {
+					//catches the input if the user puts in something other than a number
+					String garbage = sc.nextLine();
+					System.out.println("Please provide a number for input.");
+					
+				}if(a != null) {
 				System.out.println("How much?");
 				if(sc.hasNextInt()) {
 					int x = sc.nextInt();
-					//c.withdraw(x);
+					a.withdraw(x);
+					acctwork.updateAccount(a);
 					doCustomerStuff(c);
 				}else {
 					//catches the input if the user puts in something other than a number
 					String garbage = sc.nextLine();
 					System.out.println("Please provide a number for input.");
 					
+				}
+				}else {
+					doCustomerStuff(c);
 				}
 				break;
 			case 2: 
 				newScreen = true;
-				System.out.println("How much?");
+				System.out.println("Which Account?");
+				custwork.showAccounts(c);
 				if(sc.hasNextInt()) {
-					int y = sc.nextInt();
-					//c.deposit(y);
-					doCustomerStuff(c);
+					int x = sc.nextInt();
+					a = acctwork.getAccount(x);
 				}else {
 					//catches the input if the user puts in something other than a number
 					String garbage = sc.nextLine();
 					System.out.println("Please provide a number for input.");
 					
 				}
+				if(a != null) {
+				System.out.println("How much?");
+				if(sc.hasNextInt()) {
+					int x = sc.nextInt();
+					a.deposit(x);
+					acctwork.updateAccount(a);
+					doCustomerStuff(c);
+				}else {
+					//catches the input if the user puts in something other than a number
+					String garbage = sc.nextLine();
+					System.out.println("Please provide a number for input.");
+					
+				}}else {
+					doCustomerStuff(c);
+				}
 				break;
 			case 3:
 				newScreen = true;
+				System.out.println("What account # would you like to transfer to?");
 				if(sc.hasNextInt()) {
-					cases = sc.nextInt();
+					int x = sc.nextInt();
+					Account b = acctwork.getAccount(x);
+					System.out.println("From which account?");
+					custwork.showAccounts(c);
+					x = sc.nextInt();
+					a = acctwork.getAccount(x);
+					System.out.println("How much would you like to transfer?");
+					x = sc.nextInt();
+					a.transferFunds(x, b);
 				}else {
 					//catches the input if the user puts in something other than a number
 					String garbage = sc.nextLine();
@@ -316,6 +310,7 @@ public class Driver implements Serializable {
 		int cases = 0;
 		newScreen = false;
 		System.out.println("----Admin console----");
+		System.out.println("   Welcome Maerlyn.");
 		System.out.println("What would you like to do?");
 		System.out.println("1. Approve Accounts");
 		System.out.println("2. View customer info");
@@ -350,10 +345,10 @@ public class Driver implements Serializable {
 				case 4: 
 					newScreen = true;
 					System.out.println("Would you like to create a new (1)Employee or (2)Admin?");
-					String i = sc.nextLine();
-					if(i == "1") {
+					int i = sc.nextInt();
+					if(i == 1) {
 						createEmployee();
-					} else if(i == "2") {
+					} else if(i == 2) {
 						createAdmin();
 					}else {
 						System.out.println("Please input a valid choice.");
@@ -362,6 +357,11 @@ public class Driver implements Serializable {
 					break;
 				case 5: 
 					newScreen = true;
+					System.out.println("Type the Customer ID that you want to delete.");
+					custwork.getAllCustomers();
+					int id = sc.nextInt();
+					custwork.deleteCustomer(id);
+					System.out.println("Delete complete.");
 					doAdminStuff();
 					break;
 				case 6:
@@ -390,8 +390,7 @@ public class Driver implements Serializable {
 		System.out.println("1. View Customer Accounts");
 		System.out.println("2. Update Existing Accounts");
 		System.out.println("3. Delete an account");
-		System.out.println("4. ");
-		System.out.println("5. Log off");
+		System.out.println("4. Log off");
 		if(sc.hasNextInt()) {
 			cases = sc.nextInt();
 		}else {
@@ -404,8 +403,8 @@ public class Driver implements Serializable {
 			switch(cases) {
 			case 1:
 				newScreen = true;
-					
-					doEmployeeStuff();
+				custwork.getAllCustomers();
+				doEmployeeStuff();
 				break;
 			case 2: 
 				newScreen = true;
@@ -413,13 +412,23 @@ public class Driver implements Serializable {
 				break;
 			case 3:
 				newScreen = true;
+				System.out.println("Type the Customer ID that you want to delete.");
+				custwork.getAllCustomers();
+				int id = sc.nextInt();
+				custwork.deleteCustomer(id);
+				System.out.println("Delete complete.");
+				doEmployeeStuff();
+				break;
+			case 4:
+				newScreen = true;
 				logOn();
 				break;
 			default:
 				System.out.println("What would you like to do?");
-				System.out.println("1. Approve Account");
-				System.out.println("2. Customer info");
-				System.out.println("3. Log off");
+				System.out.println("1. View Customer Accounts");
+				System.out.println("2. Update Existing Accounts");
+				System.out.println("3. Delete an account");
+				System.out.println("4. Log off");
 				cases = sc.nextInt();
 			
 		}
@@ -436,123 +445,7 @@ public class Driver implements Serializable {
 			int i = sc.nextInt();
 			custwork.approveCustomer(i);
 		}
-//		Customer c;
-//		for(int i = 0; i < customs.size(); i++) {
-//			c = customs.get(i);
-//			if(c.hasAcct == false) {
-//				System.out.println(c.getFirstName() + " " + c.getLastName());
-//			}
-//		}
-//		String ip = sc.nextLine();
-		
-	}
-	
-	public static void printToFile(ArrayList<Serializable> t, String s) {
-		FileOutputStream fs = null;
-		ObjectOutputStream os = null;
-		File file = new File(s);
-		try {
-			fs = new FileOutputStream(file);
-			os = new ObjectOutputStream(fs);
-			for(int i = 0; i < t.size(); i++) {
-			os.writeObject(t.get(i));
-			}
-		}
-		catch(FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		if(os != null) {
-			try {
-				os.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-	
-	public static void printCToFile(ArrayList<Customer> t, String s) {
-		FileOutputStream fs = null;
-		ObjectOutputStream os = null;
-		File file = new File(s);
-		try {
-			fs = new FileOutputStream(file);
-			os = new ObjectOutputStream(fs);
-			for(int i = 0; i < t.size(); i++) {
-			os.writeObject(t.get(i));
-			}
-		}
-		catch(FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		if(os != null) {
-			try {
-				os.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-	
-	public static void printTo(ArrayList<String> t, String s) {
-		FileOutputStream fs = null;
-		OutputStream os = null;
-		File file = new File(s);
-		try {
-			os = new FileOutputStream(file);
-			for(int i = 0; i < t.size(); i++) {
-			os.write(t.get(i).getBytes());
-			os.write("\n".getBytes());
-			}
-		}
-		catch(FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		if(os != null) {
-			try {
-				os.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-	
-	public static void readLogIn() {
-		FileInputStream fs = null;
-		File file = new File(loglog);
-		String s = "";
-		try {
-			fs = new FileInputStream(file);
-		}
-		catch(FileNotFoundException e) {
-			e.printStackTrace();
-		}
-		int b = 0;
-		try {
-			while((b = fs.read()) != -1) {
-				char c = (char) b;
-				s += c;
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		if(fs != null) {
-			try {
-				fs.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		String[] arr = s.split("\n");
-		for(int i = 0; i < arr.length; i++) {
-			loginInfo.add(arr[i]);
-		}
-	}
-	
+
+	}	
 }
 
