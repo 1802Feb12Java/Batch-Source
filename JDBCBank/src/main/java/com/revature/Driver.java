@@ -266,9 +266,7 @@ public class Driver {
 	*/
 	public static void main(String[] args) {
 		
-		//initializes connection to DB
-		//init();
-		logger.debug("Starting Program...");
+		logger.info("Starting Program...");
 
 		//main loop boolean
 		boolean exitMain = false;
@@ -298,7 +296,6 @@ public class Driver {
 				
 				//logged in!
 				if(!curUser.equals(null)) {
-					logger.debug("calling logic methods");
 					if(curUser.getAccessLevel() == 0) {//Customer
 						runClient(curUser);
 					}
@@ -324,8 +321,6 @@ public class Driver {
 			}
 		}
 		System.out.println("Thanks for choosing our services! Have a good day!");
-		logger.debug("Exiting Program Now...");
-		//call gc??
-		//TODO: delete print to console from log4j.properties
-	}
+		logger.info("Exiting Program Now...");
+	}//end main
 }

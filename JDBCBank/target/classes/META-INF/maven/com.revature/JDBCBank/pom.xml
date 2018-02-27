@@ -4,7 +4,6 @@
   <artifactId>JDBCBank</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>JDBCBank</name>
-  
 	<dependencies>
 		<dependency>
 			<groupId>com.oracle</groupId>
