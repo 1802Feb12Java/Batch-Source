@@ -8,7 +8,7 @@ Current database values:
 
 --//USERNAMES AND PASSWORDS ARE CASE-SENSITIVE\\--
 User -1 (dummy value to show deleted users, transactions table will point to this if they're deleted)
-User -2 (SuperUser, all SuperUsers share the account, username = "superuser", password = "superpass")
+User -2 (SuperUser, all SuperUsers share the account - username = "superuser", password = "superpass")
 User 1 (username = "joe", password = "@@",	name = "Jim Bob", owns accounts 1 and 2)
 User 2 (username = "jim", password = "@13", name = "Joe Johnson", owns accounts 3 and 4)
 
