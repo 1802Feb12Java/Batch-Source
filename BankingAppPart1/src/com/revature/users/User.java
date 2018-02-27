@@ -12,9 +12,8 @@ public class User {
 	private String state = null;
 	private String phoneNumber = null;
 	private String userType = null;
-	private int customerID = 0;
+	private int userID = 0;
 	private boolean accountHolder = false;
-	private boolean applyingForSavings = false;
 
 	public User() {
 		super();
@@ -92,12 +91,12 @@ public class User {
 		this.userType = userType;
 	}
 
-	public int getCustomerID() {
-		return customerID;
+	public int getUserID() {
+		return userID;
 	}
 
-	public void setCustomerID(int customerID) {
-		this.customerID = customerID;
+	public void setCustomerID(int userID) {
+		this.userID = userID;
 	}
 
 	public boolean isAccountHolder() {
@@ -108,14 +107,6 @@ public class User {
 		this.accountHolder = accountHolder;
 	}
 
-	public boolean isApplyingForSavings() {
-		return applyingForSavings;
-	}
-
-	public void setApplyingForSavings(boolean applyingForSavings) {
-		this.applyingForSavings = applyingForSavings;
-	}
-	
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import com.revature.accounts.Account;
 import com.revature.menus.Menus;
+import com.revature.services.AccountServices;
 import com.revature.services.CustomerServices;
 import com.revature.userfunctions.*;
 import com.revature.users.User;
@@ -20,7 +21,12 @@ public class Driver {
 		
 		//active session objects
 		User user = null;
+		User locatedUser = null;
+		String locateUserName = null;
+		Account account = null;
+		ArrayList<Account> accountList = null;
 		CustomerServices cs = new CustomerServices();
+		AccountServices as = new AccountServices();
 		
 		//login and validation variables
 		int option = 0;
@@ -219,11 +225,29 @@ public class Driver {
 							
 							switch(option) {
 							case 1:
-								user.setApplyingForSavings(false);
+								//create the checking account
+								account = Account.createAccount(user, "Checking");
+								
+								//add the account to the database
+								try {
+									as.addAccount(account);
+								} catch (SQLException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
 								break;
 								
 							case 2:
-								user.setApplyingForSavings(true);
+								//create the savings account
+								account = Account.createAccount(user, "Savings");
+								
+								//add the account to the database
+								try {
+									as.addAccount(account);
+								} catch (SQLException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
 								break;
 							}//end account type switch
 							
@@ -371,20 +395,53 @@ public class Driver {
 						switch(option) {
 						case 1:
 							//View customer information
-							//TODO: view customer
+							System.out.print("Enter a user name to view: ");
+							
+							locateUserName = getInput.nextLine();
+							
+							try {
+								locatedUser = cs.getUser(locateUserName);
+							} catch (SQLException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							
+							if(locatedUser != null) {
+								System.out.println();
+								System.out.print(locatedUser.toString());
+								System.out.println();
+							}
+							
+							else {
+								System.out.println("User not found");
+							}
+							
 							option = 0;
 							break;
 
 						case 2:
-							//view customer accounts
+							//TODO: view customer accounts
 							option = 0;
 							break;
 
 						case 3:
 							//View pending account applications
-							//TODO: fix pending
+							try {
+								accountList = as.getPendingAccounts();
+							} catch (SQLException e) {
+								System.out.println("Something went wrong reading the account list.");
+								e.printStackTrace();
+							}
 
-							//if applicable, create the approved account
+							//if accounts exist, allow administrator to approve or deny them
+							if(accountList != null) {
+								System.out.println("The following accounts are currently pending: ");
+								Account.listAccounts(accountList);
+								
+								System.out.print("Select an account for processing: ");
+								option = getInput.nextInt();
+								getInput.nextLine();
+							}
 							
 							option = 0;
 							break;

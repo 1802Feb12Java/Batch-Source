@@ -19,8 +19,10 @@ public class CustomerServices implements CustomerDAO {
 			accHolder = "Y";
 		}
 		
+		//set the string to use in the prepared statement and create the statement
 		String sql = "INSERT INTO USERS(userID, userName, pass, firstName, lastName, streetAddress, city, state, phoneNumber, userType, accountHolder) VALUES(GENERATE_USER_ID.nextVal,?,?,?,?,?,?,?,?,?,?)";
 		PreparedStatement ps = conn.prepareStatement(sql);
+		
 		//use the user values to set the sql variables
 		ps.setString(1, user.getUserName());
 		ps.setString(2, user.getPassword());
@@ -33,7 +35,8 @@ public class CustomerServices implements CustomerDAO {
 		ps.setString(9, user.getUserType());
 		ps.setString(10, accHolder);
 		
-		ps.executeUpdate();
+		ps.execute();
+		ps.close();
 	}
 
 	public User getUser(String uName) throws SQLException {
@@ -72,9 +75,10 @@ public class CustomerServices implements CustomerDAO {
 		else {
 			user.setAccountHolder(false);
 			//TODO: clean this out too
-			//System.out.println("Customer has no account");
+			System.out.println("Customer has no account");
 		}
 
+		ps.close();
 		return user;
 	}
 

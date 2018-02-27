@@ -4,12 +4,12 @@ import org.apache.log4j.Logger;
 import com.revature.users.User;
 
 public class Account {
-	private double balance = 25.00;
+	private double balance = 25.00d;
 	private int accountNumber;
 	private String status = "Pending";
 	private String accountType;
 	private String primaryAccountHolder = null;
-	private Logger log = Logger.getRootLogger();
+	protected static Logger log = Logger.getRootLogger();
 	
 	public Account() {
 		super();
@@ -22,9 +22,10 @@ public class Account {
 
 	}
 
-	public static void listAccounts(ArrayList<Account> accountList, String userName) {
+	public static void listAccounts(ArrayList<Account> accountList) {
+		int index = 1;
+		
 		for(Account current : accountList) {
-			int index = 1;
 			System.out.println(index + ".  Account: " + current.getAccountNumber() + "  " + current.getAccountType() +
 					"  " + "Balance: " + current.getBalance());
 			index++;
@@ -32,9 +33,17 @@ public class Account {
 	}
 	
 
-	public static void createAccount(User user) {
+	public static Account createAccount(User user, String accountType) {
+		Account newAccount = new Account();
 		
-
+		//set the account to checking or savings
+		newAccount.setAccountType(accountType);
+		
+		//assign the account the the customer
+		newAccount.setPrimaryAccountHolder(user.getUserName());
+		log.info(user.getFirstName() + " " + user.getLastName() + "created new account.");
+		
+		return newAccount;
 	}
 	
 	public void withdraw(double amount) {
@@ -50,13 +59,7 @@ public class Account {
 		balance -= amount;
 		destination.setBalance(destination.getBalance() + amount);		
 	}
-
-	public void listAccounts(ArrayList<Account> accounts) {
-		for (Account current : accounts) {
-			current.toString();
-		}
-	}
-		
+	
 	public double getBalance() {
 		return balance;
 	}

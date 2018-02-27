@@ -19,10 +19,10 @@ create table users (
 
 create table account (
     balance         number(9,2)     NOT NULL,
-	accountNumber   number(15)      NOT NULL,
+	accountNumber   int             NOT NULL,
 	status          varchar2(7)     NOT NULL,
 	accountType     varchar2(8)     NOT NULL,
-	accountHolder   int             NOT NULL)
+	accountHolder   varchar2(30)    NOT NULL)
 /
 
 CREATE SEQUENCE GENERATE_USER_ID
@@ -36,7 +36,7 @@ CREATE SEQUENCE GENERATE_ACCOUNT_NUMBER
 /
 
 /* DESTROY EVERYTHING */
-
+/*
 BEGIN   
    FOR cur_rec IN (SELECT object_name, object_type FROM user_objects WHERE object_type IN ('TABLE', 'VIEW', 'PACKAGE', 'PROCEDURE', 'FUNCTION', 'SEQUENCE'))
    LOOP
@@ -55,3 +55,4 @@ BEGIN
    END LOOP;
 END;
 /
+*/
