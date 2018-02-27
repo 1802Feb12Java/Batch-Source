@@ -173,4 +173,42 @@ public class LogicDriver {
 		}
 		return u;
 	}
+	
+	public void ViewAllUser() {
+		try {
+			UserServices us = new UserServices();
+			ArrayList<User> userList = us.retrieveAllRows();
+			for(User curU: userList) {
+				System.out.println(curU.toString());
+			}
+		}
+		catch(SQLException e) {
+			logger.error(e.toString());
+		}
+	}
+
+	public void viewAllAcc() {
+		try {
+			UserServices us = new UserServices();
+			ArrayList<User> usrList = us.retrieveAllRows();
+			for(User curU: usrList) {
+				viewAccounts(curU);
+			}
+		}
+		catch(SQLException e) {
+			logger.error(e.toString());
+		}
+	}
+	
+	public void deleteUser(int userID) {
+		try {
+			UserServices us = new UserServices();
+			User toDelete = userLookup(userID);
+			us.deleteRecord(toDelete);
+		}
+		catch(SQLException e) {
+			logger.error(e.toString());
+		}
+	}
+
 }

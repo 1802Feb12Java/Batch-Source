@@ -173,20 +173,29 @@ public class Driver {
 		while(running) {
 			menu.printAdmin();
 			String option = sc.nextLine();
-			if(option.equals("1")) {
+			if(option.equals("1")) {//view all users
+				logicDriver.ViewAllUser();
+			}
+			else if(option.equals("2")) {//Create user
+				if(!register()) {
+					logger.info("Something went wrong! Please try again.");
+				}
+				else {
+					logger.info("Registration successful!");
+				}
+			}
+			else if(option.equals("3")) {//Modify user
 				
 			}
-			else if(option.equals("2")) {
+			else if(option.equals("4")) {//delete user 
+				System.out.println("Enter User id to be delete: ");
+				int usrID = sc.nextInt();
+				sc.nextLine();
+				logicDriver.deleteUser(usrID);
 				
 			}
-			else if(option.equals("3")) {
-				
-			}
-			else if(option.equals("4")) {
-				
-			}
-			else if(option.equals("5")) {
-				
+			else if(option.equals("5")) {//view all accounts
+				logicDriver.viewAllAcc();
 			}
 			else if(option.equals("6")) {//create account
 				//account number
