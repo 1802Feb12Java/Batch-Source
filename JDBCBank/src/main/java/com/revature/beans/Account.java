@@ -85,10 +85,7 @@ public class Account{
 				"AccountID: " + accountID + 
 				"\nAccount Number: " + accountNumber + 
 				"\nBalance: " + balance + 
-				"\nOwner: " + owner.getName().getKey() +  " " + owner.getName().getValue() +
-				"\nJoint:" + joint);
-		if(joint)
-			sb.append("\nJointOwner: " + jointOwner.getName().getKey() +  " " + jointOwner.getName().getValue());
+				"\nOwner: " + owner.getName().getKey() +  " " + owner.getName().getValue());
 		return sb.toString();
 	}
 	

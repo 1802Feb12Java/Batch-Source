@@ -185,6 +185,10 @@ public class Driver {
 				}
 			}
 			else if(option.equals("3")) {//Modify user
+				System.out.println("Enter User ID to be modify: ");
+//				int usrID = sc.nextInt();
+//				sc.nextLine();
+				//TODO
 				
 			}
 			else if(option.equals("4")) {//delete user 
@@ -199,7 +203,7 @@ public class Driver {
 			}
 			else if(option.equals("6")) {//create account
 				//account number
-				System.out.println("Enter User ID: ");
+				System.out.println("Enter User ID to create the account for: ");
 				int usrID = sc.nextInt();
 				sc.nextLine();
 				User uC = logicDriver.userLookup(usrID);

@@ -180,6 +180,7 @@ public class LogicDriver {
 			ArrayList<User> userList = us.retrieveAllRows();
 			for(User curU: userList) {
 				System.out.println(curU.toString());
+				System.out.println("---------------------------");
 			}
 		}
 		catch(SQLException e) {
