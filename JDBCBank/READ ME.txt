@@ -1,0 +1,17 @@
+Pre-existing accounts
+
+Admin
+Username: Admin
+Password: Admin
+
+Customer
+Username: Zelarous
+Password: something
+
+Employee
+Username: Steve3789
+Password: secret
+
+Connection information
+
+"jdbc:oracle:thin:@jdbcbank.cpcjj0oba8us.us-east-2.rds.amazonaws.com:1521:orcl", "sgm4789", "Howareyou!"
