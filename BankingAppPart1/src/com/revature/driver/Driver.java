@@ -480,25 +480,41 @@ public class Driver {
 									}while(true);
 									
 									if(option == 1) {
+										//approve
 										//set the account status to active and update it in the database
 										account.setStatus("Active");
 										try {
 											as.updateAccount(account);
+											locateUserName = account.getPrimaryAccountHolder();
+											account = null;
 										} catch (SQLException e) {
 											// TODO Auto-generated catch block
 											e.printStackTrace();
 										}
 										
 										//get the user associated with the account update their account holder status if necessary
-										locatedUser = cs.getUser(locateUserName);
+										try {
+											locatedUser = cs.getUser(locateUserName);
+										} catch (SQLException e) {
+											// TODO Auto-generated catch block
+											e.printStackTrace();
+										}
 										locatedUser.setAccountHolder(true);
 										
 										//update the user
-										cs.updateUser(locatedUser);
+										try {
+											cs.updateUser(locatedUser);
+										} catch (SQLException e) {
+											// TODO Auto-generated catch block
+											e.printStackTrace();
+										}
+										locatedUser = null;
 										break;
 									}
 									
+									//Deny account
 									else if(option == 2) {
+										
 										System.out.println(account.getStatus());
 										try {
 											as.updateAccount(account);

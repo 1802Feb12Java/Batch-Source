@@ -80,7 +80,26 @@ public class CustomerServices implements CustomerDAO {
 	}
 
 	public void updateUser(User user) throws SQLException {
-		// TODO Auto-generated method stub
+		//set the string to use in the prepared statement and create the statement
+		String sql = "UPDATE USERS SET userName = ?, pass = ?, firstName = ?, lastName =?, streetAddress = ?, city = ?, state = ?, phoneNumber = ?, userType = ?, accountHolder = ? WHERE userID = ?";
+		PreparedStatement ps = conn.prepareStatement(sql);
+		
+		//use the user values to set the sql variables
+		ps.setString(1, user.getUserName());
+		ps.setString(2, user.getPassword());
+		ps.setString(3, user.getFirstName());
+		ps.setString(4, user.getLastName());
+		ps.setString(5, user.getStreetAddress());
+		ps.setString(6, user.getCity());
+		ps.setString(7, user.getState());
+		ps.setString(8, user.getPhoneNumber());
+		ps.setString(9, user.getUserType());
+		ps.setBoolean(10, user.isAccountHolder());
+		ps.setInt(11, user.getUserID());
+
+		
+		ps.executeUpdate();
+		ps.close();
 		
 	}
 
