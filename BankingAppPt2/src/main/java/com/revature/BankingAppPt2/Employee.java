@@ -7,11 +7,16 @@ import org.apache.log4j.Logger;
 
 public class Employee extends User{
 	private EmployeeServices employeeServices;
+	private EmployeeDAO employeeDAO;
 	static Scanner scanner = new Scanner(System.in);
 	final static Logger logger = Logger.getLogger(Employee.class);
 	public Employee(int userId, String userType, Connection connection) {
 		super(userId, userType, connection);
 		this.employeeServices = new EmployeeServices(connection);
+		this.employeeDAO = new EmployeeDAO(connection);
+		this.firstName = employeeDAO.getFirstName(userId);
+		this.lastName = employeeDAO.getLastName(userId);
+		this.userName = employeeDAO.getUsername(userId);
 		
 	}
 	@Override

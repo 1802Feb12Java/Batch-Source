@@ -1,5 +1,6 @@
 package com.revature.BankingAppPt2;
 
+import java.io.Console;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,7 +13,7 @@ public class LoginService {
 	final static Logger logger = Logger.getLogger(LoginService.class);
 	static Scanner scanner = new Scanner(System.in);
 	private Connection connection;
-	
+	Console console;
 	LoginService(Connection connection) {
 		this.connection = connection;
 	}

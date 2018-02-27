@@ -31,7 +31,7 @@ public class Customer extends User {
 	@Override
 	protected void runMenu() {
 		System.out.println("Hello, " + firstName + ".");
-		System.out.println("How can we assist you today?");
+		System.out.println("How can we assist you today?\n");
 		int menuOption = 0;
 		while (menuOption != 7) {
 			System.out.println("1. Apply for a new account");
@@ -39,7 +39,7 @@ public class Customer extends User {
 			System.out.println("3. View your personal information");
 			System.out.println("4. Make a deposit");
 			System.out.println("5. Make a withdrawl");
-			System.out.println("6. Make a transfer");
+			System.out.println("6. Delete an account");
 			System.out.println("7. Log Out");
 			try {
 				menuOption = Integer.valueOf(scanner.nextLine());
@@ -60,10 +60,10 @@ public class Customer extends User {
 					//this.runMenu();
 				}
 				else {
-					System.out.println("Here are the accounts we have on file for you:\n\n");
+					System.out.println("Here are the accounts we have on file for you:\n");
 					for (BankAccount bankAccount : bankAccounts) {
 						System.out.println(bankAccount.toString());
-						System.out.println("\n\n");
+						System.out.println("\n");
 					}
 					//this.runMenu();
 				}
@@ -82,18 +82,15 @@ public class Customer extends User {
 				this.bankAccounts = bankAccountServices.getBankAccountList(this.userId);
 				break;
 			case 6:
-				customerServices.makeTransfer(bankAccounts);
-				this.bankAccounts = bankAccountServices.getBankAccountList(this.userId);
+				customerServices.deleteAccount(bankAccounts);
 				break;
 			default:
 				System.out.println("Please enter a valid option.");
 				break;
 			}
-			//break out of while loop
-			//break;
+
 		}
 	}
-
 	@Override
 	public String toString() {
 		return "Customer [userName=" + this.userName + ", firstName=" + this.firstName + ", lastName=" + this.lastName + "]";

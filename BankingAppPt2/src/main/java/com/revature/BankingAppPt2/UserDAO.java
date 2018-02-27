@@ -13,6 +13,7 @@ public abstract class UserDAO {
 	protected UserDAO(Connection connection) {
 		this.connection = connection;
 	}
+	
 	public String getUsername(int userId) {
 		String userName = "";
 		String userNameQueryString = "SELECT userName FROM userAccounts WHERE userId = ?";
@@ -34,9 +35,6 @@ public abstract class UserDAO {
 		return userName;
 	}
 	
-	public void setUserName(int userId) {
-		
-	}
 	
 	public String getFirstName(int userId) {
 		String firstName = "";
@@ -59,10 +57,7 @@ public abstract class UserDAO {
 		return firstName;
 	}
 	
-	public void setFirstName(int userId) {
-		
-	}
-	
+
 	public String getLastName(int userId) {
 		String lastName = "";
 		String lastNameQueryString = "SELECT lastName FROM userAccounts WHERE userId = ?";
@@ -84,14 +79,8 @@ public abstract class UserDAO {
 		return lastName;
 	}
 	
-	public void setLastName(int userId) {
-		
-	}
 	
-	public void setPassword(int userId) {
-		
-	}
-	
+
 	public int getUserId(String userName) {
 		int userId = 0;
 		String getUserIdString = "SELECT userId FROM userAccounts WHERE userName = ?";
