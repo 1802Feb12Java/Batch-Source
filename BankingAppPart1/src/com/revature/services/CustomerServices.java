@@ -2,9 +2,8 @@ package com.revature.services;
 
 import java.sql.*;
 import java.util.List;
-
 import com.revature.dao.CustomerDAO;
-import com.revature.users.Customer;
+import com.revature.users.User;
 import com.revature.util.ConnFactory;
 
 public class CustomerServices implements CustomerDAO {
@@ -12,65 +11,83 @@ public class CustomerServices implements CustomerDAO {
 	ConnFactory cf = new ConnFactory();
 	Connection conn = cf.getConnection();
 
-	public void addCustomer(Customer customer) throws SQLException {
+	public void addUser(User user) throws SQLException {
 		String accHolder = "N";
 		
-		if(customer.isAccountHolder()) {
+		//unlikely to be used upon user creation, but including just in case
+		if(user.isAccountHolder()) {
 			accHolder = "Y";
 		}
 		
-		String sql = "INSERT INTO CUSTOMER(customerID, userName, pass, firstName, lastName, streetAddress, city, state, phoneNumber, accountHolder) VALUES(?,?,?,?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO USERS(userID, userName, pass, firstName, lastName, streetAddress, city, state, phoneNumber, userType, accountHolder) VALUES(GENERATE_USER_ID.nextVal,?,?,?,?,?,?,?,?,?,?)";
 		PreparedStatement ps = conn.prepareStatement(sql);
-		//TODO: Change first variable to sequence number
-		ps.setInt(1, 1);
-		ps.setString(2, customer.getUserName());
-		ps.setString(3, customer.getPassword());
-		ps.setString(4, customer.getFirstName());
-		ps.setString(5, customer.getLastName());
-		ps.setString(6, customer.getStreetAddress());
-		ps.setString(7, customer.getCity());
-		ps.setString(8, customer.getState());
-		ps.setString(9, customer.getPhoneNumber());
+		//use the user values to set the sql variables
+		ps.setString(1, user.getUserName());
+		ps.setString(2, user.getPassword());
+		ps.setString(3, user.getFirstName());
+		ps.setString(4, user.getLastName());
+		ps.setString(5, user.getStreetAddress());
+		ps.setString(6, user.getCity());
+		ps.setString(7, user.getState());
+		ps.setString(8, user.getPhoneNumber());
+		ps.setString(9, user.getUserType());
 		ps.setString(10, accHolder);
 		
 		ps.executeUpdate();
 	}
 
-	public Customer getCustomer(String uName, Customer customer) throws SQLException {
-		String sql = "SELECT * FROM CUSTOMER WHERE userName = " + uName;
-		ResultSet rs = (ResultSet) conn.prepareCall(sql);
+	public User getUser(String uName) throws SQLException {
+		String sql = "SELECT * FROM USERS WHERE USERNAME=?";
+		User user = null;
 		
-		customer.setUserName(rs.getString("userName"));
-		customer.setPassword(rs.getString("pass"));
-		customer.setFirstName(rs.getString("firstName"));
-		customer.setLastName(rs.getString("lastName"));
-		customer.setStreetAddress(rs.getString("streetAddress"));
-		customer.setCity(rs.getString("city"));
-		customer.setState(rs.getString("state"));
-		customer.setPhoneNumber(rs.getString("phoneNumber"));
+		PreparedStatement ps = conn.prepareStatement(sql);
+		ps.setString(1, uName);
+		ResultSet rs = ps.executeQuery();
 		
-		if(rs.getString("accountHolder") == "Y") {
-			customer.setAccountHolder(true);
+		if(rs.next() == false) {
+			System.out.println("User not found.");
+			return user;
 		}
 		
 		else {
-			customer.setAccountHolder(false);
+			user = new User();
+			user.setUserName(rs.getString("userName"));
+			user.setPassword(rs.getString("pass"));
+			user.setFirstName(rs.getString("firstName"));
+			user.setLastName(rs.getString("lastName"));
+			user.setStreetAddress(rs.getString("streetAddress"));
+			user.setCity(rs.getString("city"));
+			user.setState(rs.getString("state"));
+			user.setPhoneNumber(rs.getString("phoneNumber"));
 		}
 		
-		return customer;
+		if(rs.getString("accountHolder") == "Y") {
+			user.setAccountHolder(true);
+			//TODO: clean this out
+			System.out.println("Customer is account holder");
+		}
+
+		
+		else {
+			user.setAccountHolder(false);
+			//TODO: clean this out too
+			System.out.println("Customer has no account");
+		}
+
+		return user;
 	}
 
-	public void updateCustomer(Customer customer) throws SQLException {
+	public void updateUser(User user) throws SQLException {
 		// TODO Auto-generated method stub
 		
 	}
 
-	public void deleteCustomer(Customer customer) throws SQLException {
-		String uName = customer.getUserName();
+	public void deleteUser(User user) throws SQLException {
+		String uName = user.getUserName();
 		String sql = "DELETE * FROM CUSTOMER WHERE USERNAME = " + uName;
 	}
 
-	public List<Customer> getAllCustomers() throws SQLException {
+	public List<User> getAllUsers() throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}

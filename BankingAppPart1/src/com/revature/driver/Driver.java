@@ -6,12 +6,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 import com.revature.accounts.Account;
-import com.revature.accounts.Pending;
-import com.revature.fileoperations.FileOperations;
 import com.revature.menus.Menus;
 import com.revature.services.CustomerServices;
 import com.revature.userfunctions.*;
-import com.revature.users.*;
+import com.revature.users.User;
 
 public class Driver {
 	public static void main(String[] args) {
@@ -22,21 +20,10 @@ public class Driver {
 		boolean runningBackend = true;
 		boolean systemRunning = true;
 		
-		//filenames
-		String adminFilename = "admins.dat";
-		String customerFilename = "customers.dat";
-		
-		//Data structures
-		HashMap<String, Admin> adminsMap = new HashMap<>();
-		HashMap<String, Customer> customersMap = new HashMap<>();
-		HashMap<String, ArrayList<Account>> accountsMap = new HashMap<>();
-		ArrayList<Customer> pendingRequests = new ArrayList<>();
-		
 		//active session objects
-		Customer customer = null;
-		Admin admin = null;
-		char userType = 'n';
-		boolean customerPending = false;
+		User user = null;
+		User newUser = null;
+		CustomerServices cs = new CustomerServices();
 		
 		//login and validation variables
 		int option = 0;
@@ -44,22 +31,6 @@ public class Driver {
 		String password = null;
 		Scanner getInput = null;
 
-		//initialize the system
-		System.out.println("Populating HashMaps...");
-
-
-		//load the admin HashMap
-		System.out.print("  Loading administrators...");
-		adminsMap = FileOperations.readAdmins(adminFilename);
-
-		//load the customer HashMap
-		System.out.println("  Loading customers...");
-		customersMap = FileOperations.readCustomers(customerFilename);
-		
-		System.out.println("HashMaps loaded.");
-		System.out.println("  Number of customers: " + customersMap.size());
-		System.out.println("  Number of administrators: " + adminsMap.size());
-		System.out.println("  Number of accounts pending: " + pendingRequests.size());
 		//open the scanner to be used for all input
 		getInput = new Scanner(System.in);
 
@@ -99,35 +70,31 @@ public class Driver {
 						
 					switch(option) {
 					case 1:
-						option = 0;
-						//create a new administrator account and add it to the map
-						Admin newAdmin = BackendAdministration.createAdmin(getInput);
-						adminsMap.put(newAdmin.getUserName(), newAdmin);
-
-						//update the admins.dat file
+						//create a new user account and set it to administrator
+						newUser = UserFunctions.register(getInput);
+						newUser.setUserType("Administrator");
+						//add the administrator to the database
 						try {
-							FileOperations.writeAdmins(adminsMap, adminFilename);
-						} catch (IOException e) {
-							System.out.println("IO error in writeAdmins");
-							e.printStackTrace();
+							cs.addUser(newUser);
+						} catch (SQLException e2) {
+							// TODO Auto-generated catch block
+							e2.printStackTrace();
 						}
+						option = 0;
 						break;
 								
 					case 2:
-						option = 0;
-						//create a new customer account and add it to the map
-						Customer newCustomer = BackendAdministration.createCustomer(getInput);
-						customersMap.put(newCustomer.getUserName(), newCustomer);
-						System.out.println("  Number of customers: " + customersMap.size());
-						
-						//update the customers.dat file
+						//create a new customer account and set it to customer
+						newUser = UserFunctions.register(getInput);
+						newUser.setUserType("Customers");
 						try {
-							FileOperations.writeCustomers(customersMap, customerFilename);
-						} catch (IOException e) {
-							System.out.println("IO error in writeCustomers");
-							e.printStackTrace();
-						}											
+							cs.addUser(newUser);
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 
+						option = 0;
 						break;
 								
 					case 3:
@@ -165,82 +132,53 @@ public class Driver {
 						//validate user
 						System.out.print("Please enter your user name: ");
 						userName = getInput.nextLine();
-						
-						//search the customer database
-						if (customersMap.containsKey(userName)) {
-							customer = customersMap.get(userName);
-							userType = 'c';
+						try {
+							user = cs.getUser(userName);
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
 						}
-							
-						//search the admin database
-						else if (adminsMap.containsKey(userName)) {
-							admin = adminsMap.get(userName);
-							System.out.println("Found, pass: "+ admin.getPassword());
-							userType = 'a';
+						//check the user name
+						try {
+							user = cs.getUser(userName);
+						} catch (SQLException e2) {
+							// TODO Auto-generated catch block
+							e2.printStackTrace();
 						}
-						
-						else {
-							System.out.println("User not found.");
+									
+						//exit the switch if the customer name is not found
+						if(user == null) {
 							break;
 						}
-						
+
 						System.out.print("Please enter your password: ");
 						password = getInput.nextLine();
 						
-						//identify login type and validate login
-						switch(userType) {
-						
-						case 'c':
-							//validate customer login
-							validated = UserFunctions.validateCustomer(password, customer);
-							if(validated) {
-								loggingIn = false;
-							}
+						//validate login
+						validated = UserFunctions.validateUser(password, user);
+						if(validated) {
+							loggingIn = false;
+						}
 							
-							else { 
-								userType = 'n';
-								customer = null;
-							}
-							break;
-						
-						case 'a':
-							//validate admin login
-							validated = UserFunctions.validateAdmin(password, admin);
-							if(validated) {
-								loggingIn = false;
-							}
+						else {
+							System.out.println();
+							user = null;
+						}
 							
-							else {
-								System.out.println();
-								userType = 'n';
-								admin = null;
-							}
-							
-							break;
-						}//end user type switch	
 						option = 0;
 						break;
 					
 					case 2:
 						//register new customer
-						customer = UserFunctions.register(getInput);
-						customersMap.put(customer.getUserName(), customer);
-						CustomerServices cs = new CustomerServices();
+						newUser = UserFunctions.register(getInput);
+						newUser.setUserType("Customer");
 						try {
-							cs.addCustomer(customer);
+							cs.addUser(user);
 						} catch (SQLException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
-						//update the customers.dat file
-						try {
-							FileOperations.writeCustomers(customersMap, customerFilename);
-						} catch (IOException e) {
-							System.out.println("IO error in writeCustomers");
-							e.printStackTrace();
-						}											
-
-						userType = 'c';
+						
 						validated = true;
 						loggingIn = false;
 						option = 0;
@@ -260,10 +198,9 @@ public class Driver {
 				}//end logging in while loop
 				
 				while(validated) {
-					switch(userType) {
-					case 'c':
-						//CUSTOMER
-						Menus.displayCustomerMenu(customer.getFirstName(), customer.getLastName());
+					switch(user.getUserType()) {
+					case "Customer":
+						Menus.displayCustomerMenu(user.getFirstName(), user.getLastName());
 						System.out.print("Please make a selection: ");
 						
 						try {
@@ -290,43 +227,27 @@ public class Driver {
 							
 							switch(option) {
 							case 1:
-								customer.setApplyingForSavings(false);
+								user.setApplyingForSavings(false);
 								break;
 								
 							case 2:
-								customer.setApplyingForSavings(true);
+								user.setApplyingForSavings(true);
 								break;
 							}//end account type switch
 							
-							for(Customer current : pendingRequests) {
-								if(current.equals(customer)) {
-									customerPending = false;
-								}
-							}
-							
-							//if the customer already has already applied for an account, they must await approval
-							if(customerPending) {
-								System.out.println("You are already awaiting account approval");
-							}
-							
-							//otherwise, add the customer to the pending list
-							else {								
-								pendingRequests.add(customer);
-							}//end account request else
-
 							option = 0;
 							break;
 							
 						case 2:
 							//LIST ACCOUNTS
 							//List customer's accounts
-							if(!customer.isAccountHolder()) {
+							if(!user.isAccountHolder()) {
 								System.out.print("You currently have no open accounts");
 								System.out.println();
 							}
 							
 							else {
-								Account.listAccounts(accountsMap.get(userName), userName);
+								//TODO:list accounts
 							}
 							
 							option = 0;
@@ -335,13 +256,13 @@ public class Driver {
 						case 3:
 							//VIEW ACCOUNT
 							//List customer's accounts
-							if(!customer.isAccountHolder()) {
+							if(!user.isAccountHolder()) {
 								System.out.print("You currently have no open accounts");
 								System.out.println();
 							}
 							
 							else {
-								Account.listAccounts(accountsMap.get(userName), userName);
+								//TODO: List accoutn
 								System.out.print("Select an account to view: ");
 								
 								try {
@@ -352,7 +273,6 @@ public class Driver {
 									}
 								
 								System.out.println();
-								System.out.println(accountsMap.get(userName).get(option - 1).toString());
 								System.out.println();
 								getInput.nextLine();
 								
@@ -363,17 +283,13 @@ public class Driver {
 							
 						case 4:
 							//WITHDRAW
-							//List customer's accounts
-							if(!customer.isAccountHolder()) {
+							if(!user.isAccountHolder()) {
 								System.out.print("You currently have no open accounts");
-								if(customer.getUserName().equals("js")) {
-									System.out.print(" (Loser)");
-								}
 								System.out.println();
 							}
 							
 							else {
-								Account.listAccounts(accountsMap.get(userName), userName);
+								//TODO: List customer's accounts
 								System.out.print("Select an account to withdraw from: ");
 								
 								try {
@@ -383,9 +299,7 @@ public class Driver {
 										break;
 									}
 								System.out.print("Enter an amount to withdraw: ");
-								accountsMap.get(userName).get(option - 1).withdraw(getInput.nextDouble());
 								System.out.println();
-								System.out.println(accountsMap.get(userName).get(option - 1).toString());
 								System.out.println();
 								getInput.nextLine();
 							}
@@ -396,16 +310,13 @@ public class Driver {
 						case 5:
 							//DEPOSIT
 							//List customer's accounts
-							if(!customer.isAccountHolder()) {
+							if(!user.isAccountHolder()) {
 								System.out.print("You currently have no open accounts");
-								if(customer.getUserName().equals("js")) {
-									System.out.print(" (Loser)");
-								}
 								System.out.println();
 							}
 							
 							else {
-								Account.listAccounts(accountsMap.get(userName), userName);
+								//TODO: List accounts
 								System.out.print("Select an account to deposit to: ");
 								
 								try {
@@ -416,12 +327,9 @@ public class Driver {
 									}
 								getInput.nextLine();
 								System.out.print("Enter an amount to deposit: ");
-								accountsMap.get(userName).get(option - 1).deposit(getInput.nextDouble());
 								System.out.println();
-								System.out.println(accountsMap.get(userName).get(option - 1).toString());
 								System.out.println();
 								getInput.nextLine();
-
 							}
 							
 							option = 0;
@@ -430,16 +338,13 @@ public class Driver {
 						case 6:
 							//TRANSFER
 							//List customer's accounts
-							if(!customer.isAccountHolder()) {
+							if(!user.isAccountHolder()) {
 								System.out.print("You currently have no open accounts");
-								if(customer.getUserName().equals("js")) {
-									System.out.print(" (Loser)");
-								}
 								System.out.println();
 							}
 							
 							else {
-								Account.listAccounts(accountsMap.get(userName), userName);
+								//TODO:  Transfer
 							}
 							
 							option = 0;
@@ -458,9 +363,9 @@ public class Driver {
 						}
 						break;
 						
-					case 'a':
+					case "Administrator":
 						//ADMIN
-						Menus.displayAdminMenu(admin.getFirstName(), admin.getLastName());
+						Menus.displayAdminMenu(user.getFirstName(), user.getLastName());
 						System.out.print("Please make a selection: ");
 						
 						try {
@@ -474,7 +379,7 @@ public class Driver {
 						switch(option) {
 						case 1:
 							//View customer information
-							UserFunctions.viewCustomerInformation(customersMap, getInput);
+							//TODO: view customer
 							option = 0;
 							break;
 
@@ -485,20 +390,15 @@ public class Driver {
 
 						case 3:
 							//View pending account applications
-							customer = Pending.view(pendingRequests, getInput);
+							//TODO: fix pending
 
 							//if applicable, create the approved account
-							if(customer != null) {
-								accountsMap = Account.createAccount(customer, accountsMap);
-								System.out.println("Account created.");
-
-							}
 							
 							option = 0;
 							break;
 
 						case 4:
-							//modify accounts
+							//TODO: modify accounts
 							option = 0;
 							break;
 

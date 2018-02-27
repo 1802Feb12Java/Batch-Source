@@ -1,22 +1,22 @@
 package com.revature.users;
 
-import java.io.Serializable;
-
-public class Customer implements Serializable {
+public class User {
 
 	private static final long serialVersionUID = -2795373050638956075L;
 	private String userName;
 	private String password;
 	private String firstName;
 	private String lastName;
-	private String streetAddress;
-	private String city;
-	private String state;
-	private String phoneNumber;
+	private String streetAddress = null;
+	private String city = null;
+	private String state = null;
+	private String phoneNumber = null;
+	private String userType = null;
+	private int customerID = 0;
 	private boolean accountHolder = false;
 	private boolean applyingForSavings = false;
 
-	public Customer() {
+	public User() {
 		super();
 	}
 	
@@ -83,7 +83,23 @@ public class Customer implements Serializable {
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
-		
+	
+	public String getUserType() {
+		return userType;
+	}
+
+	public void setUserType(String userType) {
+		this.userType = userType;
+	}
+
+	public int getCustomerID() {
+		return customerID;
+	}
+
+	public void setCustomerID(int customerID) {
+		this.customerID = customerID;
+	}
+
 	public boolean isAccountHolder() {
 		return accountHolder;
 	}
@@ -100,6 +116,10 @@ public class Customer implements Serializable {
 		this.applyingForSavings = applyingForSavings;
 	}
 	
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 	@Override
 	public String toString() {
 		return "User name:  " + userName + "\nName:  " + firstName + " "+ lastName + 

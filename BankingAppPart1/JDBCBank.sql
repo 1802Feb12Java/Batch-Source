@@ -1,23 +1,42 @@
-create table customer (
-    customerID      number(5)       NOT NULL,
+/* Set up the tables */
+create table users (
+    userID          int             NOT NULL,
   	userName        varchar2(30)    NOT NULL,
 	pass            varchar2(30)    NOT NULL,
 	firstName       varchar2(30)    NOT NULL,
 	lastName        varchar2(30)    NOT NULL,
-	streetAddress   varchar2(100)   NOT NULL,
-	city            varchar2(50)    NOT NULL,
-	state           varchar2(2)     NOT NULL,
-	phoneNumber     varchar2(12)    NOT NULL,
-    account1        number(20),
-    account2        number(20),
-    account3        number(20),
-    account4        number(20),
-	accountHolder   varchar2(1)     NOT NULL);
+	streetAddress   varchar2(50),
+	city            varchar2(20),
+	state           varchar2(2),
+	phoneNumber     varchar2(12),
+    userType        varchar2(13)    NOT NULL,
+    account1        int,
+    account2        int,
+    account3        int,
+    account4        int,
+	accountHolder   varchar2(1));
 /
 
+create table account (
+    balance         number(9,2)     NOT NULL,
+	accountNumber   number(15)      NOT NULL,
+	status          varchar2(7)     NOT NULL,
+	accountType     varchar2(8)     NOT NULL,
+	accountHolder   int             NOT NULL)
+/
+
+CREATE SEQUENCE GENERATE_USER_ID
+    START WITH 1
+    INCREMENT BY 1;
+/
+
+CREATE SEQUENCE GENERATE_ACCOUNT_NUMBER
+    START WITH 10000
+    INCREMENT BY 1;
+/
 
 /* DESTROY EVERYTHING */
-/*
+
 BEGIN   
    FOR cur_rec IN (SELECT object_name, object_type FROM user_objects WHERE object_type IN ('TABLE', 'VIEW', 'PACKAGE', 'PROCEDURE', 'FUNCTION', 'SEQUENCE'))
    LOOP
@@ -36,4 +55,3 @@ BEGIN
    END LOOP;
 END;
 /
-*/
