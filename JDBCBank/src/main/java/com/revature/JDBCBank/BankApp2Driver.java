@@ -728,5 +728,4 @@ public class BankApp2Driver {
 		String endChoice = scan.nextLine().toLowerCase();
 		return endChoice;
 	}
-
 }
