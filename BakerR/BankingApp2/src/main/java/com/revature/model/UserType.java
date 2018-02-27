@@ -13,6 +13,20 @@ public enum UserType {
 		return id;
 	}
 	
+	public static UserType fromId(int id) {
+		UserType ut = null;
+		
+		if(id == ADMIN.getId()) {
+			ut = ADMIN;
+		} else if(id == EMPLOYEE.getId()) {
+			ut = EMPLOYEE;
+		} else if(id == CUSTOMER.getId()) {
+			ut = CUSTOMER;
+		}
+		
+		return ut;
+	}
+	
 	public static String toString(UserType t) {
 		String str = "";
 		

@@ -4,13 +4,13 @@ public class BankAccount {
 	private int accountId;
 	private boolean isActive;
 	private double balance;
-	private Customer owner;
+	private Integer ownerId;
 	
-	public BankAccount(int id, boolean isActive, double bal, Customer owner) {
+	public BankAccount(int id, boolean isActive, double bal, Integer owner) {
 		accountId = id;
 		this.isActive = isActive;
 		balance = bal;
-		this.owner = owner;
+		this.ownerId = owner;
 	}
 	
 	public BankAccount() {
@@ -41,11 +41,11 @@ public class BankAccount {
 		this.balance = balance;
 	}
 
-	public Customer getOwner() {
-		return owner;
+	public Integer getOwner() {
+		return ownerId;
 	}
 
-	public void setOwner(Customer owner) {
-		this.owner = owner;
+	public void setOwner(Integer owner) {
+		this.ownerId = owner;
 	}
 }
