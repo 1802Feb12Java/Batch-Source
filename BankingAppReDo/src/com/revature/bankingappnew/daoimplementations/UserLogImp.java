@@ -233,7 +233,7 @@ public class UserLogImp {
 		}//end while
 		boolean b = true;
 		for(String s : usernameList) {
-			if(s.equalsIgnoreCase(username)) {
+			if(s.equals(username)) {
 				b = false;
 			}
 		}

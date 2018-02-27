@@ -132,6 +132,7 @@ public class Driver {
 				//continue to return statement
 			} else {
 				System.out.println("*********Error: Username or Password is incorrect.*********");
+				System.out.println("Press Enter to Try Again.");
 				log.info("User Error: User tried to log in, but the username and password entered did not match.");
 				username = "";
 			}
