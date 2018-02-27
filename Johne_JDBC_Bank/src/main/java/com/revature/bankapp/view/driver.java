@@ -10,7 +10,7 @@ import com.revature.bankapp.model.Customer;
 public class driver {
 	public static void main(String[] args) throws SQLException {
 		Customer user = new Customer();
-		user.setCustomerID(1001);
+		user.setCustomerID(1002);
 		user.setCustUsername("user");
 		user.setCustPW("user");
 		
@@ -18,7 +18,7 @@ public class driver {
 		BankAdmin admin = new BankAdmin();
 		
 		//BankController.registerCustomer(user);
-		BankController.adminDeleteCustomer(0);
+		//BankController.adminDeleteCustomer(0);
 		System.out.println(BankController.adminViewAllCustomers().toString());
 	}
 }
