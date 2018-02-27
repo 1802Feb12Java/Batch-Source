@@ -8,7 +8,7 @@ import java.util.List;
 public interface AccountDAO {
 	//CRUD operations
 	public void addAccount(Account account)throws SQLException;
-	public Account getAccount(int id)throws SQLException;
+	public Account getAccount(int accountNumber)throws SQLException;
 	public void updateAccount(Account account)throws SQLException;
 	public void deleteAccount(Account account)throws SQLException;
 	public ArrayList<Account> getPendingAccounts()throws SQLException;

@@ -79,6 +79,7 @@ public class CustomerServices implements CustomerDAO {
 		}
 
 		ps.close();
+		rs.close();
 		return user;
 	}
 

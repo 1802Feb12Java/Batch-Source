@@ -31,9 +31,32 @@ public class AccountServices implements AccountDAO{
 		ps.close();
 	}
 
-	public Account getAccount(int id) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+	public Account getAccount(int accountNumber) throws SQLException {
+		Account account = null;
+		String sql = "SELECT * FROM ACCOUNT WHERE accountNumber = ?";
+		PreparedStatement ps = conn.prepareStatement(sql);
+		ps.setInt(1, accountNumber);
+		ResultSet rs = ps.executeQuery();
+		
+		if(!rs.next()) {
+			System.out.println("Account number not found");
+			ps.close();
+			rs.close();
+			return account;
+		}
+		
+		else {
+			account.setAccountNumber(rs.getInt("accountNumber"));
+			account.setBalance(rs.getDouble("balance"));
+			account.setStatus(rs.getString("status"));
+			account.setAccountType(rs.getString("accountType"));
+			account.setPrimaryAccountHolder(rs.getString("accountHolder"));
+			ps.close();
+			rs.close();
+			return account;
+		}
+
+
 	}
 
 	public void updateAccount(Account account) throws SQLException {
@@ -74,7 +97,8 @@ public class AccountServices implements AccountDAO{
 			}while(rs.next());
 		}
 
+		ps.close();
+		rs.close();
 		return pendingList;
 	}
-
 }

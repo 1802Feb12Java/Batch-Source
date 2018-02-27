@@ -80,7 +80,7 @@ public class Driver {
 						try {
 							cs.addUser(user);
 						} catch (SQLException e2) {
-							// TODO Auto-generated catch block
+							System.out.println("Unable to add user.");
 							e2.printStackTrace();
 						}
 						option = 0;
@@ -93,7 +93,7 @@ public class Driver {
 						try {
 							cs.addUser(user);
 						} catch (SQLException e1) {
-							// TODO Auto-generated catch block
+							System.out.println("Unable to add user.");
 							e1.printStackTrace();
 						}
 
@@ -140,7 +140,7 @@ public class Driver {
 						try {
 							user = cs.getUser(userName);
 						} catch (SQLException e) {
-							// TODO Auto-generated catch block
+							System.out.println("Something went wrong when fetching user.");
 							e.printStackTrace();
 						}
 									
@@ -173,7 +173,7 @@ public class Driver {
 						try {
 							cs.addUser(user);
 						} catch (SQLException e1) {
-							// TODO Auto-generated catch block
+							System.out.println("An error occurred while trying to add the user.");
 							e1.printStackTrace();
 						}
 						
@@ -232,7 +232,7 @@ public class Driver {
 								try {
 									as.addAccount(account);
 								} catch (SQLException e1) {
-									// TODO Auto-generated catch block
+									System.out.println("Something went wrong trying to add the account.");
 									e1.printStackTrace();
 								}
 								break;
@@ -245,7 +245,7 @@ public class Driver {
 								try {
 									as.addAccount(account);
 								} catch (SQLException e1) {
-									// TODO Auto-generated catch block
+									System.out.println("Something went wrong trying to add the account.");
 									e1.printStackTrace();
 								}
 								break;
@@ -402,7 +402,7 @@ public class Driver {
 							try {
 								locatedUser = cs.getUser(locateUserName);
 							} catch (SQLException e) {
-								// TODO Auto-generated catch block
+								System.out.println("Something went wrong when trying to locate the user.");
 								e.printStackTrace();
 							}
 							
