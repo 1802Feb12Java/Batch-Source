@@ -93,9 +93,7 @@ public final class EntryState extends CommandState {
 
 			@Override
 			public void run() {
-				// TODO setup
-				
-				// Next state: LoginState
+				setNextState(new LoginState());
 			}
 
 			@Override

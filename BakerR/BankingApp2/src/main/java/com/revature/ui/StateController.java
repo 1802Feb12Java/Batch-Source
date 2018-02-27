@@ -1,5 +1,13 @@
 package com.revature.ui;
 
+import java.sql.SQLException;
+import java.util.List;
+
+import com.revature.db.UserDAO;
+import com.revature.db.UserDAOImpl;
+import com.revature.model.Admin;
+import com.revature.model.User;
+
 public final class StateController implements Runnable {
 	private static StateController instance;
 	
@@ -14,7 +22,7 @@ public final class StateController implements Runnable {
 		startState = new DisplayState() {
 
 			@Override
-			public void execute() { // TODO start state.
+			public void execute() {
 				final String TUX = "\n" + 
 						"             .888888:.\n" + 
 						"             88888.888.\n" + 
@@ -41,12 +49,25 @@ public final class StateController implements Runnable {
 				System.out.println("Welcome to the Bank of Tux!");
 				
 				// Get number of admins
+				int adminCount = 0;
+				try {
+					UserDAO userDao = new UserDAOImpl();
+					List<User> usrList = userDao.getAllUsers();
+					
+					for(User u : usrList) {
+						if(u instanceof Admin) {
+							++adminCount;
+						}
+					}
+				} catch (ClassNotFoundException | SQLException e) {
+				}
 				
-				// If admins < 0: goto SetupState
-				// Else: goto EntryState
-				
-				
-				
+				// If admins < 1: goto SetupState
+				if(adminCount == 0) {
+					setNextState(new SetupState());
+				} else {
+					setNextState(new EntryState());
+				}
 			}
 			
 		};

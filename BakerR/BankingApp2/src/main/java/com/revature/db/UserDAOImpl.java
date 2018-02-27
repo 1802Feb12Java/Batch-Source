@@ -7,9 +7,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import com.revature.model.Admin;
+import com.revature.model.BankAccount;
 import com.revature.model.Customer;
 import com.revature.model.Employee;
 import com.revature.model.User;
@@ -66,7 +68,15 @@ public class UserDAOImpl implements UserDAO {
 		
 		// Perform additional update if user is a customer.
 		if(usrtype == UserType.CUSTOMER.getId()) {
-			// TODO AccountDAO: get all accounts.
+			Customer cust = (Customer)usr;
+			try {
+				BankAccountDAO acctDao = new BankAccountDAOImpl();
+				List<BankAccount> acctList = acctDao.getAllUserAccounts(cust);
+				acctList.forEach((BankAccount acct) -> {
+					cust.getAccounts().put(acct.getAccountId(), acct);
+				});
+			} catch (ClassNotFoundException e) {
+			}
 		}
 	}
 
@@ -83,7 +93,18 @@ public class UserDAOImpl implements UserDAO {
 		
 		// Update accounts
 		if(usr instanceof Customer) {
-			// TODO Update account info (AccountDAO)
+			Customer cust = (Customer)usr;
+			Collection<BankAccount> acctList = cust.getAccounts().values();
+			try {
+				BankAccountDAO acctDao = new BankAccountDAOImpl();
+				acctList.forEach((BankAccount acct) -> {
+					try {
+						acctDao.updateAccount(acct);
+					} catch (SQLException e) {
+					}
+				});
+			} catch (ClassNotFoundException e) {
+			}
 		}
 	}
 
@@ -137,8 +158,14 @@ public class UserDAOImpl implements UserDAO {
 			
 			if(usr instanceof Customer) {
 				Customer cust = (Customer)usr;
-				
-				// TODO Get accounts (AccountDAO)
+				try {
+					BankAccountDAO acctDao = new BankAccountDAOImpl();
+					List<BankAccount> acctList = acctDao.getAllUserAccounts(cust);
+					acctList.forEach((BankAccount acct) -> {
+						cust.getAccounts().put(acct.getAccountId(), acct);
+					});
+				} catch (ClassNotFoundException e) {
+				}
 			}
 			
 			userList.add(usr);
@@ -182,6 +209,7 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	
+	
 	@Override
 	public User getUserById(int id) throws SQLException {
 		User usr;
@@ -215,7 +243,14 @@ public class UserDAOImpl implements UserDAO {
 			
 			if(usr instanceof Customer) {
 				Customer cust = (Customer)usr;
-				// TODO Get accounts (AccountDAO)
+				try {
+					BankAccountDAO acctDao = new BankAccountDAOImpl();
+					List<BankAccount> acctList = acctDao.getAllUserAccounts(cust);
+					acctList.forEach((BankAccount acct) -> {
+						cust.getAccounts().put(acct.getAccountId(), acct);
+					});
+				} catch (ClassNotFoundException e) {
+				}
 			}
 			
 		} else {
