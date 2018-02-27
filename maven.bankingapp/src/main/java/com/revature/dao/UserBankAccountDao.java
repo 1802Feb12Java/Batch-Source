@@ -16,5 +16,8 @@ public interface UserBankAccountDao {
 	public void deleteRecord(int id);
 	
 	public List<UserBankAccount> retrieveAllRecords();
+	
+	// get second person on account
+	public UserBankAccount getRecordExcludingCustId(int cust_id, int account_id);
 
 }

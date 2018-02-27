@@ -64,6 +64,9 @@ public class Driver
 	    		
 		
 	    	}
+	    	System.out.println("**********************************************************************");
+	    	System.out.println("*****Thanks for visiting the Bank of Boudreau! See you next time!*****");
+	    	System.out.println("**********************************************************************");
 		
 	    
 		

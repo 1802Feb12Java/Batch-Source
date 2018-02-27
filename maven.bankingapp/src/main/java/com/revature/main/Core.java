@@ -24,11 +24,20 @@ public class Core {
 	UserBankAccountServices ubas = new UserBankAccountServices();
 	AccountServices as = new AccountServices();
 	Account account = null;
+	UserBankAccount uba = null;
 	Menu menu = new Menu();
+	User user = null;
 	
 	int choice = 0;
 	String username = "";
 	String password = "";
+	boolean mainMenu = false;
+	boolean validSelection = false;
+	double depositAmount = 0;
+	double withdrawAmount = 0;
+	boolean depositing = false;
+	boolean withdrawing = false;
+	double initialDeposit = 0;
 	
 	public void adminLogin() throws FileNotFoundException, IOException, SQLException {
 		
@@ -39,13 +48,16 @@ public class Core {
 		String s_password = prop.getProperty("s_psw");
 		
 		// Get username input
-		System.out.println();
+		System.out.println("******************************************************************");
 		System.out.println("Enter your username");
+		System.out.println("******************************************************************");
 		String usernameInput = sc.next();
 		
 		// Get password input
 		System.out.println();
+		System.out.println("******************************************************************");
 		System.out.println("Enter your password");
+		System.out.println("******************************************************************");
 		String passwordInput = sc.next();
 		
 		// Verification
@@ -323,40 +335,62 @@ public class Core {
 						break;
 				}
 				
-				
-				
 			}
-			
-			
-			
-			
 			
 		}
 	}
 	
 	public void register() {
+		System.out.println("******************************************************************");
 		System.out.println("Enter your first name:");
+		System.out.println("******************************************************************");
 		String firstName = sc.next();
 		
+		System.out.println("******************************************************************");
 		System.out.println("Enter your last name:");
+		System.out.println("******************************************************************");
 		String lastName = sc.next();
 		
+		System.out.println("******************************************************************");
 		System.out.println("Enter your email:");
+		System.out.println("******************************************************************");
 		String email = sc.next();
 		
+		System.out.println("******************************************************************");
 		System.out.println("Enter your phone number:");
+		System.out.println("******************************************************************");
 		String phone = sc.next();
 		
+		System.out.println("******************************************************************");
 		System.out.println("Enter your desired username:");
+		System.out.println("******************************************************************");
 		String username = sc.next();
 		
+		boolean usernameOk = false;
+		while(!usernameOk) {
+			user = us.getUserByUsername(username);
+			if(user == null) {
+				usernameOk = true;
+			} else {
+				System.out.println("******************************************************************");
+				System.out.println("Error! That username is already take. Please choose a different one.");
+				System.out.println("******************************************************************");
+				username = sc.next();
+			}
+		}
+		
+		
+		System.out.println("******************************************************************");
 		System.out.println("Enter your password:");
+		System.out.println("******************************************************************");
 		String password = sc.next();
 		
 		boolean passwordOk = false;
 		while(!passwordOk) {
 			if (password.length() < 6) {
+				System.out.println("******************************************************************");
 				System.out.println("Error! Please choose a password that has at least six characters.");
+				System.out.println("******************************************************************");
 				password = sc.next();
 			} else {
 				passwordOk = true;
@@ -374,10 +408,13 @@ public class Core {
 		boolean validLogin = false;
 		while(!validLogin) {
 			
+			System.out.println("******************************************************************");
 			System.out.println("Please enter your username:");
+			System.out.println("******************************************************************");
 			username = sc.next();
-			
+			System.out.println("******************************************************************");
 			System.out.println("Please enter your password:");
+			System.out.println("******************************************************************");
 			password = sc.next();
 			
 			user = us.getUserByUsername(username);
@@ -421,7 +458,7 @@ public class Core {
 						System.out.println("******************************************************************");
 						System.out.println("How much would you like to deposit?");
 						System.out.println("******************************************************************");
-						double initialDeposit = sc.nextDouble();
+						initialDeposit = sc.nextDouble();
 						
 						boolean depositOk = false;
 						while(!depositOk) {
@@ -437,12 +474,104 @@ public class Core {
 						
 						as.insertNewAccount(0, initialDeposit);
 						List<Account> accounts = as.retrieveAllAccounts();
-						Account account = accounts.get(0);
+						account = accounts.get(0);
 						ubas.insertRecord(user.getId(), account.getId());
 						break;
 						
+						
+					case 2:
+						User userTwo = null;
+						mainMenu = false;
+						while(!mainMenu) {
+							
+							System.out.println("******************************************************************");
+							System.out.println("Please enter the username of the customer you will have a joing account with:");
+							System.out.println("******************************************************************");
+							username = sc.next();
+							
+							boolean userNotFound = true;
+							while(userNotFound) {
+								userTwo = us.getUserByUsername(username);
+								if(userTwo == null) {
+									System.out.println("******************************************************************");
+									System.out.println("Error! We could not find a customer with that username. Please try again.");
+									System.out.println("******************************************************************");
+									username = sc.next();
+								} else {
+									userNotFound = false;
+								}
+							}
+							
+							uba = ubas.getRecordByCustId(userTwo.getId());
+							if(uba == null) {
+								System.out.println("******************************************************************");
+								System.out.println("How much would you like to deposit?");
+								System.out.println("******************************************************************");
+								initialDeposit = sc.nextDouble();
+								
+								boolean depositOkTwo = false;
+								while(!depositOkTwo) {
+									if(initialDeposit < 50) {
+										System.out.println("******************************************************************");
+										System.out.println("Please deposit a minimum of $50");
+										System.out.println("******************************************************************");
+										initialDeposit = sc.nextDouble();
+									} else {
+										depositOkTwo = true;
+									}
+								}
+								
+								as.insertNewAccount(0, initialDeposit);
+								List<Account> accountsTwo = as.retrieveAllAccounts();
+								Account accountThree = accountsTwo.get(0);
+								ubas.insertRecord(user.getId(), accountThree.getId());
+								ubas.insertRecord(userTwo.getId(), accountThree.getId());
+								
+								mainMenu = true;
+								
+							} else {
+								System.out.println("******************************************************************");
+								System.out.println("Error! This user already has an account.");
+								System.out.println("******************************************************************");
+								System.out.println("Actions:");
+								System.out.println("1. Enter Another Username");
+								System.out.println("2. Main Menu");
+								choice = sc.nextInt();
+								
+								if(choice == 2) {
+									mainMenu=true;
+								}
+							}
+							
+						}
+						
+
+						break;
+						
 					case 3:
-						menu.customerPersonalInfo();
+						mainMenu = false;
+						while(!mainMenu) {
+							System.out.println("******************************************************************");
+							System.out.println("Name ------ " + user.getFirstName() + " " + user.getLastName());
+							System.out.println("Email ----- " + user.getEmail());
+							System.out.println("Phone ----- " + user.getPhone());
+							System.out.println("Username -- " + user.getUsername());
+							System.out.println("Password -- " + user.getPassword());
+							System.out.println("******************************************************************");
+							
+							System.out.println("Actions:");
+							System.out.println("1. Main Menu");
+							System.out.println("******************************************************************");
+							choice = sc.nextInt();
+							
+							if(choice == 1) {
+								mainMenu = true;
+							} else {
+								System.out.println();
+								System.out.println("******************************************************************");
+								System.out.println("Error! Invalid option.");
+							}
+						}
 						break;
 						
 					case 4:
@@ -459,8 +588,6 @@ public class Core {
 				
 				account = as.getAccount(uba.getAccountId());
 				
-				
-				
 				if(account.getIs_approved() == 0) {
 					System.out.println();
 					System.out.println("******************************************************************");
@@ -474,14 +601,14 @@ public class Core {
 					
 					switch(choice) {
 						case 1:
-							boolean mainMenu = false;
+							mainMenu = false;
 							while(!mainMenu) {
 								System.out.println("******************************************************************");
-								System.out.println("Name: " + user.getFirstName() + " " + user.getLastName());
-								System.out.println("Email: " + user.getEmail());
-								System.out.println("Phone: " + user.getPhone());
-								System.out.println("Username: " + user.getUsername());
-								System.out.println("Password: " + user.getPassword());
+								System.out.println("Name ------ " + user.getFirstName() + " " + user.getLastName());
+								System.out.println("Email ----- " + user.getEmail());
+								System.out.println("Phone ----- " + user.getPhone());
+								System.out.println("Username -- " + user.getUsername());
+								System.out.println("Password -- " + user.getPassword());
 								System.out.println("******************************************************************");
 								
 								System.out.println("Actions:");
@@ -511,15 +638,222 @@ public class Core {
 					
 				} else {
 					
-					System.out.println();
-					System.out.println("******************************************************************");
-					System.out.println("Welcome " + user.getFirstName() + " " + user.getLastName() + "!");
-					System.out.println("******************************************************************");
-					System.out.println("What would you like to do?");
-					System.out.println("1. Make A Deposit");
-					System.out.println("2. Make A Withdrawl");
-
-					choice = sc.nextInt();
+					logout = false;
+					while(!logout) {
+					
+						System.out.println();
+						System.out.println("******************************************************************");
+						System.out.println("Welcome " + user.getFirstName() + " " + user.getLastName() + "!");
+						System.out.println("******************************************************************");
+						System.out.println("What would you like to do?");
+						System.out.println("1. Make A Deposit");
+						System.out.println("2. Make A Withdrawl");
+						System.out.println("3. View Account Info");
+						System.out.println("4. View Personal Info");
+						System.out.println("5. Logout");
+						choice = sc.nextInt();
+						
+						switch(choice) {
+						
+							case 1:
+								boolean depositing = true;
+								while(depositing) {
+									System.out.println("******************************************************************");
+									System.out.println("How much would you like to deposit?");
+									System.out.println("******************************************************************");
+									depositAmount = sc.nextDouble();
+									
+									boolean depositAmountOk = false;
+									while(!depositAmountOk) {
+										if(depositAmount <= 0) {
+											System.out.println("******************************************************************");
+											System.out.println("Error! Please enter an amount greater than $0");
+											System.out.println("******************************************************************");
+											depositAmount = sc.nextDouble();
+										} else {
+											double newBalance = account.getBalance() + depositAmount;
+											account.setBalance(newBalance);
+											as.updateAccount(account);
+											depositAmountOk = true;
+										}
+									}
+									System.out.println("******************************************************************");
+									System.out.println("Deposit made successfully! Your new balance is $" + account.getBalance());
+									System.out.println("******************************************************************");
+									System.out.println("Actions:");
+									System.out.println("1. Make Another Deposit");
+									System.out.println("2. Main Menu");
+									choice = sc.nextInt();
+									
+									validSelection = false;
+									while(!validSelection) {
+										switch(choice) {
+											case 1:
+												validSelection=true;
+												break;
+												
+											case 2:
+												validSelection=true;
+												depositing=false;
+												break;
+												
+											default:
+												System.out.println("Invalid selection. Please try again.");
+												choice = sc.nextInt();
+												break;
+										}
+									}
+									
+								}
+								break;
+								
+							case 2:
+								withdrawing = true;
+								while(withdrawing) {
+									System.out.println("******************************************************************");
+									System.out.println("Available balance: $" + account.getBalance());
+									System.out.println("How much would you like to withdraw from your account?");
+									System.out.println("******************************************************************");
+									withdrawAmount = sc.nextDouble();
+									
+									boolean withdrawAmountOk = false;
+									while(!withdrawAmountOk) {
+										if(withdrawAmount <= 0) {
+											System.out.println("******************************************************************");
+											System.out.println("Error! Please enter an amount greater than $0");
+											System.out.println("******************************************************************");
+											withdrawAmount = sc.nextDouble();
+										} else if(withdrawAmount > account.getBalance()) {
+											System.out.println("******************************************************************");
+											System.out.println("Error! Insufficient funds. Please enter an amount less than or equal to $" + account.getBalance());
+											System.out.println("******************************************************************");
+											withdrawAmount = sc.nextDouble();
+										} else {
+											double newBalance = account.getBalance() - withdrawAmount;
+											account.setBalance(newBalance);
+											as.updateAccount(account);
+											withdrawAmountOk = true;
+										}
+									}
+									System.out.println("******************************************************************");
+									System.out.println("Money withdrawn successfully! Your new balance is $" + account.getBalance());
+									System.out.println("******************************************************************");
+									System.out.println("Actions:");
+									System.out.println("1. Make another widthdrawl");
+									System.out.println("2. Main menu");
+									choice = sc.nextInt();
+									
+									validSelection = false;
+									while(!validSelection) {
+										switch(choice) {
+											case 1:
+												validSelection=true;
+												break;
+												
+											case 2:
+												validSelection=true;
+												withdrawing=false;
+												break;
+												
+											default:
+												System.out.println("Invalid selection. Please try again.");
+												choice = sc.nextInt();
+												break;
+										}
+									}
+									
+								}
+								break;
+							
+						
+							case 3:
+								mainMenu = false;
+								while(!mainMenu) {
+									
+									// Get first account
+									uba = ubas.getRecordByCustId(user.getId());
+									account = as.getAccount(uba.getAccountId());
+									
+									// Check if second customer on account
+									UserBankAccount uba2 = ubas.getRecordExcludingCustId(user.getId(), account.getId());
+									
+									// Check if second customer exists
+									if(uba2 == null) {
+										System.out.println("******************************************************************");
+										System.out.println("Account Id ------- " + account.getId());
+										System.out.println("Account Type ----- Single");
+										System.out.println("Account Balance -- $" + account.getBalance());
+										System.out.println("******************************************************************");
+									} else {
+										User user2 = us.getUser(uba2.getUserId());
+										
+										System.out.println("******************************************************************");
+										System.out.println("Account Id ------- " + account.getId());
+										System.out.println("Account Type ----- Joint");
+										System.out.println("Customer Two ----- " + user2.getFirstName() + " " + user2.getLastName());
+										System.out.println("Account Balance -- $" + account.getBalance());
+										System.out.println("******************************************************************");
+									}
+									
+									System.out.println("Actions:");
+									System.out.println("1. Main Menu");
+									choice = sc.nextInt();
+									
+									validSelection = false;
+									while(!validSelection) {
+										if(choice == 1) {
+											validSelection = true;
+											mainMenu = true;
+										} else {
+											System.out.println("Invalid selection. Please try again.");
+											choice = sc.nextInt();
+										}
+									}
+									
+											
+								}
+								break;
+						
+							case 4:
+								mainMenu = false;
+								while(!mainMenu) {
+									System.out.println("******************************************************************");
+									System.out.println("Name ------ " + user.getFirstName() + " " + user.getLastName());
+									System.out.println("Email ----- " + user.getEmail());
+									System.out.println("Phone ----- " + user.getPhone());
+									System.out.println("Username -- " + user.getUsername());
+									System.out.println("Password -- " + user.getPassword());
+									System.out.println("******************************************************************");
+									
+									System.out.println("Actions:");
+									System.out.println("1. Main Menu");
+									System.out.println("******************************************************************");
+									choice = sc.nextInt();
+									
+									if(choice == 1) {
+										mainMenu = true;
+									} else {
+										System.out.println();
+										System.out.println("******************************************************************");
+										System.out.println("Error! Invalid option.");
+									}
+								}
+								break;
+						
+							case 5:
+								logout=true;
+								break;
+								
+							default:
+								System.out.println("Error! Invalid selection. Please try again.");
+								break;	
+						}
+						
+						
+						
+					}
+					
+					
 				}
 				
 				
@@ -528,21 +862,5 @@ public class Core {
 		
 		
 	}
-	
-	public boolean userHasAccount(int id) {
-		
-		
-		
-		
-		
-		return false;
-	}
-	
-	
-	
-	
-	
-	
-	
 	
 }

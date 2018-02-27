@@ -26,5 +26,6 @@ public interface AccountDao {
 	// check pending account
 	public boolean pendingAccount() throws SQLException;
 	
+	
 
 }

@@ -122,4 +122,39 @@ public class UserBankAccountServices implements UserBankAccountDao {
 		return null;
 	}
 
+	@Override
+	public UserBankAccount getRecordExcludingCustId(int cust_id, int acc_id) {
+		
+		UserBankAccount uba = null;
+		int customer_id = 0;
+		int account_id = 0;
+		
+		try(Connection conn = cf.getConnection()) {
+			
+			// create statement
+			String sqlInsert = "SELECT * FROM bank_user_account WHERE account_id = ? AND customer_id != ?";
+			
+			// instantiate ps object
+			PreparedStatement ps = conn.prepareStatement(sqlInsert);
+			
+			// set sql statement values
+			ps.setInt(1, acc_id);
+			ps.setInt(2, cust_id);
+			
+			ResultSet rs = ps.executeQuery();
+			if(rs.next()) {
+				customer_id = rs.getInt("CUSTOMER_ID");
+				account_id = rs.getInt("ACCOUNT_ID");
+				
+				uba = new UserBankAccount(customer_id, account_id);
+				return uba;
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+
 }
