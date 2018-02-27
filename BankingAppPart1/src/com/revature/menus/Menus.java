@@ -50,4 +50,9 @@ public class Menus {
 		System.out.println("1.  Checking Account");
 		System.out.println("2.  Savings Account");
 	}
+	
+	public static void displayAccountApprovalMenu() {
+		System.out.println("1.  Approve account");
+		System.out.println("2.  Deny account");
+	}
 }

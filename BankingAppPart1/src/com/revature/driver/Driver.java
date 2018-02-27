@@ -443,8 +443,31 @@ public class Driver {
 								System.out.print("Select an account for processing: ");
 								option = getInput.nextInt();
 								getInput.nextLine();
+								
+								if(option > 1 && option < accountList.size()) {
+									account = accountList.get(option - 0);
+									while(option != 1 || option != 2) {
+										System.out.print("Please make a selection: ");
+										option = getInput.nextInt();
+										getInput.nextLine();
+									}
+									
+									if(option == 1) {
+										account.setStatus("Active");
+									}
+									
+									else if(option == 2) {
+										account.setStatus("Denied");
+									}
+								}
+								
+								else {
+									System.out.println("Improper selection.");
+									break;
+								}
 							}
 							
+							accountList = null;
 							option = 0;
 							break;
 

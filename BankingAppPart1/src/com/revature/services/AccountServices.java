@@ -5,11 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
-
 import com.revature.accounts.Account;
 import com.revature.dao.AccountDAO;
-import com.revature.users.User;
 import com.revature.util.ConnFactory;
 
 public class AccountServices implements AccountDAO{
@@ -56,13 +53,16 @@ public class AccountServices implements AccountDAO{
 			rs.close();
 			return account;
 		}
-
-
 	}
 
 	public void updateAccount(Account account) throws SQLException {
-		// TODO Auto-generated method stub
+		String sql = "UPDATE ACCOUNT SET balance = ? WHERE accountNumber = ?";
+		PreparedStatement ps = conn.prepareStatement(sql);
+		ps.setDouble(1, account.getBalance());
+		ps.setInt(2, account.getAccountNumber());
 		
+		ps.executeUpdate();
+		ps.close();		
 	}
 
 	public void deleteAccount(Account account) throws SQLException {
