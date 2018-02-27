@@ -1,0 +1,34 @@
+Bank Assignment
+
+Console application: 
+
+x	A registered user can login with their username and password  
+x	An unregistered user can register by creating a username and password 
+	A superuser can view, create, update, and delete all users.
+
+	Accounts DAO:
+x		A user can view their own existing accounts and balances.	- select
+		A user can create an account.								- insert
+		A user can delete an account if it is empty.  				- delete
+		A user can add to or withdraw from an account. 				- update
+	A user can execute multiple deposits or withdrawals in a session.	- logic loop
+x	A user can logout. 													- logic loop
+
+	Use sequences to generate USER_ID and BANK_ACCOUNT_ID. 
+	Throw custom exceptions in the event of user error (overdraft, incorrect password, etc).
+	Provide validation messages through the console for all user actions. 
+x	Use the DAO design pattern. 
+x	Store superuser username/password and database connection information in a properties file. 
+
+Required technologies: 
+	PL/SQL with at least one stored procedure, JDBC with prepared and callable statements,
+x	Scanner for user input
+	JUnit tests on as much of the program as possible.  
+
+
+x	Create a Maven project with your solution as JDBCBank, include it in your branch with your DB creation script (JDBCBank.sql). 
+	README
+		change paths in 
+			log4j.properties: "log4j.appender.file.File" to where you want the bank.log
+			com.revature.util.ConnFactory: "fileParth" to where the database.properties' path
+
