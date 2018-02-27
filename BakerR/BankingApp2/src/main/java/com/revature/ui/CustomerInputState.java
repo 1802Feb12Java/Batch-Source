@@ -1,5 +1,6 @@
 package com.revature.ui;
 
+import java.util.Collections;
 import java.util.List;
 
 import com.revature.model.Customer;
@@ -24,7 +25,7 @@ public class CustomerInputState extends SessionState {
 			@Override
 			public List<String> getParams() {
 				// TODO Auto-generated method stub
-				return null;
+				return Collections.emptyList();
 			}
 
 			@Override
