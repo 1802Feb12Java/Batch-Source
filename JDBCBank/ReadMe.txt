@@ -1,8 +1,8 @@
 To run this program:
 
-Make sure to redirect the "log4j.appender.file.File" line to where you have a .log file in the log4j.properties file.
-Right-click JDBCBank (the main project folder) -> Build Path -> Add Libraries -> JUnit
-Keep database.properties in the main directory for the project (on the same level as the src folders).
+- Make sure to redirect the "log4j.appender.file.File" line to where you have a .log file in the log4j.properties file.
+- Right-click JDBCBank (the main project folder) -> Build Path -> Add Libraries -> JUnit
+- Keep database.properties in the main directory for the project (on the same level as the src folders).
 
 Current database values:
 
