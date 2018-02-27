@@ -172,12 +172,20 @@ public class Core {
 		//go through accounts, and match username and password
 		for(Account i: accounts) {
 			if(username.equals(i.getUsername())) {
+				
+				//had to make a quick fix
 				if(password.equals(i.getPassword())) {
-					
+					boolean active = false;
 					//if customer account
 					if(i.getPriorityLevel() == 0) {
-						CustomerAccount customer = (CustomerAccount) i;
-						if(customer.isActive()) {
+						
+						for(CustomerAccount d: customers) {
+							if(d.getUsername().equals(username)) {
+								active = d.isActive();
+							}
+						}
+						
+						if(active) {
 							log.debug(i.getUsername() + " has logged in");
 							Menu.loginSuccessCustomerFunctionality((CustomerAccount)i, customers);
 							break;

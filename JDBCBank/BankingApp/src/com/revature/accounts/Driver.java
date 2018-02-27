@@ -107,6 +107,7 @@ public class Driver {
 				exit = true;	
 				break;
 			default:
+				allAdminAccounts.get(0).viewAllCustomerInformation(allCustomerAccounts);
 				System.out.println("INVALID OPTION");
 				Menu.mainMenu();
 				break;

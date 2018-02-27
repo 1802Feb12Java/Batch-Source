@@ -3,6 +3,8 @@ package com.revature.accounts;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import com.revature.dao.CustomerAccountDAOImp;
+
 public class EmployeeAccount extends Account{
 	
 	//read employee ID from txt file
@@ -66,8 +68,11 @@ public class EmployeeAccount extends Account{
 		
 		for(CustomerAccount i: customers) {
 			//only print out accounts that have not been approved
-			if(!i.isActive() && i.getUsername().equals(input)) {
+			
+			if(i.getUsername().equals(input)) {
+				System.out.println(i.getUsername());
 				i.setActive(true);
+				System.out.println(i.isActive());
 			}
 		}
 	}
