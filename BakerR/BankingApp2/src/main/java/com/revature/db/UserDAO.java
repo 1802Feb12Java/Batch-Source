@@ -27,6 +27,13 @@ public interface UserDAO {
 	public User getUserById(int id) throws SQLException;
 	
 	/**
+	 * Gets a user by username.
+	 * @param username	The username of the user.
+	 * @return	The user with the given username.
+	 */
+	public User getUserByUsername(String username) throws SQLException;
+	
+	/**
 	 * Updates the database with the info from usr.
 	 * @param usr The user info to update the database with.
 	 */
@@ -44,6 +51,13 @@ public interface UserDAO {
 	 * @param pw The new hashed password.
 	 */
 	public void updatePassword(User usr, String pw) throws SQLException;
+	
+	/**
+	 * Gets the password from the database using the user's username.
+	 * @param usr	The user whose password hash to fetch.
+	 * @return	The password hash.
+	 */
+	public String getPWHash(User usr) throws SQLException;
 	
 	/**
 	 * Gets all registered users.

@@ -259,4 +259,69 @@ public class UserDAOImpl implements UserDAO {
 		
 		return usr;
 	}
+
+	@Override
+	public String getPWHash(User usr) throws SQLException {
+		String query = "SELECT PASSHASH FROM USERS WHERE USERNAME=?";
+		PreparedStatement ps = conn.prepareStatement(query);
+		ps.setString(1, usr.getUserName());
+		
+		ResultSet rs = ps.executeQuery();
+		String pwHash = null;
+		if(rs.next()) {
+			pwHash = rs.getString("PASSHASH");
+		}
+		
+		return pwHash;
+	}
+
+	@Override
+	public User getUserByUsername(String username) throws SQLException {
+		User usr;
+		String query = "SELECT USERID, USERNAME, FIRSTNAME, LASTNAME, USERTYPE FROM USERS WHERE USERNAME=?";
+		PreparedStatement ps = conn.prepareStatement(query);
+		ps.setString(1, username);
+		
+		ResultSet rs = ps.executeQuery();
+		
+		if(rs.next()) {
+			int type = rs.getInt("USERTYPE");
+			UserType uType = UserType.fromId(type);
+			usr = null;
+			
+			switch(uType) {
+			case ADMIN:
+				usr = new Admin();
+				break;
+			case EMPLOYEE:
+				usr = new Employee();
+				break;
+			case CUSTOMER:
+				usr = new Customer();
+				break;
+			}
+			
+			usr.setUserId(rs.getInt("USERID"));
+			usr.setUserName(rs.getString("USERNAME"));
+			usr.setFirstName(rs.getString("FIRSTNAME"));
+			usr.setLastName(rs.getString("LASTNAME"));
+			
+			if(usr instanceof Customer) {
+				Customer cust = (Customer)usr;
+				try {
+					BankAccountDAO acctDao = new BankAccountDAOImpl();
+					List<BankAccount> acctList = acctDao.getAllUserAccounts(cust);
+					acctList.forEach((BankAccount acct) -> {
+						cust.getAccounts().put(acct.getAccountId(), acct);
+					});
+				} catch (ClassNotFoundException e) {
+				}
+			}
+			
+		} else {
+			usr =  null;
+		}
+		
+		return usr;
+	}
 }

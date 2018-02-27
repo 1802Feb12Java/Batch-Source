@@ -120,32 +120,4 @@ public final class EntryState extends CommandState {
 		
 		registerCommand(loginCommand);
 	}
- 	
-	@Override
-	public void execute() {
-		Command cmd = null;
-		setNextState(this); // Return to this state if command doesn't set next state.
-		
-		do { // Keep prompting until a valid command is given.
-			// Prompt for command.
-			System.out.print(">>> ");
-			
-			try {
-				cmd = waitForCommand();
-				
-				if(cmd == null) {
-					System.out.println("Invalid command.");
-				} else {
-					cmd.run();
-					cmd.reset();
-				}
-			} catch(IllegalCommandParameterException ex) {
-				System.out.println("Invalid arguments for command: " + ex.getCommand().getName());
-				System.out.println("Expected template: " + ex.getCommand().getTemplate());
-				cmd = null;
-			}
-			
-		} while(cmd == null);
-	}
-
 }
