@@ -59,6 +59,7 @@ public class CustomerServices implements CustomerDAO {
 			user.setCity(rs.getString("city"));
 			user.setState(rs.getString("state"));
 			user.setPhoneNumber(rs.getString("phoneNumber"));
+			user.setUserType(rs.getString("userType"));
 		}
 		
 		if(rs.getString("accountHolder") == "Y") {
@@ -71,7 +72,7 @@ public class CustomerServices implements CustomerDAO {
 		else {
 			user.setAccountHolder(false);
 			//TODO: clean this out too
-			System.out.println("Customer has no account");
+			//System.out.println("Customer has no account");
 		}
 
 		return user;

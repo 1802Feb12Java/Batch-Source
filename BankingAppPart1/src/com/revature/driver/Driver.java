@@ -1,9 +1,7 @@
 package com.revature.driver;
 
-import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Scanner;
 import com.revature.accounts.Account;
 import com.revature.menus.Menus;
@@ -22,7 +20,6 @@ public class Driver {
 		
 		//active session objects
 		User user = null;
-		User newUser = null;
 		CustomerServices cs = new CustomerServices();
 		
 		//login and validation variables
@@ -71,11 +68,11 @@ public class Driver {
 					switch(option) {
 					case 1:
 						//create a new user account and set it to administrator
-						newUser = UserFunctions.register(getInput);
-						newUser.setUserType("Administrator");
+						user = UserFunctions.register(getInput);
+						user.setUserType("Administrator");
 						//add the administrator to the database
 						try {
-							cs.addUser(newUser);
+							cs.addUser(user);
 						} catch (SQLException e2) {
 							// TODO Auto-generated catch block
 							e2.printStackTrace();
@@ -85,10 +82,10 @@ public class Driver {
 								
 					case 2:
 						//create a new customer account and set it to customer
-						newUser = UserFunctions.register(getInput);
-						newUser.setUserType("Customers");
+						user = UserFunctions.register(getInput);
+						user.setUserType("Customers");
 						try {
-							cs.addUser(newUser);
+							cs.addUser(user);
 						} catch (SQLException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
@@ -129,6 +126,8 @@ public class Driver {
 					
 					//begin login procedure
 					case 1:
+						option = 0;
+						
 						//validate user
 						System.out.print("Please enter your user name: ");
 						userName = getInput.nextLine();
@@ -137,13 +136,6 @@ public class Driver {
 						} catch (SQLException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
-						}
-						//check the user name
-						try {
-							user = cs.getUser(userName);
-						} catch (SQLException e2) {
-							// TODO Auto-generated catch block
-							e2.printStackTrace();
 						}
 									
 						//exit the switch if the customer name is not found
@@ -164,14 +156,14 @@ public class Driver {
 							System.out.println();
 							user = null;
 						}
-							
-						option = 0;
+					    
 						break;
+
 					
 					case 2:
 						//register new customer
-						newUser = UserFunctions.register(getInput);
-						newUser.setUserType("Customer");
+						user = UserFunctions.register(getInput);
+						user.setUserType("Customer");
 						try {
 							cs.addUser(user);
 						} catch (SQLException e1) {
