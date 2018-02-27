@@ -19,7 +19,7 @@ public class DriverDB {
 		Scanner input = new Scanner(System.in);
 		boolean end = false;
 		String user, pass;
-		String version = "2.0.1";
+		String version = "2.0.4";
 
 		log.debug("STARTING PROGRAM VERSION [" + version + "]");
 
