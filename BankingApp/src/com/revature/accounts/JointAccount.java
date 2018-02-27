@@ -11,6 +11,8 @@ public class JointAccount extends Account{
 	private static final byte PRIVILEGE_LEVEL = -1;
 	private CustomerAccount customer;
 	private int age;
+	private int jointID;
+	private int customerID;
 	
 	public JointAccount() {
 		
@@ -22,6 +24,7 @@ public class JointAccount extends Account{
 		super.setFirstName(firstName);
 		super.setLastName(lastName);
 		this.customer = customer;
+		customerID = customer.getCustomerID();
 	}
 	
 	public void setCustomer(CustomerAccount customer) {
@@ -82,40 +85,55 @@ public class JointAccount extends Account{
 		}
 	}
 	
-	public boolean withdrawSavings() {
+	public void withdrawSavings() {
 		double doubleInput = 0;
 		Scanner sc = new Scanner(System.in);
+		boolean actionComplete = false;
 		
 		System.out.print("How much would you like to withdraw from savings?: ");
 		
 		try {
 			doubleInput = sc.nextDouble();
 			sc.nextLine();					
-			return customer.withdrawSavings(doubleInput);
+			
+			actionComplete = customer.withdrawSavings(doubleInput);
+			
+			if(!actionComplete) {
+				System.out.println("You do not have enough in your savings to withdraw that much");
+			}
+			else {
+				System.out.println("Successfully withdrew $" + doubleInput + " from savings");
+			}
+			
 		}
 		catch(InputMismatchException e){
 			System.out.println("INVALID INPUT");
 		}
-		
-		return false;
 	}
 	
-	public boolean withdrawChecking() {
+	public void withdrawChecking() {
 		double doubleInput = 0;
 		Scanner sc = new Scanner(System.in);
+		boolean actionComplete = false;
 		
 		System.out.print("How much would you like to withdraw from checking?: ");
 		
 		try {
 			doubleInput = sc.nextDouble();
 			sc.nextLine();					
-			return customer.withdrawChecking(doubleInput);
+			
+			actionComplete = customer.withdrawChecking(doubleInput);
+			
+			if(!actionComplete) {
+				System.out.println("You do not have enough in your checking to withdraw that much");
+			}
+			else {
+				System.out.println("Successfully withdrew $" + doubleInput + " from checking");
+			}
 		}
 		catch(InputMismatchException e){
 			System.out.println("INVALID INPUT");
 		}
-		
-		return false;
 	}
 	
 	public String toString() {
@@ -124,6 +142,26 @@ public class JointAccount extends Account{
 
 	public boolean isActive() {
 		return customer.isActive();
+	}
+	
+	public int getLinkedAccount() {	
+		return customer.getCustomerID();		
+	}
+
+	public int getJointID() {
+		return jointID;
+	}
+
+	public void setJointID(int jointID) {
+		this.jointID = jointID;
+	}
+
+	public int getCustomerID() {
+		return customerID;
+	}
+
+	public void setCustomerID(int customerID) {
+		this.customerID = customerID;
 	}
 
 }

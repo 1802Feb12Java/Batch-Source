@@ -4,12 +4,17 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import org.apache.log4j.Logger;
+
 import com.revature.accounts.AdminAccount;
 import com.revature.accounts.CustomerAccount;
 import com.revature.accounts.EmployeeAccount;
 import com.revature.accounts.JointAccount;
 
 public class Menu {
+	
+	private static Logger log = Logger.getLogger(AdminAccount.class.getName());
+
 
 	
 	public static void mainMenu() {
@@ -28,14 +33,17 @@ public class Menu {
 		System.out.println("2. Withdraw from savings");
 		System.out.println("3. Deposit into checking");
 		System.out.println("4. Deposit into savings");
-		System.out.println("5. View your account details");
-		System.out.println("6. Logout");	
+		System.out.println("5. Transfer from checking");
+		System.out.println("6. Transfer from savings");
+		System.out.println("7. View your account details");
+		System.out.println("8. Logout");	
 		
 	}	
 	
-	public static void loginSuccessCustomerFunctionality(CustomerAccount customer) {
+	public static void loginSuccessCustomerFunctionality(CustomerAccount customer, ArrayList<CustomerAccount> customers) {
 
 		String option = "";
+		String username = "";
 		Scanner sc = new Scanner(System.in);
 		boolean exit = false;
 		boolean actionComplete;
@@ -101,7 +109,7 @@ public class Menu {
 					
 					customer.depositChecking(amount);
 					
-					System.out.println("Successfully withdrew $" + amount + " from savings");
+					System.out.println("Successfully deposited $" + amount + " into checking");
 					
 				}catch(InputMismatchException e){
 					System.out.println("INVALID INPUT");
@@ -121,9 +129,46 @@ public class Menu {
 				}				
 				break;
 			case "5":
+				System.out.print("Please enter the username of the account you would like to transfer to: ");
+				
+				try {
+					username = sc.next();
+					sc.nextLine();
+					
+					System.out.print("Please enter the amount: ");
+					
+					amount = sc.nextDouble();
+					sc.nextLine();
+					
+					customer.transferFromSavings(customer, username, customers, amount);
+					
+				}catch(InputMismatchException e){
+					System.out.println("INVALID INPUT");
+				}
+				break;	
+			case "6":
+				System.out.print("Please enter the username of the account you would like to transfer to: ");
+				
+				
+					username = sc.next();
+					sc.nextLine();	
+					
+					System.out.print("Please enter the amount: ");
+				try {	
+					amount = sc.nextDouble();
+					sc.nextLine();
+					
+					customer.transferFromChecking(customer, username, customers, amount);
+					
+				}catch(InputMismatchException e){
+					System.out.println("INVALID INPUT");
+				}
+				break;
+			case "7":
 				System.out.println(customer.toString());
 				break;
-			case "6":
+			case "8":
+				log.debug(customer.getUsername() + " logged out.");
 				exit = true;
 				break;
 			default:
@@ -168,6 +213,7 @@ public class Menu {
 				employee.approveAccounts(customers);
 				break;
 			case "4":
+				log.debug(employee.getUsername() + " logged out.");
 				exit = true;
 				break;
 			default:
@@ -188,7 +234,8 @@ public class Menu {
 		System.out.println("6. Withdraw From Customer Checking");
 		System.out.println("7. Withdraw From Customer Savings");
 		System.out.println("8. Disable Account");
-		System.out.println("9. Logout");
+		System.out.println("9. Delete Account");
+		System.out.println("10. Logout");
 	}
 	
 public static void loginAdminFunctionality(AdminAccount admin, ArrayList<CustomerAccount> customers) {
@@ -229,6 +276,10 @@ public static void loginAdminFunctionality(AdminAccount admin, ArrayList<Custome
 				admin.disableAccount(customers);
 				break;
 			case "9":
+				admin.deleteAccount(customers);
+				break;
+			case "10":
+				log.debug(admin.getUsername() + " logged out.");
 				exit = true;
 				break;
 			default:
@@ -256,6 +307,7 @@ public static void loginJointFunctionality(JointAccount customer) {
 			switch(option) {
 			case "1":
 				customer.withdrawChecking();
+				break;
 			case "2":
 				customer.withdrawSavings();
 				break;
@@ -272,6 +324,7 @@ public static void loginJointFunctionality(JointAccount customer) {
 				exit = true;
 				break;
 			default:
+				log.debug(customer.getUsername() + " logged out.");
 				System.out.println("INVALID OPTION");
 				loginSuccessCustomer();
 				break;

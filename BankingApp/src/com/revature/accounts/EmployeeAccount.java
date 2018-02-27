@@ -47,7 +47,7 @@ public class EmployeeAccount extends Account{
 		for(CustomerAccount i: customers) {
 			//only print out accounts that have not been approved
 			if(!i.isActive()) {
-				System.out.print(i.toString());
+				System.out.println(i.toString());
 			}
 		}
 		

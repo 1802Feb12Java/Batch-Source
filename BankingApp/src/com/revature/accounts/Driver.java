@@ -3,6 +3,10 @@ package com.revature.accounts;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import com.revature.dao.AdminAccountDAOImp;
+import com.revature.dao.CustomerAccountDAOImp;
+import com.revature.dao.EmployeeAccountDAOImp;
+import com.revature.dao.JointAccountDAOImp;
 import com.revature.system.Core;
 import com.revature.system.FilterAccounts;
 import com.revature.system.Menu;
@@ -21,15 +25,35 @@ public class Driver {
 		ArrayList<CustomerAccount> allCustomerAccounts = new ArrayList<CustomerAccount>();
 		ArrayList<EmployeeAccount> allEmployeeAccounts = new ArrayList<EmployeeAccount>();
 		ArrayList<AdminAccount> allAdminAccounts = new ArrayList<AdminAccount>();
+		ArrayList<JointAccount> allJointAccounts = new ArrayList<JointAccount>();
+		
+		//Filter all account types into their own arraylist
+		CustomerAccountDAOImp customerDAO = new CustomerAccountDAOImp();
+		EmployeeAccountDAOImp employeeDAO = new EmployeeAccountDAOImp();
+		AdminAccountDAOImp adminDAO = new AdminAccountDAOImp();
+		JointAccountDAOImp jointDAO = new JointAccountDAOImp();
 
 		
-		//read in all accounts
-		allAccounts = FileIO.readFromAccounts();
-		//Filter all account types into their own arraylist
-		allCustomerAccounts = FilterAccounts.getAllCustomerAccounts(allAccounts);
-		allEmployeeAccounts = FilterAccounts.getAllEmployeeAccounts(allAccounts);
-		allAdminAccounts = FilterAccounts.getAllAdminAccounts(allAccounts);
+		allCustomerAccounts = customerDAO.getCustomers();
+		allEmployeeAccounts = employeeDAO.getEmployees();
+		allAdminAccounts = adminDAO.getAdmins();
+		allJointAccounts = jointDAO.getJointAccounts();
 		
+		//add
+		allAccounts.addAll(allEmployeeAccounts);
+		allAccounts.addAll(allAdminAccounts);
+		allAccounts.addAll(allCustomerAccounts);
+		
+		//not efficient but necessary for now
+		for(JointAccount i: allJointAccounts) {
+			for(int j = 0; j < allCustomerAccounts.size();j++) {
+				if(i.getCustomerID() == allCustomerAccounts.get(j).getCustomerID()) {
+					i.setCustomer(allCustomerAccounts.get(j));
+				}
+			}
+		}
+		
+		allAccounts.addAll(allJointAccounts);
 		
 		while(!exit) {
 			//display main menu
@@ -63,7 +87,8 @@ public class Driver {
 				//if the newCustomer is not null, add him to the list
 				if(newCustomer != null) {
 					allAccounts.add(newCustomer);
-					allCustomerAccounts.add(newCustomer);
+					customerDAO.addCustomer(newCustomer);
+					allCustomerAccounts.add(customerDAO.getCustomer(newCustomer.getUsername()));
 				}
 				break;
 			case "3":
@@ -89,19 +114,19 @@ public class Driver {
 			
 		}
 		
-		/*AdminAccount admin1 = new AdminAccount("Seth", "Maize", "Seth", "Maize", 1111);
-		AdminAccount admin2 = new AdminAccount("Admin", "Admin", "Admin", "Admin", 1112);
-		EmployeeAccount emp1 = new EmployeeAccount("Steve3789", "secret", "Steve", "Burgandy", 1032);
-		EmployeeAccount emp2 = new EmployeeAccount("Alissa21", "secreter", "Alissa", "Wollywhirl", 1011);
-		
-		allAccounts.add(emp1);
-		allAccounts.add(emp2);
-		allAccounts.add(admin1);
-		allAccounts.add(admin2);*/
-		
+//		AdminAccount admin1 = new AdminAccount("Seth", "Maize", "Seth", "Maize", 1111);
+//		AdminAccount admin2 = new AdminAccount("Admin", "Admin", "Admin", "Admin", 1112);
+//		EmployeeAccount emp1 = new EmployeeAccount("Steve3789", "secret", "Steve", "Burgandy", 1032);
+//		EmployeeAccount emp2 = new EmployeeAccount("Alissa21", "secreter", "Alissa", "Wollywhirl", 1011);
+//		
+//		allAccounts.add(emp1);
+//		allAccounts.add(emp2);
+//		allAccounts.add(admin1);
+//		allAccounts.add(admin2);
+//		
 		
 		//write out all accounts on termination
-		FileIO.writeToAccounts(allAccounts);
+		//FileIO.writeToAccounts(allAccounts);
 	}
 }
 

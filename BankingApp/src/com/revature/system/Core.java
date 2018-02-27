@@ -4,14 +4,18 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import org.apache.log4j.Logger;
+
 import com.revature.accounts.Account;
 import com.revature.accounts.AdminAccount;
 import com.revature.accounts.CustomerAccount;
 import com.revature.accounts.EmployeeAccount;
 import com.revature.accounts.JointAccount;
+import com.revature.dao.JointAccountDAOImp;
 
 public class Core {
 	
+	private static Logger log = Logger.getLogger(AdminAccount.class.getName());
 	
 	public static CustomerAccount createCustomerAccount() {
 		String input = "";
@@ -73,6 +77,10 @@ public class Core {
 		input = sc.next();		
 		sc.nextLine();
 		customer.setLastName(input);
+		
+		//default these, the database will take care of these
+		customer.setAccountNumber(1);
+		customer.setCustomerID(1000);
 		
 		return customer;		
 	}
@@ -145,11 +153,18 @@ public class Core {
 		for(CustomerAccount i: customers) {
 			if(i.getUsername().equals(input)) {
 				customer.setCustomer(i);
-				return customer;
+				customer.setCustomerID(i.getCustomerID());
+				customer.setJointID(1000);
 			}
 		}
 		
-		return null;
+		if(customer.getJointID() != 1000) {
+			return null;
+		}
+		
+		JointAccountDAOImp jointDOA = new JointAccountDAOImp();
+		jointDOA.addCustomer(customer);
+		return customer;
 	}
 	
 	public static void authenticateLogin(String username, String password, ArrayList<Account> accounts, ArrayList<CustomerAccount> customers) {
@@ -163,17 +178,20 @@ public class Core {
 					if(i.getPriorityLevel() == 0) {
 						CustomerAccount customer = (CustomerAccount) i;
 						if(customer.isActive()) {
-							Menu.loginSuccessCustomerFunctionality((CustomerAccount)i);
+							log.debug(i.getUsername() + " has logged in");
+							Menu.loginSuccessCustomerFunctionality((CustomerAccount)i, customers);
 							break;
 						}
 					}
 					//employee account
 					else if(i.getPriorityLevel() == 1) {
+						log.debug(i.getUsername() + " has logged in");
 						Menu.loginEmployeeFunctionality((EmployeeAccount)i, customers);
 						break;
 					}
 					//admin account
 					else if(i.getPriorityLevel() == 2) {
+						log.debug(i.getUsername() + " has logged in");
 						Menu.loginAdminFunctionality((AdminAccount)i, customers);
 						break;
 					}
@@ -182,6 +200,7 @@ public class Core {
 						JointAccount customerJ = (JointAccount) i;
 						
 						if(customerJ.isActive()) {
+							log.debug(i.getUsername() + " has logged in");
 							Menu.loginJointFunctionality(customerJ);
 							break;
 						}

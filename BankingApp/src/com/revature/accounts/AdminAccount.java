@@ -4,12 +4,16 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import com.revature.dao.CustomerAccountDAOImp;
+
 public class AdminAccount extends EmployeeAccount{
 	
 	//CustomerAccounts identifier, and PrivilegeLevel
 	private static final byte PRIVILEGE_LEVEL = 2;
 	
 	private static final long serialVersionUID = 2L;
+	
+	private int adminID;
 
 	
 	public AdminAccount() {
@@ -22,6 +26,7 @@ public class AdminAccount extends EmployeeAccount{
 		super.setFirstName(firstName);
 		super.setLastName(lastName);
 		super.setEmployeeID(employeeID);
+		adminID = 1000;
 	}
 	
 	public static byte getPrivilegeLevel() {
@@ -182,5 +187,40 @@ public class AdminAccount extends EmployeeAccount{
 		
 		}
 	
+	}
+	
+	public void deleteAccount(ArrayList<CustomerAccount> customers) {
+		CustomerAccountDAOImp customerDAO = new CustomerAccountDAOImp();
+		String input;
+		boolean actionComplete = false;
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.println();
+		System.out.print("Please type in the username of the account you would like to delete from the system: ");
+		input = sc.next();
+		sc.nextLine();
+		
+		for(int i = 0; i < customers.size(); i++) {
+			if(customers.get(i).getUsername().equals(input)) {
+				customerDAO.deleteCustomer(customers.get(i));
+				customers.remove(i);
+				actionComplete = true;
+			}
+		}
+		
+		if(actionComplete) {
+			System.out.println("Customer successfully deleted.");
+		}
+		else {
+			System.out.println("Customer could not be found.");
+		}
+	}
+
+	public int getAdminID() {
+		return adminID;
+	}
+
+	public void setAdminID(int adminID) {
+		this.adminID = adminID;
 	}
 }
