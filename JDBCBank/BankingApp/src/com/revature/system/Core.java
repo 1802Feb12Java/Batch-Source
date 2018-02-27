@@ -179,7 +179,7 @@ public class Core {
 						CustomerAccount customer = (CustomerAccount) i;
 						if(customer.isActive()) {
 							log.debug(i.getUsername() + " has logged in");
-							Menu.loginSuccessCustomerFunctionality((CustomerAccount)i);
+							Menu.loginSuccessCustomerFunctionality((CustomerAccount)i, customers);
 							break;
 						}
 					}

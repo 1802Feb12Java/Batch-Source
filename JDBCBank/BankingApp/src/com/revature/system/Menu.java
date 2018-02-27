@@ -33,14 +33,17 @@ public class Menu {
 		System.out.println("2. Withdraw from savings");
 		System.out.println("3. Deposit into checking");
 		System.out.println("4. Deposit into savings");
-		System.out.println("5. View your account details");
-		System.out.println("6. Logout");	
+		System.out.println("5. Transfer from checking");
+		System.out.println("6. Transfer from savings");
+		System.out.println("7. View your account details");
+		System.out.println("8. Logout");	
 		
 	}	
 	
-	public static void loginSuccessCustomerFunctionality(CustomerAccount customer) {
+	public static void loginSuccessCustomerFunctionality(CustomerAccount customer, ArrayList<CustomerAccount> customers) {
 
 		String option = "";
+		String username = "";
 		Scanner sc = new Scanner(System.in);
 		boolean exit = false;
 		boolean actionComplete;
@@ -126,9 +129,44 @@ public class Menu {
 				}				
 				break;
 			case "5":
-				System.out.println(customer.toString());
-				break;
+				System.out.print("Please enter the username of the account you would like to transfer to: ");
+				
+				try {
+					username = sc.next();
+					sc.nextLine();
+					
+					System.out.print("Please enter the amount: ");
+					
+					amount = sc.nextDouble();
+					sc.nextLine();
+					
+					customer.transferFromSavings(customer, username, customers, amount);
+					
+				}catch(InputMismatchException e){
+					System.out.println("INVALID INPUT");
+				}
+				break;	
 			case "6":
+				System.out.print("Please enter the username of the account you would like to transfer to: ");
+				
+				
+					username = sc.next();
+					sc.nextLine();	
+					
+					System.out.print("Please enter the amount: ");
+				try {	
+					amount = sc.nextDouble();
+					sc.nextLine();
+					
+					customer.transferFromChecking(customer, username, customers, amount);
+					
+				}catch(InputMismatchException e){
+					System.out.println("INVALID INPUT");
+				}
+				break;
+			case "7":
+				customer.toString();
+			case "8":
 				log.debug(customer.getUsername() + " logged out.");
 				exit = true;
 				break;

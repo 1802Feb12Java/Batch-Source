@@ -2,6 +2,7 @@ package com.revature.accounts;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.util.ArrayList;
 
 import com.revature.dao.CustomerAccountDAOImp;
 import com.revature.utility.ConnectionFactory;
@@ -182,6 +183,30 @@ public class CustomerAccount extends Account{
 			
 			return true;
 		}
+	}
+	
+	public void transferFromChecking(CustomerAccount customer, String username, ArrayList<CustomerAccount> customers, double amount) {
+		
+		for(CustomerAccount i: customers) {
+			if(i.getUsername().equals(username)) {
+				if(customer.withdrawChecking(amount)) {
+					i.depositChecking(amount);
+				}
+			}
+		}
+		
+	}
+	
+	public void transferFromSavings(CustomerAccount customer, String username, ArrayList<CustomerAccount> customers, double amount) {
+		
+		for(CustomerAccount i: customers) {
+			if(i.getUsername().equals(username)) {
+				if(customer.withdrawSavings(amount)) {
+					i.depositSavings(amount);
+				}
+			}
+		}
+		
 	}
 
 	public int getCustomerID() {
