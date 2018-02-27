@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import com.revature.accounts.Account;
 import com.revature.dao.AccountDAO;
+import com.revature.users.User;
 import com.revature.util.ConnFactory;
 
 public class AccountServices implements AccountDAO{
@@ -56,10 +57,12 @@ public class AccountServices implements AccountDAO{
 	}
 
 	public void updateAccount(Account account) throws SQLException {
-		String sql = "UPDATE ACCOUNT SET balance = ? WHERE accountNumber = ?";
+		String sql = "UPDATE ACCOUNT SET balance = ?, status = ? WHERE accountNumber = ?";
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setDouble(1, account.getBalance());
-		ps.setInt(2, account.getAccountNumber());
+		ps.setString(2, account.getStatus());
+		ps.setInt(3, account.getAccountNumber());
+		
 		
 		ps.executeUpdate();
 		ps.close();		
@@ -103,13 +106,13 @@ public class AccountServices implements AccountDAO{
 		return pendingList;
 	}
 
-	public ArrayList<Account> getCustomerAccounts()throws SQLException{
+	public ArrayList<Account> getCustomerAccounts(User user)throws SQLException{
 		String sql = "SELECT * FROM ACCOUNT WHERE accountHolder = ?";
 		ArrayList<Account> customerAccountList = null;
 		Account current = null;
 		
 		PreparedStatement ps = conn.prepareStatement(sql);
-		ps.setString(1, "Pending");
+		ps.setString(1, user.getUserName());
 		ResultSet rs = ps.executeQuery();
 		
 		if(rs.next() == false) {

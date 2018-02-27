@@ -1,9 +1,10 @@
 package com.revature.dao;
 
 import com.revature.accounts.Account;
+import com.revature.users.User;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
+
 
 public interface AccountDAO {
 	//CRUD operations
@@ -12,5 +13,5 @@ public interface AccountDAO {
 	public void updateAccount(Account account)throws SQLException;
 	public void deleteAccount(Account account)throws SQLException;
 	public ArrayList<Account> getPendingAccounts()throws SQLException;
-	public ArrayList<Account> getCustomerAccounts()throws SQLException;
+	public ArrayList<Account> getCustomerAccounts(User user)throws SQLException;
 }

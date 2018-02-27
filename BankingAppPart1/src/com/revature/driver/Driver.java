@@ -258,14 +258,23 @@ public class Driver {
 							
 						case 2:
 							//LIST ACCOUNTS
-							//List customer's accounts
 							if(!user.isAccountHolder()) {
 								System.out.print("You currently have no open accounts");
 								System.out.println();
 							}
 							
 							else {
-								//TODO:list accounts
+								try {
+									accountList = as.getCustomerAccounts(user);
+								} catch (SQLException e) {
+									System.out.println("Something went wrong trying to access the account list.");
+									e.printStackTrace();
+								}
+								
+								if(accountList != null) {
+									Account.listAccounts(accountList);
+								}
+								accountList = null;
 							}
 							
 							option = 0;
@@ -280,11 +289,22 @@ public class Driver {
 							}
 							
 							else {
-								//TODO: List accoutn
+								try {
+									accountList = as.getCustomerAccounts(user);
+								} catch (SQLException e) {
+									System.out.println("Something went wrong trying to access the account list.");
+									e.printStackTrace();
+								}
+								
+								if(accountList != null) {
+									Account.listAccounts(accountList);
+								}
+
 								System.out.print("Select an account to view: ");
 								
 								try {
 									option = getInput.nextInt();
+									getInput.nextLine();
 									}catch(Exception e) {
 										System.out.println("Please enter an appropriate selection");
 										break;
@@ -292,7 +312,7 @@ public class Driver {
 								
 								System.out.println();
 								System.out.println();
-								getInput.nextLine();
+
 								
 							}
 													
@@ -444,20 +464,49 @@ public class Driver {
 								option = getInput.nextInt();
 								getInput.nextLine();
 								
-								if(option > 1 && option < accountList.size()) {
-									account = accountList.get(option - 0);
-									while(option != 1 || option != 2) {
+								if(option > 0 && option <= accountList.size()) {
+									account = accountList.get(option - 1);
+									System.out.println("Choose what to do with account " + account.getAccountNumber());
+									 do{
+										Menus.displayAccountApprovalMenu();
 										System.out.print("Please make a selection: ");
 										option = getInput.nextInt();
 										getInput.nextLine();
-									}
+										
+										//I couldn't get this loop to break with the same conditions in the while...not sure why.
+										if(option == 1 || option == 2) {
+											break;
+										}
+									}while(true);
 									
 									if(option == 1) {
+										//set the account status to active and update it in the database
 										account.setStatus("Active");
+										try {
+											as.updateAccount(account);
+										} catch (SQLException e) {
+											// TODO Auto-generated catch block
+											e.printStackTrace();
+										}
+										
+										//get the user associated with the account update their account holder status if necessary
+										locatedUser = cs.getUser(locateUserName);
+										locatedUser.setAccountHolder(true);
+										
+										//update the user
+										cs.updateUser(locatedUser);
+										break;
 									}
 									
 									else if(option == 2) {
-										account.setStatus("Denied");
+										System.out.println(account.getStatus());
+										try {
+											as.updateAccount(account);
+										} catch (SQLException e) {
+											// TODO Auto-generated catch block
+											e.printStackTrace();
+										}
+										break;
 									}
 								}
 								
