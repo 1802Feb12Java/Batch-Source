@@ -46,6 +46,7 @@ public class AccountServices implements AccountDAO{
 		}
 		
 		else {
+			account = new Account();
 			account.setAccountNumber(rs.getInt("accountNumber"));
 			account.setBalance(rs.getDouble("balance"));
 			account.setStatus(rs.getString("status"));
@@ -100,5 +101,38 @@ public class AccountServices implements AccountDAO{
 		ps.close();
 		rs.close();
 		return pendingList;
+	}
+
+	public ArrayList<Account> getCustomerAccounts()throws SQLException{
+		String sql = "SELECT * FROM ACCOUNT WHERE accountHolder = ?";
+		ArrayList<Account> customerAccountList = null;
+		Account current = null;
+		
+		PreparedStatement ps = conn.prepareStatement(sql);
+		ps.setString(1, "Pending");
+		ResultSet rs = ps.executeQuery();
+		
+		if(rs.next() == false) {
+			System.out.println("No accounts currently pending");
+			return customerAccountList;
+		}
+		
+		else {
+			customerAccountList = new ArrayList<>();
+			
+			do {
+				current = new Account();
+				current.setAccountNumber(rs.getInt("accountNumber"));
+				current.setBalance(rs.getDouble("balance"));
+				current.setStatus(rs.getString("status"));
+				current.setAccountType(rs.getString("accountType"));
+				current.setPrimaryAccountHolder(rs.getString("accountHolder"));
+				customerAccountList.add(current);
+			}while(rs.next());
+		}
+
+		ps.close();
+		rs.close();
+		return customerAccountList;
 	}
 }

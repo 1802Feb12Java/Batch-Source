@@ -235,6 +235,7 @@ public class Driver {
 									System.out.println("Something went wrong trying to add the account.");
 									e1.printStackTrace();
 								}
+								account = null;
 								break;
 								
 							case 2:
@@ -248,6 +249,7 @@ public class Driver {
 									System.out.println("Something went wrong trying to add the account.");
 									e1.printStackTrace();
 								}
+								account = null;
 								break;
 							}//end account type switch
 							

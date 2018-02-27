@@ -67,15 +67,11 @@ public class CustomerServices implements CustomerDAO {
 		
 		if(rs.getString("accountHolder") == "Y") {
 			user.setAccountHolder(true);
-			//TODO: clean this out
-			System.out.println("Customer is account holder");
 		}
 
 		
 		else {
 			user.setAccountHolder(false);
-			//TODO: clean this out too
-			System.out.println("Customer has no account");
 		}
 
 		ps.close();
@@ -88,9 +84,8 @@ public class CustomerServices implements CustomerDAO {
 		
 	}
 
-	public void deleteUser(User user) throws SQLException {
-		String uName = user.getUserName();
-		String sql = "DELETE * FROM CUSTOMER WHERE USERNAME = " + uName;
+	public void deleteUser(String userName) throws SQLException {
+		//TODO
 	}
 
 	public List<User> getAllUsers() throws SQLException {
