@@ -1,0 +1,24 @@
+Customer Details:
+ps763
+1387.0
+Priya
+Pooja;Noah;Sandra;
+200.0
+
+Pooja Suresh
+12.23.3456
+21
+234-233-2332
+
+Customer Details:
+ps543
+1351.0
+Priya
+
+300.0
+
+Pooja Suresh
+12.34.5678
+21
+323-232-3232
+
