@@ -24,7 +24,7 @@ public class Driver {
 	private static User login(User u) {
 		System.out.println("Enter Username: ");
 		String usr = sc.nextLine();
-		System.out.println("Enter PassWord: ");
+		System.out.println("Enter Password: ");
 		String pw = sc.nextLine();
 		logger.info("Logging in user " + usr);
 		
@@ -290,7 +290,11 @@ public class Driver {
 				boolean loggingExit = false;
 				while(!loggingExit) {
 					curUser = login(curUser);
-					if(!curUser.equals(null))
+					if(curUser == null) {
+						logger.info("Invalid username or password!");
+						continue;
+					}
+					else
 						loggingExit = true;
 				}
 				
@@ -324,3 +328,7 @@ public class Driver {
 		logger.info("Exiting Program Now...");
 	}//end main
 }
+
+
+	
+

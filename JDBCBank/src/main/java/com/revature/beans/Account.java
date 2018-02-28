@@ -82,8 +82,7 @@ public class Account{
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder(
-				"AccountID: " + accountID + 
-				"\nAccount Number: " + accountNumber + 
+				"Account Number: " + accountNumber + 
 				"\nBalance: " + balance + 
 				"\nOwner: " + owner.getName().getKey() +  " " + owner.getName().getValue());
 		return sb.toString();
