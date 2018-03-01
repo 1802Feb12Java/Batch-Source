@@ -48,7 +48,7 @@ public class CustomerServices implements CustomerDAO{
 		ps.setInt(1, id);
 		ResultSet rs1 = ps.executeQuery();
 		if(rs1.next()) {
-		Customer c = new Customer(rs1.getString(4), rs1.getString(5), rs1.getString(2), rs1.getString(3));
+		Customer c = new Customer(rs1.getString(2), rs1.getString(3), rs1.getString(4), rs1.getString(5));
 		c.setCustomerID(rs1.getString(1));
 		return c;
 		}

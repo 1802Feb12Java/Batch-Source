@@ -192,7 +192,7 @@ public class Driver implements Serializable {
 	public static void doCustomerStuff(Customer c) throws SQLException {
 		int cases = 0;
 		newScreen = false;
-		System.out.println("Welcome, " + c.getFirstName());
+		System.out.println("Welcome, " + c.getUsername());
 		System.out.println("What would you like to do?");
 		System.out.println("1. Withdraw");
 		System.out.println("2. Deposit");
