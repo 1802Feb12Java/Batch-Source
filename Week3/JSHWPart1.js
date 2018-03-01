@@ -60,25 +60,21 @@ homework.rotateLeft = function(array, n) {
     return array;
 };
 
-/*
- 5. Balanced Brackets
-
- A bracket is any one of the following: (, ), {, }, [, or ]
-
- The following are balanced brackets:
-    ()
-    ()()
-    (())
-    ({[]})
-
- The following are NOT balanced brackets:
- (
- )
- (()
- ([)]
-
- Return true if balanced
- Return false if not balanced
+/* 5. Balanced Brackets
+ * A bracket is any one of the following: (, ), {, }, [, or ]
+ * The following are balanced brackets:
+ *  ()
+ *  ()()
+ *  (())
+ *  ({[]})
+ * 
+ * The following are NOT balanced brackets:
+ *  (
+ *  )
+ *  (()
+ *  ([)]
+ * Return true if balanced
+ * Return false if not balanced
 */
 homework.balancedBrackets = function(bracketsString){
     stack = [];
@@ -111,6 +107,8 @@ homework.balancedBrackets = function(bracketsString){
             else return false;
         }
     }
+    if(stack.length != 0)
+        return false;
     return true;
 };
 
