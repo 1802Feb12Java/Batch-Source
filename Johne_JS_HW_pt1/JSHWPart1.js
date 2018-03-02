@@ -149,7 +149,7 @@ homework.balancedBrackets = function(bracketsString){
 
     var tempArr = [];
     var failed = false;
-    for (var i = 0; (i < bracketsString.length); i++) {
+    for (var i = 0; !failed && (i < bracketsString.length); i++) {
        switch(bracketsString.charAt(i)) {
            case left_curly : 
            case left_normal :
