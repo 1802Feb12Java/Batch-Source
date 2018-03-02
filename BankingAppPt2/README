@@ -1,0 +1,18 @@
+No log4j
+You can't approve accounts but that wasn't a requirement in the doc (i think)
+
+database.properties is in src/main/java
+
+Admin (need to use capital A)
+b     (most my passwords were b)
+
+John
+b
+
+TheVeryBest
+LikeNoOneEverWas
+
+DONT USE SPACES in inputs
+didnt realize that i was using .next() instead of .nextLine()
+if you do an input with a space it will take the word after the space as the next input and everything will be off.
+I don't think this crashes it but it probably sets it off.
