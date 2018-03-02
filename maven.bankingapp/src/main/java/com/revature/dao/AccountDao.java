@@ -8,6 +8,8 @@ import com.revature.beans.User;
 
 public interface AccountDao {
 	
+	int var = 1;
+	
 	// insert new user
 	public void insertNewAccount(int is_approved, double balance) throws SQLException;
 	

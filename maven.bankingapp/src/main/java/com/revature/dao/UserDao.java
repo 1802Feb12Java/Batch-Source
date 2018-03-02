@@ -9,7 +9,7 @@ import java.sql.SQLException;
 public interface UserDao {
 	
 	// insert new user
-	public void insertNewUser(int roleId, String firstname, String lastname, String email, String phone, String username, String password) throws SQLException;
+	public void insertNewUser(int roleId, String firstname, String lastname, String email, String username, String password) throws SQLException;
 	
 	// get user
 	public User getUser(int id) throws SQLException;

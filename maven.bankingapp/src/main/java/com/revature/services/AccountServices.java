@@ -16,6 +16,7 @@ public class AccountServices implements AccountDao {
 	
 	// Instantiate ConnFactory object
 	ConnFactory cf = new ConnFactory();
+	
 
 	@Override
 	public void insertNewAccount(int is_approved, double balance) throws SQLException {

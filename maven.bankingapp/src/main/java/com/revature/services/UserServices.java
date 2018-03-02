@@ -23,13 +23,13 @@ public class UserServices implements UserDao {
 	// Create connection 
 	ConnFactory cf = new ConnFactory();
 	
-	public void insertNewUser(int roleId, String firstName, String lastName, String email, String phone, String username, String password) {
+	public void insertNewUser(int roleId, String firstName, String lastName, String email, String username, String password) {
 		
 		try(Connection conn = cf.getConnection()) {
 			
 			// create statement
-			String sqlInsert = "INSERT INTO bank_user(id, role_id, first_name, last_name, email, phone, username, password) ";
-			sqlInsert += "VALUES(userIdSequence.NEXTVAL, ?, ?, ?, ?, ?, ?, ?)";
+			String sqlInsert = "INSERT INTO bank_user(id, role_id, first_name, last_name, email, username, password) ";
+			sqlInsert += "VALUES(userIdSequence.NEXTVAL, ?, ?, ?, ?, ?, ?)";
 			
 			// instantiate ps object
 			PreparedStatement ps = conn.prepareStatement(sqlInsert);
@@ -39,16 +39,12 @@ public class UserServices implements UserDao {
 			ps.setString(2, firstName);
 			ps.setString(3, lastName);
 			ps.setString(4, email);
-			ps.setString(5, phone);
-			ps.setString(6, username);
-			ps.setString(7, password);
+			ps.setString(5, username);
+			ps.setString(6, password);
 			
 			int rowsInserted = ps.executeUpdate();
 			if(rowsInserted > 0) {
-				System.out.println();
-				System.out.println("******************************************************");
-				System.out.println("Your account has been created! You may now log in.");
-				System.out.println("******************************************************");
+				// Row inserted
 			}
 
 		} catch (SQLException e) {
@@ -79,10 +75,9 @@ public class UserServices implements UserDao {
 				String firstName = rs.getString("FIRST_NAME");
 				String lastName = rs.getString("LAST_NAME");
 				String email = rs.getString("EMAIL");
-				String phone = rs.getString("PHONE");
 				String uname = rs.getString("USERNAME");
 				String pword = rs.getString("PASSWORD");
-				user = new User(id, role_id, firstName, lastName, email, phone, uname, pword);
+				user = new User(id, role_id, firstName, lastName, email, uname, pword);
 			}
 			
 			return user;
@@ -117,10 +112,9 @@ public class UserServices implements UserDao {
 				String firstName = rs.getString("FIRST_NAME");
 				String lastName = rs.getString("LAST_NAME");
 				String email = rs.getString("EMAIL");
-				String phone = rs.getString("PHONE");
 				String uname = rs.getString("USERNAME");
 				String pword = rs.getString("PASSWORD");
-				user = new User(id2, role_id, firstName, lastName, email, phone, uname, pword);
+				user = new User(id2, role_id, firstName, lastName, email, uname, pword);
 			}
 			
 			return user;
@@ -151,10 +145,9 @@ public class UserServices implements UserDao {
 				String firstName = rs.getString(3);
 				String lastName = rs.getString(4);
 				String email = rs.getString(5);
-				String phone = rs.getString(6);
-				String username = rs.getString(7);
-				String password = rs.getString(8);
-				user = new User(id, role_id, firstName, lastName, email, phone, username, password);
+				String username = rs.getString(6);
+				String password = rs.getString(7);
+				user = new User(id, role_id, firstName, lastName, email, username, password);
 				users.add(user);
 			}
 			
@@ -163,8 +156,6 @@ public class UserServices implements UserDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-		
 		
 		return null;
 	}
@@ -202,6 +193,25 @@ public class UserServices implements UserDao {
 	@Override
 	public void deleteUser(int id) throws SQLException {
 		
+		try(Connection conn = cf.getConnection()) {
+			
+			// Update query
+			String sqlUpdate = "DELETE FROM bank_user WHERE id = ?";
+			
+			// Instantiate PreparedStatement object
+			PreparedStatement ps = conn.prepareStatement(sqlUpdate);
+			
+			// Set values
+			ps.setInt(1, id);
+			
+			int rowsUpdate = ps.executeUpdate();
+			if (rowsUpdate > 0) {
+				// User updated
+			}
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
 		
 	}
 
@@ -211,7 +221,7 @@ public class UserServices implements UserDao {
 		try(Connection conn = cf.getConnection()) {
 			
 			// Update query
-			String sqlUpdate = "UPDATE bank_user SET id=?, role_id=?, first_name=?, last_name=?, email=?, phone=?, username=?, password=? ";
+			String sqlUpdate = "UPDATE bank_user SET id=?, role_id=?, first_name=?, last_name=?, email=?, username=?, password=? ";
 			sqlUpdate += "WHERE id = ?";
 			
 			// Instantiate PreparedStatement object
@@ -223,10 +233,9 @@ public class UserServices implements UserDao {
 			ps.setString(3, user.getFirstName());
 			ps.setString(4, user.getLastName());
 			ps.setString(5, user.getEmail());
-			ps.setString(6, user.getPhone());
-			ps.setString(7, user.getUsername());
-			ps.setString(8, user.getPassword());
-			ps.setInt(9, user.getId());
+			ps.setString(6, user.getUsername());
+			ps.setString(7, user.getPassword());
+			ps.setInt(8, user.getId());
 			
 			int rowsUpdate = ps.executeUpdate();
 			if (rowsUpdate > 0) {

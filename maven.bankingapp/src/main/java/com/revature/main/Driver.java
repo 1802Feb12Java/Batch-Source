@@ -14,17 +14,13 @@ import com.revature.services.UserServices;
 public class Driver 
 {
     public static void main(String[] args) throws FileNotFoundException, IOException, SQLException
-    {
-    		// insert example
-//    		UserServices userDao = new UserServices();
-//    		userDao.insertNewUser(3, "Sonam", "asdjfklasd", "bbob@gmail.com", "2394023904", "bobbo", "passfda");
-    		
+    {    		
     		// Instantiate menu object
     		Menu menu = new Menu();
     		
     		// Instantiate Core object
     		Core core = new Core();
-    	
+    		
 	    	// Instantiate new Scanner object
 	    	Scanner sc = new Scanner(System.in);
 	    	
@@ -61,7 +57,6 @@ public class Driver
 	    				System.out.println("Error! Please enter a 1, 2, 3 or 4");
 	    				break;
 	    		}
-	    		
 		
 	    	}
 	    	System.out.println("**********************************************************************");

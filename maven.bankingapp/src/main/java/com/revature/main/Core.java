@@ -72,9 +72,11 @@ public class Core {
 				System.out.println("Welcome admin!");
 				System.out.println("******************************************************************");
 				System.out.println("Please choose an action:");
-				System.out.println("1. View User Accounts");
+				System.out.println("1. View All Users");
 				System.out.println("2. View Pending Applications");
-				System.out.println("3. Logout");
+				System.out.println("3. Create New User");
+				System.out.println("4. Delete User");
+				System.out.println("5. Logout");
 				choice = sc.nextInt();
 				
 				
@@ -84,7 +86,7 @@ public class Core {
 						boolean userAccountScreen = true;
 						while(userAccountScreen) {
 							System.out.println("******************************************************************");
-							System.out.println("User account list:");
+							System.out.println("User list:");
 							System.out.println("******************************************************************");
 							
 							users = us.retrieveAllUsers();
@@ -93,7 +95,6 @@ public class Core {
 								System.out.println("First Name -- " + user.getFirstName());
 								System.out.println("Last Name --- " + user.getLastName());
 								System.out.println("Email ------- " + user.getEmail());
-								System.out.println("Phone ------- " + user.getPhone());
 								System.out.println("Username ---- " + user.getUsername());
 								System.out.println("Password ---- " + user.getPassword());
 								System.out.println("******************************************************************");
@@ -132,10 +133,9 @@ public class Core {
 										System.out.println("(1) First Name -- " + userEdit.getFirstName());
 										System.out.println("(2) Last Name --- " + userEdit.getLastName());
 										System.out.println("(3) Email ------- " + userEdit.getEmail());
-										System.out.println("(4) Phone ------- " + userEdit.getPhone());
-										System.out.println("(5) Username ---- " + userEdit.getUsername());
-										System.out.println("(6) Password ---- " + userEdit.getPassword());
-										System.out.println("(7) EXIT");
+										System.out.println("(4) Username ---- " + userEdit.getUsername());
+										System.out.println("(5) Password ---- " + userEdit.getPassword());
+										System.out.println("(6) EXIT");
 										System.out.println("******************************************************************");
 										System.out.println("Choose a field to edit:");
 										System.out.println("******************************************************************");
@@ -169,17 +169,8 @@ public class Core {
 												System.out.println("******************************************************************");
 												System.out.println("User updated successfully!");
 												break;
-												
+																	
 											case 4:
-												System.out.println("Enter new phone number:");
-												value = sc.next();
-												userEdit.setPhone(value);
-												us.updateUser(userEdit);
-												System.out.println("******************************************************************");
-												System.out.println("User updated successfully!");
-												break;
-												
-											case 5:
 												System.out.println("Enter new username:");
 												value = sc.next();
 												userEdit.setUsername(value);
@@ -188,7 +179,7 @@ public class Core {
 												System.out.println("User updated successfully!");
 												break;
 												
-											case 6:
+											case 5:
 												System.out.println("Enter new password:");
 												value = sc.next();
 												userEdit.setPassword(value);
@@ -197,12 +188,10 @@ public class Core {
 												System.out.println("User updated successfully!");
 												break;
 												
-											case 7:
+											case 6:
 												editingUser=false;
 												break;
 										}
-										
-										
 										
 									}
 									
@@ -265,7 +254,6 @@ public class Core {
 											System.out.println("Initial Deposit -- " + account_0.getBalance());
 											System.out.println("Name ------------- " + user.getFirstName() + " " + user.getLastName());
 											System.out.println("Email ------------ " + user.getEmail());
-											System.out.println("Phone ------------ " + user.getPhone());
 											System.out.println("Username --------- " + user.getUsername());
 											System.out.println("******************************************************************");
 										}
@@ -325,8 +313,122 @@ public class Core {
 							
 						}
 						break;
-						
+
 					case 3:
+						System.out.println("******************************************************************");
+						System.out.println("Enter customer's first name:");
+						System.out.println("******************************************************************");
+						String firstName = sc.next();
+						
+						System.out.println("******************************************************************");
+						System.out.println("Enter customer's your last name:");
+						System.out.println("******************************************************************");
+						String lastName = sc.next();
+						
+						System.out.println("******************************************************************");
+						System.out.println("Enter customer's email:");
+						System.out.println("******************************************************************");
+						String email = sc.next();
+						
+						System.out.println("******************************************************************");
+						System.out.println("Enter customer's username:");
+						System.out.println("******************************************************************");
+						String username = sc.next();
+						
+						boolean usernameOk = false;
+						while(!usernameOk) {
+							user = us.getUserByUsername(username);
+							if(user == null) {
+								usernameOk = true;
+							} else {
+								System.out.println("******************************************************************");
+								System.out.println("Error! That username is already take. Please choose a different one.");
+								System.out.println("******************************************************************");
+								username = sc.next();
+							}
+						}
+						
+						System.out.println("******************************************************************");
+						System.out.println("Enter customer's password:");
+						System.out.println("******************************************************************");
+						String password = sc.next();
+						
+						boolean passwordOk = false;
+						while(!passwordOk) {
+							if (password.length() < 6) {
+								System.out.println("******************************************************************");
+								System.out.println("Error! Please choose a password that has at least six characters.");
+								System.out.println("******************************************************************");
+								password = sc.next();
+							} else {
+								passwordOk = true;
+							}
+						}
+						
+						this.us.insertNewUser(3, firstName, lastName, email, username, password);
+						
+						System.out.println();
+						System.out.println("******************************************************");
+						System.out.println("New customer account created successfully!");
+						System.out.println("******************************************************");
+						break;
+						
+					case 4:
+						boolean deleteUserScreen = true;
+						while(deleteUserScreen) {
+							System.out.println("******************************************************************");
+							System.out.println("User list:");
+							System.out.println("******************************************************************");
+							
+							users = us.retrieveAllUsers();
+							for(User user : users) {
+								System.out.println("User Id ----- " + user.getId());
+								System.out.println("First Name -- " + user.getFirstName());
+								System.out.println("Last Name --- " + user.getLastName());
+								System.out.println("Email ------- " + user.getEmail());
+								System.out.println("Username ---- " + user.getUsername());
+								System.out.println("Password ---- " + user.getPassword());
+								System.out.println("******************************************************************");
+							}
+							System.out.println("Enter the id of the user you would like to delete or type 1 and hit enter to exit:");
+							choice = sc.nextInt();
+							
+							if(choice == 1) {
+								deleteUserScreen=false;
+							} else {
+								boolean userNotFound=true;
+								while(userNotFound) {
+									user = us.getUser(choice);
+									if(user == null) {
+										System.out.println("Error! We could not find a user with that id. Please try again.");
+										choice = sc.nextInt();
+									} else {
+										userNotFound = false;
+									}
+								}
+								
+								UserBankAccount record = null;
+								record = ubas.getRecordByCustId(user.getId());
+								if(record == null) {
+									us.deleteUser(user.getId());
+									System.out.println();
+									System.out.println("******************************************************************");
+									System.out.println("Customer " + user.getFirstName() + " " + user.getLastName() + " deleted successfully!");
+									System.out.println("******************************************************************");
+									System.out.println();
+									deleteUserScreen = false;
+									
+								} else {
+									System.out.println("******************************************************************");
+									System.out.println("Error! You cannot delete a user that has an account. Please enter a different id.");
+									System.out.println("******************************************************************");
+									
+								}
+							}
+						}
+						break;
+						
+					case 5:
 						logout=true;
 						break;
 						
@@ -355,11 +457,6 @@ public class Core {
 		System.out.println("Enter your email:");
 		System.out.println("******************************************************************");
 		String email = sc.next();
-		
-		System.out.println("******************************************************************");
-		System.out.println("Enter your phone number:");
-		System.out.println("******************************************************************");
-		String phone = sc.next();
 		
 		System.out.println("******************************************************************");
 		System.out.println("Enter your desired username:");
@@ -397,7 +494,13 @@ public class Core {
 			}
 		}
 		
-		this.us.insertNewUser(3, firstName, lastName, email, phone, username, password);
+		// Insert new user
+		this.us.insertNewUser(3, firstName, lastName, email, username, password);
+		
+		System.out.println();
+		System.out.println("******************************************************");
+		System.out.println("Your account has been created! You may now log in.");
+		System.out.println("******************************************************");
 	}
 	
 	public void userAccountFlow() throws SQLException {
@@ -554,7 +657,6 @@ public class Core {
 							System.out.println("******************************************************************");
 							System.out.println("Name ------ " + user.getFirstName() + " " + user.getLastName());
 							System.out.println("Email ----- " + user.getEmail());
-							System.out.println("Phone ----- " + user.getPhone());
 							System.out.println("Username -- " + user.getUsername());
 							System.out.println("Password -- " + user.getPassword());
 							System.out.println("******************************************************************");
@@ -606,7 +708,6 @@ public class Core {
 								System.out.println("******************************************************************");
 								System.out.println("Name ------ " + user.getFirstName() + " " + user.getLastName());
 								System.out.println("Email ----- " + user.getEmail());
-								System.out.println("Phone ----- " + user.getPhone());
 								System.out.println("Username -- " + user.getUsername());
 								System.out.println("Password -- " + user.getPassword());
 								System.out.println("******************************************************************");
@@ -820,7 +921,6 @@ public class Core {
 									System.out.println("******************************************************************");
 									System.out.println("Name ------ " + user.getFirstName() + " " + user.getLastName());
 									System.out.println("Email ----- " + user.getEmail());
-									System.out.println("Phone ----- " + user.getPhone());
 									System.out.println("Username -- " + user.getUsername());
 									System.out.println("Password -- " + user.getPassword());
 									System.out.println("******************************************************************");

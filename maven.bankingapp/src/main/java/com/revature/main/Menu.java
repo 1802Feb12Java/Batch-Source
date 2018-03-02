@@ -40,7 +40,6 @@ public class Menu {
 			System.out.println("******************************************************************");
 			System.out.println("Name: " + user.getFirstName() + " " + user.getLastName());
 			System.out.println("Email: " + user.getEmail());
-			System.out.println("Phone: " + user.getPhone());
 			System.out.println("Username: " + user.getUsername());
 			System.out.println("Password: " + user.getPassword());
 			System.out.println("******************************************************************");
