@@ -16,7 +16,6 @@ import com.revature.bankingappnew.Employee;
 import com.revature.bankingappnew.User;
 
 /*
- * make sure deleteUserRecord works because keys may cause issues
  * 
  */
 

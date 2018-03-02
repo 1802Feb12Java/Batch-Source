@@ -111,32 +111,7 @@ public class FileKeeping implements Serializable{
 		return stringList; //each entry in the array should be a string with the format "username:password:userType"
 		
 	}//end readInUsernamePasswordLog method
-	
-//	@SuppressWarnings("unchecked")
-//	public static ArrayList<String> readInUsernamePasswordLog(){
-//		Serializable s = null;
-//		
-//		FileInputStream fileIS;
-//		try {
-//			fileIS = new FileInputStream("UsernamePasswordLog.txt");
-//			ObjectInputStream objectIS = new ObjectInputStream(fileIS);
-//			s = (Serializable) objectIS.readObject();
-//			
-//			objectIS.close();
-//			
-//		} catch (FileNotFoundException e) {
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		} catch (ClassNotFoundException e) {
-//			e.printStackTrace();
-//		}
-//		
-//		
-//		return (ArrayList<String>) s;
-//		
-//	}//end readInUsernamePasswordLog method
-	
+
 	@SuppressWarnings("unchecked")
 	public static ArrayList<Integer> readInAccountNumberLog(){
 		Serializable s = null;
@@ -242,7 +217,7 @@ public class FileKeeping implements Serializable{
 	public static void addToUsernamePasswordLog(ArrayList<String> usernamePassLog, BankAdmin newUser) {
 		String username = newUser.getUsername();
 		String password = newUser.getPassword();
-		String accessType = newUser.getAccessType();
+		String accessType = "Admin";
 		String newLogEntry = username + ":" + password + ":" + accessType;
 		usernamePassLog.add(newLogEntry);
 		writeToUsernamePasswordFile(usernamePassLog);

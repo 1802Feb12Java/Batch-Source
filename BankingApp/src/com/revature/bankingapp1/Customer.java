@@ -2,7 +2,6 @@ package com.revature.bankingapp1;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.Scanner;
 
 public class Customer implements Serializable{
@@ -68,7 +67,6 @@ public class Customer implements Serializable{
 		
 		
 	}//end viewCustomerDetails method
-	
 	
 	public void createApplication(ArrayList<Customer> customerList, String applicationType) {
 		this.applicationList.add(new Application(customerList, applicationType));
