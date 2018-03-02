@@ -60,29 +60,32 @@ var rotateLeft = function(array, left){
 }
 
 var balanceBrackets = function(inputStr){
-
+    
     if(inputStr.length % 2 != 0){
         return false;
     }
     
-    var i = 0;
+    var temp;
+    var stack = [];
 
-    while(i < inputStr.length/2){
-        //console.log('' + inputStr[i] +' == '+ inputStr[(inputStr.length-1-i)]);
-        if((inputStr[i] == '(' && inputStr[inputStr.length-1-i] == ')') ||
-            (inputStr[i] == '[' && inputStr[inputStr.length-1-i] == ']') ||
-            (inputStr[i] == '{' && inputStr[inputStr.length-1-i] == '}') ||
-            (inputStr[i] == ')' && inputStr[inputStr.length-1-i] == '(') ||
-            (inputStr[i] == ']' && inputStr[inputStr.length-1-i] == '[') ||
-            (inputStr[i] == '}' && inputStr[inputStr.length-1-i] == '{') ){
-            i++;
-        } else {    
-            return false;
+    for (var i = 0; i < inputStr.length; i++){
+        if (inputStr[i] == '(' || inputStr[i] == '[' || inputStr[i] == '{'){
+            stack.push(inputStr[i]);
+        } else {
+            temp = stack.pop();
+            if ((inputStr[i] == ')' && temp == '(') ||
+            (inputStr[i] == ']' && temp == '[') ||
+            (inputStr[i] == '}' && temp == '{')){
+            } else {
+                return false;
+            }
         }
-
     }
-    return true;
 
+    if(stack.length == 0){
+        return true;
+    }
+    return false;
 }
 
 
