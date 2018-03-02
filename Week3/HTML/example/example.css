@@ -1,0 +1,37 @@
+body {
+    background-image: url("city-background.png");
+    color: 	#1193DB;
+    background-size: 100%;
+}
+
+p {
+    font-family: Verdana, Verdana, sans-serif;
+}
+
+h1 {
+    text-transform: uppercase;
+    text-align: center;
+}
+
+h4 {
+    text-transform: lowercase;
+    text-align: center;
+}
+
+button {
+    background-color: rgb(100, 100, 100);
+    color: 	#1193DB;
+    font-size: 18px;
+    padding: 20px 30px;
+    border: #1193DB;
+    border-style: ridge;
+    text-align: center;
+}
+
+#index-main {
+    text-align: left;
+}
+
+#aboutme-main {
+    text-align: right;
+}
