@@ -9,6 +9,9 @@ import com.revature.bankapp.model.Customer;
 
 public class driver {
 	public static void main(String[] args) throws SQLException {
+		
+		
+		
 		Customer user = new Customer();
 		user.setCustomerID(1002);
 		user.setCustUsername("user");
@@ -21,4 +24,5 @@ public class driver {
 		//BankController.adminDeleteCustomer(0);
 		System.out.println(BankController.adminViewAllCustomers().toString());
 	}
+	
 }

@@ -113,7 +113,6 @@ public class BankAdminDAO {
 		
 		ps.setString(1, username);
 		ps.setInt(2, id);
-		
 		ps.executeQuery();
 		
 	}

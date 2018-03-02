@@ -28,12 +28,12 @@ public class BankController {
 		return CustomerDAO.createAccount();
 	}
 	
-	public static void deposit(BankAccount account) throws SQLException {
-		BankDAO.deposit(account);
+	public static void deposit(double amount, BankAccount account) throws SQLException {
+		BankDAO.deposit(amount, account);
 	}
 	
-	public static void withdraw(BankAccount account) throws SQLException {
-		BankDAO.withdraw(account);
+	public static void withdraw(double amount, BankAccount account) throws SQLException {
+		BankDAO.withdraw(amount, account);
 	}
 	
 	public static List<Customer> adminViewAllCustomers() throws SQLException {
