@@ -21,8 +21,7 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml 
 hs_err_pid* 
 
-# # Created by https://www.gitignore.io/api/eclipse 
-### Eclipse ### 
+#Eclipse
 .metadata 
 bin/ 
 tmp/ 
@@ -80,5 +79,3 @@ Servers/
 .cache-main 
 .scala_dependencies 
 .worksheet 
-
-# End of https://www.gitignore.io/api/eclipse
