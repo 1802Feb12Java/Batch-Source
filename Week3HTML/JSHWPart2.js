@@ -199,6 +199,16 @@ for(var i=0; i<favColorList.length; i++){
                 newChoice = favColorList[j].value;
             }
         }
+        this.style.backgroundColor = newChoice;
+        this.style.color = newChoice;
+        this.style.background = newChoice;
+        this.style.fill = newChoice;
+        //trust me, none of these do diddly squat
+        this.parentNode.style.backgroundColor = newChoice;
+        //so I said flip it, I'm just gunna change the whole form's background color
+        //cuz at least that actually works
+        //also it technically does change the background color of all the favoriteColor buttons
+        //...just... a few more things, too
         if(lastChoice != null)  //only alert if there was a choice before
            alert("So you like " + newChoice + " more than " + lastChoice + " now?");
     }
@@ -212,11 +222,14 @@ for(var i=0; i<favColorList.length; i++){
 // Hide the name if shown.
 // Show the name if hidden.
 var allEmps = document.getElementsByClassName("empName");
-console.log(allEmps);
 for(var i=0; i<allEmps.length; i++){
-    allEmps[i].onmouseenter = function(){
-        console.log("stop touching me");
-        //what am i supposed to be doing here again
+    allEmps[i].onmouseover = function(){
+        if(this.style.color == "black" || this.style.color == ""){
+            this.style.color = "white";
+        }
+        else if(this.style.color == "white"){
+            this.style.color = "black";
+        } 
     }
 }
 
@@ -225,28 +238,65 @@ for(var i=0; i<allEmps.length; i++){
 
 // Regarding this element:
 // 	<h5 id="currentTime"></h5>
-
 // Show the current time in this element in this format: 9:05:23 AM
-
 // The time should be accurate to the second without having to reload the page.
+function updateTime(){
+    var currTimeElement = document.getElementById("currentTime");
+    var timestamp = new Date();
+    var hours = timestamp.getHours();
+    var AMPM;
+    if(hours >= 12){
+        AMPM = "PM";
+        if(hours != 12){
+            hours -= 12;
+        }
+    }
+    else{
+        AMPM = "AM";
+    }
+    var minutes = timestamp.getMinutes();
+    var seconds = timestamp.getSeconds();
+    if(minutes<10){
+        minutes="0"+minutes;
+    }
+    if(seconds<10){
+        seconds="0"+seconds;
+    }
+    currTimeElement.innerHTML = hours+":"+minutes+":"+seconds+" "+AMPM;
+    setTimeout(updateTime, 1000); //update it every second
+}
+updateTime();
 
 
 // 11. Delay
 // Regarding this element:
-	
 // <p id="helloWorld">Hello, World!</p>
-
 // Three seconds after a user clicks on this element, change the text to a random color.
+var helloWorldElement = document.getElementById("helloWorld");
+helloWorldElement.onclick = function(){
+    setTimeout(function(){
+        helloWorldElement.style.color = "#"+Math.floor(Math.random()*16777215).toString(16);
+    }, 3000);   //do it after 3000 ms
+}
 
 
 // 12. Walk the DOM
 
 // Define function walkTheDOM(node, func)
-
 // This function should traverse every node in the DOM. 
 // Use recursion.
-
 // On each node, call func(node).
-
-
-
+function walkTheDOM(node, func){
+    for(var i=0; i<node.length; i++){
+        walkTheDOM(node[i], func);
+    }
+    if(node.length == undefined){   
+        //if the node isn't an array anymore (called on recursion)
+        func(node);
+    }
+}
+function printTextContents(x){
+    console.log(x.textContent);
+}
+var x = document.getElementsByTagName("a");
+walkTheDOM(x, printTextContents);
