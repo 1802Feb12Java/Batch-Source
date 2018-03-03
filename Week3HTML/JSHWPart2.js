@@ -182,6 +182,7 @@ for(var i=0; i<allSkills.length; i++){
 // In this example, green is the new value and blue is the old value.
 // Make the background color (of all favoriteColor radio buttons) 
 // the newly selected favoriteColor
+var favColorSpanList = document.getElementsByClassName("favoriteColor");
 var favColorList = document.getElementsByName("favoriteColor");
 var lastChoice;
 var newChoice;
@@ -199,16 +200,9 @@ for(var i=0; i<favColorList.length; i++){
                 newChoice = favColorList[j].value;
             }
         }
-        this.style.backgroundColor = newChoice;
-        this.style.color = newChoice;
-        this.style.background = newChoice;
-        this.style.fill = newChoice;
-        //trust me, none of these do diddly squat
-        this.parentNode.style.backgroundColor = newChoice;
-        //so I said flip it, I'm just gunna change the whole form's background color
-        //cuz at least that actually works
-        //also it technically does change the background color of all the favoriteColor buttons
-        //...just... a few more things, too
+        for(var j=0; j<favColorSpanList.length; j++){
+            favColorSpanList[j].style.backgroundColor = newChoice;
+        }
         if(lastChoice != null)  //only alert if there was a choice before
            alert("So you like " + newChoice + " more than " + lastChoice + " now?");
     }
