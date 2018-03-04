@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>DOM</title>
+</head>
+<body>    <div>
+        <div>
+            <h3>
+                Sum: <span id="sum"></span>
+            </h3>
+            <h5 id="currentTime"></h5>
+        </div>
+        <div>
+            <h1>
+                United <span data-customAttr="USA">States</span> of America (<span>USA</span>)
+            </h1>
+            <div>
+                <a>Click Here</a><a>Click Here</a><a>Click Here</a><a>Click Here</a><a>Click
+                    Here</a>
+            </div>
+            <a>Click Here</a> <a>Click <span>Here1</span></a> <a>Click Here</a>
+            <div>
+                <select name="colors">
+                    <option value="green">Green</option>
+                    <option value="blue">Blue</option>
+                    <option value="red" selected="selected">Red</option>
+                    <option value="purple">Purple</option>
+                    <option value="yellow" selected="selected">Yellow</option>
+                </select>
+            </div>
+        </div>
+        <p id="helloWorld">Hello, World!</p>
+        <div>
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Department</th>
+                </tr>
+                <tr>
+               
+     <td class="empName">John</td>
+                    <td>Sales</td>
+                </tr>
+                <tr>
+                    <td class="empName">Amy</td>
+                    <td>Finance</td>
+                </tr>
+                <tr>
+                    <td class="empName">Austin</td>
+                    <td>Sales</td>
+                </tr>
+                <tr>
+                    <td class="empName">Katie</td>
+                    <td>Marketing</td>
+                </tr>
+                <tr>
+                    <td class="empName" data-customAttr="court">Courtney</td>
+                    <td>Sales</td>
+                </tr>
+                <tr>
+                    <td class="empName">Scout</td>
+                    <td>Sales</td>
+                </tr>
+            </table>
+        </div>
+        <form id="firstForm">
+            <a>Click <span>Here2</span></a> <input type="text"
+                data-customAttr="7" /><br /> <input type="text" data-customAttr="24" /><br />
+            <input type="radio" name="favoriteAnimal" value="dog" />Dog<br /> <input
+                type="radio" name="favoriteColor" value="blue" />Blue<br />
+                 <input
+                id="num1" class="nums" type="text" /><br /> <input type="radio"
+                name="favoriteAnimal" value="cat" />Cat<br /> <input type="radio"
+                name="favoriteColor" value="red" />Red<br /> <input type="radio"
+                name="favoriteAnimal" value="horse" />Horse<br /> <input
+                type="radio" name="favoriteAnimal" value="dolphin" />Dolphin<br /> <a>Click
+                <span>Here</span>
+            </a><br /> <input type="radio" name="favoriteAnimal" value="eagle" />Eagle<br />
+            <input type="radio" name="favoriteColor" value="green" />Green<br />
+            <input type="radio" name="favoriteColor" value="orange" />Orange<br />
+            <select name="hobbies">
+                <option value="photography">Photography</option>
+                <option value="football" selected="selected">Football</option>
+                <option value="kayaking" selected="selected">Kayaking</option>
+                <option value="hiking">Hiking</option>
+                <option value="programming" selected="selected">Programming</option>
+            </select> <input id="num2" class="nums" type="text" /> <select name="skills">
+                <option value="java">Java</option>
+                <option value="net">.NET</option>
+                <option value="dom" selected="selected">DOM</option>
+                <option value="html">HTML</option>
+                <option value="css">CSS</option>
+                <option value="javascript" selected="selected">Javascript</option>
+            </select>
+        </form>
+    </div> 
+    <a>Click Here</a>
+    <a>Click <span data-customAttr="500">Here3</span></a>
+    <a>Click Here</a>
+    <script type="text/javascript">
+        
+        //  1. USA
+
+        function getUSA(){
+            var tags = document.getElementsByTagName("*");          // search entire document
+            var result;
+            for(var i = 0; i < tags.length; i++){
+                if(tags[i].innerHTML == "USA"){                     // search each word for contained string 'USA'
+                    result = allTags[i];                            // if yes, collect word into array result
+                }
+            }
+        }
+
+        // print array element collection containing 'usa'
+
+        console.log(result.textContent);
+        console.log("\n");
+
+
+        //  2. Sales
+
+        function getPeopleInSales(){
+            var empTags = document.getElementsByTagName("tr");      // employees are tagged with tr
+            for(var i = 0; i < empTags.length; i++){
+                if(empTags[i].children[1].textContent == "Sales"){      // iterate through tag collection looking for string 'Sales' in line 2
+                    console.log(empTags[i].children[0].textContent);    // if yes, print name at line 1
+                }
+            }
+        }
+
+
+        //  3. Click here
+
+        function getAnchorChildren(){
+            return document.getElementsByTagName("a");         
+        }
+
+        var anchorTags = getAnchorChildren();                       // all anchor tag blocks
+        var anchorSpanChildren = [];
+        for(var i = 0; i < anchorTags.length; i++){
+            var anchorChildren = anchorTags[i].children;            // get children of that anchor block
+            for(var j = 0; j < anchorChildren.length; j++){
+                if(anchorChildren[j].nodeName == "SPAN"){           // if children collection contains 'span', collect in anchorSpanChildren
+                    anchorSpanChildren.push(anchorTags[i]);
+                }
+            }
+        }
+
+        for(var i = 0; i < anchorSpanChildren.length; i++){         // iterate through child collection
+            var childAnchor = anchorSpanChildren[i].children;
+            for(var j = 0; j < childAnchor.length; j++){
+                if(childAnchor[j].nodeName == "SPAN")               // double check that it's span
+                    console.log(childAnchor[j].textContent);        // print content
+            }
+        }
+        console.log("\n");
+
+
+        //  4. Hobbies
+
+        function getSkills(){
+            var allSelects = document.getElementsByTagName("select");       // search document for tag 'select'
+            for(var i = 0; i < allSelects.length; i++){             // iterate through collection
+                if(allSelects[i].name == "skills"){                 // looking for name 'skills'
+                    return allSelects[i];                           // return skills
+                }
+            }
+        }
+
+        var allSkills = getSkills();
+
+        // Print the value and the contents.
+        for(var i=0; i<allSkills.length; i++){
+            if(allSkills[i].selected == true){
+                console.log(allSkills[i].value);
+            }
+        }
+        console.log("\n");
+
+
+        //  5. Custom Attribute
+
+        function getCustomAttribute(){
+            var custom = [];
+            for(var i = 0; i < allTags.length; i++){
+                if(allTags[i].hasAttribute("data-customAttr")){         // collect all elements with attribute 'data-customAttr'
+                    custom.push(allTags[i]);
+                }
+            }
+            return custom;
+        }
+
+        var custom = getCustomAttribute();
+        // Print the value of the attribute.
+        // Print the element that has the attribute.
+        for(var i = 0; i < custom.length; i++){
+            console.log(custom[i].getAttribute("data-customAttr"));
+            //console.log(elementsWithCustom[i]); 
+            //would print element, but looks gross so I'm not leaving it
+        }
+        console.log("\n");
+        
+        //  6. Sum Event
+    
+        var tags = [];
+        tags0.push(document.getElementById("num1"));                     // search doc for id block 'num1'
+        tags1.push(document.getElementById("num2"));                     // search doc for id block 'num2'
+        tags.push(document.getElementById("sum"));                      // search doc for id block 'sum'
+
+        for(var i = 0; i < tags.length; i++){                           // iterate through entire collection
+            tags[i].onchange = function(){                          // when that element of the list is being acted on, do this
+                var num1 = tags0[0].value;
+                var num2 = tags1[1].value;
+                var sum = num1+num2;                                // add 2 
+                // do something here
+            };
+        } 
+        // Add <input> element values.
+        // Put the sum in the <span> element.
+        // If values cannot be added, put "Cannot add" in the <span> element
+
+
+        //  7. Skills Event
+
+            var allSkills = getSkills();                                // get all skills
+            for(var i = 0; i < allSkills.length; i++){
+                allSkills.onchange = function(){                        // when the list is being acted on, do this
+                    for(var i = 0; i < allSkills.length; i++){
+                        if(allSkills[i].selected == true){              // when skill is selected
+                            var skillChosen = allSkills[i].value;
+                            alert("Are you sure " + skillChosen + " is one of your skills?");       // alert message
+                        }
+                    }
+                };
+            }
+
+        //  8. Favorite Color Event
+
+            var favColorSpanList = document.getElementsByClassName("favoriteColor");        // collect elements with class 'favoriteColor'
+            var favColor = document.getElementsByName("favoriteColor");                 // collect elements by name 'favoriteColor'
+            var lastChoice;                 // last selected color
+            var newChoice;                  // presently selected color
+            for(var i = 0; i < favColor.length; i++){                             
+                favColor[i].onmousedown = function() {                      // for each color acted on by mouse down
+                    for(var j = 0; j < favColor.length; j++){                   // iterate through colors, and if checked, set as prev color
+                        if(favColor[j].checked == true){
+                            lastChoice = favColor[j].value;
+                        }
+                    }
+                }
+
+                favColor[i].onchange = function() {                         // when list is changed, do this
+                    for(var j = 0; j < favColor.length; j++){                   // iterate through list and find new checked color
+                        if(favColor[j].checked == true){
+                            newChoice = favColor[j].value;                  // set to presently checked color
+                        }
+                        
+                    }
+                    if(lastChoice == newChoice){                                // if choices are the same before and after
+                        alert("You checked the same color");
+                        return;
+                    }
+                    if(lastChoice != null)  //only alert if there was a choice before
+                    alert("So you like " + newChoice + " more than " + lastChoice + " now?");
+                }
+            }
+
+
+        //  9. Show/ Hide Event
+
+            var allEmps = document.getElementsByClassName("empName");           // collect elements labeled class 'empName'
+            for(var i = 0; i < allEmps.length; i++){
+                allEmps[i].onmouseover = function(){                            // when hovering over those elements, do this
+                    if(this.style.color == "black" || this.style.color == ""){      
+                        this.style.color = "white";                             // if its visible, hide it  
+                    }
+                    else if(this.style.color == "white"){                      
+                        this.style.color = "black";                             // if its not visible, show it
+                    } 
+                }
+            }
+
+        //  10. Current Time
+
+        function updateTime(){
+            var currTimeElement = document.getElementById("currentTime");           // collect elements of id 'currentTime'
+            var timestamp = new Date();             
+            var hours = timestamp.getHours();
+            var AMPM;
+            if(hours >= 12){                                                    // if hrs are 12 and above, its past noon
+                AMPM = "PM";
+                if(hours != 12){
+                    hours -= 12;
+                }
+            }
+            else{
+                AMPM = "AM";
+            }
+            var minutes = timestamp.getMinutes();         
+            var seconds = timestamp.getSeconds();
+            if(minutes < 10){
+                minutes="0"+minutes;
+            }
+            if(seconds < 10){
+                seconds="0"+seconds;
+            }
+            currTimeElement.innerHTML = hours+":"+minutes+":"+seconds+" "+AMPM; 
+            setTimeout(updateTime, 1000); //update it every second
+        }
+        updateTime();
+
+
+        //  11. Delay
+
+        var hello = document.getElementById("helloWorld");              // collect elements with id = 'helloWorld'
+        hello.onclick = function(){                         // when the elements are clicked
+            setTimeout(function(){
+                hello.style.color = "#"+Math.floor(Math.random()*16777215).toString(16);
+            }, 3000);   //do it after 3000 ms
+        }
+
+        // 12. Walk the DOM
+
+        // Define function walkTheDOM(node, func)
+        // This function should traverse every node in the DOM. 
+        // Use recursion.
+        // On each node, call func(node).
+        function walkTheDOM(node, func){
+            for(var i = 0; i < node.length; i++){
+                walkTheDOM(node[i], func);
+            }
+            if(node.length == undefined){   
+                //if the node isn't an array anymore (called on recursion)
+                func(node);
+            }
+        }
+        function printTextContents(x){
+            console.log(x.textContent);
+        }
+        var x = document.getElementsByTagName("a");
+        walkTheDOM(x, printTextContents);
+    </script>
+
+getUSA();
+</body>
+</html>
