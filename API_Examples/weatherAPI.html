@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>WeatherAPI</title>
+  </head>
+  <body>
+
+   
+      <label>Open Weather Maps Form</label> 
+      <form>
+        <fieldset>
+      <p>Enter a city or zipcode in the box below and I will fetch the weather for you.</p>
+      <br>Please enter data in the form of:<br> {zipcode},{state}
+      <p>Examples:<br>Enter Newington,us or 06111,us to get weather data from Newington CT.
+        </fieldset>
+      <p>
+          <input type="text" id="userInput">
+          <input type="submit" id="submitButton">
+          </p>
+      <fieldset>
+      <label>Some Selected Data:</label>
+          <p>
+          <div id ="city"></div><br>
+          <div id="current"></div><br>
+          <div id="humidity"></div><br>
+          <div id="wind"></div><br>
+          
+      </fieldset>
+      <fieldset>
+          <p>The raw response from the server is:</p>
+          <textarea id="responseArea"></textarea>
+          <p>Parsed into human readable-ish format:</p>
+          <ul id="getResponse"></ul>
+      </fieldset>
+      </form>
+      
+
+      
+      <script src="weatherAPI.js"></script>
+
+  </body>
+</html>
