@@ -55,7 +55,6 @@ homework.sort = function(array) {
             return newAry;
         };
     
-            
         if(ary.length != 1) {
             // Split into left & right arrays
             var leftAry, rightAry;
@@ -135,3 +134,20 @@ homework.balancedBrackets = function(bracketsString) {
     // without the check, unbalanced brackets such as '[{}()' may return true.
     return isBalanced && (bracketStack.length == 0);
 };
+
+
+// Extra: ~52% slower on list of size 1M
+// homework.bubbleSort = function(array) {
+//     // bubble through the list i times
+//     for(var i = array.length; i-->0;) {
+//         // bubble larger values to the end of the array.
+//         for(var j = 0; j < i; ++j) {
+//             // swap item j with j+1 if larger
+//             if(array[j] > array[j+1]) {
+//                 var tmp = array[j];
+//                 array[j] = array[j+1];
+//                 array[j+1] = tmp;
+//             }
+//         }
+//     }
+// };
