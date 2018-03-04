@@ -49,15 +49,40 @@ let getAnchorChildren = function(){
 
 console.log("Question 3 output:");
 getAnchorChildren();
-console.log();
 
 //Q4 Find all checked options in the 'skills' select element
 let getSkills = function(){
+    //I've tried this a few different way, but it only shows
+    //JavaScript selected as true, it's not picking up DOM
+    //even though they look exactly the same.  I'll come 
+    //back to this if I have time.
     let skeelz = document.getElementsByName("skills");
-    
-    console.log(skeelz)
-   
+    let toPayTheBillz = skeelz[0].children;
+    for(let index = 0; index < toPayTheBillz.length; index++){
+        if(toPayTheBillz[index].selected){
+            console.log(toPayTheBillz[index].textContent);
+        };
+    };   
 };
 
 console.log("");
+console.log("Question 4 output: ")
 getSkills();
+console.log("");
+
+//Q5 Custom attribute, find all elements with data-customAttr
+//print the attribute and print the element that has the attribute
+let getCustomAttribute = function(){
+    let custAtt = document.querySelectorAll("[data-customAttr]");
+    for (let index = 0; index < custAtt.length; index++){
+        console.log();
+        console.log(custAtt[index].tagName +
+            " contains custom attribute: " +
+            custAtt[index].getAttribute("data-customAttr"));
+    };
+};
+
+console.log("");
+console.log("Question 5 output:");
+getCustomAttribute();
+
