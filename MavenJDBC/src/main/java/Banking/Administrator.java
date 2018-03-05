@@ -29,16 +29,16 @@ public class Administrator extends Employee
 
     public static void approveAccount(Customer customer)
     {
-        customer.setApproved(true);
+        customer.setApproved(1);
     }
 
     public static void denyAccount(Customer customer)
     {
-        customer.setApproved(false);
+        customer.setApproved(0);
     }
 
     public static void cancelAccount(Customer customer)
     {
-        customer.setCancelled(true);
+        customer.setCancelled(1);
     }
 }

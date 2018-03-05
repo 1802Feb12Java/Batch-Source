@@ -13,17 +13,18 @@ public class Identity implements Serializable
     public static final long serialVersionUID = BankingApplication.VERSION;
     
     private String username, password, name;
-    private boolean approved;
-    private boolean cancelled;
-    private int id;
+    private int approved = 0;
+    private int cancelled = 0;
+
+	private int id;
 
     public Identity(String username, String password, String name, int id) //constructor
     {
         this.username = username;
         this.password = password;
         this.name = name;
-        this.approved = false;
-        this.cancelled = false;
+        this.approved = 0;
+        this.cancelled = 0;
         this.id = id;
     }
 
@@ -87,10 +88,10 @@ public class Identity implements Serializable
     {
         return name;
     }
-    public boolean approved() {
+    public int approved() {
         return this.approved;
     }
-    public boolean cancelled() {
+    public int cancelled() {
         return this.cancelled;
     }
 	public int getID() 
@@ -103,11 +104,11 @@ public class Identity implements Serializable
 		this.id = id;
 	}
 
-    public void setApproved(boolean approved) {
+    public void setApproved(int approved) {
         this.approved = approved;
     }
 
-    public void setCancelled(boolean cancelled) {
+    public void setCancelled(int cancelled) {
         this.cancelled = cancelled;
     }
 }

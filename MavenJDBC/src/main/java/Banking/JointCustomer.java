@@ -21,9 +21,9 @@ public class JointCustomer extends Customer implements Serializable
         String secondaryPassword,
         String secondaryName)
     {
-        super(primaryUsername, primaryPassword, primaryName);
+        super(primaryUsername, primaryPassword, primaryName, 1);
 
-        this.secondaryOwner = new Identity(secondaryUsername, secondaryPassword, secondaryName);
+        this.secondaryOwner = new Identity(secondaryUsername, secondaryPassword, secondaryName,1);
     }
 
     public Identity secondaryOwner()
@@ -32,13 +32,13 @@ public class JointCustomer extends Customer implements Serializable
     }
 
     @Override
-    public void setApproved(boolean approved) {
+    public void setApproved(int approved) {
         this.secondaryOwner.setApproved(approved);
     }
 
 
     @Override
-    public void setCancelled(boolean cancelled) {
+    public void setCancelled(int cancelled) {
         this.secondaryOwner.setCancelled(cancelled);
     }
 
@@ -49,15 +49,19 @@ public class JointCustomer extends Customer implements Serializable
     }
 
     @Override
-    public boolean approved()
+    public int approved()
     {
-        return super.approved() && secondaryOwner().approved();
+        if(super.approved() == 1 && secondaryOwner().approved() == 1)
+        	return 1;
+        return 0;
     }
 
     @Override
-    public boolean cancelled() //check if either account is cancelled
+    public int cancelled() //check if either account is cancelled
     {
-        return super.cancelled() || secondaryOwner().cancelled();
+        if(super.cancelled() == 1 || secondaryOwner().cancelled() == 1)
+        	return 0;
+        return 1;
     }
 
     @Override

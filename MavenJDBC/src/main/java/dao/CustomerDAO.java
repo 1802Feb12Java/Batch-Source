@@ -12,7 +12,7 @@ import Banking.Connector;;
 
 public  class CustomerDAO implements CustomerDAOInterface{
 	
-	@Override
+	@Override 
 	public ArrayList<Customer> getCustomers()
 	{
 		// TODO Auto-generated method stub
@@ -22,17 +22,18 @@ public  class CustomerDAO implements CustomerDAOInterface{
 			Connection con = Connector.getConnection();
 			PreparedStatement ps = con.prepareStatement("SELECT * FROM Customers");
 			ResultSet rs = ps.executeQuery();
-			
+			int idcount = 1;
 			while(rs.next())
 			{
 				Customer customer = new Customer();
-
-				customer.getIdentity().setID(rs.getInt(1));
+				
+				customer.getIdentity().setID(idcount);
 				customer.getIdentity().setUsername(rs.getString(2));
 				customer.getIdentity().setPassword(rs.getString(3));
 				customer.getIdentity().setName(rs.getString(4));
 				customer.setBalance(rs.getBigDecimal(5));
 				customers.add(customer);
+				idcount ++;
 			}
 			
 		} catch (SQLException e) 
@@ -73,18 +74,20 @@ public  class CustomerDAO implements CustomerDAOInterface{
 
 	//add customer to the database
 	@Override
-	public void addCustomer1(Customer customer) {
+	public void addCustomer(Customer customer) {
 		// TODO Auto-generated method stub
 		
 		try {
 			Connection conn = Connector.getConnection();
-			PreparedStatement ps = conn.prepareStatement("INSERT INTO Customers Values(?, ?, ?, ?, ?, ?)");
+			PreparedStatement ps = conn.prepareStatement("INSERT INTO Customers Values(?, ?, ?, ?, ?,?,?)");
 			
-			ps.setInt(1, customer.getID());
+			ps.setInt(1, customer.getID()); //customer.getID());
 			ps.setString(2, customer.username());
 			ps.setString(3, customer.password());
 			ps.setString(4, customer.name());
 			ps.setBigDecimal(5, customer.getBalance());
+			ps.setInt(6, customer.approved());
+			ps.setInt(7, customer.cancelled());
 			//ps.setBoolean(6, customer.());
 			
 			ps.execute();
@@ -102,7 +105,7 @@ public  class CustomerDAO implements CustomerDAOInterface{
 	}
 
 	@Override
-	public void updateCustomer1(Customer customer) {
+	public void updateCustomer(Customer customer) {
 		// TODO Auto-generated method stubs
 		
 		Connection con = Connector.getConnection();
@@ -125,23 +128,11 @@ public  class CustomerDAO implements CustomerDAOInterface{
 		
 	}
 
-	@Override
-	public void addCustomer(Customer c) throws SQLException {
-		// TODO Auto-generated method stub
-		
-	}
 
-	@Override
-	public Customer getCustomer(int id) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	@Override
-	public void updateCustomer(Customer c) throws SQLException {
-		// TODO Auto-generated method stub
-		
-	}
+
+
+
 
 	@Override
 	public void deleteCustomer(int id) throws SQLException {
@@ -154,4 +145,26 @@ public  class CustomerDAO implements CustomerDAOInterface{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public Customer getCustomers(int id) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void addCustomer1(Customer customer) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateCustomer1(Customer customer) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+
 }

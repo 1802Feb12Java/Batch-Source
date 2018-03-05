@@ -1,5 +1,5 @@
 package Banking;
-
+import dao.*;
 import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -16,12 +16,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
+
 @SuppressWarnings("unused")
 public class BankingApplication
 {
 	public final static int VERSION = 1;
 	public final static String DB_PATH = "AccountStorage.txt";  //our storage file
 	public final static String LETTERS_REGEX = "\\p{L}+"; //letters_regex forces the user to not input special characters
+	
+	
 
 	public static Optional<Customer> lookupAccount (ArrayList<Customer> accounts, String username)
 	{
@@ -139,6 +142,7 @@ public class BankingApplication
 	        if (connection != null)
 	        {
 	            System.out.println("You made it, take control your database now!");
+	            
 	            return true;
 	        } 
 	        else 
@@ -171,7 +175,44 @@ public class BankingApplication
 	@SuppressWarnings("unchecked")
 	public static void main(String[] args) throws IOException
 	{
-		connectToDatabase();
+
+		//define arraylists to retrive and utilize accounts
+		ArrayList<Object> Accounts = new ArrayList<Object>();
+		ArrayList<Customer> Customers = new ArrayList<Customer>();
+		ArrayList<Employee> Employees = new ArrayList<Employee>();
+		ArrayList<Administrator> Administrators = new ArrayList<Administrator>();
+		ArrayList<JointCustomer> JointCustomers = new ArrayList<JointCustomer>();
+		
+		CustomerDAO CDAO = new CustomerDAO();
+	//	Customers = CDAO.getCustomers();
+	//	Employees = EmployeeDAO.getEmployees();
+	//	allAdminAccounts = adminDAO.getAdmins();
+	//	allJointAccounts = jointDAO.getJointAccounts();
+		
+		//add
+		Accounts.addAll(Customers);
+		Accounts.addAll(Employees);
+		Accounts.addAll(Administrators);
+		Accounts.addAll(JointCustomers);
+		
+		
+/*
+		allAccounts.addAll(allAdminAccounts);
+		allAccounts.addAll(allCustomerAccounts);
+		//not efficient but necessary for now
+		for(JointAccount i: allJointAccounts) {
+			for(int j = 0; j < allCustomerAccounts.size();j++) {
+				if(i.getCustomerID() == allCustomerAccounts.get(j).getCustomerID()) {
+					i.setCustomer(allCustomerAccounts.get(j));
+					System.out.println("INSERT");
+				}
+				System.out.println(allCustomerAccounts.get(j).getCustomerID());
+				System.out.println(i.getCustomerID());
+			}
+		}		
+*/
+		
+	//	connectToDatabase();
 		
 		ArrayList<Customer> accounts = new ArrayList<>();
 		Scanner scan = new Scanner(System.in);
@@ -211,6 +252,13 @@ public class BankingApplication
 				System.out.print(e.toString());
 			}
 			System.out.println();
+		/*	System.out.print("Customer accounts(2): ");
+			
+			for (Object o : Accounts)
+			{
+				System.out.print("D - " + o.toString());
+			}*/
+			System.out.println();
 
 			System.out.print("Main menu. Enter C if you're a customer, E for employee, and A for admin. Q for quit: ");
 			String userType = scan.nextLine();
@@ -232,7 +280,7 @@ public class BankingApplication
 					Customer account = selectAccount(accounts, scan);
 					String password = scan.nextLine();
 
-					if (account.authenticate(password) && account.approved() && !account.cancelled())
+					if (account.authenticate(password) && account.approved() == 1 && !(account.cancelled() == 0))
 					{
 						System.out.println("Succesfully logged in.");
 						boolean keepGoing = true;
@@ -262,18 +310,21 @@ public class BankingApplication
 									keepGoing = false;
 									break;
 							} //end switch
+							
+							CDAO.addCustomer(account);
+							
 							oos.flush(); //write the object
 							oos.writeObject(accounts);
-							oos.close();
+						//	oos.close();
 						}
 					}
 					else
 					{
-						if (!account.approved()) //check if the account is approved
+						if (account.approved() == 0) //check if the account is approved
 						{
 							System.out.println("Sorry, your account is currently not approved. Please contact an administrator.");
 						}
-						else if (account.cancelled()) //check if the account is terminated
+						else if (account.cancelled() == 1) //check if the account is terminated
 						{
 							System.out.println("Your account has been terminated. If you feel this was not correct, please contact an administrator");
 						}
@@ -365,8 +416,8 @@ public class BankingApplication
 							System.out.print("Invalid name, try again: ");
 							name = scan.nextLine();
 						}
-						
-						accounts.add(new Customer(username, password, name));
+						CDAO.addCustomer(new Customer(username, password, name, 0));
+						accounts.add(new Customer(username, password, name, 0));
 					}
 				System.out.println("Congratulations, you are now registered. Please contact an administrator for account approval. Goodbye.");
 				}
@@ -406,7 +457,7 @@ public class BankingApplication
 					}
 					oos.flush(); //write the object
 					oos.writeObject(accounts);
-					oos.close();
+				//	oos.close();
 				}
 			}
 			else if (userType.toLowerCase().equals("a"))
@@ -475,7 +526,7 @@ public class BankingApplication
 						} //end switch
 						oos.flush(); //sanity check to make sure input gets flushed
 						oos.writeObject(accounts); //write the object to the notepad file
-						oos.close(); //close it
+					//	oos.close(); //close it
 						
 					}
 				}
@@ -483,7 +534,7 @@ public class BankingApplication
 				{
 					oos.flush(); //sanity check to make sure input gets flushed
 					oos.writeObject(accounts); //write the object to the notepad file
-					oos.close(); //close it
+				//	oos.close(); //close it
 					break;
 				}	
 				System.out.println(accounts.toString());

@@ -5,13 +5,13 @@ import java.util.ArrayList;
 
 import Banking.Customer;
 
-public abstract interface CustomerDAOInterface
+public interface CustomerDAOInterface
 {
-	public abstract void addCustomer(Customer c) throws SQLException;
-	public abstract void deleteCustomer(int id) throws SQLException;
-	public abstract ArrayList<Customer> getAllCustomers() throws SQLException;	
-	public abstract Customer getCustomer(int id) throws SQLException;
-	public abstract void updateCustomer(Customer c) throws SQLException;
+	public void addCustomer(Customer c) throws SQLException;
+	public void deleteCustomer(int id) throws SQLException;
+	public ArrayList<Customer> getAllCustomers() throws SQLException;	
+	public Customer getCustomers(int id) throws SQLException;
+	public void updateCustomer(Customer c) throws SQLException;
 	ArrayList<Customer> getCustomers() throws SQLException;
 	void addCustomer1(Customer customer);
 	void deleteCustomer(Customer customer);

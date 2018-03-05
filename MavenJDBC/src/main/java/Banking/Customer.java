@@ -13,7 +13,8 @@ public class Customer implements Serializable
     							//consists of an arbitrary precision integer unscaled value and a 32-bit integer scale
     							//useful for financial figures
     
-    public BigDecimal getBalance() {
+    public BigDecimal getBalance()
+    {
 		return balance;
 	}
 
@@ -73,11 +74,11 @@ public class Customer implements Serializable
     {
         return balance;
     }
-    public boolean approved()
+    public int approved()
     {
         return this.getIdentity().approved();
     }
-    public boolean cancelled()
+    public int cancelled()
     {
         return this.getIdentity().cancelled();
     }
@@ -86,11 +87,11 @@ public class Customer implements Serializable
     {
         this.balance = balance;
     }
-    public void setApproved(boolean approved)
+    public void setApproved(int approved)
     {
         this.getIdentity().setApproved(approved);
     }
-    public void setCancelled(boolean cancelled)
+    public void setCancelled(int cancelled)
     {
         this.setCancelled(cancelled);
     }
