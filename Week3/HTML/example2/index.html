@@ -9,9 +9,27 @@
 </head>
 
 <body>
-    <input type="text" id="pokeId" placeholder="Enter Pokemon ID" />
-    <input type="submit" value="Get Pokemon Info" id="pokemonSubmit" />
-    <h1 id="name"></h1>
+    <div>
+        <input type="text" id="pokeId" placeholder="Enter Pokemon ID" />
+        <input type="submit" value="Get Pokemon Info" id="pokemonSubmit" />
+        <h1 id="name"></h1>
+    </div>
+
+    <div>
+        <input type="text" id="artistToSearch" placeholder="Search for artist on Spotify" />
+        <input type="submit" id=artistSubmit value="Search for Artist" />
+    </div>
+
+    <div>
+        <p>
+            <img id="artistImage" src="" height="" width="">
+        </p>
+        <p>
+            <form id="artistForm" action="http://google.com">
+                <input id="artistLink" type="submit" value="Google" />
+            </form>
+        </p>
+    </div>
 
     <script type="text/javascript" src="JavaScript.js"></script>
 </body>
