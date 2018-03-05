@@ -85,4 +85,38 @@ let getCustomAttribute = function(){
 console.log("");
 console.log("Question 5 output:");
 getCustomAttribute();
+console.log("");
 
+//Question 6:  Define onchange event handler to add the input elements
+//num1 and num2.  Output the sum in the sum element, if the numbers
+//cannot be added, put "Cannot add" in the sum span element
+
+//add the eventListener to the number fields, setting it to listen for
+//an onchange event in either field
+document.getElementById("num1").addEventListener("change", handleSum);
+document.getElementById("num2").addEventListener("change", handleSum);
+
+function handleSum() {
+    //get the value of the first and second fields, converting them
+    //to Number.
+    let firstNum = Number(document.getElementById("num1").value);
+    let secondNum = Number(document.getElementById("num2").value);
+
+    //get the "sum" element in order to be able to change the field
+    let numSum = document.getElementById("sum");
+
+    //add the numbers from num1 and num2
+    let summed = firstNum + secondNum;
+
+    //if the sum is not a number, print the cannot add message
+    //blank fields are treated as the Number 0.
+    if(isNaN(summed)){
+        numSum.textContent = "Cannot add";
+    }
+
+    //otherwise, change the textContent of the element to the
+    //calculated sum
+    else {
+        numSum.textContent = summed;
+    };
+};
