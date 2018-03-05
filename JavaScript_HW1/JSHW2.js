@@ -232,3 +232,5 @@ supPlanet.onclick = function(){
         supPlanet.style.color = '#' + Math.floor(Math.random() * 16777215).toString(16);
     }, 3000);
 };
+
+//Question 12:  It's late, and I didn't get around to this one :()
