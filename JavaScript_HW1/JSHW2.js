@@ -168,13 +168,29 @@ function changeColor(){
 
             //set prevColor to the currently selected color for future use
             prevColor = favColor[index].value;
+           
 
-            //change the background color of the  favoriteColor radio buttons
+            //change the background color of the  favoriteColor radio button
             favColor[index].onchange = function(){
-                console.log("zoom")
-                document.body.style.backgroundColor = prevColor;
-                console.log("zim")
-            }
-        }
+                //create a string to use with jQuery
+                newWrap = "<span style='background-color:" + prevColor + "'></span>";
+
+                //create the new span wrap dynamically around the radio buttons using jquery
+                $('[name="favoriteColor"]').wrap( newWrap );
+            };
+        };
+    };
+};
+
+//Question 9: When a user hovers over an employee name, hide the name if shown, 
+//show the name if hidden.
+
+//get the employee elements
+let employeeNames = document.getElementsByClassName("empName");
+
+//add the mouseover listeners
+for(let index = 0; index < employeeNames; index++){
+    employeeNames[index].onmouseover = function(){
+        console.log("sup");
     }
 }
