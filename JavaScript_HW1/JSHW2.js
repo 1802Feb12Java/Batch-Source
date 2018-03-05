@@ -188,9 +188,47 @@ function changeColor(){
 //get the employee elements
 let employeeNames = document.getElementsByClassName("empName");
 
-//add the mouseover listeners
-for(let index = 0; index < employeeNames; index++){
+//loop through the employee list, using an anonymous callback function for the mouseover behavior
+for(let index = 0; index < employeeNames.length; index++){
     employeeNames[index].onmouseover = function(){
-        console.log("sup");
-    }
-}
+        //if the employee name is visible, change the text color to white to blend in with the background
+        if(this.style.color == "black" || this.style.color == ""){
+            this.style.color = "white";
+        }
+
+        //if the employee name isn't visible, change the color back to black
+        else if(this.style.color == "white"){
+            this.style.color = "black";
+        }; 
+    };
+};
+
+//Question 10:  Show current time in AM/PM format without updating
+let yoWhatTimeItIs = function(){
+    //get the element
+    let timeElement = document.getElementById("currentTime");
+
+    //create a date object to access time/date functions
+    let time = new Date();
+
+    //use the 12 hour format with a Blade Runner hat-tip
+    let wakeUpTimeToDie = time.toLocaleTimeString();
+    
+    //write the formatted time to the element
+    timeElement.textContent = wakeUpTimeToDie;
+};
+
+//print the updated clock every 1000ms
+setInterval(yoWhatTimeItIs, 1000);
+
+//Question 11:  When a user clicks on Hello world, wait three seconds, change the text to a random color
+//get the element
+let supPlanet = document.getElementById("helloWorld");
+
+supPlanet.onclick = function(){
+    //set a timeout function that waits for 3000ms and then generates the random color and sets the element
+    //color to it
+    setTimeout(function(){
+        supPlanet.style.color = '#' + Math.floor(Math.random() * 16777215).toString(16);
+    }, 3000);
+};
