@@ -54,10 +54,6 @@ function getPeopleInSales() {
     var scout = trRecord.getElementsByTagName('td')[0].innerHTML; //department name
 
     var salesName = [john, austin, courtney, scout];
-    /**
-     * traverse through each row (tr),
-     * check if td[1].innerHTML === Sales
-     */
     
     return salesName;
 }
