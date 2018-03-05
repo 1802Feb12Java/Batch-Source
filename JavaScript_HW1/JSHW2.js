@@ -91,6 +91,12 @@ console.log("");
 //num1 and num2.  Output the sum in the sum element, if the numbers
 //cannot be added, put "Cannot add" in the sum span element
 
+/* NOTE:  This method is unobtrusive insofar that the fields will
+still exist and be in the same place whether JavaScript is working
+or not, but without the JavaScript functionality, they will do 
+nothing regardless of what is entered in them
+*/
+
 //add the eventListener to the number fields, setting it to listen for
 //an onchange event in either field
 document.getElementById("num1").addEventListener("change", handleSum);
@@ -120,3 +126,55 @@ function handleSum() {
         numSum.textContent = summed;
     };
 };
+
+//Question 7:  Create a message alert when a user selects a skill, 
+//verifying that the user possesses that skill by producing an 
+//alert.  Produce nothing if the user deselects
+
+//get the skills node
+let skeelzes = document.getElementsByName("skills");
+
+//add the listener to the selection box
+skeelzes[0].addEventListener("change", youSure);
+
+function youSure(){
+    //form the alert message and then pass it to the alert function
+    let msg = "Are you sure " + skeelzes[0].value + " is one of your skills?";
+    alert(msg);
+};
+
+//Question 8:  When a user selects a color ask "so you like <new color>
+//more than <old color>? " in an alert and change the background of
+//all favorite color radio buttons to the new color.
+
+//add a listener to all favorite color radio buttons
+var favColor = document.getElementsByName("favoriteColor");
+for(let index = 0; index < favColor.length; index++){
+    favColor[index].addEventListener("click", changeColor);
+}
+
+//assign a global variable to keep track of the previously
+//selected color
+var prevColor = "Pearlescent Subtle Eggshell White";
+
+function changeColor(){
+    for (let index = 0; index < favColor.length; index++){
+        //when the checked option is found form the message and produce the alert
+        if(favColor[index].checked){
+            let msg = "Oh, so you like " + favColor[index].value +
+            " better than " + prevColor + " now??";
+
+            alert(msg);
+
+            //set prevColor to the currently selected color for future use
+            prevColor = favColor[index].value;
+
+            //change the background color of the  favoriteColor radio buttons
+            favColor[index].onchange = function(){
+                console.log("zoom")
+                document.body.style.backgroundColor = prevColor;
+                console.log("zim")
+            }
+        }
+    }
+}
