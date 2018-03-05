@@ -21,7 +21,9 @@ function getPokemon(){
    }
 
    //Step 3! Open request/connection
-   xhr.open("GET","https://pokeapi.co/api/v2/pokemon/" + pokemonId, true);    //Step 4! send request
+   xhr.open("GET","https://pokeapi.co/api/v2/pokemon/" + pokemonId, true);    
+   
+   //Step 4! send request
    xhr.send();
 
 }window.onload = function(){
