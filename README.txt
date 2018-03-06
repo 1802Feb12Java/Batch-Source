@@ -1,1 +1,0 @@
-JavaScript Homework Part 2 location: /Week3/HTML/JSHW1/JavaScript2.js
