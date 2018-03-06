@@ -1,0 +1,74 @@
+Expense Reimbursement System
+
+-An Employee can login
+-An Employee can view the Employee Homepage
+-An Employee can logout
+-An Employee can submit a reimbursement request --insert ticket
+-An Employee can upload an image of his/her receipt as part of the reimbursement request --update/insert ticket
+-An Employee can view their pending reimbursement requests  -- tickets by status and author
+-An Employee can view their resolved reimbursement requests -- tickets by status and author
+-An Employee can view their information -- user toString from user obj
+-An Employee can update their information --update user
+-An Employee receives an email when one of their reimbursement requests is resolved (optional)
+
+-A Manager can login
+-A Manager can view the Manager Homepage
+-A Manager can logout
+-A Manager can approve/deny pending reimbursement requests --update ticket
+-A Manager can view all pending requests from all employees -- tickets by status
+-A Manager can view images of the receipts from reimbursement requests -- tickets by uid
+-A Manager can view all resolved requests from all employees and see which manager resolved it -- tickets by status
+-A Manager can view all Employees -- view all User
+-A Manager can view reimbursement requests from a single Employee
+
+------------------------------------------------------------------
+-A Manager can register an Employee, which sends the Employee an email with their username and temp password (optional)
+-An Employee can reset their password (Optional - tied with above functional requirement)
+
+
+Technologies:
+-Java 1.8
+-Servlets
+-JDBC
+-PL/SQL
+-HTML
+-CSS
+-Javascript
+-Bootstrap
+-AJAX
+-JUnit
+-log4j 
+
+Environment:
+-Tomcat Server
+-Oracle 11g Database (Or whatever your RDS is) 
+-Eclipse/Spring Tools Suite
+-SQL Developer
+
+Notes!
+Servlet:
+Servlet interface
+Generic Servlet -> Abstract Class
+HTTPServlet -> Abstract Class
+YourServlet: override the methods you need
+
+init():
+    invoked only once when the servlet is first loaded
+    can be override: establishing DB connection
+Service():
+    process EACH http request  
+    call the appropiate method
+    do not override
+Destory():
+    called when the server shuts down
+    may override to clean up resources i.e. file I/O
+
+Constructor():
+    don't override, DO NOT TOUCH
+
+Servlet config:
+    add properties to a specific servlet
+    <init-param>
+        <param-name> </param-name>
+        <param-value>""</>
+    </>

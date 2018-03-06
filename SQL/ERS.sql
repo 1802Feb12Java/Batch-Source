@@ -62,3 +62,18 @@ CREATE TABLE  ers_reimbursement_type
     rs_type VARCHAR2(30) NOT NULL,
     CONSTRAINT ers_reimbursment_type_pk PRIMARY KEY (rt_id)
 );
+
+--SEQUENCES
+--u_id for user id
+CREATE SEQUENCE u_id
+MINVALUE 1
+MAXVALUE 999999
+START WITH 1
+INCREMENT BY 1;
+
+--r_id for reimbursement id
+CREATE SEQUENCE r_id
+MINVALUE 1
+MAXVALUE 999999
+START WITH 1
+INCREMENT BY 1;
