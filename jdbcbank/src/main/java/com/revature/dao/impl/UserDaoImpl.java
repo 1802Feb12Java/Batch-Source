@@ -12,7 +12,6 @@ import org.apache.log4j.Logger;
 
 import com.revature.beans.User;
 import com.revature.dao.UserDao;
-import com.revature.util.CommonStatements;
 import com.revature.util.ConnectionFactory;
 
 public class UserDaoImpl implements UserDao {
@@ -159,19 +158,23 @@ public class UserDaoImpl implements UserDao {
 	public void updateUser(User user) throws SQLException {
 		Connection con = null;
 		PreparedStatement s = null;
-		String statement = CommonStatements.Update.apply(TABLE_NAME, TABLE_COLS);
+		String statement = "UPDATE " + TABLE_NAME + " SET USERNAME=?, PASSWORD =?, FNAME=?,"
+				+ " LNAME=?, BIRTHDATE=?, SUPER=? WHERE USER_ID=?";
+
+		// CommonStatements.Update.apply(TABLE_NAME, TABLE_COLS);
 		logger.debug("Created SQL Statement: " + statement + " with user " + user);
 
 		try {
 			con = ConnectionFactory.getInstance().getConnection();
 			s = con.prepareStatement(statement);
 			// fill in the ???s
-			s.setString(1, TABLE_NAME);
-			for (int i = 1; i < TABLE_COLS.length; i++) {
-				s.setString(i + 1, TABLE_COLS[i]);
-			}
-			// set id ?
-			s.setString(TABLE_COLS.length, TABLE_COLS[0]);
+			s.setString(1, user.getUsername());
+			s.setString(2, user.getPassword());
+			s.setString(3, user.getFirstName());
+			s.setString(4, user.getLastName());
+			s.setDate(5, user.getBirthdate());
+			s.setInt(6, user.getSuper());
+			s.setInt(7, user.getUserId());
 
 			s.executeQuery();
 			logger.debug("Updated User to " + user);

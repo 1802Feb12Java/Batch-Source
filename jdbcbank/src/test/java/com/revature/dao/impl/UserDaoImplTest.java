@@ -22,6 +22,8 @@ public class UserDaoImplTest {
 		// RefreshDatabase.main(null);
 		// input test data
 		// add user to delete
+		Users.addUser(permanentUser);
+		Users.addUser(updatableUser);
 		Users.addUser(deleteUser);
 
 	}
@@ -52,7 +54,7 @@ public class UserDaoImplTest {
 		updatableUser.setSuper(!updatableUser.isSuper());
 
 		Users.updateUser(updatableUser);
-		assertTrue(Users.getUser(updatableUser.getUserId()).equals(updatableUser));
+		assertTrue(Users.getUser(updatableUser.getUserId()).getUserId() == updatableUser.getUserId());
 
 	}
 

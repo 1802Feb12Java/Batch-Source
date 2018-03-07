@@ -29,7 +29,7 @@ public class Driver {
 		boolean bankSysOn = true;
 		while (bankSysOn) {
 			do {
-				logger.info("\n---------------------------------------------");
+				logger.info("\n\t---------------------------------------------");
 				logger.info("\tWelcome to the Banking App Part II");
 				logger.info("\t\t1. To Login");
 				logger.info("\t\t2. To Register");
@@ -182,7 +182,6 @@ public class Driver {
 		}
 
 		// READ ONLY
-
 		int choice = -1, accountSize = accounts.size();
 		// Account Access Menu Loop
 		while (true) {
@@ -208,11 +207,11 @@ public class Driver {
 
 	public static void createBankAccount(int userId) {
 
-		String balance = "";
+		double balance = -1;
 		do {
 			logger.info("\tInput a Valid Initial Bank Account Balance");
-			balance = scan.nextLine().trim();
-		} while (Validate.validAmount(balance));
+			balance = Validate.validAmount(scan.nextLine().trim());
+		} while (balance < 0);
 
 		// create bank account POJO
 		BankAccount bAccount = new BankAccount(0, new BigDecimal(balance), null);
@@ -384,11 +383,12 @@ public class Driver {
 	}
 
 	private static void depositMenu(BankAccount ba, int userId) {
-		String amount = "";
+		double amount = -1;
 		do {
 			logger.info("\tInput a Valid Deposit Amount");
-			amount = scan.nextLine().trim();
-		} while (Validate.validAmount(amount));
+			amount = Validate.validAmount(scan.nextLine().trim());
+
+		} while (amount < 0);
 
 		if (Accounting.createDeposit(new BigDecimal(amount), ba, userId)) {
 			logger.info("\n\tDeposited " + amount);
@@ -399,11 +399,11 @@ public class Driver {
 	}
 
 	private static void withdrawMenu(BankAccount ba, int userId) {
-		String amount = "";
+		double amount = -1;
 		do {
 			logger.info("\tInput a Valid Withdraw Amount");
-			amount = scan.nextLine().trim();
-		} while (Validate.validAmount(amount));
+			amount = Validate.validAmount(scan.nextLine().trim());
+		} while (amount < 0);
 
 		if (Accounting.createWithdraw(new BigDecimal(amount), ba, userId)) {
 			logger.info("\n\tWithdrew " + amount);
@@ -413,7 +413,8 @@ public class Driver {
 	}
 
 	private static void transferMenu(BankAccount ba, int userId) {
-
+		logger.info("\n\tSorry, this feature has not been implmented at this time");
+		return;
 	}
 
 	private static void editUser(User user) {
@@ -460,7 +461,8 @@ public class Driver {
 			}
 			logger.info("\t" + methodFound.getName());
 			logger.info("\tIs this the field you want to edit?");
-
+			if (!Validate.validBoolean(scan.nextLine()))
+				break;
 			logger.info("\tEnter value you would like to change it to");
 			String fieldValue = scan.nextLine();
 			try {

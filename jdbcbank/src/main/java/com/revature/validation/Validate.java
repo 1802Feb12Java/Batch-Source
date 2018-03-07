@@ -72,9 +72,14 @@ public class Validate {
 		return false;
 	}
 
-	public static boolean validAmount(String amount) {
-		String pattern = "^\\$(([1-9]\\d{0,2}(,\\d{3})*)|(([1-9]\\d*)?\\d))(\\.\\d\\d)?$";
-		return amount.matches(pattern);
+	public static double validAmount(String amount) {
+		try {
+			return Double.parseDouble(amount);
+			// String pattern = "^[+-]?[0-9]{1,3}(?:,?[0-9]{3})*(?:\\.[0-9]{2})?$";
+			// amount.matches(pattern);
+		} catch (Exception e) {
+		}
+		return -1;
 	}
 
 	private static boolean containsNumber(String s) {

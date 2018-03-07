@@ -52,6 +52,7 @@ public class RefreshDatabase {
 					rs = prepStatement.executeQuery();
 				} catch (SQLException e) {
 				}
+
 			}
 			prepStatement = connection.prepareStatement(CreateBank.CREATE_USER_TABLE);
 			rs = prepStatement.executeQuery();

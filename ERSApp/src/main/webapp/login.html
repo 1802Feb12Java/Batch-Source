@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Login</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="glyphicons-686-sunbath.png" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<!-- Common Nav Bar -->
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid ">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">Reimbursement Portal</a>
+      </div>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="active"><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      </ul>
+    </div>
+</nav>
+<div class="container-fluid col-xs-8 col-xs-offset-1 mx-auto">
+    <br><br><br>
+    <div class="form">
+    	<form action="/ERSApp/login" method="post">
+        <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" name="username" class="form-control" id="username">
+        <!-- <small id="helpId" class="form-text text-muted">Help text</small> -->
+        </div>
+        <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" name="userpass" class="form-control" id="password">
+        </div>
+        <div class="form-group pull-right">
+        <button type="submit" class="btn btn-primary|light">Login</button>
+        </div>    
+        </form>
+    </div>
+    <br><br><br>
+      <!--Footer-->
+      <footer class="page-footer font-small blue-grey lighten-5 pt-0">
+      
+          <!--Footer Links-->
+      
+                  <!--Contact column-->
+                  <div class="col-xl-1 dark-grey-text text-center">
+                      <h6 class="title font-weight-bold"><strong>Contact</strong></h6>
+                      <hr class="teal accent-3 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                      <p><i class="fa fa-home mr-3"></i> Tampa, FL 33620, US</p>
+                      <p><i class="fa fa-envelope mr-3"></i> projectOne@projects.com</p>
+                      <p><i class="fa fa-phone mr-3"></i>(222) 222-2222</p>
+                  </div>
+                  <!--/.Contact column-->
+      
+          <!-- Copyright-->
+          <div class="footer-copyright py-3 text-center">
+              <div class="container-fluid">
+                  <p><small>© 2017 A Revature Place</small></p>
+              </div>
+          </div>
+          <!--/.Copyright -->
+      
+      </footer>
+      <!--/.Footer-->
+</div>
+</body>
+</html>

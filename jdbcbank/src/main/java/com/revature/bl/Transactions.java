@@ -69,6 +69,21 @@ public class Transactions {
 		return null;
 	}
 
+	public static boolean updateTransaction(Transaction transaction) {
+		try {
+			transDao.updateTransaction(transaction);
+		} catch (SQLException e) {
+			// log for now
+			logger.error("SQL Error while updating transaction " + transaction);
+			logger.error(e.getMessage());
+			return false;
+		} finally {
+
+		}
+
+		return true;
+	}
+
 	public static boolean deleteTransaction(int transactionId) {
 		try {
 			transDao.deleteTransaction(transactionId);

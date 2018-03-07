@@ -8,6 +8,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import com.revature.beans.BankAccount;
+import com.revature.beans.Transaction;
 import com.revature.dao.impl.BankAccountDaoImpl;
 import com.revature.dao.impl.UserBankAccountDaoImpl;
 import com.revature.dao.impl.UtilDaoImpl;
@@ -107,6 +108,22 @@ public class Accounts {
 			// delete user bank account entry
 			userBankAccDao.deleteUserBankAccount(userId, accountId);
 
+			// update transactions with this account
+			ArrayList<Transaction> transactionList = (ArrayList<Transaction>) Transactions.getTransactions(accountId);
+			for (Transaction t : transactionList) {
+				// wipe user id
+				if (t.getAccountIdFrom() == accountId)
+					t.setAccountIdFrom(0);
+				if (t.getAccountIdTo() == accountId)
+					t.setAccountIdFrom(0);
+				if (t.getAccountIdFrom() == t.getAccountIdFrom() && t.getAccountIdFrom() == 0) {
+					Transactions.deleteTransaction(t.getTransactionId());
+					logger.debug("Deleted transaction " + t);
+				} else {
+					Transactions.updateTransaction(t);
+					logger.debug("Updated transaction " + t);
+				}
+			}
 			// then delete bank account #PK constraint
 			bankAccDao.deleteBankAccount(accountId);
 

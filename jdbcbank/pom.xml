@@ -4,7 +4,32 @@
   <artifactId>JDBCBank</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>JDBCBank</name>
-  
+  <build>
+  <plugins>
+    <plugin>
+      <!-- Build an executable JAR -->
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-jar-plugin</artifactId>
+      <version>3.0.2</version>
+      <configuration>
+       <archive>
+			<manifest>
+				<mainClass>com.revature.Driver</mainClass>
+			</manifest>
+			</archive>
+      </configuration>
+    </plugin>
+    <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.7.0</version>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+        </configuration>
+      </plugin>
+  </plugins>
+</build>
   <dependencies>
    <!-- https://mvnrepository.com/artifact/junit/junit -->
 	<dependency>
@@ -34,5 +59,6 @@
      <version>12.2.0.1</version>
 	</dependency>
   </dependencies>
+  
 
 </project>
