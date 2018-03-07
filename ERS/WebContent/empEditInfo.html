@@ -26,35 +26,47 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-                    <a class="nav-link" href="employeeDash.html">
+                    <a class="nav-link" href="empDash.html">
                         <i class="fa fa-fw fa-dashboard"></i>
-                        <span class="nav-link-text">Dashboard</span>
+                        <span class="nav-link-text">Employee Dashboard</span>
                     </a>
                 </li>
-                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                    <a class="nav-link" href="charts.html">
-                        <i class="fa fa-fw fa-area-chart"></i>
-                        <span class="nav-link-text">View Reimbursments</span>
-                    </a>
-                </li>
-                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
-                    <a class="nav-link" href="tables.html">
-                        <i class="fa fa-fw fa-table"></i>
-                        <span class="nav-link-text">Approve Requests</span>
-                    </a>
-                </li>
+                <!--requests panel-->
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
-                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
-                        <i class="fa fa-fw fa-wrench"></i>
-                        <span class="nav-link-text">Employees</span>
+                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents1" data-parent="#exampleAccordion">
+                        <i class="fa fa-usd"></i>
+                        <span class="nav-link-text">Reimbursment Requests</span>
                     </a>
-                    <ul class="sidenav-second-level collapse" id="collapseComponents">
+                    <ul class="sidenav-second-level collapse" id="collapseComponents1">
                         <li>
-                            <a href="navbar.html">View Information</a>
+                            <a href="empViewRequests.html?view=pending">
+                                <i class="fa fa-credit-card-alt"></i> View Pending</a>
                         </li>
                         <li>
-                            <a href="cards.html">Register New</a>
+                            <a href="empViewRequests.html?view=resolved"> <i class="fa fa-check-circle" ></i> View Resolved</a>
+                        </li>
+                        <li>
+                            <a href="empViewRequests.html?view=all">
+                                <i class="fa fa-university"></i> View All</a>
+                        </li>
+                    </ul>
+                </li>
+                <!--employee panel-->
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
+                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents2" data-parent="#exampleAccordion">
+                        <i class="fa fa-info-circle"></i>
+                        <span class="nav-link-text">Your Information</span>
+                    </a>
+                    <ul class="sidenav-second-level collapse" id="collapseComponents2">
+                        <li>
+                            <a href="empViewInfo.html">
+                                <i class="fa fa-list-alt"></i> View </a>
+                        </li>
+                        <li>
+                            <a href="empEditInfo.html">
+                                <i class="fa fa-pencil"></i> Edit</a>
                         </li>
                     </ul>
                 </li>
@@ -75,14 +87,16 @@
             </ul>
         </div>
     </nav>
+    <!--End Navigation elements-->
+
     <div class="content-wrapper">
         <div class="container-fluid">
             <!-- Breadcrumbs-->
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                    <a href="employeeDash.html">Dashboard</a>
+                    <a href="empDash.html">Dashboard</a>
                 </li>
-                <li class="breadcrumb-item active">Dashboard</li>
+                <li class="breadcrumb-item active">Edit Info</li>
             </ol>
             <div class="row">
                 <div class="col-12">

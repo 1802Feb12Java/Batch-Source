@@ -65,7 +65,7 @@ public class LoginServlet extends HttpServlet {
 		        Cookie cookie = new Cookie("firstName", LoginDAO.getUserFirstName(userName));
 		        cookie.setMaxAge(60*60*24); //set cookie to live for one day
 		        response.addCookie(cookie);
-		    	RequestDispatcher requestDispatcher = request.getRequestDispatcher("employeeDash.html");  
+		    	RequestDispatcher requestDispatcher = request.getRequestDispatcher("empDash.html");  
 		        requestDispatcher.forward(request,response); 
 	    	} 
 	    }
