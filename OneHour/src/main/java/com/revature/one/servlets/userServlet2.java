@@ -78,7 +78,9 @@ public class userServlet2 extends HttpServlet {
 
 		try {
 			ud.addUser(user);
+			response.getWriter().print("1");
 		} catch (SQLException e) {
+			response.getWriter().print("0");
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
