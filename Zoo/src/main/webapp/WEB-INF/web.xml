@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+  <display-name>Zoo</display-name>
+  <welcome-file-list>
+    <welcome-file>eZoo.html</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <description></description>
+    <display-name>Zoo</display-name>
+    <servlet-name>Zoo</servlet-name>
+    <servlet-class>com.revature.zoo.view.servlet.Zoo</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Zoo</servlet-name>
+    <url-pattern>/Zoo</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ZooAjax</display-name>
+    <servlet-name>ZooAjax</servlet-name>
+    <servlet-class>com.revature.zoo.view.servlet.ZooAjax</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ZooAjax</servlet-name>
+    <url-pattern>/ZooAjax</url-pattern>
+  </servlet-mapping>
+</web-app>

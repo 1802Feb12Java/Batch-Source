@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+  <head>
+      <style>
+       button {
+        
+            font-family: Arial, Helvetica, sans-serif;
+        
+            font-size: 14px;
+        
+            color: #ffffff;
+        
+            padding: 10px 20px;
+        
+            background: -moz-linear-gradient(
+        
+                top,
+        
+                #c435c4 0%,
+        
+                #419490);
+        
+            background: -webkit-gradient(
+        
+                linear, left top, left bottom,
+        
+                from(#c435c4),
+        
+                to(#419490));
+        
+            -moz-border-radius: 34px;
+        
+            -webkit-border-radius: 34px;
+        
+            border-radius: 34px;
+        
+            border: 3px solid #000000;
+        
+            -moz-box-shadow:
+        
+                0px 1px 3px rgba(255,140,0,0.7),
+        
+                inset 0px 0px 1px rgba(255,255,255,0.7);
+        
+            -webkit-box-shadow:
+        
+                0px 1px 3px rgba(255,140,0,0.7),
+        
+                inset 0px 0px 1px rgba(255,255,255,0.7);
+        
+            box-shadow:
+        
+                0px 1px 3px rgba(255,140,0,0.7),
+        
+                inset 0px 0px 1px rgba(255,255,255,0.7);
+        
+            text-shadow:
+        
+                0px -1px 0px rgba(000,000,000,0.4),
+        
+                0px 1px 0px rgba(255,255,255,0.3);
+        
+        }
+        
+         
+        
+        body{
+        
+            background: white;
+        
+        }
+        
+         
+        
+        h1{
+        
+            font-family: Palatino;
+        
+            font-size: 30px;
+        
+            font-style: italic;
+        
+            font-variant: normal;
+        
+            font-weight: 700;
+        
+            color: black;
+        
+            line-height: 24px;
+        
+        }
+         </style>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  </head>
+  <body>
+    <form action="/ZooAjax">
+        <h3 for="Animal">Animal</h3>
+        <div class="form-group">
+          <label for="name">name</label>
+          <input type="name" class="form-control" id="name">
+        </div>
+        <div class="form-group">
+                <label for="species">species</label>
+                <input type="species" class="form-control" id="species">
+              </div>
+        <button onclick = "getAnimal()" type="submit" class="btn btn-default">getSubmit</button>
+        <button onclick = "postAnimal()" type="submit" class="btn btn-default" id = "Delete">postSubmit</button>
+        <button onclick = "putAnimal()" type="submit" class="btn btn-default" id = "Update">Update</button>
+        <button onclick = "deleteAnimal()" type="submit" class="btn btn-default" id = "Delete">Delete</button>
+    </form>
+    <!-- Optional JavaScript -->
+    <script>
+        var url = "/ZooAjax"
+         var nameID = document.getElementById("name")
+            var speciesID = document.getElementById("species")
+            var animalSend = {name:nameID.value, species:speciesID.value};
+            var myjson = JSON.stringify(animalSend)
+
+            // var concat = "/ZooAjax?" +"name="+ nameID.value +"&species=" + speciesID.value;
+
+            
+    
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() 
+            {
+                    if (this.readyState == 4 && this.status == 200) {
+                // Typical action to be performed when the document is ready:
+                 
+				var animal = JSON.parse(xhttp.responseText);
+				var animalElement = document.createElement("p");
+				
+                document.body.appendChild(animalElement);
+                animalElement.innerHTML = animal.name + " " + animal.species;
+                
+
+            }
+        function deleteAnimal()
+        {
+           
+            xhttp.open("DELETE", url , true);
+            xhttp.send("x=" + animalSend);
+        }
+        function putAnimal()
+        {
+            
+            xhttp.open("PUT", url , true);
+            xhttp.send("x=" + animalSend);
+        }
+        function getAnimal()
+        {
+           
+            xhttp.open("GET", url , true);
+            xhttp.send("x=" + animalSend);
+            
+        }
+        function postAnimal()
+        {
+            xhttp.open("POST", url , true);
+            xhttp.send("x=" + animalSend);
+        }
+    </script>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>
