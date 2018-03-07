@@ -1,6 +1,6 @@
 document.getElementById("viewPeopleButton").addEventListener("click", function(){
     var req = new XMLHttpRequest();
-    var idNumber = document.getElementById("idnumber").value;
+    var idNumber = document.getElementById("personIdSearch").value;
     req.open("GET", "http://localhost:8080/ServletDemo/myfirstservlet?idnumber=" + idNumber, true);
     req.send(null);
 
