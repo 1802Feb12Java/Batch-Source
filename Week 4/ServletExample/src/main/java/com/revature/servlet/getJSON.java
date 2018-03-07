@@ -28,7 +28,7 @@ public class getJSON extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Person matt = new Person("Matt");
+		Person matt = new Person("Josh is stupid");
 		
 		ObjectMapper mapper = new ObjectMapper();
 		String mattJSON = mapper.writeValueAsString(matt);
