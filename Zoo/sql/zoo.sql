@@ -1,0 +1,38 @@
+/**
+    Animal
+    field: id
+            name
+            spieces
+
+*/
+
+--DROP TABLE ANIMAL;
+--DROP SEQUENCE animal_seq;
+--DROP PROCEDURE insert_procedure;
+
+CREATE TABLE ANIMAL 
+(
+    ANIMAL_ID INT NOT NULL,
+    ANIMAL_NAME VARCHAR(30),
+    ANIMAL_SPECIES VARCHAR(40),
+    CONSTRAINT ANIMAL_PK PRIMARY KEY (ANIMAL_ID)
+);
+
+CREATE SEQUENCE animal_seq
+    START WITH 1000
+    INCREMENT BY 1;
+
+SELECT ANIMAL_ID, ANIMAL_NAME, ANIMAL_SPECIES 
+FROM ANIMAL;
+
+--stored procedure
+--insert 
+CREATE OR REPLACE PROCEDURE insert_procedure(A_NAME VARCHAR, A_SPECIES VARCHAR) 
+AS
+    BEGIN
+    INSERT INTO ANIMAL (ANIMAL_ID, ANIMAL_NAME, ANIMAL_SPECIES) VALUES
+    (animal_seq.NEXTVAL, A_NAME, A_SPECIES);
+    COMMIT;
+    END;
+    /
+EXECUTE insert_procedure('Clifford', 'Dog');
