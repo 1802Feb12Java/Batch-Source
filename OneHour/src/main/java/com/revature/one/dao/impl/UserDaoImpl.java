@@ -1,5 +1,6 @@
 package com.revature.one.dao.impl;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,7 +14,7 @@ public class UserDaoImpl implements UserDao {
 
 	public void addUser(User user) throws SQLException {
 		Connection con = null;
-		PreparedStatement s = null;
+		CallableStatement s = null;
 		String statement = "{CALL INS_REC(?,?)}";
 
 		// CommonStatements.InsertIntoFill.apply(TABLE_NAME, TABLE_COLS.length);
@@ -21,12 +22,14 @@ public class UserDaoImpl implements UserDao {
 
 		try {
 			con = ConnectionFactory.getInstance().getConnection();
-			s = con.prepareStatement(statement);
+			s = con.prepareCall(statement);
 			s.setInt(1, user.getId());
 			s.setString(2, user.getName());
 
-			s.executeQuery();
-			System.out.println("Executed SQL Query");
+			s.execute();
+			System.out.println("User " + user.getName() + " added!");
+		} catch (SQLException e) {
+			System.out.println("An SQL exception occurred 503");
 		} finally {
 			if (s != null)
 				s.close();

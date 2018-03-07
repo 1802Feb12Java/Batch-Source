@@ -19,5 +19,12 @@
      <artifactId>objdbc8</artifactId>
      <version>12.2.0.1</version>
 	</dependency>
+	<!-- https://mvnrepository.com/artifact/org.json/json -->
+<dependency>
+    <groupId>org.json</groupId>
+    <artifactId>json</artifactId>
+    <version>20180130</version>
+</dependency>
+	
   </dependencies>
 </project>
