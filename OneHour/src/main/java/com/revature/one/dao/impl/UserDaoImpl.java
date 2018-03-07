@@ -14,7 +14,7 @@ public class UserDaoImpl implements UserDao {
 	public void addUser(User user) throws SQLException {
 		Connection con = null;
 		PreparedStatement s = null;
-		String statement = "CALL INS_REC(?,?)";
+		String statement = "{CALL INS_REC(?,?)}";
 
 		// CommonStatements.InsertIntoFill.apply(TABLE_NAME, TABLE_COLS.length);
 		System.out.println("Created statement = " + statement + "\nwith user " + user);
@@ -42,7 +42,7 @@ public class UserDaoImpl implements UserDao {
 		ResultSet rs = null;
 
 		String statement = "SELECT * FROM ONEHOUR " + " WHERE ID=?" + " ";
-		System.out.println("Created SQL Statement: " + statement + " With USER_ID " + userId);
+		System.out.println("Created SQL Statement: " + statement + " With ID " + userId);
 
 		try {
 			con = ConnectionFactory.getInstance().getConnection();
