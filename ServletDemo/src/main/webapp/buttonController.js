@@ -6,11 +6,13 @@ document.getElementById("viewPeopleButton").addEventListener("click", function()
 
     req.addEventListener('load', function () {
         if (req.status >= 200 && req.status < 300) {
-            var resultDiv = document.getElementById("personSearchResult");
+            var result = document.getElementById("personSearchResult");
             var thePerson = req.responseText;
-            var responsePageElement = document.createElement("p");
-            responsePageElement.textContent = thePerson;
-            resultDiv.appendChild(responsePageElement);
+            result.value = thePerson;
+//            var responsePageElement = document.createElement("p");
+//            responsePageElement.textContent = thePerson;
+//            resultDiv.textContent = '';
+//            resultDiv.appendChild(responsePageElement);
         }
     });
 });
