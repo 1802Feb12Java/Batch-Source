@@ -39,6 +39,22 @@ public class LoginDAO {
 		return userId;
 	}
 	
+	public static String getUserFirstName(String userName) {
+		Connection connection = DatabaseConnection.getDatabaseConnection();
+		String userFirstName = "";
+		try {
+			PreparedStatement userIdQuery = connection.prepareStatement("SELECT U_FIRSTNAME FROM ERS_USERS WHERE U_USERNAME = ?");
+			userIdQuery.setString(1, userName);
+			ResultSet resultSet = userIdQuery.executeQuery();
+			if (resultSet.next()) {
+				userFirstName = resultSet.getString(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return userFirstName;
+	}
+	
 	public static String getUserType(int userTypeId) {
 		String userType = "";
 		Connection connection = DatabaseConnection.getDatabaseConnection();

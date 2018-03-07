@@ -5,9 +5,11 @@ import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class LoginServlet
@@ -45,18 +47,27 @@ public class LoginServlet extends HttpServlet {
 	    String userName = request.getParameter("username");  
 	    String password = request.getParameter("password");  
 	    
-	    //response.getWriter().append("UserName: " + userName + "Password: " + password).append(request.getContextPath());
 	    if (LoginDAO.validate(userName, password)) {
 	    	String userType = LoginDAO.getUserType(LoginDAO.getUserTypeId(userName));
+	    	//set up session for a user with type manager
 	    	if( userType.equals("MANAGER")) {
+		        HttpSession session = request.getSession();
+		        Cookie cookie = new Cookie("firstName", LoginDAO.getUserFirstName(userName));
+		        cookie.setMaxAge(60*60*24); //set cookie to live for one day
+		        response.addCookie(cookie);
+		        //session.setAttribute("username", userName);
 		    	RequestDispatcher requestDispatcher = request.getRequestDispatcher("managerDash.html");  
 		        requestDispatcher.forward(request,response); 
 	    	}
+	    	//set up session for user with type employee
 	    	else {
+		        HttpSession session = request.getSession();  
+		        Cookie cookie = new Cookie("firstName", LoginDAO.getUserFirstName(userName));
+		        cookie.setMaxAge(60*60*24); //set cookie to live for one day
+		        response.addCookie(cookie);
 		    	RequestDispatcher requestDispatcher = request.getRequestDispatcher("employeeDash.html");  
 		        requestDispatcher.forward(request,response); 
-	    	}
-
+	    	} 
 	    }
 	    else{  
 	        out.print("Sorry username or password error");  
