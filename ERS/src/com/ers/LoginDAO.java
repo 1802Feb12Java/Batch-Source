@@ -6,10 +6,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class LoginDAO {
-	public static boolean validate(String userName, String password) {
+	private Connection connection;
+	
+	LoginDAO(Connection connection) {
+		this.connection = connection;
+	}
+	public boolean validate(String userName, String password) {
 		boolean status = false;
 		try {
-			Connection connection = DatabaseConnection.getDatabaseConnection();
+			connection = DatabaseConnection.getDatabaseConnection();
 			PreparedStatement loginQuery = connection.prepareStatement("select * from ERS_USERS where U_USERNAME = ? and U_PASSWORD = ?");
 			loginQuery.setString(1, userName);
 			loginQuery.setString(2, password);
@@ -23,8 +28,8 @@ public class LoginDAO {
 		return status;
 	}
 	
-	public static int getUserTypeId(String userName) {
-		Connection connection = DatabaseConnection.getDatabaseConnection();
+	public int getUserTypeId(String userName) {
+		connection = DatabaseConnection.getDatabaseConnection();
 		int userId = 0;
 		try {
 			PreparedStatement userIdQuery = connection.prepareStatement("SELECT UR_ID FROM ERS_USERS WHERE U_USERNAME = ?");
@@ -39,8 +44,8 @@ public class LoginDAO {
 		return userId;
 	}
 	
-	public static String getUserFirstName(String userName) {
-		Connection connection = DatabaseConnection.getDatabaseConnection();
+	public String getUserFirstName(String userName) {
+		connection = DatabaseConnection.getDatabaseConnection();
 		String userFirstName = "";
 		try {
 			PreparedStatement userIdQuery = connection.prepareStatement("SELECT U_FIRSTNAME FROM ERS_USERS WHERE U_USERNAME = ?");
@@ -55,9 +60,9 @@ public class LoginDAO {
 		return userFirstName;
 	}
 	
-	public static String getUserType(int userTypeId) {
+	public String getUserType(int userTypeId) {
 		String userType = "";
-		Connection connection = DatabaseConnection.getDatabaseConnection();
+		connection = DatabaseConnection.getDatabaseConnection();
 		try {
 			PreparedStatement userTypeQuery = connection.prepareStatement("SELECT UR_ROLE FROM ERS_USER_ROLES WHERE UR_ID = ?");
 			userTypeQuery.setInt(1, userTypeId);

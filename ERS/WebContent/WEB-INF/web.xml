@@ -4,14 +4,22 @@
   <welcome-file-list>
     <welcome-file>login.html</welcome-file>
   </welcome-file-list>
+  <servlet>
+    <servlet-name>LoginServlet</servlet-name>
+    <servlet-class>com.ers.LoginServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoginServlet</servlet-name>
+    <url-pattern>/login</url-pattern>
+  </servlet-mapping>
   
-    <servlet>
-        <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>com.ers.LoginServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>LoginServlet</servlet-name>
-        <url-pattern>/login</url-pattern>
-    </servlet-mapping>
+  <servlet>
+    <servlet-name>ManagerDashServlet</servlet-name>
+    <servlet-class>com.ers.ManagerDashServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ManagerDashServlet</servlet-name>
+    <url-pattern>/mgrDash</url-pattern>
+  </servlet-mapping>
+  
 </web-app>

@@ -2,6 +2,7 @@ package com.ers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,7 +10,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class LoginServlet
@@ -17,20 +17,19 @@ import javax.servlet.http.HttpSession;
 //@WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+    private LoginDAO loginDAO;    
+   
     public LoginServlet() {
         super();
-        // TODO Auto-generated constructor stub
+        Connection connection = DatabaseConnection.getDatabaseConnection();
+        this.loginDAO = new LoginDAO(connection);
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
@@ -38,21 +37,18 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//doGet(request, response);
-
-	    response.setContentType("text/html");  
+	    
+		response.setContentType("text/html");  
 	    PrintWriter out = response.getWriter();  
 	          
 	    String userName = request.getParameter("username");  
 	    String password = request.getParameter("password");  
 	    
-	    if (LoginDAO.validate(userName, password)) {
-	    	String userType = LoginDAO.getUserType(LoginDAO.getUserTypeId(userName));
+	    if (loginDAO.validate(userName, password)) {
+	    	String userType = loginDAO.getUserType(loginDAO.getUserTypeId(userName));
 	    	//set up session for a user with type manager
 	    	if( userType.equals("MANAGER")) {
-		        HttpSession session = request.getSession();
-		        Cookie cookie = new Cookie("firstName", LoginDAO.getUserFirstName(userName));
+		        Cookie cookie = new Cookie("firstName", loginDAO.getUserFirstName(userName));
 		        cookie.setMaxAge(60*60*24); //set cookie to live for one day
 		        response.addCookie(cookie);
 		        //session.setAttribute("username", userName);
@@ -60,9 +56,8 @@ public class LoginServlet extends HttpServlet {
 		        requestDispatcher.forward(request,response); 
 	    	}
 	    	//set up session for user with type employee
-	    	else {
-		        HttpSession session = request.getSession();  
-		        Cookie cookie = new Cookie("firstName", LoginDAO.getUserFirstName(userName));
+	    	else {  
+		        Cookie cookie = new Cookie("firstName", loginDAO.getUserFirstName(userName));
 		        cookie.setMaxAge(60*60*24); //set cookie to live for one day
 		        response.addCookie(cookie);
 		    	RequestDispatcher requestDispatcher = request.getRequestDispatcher("empDash.html");  
@@ -70,7 +65,7 @@ public class LoginServlet extends HttpServlet {
 	    	} 
 	    }
 	    else{  
-	        out.print("Sorry username or password error");  
+	        out.print("<h1 class='mx-auto'>Wrong username or password!</h1>");  
 	        RequestDispatcher requestDispatcher = request.getRequestDispatcher("login.html");  
 	        requestDispatcher.include(request,response);  
 	    }  

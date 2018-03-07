@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 
 var cookieFromServer = document.cookie
 
