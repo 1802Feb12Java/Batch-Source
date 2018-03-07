@@ -1,7 +1,7 @@
 document.getElementById("viewPeopleButton").addEventListener("click", function(){
     var req = new XMLHttpRequest();
-
-    req.open("GET", "http://localhot:8080/myFirstServlet", true);
+    var idNumber = document.getElementById("idnumber").textContent;
+    req.open("GET", "http://localhot:8080/myFirstServlet?idnumber=" + idNumber, true);
     req.send(null);
 
     req.addEventListener('load', function () {
@@ -14,3 +14,10 @@ document.getElementById("viewPeopleButton").addEventListener("click", function()
         }
     });
 });
+
+
+document.getElementById("deletePersonButton").addEventListener("click", function(){
+    var req = new XMLHttpRequest();
+    var idNumber = document.getElementById("idnumber").textContent;
+     
+})
