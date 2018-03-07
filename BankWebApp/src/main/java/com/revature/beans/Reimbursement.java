@@ -1,20 +1,22 @@
 package com.revature.beans;
 
+import java.sql.Date;
+
 public class Reimbursement {
 	
 	private int id;
 	private double amount;
 	private String description;
 	private String receipt;
-	private String submittedTime;
-	private String resolvedTime;
+	private Date submittedTime;
+	private Date resolvedTime;
 	private int authorId;
 	private int resolverId;
 	private int typeId;
 	private int statusId;
 	
-	public Reimbursement(int id, double amount, String description, String receipt, String submittedTime,
-			String resolvedTime, int authorId, int resolverId, int typeId, int statusId) {
+	public Reimbursement(int id, double amount, String description, String receipt, Date submittedTime,
+			Date resolvedTime, int authorId, int resolverId, int typeId, int statusId) {
 		this.id = id;
 		this.amount = amount;
 		this.description = description;
@@ -26,83 +28,83 @@ public class Reimbursement {
 		this.typeId = typeId;
 		this.statusId = statusId;
 	}
-	
+
 	public int getId() {
 		return id;
 	}
-	
+
 	public void setId(int id) {
 		this.id = id;
 	}
-	
+
 	public double getAmount() {
 		return amount;
 	}
-	
+
 	public void setAmount(double amount) {
 		this.amount = amount;
 	}
-	
+
 	public String getDescription() {
 		return description;
 	}
-	
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
 	public String getReceipt() {
 		return receipt;
 	}
-	
+
 	public void setReceipt(String receipt) {
 		this.receipt = receipt;
 	}
-	
-	public String getSubmittedTime() {
+
+	public Date getSubmittedTime() {
 		return submittedTime;
 	}
-	
-	public void setSubmittedTime(String submittedTime) {
+
+	public void setSubmittedTime(Date submittedTime) {
 		this.submittedTime = submittedTime;
 	}
-	
-	public String getResolvedTime() {
+
+	public Date getResolvedTime() {
 		return resolvedTime;
 	}
-	
-	public void setResolvedTime(String resolvedTime) {
+
+	public void setResolvedTime(Date resolvedTime) {
 		this.resolvedTime = resolvedTime;
 	}
-	
+
 	public int getAuthorId() {
 		return authorId;
 	}
-	
+
 	public void setAuthorId(int authorId) {
 		this.authorId = authorId;
 	}
-	
+
 	public int getResolverId() {
 		return resolverId;
 	}
-	
+
 	public void setResolverId(int resolverId) {
 		this.resolverId = resolverId;
 	}
-	
+
 	public int getTypeId() {
 		return typeId;
 	}
-	
+
 	public void setTypeId(int typeId) {
 		this.typeId = typeId;
 	}
-	
+
 	public int getStatusId() {
 		return statusId;
 	}
-	
+
 	public void setStatusId(int statusId) {
 		this.statusId = statusId;
 	}
