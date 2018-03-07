@@ -31,13 +31,14 @@ public class userServlet2 extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) {
 		User user = null;
 		UserDaoImpl ud = new UserDaoImpl();
+		String req = request.getQueryString();
+		System.out.println(req);
 
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-		int id = Integer.parseInt(request.getHeader("personID"));
+		int id = Integer.parseInt(req.substring(req.indexOf('=') + 1, req.length()));
+		System.out.println("id=" + id);
 		try {
 			user = ud.getUser(id);
 		} catch (SQLException e) {
@@ -45,8 +46,15 @@ public class userServlet2 extends HttpServlet {
 			e.printStackTrace();
 		}
 
-		JSONObject jsonUser = new JSONObject(user);
-		// PrintWriter out = request
+		JSONObject ju = new JSONObject(user);
+
+		response.setContentType("text/json");
+		try {
+			response.getWriter().write(ju.toString());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 
@@ -56,8 +64,46 @@ public class userServlet2 extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		User user = new User();
+		UserDaoImpl ud = new UserDaoImpl();
+		String req = request.getQueryString();
+		System.out.println(req);
+
+		int id = Integer.parseInt(req.substring(req.indexOf('=') + 1, req.lastIndexOf('?')));
+		String name = (req.substring(req.lastIndexOf('=') + 1, req.length()));
+		System.out.println("id=" + id);
+		System.out.println("name=" + name);
+		user.setId(id);
+		user.setName(name);
+
+		try {
+			ud.addUser(user);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		// StringBuffer jb = new StringBuffer();
+		// String line = null;
+		// User user = null;
+		// try {
+		// BufferedReader reader = request.getReader();
+		// while ((line = reader.readLine()) != null)
+		// jb.append(line);
+		// } catch (Exception e) {
+		// /* report an error */ }
+		//
+		// try {
+		// JSONObject jsonObject = HTTP.toJSONObject(jb.toString());
+		// user.setId(jsonObject.getInt("ID"));
+		// user.setName(jsonObject.getString("Name"));
+		// } catch (JSONException e) {
+		// // crash and burn
+		// throw new IOException("Error parsing JSON request string");
+		// }
+		//
+		// // TODO Auto-generated method stub
+		// doGet(request, response);
 	}
 
 }

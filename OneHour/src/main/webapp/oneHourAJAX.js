@@ -1,7 +1,9 @@
 window.onload = function(){
     console.log("onload functions");
     document.getElementById("createSubmit").addEventListener("click", getInput, false);
+    console.log("first button event listener created");
     document.getElementById("fetchSubmit").addEventListener("click", getPersonByID, false);
+    console.log("second button event listener created");
 }
 
 function getInput(){
@@ -19,10 +21,11 @@ function getInput(){
             }
         }
 
-        xhr.open("PUT", "localhost:8080/userServlet/", true);
+        xhr.open("PUT", "localhost:8080/OneHour/user?fetchID="+input_id+"?name="+input_name, true);
         xhr.setRequestHeader("Content-type", "application/json");
         xhr.send(JSON.stringify({id:input_id, name:input_name}));
-        console.log(JSON.stringify(person));
+        //xhr.send(input_id+":"+input_name);
+        //console.log(JSON.stringify(person));
 
     
 }//end function getInput
@@ -41,6 +44,7 @@ function dataSubmitAlert(response){
 
 
 function getPersonByID(){
+    console.log("in getPersonByID fxn");
     var personID = document.getElementById("fetchID").value;
 
     var xhr = new XMLHttpRequest();
@@ -49,11 +53,12 @@ function getPersonByID(){
         if(xhr.readyState == 4 && xhr.status == 200){
             console.log(xhr.responseText);
             var personObj = JSON.parse(xhr.responseText);
+            console.log(personObj);
             loadThisPerson(personObj);
         }
     }
 
-    xhr.open("GET", "localhost:8080/userServlet/",true)
+    xhr.open("GET", "localhost:8080/OneHour/user?fetchID=" + personID,true);
     xhr.send();
 }//end function getPersonById
 
