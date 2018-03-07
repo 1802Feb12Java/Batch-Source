@@ -1,7 +1,7 @@
 document.getElementById("viewPeopleButton").addEventListener("click", function(){
     var req = new XMLHttpRequest();
-    var idNumber = document.getElementById("idnumber").textContent;
-    req.open("GET", "http://localhost:8080/myfirstservlet?idnumber=" + idNumber, true);
+    var idNumber = document.getElementById("idnumber").value;
+    req.open("GET", "http://localhost:8080/ServletDemo/myfirstservlet?idnumber=" + idNumber, true);
     req.send(null);
 
     req.addEventListener('load', function () {
@@ -18,8 +18,8 @@ document.getElementById("viewPeopleButton").addEventListener("click", function()
 
 document.getElementById("deletePersonButton").addEventListener("click", function(){
     var req = new XMLHttpRequest();
-    var idNumber = document.getElementById("personIdSearch").textContent;
-    req.open("DELETE","http://localhost:8080/myfirstservlet?idnumber" + idNumber, true );
+    var idNumber = document.getElementById("personIdSearch").value;
+    req.open("DELETE","http://localhost:8080/ServletDemo/myfirstservlet?idnumber=" + idNumber, true );
     req.send(null);
     req.addEventListener("load", function() {
         if (req.status >= 200 && req.status < 300) {
@@ -30,8 +30,8 @@ document.getElementById("deletePersonButton").addEventListener("click", function
 
 document.getElementById("updatePeopleButton").addEventListener("cick", function() {
     var req = new XMLHttpRequest();
-    var idNumber = document.getElementById("personIdSearch").textContent;
-    req.open("PUT", "http://localhost:8080/myfirstservlet?idnumber" + idNumber, true);
+    var idNumber = document.getElementById("personIdSearch").value;
+    req.open("PUT", "http://localhost:8080/ServletDemo/myfirstservlet?idnumber=" + idNumber, true);
     req.send(null);
     req.addEventListener("load", function() {
         if (req.status >= 200 && req.status <300) {
