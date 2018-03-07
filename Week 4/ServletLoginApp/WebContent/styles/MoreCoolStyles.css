@@ -1,0 +1,20 @@
+@CHARSET "ISO-8859-1";
+
+.box {
+	background-color:#ea518f;
+	margin:40px;
+	padding:20px;
+	border-style: solid;
+	border-width: 5px;
+}
+
+body {
+	background-color:#47bbb3;
+}
+
+a {
+	border-style: solid;
+	border-width: 3px;
+	margin: 10px;
+	padding: 10px;
+}
