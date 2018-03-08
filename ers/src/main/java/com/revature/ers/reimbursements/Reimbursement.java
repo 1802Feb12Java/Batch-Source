@@ -14,6 +14,7 @@ public class Reimbursement {
 	private int u_ID_Resolver;
 	private int rt_Type;
 	private int rt_Status;
+	
 	public int getR_id() {
 		return r_id;
 	}
@@ -73,7 +74,5 @@ public class Reimbursement {
 	}
 	public void setRt_Status(int rt_Status) {
 		this.rt_Status = rt_Status;
-	}
-	
-	
+	}	
 }
