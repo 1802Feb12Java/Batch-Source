@@ -1,47 +1,56 @@
 package com.revature.servlets;
 
 import java.io.IOException;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
 
-import org.apache.log4j.Logger;
-
-import com.revature.factory.ConnectionFactory;
-
-public class LoginServlet extends HttpServlet{
-	private static final long serialVersionUID = 1L;
-	private static Logger log = Logger.getLogger(LoginServlet.class.toString());
-	private static ConnectionFactory conn = ConnectionFactory.getInstance();
+public class LoginServlet extends HttpServlet {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@SuppressWarnings("unused")
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("Get Better Roll Tide");
-		log.info("Getting, mothafucka");
-
-		PreparedStatement ps;
-		try {
-			ps = conn.getConnection().prepareStatement("Select * from ers_user_roles");
-			ResultSet rs = ps.executeQuery();
-
-			while(rs.next()) {
-				System.out.println("----------------New role----------------");
-				System.out.println("User id = " + rs.getInt(1));
-				System.out.println("User role = " + rs.getString(2));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		HttpSession session = req.getSession();
+		PrintWriter pw = resp.getWriter();
+		resp.setContentType("text/html");
+		req.getRequestDispatcher("Login.html").include(req, resp);
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("Post Better Roll Tide");
+		
+		HttpSession session = req.getSession();
+		
+		resp.setContentType("text/html");
+		PrintWriter pw = resp.getWriter();
+		
+		String username = req.getParameter("username");
+		String password = req.getParameter("password");
+		
+		if(password.equals("admin123")) {
+//			pw.println("Welcome, "+username);
+//			pw.println("<a href=\"Index.html\">Go back</a>");
+			session.setAttribute("username", username);
+			session.setAttribute("password", password);
+			session.setAttribute("problem", null);	//should this be password and password?
+			resp.sendRedirect("profile");
+		} else {
+//			pw.println("Lol no");
+//			pw.println("<a href=\"Index.html\">Go back</a>");
+			session.setAttribute("problem", "incorrect password");
+			resp.sendRedirect("login");
+		}
+		
 	}
-	
+
 }
+
+
+
+

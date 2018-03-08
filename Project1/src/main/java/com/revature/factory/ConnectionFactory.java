@@ -1,7 +1,5 @@
 package com.revature.factory;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -41,7 +39,7 @@ public class ConnectionFactory {
 			String password = props.getProperty("pass");
 			conn = DriverManager.getConnection(url, dbusername, password);
 		} catch (Exception e1) {
-			e1.printStackTrace();
+			System.out.println("Connection failed.");
 		}
 
 		return conn;

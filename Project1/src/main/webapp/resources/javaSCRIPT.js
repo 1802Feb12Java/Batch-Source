@@ -1,81 +1,26 @@
-var myPerson;
-
-function getJSON(){
-	
-	var xhr = new XMLHttpRequest();
-	xhr.onreadystatechange = function(){
-		
-		if(xhr.readyState == 4 && xhr.status == 200){
-			
-			var person = JSON.parse(xhr.responseText);
-			
-			myPerson = person;
-			
-			document.getElementById("stuff").innerHTML = person.name;
-			
+function sendAjaxGet(url, func) {
+	var xhr = new XMLHttpRequest()
+			|| new ActiveXObject("Microsoft.HTTPRequest");
+	xhr.onreadystatechange = function() {
+		console.log(this.readyState);
+		if (this.readyState == 4 && this.status == 200) {
+			func(this);
 		}
-		
+	};
+	xhr.open("GET", url, true);
+	xhr.send();	
+};
+
+function populateUser(xhr) {
+	var res = JSON.parse(xhr.responseText);
+	if (res.username != "null") { //error checking could be improved 
+		document.getElementById("user").innerHTML = "you are logged in as "
+				+ res.username;
+	} else {
+		window.location = "http://localhost:8080/ServletLoginApp/login";
 	}
-	
-	xhr.open("GET", "getJSON", true);
-	xhr.send();
-	
 }
 
-function postPerson(){
-	
-	var xhr = new XMLHttpRequest();
-	
-	var stuff2 = document.getElementById("stuff2");
-	
-	var schaun = {};
-	schaun.name = "Schaun";
-	
-	xhr.onreadystatechange = function(){
-		
-		switch(xhr.readyState) {
-		
-		case 0:
-			stuff2.innerHTML = "Request not initialized";
-			break;
-			
-		case 1: 
-			stuff2.innerHTML = "initialized connection";
-			break;
-			
-		case 2: 
-			stuff2.innerHTML = "Request Recieved";
-			break;
-			
-		case 3:
-			stuff2.innerHTML = "Processing";
-			break;
-			
-		case 4:
-			if(xhr.status == 200){
-				
-				stuff2.innerHTML = "person Posted!!!!!";
-				
-			}
-			
-			else{
-				
-				stuff2.innerHTML = "EROOR with request, status code: " + xhr.status;
-				
-			}
-			break;
-		
-		}
-		
-	}
-	
-	xhr.open("POST", "getJSON", true);
-	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-	var data = "person="+JSON.stringify(schaun);
-	xhr.send(data);
-	
+window.onload = function() {
+	sendAjaxGet("http://localhost:8080/ServletLoginApp/session", populateUser);
 }
-
-console.log("in onload");
-document.getElementById("myBtn").addEventListener("click", getJSON, false);
-document.getElementById("myBtn2").addEventListener("click", postPerson, false);
