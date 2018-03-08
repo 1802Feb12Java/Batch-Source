@@ -1,7 +1,7 @@
 --Users
 CREATE TABLE ers_users
 (
-    u_id NUMBER(*,0) NOT NULL,
+    u_id NUMBER(*,0) GENERATED ALWAYS AS IDENTITY NOT NULL,
     u_username VARCHAR2(40) NOT NULL,
     u_password VARCHAR2(40) NOT NULL, 
     u_firstname VARCHAR2(30), 
@@ -18,7 +18,7 @@ CREATE TABLE ers_users
 --User roles
 CREATE TABLE ers_user_roles
 (
-    ur_id NUMBER(*,0),
+    ur_id NUMBER(*,0) GENERATED ALWAYS AS IDENTITY,
     ur_roles VARCHAR(40),
     CONSTRAINT ers_user_roles_pk PRIMARY KEY (ur_id)
 );
@@ -26,7 +26,7 @@ CREATE TABLE ers_user_roles
 --Reimbursements
 CREATE TABLE ers_reimbursements
 (
-    r_id NUMBER(*,0) NOT NULL,
+    r_id NUMBER(*,0) GENERATED ALWAYS AS IDENTITY NOT NULL,
     r_amount NUMBER(22,2) NOT NULL,
     r_description VARCHAR2(100),
     r_receipt BLOB,
@@ -41,7 +41,7 @@ CREATE TABLE ers_reimbursements
             REFERENCES ers_users (u_id),
     CONSTRAINT ers_u_id_resolver FOREIGN KEY (u_id_resolver) 
         REFERENCES ers_users (u_id),
-    CONSTRAINT ers_rt_type FOREIGN KEY (rt_id) 
+    CONSTRAINT ers_rt_type FOREIGN KEY (rt_type) 
             REFERENCES ers_reimbursement_type (rt_id),
     CONSTRAINT ers_rt_status FOREIGN KEY (rt_status) 
         REFERENCES ers_reimbursement_status (rs_id)
@@ -50,7 +50,7 @@ CREATE TABLE ers_reimbursements
 --Reimbursement Status
 CREATE TABLE  ers_reimbursement_status
 (
-    rs_id NUMBER(*,0) NOT NULL,
+    rs_id NUMBER(*,0) GENERATED ALWAYS AS IDENTITY NOT NULL,
     rs_status VARCHAR2(30) NOT NULL,
     CONSTRAINT ers_reimbursment_status_pk PRIMARY KEY (rs_id)
 );
@@ -58,22 +58,22 @@ CREATE TABLE  ers_reimbursement_status
 --Reimbursement Type
 CREATE TABLE  ers_reimbursement_type
 (
-    rt_id NUMBER(*,0) NOT NULL,
-    rs_type VARCHAR2(30) NOT NULL,
+    rt_id NUMBER(*,0) GENERATED ALWAYS AS IDENTITY NOT NULL,
+    rt_type VARCHAR2(30) NOT NULL,
     CONSTRAINT ers_reimbursment_type_pk PRIMARY KEY (rt_id)
 );
 
 --SEQUENCES
 --u_id for user id
-CREATE SEQUENCE u_id
-MINVALUE 1
-MAXVALUE 999999
-START WITH 1
-INCREMENT BY 1;
+--CREATE SEQUENCE u_id
+--MINVALUE 1
+--MAXVALUE 999999
+--START WITH 1
+--INCREMENT BY 1;
 
 --r_id for reimbursement id
-CREATE SEQUENCE r_id
-MINVALUE 1
-MAXVALUE 999999
-START WITH 1
-INCREMENT BY 1;
+--CREATE SEQUENCE r_id
+--MINVALUE 1
+--MAXVALUE 999999
+--START WITH 1
+--INCREMENT BY 1;

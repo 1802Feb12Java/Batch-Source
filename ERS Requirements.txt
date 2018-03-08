@@ -45,6 +45,10 @@ Environment:
 -Eclipse/Spring Tools Suite
 -SQL Developer
 
+
+
+
+
 Notes!
 Servlet:
 Servlet interface
@@ -72,3 +76,44 @@ Servlet config:
         <param-name> </param-name>
         <param-value>""</>
     </>
+
+Sessions! Approaches:
+Cookies:
+    small pieces of info
+    presistant access multiple requests
+    stored on client side
+    2 flavors
+        presistent
+            across multiple sessions
+        non-presistent
+            one session ONLY
+
+    javax.servlet.http.cookie
+    pros: simple, easy to maintain, on client side
+    cons: text only, can be disabled, shady??
+URL rewriting
+    append Identitifer to URL
+    pros: works w/o cookies
+    cons: insecure, only works with links, have to keep track of id in every url(extra maintenance)
+Hidden Form fields
+    DON'T USE!
+    store info in fields that are hidden from the page
+    pros: doen't rely on owner, easy for forms
+    cons: shows up in source code
+HTTP session object
+    THE ONE WE WANT TO USE
+    can use a request object to obtain a session + manage it
+    programmatically on server side
+    same package as cookie: javax.servlet.http.httpSession or something like that
+    .getSession(boolean b)
+        if(b)
+            creates a new session
+        if!(b) or default
+            check to see if session already exists
+            returns either the existing session or null
+    when session is created, cookie based but not fully
+        container sends JSessionID cookie to browser. JSessionID is a type of cookie??
+        if(Cookie.disable) 
+            append identifiers to url (url rewriting as backup);
+    .invalidate()
+        ends the session

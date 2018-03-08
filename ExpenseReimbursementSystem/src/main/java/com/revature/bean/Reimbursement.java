@@ -7,7 +7,7 @@ public class Reimbursement{
     private int reimburseID;
     private double amount;
     private String description;
-    private String receipt; //it's an image, can probably store image url??
+    private Byte[] receipt;
     private Date submitted;
     private Date resolved;
     private User author;
@@ -20,7 +20,7 @@ public class Reimbursement{
         this.reimburseID = 0;
         this.amount = 0.0;
         this.description = "";
-        this.receipt = ""; //??
+        this.receipt = new Byte[0];
         this.submitted = new Date();
         this.resolved = new Date();
         this.author = new User();
@@ -44,11 +44,11 @@ public class Reimbursement{
     }
 
     //parm Constructor
-    public Reimbursement(int newRID, double newAmount, String newDescription, String newReceipt, Date newSubmitted, Date newResolved, User newAuthor, User newResolver, String newRType, String newRStatus){
+    public Reimbursement(int newRID, double newAmount, String newDescription, Byte[] newReceipt, Date newSubmitted, Date newResolved, User newAuthor, User newResolver, String newRType, String newRStatus){
         this.reimburseID = newRID;
         this.amount = newAmount;
         this.description = newDescription;
-        this.receipt = newReceipt; //??
+        this.receipt = newReceipt;
         this.submitted = newSubmitted;
         this.resolved = newResolved;
         this.author = newAuthor;
@@ -70,7 +70,7 @@ public class Reimbursement{
         return this.description;
     }
 
-    public String getReceipt(){
+    public Byte[] getReceipt(){
         return this.receipt;
     }
 
@@ -111,7 +111,7 @@ public class Reimbursement{
         this.description = newDescription;
     }
 
-    public void setReceipt(String newReceipt){
+    public void setReceipt(Byte[] newReceipt){
         this.receipt = newReceipt;
     }
 
@@ -145,11 +145,15 @@ public class Reimbursement{
         StringBuilder s = new StringBuilder(
                           "Reimbursement ID: " + this.reimburseID + 
                           "Amount: " + this.amount + 
-                          "Description: " + this.description + "\n" +
-                          "Receipt: " + this.receipt +
-                          "Date Submitted: " + this.submitted + 
-                          "Date Resolved: " + this.resolved + 
-                          "Author: " + this.author.toString());
+                          "Description: " + this.description + "\n");
+        //blobs shouldn't be printed out as strings??	
+        //if(this.receipt != null) {
+        	//s.append("Receipt: " + this.receipt);
+        //}
+        
+        s.append("Date Submitted: " + this.submitted + 
+        		 "Date Resolved: " + this.resolved + 
+        		 "Author: " + this.author.toString());
         if(this.resolver != null){
             s.append("Resolver: " + this.resolver.toString());
         }
