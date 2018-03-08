@@ -36,6 +36,7 @@ public class LoginServlet extends HttpServlet {
 			request.getSession().setAttribute("user", u); // Put user in session.
 			response.sendRedirect("secure/home.html"); // Go to some start page.
 		} else {
+			logger.info("Unable to log user in");
 			request.setAttribute("error", "Unknown login, try again"); // Set error msg for ${error}
 			request.getRequestDispatcher("/login.html").forward(request, response); // Go back to login page.
 		}

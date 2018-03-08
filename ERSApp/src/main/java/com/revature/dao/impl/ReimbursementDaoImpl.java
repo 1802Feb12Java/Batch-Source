@@ -142,7 +142,7 @@ public class ReimbursementDaoImpl implements ReimbursementDao {
 
 	}
 
-	public List<Reimbursement> getAllReimbursement() throws SQLException {
+	public List<Reimbursement> getAllReimbursements() throws SQLException {
 		Connection con = null;
 		PreparedStatement s = null;
 		ResultSet rs = null;
@@ -182,7 +182,7 @@ public class ReimbursementDaoImpl implements ReimbursementDao {
 	 * @param rs
 	 * @return
 	 */
-	private Reimbursement processRow(ResultSet rs) throws SQLException {
+	public static Reimbursement processRow(ResultSet rs) throws SQLException {
 		Reimbursement reimbursement = new Reimbursement();
 		reimbursement.setReimbursementId(rs.getInt("R_ID"));
 		reimbursement.setAmount(rs.getBigDecimal("R_AMOUNT"));

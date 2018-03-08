@@ -18,5 +18,5 @@ public interface ReimbursementDao {
 
 	public void deleteReimbursement(int reimbursementId) throws SQLException;
 
-	public List<Reimbursement> getAllReimbursement() throws SQLException;
+	public List<Reimbursement> getAllReimbursements() throws SQLException;
 }

@@ -27,7 +27,7 @@
             </li>
             <li><a href="user-info.html">User Info</a></li>
           </ul>
-          <ul class="nav navbar-nav navbar-right">
+          <ul class="nav navbar-nav navbar-right" id="logoutBtn">
             <li><a href="../login.html"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
           </ul>
         </div>
@@ -35,7 +35,7 @@
 
      <br><br>
      <div class="container col-xs-8 col-xs-offset-1 mx-auto">
-      <form>
+      <form id="requestForm" enctype="multipart/form-data">
           <div class="form">
             <div class="row justify-content-between">
                   <div class="form-group">
@@ -43,34 +43,36 @@
                     </div>                
                     <div class="form-group">
                     <label for="Amount">Amount</label>
-                    <input type="number" min="0.01" max="5000" class="form-control" id="amount" placeholder="Amount">
+                    <input type="number" id="fAmount" min="0" max="5000" class="form-control" id="amount">
                     </div>
 
                         <div class="form-group">
                         <label for="description">Description</label>
-                        <textarea name="description" class="form-control" form="usrform"></textarea>
+                        <textarea name="description" id="fDescription" class="form-control" form="usrform"></textarea>
                         </div>
 
                         <div class="form-group">
                           <label for="type">Type</label>
-                          <input type="text" class="form-control" form="usrform"></input>
+                          <input type="text" id="fType" class="form-control" form="usrform"></input>
                         </div>
 
                         <div class="form-group">
-                        <label for="inputAddress">Upload Receipt Image</label>
-                        <button type="button" class="form-control btn btn-link">Upload</button>
+                        <label for="uploadRecipt">Upload Receipt Image</label>
+                         <input type="file"  id="fRecipt" class="form-control btn btn-link" name="file" />
                         </div>
 
                         <div class="form-group pull-right">
                         <button type="button" class="btn btn-secondary">Cancel</button>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" id="submitBtn" class="btn btn-primary">Submit</button>
                         </div>
                 </div>
               </div>
-          </div>
+          
         </form>
-      
+      </div>
     <!-- Optional JavaScript -->
+    <script src="../resources/request-form.js"></script>
+    <script src="../resources/ajaxLogout.js"></script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

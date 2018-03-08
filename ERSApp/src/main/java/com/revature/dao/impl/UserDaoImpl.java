@@ -97,8 +97,12 @@ public class UserDaoImpl implements UserDao {
 			rs = s.executeQuery();
 			logger.debug("Fetched User with username: " + username + ", password: " + password + " from Database");
 
+			User u = null;
 			if (rs.next())
-				return processRow(rs);
+				u = processRow(rs);
+			else
+				logger.debug("no result set found");
+			return u;
 		} finally {
 			if (s != null)
 				s.close();
@@ -107,7 +111,6 @@ public class UserDaoImpl implements UserDao {
 			if (con != null)
 				con.close();
 		}
-		return null;
 	}
 
 	public void updateUser(User user) throws SQLException {
