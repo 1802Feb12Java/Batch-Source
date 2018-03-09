@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Login</title>
+    <script type="text/javascript" src="./resources/AjaxLoginFormSubmit.js"></script>
 </head>
 <body>
     <form name="form1" method="post" onsubmit="getxmlHttpRequest('LoginServlet', 'form1', 'message', 'please wait...'); return false;">
-        User:<input type="text" id="uname"/><br>
-        Password:<input type="text" id="password"/>
-        <input type="submit" value="Submit"/>
+        User:<input type="text"  id="uname"/><br>
+        Password:<input type="text"  id="password"/>
+        <input type="submit"  value="Submit"/>
     </form>
     <div name="message"></div>
 </body>

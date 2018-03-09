@@ -47,3 +47,13 @@
 2018-03-08 01:01:32 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
 2018-03-08 01:01:33 - User mm successfully logged in
 2018-03-08 01:01:33 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-09 10:19:50 - Attempted login with user name: pm
+2018-03-09 10:19:50 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-09 10:19:53 - User pm successfully logged in
+2018-03-09 10:19:53 - Attempted login with user name: mm
+2018-03-09 10:19:53 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-09 10:19:53 - Incorrect password for mm
+2018-03-09 10:19:53 - Attempted login with user name: mm
+2018-03-09 10:19:53 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-09 10:19:54 - User mm successfully logged in
+2018-03-09 10:19:54 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
