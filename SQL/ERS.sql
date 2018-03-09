@@ -1,7 +1,7 @@
 --Users
 CREATE TABLE ers_users
 (
-    u_id NUMBER(*,0) GENERATED ALWAYS AS IDENTITY NOT NULL,
+    u_id NUMBER(*,0) GENERATED ALWAYS AS IDENTITY,
     u_username VARCHAR2(40) NOT NULL,
     u_password VARCHAR2(40) NOT NULL, 
     u_firstname VARCHAR2(30), 
@@ -26,7 +26,7 @@ CREATE TABLE ers_user_roles
 --Reimbursements
 CREATE TABLE ers_reimbursements
 (
-    r_id NUMBER(*,0) GENERATED ALWAYS AS IDENTITY NOT NULL,
+    r_id NUMBER(*,0) GENERATED ALWAYS AS IDENTITY,
     r_amount NUMBER(22,2) NOT NULL,
     r_description VARCHAR2(100),
     r_receipt BLOB,
@@ -50,7 +50,7 @@ CREATE TABLE ers_reimbursements
 --Reimbursement Status
 CREATE TABLE  ers_reimbursement_status
 (
-    rs_id NUMBER(*,0) GENERATED ALWAYS AS IDENTITY NOT NULL,
+    rs_id NUMBER(*,0) GENERATED ALWAYS AS IDENTITY,
     rs_status VARCHAR2(30) NOT NULL,
     CONSTRAINT ers_reimbursment_status_pk PRIMARY KEY (rs_id)
 );
@@ -58,22 +58,120 @@ CREATE TABLE  ers_reimbursement_status
 --Reimbursement Type
 CREATE TABLE  ers_reimbursement_type
 (
-    rt_id NUMBER(*,0) GENERATED ALWAYS AS IDENTITY NOT NULL,
+    rt_id NUMBER(*,0) GENERATED ALWAYS AS IDENTITY,
     rt_type VARCHAR2(30) NOT NULL,
     CONSTRAINT ers_reimbursment_type_pk PRIMARY KEY (rt_id)
 );
 
---SEQUENCES
---u_id for user id
---CREATE SEQUENCE u_id
---MINVALUE 1
---MAXVALUE 999999
---START WITH 1
---INCREMENT BY 1;
+--Stored Procedures for insert, updates, and deletes for users
+CREATE OR REPLACE PROCEDURE insert_user
+(user_username IN ers_users.u_username%TYPE,
+ user_password IN ers_users.u_password%TYPE,
+ user_firstname IN ers_users.u_firstname%TYPE,
+ user_lastname IN ers_users.u_lastname%TYPE,
+ user_email IN ers_users.u_email%TYPE,
+ user_role IN ers_users.ur_id%TYPE
+)
+AS
+BEGIN
+    INSERT INTO ers_users (u_username,u_password,u_firstname,u_lastname,u_email,ur_id) 
+    VALUES (user_username, user_password,user_firstname,user_lastname,user_email,user_role);
+    COMMIT;
+END;
+/
 
---r_id for reimbursement id
---CREATE SEQUENCE r_id
---MINVALUE 1
---MAXVALUE 999999
---START WITH 1
---INCREMENT BY 1;
+CREATE OR REPLACE PROCEDURE update_user
+(user_id IN ers_users.u_id%TYPE,
+ user_username IN ers_users.u_username%TYPE,
+ user_password IN ers_users.u_password%TYPE,
+ user_firstname IN ers_users.u_firstname%TYPE,
+ user_lastname IN ers_users.u_lastname%TYPE,
+ user_email IN ers_users.u_email%TYPE,
+ user_role IN ers_users.ur_id%TYPE
+)
+AS
+BEGIN
+    UPDATE ers_users
+    SET u_username = user_username,
+        u_password = user_password,
+        u_firstname = user_firstname,
+        u_lastname = user_lastname,
+        u_email = user_email,
+        ur_id = user_role
+    WHERE ers_users.u_id = user_id;
+    COMMIT;
+END;
+/
+
+CREATE OR REPLACE PROCEDURE delete_user
+(user_id IN ers_users.u_id%TYPE)
+AS
+BEGIN
+    DELETE FROM ers_reimbursements WHERE u_id_author IN user_id;
+    DELETE FROM ers_users WHERE u_id=user_id;
+    COMMIT;
+END;
+/
+
+--stored procedures of insert, update, and delete for reimbursements
+CREATE OR REPLACE PROCEDURE insert_ticket
+(ticket_amount IN ers_reimbursements.r_amount%TYPE,
+ ticket_description IN ers_reimbursements.r_description%TYPE,
+ ticket_receipt IN ers_reimbursements.r_receipt%TYPE,
+ ticket_submitted IN ers_reimbursements.r_submitted%TYPE,
+ ticket_resolved IN ers_reimbursements.r_resolved%TYPE,
+ ticket_author IN ers_reimbursements.u_id_author%TYPE,
+ ticket_resolver IN ers_reimbursements.u_id_resolver%TYPE,
+ ticket_rtype IN ers_reimbursements.rt_type%TYPE,
+ ticket_rstatus IN ers_reimbursements.rt_status%TYPE
+)
+AS
+BEGIN
+    INSERT INTO ers_reimbursements 
+    (r_amount,r_description,r_receipt,r_submitted,r_resolved,
+     u_id_author,u_id_resolver,rt_type,rt_status)
+    VALUES 
+    (ticket_amount,ticket_description,ticket_receipt,ticket_submitted,ticket_resolved,
+     ticket_author,ticket_resolver,ticket_rtype,ticket_rstatus);
+    COMMIT;
+END;
+/
+
+CREATE OR REPLACE PROCEDURE update_ticket
+(ticket_id IN ers_reimbursements.r_id%TYPE,
+ ticket_amount IN ers_reimbursements.r_amount%TYPE,
+ ticket_description IN ers_reimbursements.r_description%TYPE,
+ ticket_receipt IN ers_reimbursements.r_receipt%TYPE,
+ ticket_submitted IN ers_reimbursements.r_submitted%TYPE,
+ ticket_resolved IN ers_reimbursements.r_resolved%TYPE,
+ ticket_author IN ers_reimbursements.u_id_author%TYPE,
+ ticket_resolver IN ers_reimbursements.u_id_resolver%TYPE,
+ ticket_rtype IN ers_reimbursements.rt_type%TYPE,
+ ticket_rstatus IN ers_reimbursements.rt_status%TYPE
+)
+AS
+BEGIN
+    UPDATE ers_reimbursements
+    SET
+    r_amount = ticket_amount,
+    r_description = ticket_description,
+    r_receipt = ticket_receipt,
+    r_submitted = ticket_submitted,
+    r_resolved = ticket_resolved,
+    u_id_author = ticket_author,
+    u_id_resolver = ticket_resolver,
+    rt_type = ticket_rtype,
+    rt_status = ticket_rstatus
+    WHERE ers_reimbursements.r_id = ticket_id;
+    COMMIT;
+END;
+/
+
+CREATE OR REPLACE PROCEDURE delete_ticket
+(ticket_id IN ers_reimbursements.r_id%TYPE)
+AS
+BEGIN
+    DELETE FROM ers_reimbursements WHERE r_id IN ticket_id;
+    COMMIT;
+END;
+/

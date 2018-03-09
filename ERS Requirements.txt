@@ -36,8 +36,8 @@ Technologies:
 -Javascript
 -Bootstrap
 -AJAX
--JUnit
--log4j 
+-JUnit   --use to test DAO/Services?
+-log4j
 
 Environment:
 -Tomcat Server

@@ -1,0 +1,45 @@
+OOP is good for UI dev
+ANGULAR!!
+	js framework (lib/api)
+typescript
+	- superset of JS
+	- an attempt to make js more strongly typed
+	- extra syntax to strictly keep a var in one data type
+	- .ts extension -- cannot be used by itself
+		-convert it to js through compiler (tsc)
+	-classes! oop classes!
+
+NodeJS:
+	- like a JRE, runtime enviornment for JS
+	-npm: node packagemanager
+
+webpack:
+	packaging/bundling: dynamic js lib -> one file
+		- compresses files, getting ride of whitespace and others
+		- simplified load order
+	npm init
+	npm instatll --save-dev webpack
+
+	don't deliver, dev tool only
+	-angular 2 onwards are webpacked!
+	don't upload node modules to git
+		put it in git ignore
+component contains its own
+	html, css, and js
+Angular 2.0
+	another dev env
+	(SPA) single page application
+		instead of links, you have routes: switch out components/views
+	Module --loaded--> index.html
+		load all your components + services + dependencies into the module
+	angular directives:
+		have pre-defined function to create tags
+		special html tags + attributes that inject angualr functionality
+			data binding - page to model/object binds
+				one way binding 
+				two way binding 
+				property binding 
+				string interpolation binding
+				event binding - making triggers easier
+
+

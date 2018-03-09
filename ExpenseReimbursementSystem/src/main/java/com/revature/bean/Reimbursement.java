@@ -1,13 +1,14 @@
 package com.revature.bean;
 
-import java.util.Date;
+import java.sql.Blob;
+import java.sql.Date;
 
 public class Reimbursement{
     //members
     private int reimburseID;
     private double amount;
     private String description;
-    private Byte[] receipt;
+    private Blob receipt;
     private Date submitted;
     private Date resolved;
     private User author;
@@ -20,9 +21,9 @@ public class Reimbursement{
         this.reimburseID = 0;
         this.amount = 0.0;
         this.description = "";
-        this.receipt = new Byte[0];
-        this.submitted = new Date();
-        this.resolved = new Date();
+        this.receipt = null;
+        this.submitted = null;
+        this.resolved = null;
         this.author = new User();
         this.resolver = new User();
         this.rType = "";
@@ -44,7 +45,10 @@ public class Reimbursement{
     }
 
     //parm Constructor
-    public Reimbursement(int newRID, double newAmount, String newDescription, Byte[] newReceipt, Date newSubmitted, Date newResolved, User newAuthor, User newResolver, String newRType, String newRStatus){
+    public Reimbursement(int newRID, double newAmount, String newDescription,
+    					 Blob newReceipt, Date newSubmitted, Date newResolved, 
+    					 User newAuthor, User newResolver, String newRType, 
+    					 String newRStatus){
         this.reimburseID = newRID;
         this.amount = newAmount;
         this.description = newDescription;
@@ -70,7 +74,7 @@ public class Reimbursement{
         return this.description;
     }
 
-    public Byte[] getReceipt(){
+    public Blob getReceipt(){
         return this.receipt;
     }
 
@@ -111,7 +115,7 @@ public class Reimbursement{
         this.description = newDescription;
     }
 
-    public void setReceipt(Byte[] newReceipt){
+    public void setReceipt(Blob newReceipt){
         this.receipt = newReceipt;
     }
 
@@ -143,25 +147,25 @@ public class Reimbursement{
     @Override
     public String toString(){
         StringBuilder s = new StringBuilder(
-                          "Reimbursement ID: " + this.reimburseID + 
-                          "Amount: " + this.amount + 
+                          "Reimbursement ID: " + this.reimburseID + "\n" + 
+                          "Amount: " + this.amount +  "\n" +
                           "Description: " + this.description + "\n");
         //blobs shouldn't be printed out as strings??	
         //if(this.receipt != null) {
         	//s.append("Receipt: " + this.receipt);
         //}
         
-        s.append("Date Submitted: " + this.submitted + 
-        		 "Date Resolved: " + this.resolved + 
+        s.append("Date Submitted: " + this.submitted + "\n" +
+        		 "Date Resolved: " + this.resolved + "\n" + 
         		 "Author: " + this.author.toString());
         if(this.resolver != null){
-            s.append("Resolver: " + this.resolver.toString());
+            s.append("Resolver: " + this.resolver.toString() + "\n");
         }
         else{
-            s.append("Resolver: N/A");
+            s.append("Resolver: N/A\n");
         }
-        s.append("Reimbursement type: " + this.rType +
-                 "Reimbursement status: " + this.rStatus);
+        s.append("Reimbursement type: " + this.rType + "\n" +
+                 "Reimbursement status: " + this.rStatus + "\n");
         return s.toString();
     }
 }
