@@ -2,6 +2,7 @@ package com.revature.ers.util;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -27,9 +28,11 @@ public class ConnFactory {
 	public Connection getConnection() {
 		
 		Connection conn = null;
+		InputStream input = this.getClass().getClassLoader().getResourceAsStream("database.properties");
+
 		try {
 			Properties prop = new Properties();
-			prop.load(new FileReader("database.properties"));
+			prop.load(input);
 			Class.forName(prop.getProperty("driver"));
 			log.info("Connection to " + prop.getProperty("url") + " succesful.");
 

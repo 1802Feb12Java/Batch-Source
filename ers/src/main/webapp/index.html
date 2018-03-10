@@ -8,11 +8,11 @@
     <script type="text/javascript" src="./resources/AjaxLoginFormSubmit.js"></script>
 </head>
 <body>
-    <form name="form1" method="post" onsubmit="getxmlHttpRequest('LoginServlet', 'form1', 'message', 'please wait...'); return false;">
-        User:<input type="text"  id="uname"/><br>
-        Password:<input type="text"  id="password"/>
-        <input type="submit"  value="Submit"/>
+	<form action="./login" method="POST">
+	    User:<input type="text"  name="uname"/><br>
+        Password:<input type="password"  name="password"/>
+        <button type="submit">Submit</button>
+	    <div name="message"></div>
     </form>
-    <div name="message"></div>
 </body>
 </html>

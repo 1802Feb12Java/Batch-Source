@@ -57,3 +57,94 @@
 2018-03-09 10:19:53 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
 2018-03-09 10:19:54 - User mm successfully logged in
 2018-03-09 10:19:54 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-09 20:49:29 - Attempted login with user name: mm
+2018-03-09 20:49:29 - There was a problem with the IO Stream.database.properties (The system cannot find the file specified)
+2018-03-09 20:54:04 - Attempted login with user name: mm
+2018-03-09 20:56:57 - Attempted login with user name: mm
+2018-03-09 20:57:38 - Attempted login with user name: mm
+2018-03-09 20:57:53 - Attempted login with user name: mm
+2018-03-09 20:58:21 - Attempted login with user name: 
+2018-03-09 20:58:28 - Attempted login with user name: asdf
+2018-03-09 21:02:20 - Attempted login with user name: asdf
+2018-03-09 21:03:03 - Attempted login with user name: asdf
+2018-03-09 21:06:49 - Attempted login with user name: asdf
+2018-03-09 21:06:49 - The class was not found.oracle.jdbc.driver.OracleDriver
+2018-03-09 21:08:18 - Attempted login with user name: asdf
+2018-03-09 21:08:18 - The class was not found.oracle.jdbc.driver.OracleDriver
+2018-03-09 21:30:57 - Attempted login with user name: asdf
+2018-03-09 21:30:57 - The class was not found.oracle.jdbc.driver.OracleDriver
+2018-03-09 21:37:57 - Attempted login with user name: asdf
+2018-03-09 21:37:57 - The class was not found.oracle.jdbc.OracleDriver
+2018-03-09 21:40:14 - Attempted login with user name: sdf
+2018-03-09 21:40:14 - The class was not found.oracle.jdbc.driver.OracleDriver
+2018-03-09 21:43:06 - Attempted login with user name: a
+2018-03-09 21:43:06 - The class was not found.oracle.jdbc.driver.OracleDriver
+2018-03-09 21:51:13 - Attempted login with user name: df
+2018-03-09 21:51:14 - The class was not found.oracle.jdbc.driver.OracleDriver
+2018-03-09 21:52:41 - Attempted login with user name: wer
+2018-03-09 21:52:41 - The class was not found.oracle.jdbc.driver.OracleDriver
+2018-03-09 22:32:09 - Attempted login with user name: d
+2018-03-09 22:32:09 - The class was not found.oracle.jdbc.driver.OracleDriver
+2018-03-09 22:35:54 - Attempted login with user name: d
+2018-03-09 22:35:54 - The class was not found.oracle.jdbc.driver.OracleDriver
+2018-03-09 22:52:50 - Attempted login with user name: null
+2018-03-09 22:52:50 - The class was not found.oracle.jdbc.driver.OracleDriver
+2018-03-09 23:02:27 - Attempted login with user name: s
+2018-03-09 23:02:27 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-09 23:02:29 - User s not found.
+2018-03-09 23:03:25 - Attempted login with user name: mm
+2018-03-09 23:03:25 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-09 23:03:25 - User mm successfully logged in
+2018-03-09 23:08:48 - Attempted login with user name: aa
+2018-03-09 23:08:48 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-09 23:08:49 - User aa not found.
+2018-03-09 23:11:58 - Attempted login with user name: pm
+2018-03-09 23:11:58 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-09 23:11:58 - User pm successfully logged in
+2018-03-09 23:12:04 - Attempted login with user name: pm
+2018-03-09 23:12:04 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-09 23:12:06 - Incorrect password for pm
+2018-03-09 23:13:32 - Attempted login with user name: roflcopter
+2018-03-09 23:13:32 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-09 23:13:34 - User roflcopter not found.
+2018-03-09 23:13:43 - Attempted login with user name: js
+2018-03-09 23:13:43 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-09 23:13:44 - User js successfully logged in
+2018-03-09 23:17:31 - Attempted login with user name: sdfsd
+2018-03-09 23:17:31 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-09 23:17:33 - User sdfsd not found.
+2018-03-09 23:18:41 - Attempted login with user name: dasd
+2018-03-09 23:18:41 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-09 23:18:43 - User dasd not found.
+2018-03-09 23:19:01 - Attempted login with user name: mm
+2018-03-09 23:19:01 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-09 23:19:01 - User mm successfully logged in
+2018-03-09 23:21:12 - Attempted login with user name: a
+2018-03-09 23:21:12 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-09 23:21:14 - User a not found.
+2018-03-09 23:22:15 - Attempted login with user name: sdf
+2018-03-09 23:22:15 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-09 23:22:17 - User sdf not found.
+2018-03-09 23:22:28 - Attempted login with user name: mm
+2018-03-09 23:22:28 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-09 23:22:29 - Incorrect password for mm
+2018-03-09 23:22:33 - Attempted login with user name: mm
+2018-03-09 23:22:33 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-09 23:22:34 - User mm successfully logged in
+2018-03-09 23:57:09 - Attempted login with user name: mm
+2018-03-09 23:57:09 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-09 23:57:11 - User mm successfully logged in
+2018-03-09 23:57:11 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-09 23:57:22 - Attempted login with user name: pm
+2018-03-09 23:57:22 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-09 23:57:23 - User pm successfully logged in
+2018-03-09 23:57:23 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-09 23:58:43 - Attempted login with user name: pm
+2018-03-09 23:58:43 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-09 23:58:44 - User pm successfully logged in
+2018-03-09 23:58:44 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-10 00:00:54 - Attempted login with user name: pm
+2018-03-10 00:00:54 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-10 00:00:56 - User pm successfully logged in
+2018-03-10 00:00:56 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-10 00:00:56 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.

@@ -101,8 +101,19 @@ public class UserServices implements UserDAO{
 			//TODO update the employee record
 	}
 
-	public int getUserRole(int u_id) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
+	public int getUserRole(String u_userName) throws SQLException {
+		ConnFactory cf = new ConnFactory();
+		Connection conn = cf.getConnection();
+		PreparedStatement ps = null;
+		
+		//create the prepared statement
+		String sql = "SELECT * FROM ERS_USERS WHERE U_USERNAME = ?";
+		ps = conn.prepareStatement(sql);
+		ps.setString(1, u_userName);
+		
+		//execute the query
+		ResultSet rs = ps.executeQuery();
+		rs.next();
+		return rs.getInt("UR_ID");
 	}
 }
