@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
+
 import com.revature.ers.users.UserServices;
 
 /**
@@ -16,26 +18,14 @@ import com.revature.ers.users.UserServices;
  */
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+    private Logger logger = Logger.getRootLogger();
     /**
      * @see HttpServlet#HttpServlet()
      */
     public LoginServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		UserServices us = new UserServices();
@@ -45,32 +35,38 @@ public class LoginServlet extends HttpServlet {
 		String password = request.getParameter("password");
 		response.setContentType("text/html");
 		
+		//attempt to validate the user
 		try {
 			validated = us.validateUser(username, password);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			logger.error("There was a problem with the validation request");
 			e.printStackTrace();
 		}
 		
+		//if the user has entered the correct password, determine whether he is
+		//a manager or employee, and redirect to the appropriate page.
 		if(validated) {
 			try {
 				if(us.getUserRole(username) == 1) {
-					System.out.println(us.getUserRole(username));
-					response.sendRedirect("employee.html");
+					logger.info("User '" + username + "' logged in as manager.");
+					response.sendRedirect("manager.html");
 				}
 				
 				else if(us.getUserRole(username) == 2) {
-					response.sendRedirect("manager.html");
+					logger.info("User '" + username + "' logged in as employee.");
+					response.sendRedirect("employee.html");
 				}
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
+				logger.error("There was a problem accessing the user role.");
 				e.printStackTrace();
 			}
 		}
 		
+		//if the user doesn't exist or has entered the wrong password, reload the 
+		//main page
 		else {
+			logger.info("Improper password for user '" + username + ", or user does not exist'.");
 			response.sendRedirect("index.html");
 		}
 	}
-
 }
