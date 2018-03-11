@@ -11,28 +11,34 @@
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
       <body>
-      <!-- Common Nav Bar -->
-      <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <a class="navbar-brand" href="home.html">Reimbursement Portal</a>
-          </div>
-          <ul class="nav navbar-nav">
-            <li><a href="home.html">Home</a></li>
-            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Reimbursements <span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                  <li><a href="request-form.html">Submit</a></li>
-                  <li><a href="request-page">View</a></li>
-              </ul>
-            </li>
-            <li class="active"><a href="user-info.html">User Info</a></li>
-          </ul>
-          <ul class="nav navbar-nav navbar-right" id="logoutBtn">
-            <li><a href="../login.html"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-          </ul>
+    <!-- Common Nav Bar -->
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="./home.html">Reimbursement Portal</a>
         </div>
-      </nav>
-          <br><br>
+        <ul class="nav navbar-nav">
+          <li><a href="./home.html">Home</a></li>
+          <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Reimbursements <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li><a href="./request-pending.html">View Pending</a></li>
+                <li><a href="./request-all.html">View All</a></li>
+            </ul>
+          </li>
+          <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Employees <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li><a href="./user-register.html">Register</a></li>
+                <li><a href="./user-all.html">View All</a></li>
+            </ul>
+          </li>
+          <li><a href="./user-info.html">Update My Info</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right"  id="logoutBtn">
+          <li><a href="../login.html"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+        </ul>
+      </div>
+    </nav>
+    <br><br>
           <form id="userForm" method="put" action="/ERSApp/secure/user/update">
               <div class="form">
                   <div class="container-fluid col-xs-8 col-xs-offset-1">

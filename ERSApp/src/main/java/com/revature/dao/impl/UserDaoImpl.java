@@ -20,8 +20,8 @@ public class UserDaoImpl implements UserDao {
 	public void addUser(User user) throws SQLException {
 		Connection con = null;
 		PreparedStatement s = null;
-		String statement = "INSERT INTO ERS_USERS" + " (U_ID, U_USERNAME, U_PASSWORD, U_FIRSTNAME, U_LASTNAME, U_EMAIL)"
-				+ " VALUES(?,?,?,?,?,?)";
+		String statement = "INSERT INTO ERS_USERS"
+				+ " (U_ID, U_USERNAME, U_PASSWORD, U_FIRSTNAME, U_LASTNAME, U_EMAIL, UR_ID)" + " VALUES(?,?,?,?,?,?,?)";
 
 		// CommonStatements.InsertIntoFill.apply(TABLE_NAME, TABLE_COLS.length);
 		logger.debug("Created statement = " + statement + "\nwith user " + user);
@@ -35,6 +35,7 @@ public class UserDaoImpl implements UserDao {
 			s.setString(4, user.getFirstName());
 			s.setString(5, user.getLastName());
 			s.setString(6, user.getEmail());
+			s.setInt(7, roleValue(user.getUserRole()));
 
 			s.executeQuery();
 			logger.debug("Executed SQL Query");
@@ -226,7 +227,7 @@ public class UserDaoImpl implements UserDao {
 		ResultSet rs = null;
 		List<User> list = new ArrayList<>();
 
-		String statement = "SELECT * FROM ERS_USERS " + " INNER JOIN ERS_USER_ROLES R ON U.UR_ID = R.UR_ID";
+		String statement = "SELECT * FROM ERS_USERS U " + " INNER JOIN ERS_USER_ROLES R ON U.UR_ID = R.UR_ID";
 
 		logger.debug("Created SQL Statement = " + statement);
 
@@ -258,7 +259,7 @@ public class UserDaoImpl implements UserDao {
 		ResultSet rs = null;
 		List<User> list = new ArrayList<>();
 
-		String statement = "SELECT * FROM ERS_USERS " + " INNER JOIN ERS_USER_ROLES R ON U.UR_ID = R.UR_ID"
+		String statement = "SELECT * FROM ERS_USERS U " + " INNER JOIN ERS_USER_ROLES R ON U.UR_ID = R.UR_ID"
 				+ " WHERE U.UR_ID=?";
 
 		logger.debug("Created SQL Statement = " + statement + " with user role " + role);

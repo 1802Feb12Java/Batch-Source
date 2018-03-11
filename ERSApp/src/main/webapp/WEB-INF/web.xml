@@ -52,9 +52,9 @@
   </servlet>
   <servlet>
     <description></description>
-    <display-name>AdminServlet</display-name>
-    <servlet-name>AdminServlet</servlet-name>
-    <servlet-class>com.revature.servlets.AdminServlet</servlet-class>
+    <display-name>AllUserServlet</display-name>
+    <servlet-name>AllUserServlet</servlet-name>
+    <servlet-class>com.revature.servlets.AllUserServlet</servlet-class>
   </servlet>
   <servlet>
     <description></description>
@@ -85,7 +85,7 @@
     <url-pattern>/secure/request/*</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>AdminServlet</servlet-name>
+    <servlet-name>AllUserServlet</servlet-name>
     <url-pattern>/admin/user/*</url-pattern>
   </servlet-mapping>
   <servlet-mapping>

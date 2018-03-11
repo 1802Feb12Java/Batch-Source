@@ -21,15 +21,15 @@ import com.revature.beans.User;
  * 
  * ../secure/admin
  */
-public class AllUserServlets extends HttpServlet {
-	private static final Logger logger = LogManager.getLogger(AllUserServlets.class);
+public class AllUserServlet extends HttpServlet {
+	private static final Logger logger = LogManager.getLogger(AllUserServlet.class);
 
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public AllUserServlets() {
+	public AllUserServlet() {
 		super();
 	}
 
@@ -73,9 +73,9 @@ public class AllUserServlets extends HttpServlet {
 		logger.info("Got lastname from post " + lastName);
 		String email = (String) request.getParameter("email");
 		logger.info("Got email from post " + email);
-		String userType = (String) request.getParameter("userType");
-		logger.info("Got userType from post " + userType);
 
+		// Managers can create employees only
+		String userType = "Employee";
 		// create User obj
 		User u = new User(0, username, password, firstName, lastName, email, userType);
 
@@ -88,8 +88,7 @@ public class AllUserServlets extends HttpServlet {
 		}
 
 		// redirect user back to home page
-		response.sendRedirect("secure/home.html");
-		// doGet(request, response);
+		request.getRequestDispatcher("/home.html").forward(request, response);
 	}
 
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response)

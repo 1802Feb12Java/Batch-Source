@@ -39,10 +39,10 @@ public class JsonfierUtil {
 		// put in all displayable/useful fields
 		for (User u : list) {
 			obj = new JSONObject();
-			obj.put("username", u);
-			obj.put("firstname", u);
-			obj.put("lastname", u);
-			obj.put("email", u);
+			obj.put("username", u.getUsername());
+			obj.put("firstname", u.getFirstName());
+			obj.put("lastname", u.getLastName());
+			obj.put("email", u.getEmail());
 
 			// put user item in array
 			json.put(obj);

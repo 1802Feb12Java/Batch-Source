@@ -60,7 +60,7 @@ public class UserServlet extends HttpServlet {
 		}
 
 		// redirect user back to home page
-		response.sendRedirect("secure/home.html");
+		request.getRequestDispatcher("/home.html").forward(request, response);
 		// doGet(request, response);
 	}
 

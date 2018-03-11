@@ -121,7 +121,7 @@ public class RequestServlet extends HttpServlet {
 			logger.info("NO SQL ERRORS PUTTING IN REIM!");
 
 		}
-		response.sendRedirect("./home.html");
+		request.getRequestDispatcher("/home.html").forward(request, response);
 
 	}
 
