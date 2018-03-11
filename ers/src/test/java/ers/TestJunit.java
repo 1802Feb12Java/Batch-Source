@@ -1,6 +1,7 @@
 package ers;
 import org.junit.Test;
 
+import com.revature.ers.users.User;
 import com.revature.ers.users.UserServices;
 import com.revature.ers.util.ConnFactory;
 
@@ -14,6 +15,8 @@ import java.sql.SQLException;
 
 public class TestJunit {
 	UserServices us = new UserServices();
+	User testUser = new User();
+	
    @Test
    //tests that the connection factory is connecting to the database
    public void testConn() {
@@ -28,6 +31,23 @@ public class TestJunit {
       assertEquals("Conn Factory connected", result);
    }//end testConn
    
+   //Populates user fields and attempts to add user, the actual test will take place in testGetPassword;
+   //if the assertion comes back as valid, the user has been created
+   @Test
+   public void testAddUser() {
+	   testUser.setU_userName("Kbop");
+	   testUser.setU_firstName("Krombopulous");
+	   testUser.setU_lastName("Michael");
+	   testUser.setU_password("killinagain");
+	   testUser.setUr_ID(2);
+	   testUser.setU_email("ThereIGo@killinagain.com");
+	   
+	   try {
+		us.addUser(testUser);
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+   }
    @Test
    //test user validation
    public void testGetPassword() { 
@@ -35,8 +55,8 @@ public class TestJunit {
 		assertTrue(us.validateUser("pm", "eyepatch"));
 		assertFalse(us.validateUser("mm", "supplaya"));
 		assertTrue(us.validateUser("mm", "lookatme"));
+		assertTrue(us.validateUser(testUser.getU_userName(), testUser.getU_password()));
 	} catch (SQLException e) {
-		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
    }

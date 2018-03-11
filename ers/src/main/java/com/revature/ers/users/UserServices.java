@@ -1,5 +1,6 @@
 package com.revature.ers.users;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,38 +15,66 @@ import com.revature.ers.util.ConnFactory;
 public class UserServices implements UserDAO{
 	protected Logger log = Logger.getRootLogger();
 		
-	public boolean addUser(User user) throws SQLException {
+	public void addUser(User user) throws SQLException {
 		//create the connection
 		ConnFactory cf = new ConnFactory();
 		Connection conn = cf.getConnection();
-		PreparedStatement ps = null;
+		CallableStatement cs = null;
 		
 		//Form the string and the prepared statement
-		
+		String sql = "{CALL ADD_USER(?,?,?,?,?,?)}";
+		cs = conn.prepareCall(sql);
+
 		//assign the values from the new user form
+		cs.setString(1, user.getU_userName());
+		cs.setString(2, user.getU_password());
+		cs.setString(3, user.getU_firstName());
+		cs.setString(4, user.getU_lastName());
+		cs.setString(5, user.getU_email());
 		
 		//assign the role as new employee (UR_ID = 3)
+		cs.setInt(6, user.getUr_ID());
 		
 		//log the user creation
+		log.info("User " + user.getU_userName() + " created.");
 		
-		return true;
+		//execute the callable statement
+		cs.executeUpdate();
 	}
 
 	public User getUser(int u_ID) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		User user = new User();
+		
+		ConnFactory cf = new ConnFactory();
+		Connection conn = cf.getConnection();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = "SELECT U_FIRSTNAME, U_LASTNAME, U_EMAIL, UR_ID FROM ERS_USERS WHERE U_ID = ?";
+		
+		ps.setInt(1, u_ID);
+		rs = ps.executeQuery(sql);
+		
+		if (!rs.next()) {
+			return null;
+		}
+		
+		else {
+			user.setU_firstName(rs.getString("U_FIRSTNAME"));
+			user.setU_lastName(rs.getString("U_LASTNAME"));
+			user.setU_email(rs.getString("U_EMAIL"));
+			user.setUr_ID(rs.getInt("UR_ID"));
+			return user;
+		}
 	}
 
-	public boolean updateUser(User user) throws SQLException {
+	public void updateUser(User user) throws SQLException {
 		// TODO Auto-generated method stub
 		
 		//TODO Log the user update
-		return false;
 	}
 
-	public boolean deleteUser(int u_id) throws SQLException {
+	public void deleteUser(int u_id) throws SQLException {
 		// TODO Auto-generated method stub
-		return false;
 	}
 
 	public List<User> getAllEmployees() throws SQLException {
@@ -61,6 +90,7 @@ public class UserServices implements UserDAO{
 		ConnFactory cf = new ConnFactory();
 		Connection conn = cf.getConnection();
 		PreparedStatement ps = null;
+		ResultSet rs = null;
 		
 		//create the prepared statement
 		String sql = "SELECT U_PASSWORD FROM ERS_USERS WHERE U_USERNAME = ?";
@@ -68,7 +98,7 @@ public class UserServices implements UserDAO{
 		ps.setString(1, u_userName);
 		
 		//execute the query
-		ResultSet rs = ps.executeQuery();
+		rs = ps.executeQuery();
 		
 		if(!rs.next()) {
 			log.info("User " + u_userName + " not found.");
