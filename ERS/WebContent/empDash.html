@@ -33,6 +33,7 @@
                         <span class="nav-link-text">Employee Dashboard</span>
                     </a>
                 </li>
+
                 <!--requests panel-->
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
                     <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents1" data-parent="#exampleAccordion">
@@ -41,18 +42,16 @@
                     </a>
                     <ul class="sidenav-second-level collapse" id="collapseComponents1">
                         <li>
-                            <a href="empViewRequests.html?view=pending">
-                                <i class="fa fa-credit-card-alt"></i> View Pending</a>
+                            <a href="empAddRequest.html">
+                                <i class="fa fa-plus"></i> Add New</a>
                         </li>
                         <li>
-                            <a href="empViewRequests.html?view=resolved"> <i class="fa fa-check-circle" ></i> View Resolved</a>
-                        </li>
-                        <li>
-                            <a href="empViewRequests.html?view=all">
-                                <i class="fa fa-university"></i> View All</a>
+                            <a href="empViewRequests.html">
+                                <i class="fa fa-credit-card-alt"></i> View Requests</a>
                         </li>
                     </ul>
                 </li>
+
                 <!--employee panel-->
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
                     <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents2" data-parent="#exampleAccordion">
@@ -149,7 +148,8 @@
                                     <div class="card-body-icon">
                                         <i class="fa fa-id-card"></i>
                                     </div>
-                                    <div class="mr-5"><span id="totalRequests"></span> Total Requests</div>
+                                    <div class="mr-5">
+                                        <span id="totalRequests"></span> Total Requests</div>
                                 </div>
                                 <a class="card-footer text-white clearfix small z-1" href="#">
                                     <span class="float-left">View Details</span>
@@ -175,50 +175,55 @@
                                 </a>
                             </div>
                         </div>
-                </div>
-            </div>
-        </div>
-        <!-- /.container-fluid-->
-        <!-- /.content-wrapper-->
-        <footer class="sticky-footer">
-            <div class="container">
-                <div class="text-center">
-                    <small>Scott B.</small>
-                </div>
-            </div>
-        </footer>
-        <!-- Scroll to Top Button-->
-        <a class="scroll-to-top rounded" href="#page-top">
-            <i class="fa fa-angle-up"></i>
-        </a>
-        <!-- Logout Modal-->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                    <div class="modal-footer">
-                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <a class="btn btn-primary" href="login.html">Logout</a>
+                        <div class="col-md-12 mx-auto">
+
+                            <button type="button" name="newRequest" id="newRequest" class="btn btn-primary btn-lg btn-block" onclick="location.href='empAddRequest.html';">
+                                <i class="fa fa-plus"></i> Add New Reimbursment Request </button>
+                        </div>
                     </div>
                 </div>
             </div>
+            <!-- /.container-fluid-->
+            <!-- /.content-wrapper-->
+            <footer class="sticky-footer">
+                <div class="container">
+                    <div class="text-center">
+                        <small>Scott B.</small>
+                    </div>
+                </div>
+            </footer>
+            <!-- Scroll to Top Button-->
+            <a class="scroll-to-top rounded" href="#page-top">
+                <i class="fa fa-angle-up"></i>
+            </a>
+            <!-- Logout Modal-->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                            <a class="btn btn-primary" href="login.html">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Controller Scripts-->
+            <script src="employeeDashController.js"></script>
+            <!-- Bootstrap core JavaScript-->
+            <script src="vendor/jquery/jquery.min.js"></script>
+            <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+            <!-- Core plugin JavaScript-->
+            <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+            <!-- Custom scripts for all pages-->
+            <script src="sb-admin.min.js"></script>
         </div>
-        <!--Controller Scripts-->
-        <script src="employeeDashController.js"></script>
-        <!-- Bootstrap core JavaScript-->
-        <script src="vendor/jquery/jquery.min.js"></script>
-        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <!-- Core plugin JavaScript-->
-        <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-        <!-- Custom scripts for all pages-->
-        <script src="sb-admin.min.js"></script>
-    </div>
 </body>
 
 </html>

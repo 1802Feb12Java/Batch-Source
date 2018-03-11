@@ -14,7 +14,7 @@
     <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <!-- Custom styles for this template-->
     <link href="css/sb-admin.css" rel="stylesheet">
-    <link href="css/tableStyle.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/image-style.css">
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -89,19 +89,28 @@
                 <li class="breadcrumb-item">
                     <a href="managerDash.html">Dashboard</a>
                 </li>
-                <li class="breadcrumb-item active">All Reimbursments</li>
+                <li class="breadcrumb-item active">View Employee Reimbursements</li>
             </ol>
+            <div class="row">
+                <div class="col-lg-4">
+                    <button type="button" name="" id="viewAll" class="btn btn-primary btn-lg btn-block mb-3">View All Requests</button>
+                </div>
+                <div class="col-lg-4">
+                    <button type="button" name="" id="viewPending" class="btn btn-primary btn-lg btn-block mb-3">View Pending Requests</button>
+                </div>
+                <div class="col-lg-4">
+                    <button type="button" name="" id="viewApproved" class="btn btn-primary btn-lg btn-block mb-3">View Approved Requests</button>
+                </div>
+            </div>
             <div class="card mb-3">
                 <div class="card-header">
-                    <i class="fa fa-table"></i> All Submitted Reimbursment Requests</div>
+                    <i class="fa fa-table"></i> Submitted Reimbursement Requests</div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
-                                <tr class="allRequests">
-                                    <th>ID</th>
-                                    <th>Author ID</th>
-                                    <th>Resolver ID</th>
+                                <tr>
+                                    <th hidden>ID</th>
                                     <th>Amount</th>
                                     <th>Type</th>
                                     <th>Description</th>
@@ -111,28 +120,12 @@
                                     <th>Date Submitted</th>
                                     <th>Resolved By</th>
                                     <th>Date Resolved</th>
+                                    <th class="action">Action</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="mgrRequestViewTableBody">
                                 <!--Table goes here-->
                             </tbody>
-                            <tfoot>
-                                <tr class="allRequests">
-                                        <th>ID</th>
-                                        <th>Author ID</th>
-                                        <th>Resolver ID</th>
-                                        <th>Amount</th>
-                                        <th>Type</th>
-                                        <th>Description</th>
-                                        <th>Receipt</th>
-                                        <th>Status</th>
-                                        <th>Submitted By</th>
-                                        <th>Date Submitted</th>
-                                        <th>Resolved By</th>
-                                        <th>Date Resolved</th>
-                                </tr>
-                            </tfoot>
-
                         </table>
                     </div>
                 </div>
@@ -172,6 +165,7 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
+    <script src="mgrViewRequestsController.js"></script>
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- Core plugin JavaScript-->

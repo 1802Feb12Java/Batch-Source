@@ -3,6 +3,7 @@ package com.ers;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,21 +12,28 @@ import javax.servlet.http.HttpSession;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-
-public class ManagerDashServlet extends HttpServlet {
+/**
+ * Servlet implementation class EmployeeDashServlet
+ */
+@WebServlet("/EmployeeDashServlet")
+public class EmployeeDashServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private ManagerRequests managerRequests;
-    public ManagerDashServlet() {
+
+	private EmployeeRequests employeeRequests;
+    public EmployeeDashServlet() {
         super();
-        managerRequests = new ManagerRequests(DatabaseConnection.getDatabaseConnection());
+        employeeRequests = new EmployeeRequests(DatabaseConnection.getDatabaseConnection());
+        // TODO Auto-generated constructor stub
     }
+
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
 		if (session != null) {
-			int pendingRequests = managerRequests.getNumberOfPendingRequests();
-			int approvedRequests = managerRequests.getNumberOfApprovedRequests();
-			int totalRequests = managerRequests.getTotalNumberOfRequests();
+			int userId = (int) session.getAttribute("userid");
+			int pendingRequests = employeeRequests.getNumberOfPendingRequests(userId);
+			int approvedRequests = employeeRequests.getNumberOfApprovedRequests(userId);
+			int totalRequests = employeeRequests.getTotalNumberOfRequests(userId);
 			ResponseToClient responseToClient = new ResponseToClient(pendingRequests, approvedRequests, totalRequests);
 			GsonBuilder builder = new GsonBuilder();
 			Gson gson = builder.create();
@@ -49,5 +57,4 @@ public class ManagerDashServlet extends HttpServlet {
 			this.total = total;
 		}
 	}
-
 }

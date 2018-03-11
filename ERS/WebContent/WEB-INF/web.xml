@@ -12,7 +12,6 @@
     <servlet-name>LoginServlet</servlet-name>
     <url-pattern>/login</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>ManagerDashServlet</servlet-name>
     <servlet-class>com.ers.ManagerDashServlet</servlet-class>
@@ -21,5 +20,20 @@
     <servlet-name>ManagerDashServlet</servlet-name>
     <url-pattern>/mgrDash</url-pattern>
   </servlet-mapping>
-  
+  <servlet>
+    <servlet-name>EmployeeDashServlet</servlet-name>
+    <servlet-class>com.ers.EmployeeDashServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EmployeeDashServlet</servlet-name>
+    <url-pattern>/empDash</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>RequestTypeServlet</servlet-name>
+    <servlet-class>com.ers.RequestTypeServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RequestTypeServlet</servlet-name>
+    <url-pattern>/requestType</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="utf-8">
@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    <meta http-equiv="Content-Language" content="en">
     <title>Employee Reimbursment Approval Portal</title>
     <!-- Bootstrap core CSS-->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -95,28 +96,50 @@
                 <li class="breadcrumb-item">
                     <a href="empDash.html">Dashboard</a>
                 </li>
-                <li class="breadcrumb-item active">View Your Info</li>
+                <li class="breadcrumb-item active">Request Reimbursment</li>
             </ol>
-            <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                        <thead>
-                            <tr>
-                                <th class="text-center">First Name</th>
-                                <th class="text-center">Last Name</th>
-                                <th class="text-center">Email</th>
-                                <th class="text-center">User Name</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td id="firstName" class="text-center"></td>
-                                <td id="lastName" class="text-center"></td>
-                                <td id="email" class="text-center"></td>
-                                <td id="userName" class="text-center"></td>
-                            </tr>
-                        </tbody>
-                    </table>
+
+            <!--Begin Form-->
+
+            <form method="POST" action="requestType" enctype="multipart/form-data">
+                <div class="form-group row">
+                    <label for="amountRequested" class="col-4 col-form-label">Amount Requested</label>
+                    <div class="col-8">
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="fa fa-dollar"></i>
+                            </div>
+                            <input id="amountRequested" name="amountRequested" placeholder="25.00" type="text" class="form-control here" required="required">
+                        </div>
+                    </div>
                 </div>
+                <div class="form-group row">
+                    <label for="description" class="col-4 col-form-label">Description</label>
+                    <div class="col-8">
+                        <textarea id="description" name="description" cols="40" rows="5" class="form-control" required="required"></textarea>
+                        <span id="descriptionHelpBlock" class="form-text text-muted">Enter a brief Description</span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="receiptUpload" class="col-4 col-form-label">Upload a Receipt</label>
+                    <div class="col-8">
+                        <input type="file" name="receiptUpload" id="receiptUpload" required="required">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="requestType" class="col-4 col-form-label">Reimbursement Type</label>
+                    <div class="col-8">
+                        <select class="form-control" name="requestType" id="requestType" required="required"></select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="offset-4 col-8">
+                        <button id="makeRequest" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            </form>
+
+            <!--End Form-->
         </div>
         <!-- /.container-fluid-->
         <!-- /.content-wrapper-->
@@ -150,7 +173,7 @@
             </div>
         </div>
         <!--Controller Scripts-->
-        <script src="empViewInfo.js"></script>
+        <script src="addRequestFormController.js"></script>
         <!-- Bootstrap core JavaScript-->
         <script src="vendor/jquery/jquery.min.js"></script>
         <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

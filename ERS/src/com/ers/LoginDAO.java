@@ -28,6 +28,28 @@ public class LoginDAO {
 		return status;
 	}
 	
+	public boolean userNameExists(String userName) {
+		boolean nameExists = false;
+		try {
+			connection = DatabaseConnection.getDatabaseConnection();
+			PreparedStatement loginQuery = connection.prepareStatement("select * from ERS_USERS where U_USERNAME = ?");
+			loginQuery.setString(1, userName);
+
+
+			ResultSet resultSet = loginQuery.executeQuery();
+			boolean result = resultSet.next();
+			
+			if (result) {
+				nameExists = true;
+			}
+			
+
+		} catch (SQLException e) {
+			System.out.println(e);
+		}
+		return nameExists;
+	}
+	
 	public int getUserTypeId(String userName) {
 		connection = DatabaseConnection.getDatabaseConnection();
 		int userId = 0;
