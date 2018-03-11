@@ -3,7 +3,7 @@ package com.revature;
 public class Reimbursement {
 
 	public int id;
-	public int amount;
+	public double amount;
 	public String description;
 	public String timeSubmitted;
 	public String timeResolved;
@@ -12,7 +12,15 @@ public class Reimbursement {
 	public int type;
 	public int status;
 	
-	public Reimbursement(int id, int amount, String timeSubmitted, int author, int type, int status) {
+	public Reimbursement(double amount, String description, int author, int type) {
+		super();
+		this.amount = amount;
+		this.description = description;
+		this.author = author;
+		this.type = type;
+	}
+	
+	public Reimbursement(int id, double amount, String timeSubmitted, int author, int type, int status) {
 		super();
 		this.id = id;
 		this.amount = amount;
@@ -58,7 +66,7 @@ public class Reimbursement {
 		return id;
 	}
 
-	public int getAmount() {
+	public double getAmount() {
 		return amount;
 	}
 
@@ -76,9 +84,19 @@ public class Reimbursement {
 
 	@Override
 	public String toString() {
+		if(status == 1) {
 		return "Reimbursement [id=" + id + ", amount=" + amount + ", description=" + description + ", timeSubmitted="
 				+ timeSubmitted + ", timeResolved=" + timeResolved + ", author=" + author + ", resolver=" + resolver
-				+ ", type=" + type + ", status=" + status + "]";
+				+ ", type=" + type + ", status=PENDING]";
+		}else if(status == 2) {
+			return "Reimbursement [id=" + id + ", amount=" + amount + ", description=" + description + ", timeSubmitted="
+					+ timeSubmitted + ", timeResolved=" + timeResolved + ", author=" + author + ", resolver=" + resolver
+					+ ", type=" + type + ", status=APPROVED]";
+		}else {
+			return "Reimbursement [id=" + id + ", amount=" + amount + ", description=" + description + ", timeSubmitted="
+					+ timeSubmitted + ", timeResolved=" + timeResolved + ", author=" + author + ", resolver=" + resolver
+					+ ", type=" + type + ", status=DENIED]";
+		}
 	}
 	
 	
