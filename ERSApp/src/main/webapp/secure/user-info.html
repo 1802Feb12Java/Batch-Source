@@ -9,8 +9,6 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-      <!-- Custom Script(s) -->
-      <script src = "/UserInfo.js"></script>
     </head>
       <body>
       <!-- Common Nav Bar -->
@@ -35,7 +33,7 @@
         </div>
       </nav>
           <br><br>
-          <form id="userForm">
+          <form id="userForm" method="put" action="/ERSApp/secure/user/update">
               <div class="form">
                   <div class="container-fluid col-xs-8 col-xs-offset-1">
                             <div class="form-group">
@@ -45,12 +43,12 @@
                             </div>                
                             <div class="form-group">
                             <label for="Username">Username</label>
-                            <input type="text" class="form-control" id="username" required minlength="6" maxlength="36">
+                            <input type="text" class="form-control" name="username" id="username" required minlength="6" maxlength="36">
                             </div>
                                          
                             <div class="form-group">
                             <label for="Password">Password</label>
-                            <input type="password" class="form-control" id="password" required minlength="8" maxlength="36">
+                            <input type="password" class="form-control" id="password" name="password" required minlength="8" maxlength="36">
                             </div>
 
                             <div class="form-group">
@@ -61,22 +59,22 @@
     
                             <div class="form-group">
                             <label for="FirstName">First Name</label>
-                            <input type="text" class="form-control" id="firstname" required minlength="1" maxlength="30">
+                            <input type="text" class="form-control" id="firstname" name="firstname" required minlength="1" maxlength="30">
                             </div>
 
                             <div class="form-group">
                             <label for="LastName">Last Name</label>
-                            <input type="text" class="form-control" id="lastname" required minlength="1" maxlength="30">
+                            <input type="text" class="form-control" name="lastname" id="lastname" required minlength="1" maxlength="30">
                             </div>
 
                             <div class="form-group">
                             <label for="Email">Email</label>
-                            <input type="email" class="form-control" id="email" required minlength="1" maxlength="100">
+                            <input type="email" class="form-control" id="email" name="email" required minlength="1" maxlength="100">
                             </div>
     
                           
                             <div class="form-group pull-right">
-                            <button type="button" class="btn btn-secondary">Cancel</button>
+                            <a href="./home.html" class="btn btn-secondary">Cancel</a>
                             <button type="submit" class="btn btn-primary">Submit</button>
                             </div>
                     </div>
@@ -84,12 +82,13 @@
             </form>
           
       
-    <!-- Optional JavaScript -->
-     <script src="../resources/ajaxLogout.js"></script>
-     <script src="../resources/user-info.js"></script>
+   
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   </body>
+   <!-- Optional JavaScript -->
+   <script src="../resources/ajaxLogout.js"></script>
+   <script src="../resources/user-info.js"></script>
 </html>

@@ -20,9 +20,14 @@ public class LoginServlet extends HttpServlet {
 
 	private static final long serialVersionUID = -9109911146582857848L;
 
-	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		response.sendRedirect("/ERSApp/login.html");
+	}
+
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
 		logger.info("Got a request " + request.getRequestURL());
+
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 
@@ -34,6 +39,7 @@ public class LoginServlet extends HttpServlet {
 		if (u != null) {
 			logger.info("Logged in user " + u);
 			request.getSession().setAttribute("user", u); // Put user in session.
+			// TODO check user type :D
 			response.sendRedirect("secure/home.html"); // Go to some start page.
 		} else {
 			logger.info("Unable to log user in");
@@ -43,4 +49,5 @@ public class LoginServlet extends HttpServlet {
 
 		out.close();
 	}
+
 }

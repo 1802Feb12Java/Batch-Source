@@ -1,6 +1,7 @@
 package com.revature;
 
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +30,10 @@ public class Reimbursements {
 			// if (account.getAccountId() == 0)
 			// account.setAccountId(seqNum);
 			reim.setReimbursementId(0);
+			// get sys time as current timestamp
+			reim.setSubmitted(new Timestamp(System.currentTimeMillis()));
+			// set status to pending - 0
+			reim.setStatus("pending");
 			reimDao.addReimbursement(reim);
 
 		} catch (SQLException e) {

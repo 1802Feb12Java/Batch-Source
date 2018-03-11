@@ -46,7 +46,7 @@ public class AuthenticateFilter implements Filter {
 
 		if (session == null || session.getAttribute("user") == null) { // checking whether the session exists
 			logger.info("Unauthorized access request");
-			res.sendRedirect(req.getContextPath() + "/login.html");
+			res.sendRedirect(req.getContextPath() + "/login");
 		} else {
 			// pass the request along the filter chain
 			chain.doFilter(request, response);

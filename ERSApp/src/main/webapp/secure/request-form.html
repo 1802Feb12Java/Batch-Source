@@ -35,7 +35,7 @@
 
      <br><br>
      <div class="container col-xs-8 col-xs-offset-1 mx-auto">
-      <form id="requestForm" enctype="multipart/form-data">
+      <form action="/ERSApp/secure/request/create" method="post" enctype="multipart/form-data">
           <div class="form">
             <div class="row justify-content-between">
                   <div class="form-group">
@@ -43,26 +43,42 @@
                     </div>                
                     <div class="form-group">
                     <label for="Amount">Amount</label>
-                    <input type="number" id="fAmount" min="0" max="5000" class="form-control" id="amount">
+                    <input type="number" name="amount" min="0" max="5000" class="form-control" required >
                     </div>
 
                         <div class="form-group">
                         <label for="description">Description</label>
-                        <textarea name="description" id="fDescription" class="form-control" form="usrform"></textarea>
+                        <textarea name="description" class="form-control" required></textarea>
                         </div>
 
                         <div class="form-group">
                           <label for="type">Type</label>
-                          <input type="text" id="fType" class="form-control" form="usrform"></input>
+                          
+                         <div class="form-check form-check-inline">
+                          <input type="radio" class="form-check-input"  id="business"
+						     name="typechoice" value="business" required>
+						    <label class="form-check-label" for="business">Business</label>
+						
+						    <input type="radio" class="form-check-input"  id="travel"
+						     name="typechoice" value="travel">
+						    <label class="form-check-label" for="travel">Travel</label>
+						
+						    <input type="radio" class="form-check-input"  id="medical"
+						     name="typechoice" value="medical">
+						    <label class="form-check-label" for="medical">Medical</label>
+						    
+						    <input type="radio" class="form-check-input" id="other"
+						     name="typechoice" value="other">
+						    <label class="form-check-label" for="other">Other</label>
                         </div>
-
+						</div>
                         <div class="form-group">
                         <label for="uploadRecipt">Upload Receipt Image</label>
-                         <input type="file"  id="fRecipt" class="form-control btn btn-link" name="file" />
+                         <input type="file" name="receipt"class="form-control btn btn-link" name="file" />
                         </div>
 
                         <div class="form-group pull-right">
-                        <button type="button" class="btn btn-secondary">Cancel</button>
+                        <a href="./home.html" class="btn btn-secondary">Cancel</a>
                         <button type="submit" id="submitBtn" class="btn btn-primary">Submit</button>
                         </div>
                 </div>
@@ -70,12 +86,11 @@
           
         </form>
       </div>
-    <!-- Optional JavaScript -->
-    <script src="../resources/request-form.js"></script>
-    <script src="../resources/ajaxLogout.js"></script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   </body>
+   <script src="../resources/request-form.js"></script>
+    <script src="../resources/ajaxLogout.js"></script>
 </html>

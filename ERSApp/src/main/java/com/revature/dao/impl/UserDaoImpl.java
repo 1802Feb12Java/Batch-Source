@@ -52,9 +52,9 @@ public class UserDaoImpl implements UserDao {
 		PreparedStatement s = null;
 		ResultSet rs = null;
 
-		String statement = "SELECT * FROM ERS_USERS U " + " WHERE USER_ID=? "
+		String statement = "SELECT * FROM ERS_USERS U " + " WHERE U_ID=? "
 				+ " INNER JOIN ERS_USER_ROLES R ON U.UR_ID = R.UR_ID";
-		logger.debug("Created SQL Statement: " + statement + " With USER_ID " + userId);
+		logger.debug("Created SQL Statement: " + statement + " With U_ID " + userId);
 
 		try {
 			con = ConnectionFactory.getInstance().getConnection();
@@ -63,6 +63,37 @@ public class UserDaoImpl implements UserDao {
 
 			rs = s.executeQuery();
 			logger.debug("Fetched User with userId: " + userId + " from Database");
+
+			if (rs.next())
+				return processRow(rs);
+		} finally {
+			if (s != null)
+				s.close();
+			if (rs != null)
+				rs.close();
+			if (con != null)
+				con.close();
+		}
+
+		return null;
+	}
+
+	public User getUser(String username) throws SQLException {
+		Connection con = null;
+		PreparedStatement s = null;
+		ResultSet rs = null;
+
+		String statement = "SELECT * FROM ERS_USERS U " + " WHERE U_USERNAME=? "
+				+ " INNER JOIN ERS_USER_ROLES R ON U.UR_ID = R.UR_ID";
+		logger.debug("Created SQL Statement: " + statement);
+
+		try {
+			con = ConnectionFactory.getInstance().getConnection();
+			s = con.prepareStatement(statement);
+			s.setString(1, username);
+
+			rs = s.executeQuery();
+			logger.debug("Fetched User with username: " + username + " from Database");
 
 			if (rs.next())
 				return processRow(rs);
@@ -154,6 +185,29 @@ public class UserDaoImpl implements UserDao {
 			con = ConnectionFactory.getInstance().getConnection();
 			s = con.prepareStatement(statement);
 			s.setInt(1, userId);
+
+			s.executeQuery();
+			logger.debug("Executed SQL Query");
+		} finally {
+			if (s != null)
+				s.close();
+			if (con != null)
+				con.close();
+		}
+
+	}
+
+	public void deleteUser(String username) throws SQLException {
+		Connection con = null;
+		PreparedStatement s = null;
+		String statement = "DELETE FROM ERS_USERS" + " WHERE U_USERNAME =?";
+
+		logger.debug("Created SQL statement = " + statement + "\nwith username " + username);
+
+		try {
+			con = ConnectionFactory.getInstance().getConnection();
+			s = con.prepareStatement(statement);
+			s.setString(1, username);
 
 			s.executeQuery();
 			logger.debug("Executed SQL Query");

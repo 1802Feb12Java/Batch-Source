@@ -26,7 +26,7 @@ public class SpecialReimbursementDao {
 				+ " INNER JOIN ERS_REIMBURSEMENT_TYPE T ON R.RT_TYPE = T.RT_ID"
 				+ " INNER JOIN ERS_REIMBURSEMENT_STATUS S ON R.RT_STATUS = S.RS_ID" + " WHERE R.U_ID_AUTHOR=?";
 
-		logger.debug("Created SQL Statement = " + statement);
+		logger.debug("Created SQL Statement = " + statement + "With author id =" + userId);
 
 		try {
 			con = ConnectionFactory.getInstance().getConnection();

@@ -59,6 +59,19 @@ public class Users {
 		return null;
 	}
 
+	public static User getUser(String username) {
+		try {
+			return userDao.getUser(username);
+		} catch (SQLException e) {
+			// log for now
+			logger.error("No User Exists with the USERNAME " + username);
+			logger.error(e.getMessage());
+		} finally {
+
+		}
+		return null;
+	}
+
 	public static User getUser(String username, String password) {
 		try {
 			return userDao.getUser(username, password);
@@ -94,6 +107,21 @@ public class Users {
 		} catch (SQLException e) {
 			// log for now
 			logger.error("SQL Error while deleting user with ID " + userId);
+			logger.error(e.getMessage());
+			return false;
+		} finally {
+
+		}
+
+		return true;
+	}
+
+	public static boolean deleteUser(String username) {
+		try {
+			userDao.deleteUser(username);
+		} catch (SQLException e) {
+			// log for now
+			logger.error("SQL Error while deleting user with username " + username);
 			logger.error(e.getMessage());
 			return false;
 		} finally {
