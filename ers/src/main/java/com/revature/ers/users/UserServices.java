@@ -32,7 +32,7 @@ public class UserServices implements UserDAO{
 		cs.setString(4, user.getU_lastName());
 		cs.setString(5, user.getU_email());
 		
-		//assign the role as new employee (UR_ID = 3)
+		//TODO: assign the role as new employee (UR_ID = 3)
 		cs.setInt(6, user.getUr_ID());
 		
 		//log the user creation
@@ -68,9 +68,25 @@ public class UserServices implements UserDAO{
 	}
 
 	public void updateUser(User user) throws SQLException {
-		// TODO Auto-generated method stub
+		//create the connection
+		ConnFactory cf = new ConnFactory();
+		Connection conn = cf.getConnection();
+		CallableStatement cs = null;
 		
-		//TODO Log the user update
+		//Form the string and the callable statement
+		String sql = "{CALL UPDATE_USER(?,?,?,?,?,?,?)}";
+		cs = conn.prepareCall(sql);
+
+		//assign the values from the new user form
+		cs.setInt(1, user.getU_id());
+		cs.setString(2, user.getU_userName());
+		cs.setString(3, user.getU_password());
+		cs.setString(4, user.getU_firstName());
+		cs.setString(5, user.getU_lastName());
+		cs.setString(6, user.getU_email());
+		cs.setInt(7, user.getUr_ID());
+		
+		cs.executeUpdate();
 	}
 
 	public void deleteUser(int u_id) throws SQLException {
