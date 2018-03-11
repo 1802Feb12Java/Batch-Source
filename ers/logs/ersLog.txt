@@ -157,3 +157,193 @@
 2018-03-10 00:08:26 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
 2018-03-10 00:08:28 - User mm successfully logged in
 2018-03-10 00:08:28 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-10 01:52:41 - Attempted login with user name: fluffy
+2018-03-10 01:52:41 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-10 01:52:43 - User fluffy not found.
+2018-03-10 01:52:43 - Improper password for user 'fluffy, or user does not exist'.
+2018-03-10 01:52:53 - Attempted login with user name: pm
+2018-03-10 01:52:53 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-10 01:52:54 - User pm successfully logged in
+2018-03-10 01:52:54 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-10 01:52:54 - User 'pm' logged in as manager.
+2018-03-10 01:53:10 - Attempted login with user name: pm
+2018-03-10 01:53:10 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-10 01:53:10 - Incorrect password for pm
+2018-03-10 01:53:11 - Improper password for user 'pm, or user does not exist'.
+2018-03-10 13:44:16 - Attempted login with user name: mm
+2018-03-10 13:44:17 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-10 13:44:19 - User mm successfully logged in
+2018-03-10 13:44:19 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-10 13:44:20 - User 'mm' logged in as manager.
+2018-03-10 14:22:53 - Attempted login with user name: sdlfk
+2018-03-10 14:22:53 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-10 14:22:55 - User sdlfk not found.
+2018-03-10 14:22:55 - Improper password for user 'sdlfk, or user does not exist'.
+2018-03-10 14:23:29 - Attempted login with user name: bs
+2018-03-10 14:23:29 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-10 14:23:29 - User bs successfully logged in
+2018-03-10 14:23:30 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-10 14:23:30 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-10 14:23:31 - User 'bs' logged in as employee.
+2018-03-10 14:24:55 - Attempted login with user name: ss
+2018-03-10 14:24:55 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-10 14:24:56 - User ss successfully logged in
+2018-03-10 14:24:56 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-10 14:24:57 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-10 14:24:58 - User 'ss' logged in as employee.
+2018-03-10 15:03:55 - Attempted login with user name: asdf
+2018-03-10 15:03:55 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-10 15:03:57 - User asdf not found.
+2018-03-10 15:03:57 - Improper password for user 'asdf, or user does not exist'.
+2018-03-10 15:05:51 - Attempted login with user name: df
+2018-03-10 15:05:51 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-10 15:05:53 - User df not found.
+2018-03-10 15:05:53 - Improper password for user 'df, or user does not exist'.
+2018-03-10 15:06:31 - Attempted login with user name: df
+2018-03-10 15:06:31 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-10 15:06:33 - User df not found.
+2018-03-10 15:06:33 - Improper password for user 'df, or user does not exist'.
+2018-03-10 15:07:03 - Attempted login with user name: df
+2018-03-10 15:07:03 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-10 15:07:03 - User df not found.
+2018-03-10 15:07:03 - Improper password for user 'df, or user does not exist'.
+2018-03-10 15:08:18 - Attempted login with user name: df
+2018-03-10 15:08:18 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-10 15:08:19 - User df not found.
+2018-03-10 15:08:20 - Improper password for user 'df, or user does not exist'.
+2018-03-10 15:09:36 - Attempted login with user name: asdfasdf
+2018-03-10 15:09:36 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-10 15:09:38 - User asdfasdf not found.
+2018-03-10 15:09:38 - Improper password for user 'asdfasdf, or user does not exist'.
+2018-03-10 15:09:43 - Attempted login with user name: mm
+2018-03-10 15:09:43 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-10 15:09:44 - User mm successfully logged in
+2018-03-10 15:09:44 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-10 15:09:45 - User 'mm' logged in as manager.
+2018-03-10 15:10:44 - Attempted login with user name: mm
+2018-03-10 15:10:44 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-10 15:10:44 - User mm successfully logged in
+2018-03-10 15:10:44 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-10 15:10:45 - User 'mm' logged in as manager.
+2018-03-10 15:20:34 - Attempted login with user name: lkj
+2018-03-10 15:20:34 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-10 15:20:36 - User lkj not found.
+2018-03-10 15:20:36 - Improper password for user 'lkj, or user does not exist'.
+2018-03-10 15:22:19 - Attempted login with user name: lkj
+2018-03-10 15:22:19 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-10 15:22:21 - Attempted login with user name: lkj
+2018-03-10 15:22:21 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-10 15:22:22 - User lkj not found.
+2018-03-10 15:22:22 - Improper password for user 'lkj, or user does not exist'.
+2018-03-10 15:22:22 - User lkj not found.
+2018-03-10 15:22:22 - Improper password for user 'lkj, or user does not exist'.
+2018-03-10 15:22:28 - Attempted login with user name: sdfs
+2018-03-10 15:22:28 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-10 15:22:29 - User sdfs not found.
+2018-03-10 15:22:29 - Improper password for user 'sdfs, or user does not exist'.
+2018-03-10 15:22:34 - Attempted login with user name: 
+2018-03-10 15:22:34 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-10 15:22:35 - User  not found.
+2018-03-10 15:22:35 - Improper password for user ', or user does not exist'.
+2018-03-10 15:22:39 - Attempted login with user name: mm
+2018-03-10 15:22:39 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-10 15:22:40 - User mm successfully logged in
+2018-03-10 15:22:40 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-10 15:22:41 - User 'mm' logged in as manager.
+2018-03-10 15:29:14 - Attempted login with user name: mm
+2018-03-10 15:29:14 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-10 15:29:15 - Incorrect password for mm
+2018-03-10 15:29:15 - Improper password for user 'mm, or user does not exist'.
+2018-03-10 15:29:20 - Attempted login with user name: mm
+2018-03-10 15:29:20 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-10 15:29:20 - User mm successfully logged in
+2018-03-10 15:29:20 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-10 15:29:21 - User 'mm' logged in as manager.
+2018-03-10 15:31:25 - Attempted login with user name: asdf
+2018-03-10 15:31:25 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-10 15:31:28 - User asdf not found.
+2018-03-10 15:31:28 - Improper password for user 'asdf, or user does not exist'.
+2018-03-10 15:31:31 - Attempted login with user name: asdf
+2018-03-10 15:31:31 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-10 15:31:32 - User asdf not found.
+2018-03-10 15:31:32 - Improper password for user 'asdf, or user does not exist'.
+2018-03-10 15:31:37 - Attempted login with user name: js
+2018-03-10 15:31:37 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-10 15:31:37 - User js successfully logged in
+2018-03-10 15:31:37 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-10 15:31:38 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-10 15:31:38 - User 'js' logged in as employee.
+2018-03-10 15:44:37 - Attempted login with user name: sdf
+2018-03-10 15:44:37 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-10 15:44:39 - User sdf not found.
+2018-03-10 15:44:39 - Improper password for user 'sdf, or user does not exist'.
+2018-03-10 15:44:43 - Attempted login with user name: mm
+2018-03-10 15:44:43 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-10 15:44:44 - User mm successfully logged in
+2018-03-10 15:44:44 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-10 15:44:45 - User 'mm' logged in as manager.
+2018-03-10 15:45:27 - Attempted login with user name: mm
+2018-03-10 15:45:27 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-10 15:45:28 - User mm successfully logged in
+2018-03-10 15:45:28 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-10 15:45:29 - User 'mm' logged in as manager.
+2018-03-10 16:50:01 - Attempted login with user name: mm
+2018-03-10 16:50:01 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-10 16:50:03 - Incorrect password for mm
+2018-03-10 16:50:03 - Improper password for user 'mm, or user does not exist'.
+2018-03-10 16:50:09 - Attempted login with user name: mm
+2018-03-10 16:50:09 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-10 16:50:10 - User mm successfully logged in
+2018-03-10 16:50:10 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-10 16:50:11 - User 'mm' logged in as manager.
+2018-03-10 16:57:17 - Attempted login with user name: mm
+2018-03-10 16:57:17 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-10 16:57:19 - Incorrect password for mm
+2018-03-10 16:57:19 - Improper password for user 'mm, or user does not exist'.
+2018-03-10 16:57:24 - Attempted login with user name: mm
+2018-03-10 16:57:24 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-10 16:57:25 - User mm successfully logged in
+2018-03-10 16:57:25 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-10 16:57:26 - User 'mm' logged in as manager.
+2018-03-10 16:57:35 - Attempted login with user name: js
+2018-03-10 16:57:35 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-10 16:57:36 - User js successfully logged in
+2018-03-10 16:57:36 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-10 16:57:37 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-10 16:57:37 - User 'js' logged in as employee.
+2018-03-10 17:27:59 - Attempted login with user name: mm
+2018-03-10 17:27:59 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-10 17:28:01 - Incorrect password for mm
+2018-03-10 17:28:01 - Improper password for user 'mm, or user does not exist'.
+2018-03-10 17:28:05 - Attempted login with user name: mm
+2018-03-10 17:28:05 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-10 17:28:05 - User mm successfully logged in
+2018-03-10 17:28:05 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-10 17:28:06 - User 'mm' logged in as manager.
+2018-03-10 18:17:41 - Attempted login with user name: mm
+2018-03-10 18:17:41 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-10 18:17:42 - Incorrect password for mm
+2018-03-10 18:17:42 - Improper password for user 'mm, or user does not exist'.
+2018-03-10 18:17:54 - Attempted login with user name: mm
+2018-03-10 18:17:54 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-10 18:17:54 - User mm successfully logged in
+2018-03-10 18:17:55 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-10 18:17:55 - User 'mm' logged in as manager.
+2018-03-10 21:42:55 - Attempted login with user name: js
+2018-03-10 21:42:55 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-10 21:42:57 - User js successfully logged in
+2018-03-10 21:42:57 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-10 21:42:57 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-10 21:42:58 - User 'js' logged in as employee.
+2018-03-10 21:59:42 - Attempted login with user name: js
+2018-03-10 21:59:42 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-10 21:59:44 - User js successfully logged in
+2018-03-10 21:59:44 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-10 21:59:45 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-10 21:59:45 - User 'js' logged in as employee.
+2018-03-10 22:01:08 - Attempted login with user name: js
+2018-03-10 22:01:08 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-10 22:01:09 - User js successfully logged in
+2018-03-10 22:01:09 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-10 22:01:10 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-10 22:01:11 - User 'js' logged in as employee.

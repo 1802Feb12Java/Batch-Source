@@ -3,6 +3,7 @@ package com.revature.ers.servlets;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -26,6 +27,7 @@ public class LoginServlet extends HttpServlet {
         super();
     }
 
+    @Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		UserServices us = new UserServices();
@@ -40,6 +42,7 @@ public class LoginServlet extends HttpServlet {
 			validated = us.validateUser(username, password);
 		} catch (SQLException e) {
 			logger.error("There was a problem with the validation request");
+			us = null;
 			e.printStackTrace();
 		}
 		
@@ -49,15 +52,20 @@ public class LoginServlet extends HttpServlet {
 			try {
 				if(us.getUserRole(username) == 1) {
 					logger.info("User '" + username + "' logged in as manager.");
-					response.sendRedirect("manager.html");
+					us = null;
+					RequestDispatcher rd = getServletContext().getRequestDispatcher("/manager.html");
+					rd.forward(request, response);
+					//response.sendRedirect("manager.html");
 				}
 				
 				else if(us.getUserRole(username) == 2) {
 					logger.info("User '" + username + "' logged in as employee.");
+					us = null;
 					response.sendRedirect("employee.html");
 				}
 			} catch (SQLException e) {
 				logger.error("There was a problem accessing the user role.");
+				us = null;
 				e.printStackTrace();
 			}
 		}
@@ -66,7 +74,9 @@ public class LoginServlet extends HttpServlet {
 		//main page
 		else {
 			logger.info("Improper password for user '" + username + ", or user does not exist'.");
-			response.sendRedirect("index.html");
+			us = null;
+			RequestDispatcher rd = request.getRequestDispatcher("index.html");
+			rd.forward(request, response);
 		}
 	}
 }

@@ -1,0 +1,14 @@
+.bg{background: url("../images/jup.jpg") no-repeat; width: 100%; height: 100vh;}
+.form-container{
+    border: 1px solid rgb(110, 20, 104);margin: 30px 40px; padding: 60px 50px; margin-top: 20vh;
+    -webkit-box-shadow: -1px 4px 26px 11px rgba(0,0,0,0.77);
+    -moz-box-shadow: -1px 4px 26px 11px rgba(0,0,0,0.77);
+    box-shadow: -1px 4px 26px 11px rgba(0,0,0,0.77);
+    border-radius: 51px 51px 51px 51px;
+    -moz-border-radius: 51px 51px 51px 51px;
+    -webkit-border-radius: 51px 51px 51px 51px;
+    border: 0px solid #000000;
+}
+.form-control{margin-top: 20px; margin-bottom: 10px;}
+.btn{margin-top: 20px;}
+.h3{color: whitesmoke;}

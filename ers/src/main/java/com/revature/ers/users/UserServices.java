@@ -63,7 +63,7 @@ public class UserServices implements UserDAO{
 		PreparedStatement ps = null;
 		
 		//create the prepared statement
-		String sql = "SELECT * FROM ERS_USERS WHERE U_USERNAME = ?";
+		String sql = "SELECT U_PASSWORD FROM ERS_USERS WHERE U_USERNAME = ?";
 		ps = conn.prepareStatement(sql);
 		ps.setString(1, u_userName);
 		
@@ -105,15 +105,19 @@ public class UserServices implements UserDAO{
 		ConnFactory cf = new ConnFactory();
 		Connection conn = cf.getConnection();
 		PreparedStatement ps = null;
+		int role = 0;
 		
 		//create the prepared statement
-		String sql = "SELECT * FROM ERS_USERS WHERE U_USERNAME = ?";
+		String sql = "SELECT UR_ID FROM ERS_USERS WHERE U_USERNAME = ?";
 		ps = conn.prepareStatement(sql);
 		ps.setString(1, u_userName);
 		
 		//execute the query
 		ResultSet rs = ps.executeQuery();
 		rs.next();
-		return rs.getInt("UR_ID");
+		role = rs.getInt("UR_ID");
+		rs.close();
+		ps.close();
+		return role;
 	}
 }
