@@ -112,13 +112,13 @@ public class User {
 	@Override
 	public String toString() {
 		StringBuilder s  = new StringBuilder(
-							"User ID:\t" + Integer.toString(this.userID) + 
-							"Username:\t" + this.username +
-							"Password:\t" + this.password + 
-							"First Name:\t" + this.firstName + 
-							"Last Name:\t" + this.lastName+
-							"Email:\t" + this.email + 
-							"Role:\t" + this.role);
+							"User ID:\t" + Integer.toString(this.userID) + "\n" +
+							"Username:\t" + this.username + "\n" +
+							"Password:\t" + this.password + "\n" + 
+							"First Name:\t" + this.firstName + "\n" + 
+							"Last Name:\t" + this.lastName+ "\n" +
+							"Email:\t\t" + this.email + "\n" + 
+							"Role:\t\t" + this.role + "\n");
 		return s.toString();
 	}
 

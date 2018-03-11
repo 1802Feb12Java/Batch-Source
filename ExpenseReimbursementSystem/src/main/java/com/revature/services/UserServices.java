@@ -24,7 +24,7 @@ public class UserServices extends LookupServices implements UserDAO{
     	//use stored procedure
     	CallableStatement callInsert= null;
     	String insertString = "{CALL insert_user(?,?,?,?,?,?)";
-    	callInsert = conn.prepareCall(insertString);
+    	callInsert = this.conn.prepareCall(insertString);
     	
     	//set up fields
     	callInsert.setString(1, u.getUsername());
@@ -36,9 +36,6 @@ public class UserServices extends LookupServices implements UserDAO{
     	
     	//execute delete
     	callInsert.executeUpdate();
-    	
-        //close connection
-        this.conn.close();
     }
 
     //read/select from the DB
@@ -52,7 +49,7 @@ public class UserServices extends LookupServices implements UserDAO{
     	
     	//lookup Role using lookupServices
     	int rID = this.lookupRoleID(role);
-    	selectPrepared = conn.prepareStatement(selectStatement);
+    	selectPrepared = this.conn.prepareStatement(selectStatement);
     	selectPrepared.setInt(1, rID);
     	
     	ResultSet rs = selectPrepared.executeQuery();
@@ -62,8 +59,7 @@ public class UserServices extends LookupServices implements UserDAO{
     		User uToAdd = this.rsToUser(rs);
     		usersByRole.add(uToAdd);
     	}
-    	
-    	this.conn.close();
+
     	return usersByRole;
     }
     
@@ -75,11 +71,10 @@ public class UserServices extends LookupServices implements UserDAO{
     	PreparedStatement selectPrepared = null;
     	String selectStatement = "SELECT * FROM ers_users WHERE u_id=?";
     	
-    	selectPrepared = conn.prepareStatement(selectStatement);
+    	selectPrepared = this.conn.prepareStatement(selectStatement);
     	selectPrepared.setInt(1, uID);
     	
     	ResultSet rs = selectPrepared.executeQuery();
-    	this.conn.close();
     	if(rs.next()) {
     		return this.rsToUser(rs);
     	}
@@ -94,30 +89,28 @@ public class UserServices extends LookupServices implements UserDAO{
     	PreparedStatement selectPrepared = null;
     	String selectStatement = "SELECT * FROM ers_users WHERE u_username=?";
     	
-    	selectPrepared = conn.prepareStatement(selectStatement);
+    	selectPrepared = this.conn.prepareStatement(selectStatement);
     	selectPrepared.setString(1,username);
     	
     	ResultSet rs = selectPrepared.executeQuery();
-    	this.conn.close();
     	if(rs.next()) {
     		return this.rsToUser(rs);
     	}
     	return null;
     }
     //used for login
-    public User getUserByUsername(String username, String password) throws ClassNotFoundException, SQLException{
+    public User getUserForLogin(String username, String password) throws ClassNotFoundException, SQLException{
     	//get connection
     	this.conn = ConnManager.getInstance().getConnection();
     	
     	PreparedStatement selectPrepared = null;
     	String selectStatment = "SELECT * FROM ers_users WHERE u_username=? AND u_password=?";
-    	
-    	selectPrepared = conn.prepareStatement(selectStatment);
+//    	String selectStatment = "SELECT * FROM ers_users WHERE u_username=\'khsieh\' AND u_password=\'pass\'";
+    	selectPrepared = this.conn.prepareStatement(selectStatment);
     	selectPrepared.setString(1, username);
     	selectPrepared.setString(2, password);
     	
     	ResultSet rs = selectPrepared.executeQuery();
-    	this.conn.close();
     	if(rs.next()) {
     		return this.rsToUser(rs);
     	}
@@ -127,11 +120,12 @@ public class UserServices extends LookupServices implements UserDAO{
     //update DB record
     //update employee information
     public void updateUser(User u) throws ClassNotFoundException, SQLException {
+    	this.conn = ConnManager.getInstance().getConnection();
     	//user stored procedure
     	//use callable statements    	
     	CallableStatement callUpdate = null;
     	String updateString = "{CALL update_user(?,?,?,?,?,?,?)";
-    	callUpdate = conn.prepareCall(updateString);
+    	callUpdate = this.conn.prepareCall(updateString);
     	
     	//set all fields
     	callUpdate.setInt(1, u.getUserID());
@@ -148,10 +142,12 @@ public class UserServices extends LookupServices implements UserDAO{
 
     //delete DB record
     public void deleteUser(User u) throws ClassNotFoundException, SQLException {
+    	this.conn = ConnManager.getInstance().getConnection();
+    	
     	//use stored procedure
     	CallableStatement callDelete = null;
     	String deleteString = "{CALL delete_user(?)";
-    	callDelete = conn.prepareCall(deleteString);
+    	callDelete = this.conn.prepareCall(deleteString);
     	
     	//set up fields
     	callDelete.setInt(1, u.getUserID());

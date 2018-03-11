@@ -34,10 +34,8 @@ public class ReimbursementServices extends LookupServices implements Reimburseme
     	
     	//execute delete
     	callInsert.executeUpdate();
-    	
-        //close connection
-        this.conn.close();
     } 
+    
     //read/select from DB
     //all tickets
     public ArrayList<Reimbursement> getAllTickets() throws ClassNotFoundException, SQLException {
@@ -55,8 +53,6 @@ public class ReimbursementServices extends LookupServices implements Reimburseme
     	while(rs.next()) {
     		allTickets.add(this.rsToTicket(rs));
     	}
-    	//close connection
-        this.conn.close();
     	return allTickets;
     	
     }
@@ -77,8 +73,6 @@ public class ReimbursementServices extends LookupServices implements Reimburseme
     	while(rs.next()){
     		ticketsByAuthor.add(rsToTicket(rs));
     	}
-    	//close connection
-    	this.conn.close();
     	return ticketsByAuthor;
     }
     //employees viewing their own tickets
@@ -99,8 +93,6 @@ public class ReimbursementServices extends LookupServices implements Reimburseme
     	while(rs.next()){
     		ticketsByAuthAndStat.add(rsToTicket(rs));
     	}
-    	//close connection
-    	this.conn.close();
     	return ticketsByAuthAndStat;
     }
     //approve/denying view all pending
@@ -120,8 +112,6 @@ public class ReimbursementServices extends LookupServices implements Reimburseme
     	while(rs.next()){
     		ticketsByStat.add(rsToTicket(rs));
     	}
-    	//close connection
-    	this.conn.close();
     	return ticketsByStat;
     }
     //update Ticket
@@ -149,9 +139,6 @@ public class ReimbursementServices extends LookupServices implements Reimburseme
     	
     	//execute
     	callUpdate.executeUpdate();
-    	
-    	//close connection
-    	this.conn.close();
     	
     }
     //delete Ticket

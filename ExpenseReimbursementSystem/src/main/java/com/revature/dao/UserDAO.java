@@ -12,7 +12,7 @@ public interface UserDAO{
     public ArrayList<User> getUsersByRole(String role) throws ClassNotFoundException, SQLException; //used for view all employees
     public User getUserByID(int uID) throws ClassNotFoundException, SQLException; //view single employee/user
     public User getUserByUsername(String username) throws ClassNotFoundException, SQLException; //used to register, optional
-    public User getUserByUsername(String username, String password) throws ClassNotFoundException, SQLException; //used for login
+    public User getUserForLogin(String username, String password) throws ClassNotFoundException, SQLException; //used for login
     //update DB record
     public void updateUser(User u) throws ClassNotFoundException, SQLException; //update employee information
     //delete DB record

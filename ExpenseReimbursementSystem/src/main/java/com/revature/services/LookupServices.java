@@ -28,13 +28,12 @@ abstract class LookupServices{
 
         //setup prepared statements
         PreparedStatement lookupPrepared = null;
-        String lookupString = "SELECT ur_role FROM ers_user_roles WHERE ur_id=?";
+        String lookupString = "SELECT ur_roles FROM ers_user_roles WHERE ur_id=?";
 
         lookupPrepared = this.conn.prepareStatement(lookupString);
         lookupPrepared.setInt(1,roleID);
         ResultSet rs = lookupPrepared.executeQuery();
-        //closing connection
-        this.conn.close();
+
         if(rs.next()){
             return rs.getString(1);
         }
@@ -59,8 +58,7 @@ abstract class LookupServices{
     	lookupPrepared.setString(1, role);
     	//execute select
     	ResultSet rs = lookupPrepared.executeQuery();
-    	//close connection
-    	this.conn.close();
+
     	//returns
     	if(rs.next()) {
     		return rs.getInt(1);
@@ -87,8 +85,7 @@ abstract class LookupServices{
     	lookupPrepared.setInt(1, rt_id);
     	//execute select query
     	ResultSet rs = lookupPrepared.executeQuery();
-    	//close connection
-    	this.conn.close();
+
     	if(rs.next()) {
     		return rs.getString(1);
     	}
@@ -113,9 +110,7 @@ abstract class LookupServices{
     	lookupPrepared.setString(1, rt_type);
     	//execute  select
     	ResultSet rs = lookupPrepared.executeQuery();
-    	//close connection;
-    	this.conn.close();
-    	if(rs.next()) {
+    	if (rs.next()) {
     		return rs.getInt(1);
     	}
     	
@@ -138,8 +133,7 @@ abstract class LookupServices{
     	lookupPrepared.setInt(1, rs_id);
     	//execute select query
     	ResultSet rs = lookupPrepared.executeQuery();
-    	//close connection
-    	this.conn.close();
+
     	if(rs.next()) {
     		return rs.getString(1);
     	}
@@ -164,8 +158,7 @@ abstract class LookupServices{
     	lookupPrepared.setString(1, rs_status);
     	//execute  select
     	ResultSet rs = lookupPrepared.executeQuery();
-    	//close connection;
-    	this.conn.close();
+
     	if(rs.next()) {
     		return rs.getInt(1);
     	}
@@ -178,6 +171,7 @@ abstract class LookupServices{
      * Helper function to convert a row of ResultSet to a user
      */
     User rsToUser(ResultSet rs) throws ClassNotFoundException, SQLException {
+
     	User u = new User();
     	u.setUserID(rs.getInt(1));
     	u.setUsername(rs.getString(2));

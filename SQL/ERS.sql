@@ -1,3 +1,11 @@
+--User roles
+CREATE TABLE ers_user_roles
+(
+    ur_id NUMBER(*,0) GENERATED ALWAYS AS IDENTITY,
+    ur_roles VARCHAR(40),
+    CONSTRAINT ers_user_roles_pk PRIMARY KEY (ur_id)
+);
+
 --Users
 CREATE TABLE ers_users
 (
@@ -15,12 +23,20 @@ CREATE TABLE ers_users
     CONSTRAINT ers_users_u_email_un UNIQUE (u_email)
 );
 
---User roles
-CREATE TABLE ers_user_roles
+--Reimbursement Status
+CREATE TABLE  ers_reimbursement_status
 (
-    ur_id NUMBER(*,0) GENERATED ALWAYS AS IDENTITY,
-    ur_roles VARCHAR(40),
-    CONSTRAINT ers_user_roles_pk PRIMARY KEY (ur_id)
+    rs_id NUMBER(*,0) GENERATED ALWAYS AS IDENTITY,
+    rs_status VARCHAR2(30) NOT NULL,
+    CONSTRAINT ers_reimbursment_status_pk PRIMARY KEY (rs_id)
+);
+
+--Reimbursement Type
+CREATE TABLE  ers_reimbursement_type
+(
+    rt_id NUMBER(*,0) GENERATED ALWAYS AS IDENTITY,
+    rt_type VARCHAR2(30) NOT NULL,
+    CONSTRAINT ers_reimbursment_type_pk PRIMARY KEY (rt_id)
 );
 
 --Reimbursements
@@ -47,21 +63,6 @@ CREATE TABLE ers_reimbursements
         REFERENCES ers_reimbursement_status (rs_id)
 );
 
---Reimbursement Status
-CREATE TABLE  ers_reimbursement_status
-(
-    rs_id NUMBER(*,0) GENERATED ALWAYS AS IDENTITY,
-    rs_status VARCHAR2(30) NOT NULL,
-    CONSTRAINT ers_reimbursment_status_pk PRIMARY KEY (rs_id)
-);
-
---Reimbursement Type
-CREATE TABLE  ers_reimbursement_type
-(
-    rt_id NUMBER(*,0) GENERATED ALWAYS AS IDENTITY,
-    rt_type VARCHAR2(30) NOT NULL,
-    CONSTRAINT ers_reimbursment_type_pk PRIMARY KEY (rt_id)
-);
 
 --Stored Procedures for insert, updates, and deletes for users
 CREATE OR REPLACE PROCEDURE insert_user
@@ -175,3 +176,27 @@ BEGIN
     COMMIT;
 END;
 /
+
+--INSERT DUMMY DATA
+INSERT INTO ERS_REIMBURSEMENT_TYPE (RT_TYPE) VALUES ('travel');
+INSERT INTO ERS_REIMBURSEMENT_TYPE (RT_TYPE) VALUES ('medical');
+INSERT INTO ERS_REIMBURSEMENT_TYPE (RT_TYPE) VALUES ('business');
+INSERT INTO ERS_REIMBURSEMENT_STATUS (RS_STATUS) VALUES ('pending');
+INSERT INTO ERS_REIMBURSEMENT_STATUS (RS_STATUS) VALUES ('approved');
+INSERT INTO ERS_REIMBURSEMENT_STATUS (RS_STATUS) VALUES ('denied');
+INSERT INTO ers_user_roles (UR_ROLES) VALUES ('employee');
+INSERT INTO ers_user_roles (UR_ROLES) VALUES ('manager');
+
+CALL insert_user('khsieh','pass','kevin','hsieh','kevin@gmail.com',1);
+CALL insert_user('hello','world','jimm','wong','jimbo@gmail.com',1);
+CALL insert_user('admin','password','admin','admin','admin@gmail.com',2);
+
+CALL insert_ticket(35.0,
+'Hello World', 
+null,
+TO_DATE('2018-2-21 00:00:00','yyyy-mm-dd hh24:mi:ss'),
+TO_DATE('2018-2-21 00:00:00','yyyy-mm-dd hh24:mi:ss'),
+1,3,1,1);
+
+SELECT * FROM ers_users WHERE u_username='khsieh' AND u_password='pass';
+
