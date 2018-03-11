@@ -46,13 +46,13 @@ public class AdminFilter implements Filter {
 		HttpSession session = req.getSession(false);
 		User u = (User) session.getAttribute("user");
 
-		if (!u.getUserRole().equals("Manager") || !u.getUserRole().equals("Admin")) {
+		if (u.getUserRole().toLowerCase().equals("manager") || u.getUserRole().toLowerCase().equals("admin")) {
+			// pass the request along the filter chain
+			chain.doFilter(request, response);
+		} else {
 			logger.debug("Unauthorized access request for admin pages");
 			res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 			res.sendRedirect(req.getContextPath() + "/login");
-		} else {
-			// pass the request along the filter chain
-			chain.doFilter(request, response);
 		}
 	}
 

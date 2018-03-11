@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>ERSApp</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" href="glyphicons-686-sunbath.png" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+  <body>
+          <!-- Common Nav Bar -->
+    <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+              <div class="navbar-header">
+                <a class="navbar-brand" href="./home.html">Reimbursement Portal</a>
+              </div>
+              <ul class="nav navbar-nav">
+                <li><a href="./home.html">Home</a></li>
+                <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Reimbursements <span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                      <li><a href="./request-pending.html">View Pending</a></li>
+                      <li><a href="./request-all.html">View All</a></li>
+                  </ul>
+                </li>
+                <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Employees <span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                      <li><a href="./user-register.html">Register</a></li>
+                      <li><a href="./user-all.html">View All</a></li>
+                  </ul>
+                </li>
+                <li><a href="./user-info.html">Update My Info</a></li>
+              </ul>
+              <ul class="nav navbar-nav navbar-right"  id="logoutBtn">
+                <li><a href="../login.html"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+              </ul>
+            </div>
+          </nav>
+          <br><br>
+    <!-- Pending Request Component -->
+    <div class="container-fluid col-xs-8 col-xs-offset-1">
+        <div class="page-header">
+           <h2>
+             Requests
+           </h2>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-hover" id="requestTable">
+        </table>
+      </div>
+  
+      </div>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+  <script src="../resources/ajaxLogout.js"></script>
+   <script src="../aresources/request-pending.js"></script>
+</html>

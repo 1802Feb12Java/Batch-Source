@@ -17,7 +17,7 @@ function populateUserRequests()
 		    fillInFields(reqFound);
 		}
 	};
-	var url ="/ERSApp/secure/request/get";
+	var url ="/ERSApp/admin/request/get/all";
 	console.log("URL: "+url);
 	xhr.open("GET", url, true);
 	
@@ -77,3 +77,5 @@ function getStatusClass(status)
 	return 'bg-light text-dark table-hover';
 	
 }
+
+

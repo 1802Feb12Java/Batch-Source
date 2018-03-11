@@ -148,4 +148,18 @@ public class Reimbursements {
 		return null;
 	}
 
+	public static List<Reimbursement> getAllReimbursements(String status) {
+		try {
+			return reimDao.getAllReimbursements(status);
+		} catch (SQLException e) {
+			// log for now
+			logger.error("SQL Error while fetching all reimbursements");
+			logger.error(e.getMessage());
+		} finally {
+
+		}
+
+		return null;
+	}
+
 }

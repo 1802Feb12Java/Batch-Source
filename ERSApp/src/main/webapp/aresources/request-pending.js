@@ -17,11 +17,11 @@ function populateUserRequests()
 		    fillInFields(reqFound);
 		}
 	};
-	var url ="/ERSApp/secure/request/get";
+	var url ="/ERSApp/admin/request/get/pending";
 	console.log("URL: "+url);
 	xhr.open("GET", url, true);
 	
-	xhr.send();
+	xhr.send('Pending');
 	console.log("sent AJAX request");
 };
 function fillInFields(requests)
@@ -63,7 +63,7 @@ function fillInFields(requests)
 		
 	}
 	console.log("header done "+hRow)
-    
+	
 }
 function getStatusClass(status)
 {

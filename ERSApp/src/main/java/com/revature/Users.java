@@ -145,4 +145,18 @@ public class Users {
 		return null;
 	}
 
+	public static List<User> getAllUsers(String role) {
+		try {
+			return userDao.getAllUsers(role);
+		} catch (SQLException e) {
+			// log for now
+			logger.error("SQL Error while fetching all users with role " + role);
+			logger.error(e.getMessage());
+		} finally {
+
+		}
+
+		return null;
+	}
+
 }

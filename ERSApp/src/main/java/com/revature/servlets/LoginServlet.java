@@ -39,8 +39,12 @@ public class LoginServlet extends HttpServlet {
 		if (u != null) {
 			logger.info("Logged in user " + u);
 			request.getSession().setAttribute("user", u); // Put user in session.
-			// TODO check user type :D
-			response.sendRedirect("secure/home.html"); // Go to some start page.
+			// checks user type and sends them to correct homepage
+			if (u.getUserRole().toLowerCase().equals("admin") || u.getUserRole().toLowerCase().equals("manager")) {
+				response.sendRedirect("./admin/home.html");
+			} else {
+				response.sendRedirect("./secure/home.html"); // Go to some start page.
+			}
 		} else {
 			logger.info("Unable to log user in");
 			request.setAttribute("error", "Unknown login, try again"); // Set error msg for ${error}

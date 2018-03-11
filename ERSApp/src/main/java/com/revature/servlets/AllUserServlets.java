@@ -1,6 +1,7 @@
 package com.revature.servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -20,34 +21,42 @@ import com.revature.beans.User;
  * 
  * ../secure/admin
  */
-public class AdminServlet extends HttpServlet {
-	private static final Logger logger = LogManager.getLogger(AdminServlet.class);
+public class AllUserServlets extends HttpServlet {
+	private static final Logger logger = LogManager.getLogger(AllUserServlets.class);
 
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public AdminServlet() {
+	public AllUserServlets() {
 		super();
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 *
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		logger.debug("Got Get Req");
+		logger.debug("got GET req");
 
-		// admins get format is?
+		// get all employees
+		ArrayList<User> reqs = (ArrayList<User>) Users.getAllUsers("Employee");
 
+		// jsonify them
+		// write string to response
+		String jsonReqs = JsonfierUtil.userListJson(reqs);
+
+		logger.info("Sending users " + jsonReqs);
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
+		response.getWriter().print(jsonReqs);
+		response.setStatus(HttpServletResponse.SC_OK);
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * Creates user
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

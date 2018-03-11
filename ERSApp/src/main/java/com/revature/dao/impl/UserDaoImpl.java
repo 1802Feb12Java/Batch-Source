@@ -252,6 +252,40 @@ public class UserDaoImpl implements UserDao {
 		return list;
 	}
 
+	public List<User> getAllUsers(String role) throws SQLException {
+		Connection con = null;
+		PreparedStatement s = null;
+		ResultSet rs = null;
+		List<User> list = new ArrayList<>();
+
+		String statement = "SELECT * FROM ERS_USERS " + " INNER JOIN ERS_USER_ROLES R ON U.UR_ID = R.UR_ID"
+				+ " WHERE U.UR_ID=?";
+
+		logger.debug("Created SQL Statement = " + statement + " with user role " + role);
+
+		try {
+			con = ConnectionFactory.getInstance().getConnection();
+			s = con.prepareStatement(statement);
+			s.setInt(1, roleValue(role));
+
+			rs = s.executeQuery();
+			logger.debug("Fetched Users from Database");
+
+			while (rs.next()) {
+				list.add(processRow(rs));
+			}
+		} finally {
+			if (s != null)
+				s.close();
+			if (con != null)
+				con.close();
+			if (con != null)
+				con.close();
+		}
+
+		return list;
+	}
+
 	/**
 	 * Converts a result set row into User POJO
 	 * 
@@ -270,6 +304,21 @@ public class UserDaoImpl implements UserDao {
 		user.setUserRole(rs.getString("UR_ROLE"));
 		return user;
 
+	}
+
+	private int roleValue(String role) {
+		switch (role.toLowerCase()) {
+		case "admin":
+			return 0;
+		case "test":
+			return 1;
+		case "employee":
+			return 2;
+		case "manager":
+			return 3;
+		default:
+			return -1;
+		}
 	}
 
 }

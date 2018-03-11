@@ -186,6 +186,42 @@ public class ReimbursementDaoImpl implements ReimbursementDao {
 		return list;
 	}
 
+	public List<Reimbursement> getAllReimbursements(String status) throws SQLException {
+		Connection con = null;
+		PreparedStatement s = null;
+		ResultSet rs = null;
+		List<Reimbursement> list = new ArrayList<>();
+
+		String statement = "SELECT R.R_ID, R.R_AMOUNT, R.R_DESCRIPTION, R.R_RECEIPT, R.R_SUBMITTED, R.R_RESOLVED, R.U_ID_AUTHOR, R.U_ID_RESOLVER,\r\n"
+				+ "T.RT_TYPE, S.RS_STATUS FROM ERS_REIMBURSEMENTS R "
+				+ " INNER JOIN ERS_REIMBURSEMENT_TYPE T ON R.RT_TYPE = T.RT_ID"
+				+ " INNER JOIN ERS_REIMBURSEMENT_STATUS S ON R.RT_STATUS = S.RS_ID" + " WHERE R.RT_STATUS =?";
+
+		logger.debug("Created SQL Statement = " + statement + "with status=" + status);
+
+		try {
+			con = ConnectionFactory.getInstance().getConnection();
+			s = con.prepareStatement(statement);
+			s.setInt(1, statusValue(status));
+
+			rs = s.executeQuery();
+			logger.debug("Fetched All Reimbursements from Database with status " + status);
+
+			while (rs.next()) {
+				list.add(processRow(rs));
+			}
+		} finally {
+			if (s != null)
+				s.close();
+			if (con != null)
+				con.close();
+			if (con != null)
+				con.close();
+		}
+
+		return list;
+	}
+
 	/**
 	 * Converts a result set row into Reimbursement POJO
 	 * 

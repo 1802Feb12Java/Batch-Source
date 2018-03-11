@@ -119,10 +119,10 @@ public class RequestServlet extends HttpServlet {
 			}
 		} else {
 			logger.info("NO SQL ERRORS PUTTING IN REIM!");
-			response.sendRedirect("./home.html");
-		}
 
-		// doGet(request, response);
+		}
+		response.sendRedirect("./home.html");
+
 	}
 
 	/**

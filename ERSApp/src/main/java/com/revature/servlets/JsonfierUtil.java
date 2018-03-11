@@ -6,6 +6,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.revature.beans.Reimbursement;
+import com.revature.beans.User;
 
 public class JsonfierUtil {
 
@@ -26,6 +27,24 @@ public class JsonfierUtil {
 			obj.put("status", r.getStatus());
 
 			// put reim item in array
+			json.put(obj);
+		}
+		return json.toString();
+	}
+
+	public static String userListJson(ArrayList<User> list) {
+		JSONArray json = new JSONArray();
+
+		JSONObject obj = null;
+		// put in all displayable/useful fields
+		for (User u : list) {
+			obj = new JSONObject();
+			obj.put("username", u);
+			obj.put("firstname", u);
+			obj.put("lastname", u);
+			obj.put("email", u);
+
+			// put user item in array
 			json.put(obj);
 		}
 		return json.toString();
