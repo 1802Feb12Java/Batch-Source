@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+  <display-name>ServletExample</display-name>
+  <servlet>
+    <servlet-name>myFirstServlet</servlet-name>
+    <servlet-class>com.revature.servlet.MyFirstServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>myFirstServlet</servlet-name>
+    <url-pattern>/test</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>LifecycleServlet</display-name>
+    <servlet-name>LifecycleServlet</servlet-name>
+    <servlet-class>com.revature.servlet.LifecycleServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LifecycleServlet</servlet-name>
+    <url-pattern>/LifecycleServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>PrintWriterServlet</display-name>
+    <servlet-name>PrintWriterServlet</servlet-name>
+    <servlet-class>com.revature.servlet.PrintWriterServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PrintWriterServlet</servlet-name>
+    <url-pattern>/PrintWriterServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>getJSON</display-name>
+    <servlet-name>getJSON</servlet-name>
+    <servlet-class>com.revature.servlet.getJSON</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>getJSON</servlet-name>
+    <url-pattern>/getJSON</url-pattern>
+  </servlet-mapping>
+</web-app>
