@@ -1,0 +1,7 @@
+Dependencies:
+    ojdbc8-12.2.0.1.jar
+    postgresql-42.2.1.jre7.jar
+    javax.servlet-api-4.0.0.jar
+    database.properties (located in src/main/resources)
+    rds-combined-ca-bundle.pem (if connecting to the database using SSL)
+

@@ -1,0 +1,36 @@
+<!-- Deps: reimbursement-form.css -->
+<div class="row align-items-center">
+    <div class="col"></div><!-- filler -->
+    <div class="col-lg-7 text-center">
+        <h1>Submit Reimbursement Request</h1>
+        <form id="registration-form">
+            <fieldset class="border rounded">
+                <div class="form-group">
+                    <select class="form-control" name="usr-role" id="usr-role" required>
+                        <option disabled selected value>-- Select Reimbursement Type --</option>
+                        <option value="1">Business</option>
+                        <option value="2">Travel</option>
+                        <option value="3">Medical</option>
+                        <option value="4">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <input type="number" class="form-control" name="r-amount" id="r-amount" placeholder="Amount">
+                </div>
+
+                <div class="form-group">
+                    <textarea class="form-control" name="desc-area" id="desc-area" rows="3" placeholder="Description" maxlength="100"></textarea>
+                </div>
+                <div class="form-group">
+                    <input type="file" class="form-control-file" name="receipt-file" id="receipt-file" placeholder="Receipt File">
+                </div>
+
+                <div class="form-group">
+                    <button type="button" name="submitBtn" id="submitBtn" class="btn btn-primary">Submit</button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+    <div class="col"></div><!-- filler -->
+</div>

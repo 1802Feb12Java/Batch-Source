@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="/resources/user-base.css">
+    <link rel="stylesheet" href="/resources/reimbursement-form.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <!-- Welcome & Logout Button -->
+        <div class="row">
+            <div class="col">
+                <h4>Welcome, <span id="user">User</span>.</h4>
+            </div>
+            <div class="col">
+                <div class="row float-right">
+                    <button type="button" id="logoutBtn" class="btn btn-dark">Logout</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Bar -->
+        <nav class="navbar navbar-expand-sm|md|lg|-xl navbar-light bg-light" data-toggle="collapse" data-target="#collapsibleNavId">
+            <a class="navbar-brand" href="#" data-toggle="collapse" data-target="#collapsibleNavId">Navigation</a>
+            <button class="navbar-toggler hidden-lg-up" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+                aria-expanded="false" aria-label="Toggle navigation"></button>
+            <div class="collapse navbar-collapse" id="collapsibleNavId">
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    
+                    <li class="nav-item active"> <!-- User Homepage -->
+                        <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
+                    </li>
+
+                    <li class="nav-item dropdown"> <!-- Reimbursements -->
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Reimbursements</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownId">
+                            <a class="dropdown-item" href="/view-reimbursement">View Requests</a>
+                            <a class="dropdown-item" href="/submit-req">Submit Request</a>
+                        </div>
+                    </li>
+                    
+                    <li class="nav-item dropdown"> <!-- Account -->
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Account</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownId">
+                            <a class="dropdown-item" href="/chacct">Edit Account Info</a>
+                            <a class="dropdown-item" href="/logout">Logout</a>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Content -->
+        <div id="content">
+            <div class="row align-items-center">
+                <div class="col"></div><!-- filler -->
+                <div class="col-lg-7 text-center">
+                    <h1>Submit Reimbursement Request</h1>
+                    <form id="registration-form">
+                        <fieldset class="border rounded">
+                            <div class="form-group">
+                                <select class="form-control" name="usr-role" id="usr-role" required>
+                                    <option disabled selected value>-- Select Reimbursement Type --</option>
+                                    <option value="1">Business</option>
+                                    <option value="2">Travel</option>
+                                    <option value="3">Medical</option>
+                                    <option value="4">Other</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                              <input type="number" class="form-control" name="r-amount" id="r-amount" placeholder="Amount">
+                            </div>
+
+                            <div class="form-group">
+                              <textarea class="form-control" name="desc-area" id="desc-area" rows="3" placeholder="Description" maxlength="100"></textarea>
+                            </div>
+                            <div class="form-group">
+                              <input type="file" class="form-control-file" name="receipt-file" id="receipt-file" placeholder="Receipt File">
+                            </div>
+
+                            <div class="form-group">
+                                <button type="button" name="submitBtn" id="submitBtn" class="btn btn-primary">Submit</button>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="col"></div><!-- filler -->
+            </div>
+        </div>
+        <!-- End Content -->
+
+    </div> <!-- End Container -->
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
