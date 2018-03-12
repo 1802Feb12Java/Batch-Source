@@ -33,16 +33,14 @@ public class ViewEmployeeInfo extends HttpServlet {
 
 		User user = null;
 		UserServices us = new UserServices();
-		int id = u_ID.intValue();
 		try {
 			System.out.println("Trying getUser");
-			user = us.getUser(id);
+			user = us.getUser(u_ID.intValue());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		System.out.println(id);
+		System.out.println(user.getU_firstName());
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
