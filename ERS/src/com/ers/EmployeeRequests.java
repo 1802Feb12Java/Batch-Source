@@ -121,7 +121,7 @@ public class EmployeeRequests implements RequestsDAO {
 	
 	public String[] getAllEmployeeRequests(int userId, String statusParam) {
 		
-		int amount = 0;
+		float amount = 0;
 		String type = "";
 		String description = "";
 		byte[] receipt;
@@ -166,7 +166,7 @@ public class EmployeeRequests implements RequestsDAO {
 			ResultSet resultSet = requestsQuery.executeQuery();
 			//create array of JSON objects
 			while (resultSet.next()) {
-				amount = resultSet.getInt(1);
+				amount = resultSet.getFloat(1);
 				description = resultSet.getString(2);
 				receipt = resultSet.getBytes(3);
 				timeStampRequest = resultSet.getTimestamp(4);
@@ -229,7 +229,7 @@ public class EmployeeRequests implements RequestsDAO {
 	//inner class to JSONify
 	@SuppressWarnings("unused")
 	private class Request {
-		int amount; 
+		float amount; 
 		String type; 
 		String description; 
 		String status; 
@@ -238,7 +238,7 @@ public class EmployeeRequests implements RequestsDAO {
 		Timestamp timeStampApprove;
 		String receipt;
 		
-		Request (int amount, String type, String description, 
+		Request (float amount, String type, String description, 
 				String status, Timestamp timeStampRequest, String resolver, 
 				Timestamp timeStampApprove, String receipt) {
 			this.amount = amount;

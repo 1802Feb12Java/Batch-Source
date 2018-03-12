@@ -21,119 +21,131 @@
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
 
-            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive"
-                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
-    
-                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-                        <a class="nav-link" href="managerDash.html">
-                            <i class="fa fa-fw fa-dashboard"></i>
-                            <span class="nav-link-text">Manager Dashboard</span>
-                        </a>
-                    </li>
-                    <!--requests panel-->
-                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
-                        <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents1" data-parent="#exampleAccordion">
-                            <i class="fa fa-usd"></i>
-                            <span class="nav-link-text">Reimbursment Requests</span>
-                        </a>
-                        <ul class="sidenav-second-level collapse" id="collapseComponents1">
-                            <li>
-                                <a href="pendingRequests.html"><i class="fa fa-credit-card-alt"></i> View Pending</a>
-                            </li>
-                            <li>
-                                <a href="mgrViewRequests.html"><i class="fa fa-university"></i> View All</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <!--employee panel-->
-                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
-                        <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents2" data-parent="#exampleAccordion">
-                            <i class="fa fa-users"></i>
-                            <span class="nav-link-text">Employees</span>
-                        </a>
-                        <ul class="sidenav-second-level collapse" id="collapseComponents2">
-                            <li>
-                               <a href="mgrViewEmployees.html"> <i class="fa fa-info-circle"></i> View Information</a>
-                            </li>
-                            <li>
-                                <a href="registerEmployee.html"> <i class="fa fa-user-plus"></i> Register New</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-                <ul class="navbar-nav sidenav-toggler">
-                    <li class="nav-item">
-                        <a class="nav-link text-center" id="sidenavToggler">
-                            <i class="fa fa-fw fa-angle-left"></i>
-                        </a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav ml-auto">
-    
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
-                            <i class="fa fa-fw fa-sign-out"></i>Logout</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-        <!--End Navigation elements-->
-    <div class="content-wrapper">
-        <div class="container-fluid">
-            <!-- Breadcrumbs-->
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item">
-                    <a href="managerDash.html">Dashboard</a>
-                </li>
-                <li class="breadcrumb-item active">Register Employees</li>
-            </ol>
-            <p>This is where the registration form will go</p>
-        </div>
-    </div>
-    <!-- /.container-fluid-->
-    <!-- /.content-wrapper-->
-    <footer class="sticky-footer">
-        <div class="container">
-            <div class="text-center">
-                <small>Scott B.</small>
-            </div>
-        </div>
-    </footer>
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fa fa-angle-up"></i>
-    </a>
-    <!-- Logout Modal-->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
-                </div>
-            </div>
-        </div>
-    </div>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+            aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-    <!-- Custom scripts for all pages-->
-    <script src="sb-admin.min.js"></script>
-    </div>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+                    <a class="nav-link" href="managerDash.html">
+                        <i class="fa fa-fw fa-dashboard"></i>
+                        <span class="nav-link-text">Manager Dashboard</span>
+                    </a>
+                </li>
+                <!-- Navigation-->
+                <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+
+                    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                        aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarResponsive">
+                        <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+
+                            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+                                <a class="nav-link" href="managerDash.html">
+                                    <i class="fa fa-fw fa-dashboard"></i>
+                                    <span class="nav-link-text">Manager Dashboard</span>
+                                </a>
+                            </li>
+
+                            <!--requests-->
+                            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+                                <a class="nav-link" href="mgrViewRequests.html">
+                                    <i class="fa fa-usd"></i>
+                                    <span class="nav-link-text">View Requests</span>
+                                </a>
+                            </li>
+
+                            <!--employee panel-->
+                            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
+                                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents2" data-parent="#exampleAccordion">
+                                    <i class="fa fa-users"></i>
+                                    <span class="nav-link-text">Employees</span>
+                                </a>
+                                <ul class="sidenav-second-level collapse" id="collapseComponents2">
+                                    <li>
+                                        <a href="mgrViewEmployees.html">
+                                            <i class="fa fa-info-circle"></i> View Information</a>
+                                    </li>
+                                    <li>
+                                        <a href="registerEmployee.html">
+                                            <i class="fa fa-user-plus"></i> Register New</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav sidenav-toggler">
+                            <li class="nav-item">
+                                <a class="nav-link text-center" id="sidenavToggler">
+                                    <i class="fa fa-fw fa-angle-left"></i>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav ml-auto">
+
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
+                                    <i class="fa fa-fw fa-sign-out"></i>Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                <!--End Navigation elements-->
+                <div class="content-wrapper">
+                    <div class="container-fluid">
+                        <!-- Breadcrumbs-->
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a href="managerDash.html">Dashboard</a>
+                            </li>
+                            <li class="breadcrumb-item active">Register Employees</li>
+                        </ol>
+                        <p>This is where the registration form will go</p>
+                    </div>
+                </div>
+                <!-- /.container-fluid-->
+                <!-- /.content-wrapper-->
+                <footer class="sticky-footer">
+                    <div class="container">
+                        <div class="text-center">
+                            <small>Scott B.</small>
+                        </div>
+                    </div>
+                </footer>
+                <!-- Scroll to Top Button-->
+                <a class="scroll-to-top rounded" href="#page-top">
+                    <i class="fa fa-angle-up"></i>
+                </a>
+                <!-- Logout Modal-->
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                            <div class="modal-footer">
+                                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                                <a class="btn btn-primary" href="login.html">Logout</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bootstrap core JavaScript-->
+                <script src="vendor/jquery/jquery.min.js"></script>
+                <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+                <!-- Core plugin JavaScript-->
+                <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+                <!-- Custom scripts for all pages-->
+                <script src="sb-admin.min.js"></script>
+        </div>
 </body>
 
 </html>

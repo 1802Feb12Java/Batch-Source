@@ -75,7 +75,7 @@ public class ManagerRequests {
 	
 	public String[] getRequests(String statusParam) {
 		int requestId = 0;
-		int amount = 0;
+		float amount = 0;
 		String type = "";
 		String description = "";
 		byte[] receipt;
@@ -117,7 +117,7 @@ public class ManagerRequests {
 			//create array of JSON objects
 			while (resultSet.next()) {
 				requestId = resultSet.getInt(1);
-				amount = resultSet.getInt(2);
+				amount = resultSet.getFloat(2);
 				description = resultSet.getString(3);
 				receipt = resultSet.getBytes(4);
 				requester = resultSet.getString(5);
@@ -140,16 +140,64 @@ public class ManagerRequests {
 	}
 	
 	public void approveOrDenyRequest(int userId, int requestId, String resolutionType) {
-		String updateQueryString = "UPDATE ERS_REIMBURSMENTS RT_STATUS = ?, U_ID_AUTHOR = ?, R_RESOLVED = ? WHERE R_ID = ?";
+		String updateQueryString = "UPDATE ERS_REIMBURSMENTS SET RT_STATUS = ?, U_ID_RESOLVER = ?, R_RESOLVED = ? WHERE R_ID = ?";
+		try {
+			PreparedStatement updateQuery = connection.prepareStatement(updateQueryString);
+			
+			//set approval type
+			if (resolutionType.equals("APPROVE")) {
+				updateQuery.setInt(1, 2);
+			}
+			else {
+				updateQuery.setInt(1, 3);
+			}
+			
+			updateQuery.setInt(2, userId);
+			updateQuery.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
+			updateQuery.setInt(4, requestId);
+			
+			updateQuery.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		
 	}
 	
+	public String[] getAllEmployees() {
+		List<String> results = new ArrayList<String>();
+		GsonBuilder builder = new GsonBuilder();
+		Gson gson = builder.create();
+		String getEmployeesQueryString = "SELECT U_FIRSTNAME, U_LASTNAME, U_EMAIL, U_USERNAME FROM ERS_USERS WHERE UR_ID = 2";  //UR_ID = 2 for employee
+		try {
+			PreparedStatement getEmployeesQuery = connection.prepareStatement(getEmployeesQueryString);
+			ResultSet resultSet = getEmployeesQuery.executeQuery();
+			while (resultSet.next()) {
+				String firstName = resultSet.getString(1);
+				String lastName = resultSet.getString(2);
+				String email = resultSet.getString(3);
+				String userName = resultSet.getString(4);
+				
+				EmployeeInfo empInfo = new EmployeeInfo(firstName, lastName, userName, email);
+				String json = gson.toJson(empInfo);
+		        results.add(json);
+		        
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+
+        return results.toArray(new String[results.size()]);
+     }
 	
 	//inner class to JSONify
 		@SuppressWarnings("unused")
 		private class Request {
 			int requestId;
-			int amount; 
+			float amount; 
 			String type; 
 			String description; 
 			String status;
@@ -159,7 +207,7 @@ public class ManagerRequests {
 			Timestamp timeStampApprove;
 			String receipt;
 			
-			Request (int requestId, int amount, String type, String description, 
+			Request (int requestId, float amount, String type, String description, 
 					String status, String requester, Timestamp timeStampRequest, String resolver, 
 					Timestamp timeStampApprove, String receipt) {
 				this.requestId = requestId;
@@ -174,6 +222,22 @@ public class ManagerRequests {
 				this.type = type;
 				
 			}
+		}
+		
+		@SuppressWarnings("unused")
+		private class EmployeeInfo {
+			String firstName;
+			String lastName;
+			String userName;
+			String email;
+			
+			EmployeeInfo(String firstName, String lastName, String userName, String email) {
+				this.firstName = firstName;
+				this.lastName = lastName;
+				this.userName = userName;
+				this.email = email;
+			}
+			
 		}
 	
 }

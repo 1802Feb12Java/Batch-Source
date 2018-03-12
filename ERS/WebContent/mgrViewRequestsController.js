@@ -1,9 +1,10 @@
 document.getElementById("viewPending").addEventListener("click", getPendingRequests);
 document.getElementById("viewAll").addEventListener("click", getAllRequests);
 document.getElementById("viewApproved").addEventListener("click", getApprovedRequests);
-
+var currentView;
 function getPendingRequests() {
     var results;
+    currentView = getPendingRequests;
     var req = new XMLHttpRequest();
     req.open("GET", "http://localhost:8080/ERS/ManagerRequestViewServlet?viewType='PENDING'", true);
     req.send(null);
@@ -94,6 +95,7 @@ function getPendingRequests() {
 
 function getAllRequests() {
     var results;
+    currentView = getAllRequests;
     var req = new XMLHttpRequest();
     req.open("GET", "http://localhost:8080/ERS/ManagerRequestViewServlet?viewType='ALL'", true);
     req.send(null);
@@ -177,7 +179,8 @@ function getAllRequests() {
                     action.appendChild(denyButton);
                 }
                 else {
-                    action.hidden = true;
+                    //action.hidden = true;
+                    action.textContent = "No Actions Available"
                 }
             }
         }
@@ -186,6 +189,7 @@ function getAllRequests() {
 
 function getApprovedRequests() {
     var results;
+    currentView = getApprovedRequests;
     var req = new XMLHttpRequest();
     req.open("GET", "http://localhost:8080/ERS/ManagerRequestViewServlet?viewType='APPROVED'", true);
     req.send(null);
@@ -268,8 +272,7 @@ function approveRequest() {
     req.send(null);
     req.addEventListener("load", function () {
         if (req.status >= 200 && req.status < 300) {
-            alert("Approve Successful.");
-            getPendingRequests();
+            currentView();
         }
 
     });
@@ -277,5 +280,18 @@ function approveRequest() {
 }
 
 function denyRequest() {
-    alert("Request Denied! :(");
+    var data = [];
+    data = $(this).parent().siblings();
+    //data = data[0];
+    var id = data[0].textContent;
+
+    var req = new XMLHttpRequest();
+    req.open("PUT", "http://localhost:8080/ERS/ManagerRequestViewServlet?type=DENY&id=" + id, true);
+    req.send(null);
+    req.addEventListener("load", function () {
+        if (req.status >= 200 && req.status < 300) {
+            currentView();
+        }
+
+    });
 }

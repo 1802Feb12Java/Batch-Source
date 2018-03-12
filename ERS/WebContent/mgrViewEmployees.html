@@ -14,74 +14,69 @@
     <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <!-- Custom styles for this template-->
     <link href="css/sb-admin.css" rel="stylesheet">
-    <link href="css/tableStyle.css" rel="stylesheet">
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
 
-            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive"
-                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
-    
-                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-                        <a class="nav-link" href="managerDash.html">
-                            <i class="fa fa-fw fa-dashboard"></i>
-                            <span class="nav-link-text">Manager Dashboard</span>
-                        </a>
-                    </li>
-                    <!--requests panel-->
-                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
-                        <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents1" data-parent="#exampleAccordion">
-                            <i class="fa fa-usd"></i>
-                            <span class="nav-link-text">Reimbursment Requests</span>
-                        </a>
-                        <ul class="sidenav-second-level collapse" id="collapseComponents1">
-                            <li>
-                                <a href="pendingRequests.html"><i class="fa fa-credit-card-alt"></i> View Pending</a>
-                            </li>
-                            <li>
-                                <a href="mgrViewRequests.html"><i class="fa fa-university"></i> View All</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <!--employee panel-->
-                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
-                        <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents2" data-parent="#exampleAccordion">
-                            <i class="fa fa-users"></i>
-                            <span class="nav-link-text">Employees</span>
-                        </a>
-                        <ul class="sidenav-second-level collapse" id="collapseComponents2">
-                            <li>
-                               <a href="mgrViewEmployees.html"> <i class="fa fa-info-circle"></i> View Information</a>
-                            </li>
-                            <li>
-                                <a href="registerEmployee.html"> <i class="fa fa-user-plus"></i> Register New</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-                <ul class="navbar-nav sidenav-toggler">
-                    <li class="nav-item">
-                        <a class="nav-link text-center" id="sidenavToggler">
-                            <i class="fa fa-fw fa-angle-left"></i>
-                        </a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav ml-auto">
-    
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
-                            <i class="fa fa-fw fa-sign-out"></i>Logout</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-        <!--End Navigation elements-->
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+            aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+                    <a class="nav-link" href="managerDash.html">
+                        <i class="fa fa-fw fa-dashboard"></i>
+                        <span class="nav-link-text">Manager Dashboard</span>
+                    </a>
+                </li>
+
+                <!--requests-->
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+                    <a class="nav-link" href="mgrViewRequests.html">
+                        <i class="fa fa-usd"></i>
+                        <span class="nav-link-text">View Requests</span>
+                    </a>
+                </li>
+
+                <!--employee panel-->
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
+                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents2" data-parent="#exampleAccordion">
+                        <i class="fa fa-users"></i>
+                        <span class="nav-link-text">Employees</span>
+                    </a>
+                    <ul class="sidenav-second-level collapse" id="collapseComponents2">
+                        <li>
+                            <a href="mgrViewEmployees.html">
+                                <i class="fa fa-info-circle"></i> View Information</a>
+                        </li>
+                        <li>
+                            <a href="registerEmployee.html">
+                                <i class="fa fa-user-plus"></i> Register New</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="navbar-nav sidenav-toggler">
+                <li class="nav-item">
+                    <a class="nav-link text-center" id="sidenavToggler">
+                        <i class="fa fa-fw fa-angle-left"></i>
+                    </a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
+                        <i class="fa fa-fw fa-sign-out"></i>Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!--End Navigation elements-->
     <div class="content-wrapper">
         <div class="container-fluid">
             <!-- Breadcrumbs-->
@@ -98,27 +93,17 @@
                     <div class="table-responsive">
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
-                                <tr class="viewEmployees">
-                                    <th>ID</th>
+                                <tr>
                                     <th>First Name</th>
                                     <th>Last Name</th>
                                     <th>Email</th>
                                     <th>User ID</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="mgrViewEmployeeTable">
                                 <!--Table goes here-->
                             </tbody>
                             <tfoot>
-                                <tr class="viewEmployees">
-                                    <th>ID</th>
-                                    <th>First Name</th>
-                                    <th>Last Name</th>
-                                    <th>Email</th>
-                                    <th>User ID</th>
-                                    </tr>
-                            </tfoot>
-
                         </table>
                     </div>
                 </div>
@@ -158,6 +143,7 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
+    <script src="mgrViewEmployeesController.js"></script>
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- Core plugin JavaScript-->
