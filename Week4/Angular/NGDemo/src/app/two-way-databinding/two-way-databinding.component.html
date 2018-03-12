@@ -1,0 +1,18 @@
+<!--Two-Way Binding-->
+<div id="emailPasswordInput">
+  <form>
+    <label>Email:</label>
+    <input type="email" name="email" [(ngModel)]="user.email" />
+    <br>
+    <label>Password: </label>
+    <input type="password" name="password" [(ngModel)]="user.password" />
+    <br>
+    <button type="submit">Does Nothing</button>
+  </form>
+</div>
+
+<!--One-Way Binding-->
+<div id="displayedInformation">
+  <p>Email: {{user.email}}</p>
+  <p>Password: {{user.password}}</p>
+</div>

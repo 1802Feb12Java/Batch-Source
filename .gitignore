@@ -79,3 +79,6 @@ Servers/
 .cache-main 
 .scala_dependencies 
 .worksheet 
+
+# Webpack
+node_modules/
