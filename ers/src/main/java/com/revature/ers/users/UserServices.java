@@ -166,4 +166,26 @@ public class UserServices implements UserDAO{
 		ps.close();
 		return role;
 	}
+	
+	public int getUserID(String u_userName)throws SQLException {
+		ConnFactory cf = new ConnFactory();
+		Connection conn = cf.getConnection();
+		PreparedStatement ps = null;
+		int id = 0;
+		
+		//create the prepared statement
+		String sql = "SELECT U_ID FROM ERS_USERS WHERE U_USERNAME = ?";
+		ps = conn.prepareStatement(sql);
+		ps.setString(1, u_userName);
+		
+		//execute the query
+		ResultSet rs = ps.executeQuery();
+		rs.next();
+		id = rs.getInt("U_ID");
+		rs.close();
+		ps.close();
+		return id;
+		
+	}
+
 }

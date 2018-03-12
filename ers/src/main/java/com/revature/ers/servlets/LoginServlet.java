@@ -29,7 +29,6 @@ public class LoginServlet extends HttpServlet {
 
     @Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
 		UserServices us = new UserServices();
 		boolean validated = false;
 		
@@ -50,6 +49,8 @@ public class LoginServlet extends HttpServlet {
 		//a manager or employee, and redirect to the appropriate page.
 		if(validated) {
 			try {
+				request.getSession().setAttribute("userID", us.getUserID(username));
+
 				if(us.getUserRole(username) == 1) {
 					logger.info("User '" + username + "' logged in as manager.");
 					us = null;
