@@ -5,6 +5,7 @@ import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -31,10 +32,12 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		UserServices us = new UserServices();
 		boolean validated = false;
-		
 		String username = request.getParameter("uname");
 		String password = request.getParameter("password");
-		response.setContentType("text/html");
+		
+		
+		response.setContentType("text/html");		
+
 		
 		//attempt to validate the user
 		try {
@@ -49,7 +52,8 @@ public class LoginServlet extends HttpServlet {
 		//a manager or employee, and redirect to the appropriate page.
 		if(validated) {
 			try {
-				request.getSession().setAttribute("userID", us.getUserID(username));
+				HttpSession session = request.getSession();
+			    session.setAttribute("userID", us.getUserID(username));
 
 				if(us.getUserRole(username) == 1) {
 					logger.info("User '" + username + "' logged in as manager.");

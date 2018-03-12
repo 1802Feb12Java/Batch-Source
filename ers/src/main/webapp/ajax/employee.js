@@ -36,6 +36,7 @@ let submit = function(){
 
 let viewEPending = function(){
     console.log('View Employee Pending');
+    console.log('And again');
 };
 
 let viewEResolved = function(){
@@ -43,8 +44,26 @@ let viewEResolved = function(){
 };
 
 let viewEInfo = function(){
-    console.log('View Employee info');
-}
+    //create the XHR object
+    let xhr = new XMLHttpRequest();
+
+    //Open the request with the parameters: (type, url/filename, async)
+    xhr.open('GET', '/ers/ViewEmployeeInfo', true);
+
+    //create the function to handle the request
+    console.log(xhr);
+    xhr.onreadystatechange = function(){
+        console.log("status: " + this.status);
+        if(this.readyState == 4 && this.status == 200){
+            //document.getElementById("page").innerHTML = this.responseText;
+        };
+    };
+ 
+    //send the request
+    xhr.send();
+};
+
+
 
 document.getElementById("submitReimbursement").addEventListener("click", submit);
 document.getElementById("viewEPending").addEventListener("click", viewEPending);

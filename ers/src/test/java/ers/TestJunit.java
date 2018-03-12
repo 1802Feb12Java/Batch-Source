@@ -33,21 +33,21 @@ public class TestJunit {
    
    //Populates user fields and attempts to add user, the actual test will take place in testGetPassword;
    //if the assertion comes back as valid, the user has been created
-   @Test
-   public void testAddUser() {
-	   testUser.setU_userName("Kbop");
-	   testUser.setU_firstName("Krombopulous");
-	   testUser.setU_lastName("Michael");
-	   testUser.setU_password("killinagain");
-	   testUser.setUr_ID(2);
-	   testUser.setU_email("ThereIGo@killinagain.com");
-	   
-	   try {
-		us.addUser(testUser);
-	} catch (SQLException e) {
-		e.printStackTrace();
-	}
-   }
+//   @Test
+//   public void testAddUser() {
+//	   testUser.setU_userName("Kbop");
+//	   testUser.setU_firstName("Krombopulous");
+//	   testUser.setU_lastName("Michael");
+//	   testUser.setU_password("killinagain");
+//	   testUser.setUr_ID(2);
+//	   testUser.setU_email("ThereIGo@killinagain.com");
+//	   
+//	   try {
+//		us.addUser(testUser);
+//	} catch (SQLException e) {
+//		e.printStackTrace();
+//	}
+//   }
    @Test
    //test user validation
    public void testGetPassword() { 
@@ -60,4 +60,23 @@ public class TestJunit {
 		e.printStackTrace();
 	}
    }
-}//end testGetPassword
+   
+   @Test
+   public void testGetUser() {
+   	User user = null;
+   	UserServices us = new UserServices();
+   	int id = 8;
+   	try {
+   		System.out.println("Trying getUser");
+   		user = us.getUser(id);
+   	} catch (SQLException e) {
+   		System.out.println("Exception-al.");
+   		e.printStackTrace();
+   	}
+   	
+   	System.out.println(user.getU_email());
+   	
+  }
+}
+
+

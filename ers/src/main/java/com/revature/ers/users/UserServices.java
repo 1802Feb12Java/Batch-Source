@@ -50,11 +50,12 @@ public class UserServices implements UserDAO{
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		String sql = "SELECT U_FIRSTNAME, U_LASTNAME, U_EMAIL, UR_ID FROM ERS_USERS WHERE U_ID = ?";
-		
+		System.out.println("Querying user: " + u_ID);
 		ps.setInt(1, u_ID);
 		rs = ps.executeQuery(sql);
 		
 		if (!rs.next()) {
+			System.out.println("Null user");
 			return null;
 		}
 		
@@ -63,6 +64,7 @@ public class UserServices implements UserDAO{
 			user.setU_lastName(rs.getString("U_LASTNAME"));
 			user.setU_email(rs.getString("U_EMAIL"));
 			user.setUr_ID(rs.getInt("UR_ID"));
+			System.out.println("Returning user: " + user.getU_firstName());
 			return user;
 		}
 	}
