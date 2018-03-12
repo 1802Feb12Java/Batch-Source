@@ -1,0 +1,31 @@
+<title>Reimbursement application</title>
+
+
+<div class="text-center">
+  <br>
+  <h2>Reimbursement Application</h2>
+  <br>
+  <form action='http://localhost:8080/Project1/application' method='post'>
+    Amount:<br>
+    <input type='text' name='amount' required><br><br>
+    Description:<br>
+    <input type='text' name='description' required><br><br>
+    Receipt (not required):<br>
+    <input type='file' name='receipt' accept='image/*'><br><br>
+    Type (Please put 1 for business, 2 for travel, and 3 for medical):<br>
+    <input type='text' name='type' required><br><br>
+
+    <button type="submit">Submit</button>
+  </form>
+</div>
+
+
+
+
+		<!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

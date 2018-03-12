@@ -10,7 +10,7 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   
-  <display-name>ServletLoginApp</display-name>
+  <display-name>Project1</display-name>
   <servlet>
     <servlet-name>login</servlet-name>
     <servlet-class>com.revature.servlets.LoginServlet</servlet-class>
@@ -20,12 +20,52 @@
     <url-pattern>/login</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>profile</servlet-name>
-    <servlet-class>com.revature.servlets.ProfileServlet</servlet-class>
+    <servlet-name>managerHome</servlet-name>
+    <servlet-class>com.revature.servlets.ManagerHomeServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>profile</servlet-name>
-    <url-pattern>/profile</url-pattern>
+    <servlet-name>managerHome</servlet-name>
+    <url-pattern>/managerHome</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>employeeHome</servlet-name>
+    <servlet-class>com.revature.servlets.EmployeeHomeServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>employeeHome</servlet-name>
+    <url-pattern>/employeeHome</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>updateInfo</servlet-name>
+    <servlet-class>com.revature.servlets.UpdateInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>updateInfo</servlet-name>
+    <url-pattern>/updateInfo</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>reimbursements</servlet-name>
+    <servlet-class>com.revature.servlets.ReimbursementsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>reimbursements</servlet-name>
+    <url-pattern>/reimbursements</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>application</servlet-name>
+    <servlet-class>com.revature.servlets.ApplicationServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>application</servlet-name>
+    <url-pattern>/application</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>employeeList</servlet-name>
+    <servlet-class>com.revature.servlets.EmployeeListServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>employeeList</servlet-name>
+    <url-pattern>/employeeList</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>logout</servlet-name>

@@ -1,0 +1,34 @@
+#myInput {
+    background-position: 10px 12px; /* Position the search icon */
+    font-size: 16px; /* Increase font-size */
+    padding: 12px 20px 12px 40px; /* Add some padding */
+    margin-top: 12px;   /* Add some space above the input */
+    margin-bottom: 12px; /* Add some space below the input */
+}
+
+#myTable #buttoncolumn {
+    text-align: center;
+    border: white;  /* don't want visible borders on these */
+}
+
+#myTable {
+    border-collapse: collapse; /* Collapse borders */
+    width: 100%; /* Full-width */
+    border: 1px solid black; /* Add a grey border */
+    font-size: 18px; /* Increase font-size */
+}
+
+#myTable th {
+    background-color: cornflowerblue;
+}
+
+#myTable th, #myTable td {
+    border: 1px solid black; /* Add a grey border for cells */
+    text-align: left; /* Left-align text */
+    padding: 12px; /* Add padding */
+}
+
+#myTable tr.header, #myTable tr:hover {
+    /* Add a grey background color to the table header and on hover */
+    background-color: #f1f1f1;
+}

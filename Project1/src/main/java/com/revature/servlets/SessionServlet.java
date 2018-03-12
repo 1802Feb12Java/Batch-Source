@@ -20,8 +20,19 @@ public class SessionServlet extends HttpServlet {
      */
     public SessionServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
+    
+
+	@Override
+    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        super.service(req, resp);
+        resp.addHeader("Access-Control-Allow-Origin", "http://localhost:4200");
+        resp.addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE, HEAD");
+        resp.addHeader("Access-Control-Allow-Headers",
+                "Origin, Methods, Credentials, X-Requested-With, Content-Type, Accept");
+        resp.addHeader("Access-Control-Allow-Credentials", "true");
+        resp.setContentType("application/json");
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -30,10 +41,11 @@ public class SessionServlet extends HttpServlet {
 		HttpSession session = request.getSession(false);
 		if(session!=null){
 			response.setContentType("application/json");
-			response.getWriter().write("{\"username\":\""+session.getAttribute("username")+"\"}");
+			response.getWriter().write("{\"uid\":\""+session.getAttribute("uid")+"\",");
+			response.getWriter().write("\"role\":\""+session.getAttribute("role")+"\"}");
 		} else {
 			response.setContentType("application/json");
-			response.getWriter().write("{\"username\":null}");
+			response.getWriter().write("{\"uid\":null}");
 		}
 	}
 

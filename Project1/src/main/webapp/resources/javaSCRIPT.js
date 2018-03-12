@@ -17,10 +17,10 @@ function populateUser(xhr) {
 		document.getElementById("user").innerHTML = "you are logged in as "
 				+ res.username;
 	} else {
-		window.location = "http://localhost:8080/ServletLoginApp/login";
+		window.location = "http://localhost:8080/Project1/login";
 	}
 }
 
 window.onload = function() {
-	sendAjaxGet("http://localhost:8080/ServletLoginApp/session", populateUser);
+	sendAjaxGet("http://localhost:8080/Project1/session", populateUser);
 }

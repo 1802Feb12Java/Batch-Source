@@ -1,0 +1,68 @@
+		<title>Reimbursements Table</title>
+		<!-- Required meta tags -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+		<!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    
+		<div class="text-center" id="table">	
+      <br>
+      <h2>Reimbursement List</h2>
+			<input type="text" id="myInput" (keyup)="this.filterTable()" placeholder="Search by author ID's">
+
+      <table id="myTable">
+          <thead>
+              <tr>
+                  <th>ID</th>
+                  <th>Amount</th>
+                  <th>Description</th>
+                  <th>Receipt</th>
+                  <th>Submitted</th>
+                  <th>Resolved</th>
+                  <th>Author ID</th>
+                  <th>Resolver ID</th>
+                  <th>Type ID</th>
+                  <th>Status ID</th>
+                  <th></th>
+                  <th></th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let r of reimbursementList">
+                  <td>{{r.id}}</td>
+                  <td>{{r.amount | currency}}</td>
+                  <td>{{r.description}}</td>
+                  <td *ngIf="r.receipt != undefined">{{r.receipt}}</td>
+                  <td *ngIf="r.receipt == undefined">N/A</td>
+                  <td>{{r.submitted | date:'short'}}</td>
+                  <td *ngIf="r.resolved != undefined">{{r.resolved | date:'short'}}</td>
+                  <td *ngIf="r.resolved == undefined">N/A</td>
+                  <td>{{r.authorId}}</td>
+                  <td *ngIf="r.resolved != undefined">{{r.resolverId}}</td>
+                  <td *ngIf="r.resolved == undefined">N/A</td>
+                  <td>{{r.typeId}}</td>
+                  <td>{{r.statusID}}</td>
+                  <td *ngIf="r.statusID === 1">
+                    <form action='http://localhost:8080/Project1/reimbursements' method='post'>
+                      <input type='hidden' name='reqid' value={{r.id}}>
+                      <input type='hidden' name='newstatus' value='2'>
+                      <button class='btn btn-custom btn-full-width' type='submit'>Approve</button>
+                    </form>
+                    <!-- <form>
+                      <button class='btn btn-custom btn-full-width' (click)=this.approve(r.id)>Approve</button>
+                    </form> -->
+                  </td>
+                  <td *ngIf="r.statusID === 1">
+                    <form action='http://localhost:8080/Project1/reimbursements' method='post'>
+                      <input type='hidden' name='reqid' value={{r.id}}>
+                      <input type='hidden' name='newstatus' value='3'>
+                      <button class='btn btn-custom btn-full-width' type='submit'>Deny</button>
+                    </form>
+                  </td>
+                  <td *ngIf="r.statusID !== 1"></td>
+                  <td *ngIf="r.statusID !== 1"></td>
+              </tr>
+          </tbody>
+      </table>		
+		</div>

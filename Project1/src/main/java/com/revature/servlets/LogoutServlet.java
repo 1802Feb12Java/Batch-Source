@@ -19,16 +19,11 @@ public class LogoutServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		resp.setContentType("text/html");
-		PrintWriter pw = resp.getWriter();
-		req.getRequestDispatcher("Base.html").include(req, resp);
 		HttpSession session = req.getSession(false);
 		if (session != null){
 			session.invalidate();
 		}
-		pw.println("you are successfully logged out");
-		//pw.println(session.getAttribute("username")); 
-		pw.println("<a href=\"Index.html\">Go back</a>");
-		pw.write("</div></body></html>");
+		resp.sendRedirect("http://localhost:4200/login");
 	}
 	
 	@Override

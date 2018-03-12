@@ -1,4 +1,4 @@
-package com.revature.main;
+package com.revature.beans;
 
 public class User {
     private int id;

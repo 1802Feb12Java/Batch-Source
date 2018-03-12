@@ -3,7 +3,7 @@ package com.revature.DAOs;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import com.revature.main.User;
+import com.revature.beans.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -33,7 +33,7 @@ public class UserDAOClass implements UserDAO {
 	}
 
 	public User readUser(int id) throws SQLException {
-		PreparedStatement ps = conn.prepareStatement("SELECT * FROM ERS_USERS WHERE ID = (?)");
+		PreparedStatement ps = conn.prepareStatement("SELECT * FROM ERS_USERS WHERE u_id = (?)");
 		ps.setInt(1, id);
 		ResultSet rs = ps.executeQuery();
 		String[] info = new String[5];
@@ -49,11 +49,38 @@ public class UserDAOClass implements UserDAO {
 		return new User(id, info[0], info[1], info[2], info[3], info[4], roleId);
 	}
 
-	public void updateUser(String attribute, String newVal, int id) throws SQLException {
-		PreparedStatement ps = conn.prepareStatement("update ERS_USERS set (?) = (?) where userid = (?) ");
-		ps.setString(1, attribute);
-		ps.setString(2, newVal);
-		ps.setInt(3, id);
+	public void updateFirstname(String newVal, int id) throws SQLException {
+		PreparedStatement ps = conn.prepareStatement("update ERS_USERS set u_firstname = (?) where u_id = (?)");
+		ps.setString(1, newVal);
+		ps.setInt(2, id);
+		ps.executeQuery();
+	}
+	
+	public void updateLastname(String newVal, int id) throws SQLException {
+		PreparedStatement ps = conn.prepareStatement("update ERS_USERS set u_lastname = (?) where u_id = (?)");
+		ps.setString(1, newVal);
+		ps.setInt(2, id);
+		ps.executeQuery();
+	}
+	
+	public void updateUsername(String newVal, int id) throws SQLException {
+		PreparedStatement ps = conn.prepareStatement("update ERS_USERS set u_username = (?) where u_id = (?)");
+		ps.setString(1, newVal);
+		ps.setInt(2, id);
+		ps.executeQuery();
+	}
+	
+	public void updatePassword(String newVal, int id) throws SQLException {
+		PreparedStatement ps = conn.prepareStatement("update ERS_USERS set u_password = (?) where u_id = (?)");
+		ps.setString(1, newVal);
+		ps.setInt(2, id);
+		ps.executeQuery();
+	}
+	
+	public void updateEmail(String newVal, int id) throws SQLException {
+		PreparedStatement ps = conn.prepareStatement("update ERS_USERS set u_email = (?) where u_id = (?)");
+		ps.setString(1, newVal);
+		ps.setInt(2, id);
 		ps.executeQuery();
 	}
 

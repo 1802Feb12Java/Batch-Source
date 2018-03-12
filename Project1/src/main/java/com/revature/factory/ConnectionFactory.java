@@ -31,7 +31,7 @@ public class ConnectionFactory {
 
 			String driver = props.getProperty("driver");
 			if (driver != null) {
-			    Class.forName(driver) ;
+			    Class.forName(driver);
 			}
 
 			String url = props.getProperty("url");
@@ -39,7 +39,7 @@ public class ConnectionFactory {
 			String password = props.getProperty("pass");
 			conn = DriverManager.getConnection(url, dbusername, password);
 		} catch (Exception e1) {
-			System.out.println("Connection failed.");
+			e1.printStackTrace();
 		}
 
 		return conn;
