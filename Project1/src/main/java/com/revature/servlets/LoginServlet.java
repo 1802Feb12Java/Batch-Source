@@ -16,15 +16,15 @@ import com.revature.Users;
 public class LoginServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
-	UserServices us;
+	UserServices us = new UserServices();
 
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//		HttpSession session = req.getSession();
-//		PrintWriter pw = resp.getWriter();
-		resp.setContentType("text/html");
-		req.getRequestDispatcher("Login.html").include(req, resp);
-	}
+//	@Override
+//	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+////		HttpSession session = req.getSession();
+////		PrintWriter pw = resp.getWriter();
+//		resp.setContentType("text/html");
+//		req.getRequestDispatcher("Login.html").include(req, resp);
+//	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -36,6 +36,7 @@ public class LoginServlet extends HttpServlet {
 		
 		String username = req.getParameter("username");
 		String password = req.getParameter("password");
+		System.out.println(username + password);
 		Users u = null;
 		try {
 			u = us.login(username, password);
@@ -46,13 +47,19 @@ public class LoginServlet extends HttpServlet {
 		
 		if(u != null) {
 			pw.println("Welcome, "+u.getfName());
-			pw.println("<a href=\"Index.html\">Logout</a>");
+//			pw.println("<a href=\"Index.html\">Logout</a>");
 			session.setAttribute("username", username);
 			session.setAttribute("problem", null);
-			resp.sendRedirect("profile");
+			session.setAttribute("firstname", u.getfName());
+			session.setAttribute("lastname", u.getlName());
+			if(u.getRoleID() ==  1) {
+				resp.sendRedirect("./managers/profile.html");
+			}else {
+				resp.sendRedirect("./employees/Profile.html");
+			}
 		} else {
-			session.setAttribute("problem", "incorrect password");
-			resp.sendRedirect("login");
+			pw.println("problem incorrect password");
+			resp.sendRedirect("./index.html");
 		}
 		
 	}
