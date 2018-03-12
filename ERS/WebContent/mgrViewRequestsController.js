@@ -75,7 +75,9 @@ function getPendingRequests() {
                 if (requestObject.status == "PENDING") {
                     //create buttons for action column
                     var approveButton = document.createElement("button");
+                    approveButton.classList.add("btn-sm", "btn-success");
                     var denyButton = document.createElement("button");
+                    denyButton.classList.add("btn-sm", "btn-danger");
                     approveButton.addEventListener("click", approveRequest);
                     approveButton.textContent = "Approve Request";
 
@@ -167,11 +169,13 @@ function getAllRequests() {
                     //create buttons for action column
                     var approveButton = document.createElement("button");
                     var denyButton = document.createElement("button");
+                    approveButton.classList.add("btn-sm", "btn-success");
                     approveButton.addEventListener("click", approveRequest);
                     approveButton.textContent = "Approve Request";
 
 
                     denyButton.addEventListener("click", denyRequest);
+                    denyButton.classList.add("btn-sm", "btn-danger");
                     denyButton.textContent = "Deny Request";
 
                     //append buttons to column
