@@ -1,5 +1,8 @@
 package com.revature.DAOs;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.sql.Blob;
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -8,6 +11,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+
+import org.apache.commons.codec.binary.Base64;
 
 import com.revature.beans.Reimbursement;
 
@@ -33,7 +38,13 @@ public class ReimbursementDAOClass implements ReimbursementDAO {
 		ps.setInt(1, nextId);
 		ps.setDouble(2, r.getAmount());
 		ps.setString(3, r.getDescription());
-		ps.setBlob(4, r.getReceipt());
+		
+		
+		Blob b = conn.createBlob();
+		b.setBytes(1, r.getBase64receipt().getBytes());
+		ps.setBlob(4, b);
+		
+		
 		ps.setTimestamp(5, ts);
 		ps.setTimestamp(6, r.getResolved());
 		ps.setInt(7, r.getAuthorId());
@@ -59,10 +70,23 @@ public class ReimbursementDAOClass implements ReimbursementDAO {
 		int type = 0;
 		int status = 0;
 		
+		String base64receipt = "";
+		
 		if(rs.next()) {
 			amount = rs.getDouble(2);
 			description = rs.getString(3);
-			receipt = rs.getBlob(4);
+			
+			
+			receipt = rs.getBlob(4);	
+			if(receipt != null) {
+				int blobLength = (int) receipt.length();
+				base64receipt = Base64.encodeBase64String(receipt.getBytes(1, blobLength));
+			}
+			else {
+				base64receipt = null;
+			}
+			
+			
 			submitted = rs.getTimestamp(5);
 			resolved = rs.getTimestamp(6);
 			author = rs.getInt(7);
@@ -70,7 +94,7 @@ public class ReimbursementDAOClass implements ReimbursementDAO {
 			type = rs.getInt(9);
 			status = rs.getInt(10);
 		}
-		return new Reimbursement(id, amount, description, receipt, submitted, resolved, author, resolver, type, status);
+		return new Reimbursement(id, amount, description, base64receipt, submitted, resolved, author, resolver, type, status);
 	}
 
 	public void updateReimbursementStatus(int r_id, int newStatus, int resolverUid) throws SQLException {
@@ -114,14 +138,26 @@ public class ReimbursementDAOClass implements ReimbursementDAO {
 			int id = rs.getInt(1);
 			double amount = rs.getDouble(2);
 			String description = rs.getString(3);
+			
+			
 			Blob receipt = rs.getBlob(4);
+			String base64receipt = "";
+			if(receipt != null) {
+				int blobLength = (int) receipt.length();
+				base64receipt = Base64.encodeBase64String(receipt.getBytes(1, blobLength));
+			}
+			else {
+				base64receipt = null;
+			}
+			
+			
 			Timestamp submitted = rs.getTimestamp(5);
 			Timestamp resolved = rs.getTimestamp(6);
 			int author = rs.getInt(7);
 			int resolver = rs.getInt(8);
 			int type = rs.getInt(9);
 			int status = rs.getInt(10);
-			allReimbursements.add(new Reimbursement(id, amount, description, receipt, submitted, resolved, author, resolver, type, status));
+			allReimbursements.add(new Reimbursement(id, amount, description, base64receipt, submitted, resolved, author, resolver, type, status));
 		}
 		
 		return allReimbursements;

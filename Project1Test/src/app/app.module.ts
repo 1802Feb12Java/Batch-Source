@@ -12,6 +12,7 @@ import { ApplicationComponent } from './application/application.component';
 import { HeaderComponent } from './header/header.component';
 import { EmployeeListComponent } from './employee-list/employee-list.component';
 import { UpdateUserComponent } from './update-user/update-user.component';
+import { ImagePipePipe } from './image-pipe.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +23,8 @@ import { UpdateUserComponent } from './update-user/update-user.component';
     ApplicationComponent,
     HeaderComponent,
     EmployeeListComponent,
-    UpdateUserComponent
+    UpdateUserComponent,
+    ImagePipePipe
   ],
   imports: [
     BrowserModule,

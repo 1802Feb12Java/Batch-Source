@@ -16,7 +16,7 @@ export class ReimbursementsAllComponent implements OnInit {
   ngOnInit() {
     this.client.get('http://localhost:8080/Project1/reimbursements', { withCredentials: true })
    .subscribe(
-     (succ: any) => {
+     (succ: any) => { 
        this.reimbursementList = succ;
        console.log(this.reimbursementList);   
        return this.reimbursementList;

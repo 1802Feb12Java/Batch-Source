@@ -18,14 +18,14 @@
                   <th>Amount</th>
                   <th>Description</th>
                   <th>Receipt</th>
-                  <th>Submitted</th>
-                  <th>Resolved</th>
+                  <th id="timestampcolumn">Submitted</th>
+                  <th id="timestampcolumn">Resolved</th>
                   <th>Author ID</th>
                   <th>Resolver ID</th>
                   <th>Type ID</th>
                   <th>Status ID</th>
-                  <th></th>
-                  <th></th>
+                  <th id="buttoncolumn"></th>
+                  <th id="buttoncolumn"></th>
               </tr>
           </thead>
           <tbody>
@@ -33,17 +33,17 @@
                   <td>{{r.id}}</td>
                   <td>{{r.amount | currency}}</td>
                   <td>{{r.description}}</td>
-                  <td *ngIf="r.receipt != undefined">{{r.receipt}}</td>
-                  <td *ngIf="r.receipt == undefined">N/A</td>
-                  <td>{{r.submitted | date:'short'}}</td>
-                  <td *ngIf="r.resolved != undefined">{{r.resolved | date:'short'}}</td>
-                  <td *ngIf="r.resolved == undefined">N/A</td>
+                  <td *ngIf="r.base64receipt != undefined"><img [src]="'data:image/jpg;base64,'+r.base64receipt | safeHtml" width="200" height="200"/></td>
+                  <td *ngIf="r.base64receipt == undefined">N/A</td>
+                  <td id="timestampcolumn">{{r.submitted | date:'short'}}</td>
+                  <td *ngIf="r.resolved != undefined" id="timestampcolumn">{{r.resolved | date:'short'}}</td>
+                  <td *ngIf="r.resolved == undefined" id="timestampcolumn">N/A</td>
                   <td>{{r.authorId}}</td>
                   <td *ngIf="r.resolved != undefined">{{r.resolverId}}</td>
                   <td *ngIf="r.resolved == undefined">N/A</td>
                   <td>{{r.typeId}}</td>
                   <td>{{r.statusID}}</td>
-                  <td *ngIf="r.statusID === 1">
+                  <td *ngIf="r.statusID === 1" id="buttoncolumn">
                     <form action='http://localhost:8080/Project1/reimbursements' method='post'>
                       <input type='hidden' name='reqid' value={{r.id}}>
                       <input type='hidden' name='newstatus' value='2'>
@@ -53,15 +53,15 @@
                       <button class='btn btn-custom btn-full-width' (click)=this.approve(r.id)>Approve</button>
                     </form> -->
                   </td>
-                  <td *ngIf="r.statusID === 1">
+                  <td *ngIf="r.statusID === 1" id="buttoncolumn">
                     <form action='http://localhost:8080/Project1/reimbursements' method='post'>
                       <input type='hidden' name='reqid' value={{r.id}}>
                       <input type='hidden' name='newstatus' value='3'>
                       <button class='btn btn-custom btn-full-width' type='submit'>Deny</button>
                     </form>
                   </td>
-                  <td *ngIf="r.statusID !== 1"></td>
-                  <td *ngIf="r.statusID !== 1"></td>
+                  <td *ngIf="r.statusID !== 1" id="buttoncolumn"></td>
+                  <td *ngIf="r.statusID !== 1" id="buttoncolumn"></td>
               </tr>
           </tbody>
       </table>		

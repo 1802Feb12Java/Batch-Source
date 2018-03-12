@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.codec.binary.Base64;
+
 import com.revature.DAOs.ReimbursementDAOClass;
 import com.revature.beans.Reimbursement;
 import com.revature.factory.ConnectionFactory;
@@ -57,9 +59,9 @@ public class ApplicationServlet extends HttpServlet {
 		String receiptPath = "C:\\Users\\Trevor\\Documents\\workspace-sts\\Project1Test\\"+req.getParameter("receipt");
         
 		ByteArrayOutputStream bos = null;
-		Blob receipt = null;
+//		Blob receipt = null;
         try {
-			receipt = conn.createBlob();
+//			receipt = conn.createBlob();
             File receiptFile = new File(receiptPath);
             FileInputStream fis = new FileInputStream(receiptFile);
             byte[] buffer = new byte[1024];
@@ -68,13 +70,15 @@ public class ApplicationServlet extends HttpServlet {
 //            	System.out.println("writing");
                 bos.write(buffer, 0, len);
             }
-			receipt.setBytes(1, bos.toByteArray());
+//			receipt.setBytes(1, bos.toByteArray());
 			fis.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
+        
+        String base64Blob = Base64.encodeBase64String(bos.toByteArray());
 		
-		Reimbursement reimbursementToInsert = new Reimbursement(amount, description, receipt, receiptPath, authorID, type, 1);
+		Reimbursement reimbursementToInsert = new Reimbursement(amount, description, base64Blob, receiptPath, authorID, type, 1);
 		
 		try {
 			reDao.createReimbursement(reimbursementToInsert);

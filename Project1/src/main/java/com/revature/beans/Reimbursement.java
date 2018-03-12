@@ -1,13 +1,12 @@
 package com.revature.beans;
 
-import java.sql.Blob;
 import java.sql.Timestamp;
 
 public class Reimbursement {
 	private int id;
 	private double amount;
 	private String description;
-	private Blob receipt;
+	private String base64receipt;
 	private String receiptPath;
 	private Timestamp submitted;
 	private Timestamp resolved;
@@ -34,11 +33,11 @@ public class Reimbursement {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public Blob getReceipt() {
-		return receipt;
+	public String getBase64receipt() {
+		return base64receipt;
 	}
-	public void setReceipt(Blob receipt) {
-		this.receipt = receipt;
+	public void setReceipt(String receipt) {
+		this.base64receipt = receipt;
 	}
 	public String getReceiptPath() {
 		return receiptPath;
@@ -83,13 +82,13 @@ public class Reimbursement {
 		this.statusID = statusID;
 	}
 	
-	public Reimbursement(int id, double amount, String description, Blob receipt, Timestamp submitted,
+	public Reimbursement(int id, double amount, String description, String receipt, Timestamp submitted,
 			Timestamp resolved, int authorId, int resolverId, int typeId, int statusID) {
 		super();
 		this.id = id;
 		this.amount = amount;
 		this.description = description;
-		this.receipt = receipt;
+		this.base64receipt = receipt;
 		this.submitted = submitted;
 		this.resolved = resolved;
 		this.authorId = authorId;
@@ -99,11 +98,11 @@ public class Reimbursement {
 	}
 	
 	//for calling to make a new reimbursement to put in database
-	public Reimbursement(double amount, String description, Blob receipt, String receiptPath, int authorId, int typeId, int statusID) {
+	public Reimbursement(double amount, String description, String receipt, String receiptPath, int authorId, int typeId, int statusID) {
 		super();
 		this.amount = amount;
 		this.description = description;
-		this.receipt = receipt;
+		this.base64receipt = receipt;
 		this.receiptPath = receiptPath;
 		this.authorId = authorId;
 		this.typeId = typeId;

@@ -6,6 +6,10 @@
     margin-bottom: 12px; /* Add some space below the input */
 }
 
+#myTable #timestampcolumn {
+    width: 100px;
+}
+
 #myTable #buttoncolumn {
     text-align: center;
     border: white;  /* don't want visible borders on these */
@@ -24,7 +28,7 @@
 
 #myTable th, #myTable td {
     border: 1px solid black; /* Add a grey border for cells */
-    text-align: left; /* Left-align text */
+    text-align: center; /* Left-align text */
     padding: 12px; /* Add padding */
 }
 

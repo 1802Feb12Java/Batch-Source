@@ -10,7 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-//import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+
 import com.revature.DAOs.ReimbursementDAOClass;
 import com.revature.beans.Reimbursement;
 import com.revature.factory.ConnectionFactory;
@@ -26,13 +27,12 @@ public class ReimbursementsServlet extends HttpServlet {
 
 	@Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // TODO Auto-generated method stub
-        super.service(req, resp);
-        resp.addHeader("Access-Control-Allow-Origin", "http://localhost:4200");
+		resp.addHeader("Access-Control-Allow-Origin", "http://localhost:4200");
         resp.addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE, HEAD");
         resp.addHeader("Access-Control-Allow-Headers",
                 "Origin, Methods, Credentials, X-Requested-With, Content-Type, Accept");
         resp.addHeader("Access-Control-Allow-Credentials", "true");
+		super.service(req, resp);
         resp.setContentType("application/json");
 	}
 	
@@ -41,42 +41,42 @@ public class ReimbursementsServlet extends HttpServlet {
 		ArrayList<Reimbursement> reimbursementList = null;
 		try {
 			reimbursementList = reDao.getAllReimbursements();
-//			ObjectMapper om = new ObjectMapper();
-//			String json = om.writeValueAsString(reimbursementList);
-//			resp.getWriter().write(json);
+			Gson gson = new Gson();
+			String json = gson.toJson(reimbursementList);
+			resp.getWriter().write(json);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
-		resp.getWriter().write("[");
-		for(int i=0; i<reimbursementList.size(); i++) {
-			Reimbursement r = reimbursementList.get(i);
-			resp.getWriter().write("{\"id\":"+r.getId()+",");
-			resp.getWriter().write("\"amount\":"+r.getAmount()+",");
-			resp.getWriter().write("\"description\":\""+r.getDescription()+"\",");
-			resp.getWriter().write("\"submitted\":\""+r.getSubmitted()+"\",");
-			if(r.getResolved() != null) {
-				resp.getWriter().write("\"resolved\":\""+r.getResolved()+"\",");
-			}
-			else {
-				resp.getWriter().write("\"resolved\":null,");
-			}
-			if(r.getReceipt() != null) {
-				resp.getWriter().write("\"receipt\":\""+r.getReceipt()+"\",");
-			}
-			else {
-				resp.getWriter().write("\"receipt\":null,");
-			}
-			resp.getWriter().write("\"authorId\":"+r.getAuthorId()+",");
-			resp.getWriter().write("\"resolverId\":"+r.getResolverId()+",");
-			resp.getWriter().write("\"typeId\":"+r.getTypeId()+",");
-			if(i!=reimbursementList.size()-1) {
-				resp.getWriter().write("\"statusID\":"+r.getStatusID()+"},");
-			}
-			else {
-				resp.getWriter().write("\"statusID\":"+r.getStatusID()+"}]");
-			}
-		}
+//		resp.getWriter().write("[");
+//		for(int i=0; i<reimbursementList.size(); i++) {
+//			Reimbursement r = reimbursementList.get(i);
+//			resp.getWriter().write("{\"id\":"+r.getId()+",");
+//			resp.getWriter().write("\"amount\":"+r.getAmount()+",");
+//			resp.getWriter().write("\"description\":\""+r.getDescription()+"\",");
+//			resp.getWriter().write("\"submitted\":\""+r.getSubmitted()+"\",");
+//			if(r.getResolved() != null) {
+//				resp.getWriter().write("\"resolved\":\""+r.getResolved()+"\",");
+//			}
+//			else {
+//				resp.getWriter().write("\"resolved\":null,");
+//			}
+//			if(r.getBase64receipt() != null) {
+//				resp.getWriter().write("\"receipt\":\""+r.getBase64receipt()+"\",");
+//			}
+//			else {
+//				resp.getWriter().write("\"receipt\":null,");
+//			}
+//			resp.getWriter().write("\"authorId\":"+r.getAuthorId()+",");
+//			resp.getWriter().write("\"resolverId\":"+r.getResolverId()+",");
+//			resp.getWriter().write("\"typeId\":"+r.getTypeId()+",");
+//			if(i!=reimbursementList.size()-1) {
+//				resp.getWriter().write("\"statusID\":"+r.getStatusID()+"},");
+//			}
+//			else {
+//				resp.getWriter().write("\"statusID\":"+r.getStatusID()+"}]");
+//			}
+//		}
 	}
 	
 	@Override
