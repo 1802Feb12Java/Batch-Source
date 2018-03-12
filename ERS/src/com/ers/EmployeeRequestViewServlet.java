@@ -2,7 +2,6 @@ package com.ers;
 
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.Scanner;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,7 +19,7 @@ import org.apache.log4j.Logger;
 public class EmployeeRequestViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = Logger.getLogger(EmployeeRequestViewServlet.class);
-	static Scanner scanner = new Scanner(System.in);
+	//static Scanner scanner = new Scanner(System.in);
 	private EmployeeRequests employeeRequests;
 	
     public EmployeeRequestViewServlet() {

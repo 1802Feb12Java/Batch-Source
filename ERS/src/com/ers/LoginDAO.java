@@ -5,9 +5,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.apache.log4j.Logger;
+
 public class LoginDAO {
 	private Connection connection;
-	
+	final static Logger logger = Logger.getLogger(LoginDAO.class);
 	LoginDAO(Connection connection) {
 		this.connection = connection;
 	}
@@ -23,7 +25,9 @@ public class LoginDAO {
 			status = resultSet.next();
 
 		} catch (SQLException e) {
-			System.out.println(e);
+			System.out.println("Error in " + this.getClass() + " Check log for stacktrace");
+			logger.error("SQL Error From: " + this.getClass());
+			logger.error(e.toString());
 		}
 		return status;
 	}
@@ -45,7 +49,9 @@ public class LoginDAO {
 			
 
 		} catch (SQLException e) {
-			System.out.println(e);
+			System.out.println("Error in " + this.getClass() + " Check log for stacktrace");
+			logger.error("SQL Error From: " + this.getClass());
+			logger.error(e.toString());
 		}
 		return nameExists;
 	}
@@ -61,7 +67,9 @@ public class LoginDAO {
 				userId = resultSet.getInt(1);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("Error in " + this.getClass() + " Check log for stacktrace");
+			logger.error("SQL Error From: " + this.getClass());
+			logger.error(e.toString());
 		}
 		return userId;
 	}
@@ -77,7 +85,9 @@ public class LoginDAO {
 				userFirstName = resultSet.getString(1);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("Error in " + this.getClass() + " Check log for stacktrace");
+			logger.error("SQL Error From: " + this.getClass());
+			logger.error(e.toString());;
 		}
 		return userFirstName;
 	}
@@ -94,7 +104,9 @@ public class LoginDAO {
 			}
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("Error in " + this.getClass() + " Check log for stacktrace");
+			logger.error("SQL Error From: " + this.getClass());
+			logger.error(e.toString());
 		}
 		return userType;
 	}

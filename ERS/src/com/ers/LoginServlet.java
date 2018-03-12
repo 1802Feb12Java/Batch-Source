@@ -12,12 +12,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
+
 
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     private LoginDAO loginDAO;    
     private EmployeeRequests employeeRequests;
-    //private ManagerRequests managerRequests;
+    final static Logger logger = Logger.getLogger(LoginServlet.class);
     
     public LoginServlet() {
         super();
@@ -54,6 +56,7 @@ public class LoginServlet extends HttpServlet {
 		        session.setAttribute("userid", employeeRequests.getEmployeeId(userName));
 		        session.setAttribute("username", userName);
 		        session.setAttribute("usertype", "MANAGER");
+		        logger.info("New Log In From Manager: " + userName);
 		    	RequestDispatcher requestDispatcher = request.getRequestDispatcher("managerDash.html");  
 		        requestDispatcher.forward(request,response); 
 	    	}
@@ -66,11 +69,13 @@ public class LoginServlet extends HttpServlet {
 		        session.setAttribute("userid", employeeRequests.getEmployeeId(userName));
 		        session.setAttribute("username", userName);
 		        session.setAttribute("usertype", "EMPLOYEE");
+		        logger.info("New Log In From Employee: " + userName);
 		    	RequestDispatcher requestDispatcher = request.getRequestDispatcher("empDash.html");  
 		        requestDispatcher.forward(request,response); 
 	    	} 
 	    }
 	    else{  
+	    	logger.info("Failed Login from: " + userName + " | With password of: " + password);
 	        out.print("<h1 class='mx-auto'>Wrong username or password!</h1>");  
 	        RequestDispatcher requestDispatcher = request.getRequestDispatcher("login.html");  
 	        requestDispatcher.include(request,response);  

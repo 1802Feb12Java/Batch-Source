@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
+
 
 /**
  * Servlet implementation class ManagerRequestViewServlet
@@ -17,6 +19,7 @@ import javax.servlet.http.HttpSession;
 @WebServlet("/ManagerRequestViewServlet")
 public class ManagerRequestViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	final static Logger logger = Logger.getLogger(ManagerRequestViewServlet.class);
 	private ManagerRequests managerRequests = new ManagerRequests(DatabaseConnection.getDatabaseConnection());
        
     /**
@@ -36,14 +39,17 @@ public class ManagerRequestViewServlet extends HttpServlet {
 		
 		switch (viewType) {
 		case "'ALL'":
+			logger.info("GET Processed From: " + this.getClass());
 			response.getWriter().write(Arrays.toString(managerRequests.getRequests("ALL")));
 			break;
 			
 		case "'PENDING'":
+			logger.info("GET Processed From: " + this.getClass());
 			response.getWriter().write(Arrays.toString(managerRequests.getRequests("PENDING")));
 			break;
 			
 		case "'APPROVED'":
+			logger.info("GET Processed From: " + this.getClass());
 			response.getWriter().write(Arrays.toString(managerRequests.getRequests("APPROVED")));
 			break;
 			
@@ -60,6 +66,7 @@ public class ManagerRequestViewServlet extends HttpServlet {
 		String resolutionType = request.getParameter("type");
 		int requestId = Integer.parseInt(request.getParameter("id"));
 		managerRequests.approveOrDenyRequest(userId, requestId, resolutionType);
+		logger.info("PUT processed from: " + this.getClass());
 		response.setStatus(200);
 	}
 

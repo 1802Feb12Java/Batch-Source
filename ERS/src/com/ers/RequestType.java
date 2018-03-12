@@ -7,9 +7,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 
+import org.apache.log4j.Logger;
+
 public class RequestType implements RequestTypeDAO{
 	Connection connection;
-	
+	final static Logger logger = Logger.getLogger(RequestType.class);
 	public RequestType(Connection connection) {
 		this.connection = connection;
 	}
@@ -24,8 +26,9 @@ public class RequestType implements RequestTypeDAO{
 				typesString = typesString + resultSet.getString(1) + ",";
 			}
 		} catch (SQLException e) {
-			System.out.println("Error in get request types");
-			e.printStackTrace();
+			System.out.println("Error in " + this.getClass() + " Check log for stacktrace");
+			logger.error("SQL Error From: " + this.getClass());
+			logger.error(e.toString());
 		}
 		return typesString;
 	}
@@ -45,9 +48,9 @@ public class RequestType implements RequestTypeDAO{
 			insertQuery.setTimestamp(6,  new Timestamp(System.currentTimeMillis()));
 			insertQuery.execute();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			System.out.println("SQLError in addReimburs RequestTypeImpl");
-			e.printStackTrace();
+			System.out.println("Error in " + this.getClass() + " Check log for stacktrace");
+			logger.error("SQL Error From: " + this.getClass());
+			logger.error(e.toString());
 		}
 	}
 	
@@ -63,8 +66,9 @@ public class RequestType implements RequestTypeDAO{
 				typeID = typeQueryResult.getInt(1);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Error in " + this.getClass() + " Check log for stacktrace");
+			logger.error("SQL Error From: " + this.getClass());
+			logger.error(e.toString());
 		}
 		return typeID;
 	}

@@ -8,12 +8,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 
 public class ManagerDashServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	final static Logger logger = Logger.getLogger(ManagerDashServlet.class);
 	private ManagerRequests managerRequests;
     public ManagerDashServlet() {
         super();
@@ -31,6 +34,8 @@ public class ManagerDashServlet extends HttpServlet {
 			Gson gson = builder.create();
 			String json = gson.toJson(responseToClient);
 	        response.getWriter().write(json);
+	        logger.info("GET Processed from: " + this.getClass());
+	        
 		}
 		else {
 			response.sendRedirect("login.html");

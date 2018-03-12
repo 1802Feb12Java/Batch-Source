@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.codec.binary.Base64;
-
+import org.apache.log4j.Logger;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -17,7 +17,7 @@ import com.google.gson.GsonBuilder;
 public class ManagerRequests {
 	
 	private Connection connection;
-	
+	final static Logger logger = Logger.getLogger(ManagerRequests.class);
 	public ManagerRequests(Connection connection) {
 		this.connection = connection;
 	}
@@ -33,8 +33,9 @@ public class ManagerRequests {
 				numberOfRequests = resultSet.getInt(1);
 			}
 		} catch (SQLException e) {
-			System.out.println("Error in getPendingReq.");
-			e.printStackTrace();
+			System.out.println("Error in " + this.getClass() + " Check log for stacktrace");
+			logger.error("SQL Error From: " + this.getClass());
+			logger.error(e.toString());
 		}
 		return numberOfRequests;
 	}
@@ -50,8 +51,9 @@ public class ManagerRequests {
 				numberOfRequests = resultSet.getInt(1);
 			}
 		} catch (SQLException e) {
-			System.out.println("Error in getApprovedReq.");
-			e.printStackTrace();
+			System.out.println("Error in " + this.getClass() + " Check log for stacktrace");
+			logger.error("SQL Error From: " + this.getClass());
+			logger.error(e.toString());
 		}
 		return numberOfRequests;
 	}
@@ -67,8 +69,9 @@ public class ManagerRequests {
 				numberOfRequests = resultSet.getInt(1);
 			}
 		} catch (SQLException e) {
-			System.out.println("Error in getTotalReq.");
-			e.printStackTrace();
+			System.out.println("Error in " + this.getClass() + " Check log for stacktrace");
+			logger.error("SQL Error From: " + this.getClass());
+			logger.error(e.toString());
 		}
 		return numberOfRequests;
 	}
@@ -134,7 +137,9 @@ public class ManagerRequests {
 		        results.add(json);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("Error in " + this.getClass() + " Check log for stacktrace");
+			logger.error("SQL Error From: " + this.getClass());
+			logger.error(e.toString());
 		}
 		return results.toArray(new String[results.size()]);
 	}
@@ -159,8 +164,9 @@ public class ManagerRequests {
 			updateQuery.executeUpdate();
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Error in " + this.getClass() + " Check log for stacktrace");
+			logger.error("SQL Error From: " + this.getClass());
+			logger.error(e.toString());
 		}
 		
 		
@@ -186,7 +192,9 @@ public class ManagerRequests {
 		        
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("Error in " + this.getClass() + " Check log for stacktrace");
+			logger.error("SQL Error From: " + this.getClass());
+			logger.error(e.toString());
 		}
 		
 

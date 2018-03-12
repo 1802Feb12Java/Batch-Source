@@ -14,12 +14,13 @@ import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.log4j.Logger;
 
 
 public class RequestTypeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private RequestType requestType;
-  
+	final static Logger logger = Logger.getLogger(RequestTypeServlet.class);
 	public RequestTypeServlet() {
         super();
         requestType = new RequestType(DatabaseConnection.getDatabaseConnection());
@@ -28,6 +29,7 @@ public class RequestTypeServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String requestTypes = requestType.getRequestTypes();
+		logger.info("GET Processed From: " + this.getClass());
 		response.getWriter().write(requestTypes);
 		
 	}
@@ -71,8 +73,8 @@ public class RequestTypeServlet extends HttpServlet {
 	            }
 	        }	
 		} catch (FileUploadException e)	{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Error in " + this.getClass() + " Check log for stacktrace");
+			logger.error(e.toString());
 		}
 		
 		//get ID for request TYpe to store in DB
@@ -82,7 +84,7 @@ public class RequestTypeServlet extends HttpServlet {
 		//convert amount to number
 		float amount = Float.parseFloat(amountRequested);
 		requestType.addReimbursment(amount, description, receiptUpload, requestTypeId, employeeId);
-		
+		logger.info("POST Processed From: " + this.getClass());
 		response.sendRedirect("empDash.html");
 	}
 

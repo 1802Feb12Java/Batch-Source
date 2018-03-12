@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -18,6 +20,7 @@ import com.google.gson.GsonBuilder;
 @WebServlet("/EmployeeDashServlet")
 public class EmployeeDashServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	final static Logger logger = Logger.getLogger(EmployeeDashServlet.class);
 
 	private EmployeeRequests employeeRequests;
     public EmployeeDashServlet() {
@@ -38,6 +41,7 @@ public class EmployeeDashServlet extends HttpServlet {
 			GsonBuilder builder = new GsonBuilder();
 			Gson gson = builder.create();
 			String json = gson.toJson(responseToClient);
+			logger.info("GET processed from: " + this.getClass());
 	        response.getWriter().write(json);
 		}
 		else {

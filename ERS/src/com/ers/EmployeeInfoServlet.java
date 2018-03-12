@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 /**
@@ -18,6 +20,7 @@ import com.google.gson.GsonBuilder;
 @WebServlet("/EmployeeInfo")
 public class EmployeeInfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	final static Logger logger = Logger.getLogger(EmployeeInfoServlet.class);
 	EmployeeRequests employeeRequests;
     
 	public EmployeeInfoServlet() {
@@ -34,6 +37,7 @@ public class EmployeeInfoServlet extends HttpServlet {
 		GsonBuilder builder = new GsonBuilder();
 		Gson gson = builder.create();
 		String json = gson.toJson(employeeInfo);
+		logger.info("GET processed from: " + this.getClass());
         response.getWriter().write(json);
 	}
 	
@@ -47,6 +51,7 @@ public class EmployeeInfoServlet extends HttpServlet {
 		String email = request.getParameter("email");
 		String result = employeeRequests.updateEmployee(userId, oldUserName, newUserName, firstName, lastName, email);
 		if (result.equals("FAILURE")) {
+			logger.info("PUT FAILURE FROM: " + this.getClass());
 			response.getWriter().write("FAILURE");
 		}
 		else {
@@ -57,7 +62,7 @@ public class EmployeeInfoServlet extends HttpServlet {
 	        
 	        //update session variable
 	        request.getSession(false).setAttribute("username", newUserName);
-	        
+	        logger.info("PUT processed from: " + this.getClass());
 			response.getWriter().write("SUCCESS");
 		}
 	}
