@@ -139,6 +139,11 @@ public class ManagerRequests {
 		return results.toArray(new String[results.size()]);
 	}
 	
+	public void approveOrDenyRequest(int userId, int requestId, String resolutionType) {
+		String updateQueryString = "UPDATE ERS_REIMBURSMENTS RT_STATUS = ?, U_ID_AUTHOR = ?, R_RESOLVED = ? WHERE R_ID = ?";
+		
+	}
+	
 	
 	//inner class to JSONify
 		@SuppressWarnings("unused")

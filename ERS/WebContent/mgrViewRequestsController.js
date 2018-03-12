@@ -262,7 +262,18 @@ function approveRequest() {
     data = $(this).parent().siblings();
     //data = data[0];
     var id = data[0].textContent;
-    alert("Request has ID of: " + id);
+
+    var req = new XMLHttpRequest();
+    req.open("PUT", "http://localhost:8080/ERS/ManagerRequestViewServlet?type=APPROVE&id=" + id, true);
+    req.send(null);
+    req.addEventListener("load", function () {
+        if (req.status >= 200 && req.status < 300) {
+            alert("Approve Successful.");
+            getPendingRequests();
+        }
+
+    });
+
 }
 
 function denyRequest() {

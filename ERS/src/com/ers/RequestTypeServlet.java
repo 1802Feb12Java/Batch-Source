@@ -66,7 +66,7 @@ public class RequestTypeServlet extends HttpServlet {
 						break;
 					}
 	            } else {
-	                // Process file
+	                // get bytes from file upload
 	                receiptUpload = item.get();
 	            }
 	        }	

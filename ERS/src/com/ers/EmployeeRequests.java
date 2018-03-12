@@ -176,7 +176,7 @@ public class EmployeeRequests implements RequestsDAO {
 				status = resultSet.getString(8);;
 
 				String encodedReceipt = Base64.encodeBase64String(receipt);
-				//System.out.println(encodedReceipt);
+				System.out.println(encodedReceipt);
 				Request request = new Request(amount, type, description, status, 
 						timeStampRequest, resolver, timeStampApprove, encodedReceipt);
 				

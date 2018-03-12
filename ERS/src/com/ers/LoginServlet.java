@@ -17,14 +17,14 @@ public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     private LoginDAO loginDAO;    
     private EmployeeRequests employeeRequests;
-    private ManagerRequests managerRequests;
+    //private ManagerRequests managerRequests;
     
     public LoginServlet() {
         super();
         Connection connection = DatabaseConnection.getDatabaseConnection();
         this.loginDAO = new LoginDAO(connection);
         this.employeeRequests = new EmployeeRequests(connection);
-        this.managerRequests = new ManagerRequests(connection);
+        //this.managerRequests = new ManagerRequests(connection);
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
