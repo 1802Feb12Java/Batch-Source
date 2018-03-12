@@ -8,9 +8,9 @@ import com.revature.ers.reimbursements.Reimbursement;
 public interface ReimbursementDAO {
 	//CRUD operations
 	public void addReimbursement(Reimbursement reimbursement)throws SQLException;
-	public Reimbursement getReimbursement()throws SQLException;
+	public Reimbursement getReimbursement(int r_id)throws SQLException;
 	public void updateReimbursement(Reimbursement reimbursement)throws SQLException;
 	public void deleteReimbursement(int r_id)throws SQLException;
-	public List<Reimbursement> getPendingReimbursements()throws SQLException;
-	public List<Reimbursement> getResolvedReimbursements()throws SQLException;
+	public List<Reimbursement> getPendingReimbursements(int ur_id)throws SQLException;
+	public List<Reimbursement> getResolvedReimbursements(int ur_id)throws SQLException;
 }
