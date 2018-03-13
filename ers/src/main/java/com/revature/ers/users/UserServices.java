@@ -60,7 +60,7 @@ public class UserServices implements UserDAO{
 		
 		//verify that a result set was returned
 		if (!rs.next()) {
-			System.out.println("Null user");
+			log.error("Null user");
 			return null;
 		}
 		
@@ -97,6 +97,7 @@ public class UserServices implements UserDAO{
 		cs.setInt(7, user.getUr_ID());
 		
 		cs.executeUpdate();
+		log.info(user.getU_userName() + " updated user information.");
 		cs.close();
 	}
 
