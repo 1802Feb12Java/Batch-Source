@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Bootstrap Admin Theme</title>
+    <title>Pending</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -67,7 +67,7 @@
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="index.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -95,7 +95,7 @@
                             </li>
                             
                             <li>
-                                <a href="tables.html"><i class="fa fa-table fa-fw"></i> Tables</a>
+                                <a href="Pending.html"><i class="fa fa-table fa-fw"></i> Reimbursements</a>
                             </li>
                             <li>
                                 <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Forms</a>
@@ -123,14 +123,19 @@
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-                            <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                            <table width="100%" class="table table-striped table-bordered table-hover" id="remtable">
                                 <thead>
                                     <tr>
+                                        <th>Receipt ID</th>
                                         <th>Amount</th>
                                         <th>Description</th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
+                                        <th>Receipt</th>
+                                        <th>Time Submitted</th>
+                                        <th>Time Resolved</th>
+                                        <th>Author</th>
+                                        <th>Resolver</th>
+                                        <th>Status</th>
+                                        <th>Type</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -177,6 +182,8 @@
         });
     });
     </script>
+
+    <script src="./pending.js"></script>
 
 </body>
 

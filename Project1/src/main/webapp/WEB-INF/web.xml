@@ -27,4 +27,14 @@
     <servlet-name>WelcomeServlet</servlet-name>
     <url-pattern>/Welcome</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ReceiptServlet</display-name>
+    <servlet-name>ReceiptServlet</servlet-name>
+    <servlet-class>com.revature.servlets.ReceiptServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ReceiptServlet</servlet-name>
+    <url-pattern>/Receipt</url-pattern>
+  </servlet-mapping>
 </web-app>

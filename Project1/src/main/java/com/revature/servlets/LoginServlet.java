@@ -48,6 +48,7 @@ public class LoginServlet extends HttpServlet {
 		if(u != null) {
 			pw.println("Welcome, "+u.getfName());
 //			pw.println("<a href=\"Index.html\">Logout</a>");
+			session.setAttribute("userobj", u);
 			session.setAttribute("username", username);
 			session.setAttribute("problem", null);
 			session.setAttribute("firstname", u.getfName());

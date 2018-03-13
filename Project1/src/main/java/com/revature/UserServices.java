@@ -154,4 +154,22 @@ public class UserServices implements UsersDAO{
 		return rems;
 	}
 
+	public ArrayList<Reimbursement> getAll(Users u) throws SQLException {
+		String str = "SELECT * FROM ERS_REIMBURSEMENTS WHERE RT_AUTHOR = ?";
+		PreparedStatement ps = conn.prepareStatement(str);
+		ps.setInt(1, u.getId());
+		ResultSet rs = ps.executeQuery();
+		ArrayList<Reimbursement> rems = new ArrayList<Reimbursement>();
+		while(rs.next()) {
+			Reimbursement r = new Reimbursement(rs.getInt(1), rs.getDouble(2), rs.getString(5), 
+					rs.getInt(7), rs.getInt(9), rs.getInt(10));
+			r.setDescription(rs.getString(3));
+			r.setResolver(rs.getInt(8));
+			r.setTimeResolved(rs.getString(6));
+			rems.add(r);
+		}
+		
+		return rems;
+	}
+	
 }

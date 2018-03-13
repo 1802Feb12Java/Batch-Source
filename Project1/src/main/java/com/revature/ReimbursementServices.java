@@ -44,11 +44,12 @@ public class ReimbursementServices implements ReimbursementDAO {
 		ResultSet rs = ps.executeQuery();
 		ArrayList<Reimbursement> rems = new ArrayList<Reimbursement>();
 		while(rs.next()) {
-			Reimbursement r = new Reimbursement(rs.getInt(1), rs.getDouble(2), rs.getString(4), 
-					rs.getInt(6), rs.getInt(8), rs.getInt(9));
+			Reimbursement r = new Reimbursement(rs.getInt(1), rs.getDouble(2), rs.getString(5), 
+					rs.getInt(7), rs.getInt(9), rs.getInt(10));
 			r.setDescription(rs.getString(3));
-			r.setResolver(rs.getInt(7));
-			r.setTimeResolved(rs.getString(5));
+			r.setResolver(rs.getInt(8));
+			r.setTimeResolved(rs.getString(6));
+			r.setReceipt(rs.getBlob(4));
 			rems.add(r);
 		}
 		
@@ -64,6 +65,7 @@ public class ReimbursementServices implements ReimbursementDAO {
 			Reimbursement r = new Reimbursement(rs.getInt(1), rs.getDouble(2), rs.getString(5), 
 					rs.getInt(7), rs.getInt(9), rs.getInt(10));
 			r.setDescription(rs.getString(3));
+			r.setReceipt(rs.getBlob(4));
 			rems.add(r);
 		}
 		

@@ -1,5 +1,7 @@
 package com.revature;
 
+import java.sql.Blob;
+
 public class Reimbursement {
 
 	public int id;
@@ -11,7 +13,16 @@ public class Reimbursement {
 	public int resolver;
 	public int type;
 	public int status;
+	public Blob receipt;
 	
+	public Blob getReceipt() {
+		return receipt;
+	}
+
+	public void setReceipt(Blob receipt) {
+		this.receipt = receipt;
+	}
+
 	public Reimbursement(double amount, String description, int author, int type) {
 		super();
 		this.amount = amount;
