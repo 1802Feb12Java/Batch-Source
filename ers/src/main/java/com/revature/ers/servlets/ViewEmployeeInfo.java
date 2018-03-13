@@ -8,6 +8,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import com.revature.ers.users.User;
 import com.revature.ers.users.UserServices;
 
@@ -16,7 +20,8 @@ import com.revature.ers.users.UserServices;
  */
 public class ViewEmployeeInfo extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+    Logger logger = Logger.getRootLogger();
+    
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -30,18 +35,35 @@ public class ViewEmployeeInfo extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Integer u_ID = (Integer) request.getSession(false).getAttribute("userID");
-
+		JSONArray jarray = new JSONArray();
+		JSONObject json = new JSONObject();	
 		User user = null;
 		UserServices us = new UserServices();
 		try {
-			System.out.println("Trying getUser");
 			user = us.getUser(u_ID.intValue());
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			logger.error("There was an error communicating with the database.");
 			e.printStackTrace();
 		}
-		System.out.println(user.getU_firstName());
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+
+		//convert the user data to JSON
+		json.put("username", user.getU_userName());
+		json.put("fname", user.getU_firstName());
+		json.put("lname", user.getU_lastName());
+		json.put("email", user.getU_email());
+		
+		if(user.getUr_ID()==1) {
+			json.put("role", "Manager");
+		}
+		
+		else {
+			json.put("role", "Employee");
+		}
+		
+		jarray.put(0, json);
+		
+		//return JSON with  printwriter
+		response.getWriter().print(jarray.toString());
 	}
 
 	/**

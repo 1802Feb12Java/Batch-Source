@@ -52,9 +52,11 @@ public class LoginServlet extends HttpServlet {
 		//a manager or employee, and redirect to the appropriate page.
 		if(validated) {
 			try {
+				//open the session and get the user ID
 				HttpSession session = request.getSession();
 			    session.setAttribute("userID", us.getUserID(username));
 
+			    //get the user role and forward the user to the appropriate page
 				if(us.getUserRole(username) == 1) {
 					logger.info("User '" + username + "' logged in as manager.");
 					us = null;

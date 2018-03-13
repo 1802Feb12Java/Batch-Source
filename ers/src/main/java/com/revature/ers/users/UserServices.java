@@ -40,32 +40,39 @@ public class UserServices implements UserDAO{
 		
 		//execute the callable statement
 		cs.executeUpdate();
+		cs.close();
 	}
 
 	public User getUser(int u_ID) throws SQLException {
 		User user = new User();
 		
+		//establish the connection
 		ConnFactory cf = new ConnFactory();
 		Connection conn = cf.getConnection();
+		
+		//prepare and process the query
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sql = "SELECT U_FIRSTNAME, U_LASTNAME, U_EMAIL FROM ERS_USERS WHERE U_ID = ?";
-		System.out.println("Querying user: " + u_ID);
+		String sql = "SELECT U_FIRSTNAME, U_LASTNAME, U_EMAIL, UR_ID FROM ERS_USERS WHERE U_ID = ?";
 		ps = conn.prepareStatement(sql);
 		ps.setInt(1, u_ID);
 		rs = ps.executeQuery();
 		
-		System.out.println("Results received");
+		//verify that a result set was returned
 		if (!rs.next()) {
 			System.out.println("Null user");
 			return null;
 		}
 		
+		//create the user object
 		else {
+			user.setU_id(u_ID);
 			user.setU_firstName(rs.getString("U_FIRSTNAME"));
 			user.setU_lastName(rs.getString("U_LASTNAME"));
 			user.setU_email(rs.getString("U_EMAIL"));
-			System.out.println("Returning user: " + user.getU_firstName());
+			user.setUr_ID(rs.getInt("UR_ID"));
+			ps.close();
+			rs.close();
 			return user;
 		}
 	}
@@ -90,6 +97,7 @@ public class UserServices implements UserDAO{
 		cs.setInt(7, user.getUr_ID());
 		
 		cs.executeUpdate();
+		cs.close();
 	}
 
 	public void deleteUser(int u_id) throws SQLException {
@@ -123,7 +131,6 @@ public class UserServices implements UserDAO{
 			log.info("User " + u_userName + " not found.");
 			ps.close();
 			rs.close();
-			conn.close();
 			return false;
 		}
 		
@@ -131,7 +138,6 @@ public class UserServices implements UserDAO{
 			log.info("User " + u_userName + " successfully logged in");
 			ps.close();
 			rs.close();
-			conn.close();
 			return true;
 		}
 		
@@ -139,7 +145,6 @@ public class UserServices implements UserDAO{
 			log.info("Incorrect password for " + u_userName);
 			ps.close();
 			rs.close();
-			conn.close();
 			return false;
 		}
 		
@@ -187,8 +192,6 @@ public class UserServices implements UserDAO{
 		id = rs.getInt("U_ID");
 		rs.close();
 		ps.close();
-		return id;
-		
+		return id;	
 	}
-
 }
