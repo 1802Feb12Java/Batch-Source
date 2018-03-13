@@ -51,14 +51,11 @@ let viewEInfo = function(){
     xhr.open('GET', '/ers/ViewEmployeeInfo', true);
 
     //create the function to handle the request
-    console.log("Post send: " + xhr);
     xhr.onreadystatechange = function(){
-        console.log("status: " + this.status);
         if(this.readyState == 4 && this.status == 200){
-            let employeeInfo = "<p>" + this.responseText + "</p>";
-            console.log(employeeInfo);
-            console.log(this.responseText);
-            document.getElementById("page").innerHTML = employeeInfo;
+            let employeeJSON = JSON.parse(this.responseText);
+            test = employeeJSON[0].fname;
+            document.getElementById("page").innerHTML = test;
         };
     };
  
