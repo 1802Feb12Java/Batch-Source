@@ -54,7 +54,7 @@ let viewEInfo = function(){
     xhr.onreadystatechange = function(){
         if(this.readyState == 4 && this.status == 200){
             let employeeJSON = JSON.parse(this.responseText);
-            test = employeeJSON[0].fname;
+            test = employeeJSON.fname;
             document.getElementById("page").innerHTML = test;
         };
     };

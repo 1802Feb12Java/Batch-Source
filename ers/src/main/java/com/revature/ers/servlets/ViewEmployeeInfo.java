@@ -12,6 +12,7 @@ import org.apache.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.revature.ers.jsonifiers.ToJSON;
 import com.revature.ers.users.User;
 import com.revature.ers.users.UserServices;
 
@@ -35,35 +36,18 @@ public class ViewEmployeeInfo extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Integer u_ID = (Integer) request.getSession(false).getAttribute("userID");
-		JSONArray jarray = new JSONArray();
 		JSONObject json = new JSONObject();	
 		User user = null;
 		UserServices us = new UserServices();
+		
 		try {
 			user = us.getUser(u_ID.intValue());
 		} catch (SQLException e) {
 			logger.error("There was an error communicating with the database.");
 			e.printStackTrace();
-		}
-
-		//convert the user data to JSON
-		json.put("username", user.getU_userName());
-		json.put("fname", user.getU_firstName());
-		json.put("lname", user.getU_lastName());
-		json.put("email", user.getU_email());
-		
-		if(user.getUr_ID()==1) {
-			json.put("role", "Manager");
-		}
-		
-		else {
-			json.put("role", "Employee");
-		}
-		
-		jarray.put(0, json);
-		
-		//return JSON with  printwriter
-		response.getWriter().print(jarray.toString());
+		}		
+		json = ToJSON.employee(user);
+		response.getWriter().print(json.toString());
 	}
 
 	/**
