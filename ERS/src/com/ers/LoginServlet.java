@@ -76,9 +76,10 @@ public class LoginServlet extends HttpServlet {
 	    }
 	    else{  
 	    	logger.info("Failed Login from: " + userName + " | With password of: " + password);
-	        out.print("<h1 class='mx-auto'>Wrong username or password!</h1>");  
-	        RequestDispatcher requestDispatcher = request.getRequestDispatcher("login.html");  
-	        requestDispatcher.include(request,response);  
+	    	response.setStatus(400);
+//	        out.print("<h1 class='mx-auto'>Wrong username or password!</h1>");  
+//	        RequestDispatcher requestDispatcher = request.getRequestDispatcher("login.html");  
+//	        requestDispatcher.include(request,response);  
 	    }  
 	          
 	    out.close();  

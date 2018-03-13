@@ -32,6 +32,7 @@ public class EmployeeDashServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
+		Mailer.SendMail("scott.g.bennett@gmail.com", "anotherTest", "Still another Test");
 		if (session != null) {
 			int userId = (int) session.getAttribute("userid");
 			int pendingRequests = employeeRequests.getNumberOfPendingRequests(userId);

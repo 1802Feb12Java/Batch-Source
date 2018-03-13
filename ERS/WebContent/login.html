@@ -22,7 +22,7 @@
                         <p>
                     </div>
                     <div class="panel-body">
-                        <form method="post" action="login" class="form-horizontal">
+                        <!-- <form method="post" action="login" class="form-horizontal"> -->
                             <fieldset>
                                 <div class="noLeftRightMargin form-group">
                                     <label for="username" class="col-md-6 control-label"> Username</label>
@@ -36,14 +36,17 @@
                                         <input id="password" type="password" name="password" class="form-control" />
                                     </div>
                                 </div>
-                                <input type="submit" value="Login" class="btn btn-lg btn-success btn-block" />
+                                <button id="login" class="btn btn-lg btn-success btn-block">Log In</button>
                             </fieldset>
-                        </form>
+                        <!-- </form> -->
+                        <div hidden class="panel-footer p-3 mb-2 bg-danger text-white text-center" id="errorMessage">Error Logging In</div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <script src="loginController.js"></script>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"

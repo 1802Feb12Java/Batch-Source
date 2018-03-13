@@ -56,6 +56,30 @@ public class LoginDAO {
 		return nameExists;
 	}
 	
+	public boolean emailExists(String email) {
+		boolean emailExists = false;
+		try {
+			connection = DatabaseConnection.getDatabaseConnection();
+			PreparedStatement loginQuery = connection.prepareStatement("select * from ERS_USERS where U_EMAIL = ?");
+			loginQuery.setString(1, email);
+
+
+			ResultSet resultSet = loginQuery.executeQuery();
+			boolean result = resultSet.next();
+			
+			if (result) {
+				emailExists = true;
+			}
+			
+
+		} catch (SQLException e) {
+			System.out.println("Error in " + this.getClass() + " Check log for stacktrace");
+			logger.error("SQL Error From: " + this.getClass());
+			logger.error(e.toString());
+		}
+		return emailExists;
+	}
+	
 	public int getUserTypeId(String userName) {
 		connection = DatabaseConnection.getDatabaseConnection();
 		int userId = 0;

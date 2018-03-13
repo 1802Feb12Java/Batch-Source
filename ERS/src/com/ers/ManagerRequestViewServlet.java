@@ -35,25 +35,27 @@ public class ManagerRequestViewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String viewType = request.getParameter("viewType");
-		
+		String employeeName = request.getParameter("employeeName");
 		
 		switch (viewType) {
 		case "'ALL'":
 			logger.info("GET Processed From: " + this.getClass());
-			response.getWriter().write(Arrays.toString(managerRequests.getRequests("ALL")));
+			response.getWriter().write(Arrays.toString(managerRequests.getRequests("ALL", "NONE")));
 			break;
 			
 		case "'PENDING'":
 			logger.info("GET Processed From: " + this.getClass());
-			response.getWriter().write(Arrays.toString(managerRequests.getRequests("PENDING")));
+			response.getWriter().write(Arrays.toString(managerRequests.getRequests("PENDING", "NONE")));
 			break;
 			
 		case "'APPROVED'":
 			logger.info("GET Processed From: " + this.getClass());
-			response.getWriter().write(Arrays.toString(managerRequests.getRequests("APPROVED")));
+			response.getWriter().write(Arrays.toString(managerRequests.getRequests("APPROVED", "NONE")));
 			break;
 			
 		default:
+			logger.info("GET Processed From: " + this.getClass());
+			response.getWriter().write(Arrays.toString(managerRequests.getRequests("ALL", employeeName)));
 			break;
 		}
 

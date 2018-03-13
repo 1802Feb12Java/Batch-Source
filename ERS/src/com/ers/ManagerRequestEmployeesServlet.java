@@ -19,17 +19,13 @@ public class ManagerRequestEmployeesServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = Logger.getLogger(ManagerRequestEmployeesServlet.class);
     ManagerRequests managerRequests;   
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+
     public ManagerRequestEmployeesServlet() {
         super();
         managerRequests = new ManagerRequests(DatabaseConnection.getDatabaseConnection());
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
@@ -37,12 +33,24 @@ public class ManagerRequestEmployeesServlet extends HttpServlet {
 		logger.info("GET Processed from: " + this.getClass());
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		String firstName = request.getParameter("firstName");
+		String lastName = request.getParameter("lastName");
+		String userName = request.getParameter("username");
+		String email = request.getParameter("email");
+		
+		int result = managerRequests.registerEmployee(firstName, lastName, email, userName);
+		if (result == -1) {
+			response.setStatus(401);
+		}
+		else if (result == -2) {
+			response.setStatus(402);
+		}
+		else {
+			response.setStatus(200);
+		}
 		logger.info("POST Processed from: " + this.getClass());
 	}
 
