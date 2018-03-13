@@ -7,15 +7,19 @@
   <br>
   <form action='http://localhost:8080/Project1/updateInfo' method='post'>
     First name:<br>
-    <input type='text' name='firstname' required><br><br>
+    <input type='text' name='firstname' required><br>
+    Currently: "{{currentUser.firstname}}"<br><br>
     Last name:<br>
-    <input type='text' name='lastname' required><br><br>
+    <input type='text' name='lastname' required><br>
+    Currently: "{{currentUser.lastname}}"<br><br>
     Username:<br>
-    <input type='text' name='username' required><br><br>
+    <input type='text' name='username' required><br>
+    Currently: "{{currentUser.username}}"<br><br>
     Password:<br>
     <input type='password' name='password' required><br><br>
     Email:<br>
-    <input type='text' name='email' required><br><br>
+    <input type='text' name='email' required><br>
+    Currently: "{{currentUser.email}}"<br><br>
 
     <button type="submit">Submit</button>
   </form>

@@ -20,14 +20,6 @@
     <url-pattern>/login</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>managerHome</servlet-name>
-    <servlet-class>com.revature.servlets.ManagerHomeServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>managerHome</servlet-name>
-    <url-pattern>/managerHome</url-pattern>
-  </servlet-mapping>
-  <servlet>
     <servlet-name>employeeHome</servlet-name>
     <servlet-class>com.revature.servlets.EmployeeHomeServlet</servlet-class>
   </servlet>

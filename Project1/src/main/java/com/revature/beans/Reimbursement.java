@@ -82,6 +82,7 @@ public class Reimbursement {
 		this.statusID = statusID;
 	}
 	
+	//called in reimbursement DAO
 	public Reimbursement(int id, double amount, String description, String receipt, Timestamp submitted,
 			Timestamp resolved, int authorId, int resolverId, int typeId, int statusID) {
 		super();

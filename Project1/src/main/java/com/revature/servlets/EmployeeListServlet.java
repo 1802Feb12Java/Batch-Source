@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.DAOs.UserDAOClass;
 import com.revature.beans.User;
@@ -17,11 +19,8 @@ import com.revature.factory.ConnectionFactory;
 public class EmployeeListServlet extends HttpServlet {
 	ConnectionFactory cf = ConnectionFactory.getInstance();
 	private UserDAOClass userDao = new UserDAOClass(cf.getConnection());
-	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
+	private static final Logger log = Logger.getLogger(EmployeeListServlet.class);
 
 	@Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -41,6 +40,7 @@ public class EmployeeListServlet extends HttpServlet {
 			userList = userDao.getAllUsers();
 			ObjectMapper om = new ObjectMapper();
 			String json = om.writeValueAsString(userList);
+//			log.info("Employee list JSON sent");
 			resp.getWriter().write(json);
 		} catch (SQLException e) {
 			e.printStackTrace();

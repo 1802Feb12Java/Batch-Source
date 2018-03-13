@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
+
 import com.google.gson.Gson;
 
 import com.revature.DAOs.ReimbursementDAOClass;
@@ -17,8 +19,9 @@ import com.revature.beans.Reimbursement;
 import com.revature.factory.ConnectionFactory;
 
 public class ReimbursementsServlet extends HttpServlet {
-	ConnectionFactory cf = ConnectionFactory.getInstance();
+	private ConnectionFactory cf = ConnectionFactory.getInstance();
 	private ReimbursementDAOClass reDao = new ReimbursementDAOClass(cf.getConnection());
+	private static final Logger log = Logger.getLogger(ReimbursementsServlet.class);
 	
 	/**
 	 * 
@@ -43,40 +46,11 @@ public class ReimbursementsServlet extends HttpServlet {
 			reimbursementList = reDao.getAllReimbursements();
 			Gson gson = new Gson();
 			String json = gson.toJson(reimbursementList);
+//			log.info("Reimbursement list JSON sent");
 			resp.getWriter().write(json);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-//		resp.getWriter().write("[");
-//		for(int i=0; i<reimbursementList.size(); i++) {
-//			Reimbursement r = reimbursementList.get(i);
-//			resp.getWriter().write("{\"id\":"+r.getId()+",");
-//			resp.getWriter().write("\"amount\":"+r.getAmount()+",");
-//			resp.getWriter().write("\"description\":\""+r.getDescription()+"\",");
-//			resp.getWriter().write("\"submitted\":\""+r.getSubmitted()+"\",");
-//			if(r.getResolved() != null) {
-//				resp.getWriter().write("\"resolved\":\""+r.getResolved()+"\",");
-//			}
-//			else {
-//				resp.getWriter().write("\"resolved\":null,");
-//			}
-//			if(r.getBase64receipt() != null) {
-//				resp.getWriter().write("\"receipt\":\""+r.getBase64receipt()+"\",");
-//			}
-//			else {
-//				resp.getWriter().write("\"receipt\":null,");
-//			}
-//			resp.getWriter().write("\"authorId\":"+r.getAuthorId()+",");
-//			resp.getWriter().write("\"resolverId\":"+r.getResolverId()+",");
-//			resp.getWriter().write("\"typeId\":"+r.getTypeId()+",");
-//			if(i!=reimbursementList.size()-1) {
-//				resp.getWriter().write("\"statusID\":"+r.getStatusID()+"},");
-//			}
-//			else {
-//				resp.getWriter().write("\"statusID\":"+r.getStatusID()+"}]");
-//			}
-//		}
 	}
 	
 	@Override
@@ -88,17 +62,17 @@ public class ReimbursementsServlet extends HttpServlet {
 		int reid = new Integer(req.getParameter("reqid"));
 		int newStatus = new Integer(req.getParameter("newstatus"));
 		int resolverUid = (Integer) session.getAttribute("uid");
-
-//		System.out.println("===New Attempt===");
-//		System.out.println("reid = " + reid);
-//		System.out.println("newStatus = " + newStatus);
-//		System.out.println("resolverUid = " + resolverUid);
 		
 		try {
 			reDao.updateReimbursementStatus(reid, newStatus, resolverUid);
+			if(newStatus == 2) {
+				log.info("Updated Reimbursement "+reid+" to status: APPROVED");
+			}
+			else if(newStatus == 3) {
+				log.info("Updated Reimbursement "+reid+" to status: DENIED");
+			}
 			resp.sendRedirect("http://localhost:4200/reimbursements");
 		} catch (SQLException e) {
-			//log.debug("There was an SQL exception thrown when trying to update a Request Status.");
 			e.printStackTrace();
 		}
 

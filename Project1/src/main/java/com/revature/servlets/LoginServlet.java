@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 
+import org.apache.log4j.Logger;
+
 import com.revature.DAOs.UserDAOClass;
 import com.revature.beans.User;
 import com.revature.factory.ConnectionFactory;
@@ -16,11 +18,8 @@ public class LoginServlet extends HttpServlet {
 	
 	private ConnectionFactory cf = ConnectionFactory.getInstance();
 	private UserDAOClass userDAO = new UserDAOClass(cf.getConnection());
-	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
+	private static final Logger log = Logger.getLogger(LoginServlet.class);
 
 	@SuppressWarnings("unused")
 	@Override
@@ -60,7 +59,8 @@ public class LoginServlet extends HttpServlet {
 		}
 		if(userWithGivenUsername == null) {
 			session.setAttribute("problem", "incorrect password");
-			resp.sendRedirect("login");
+			log.info("User tried to log with invalid username");
+			resp.sendRedirect("http://localhost:4200/login");
 		}
 		else {
 			if(allUsers.get(indexOfUser).getPassword().equals(password)) {
@@ -68,16 +68,19 @@ public class LoginServlet extends HttpServlet {
 				session.setAttribute("problem", null);	//should this be password and password?
 				if(allUsers.get(indexOfUser).getRoleId() == 1) {	//if manager
 					session.setAttribute("role", "manager");
+					log.info("Manager logged in. User ID = "+session.getAttribute("uid"));
 					resp.sendRedirect("http://localhost:4200/managerHome");
 				}
 				else {	//if employee
 					session.setAttribute("role", "employee");
+					log.info("Employee logged in. User ID = "+session.getAttribute("uid"));
 					resp.sendRedirect("http://localhost:4200/employeeHome");
 				}
 			}
 			else {
 				session.setAttribute("problem", "incorrect password");
-				resp.sendRedirect("login");
+				log.info("User tried to log with incorrect password for username "+username);
+				resp.sendRedirect("http://localhost:4200/login");
 			}
 		}
 	}

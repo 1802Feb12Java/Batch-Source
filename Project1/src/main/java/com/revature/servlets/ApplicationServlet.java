@@ -4,7 +4,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -15,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.codec.binary.Base64;
+import org.apache.log4j.Logger;
 
 import com.revature.DAOs.ReimbursementDAOClass;
 import com.revature.beans.Reimbursement;
@@ -24,11 +24,8 @@ public class ApplicationServlet extends HttpServlet {
 	private ConnectionFactory cf = ConnectionFactory.getInstance();
 	private Connection conn = cf.getConnection();
 	private ReimbursementDAOClass reDao = new ReimbursementDAOClass(conn);
-	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
+	private static final Logger log = Logger.getLogger(ApplicationServlet.class);
 
 	@Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -59,18 +56,14 @@ public class ApplicationServlet extends HttpServlet {
 		String receiptPath = "C:\\Users\\Trevor\\Documents\\workspace-sts\\Project1Test\\"+req.getParameter("receipt");
         
 		ByteArrayOutputStream bos = null;
-//		Blob receipt = null;
         try {
-//			receipt = conn.createBlob();
             File receiptFile = new File(receiptPath);
             FileInputStream fis = new FileInputStream(receiptFile);
             byte[] buffer = new byte[1024];
             bos = new ByteArrayOutputStream();
             for (int len; (len = fis.read(buffer)) != -1;) {
-//            	System.out.println("writing");
                 bos.write(buffer, 0, len);
             }
-//			receipt.setBytes(1, bos.toByteArray());
 			fis.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -82,6 +75,7 @@ public class ApplicationServlet extends HttpServlet {
 		
 		try {
 			reDao.createReimbursement(reimbursementToInsert);
+			log.info("User "+authorID+" submitted a reimbursement request for $"+amount+" with description \""+description+"\"");
 			resp.sendRedirect("http://localhost:4200/employeeHome");
 		} catch (SQLException e) {
 			e.printStackTrace();

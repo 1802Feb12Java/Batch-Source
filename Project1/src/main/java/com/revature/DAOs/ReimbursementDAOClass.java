@@ -1,8 +1,5 @@
 package com.revature.DAOs;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.sql.Blob;
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -13,6 +10,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import org.apache.commons.codec.binary.Base64;
+import org.apache.log4j.Logger;
 
 import com.revature.beans.Reimbursement;
 
@@ -46,9 +44,9 @@ public class ReimbursementDAOClass implements ReimbursementDAO {
 		
 		
 		ps.setTimestamp(5, ts);
-		ps.setTimestamp(6, r.getResolved());
+		ps.setTimestamp(6, r.getResolved());	//this'll be null
 		ps.setInt(7, r.getAuthorId());
-		ps.setNull(8, java.sql.Types.INTEGER);
+		ps.setNull(8, java.sql.Types.INTEGER);	//set resolverId to null so it won't show up in the table
 		ps.setInt(9, r.getTypeId());
 		ps.setInt(10, r.getStatusID());
 		

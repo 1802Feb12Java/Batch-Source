@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
+
 import com.revature.DAOs.ReimbursementDAOClass;
 import com.revature.DAOs.UserDAOClass;
 import com.revature.beans.Reimbursement;
@@ -25,6 +27,7 @@ public class UpdateInfoServlet extends HttpServlet {
 	private ConnectionFactory cf = ConnectionFactory.getInstance();
 	private Connection conn = cf.getConnection();
 	private UserDAOClass userDao = new UserDAOClass(conn);
+	private static final Logger log = Logger.getLogger(UpdateInfoServlet.class);
 	
 	/**
 	 * 
@@ -76,23 +79,23 @@ public class UpdateInfoServlet extends HttpServlet {
 		try {
 			if(!firstname.equals(currentUser.getFirstname())) {
 				userDao.updateFirstname(firstname, userID);
-				System.out.println("Changed firstname to " + firstname);
+				log.info("Changed user "+userID+"'s first name to " + firstname);
 			}
 			if(!lastname.equals(currentUser.getLastname())) {
 				userDao.updateLastname(lastname, userID);
-				System.out.println("Changed lastname to " + lastname);
+				log.info("Changed user "+userID+"'s last name to " + lastname);
 			}
 			if(!username.equals(currentUser.getUsername())) {
 				userDao.updateUsername(username, userID);
-				System.out.println("Changed username to " + username);
+				log.info("Changed user "+userID+"'s username to " + username);
 			}
 			if(!password.equals(currentUser.getPassword())) {
 				userDao.updatePassword(password, userID);
-				System.out.println("Changed password to " + password);
+				log.info("Changed user "+userID+"'s password to " + password);
 			}
 			if(!email.equals(currentUser.getEmail())) {
 				userDao.updateEmail(email, userID);
-				System.out.println("Changed email to " + email);
+				log.info("Changed user "+userID+"'s email to " + email);
 			}
 			resp.sendRedirect("http://localhost:4200/employeeHome");
 		} catch (SQLException e) {

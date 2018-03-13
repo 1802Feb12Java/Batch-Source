@@ -12,7 +12,14 @@
 
 #myTable #buttoncolumn {
     text-align: center;
-    border: white;  /* don't want visible borders on these */
+    border-left: white;  /* don't want visible borders on these */
+    border-right: white;  /* don't want visible borders on these */
+}
+
+#myTable #buttoncolumnhead {
+    text-align: center;
+    border-left: white;  /* don't want visible borders on these */
+    border-right: white;  /* don't want visible borders on these */
 }
 
 #myTable {
