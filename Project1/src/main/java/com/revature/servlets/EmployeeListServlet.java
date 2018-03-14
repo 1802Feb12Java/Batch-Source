@@ -14,7 +14,8 @@ import org.apache.log4j.Logger;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.DAOs.UserDAOClass;
 import com.revature.beans.User;
-import com.revature.factory.ConnectionFactory;
+import com.revature.util.ConnectionFactory;
+import com.revature.util.FrontController;
 
 public class EmployeeListServlet extends HttpServlet {
 	ConnectionFactory cf = ConnectionFactory.getInstance();
@@ -22,19 +23,22 @@ public class EmployeeListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final Logger log = Logger.getLogger(EmployeeListServlet.class);
 
-	@Override
-    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.service(req, resp);
-        resp.addHeader("Access-Control-Allow-Origin", "http://localhost:4200");
-        resp.addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE, HEAD");
-        resp.addHeader("Access-Control-Allow-Headers",
-                "Origin, Methods, Credentials, X-Requested-With, Content-Type, Accept");
-        resp.addHeader("Access-Control-Allow-Credentials", "true");
-        resp.setContentType("application/json");
-	}
+//	@Override
+//    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//        super.service(req, resp);
+//        resp.addHeader("Access-Control-Allow-Origin", "http://localhost:4200");
+//        resp.addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE, HEAD");
+//        resp.addHeader("Access-Control-Allow-Headers",
+//                "Origin, Methods, Credentials, X-Requested-With, Content-Type, Accept");
+//        resp.addHeader("Access-Control-Allow-Credentials", "true");
+//        resp.setContentType("application/json");
+//	}
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		FrontController.addHeader(resp);
+		resp.setContentType("application/json");
+		
 		ArrayList<User> userList = null;
 		try {
 			userList = userDao.getAllUsers();

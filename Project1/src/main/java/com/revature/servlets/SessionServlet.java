@@ -10,6 +10,8 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
+import com.revature.util.FrontController;
+
 /**
  * Servlet implementation class SessionServlet
  */
@@ -26,29 +28,32 @@ public class SessionServlet extends HttpServlet {
     }
     
 
-	@Override
-    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.service(req, resp);
-        resp.addHeader("Access-Control-Allow-Origin", "http://localhost:4200");
-        resp.addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE, HEAD");
-        resp.addHeader("Access-Control-Allow-Headers",
-                "Origin, Methods, Credentials, X-Requested-With, Content-Type, Accept");
-        resp.addHeader("Access-Control-Allow-Credentials", "true");
-        resp.setContentType("application/json");
-	}
+//	@Override
+//    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//        super.service(req, resp);
+//        resp.addHeader("Access-Control-Allow-Origin", "http://localhost:4200");
+//        resp.addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE, HEAD");
+//        resp.addHeader("Access-Control-Allow-Headers",
+//                "Origin, Methods, Credentials, X-Requested-With, Content-Type, Accept");
+//        resp.addHeader("Access-Control-Allow-Credentials", "true");
+//        resp.setContentType("application/json");
+//	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession(false);
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		HttpSession session = req.getSession(false);
+		
+		FrontController.addHeader(resp);
+		
 		if(session!=null){
-			response.setContentType("application/json");
-			response.getWriter().write("{\"uid\":\""+session.getAttribute("uid")+"\",");
-			response.getWriter().write("\"role\":\""+session.getAttribute("role")+"\"}");
+			resp.setContentType("application/json");
+			resp.getWriter().write("{\"uid\":\""+session.getAttribute("uid")+"\",");
+			resp.getWriter().write("\"role\":\""+session.getAttribute("role")+"\"}");
 		} else {
-			response.setContentType("application/json");
-			response.getWriter().write("{\"uid\":null}");
+			resp.setContentType("application/json");
+			resp.getWriter().write("{\"uid\":null}");
 		}
 	}
 

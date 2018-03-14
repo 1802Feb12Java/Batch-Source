@@ -11,6 +11,8 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
+import com.revature.util.FrontController;
+
 public class LogoutServlet extends HttpServlet {
 	
 	/**
@@ -21,7 +23,9 @@ public class LogoutServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		FrontController.addHeader(resp);
 		resp.setContentType("text/html");
+		
 		HttpSession session = req.getSession(false);
 		if (session != null){
 			session.invalidate();

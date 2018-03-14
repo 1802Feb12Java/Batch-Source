@@ -18,7 +18,7 @@ export class ReimbursementsAllComponent implements OnInit {
    .subscribe(
      (succ: any) => { 
        this.reimbursementList = succ;
-       console.log(this.reimbursementList);   
+       console.log(this.reimbursementList);
        return this.reimbursementList;
      },
      err => {

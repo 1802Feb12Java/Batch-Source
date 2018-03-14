@@ -5,15 +5,18 @@
   <br>
   <h2>Reimbursement Application</h2>
   <br>
-  <form action='http://localhost:8080/Project1/application' method='post'>
+  <form action='http://localhost:8080/Project1/application' method='post' enctype="multipart/form-data">
     Amount:<br>
     <input type='text' name='amount' required><br><br>
     Description:<br>
     <input type='text' name='description' required><br><br>
     Receipt (not required):<br>
     <input type='file' name='receipt' accept='image/*'><br><br>
-    Type (Please put 1 for business, 2 for travel, and 3 for medical):<br>
-    <input type='text' name='type' required><br><br>
+    Type:<br>
+    <input type='radio' name='type' value='business' required><label>Business&emsp;</label>
+    <input type='radio' name='type' value='travel' required><label>Travel&emsp;</label>
+    <input type='radio' name='type' value='medical' required><label>Medical&emsp;</label>
+    <br><br>
 
     <button type="submit">Submit</button>
   </form>

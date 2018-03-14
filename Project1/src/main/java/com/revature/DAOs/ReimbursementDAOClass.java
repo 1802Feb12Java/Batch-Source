@@ -37,11 +37,14 @@ public class ReimbursementDAOClass implements ReimbursementDAO {
 		ps.setDouble(2, r.getAmount());
 		ps.setString(3, r.getDescription());
 		
-		
-		Blob b = conn.createBlob();
-		b.setBytes(1, r.getBase64receipt().getBytes());
-		ps.setBlob(4, b);
-		
+		if(!r.getBase64receipt().equals("")) {
+			Blob b = conn.createBlob();
+			b.setBytes(1, Base64.decodeBase64(r.getBase64receipt()));
+			ps.setBlob(4, b);
+		}
+		else {
+			ps.setNull(4, java.sql.Types.BLOB);	//set blob to null so if they didn't upload a picture
+		}		
 		
 		ps.setTimestamp(5, ts);
 		ps.setTimestamp(6, r.getResolved());	//this'll be null
@@ -75,10 +78,11 @@ public class ReimbursementDAOClass implements ReimbursementDAO {
 			description = rs.getString(3);
 			
 			
-			receipt = rs.getBlob(4);	
+			receipt = rs.getBlob(4);
 			if(receipt != null) {
-				int blobLength = (int) receipt.length();
-				base64receipt = Base64.encodeBase64String(receipt.getBytes(1, blobLength));
+				int bloblength = (int) receipt.length();
+				byte[] receiptBytes = receipt.getBytes(1, bloblength);
+				base64receipt = Base64.encodeBase64String(receiptBytes);
 			}
 			else {
 				base64receipt = null;
@@ -131,7 +135,7 @@ public class ReimbursementDAOClass implements ReimbursementDAO {
 		PreparedStatement ps = conn.prepareStatement("SELECT * FROM ERS_REIMBURSEMENTS");
 		ResultSet rs = ps.executeQuery();
 		ArrayList<Reimbursement> allReimbursements = new ArrayList<Reimbursement>();
-		
+		System.out.println("\n\nnew read --");
 		while (rs.next()) {
 			int id = rs.getInt(1);
 			double amount = rs.getDouble(2);
@@ -141,8 +145,9 @@ public class ReimbursementDAOClass implements ReimbursementDAO {
 			Blob receipt = rs.getBlob(4);
 			String base64receipt = "";
 			if(receipt != null) {
-				int blobLength = (int) receipt.length();
-				base64receipt = Base64.encodeBase64String(receipt.getBytes(1, blobLength));
+				int bloblength = (int) receipt.length();
+				byte[] receiptBytes = receipt.getBytes(1, bloblength);
+				base64receipt = Base64.encodeBase64String(receiptBytes);
 			}
 			else {
 				base64receipt = null;

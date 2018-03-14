@@ -22,8 +22,8 @@
                   <th id="timestampcolumn">Resolved</th>
                   <th>Author ID</th>
                   <th>Resolver ID</th>
-                  <th>Type ID</th>
-                  <th>Status ID</th>
+                  <th>Type</th>
+                  <th>Status</th>
                   <th id="buttoncolumnhead"></th>
                   <th id="buttoncolumnhead"></th>
               </tr>
@@ -41,8 +41,12 @@
                   <td>{{r.authorId}}</td>
                   <td *ngIf="r.resolved != undefined">{{r.resolverId}}</td>
                   <td *ngIf="r.resolved == undefined">N/A</td>
-                  <td>{{r.typeId}}</td>
-                  <td>{{r.statusID}}</td>
+                  <td *ngIf="r.typeId == 1">Business</td>
+                  <td *ngIf="r.typeId == 2">Travel</td>
+                  <td *ngIf="r.typeId == 3">Medical</td>
+                  <td *ngIf="r.statusID == 1"><button class="btn btn-warning btn-sm">Pending</button></td>
+                  <td *ngIf="r.statusID == 2"><button class="btn btn-success btn-sm">Approved</button></td>
+                  <td *ngIf="r.statusID == 3"><button class="btn btn-danger btn-sm">Denied</button></td>
                   <td *ngIf="r.statusID === 1" id="buttoncolumn">
                     <form action='http://localhost:8080/Project1/reimbursements' method='post'>
                       <input type='hidden' name='reqid' value={{r.id}}>

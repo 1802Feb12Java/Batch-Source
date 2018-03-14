@@ -1,4 +1,4 @@
-package com.revature.factory;
+package com.revature.util;
 
 import java.io.InputStream;
 import java.sql.Connection;

@@ -12,7 +12,8 @@ import org.apache.log4j.Logger;
 
 import com.revature.DAOs.UserDAOClass;
 import com.revature.beans.User;
-import com.revature.factory.ConnectionFactory;
+import com.revature.util.ConnectionFactory;
+import com.revature.util.FrontController;
 
 public class LoginServlet extends HttpServlet {
 	
@@ -24,9 +25,11 @@ public class LoginServlet extends HttpServlet {
 	@SuppressWarnings("unused")
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		FrontController.addHeader(resp);
+		resp.setContentType("text/html");
+		
 		HttpSession session = req.getSession();
 		PrintWriter pw = resp.getWriter();
-		resp.setContentType("text/html");
 		req.getRequestDispatcher("Login.html").include(req, resp);
 	}
 
@@ -34,6 +37,7 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession();
 		
+		FrontController.addHeader(resp);
 		resp.setContentType("text/html");
 		PrintWriter pw = resp.getWriter();
 		

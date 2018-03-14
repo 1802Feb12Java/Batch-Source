@@ -16,7 +16,8 @@ import com.google.gson.Gson;
 
 import com.revature.DAOs.ReimbursementDAOClass;
 import com.revature.beans.Reimbursement;
-import com.revature.factory.ConnectionFactory;
+import com.revature.util.ConnectionFactory;
+import com.revature.util.FrontController;
 
 public class ReimbursementsServlet extends HttpServlet {
 	private ConnectionFactory cf = ConnectionFactory.getInstance();
@@ -28,19 +29,22 @@ public class ReimbursementsServlet extends HttpServlet {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@Override
-    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		resp.addHeader("Access-Control-Allow-Origin", "http://localhost:4200");
-        resp.addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE, HEAD");
-        resp.addHeader("Access-Control-Allow-Headers",
-                "Origin, Methods, Credentials, X-Requested-With, Content-Type, Accept");
-        resp.addHeader("Access-Control-Allow-Credentials", "true");
-		super.service(req, resp);
-        resp.setContentType("application/json");
-	}
+//	@Override
+//    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//		resp.addHeader("Access-Control-Allow-Origin", "http://localhost:4200");
+//        resp.addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE, HEAD");
+//        resp.addHeader("Access-Control-Allow-Headers",
+//                "Origin, Methods, Credentials, X-Requested-With, Content-Type, Accept");
+//        resp.addHeader("Access-Control-Allow-Credentials", "true");
+//		super.service(req, resp);
+//        resp.setContentType("application/json");
+//	}
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		FrontController.addHeader(resp);
+		resp.setContentType("application/json");
+		
 		ArrayList<Reimbursement> reimbursementList = null;
 		try {
 			reimbursementList = reDao.getAllReimbursements();
@@ -57,6 +61,7 @@ public class ReimbursementsServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession();
 		
+		FrontController.addHeader(resp);
 		resp.setContentType("text/html");
 		
 		int reid = new Integer(req.getParameter("reqid"));
