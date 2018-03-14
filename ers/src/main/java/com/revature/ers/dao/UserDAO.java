@@ -3,6 +3,8 @@ package com.revature.ers.dao;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.json.simple.JSONObject;
+
 import com.revature.ers.users.User;
 
 public interface UserDAO {

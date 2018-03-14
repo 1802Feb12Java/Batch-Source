@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.json.simple.JSONObject;
 
 import com.revature.ers.dao.UserDAO;
 import com.revature.ers.util.ConnFactory;
@@ -53,7 +54,7 @@ public class UserServices implements UserDAO{
 		//prepare and process the query
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sql = "SELECT U_FIRSTNAME, U_LASTNAME, U_EMAIL, UR_ID FROM ERS_USERS WHERE U_ID = ?";
+		String sql = "SELECT * FROM ERS_USERS WHERE U_ID = ?";
 		ps = conn.prepareStatement(sql);
 		ps.setInt(1, u_ID);
 		rs = ps.executeQuery();
@@ -69,6 +70,8 @@ public class UserServices implements UserDAO{
 			user.setU_id(u_ID);
 			user.setU_firstName(rs.getString("U_FIRSTNAME"));
 			user.setU_lastName(rs.getString("U_LASTNAME"));
+			user.setU_userName(rs.getString("U_USERNAME"));
+			user.setU_password(rs.getString("U_PASSWORD"));
 			user.setU_email(rs.getString("U_EMAIL"));
 			user.setUr_ID(rs.getInt("UR_ID"));
 			ps.close();

@@ -1,7 +1,5 @@
 package com.revature.ers.jsonifiers;
 
-import java.sql.SQLException;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 

@@ -90,13 +90,31 @@ let showCard = function(employee){
                 employee.email = document.getElementsByName("email")[0].value;
             });
 
-            document.getElementById("employeeInfo").addEventListener("submit", function(e, employee){
+            document.getElementById("employeeInfo").addEventListener("submit", function(e){
                 e.preventDefault();
-            })
+                submitChange(employee);
+            });
         }
     }
 
     xhr.send();
+}
+
+let submitChange = function (emp){
+    let xhr = new XMLHttpRequest();
+
+    sendEmp = JSON.stringify(emp);
+    xhr.open("POST", "/ers/UpdateEmployeeInfo", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+
+    xhr.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
+            console.log("readychange")
+            viewEInfo();
+        }
+    }
+
+    xhr.send(sendEmp);
 }
 
 document.getElementById("submitReimbursement").addEventListener("click", submit);

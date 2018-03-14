@@ -49,13 +49,4 @@ public class ViewEmployeeInfo extends HttpServlet {
 		json = ToJSON.employee(user);
 		response.getWriter().print(json.toString());
 	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
-
 }
