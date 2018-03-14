@@ -20,9 +20,29 @@ let submit = function(){
     xhr.open('GET', "/ers/requestSubmission.html", true);
 
     //create the function to handle the request
-    xhr.onreadystatechange = function(){;
+    xhr.onreadystatechange = function(){
+
+
         if(this.readyState == 4 && this.status == 200){
             document.getElementById("page").innerHTML = this.responseText;
+            let selectedButton = 5;
+            let description = "";
+            let amount = 0.00;
+            let radio = document.getElementsByName("rType");
+
+            document.getElementById("requestForm").addEventListener('submit', function(e){
+                e.preventDefault();
+                for (let i = 1; i <= 5; i++){
+                    if(radio[i].checked){
+                        selectedButton = i;
+                        break;
+                    }
+                }
+                
+                description = document.getElementsByName("description")[0].value;
+                amount = document.getElementsByName("amountRequested")[0].value;
+                console.log(selectedButton + "," + description + "," + amount);
+            });
         };
     };
  
