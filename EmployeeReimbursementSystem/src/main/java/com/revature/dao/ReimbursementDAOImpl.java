@@ -130,6 +130,52 @@ public class ReimbursementDAOImpl implements ReimbursementDAO{
 				
 		return reimbursements;
 	}
+	
+	public ArrayList<Reimbursement> getPendingWithName() {
+		// TODO Auto-generated method stub
+		
+		String query = "select ERS_REIMBURSEMENTS.R_AMOUNT, ERS_REIMBURSEMENTS.R_DESCRIPTION, ERS_REIMBURSEMENTS.R_RECEIPT, ERS_REIMBURSEMENTS.R_SUBMITTED, ERS_USERS.U_USERNAME AS U_ID_AUTHOR, "
+				+ "ERS_REIMBURSEMENT_TYPE.RT_TYPE AS RT_TYPE, ERS_REIMBURSEMENT_STATUS.RS_STATUS AS RT_STATUS, ERS_USERS.U_FIRSTNAME, ERS_USERS.U_LASTNAME, ERS_REIMBURSEMENTS.R_ID "
+				+ "from ers_reimbursements "
+				+ "left join ers_users "
+				+ "on u_id_author = ers_users.u_id "
+				+ "left join ers_reimbursement_type "
+				+ "on ers_reimbursements.rt_type = ers_reimbursement_type.rt_id "
+				+ "left join ers_reimbursement_status "
+				+ "on ers_reimbursements.rt_status = ers_reimbursement_status.rs_id";
+		
+		ArrayList<Reimbursement> reimbursements = new ArrayList<Reimbursement>();
+				
+		try {
+			Connection conn = ConnectionFactory.getInstance().getConnection();
+			PreparedStatement ps = conn.prepareStatement(query);
+			System.out.println("Executing");
+			ResultSet rs = ps.executeQuery();
+			System.out.println("Finished executing");
+			while(rs.next()) {
+				System.out.println("Retrieving");
+				Reimbursement reimbursement = new Reimbursement();
+				
+				reimbursement.setAmount(rs.getDouble(1));
+				reimbursement.setDescription(rs.getString(2));
+				reimbursement.setReciept("none");
+				reimbursement.setSubmitted("DATE");
+				reimbursement.setUserIDAuthorString(rs.getString(8) + " " + rs.getString(9));
+				reimbursement.setReimbursementTypeIDString(rs.getString(6));
+				reimbursement.setUserIDResolverString(rs.getString(7));
+				reimbursement.setReiumbursementID(rs.getInt(10));
+				
+				reimbursements.add(reimbursement);
+				System.out.println("retrieved reimbursement");
+			}
+					
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("failed retrieving reimbursement");
+			}
+				
+		return reimbursements;
+	}
 
 	public void addReimbursement(Reimbursement reimbursement) {
 		// TODO Auto-generated method stub
