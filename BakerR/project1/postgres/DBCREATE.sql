@@ -1,9 +1,36 @@
+-- Note: Postgres auto-commit is enabled by default.
+
+------------------------
+-- Miscellaneous Queries
+------------------------
+
+-- List all constraints
+--select conrelid::regclass AS table_from, conname, pg_get_constraintdef(c.oid)
+--from   pg_constraint c
+--join   pg_namespace n ON n.oid = c.connamespace
+--where  contype in ('f', 'p','c','u') order by contype;
+
+
+-- Drop Everything & recreate public schema (if public schema is owned by user, it may get dropped with this command.)
+-- [replace wamuu with db username].
+--drop owned by wamuu cascade;
+--CREATE SCHEMA public;
+
+-- command-line tool to connect to postgresql database.
+-- psql -h [host] -p [port] -U [username] -d [database name/SID]
+-- Example: psql -h localhost -p 5432 -U wamuu -d pgsql
+-- to run an sql script using psql:
+-- \i [script filename]
+
+
 ---------------------------
 -- Database extension setup
 ---------------------------
--- create extension plperl; -- PL/Perl
+-- Only need to execute once for database; may need to reinstall if using the drop
 -- create extension pgcrypto; -- Crypto functions
--- create extension plv8; -- PL/JavaScript
+-- create extension plpgsql; -- PL/pgsql language for functions
+-- select * from pg_available_extensions; -- Shows all available (and installed) extensions.
+
 
 ------------------------------------
 -- Database Table & Constraint Setup
@@ -228,16 +255,16 @@ END;
 $$ LANGUAGE plpgsql;
 
 -- Get User by Id
-CREATE OR REPLACE FUNCTION get_user_by_id(id INTEGER) RETURNS TABLE(id INTEGER, name VARCHAR(40), firstname VARCHAR(30), lastname VARCHAR(30), email TEXT, roleid INTEGER) AS $$
+CREATE OR REPLACE FUNCTION get_user_by_id(userid INTEGER) RETURNS TABLE(id INTEGER, username VARCHAR(40), firstname VARCHAR(30), lastname VARCHAR(30), email TEXT, roleid INTEGER) AS $$
 BEGIN
-    RETURN QUERY SELECT u_id, u_username, u_firstname, u_lastname, u_email, ur_id FROM ers_users WHERE u_id = id;
+    RETURN QUERY SELECT u_id, u_username, u_firstname, u_lastname, u_email, ur_id FROM ers_users WHERE u_id = userid;
 END;
 $$ LANGUAGE plpgsql;
 
 -- Get User by Name
-CREATE OR REPLACE FUNCTION get_user_by_username(name VARCHAR(40)) RETURNS TABLE(id INTEGER, name VARCHAR(40), firstname VARCHAR(30), lastname VARCHAR(30), email TEXT, roleid INTEGER) AS $$
+CREATE OR REPLACE FUNCTION get_user_by_username(uname VARCHAR(40)) RETURNS TABLE(id INTEGER, username VARCHAR(40), firstname VARCHAR(30), lastname VARCHAR(30), email TEXT, roleid INTEGER) AS $$
 BEGIN
-    RETURN QUERY SELECT u_id, u_username, u_firstname, u_lastname, u_email, ur_id FROM ers_users WHERE u_username = name;
+    RETURN QUERY SELECT u_id, u_username, u_firstname, u_lastname, u_email, ur_id FROM ers_users WHERE u_username = uname;
 END;
 $$ LANGUAGE plpgsql;
 
@@ -355,7 +382,7 @@ $$ LANGUAGE plpgsql;
 
 
 -- Get a Reimbursement by its ID.
-CREATE OR REPLACE FUNCTION get_reimbursement_by_id(id INTEGER)
+CREATE OR REPLACE FUNCTION get_reimbursement_by_id(reimbursement_id INTEGER)
 RETURNS TABLE(id INTEGER, amount NUMERIC, description VARCHAR(100),
 submitted TIMESTAMP(0) WITH TIME ZONE, resolved TIMESTAMP(0) WITH TIME ZONE,
 author_id INTEGER, resolver_id INTEGER,
@@ -366,7 +393,7 @@ BEGIN
                r_submitted, r_resolved,
                u_id_author, u_id_resolver, rt_type, rt_status
         FROM ers_reimbursements 
-        WHERE r_id = id;
+        WHERE r_id = reimbursement_id;
 END;
 $$ LANGUAGE plpgsql;
 
@@ -474,20 +501,3 @@ $$ LANGUAGE plpgsql;
 
 
 -- COMMIT: auto-commit enabled
-
-------------------------
--- Miscellaneous Queries
-------------------------
-
--- List all constraints
---select conrelid::regclass AS table_from, conname, pg_get_constraintdef(c.oid)
---from   pg_constraint c
---join   pg_namespace n ON n.oid = c.connamespace
---where  contype in ('f', 'p','c','u') order by contype;
-
-
--- Drop Everything & recreate public schema
--- [replace wamuu with db username].
---drop owned by wamuu cascade;
---CREATE SCHEMA public;
-

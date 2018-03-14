@@ -1,0 +1,18 @@
+
+
+#login-form {
+    padding: 10px;
+    max-width: 360px;
+}
+
+#login-legend {
+    text-align: left;
+    width: inherit;
+    margin: 0 10px;
+    padding: 0 10px;
+}
+
+.login-input-item {
+    padding: 10px;
+    margin: 0px;
+}

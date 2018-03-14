@@ -1,6 +1,9 @@
 package com.revature.bean;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
+	private static final long serialVersionUID = -2433630300022617937L;
 	private Integer id;
 	private String username;
 	private String firstName;
@@ -69,4 +72,13 @@ public class User {
 	public void setRole(UserRole role) {
 		this.role = role;
 	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", username=" + username + ", firstName=" + firstName + ", lastName=" + lastName
+				+ ", email=" + email + ", role=" + role + "]";
+	}
+	
+	
+	
 }

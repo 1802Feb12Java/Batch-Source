@@ -1,0 +1,14 @@
+legend {
+    width: auto;
+    margin: 0px 10px;
+    padding: 0px 10px;
+    text-align: left;
+}
+
+.form-group {
+    padding: 0px 10px;
+}
+
+fieldset {
+    margin: 10px;
+}

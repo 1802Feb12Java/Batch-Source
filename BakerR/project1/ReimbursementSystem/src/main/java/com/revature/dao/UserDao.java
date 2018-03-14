@@ -184,7 +184,7 @@ public class UserDao {
 		CallableStatement cs = null;
 		
 		try {
-			cs = cm.getConnection().prepareCall("{call add_user(?, ?, ?, ?, ?, ?}");
+			cs = cm.getConnection().prepareCall("{call add_user(?, ?, ?, ?, ?, ?)}");
 			cs.setString(1, user.getUsername());
 			cs.setString(2, password);
 			cs.setString(3, user.getFirstName());

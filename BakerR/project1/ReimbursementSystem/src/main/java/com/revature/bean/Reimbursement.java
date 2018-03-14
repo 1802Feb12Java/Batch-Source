@@ -1,8 +1,11 @@
 package com.revature.bean;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 
-public class Reimbursement {
+public class Reimbursement implements Serializable {
+	private static final long serialVersionUID = -8730201880943442539L;
 	private Integer id;
 	private Double amount;
 	private String description;
@@ -111,4 +114,13 @@ public class Reimbursement {
 	public void setStatus(ReimbursementStatus status) {
 		this.status = status;
 	}
+
+	@Override
+	public String toString() {
+		return "Reimbursement [id=" + id + ", amount=" + amount + ", description=" + description + ", receipt="
+				+ Arrays.toString(receipt) + ", submitted=" + submitted + ", resolved=" + resolved + ", author="
+				+ author + ", resolver=" + resolver + ", type=" + type + ", status=" + status + "]";
+	}
+	
+	
 }

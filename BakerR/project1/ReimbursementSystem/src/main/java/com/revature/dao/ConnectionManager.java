@@ -25,7 +25,12 @@ public final class ConnectionManager {
 			props.load(propsInStream);
 		}
 		
-		connection = DriverManager.getConnection(props.getProperty("host"), props);
+		try {
+			Class.forName("org.postgresql.Driver");
+			connection = DriverManager.getConnection(props.getProperty("host"), props);
+		} catch(ClassNotFoundException ex) {
+			throw new IOException(ex.getMessage());
+		}
 	}
 	
 	
@@ -57,5 +62,10 @@ public final class ConnectionManager {
 		} catch(SQLException ex) {}
 		
 		instance = null;
+	}
+	
+	@Override 
+	public void finalize() {
+		destroy();
 	}
 }
