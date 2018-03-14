@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.revature.ers.reimbursements.Reimbursement;
+
 /**
  * Servlet implementation class CreateReimbursement
  */
@@ -25,6 +27,7 @@ public class CreateReimbursement extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("Hi, how are you?  Tired?");
+		Reimbursement reim = new Reimbursement();
+		
 	}
-
 }

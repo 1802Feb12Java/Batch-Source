@@ -45,14 +45,17 @@ let submit = function(){
                 let request = '{"selection" : '+ selectedButton +', "description" : "' + description +
                         '", "amount" : ' + amount + '}';
 
-                let test = JSON.parse(request);
-                console.log(test.selection + " " + test.description + test.amount);
+                sendRequest(request);
             });
         };
     };
  
     //send the request
     xhr.send();
+};
+
+let sendRequest = function(req) {
+    console.log(req);
 };
 
 let viewEPending = function(){

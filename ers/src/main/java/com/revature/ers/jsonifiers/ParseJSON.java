@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.log4j.Logger;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -12,6 +13,7 @@ public class ParseJSON {
 	public static JSONObject parsePost(HttpServletRequest request) {
 		  StringBuffer jb = new StringBuffer();
 		  String line = null;
+		  Logger log = Logger.getRootLogger();
 		  
 		  //get the form data
 		  try {
@@ -26,11 +28,10 @@ public class ParseJSON {
 			JSONObject json = (JSONObject) parser.parse(jb.toString());
 			  return json;
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
+			log.error("JSON couldn't parse");
 			e.printStackTrace();
 		}
 		  
 		return null;
-
 	}
 }

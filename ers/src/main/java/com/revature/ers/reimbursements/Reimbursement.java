@@ -2,18 +2,19 @@ package com.revature.ers.reimbursements;
 
 import java.sql.Blob;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 public class Reimbursement {
 	private int r_id;
 	private double r_amount;
 	private String r_description;
-	private Blob r_receipt;
-	private Timestamp r_submitted;
-	private Timestamp r_resolved;
+	private Blob r_receipt = null;
+	private Timestamp r_submitted = Timestamp.valueOf(LocalDateTime.now());
+	private Timestamp r_resolved = null;
 	private int u_ID_Author;
-	private int u_ID_Resolver;
+	private int u_ID_Resolver = 0;
 	private int rt_Type;
-	private int rt_Status;
+	private int rt_Status = 1;
 	
 	public int getR_id() {
 		return r_id;
