@@ -23,6 +23,7 @@ public class ReimbursementServices implements ReimbursementDAO{
 		String sql = "{CALL ADD_REIMBURSEMENT(?,?,?,?,?,?,?,?,?)}";
 		cs = conn.prepareCall(sql);
 		
+		System.out.println("HERRO");
 		//populate the fields
 		cs.setDouble(1, reimbursement.getR_amount());
 		cs.setString(2, reimbursement.getR_description());

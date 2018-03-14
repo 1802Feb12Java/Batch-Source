@@ -21,15 +21,14 @@ let submit = function(){
 
     //create the function to handle the request
     xhr.onreadystatechange = function(){
-
-
         if(this.readyState == 4 && this.status == 200){
             document.getElementById("page").innerHTML = this.responseText;
             let selectedButton = 5;
             let description = "";
             let amount = 0.00;
             let radio = document.getElementsByName("rType");
-
+            console.log("Hi");
+            console.log(radio);
             document.getElementById("requestForm").addEventListener('submit', function(e){
                 e.preventDefault();
                 for (let i = 1; i <= 5; i++){
@@ -42,9 +41,11 @@ let submit = function(){
                 description = document.getElementsByName("description")[0].value;
                 amount = document.getElementsByName("amountRequested")[0].value;
 
-                let request = '{"selection" : '+ selectedButton +', "description" : "' + description +
-                        '", "amount" : ' + amount + '}';
-
+                request = '{"selected" : ' + selectedButton + ', "description" : "' +
+                    description + '", "amount" : ' + amount + '}';
+                
+                let test = JSON.parse(request);
+                console.log(test.selection + " " + test.description + " " + test.amount);
                 sendRequest(request);
             });
         };
