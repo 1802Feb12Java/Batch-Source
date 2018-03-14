@@ -69,8 +69,8 @@ let showCard = function(employee){
     let xhr = new XMLHttpRequest();
 
     xhr.open('GET', '/ers/employeeCard.html', true);
-
     xhr.onreadystatechange = function(){
+
         if(this.readyState == 4 && this.status == 200){
             document.getElementById("page").innerHTML = this.responseText;
             document.getElementById("employeeName").textContent = employee.fname + " " + employee.lname +
@@ -78,6 +78,21 @@ let showCard = function(employee){
             document.getElementsByName("fname")[0].placeholder=employee.fname;
             document.getElementsByName("lname")[0].placeholder=employee.lname;
             document.getElementsByName("email")[0].placeholder=employee.email;
+
+            document.getElementsByName("fname")[0].addEventListener("input", function(){
+                employee.fname = document.getElementsByName("fname")[0].value;
+            });
+
+            document.getElementsByName("lname")[0].addEventListener("input", function(){
+                employee.lname = document.getElementsByName("lname")[0].value;
+            });
+            document.getElementsByName("email")[0].addEventListener("input", function(){
+                employee.email = document.getElementsByName("email")[0].value;
+            });
+
+            document.getElementById("employeeInfo").addEventListener("submit", function(e, employee){
+                e.preventDefault();
+            })
         }
     }
 
