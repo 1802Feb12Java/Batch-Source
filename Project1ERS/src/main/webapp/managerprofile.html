@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Manager Home Page</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="Resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+  <!-- Custom styles for this template -->
+  <link href="Resources/css/heroic-features.css" rel="stylesheet">
+  <link type="text/css" href="Resources/css/mycss.css" rel="stylesheet">
+  <!-- the below styling is for my user drop down in the nav bar -->
+  <style>
+    .dropdown-item {
+      color: #f16a24 !important;
+    }
+
+    .dropdown-item:hover {
+      color: black !important;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand navbar-cust-font" href="#">Manager Platform</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link navbar-cust-font" href="managerhome.html">Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle navbar-cust-font" data-toggle="dropdown" href="#">
+              Requests
+              <span class="lnr lnr-file-empty"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="nav-item">
+                <a class="nav-link dropdown-item" href="viewrequests.html">View Requests</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link dropdown-item " href="resolverequests.html">Manage Requests</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown active">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
+              <span class="lnr lnr-user"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="nav-item">
+                <a class="nav-link dropdown-item" href="viewempinfo.html">View Employees</a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link dropdown-item" href="managerprofile.html">My Profile</a>
+              </li>
+              <li class="nav-item">
+                <form action="logoutservlet" method="get">
+                  <button type='submit' class="nav-link dropdown-item ">Log Out</button>
+                </form>
+
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Content -->
+  <div class="container">
+    <div class="row text-center">
+      <div class="col-md-12 mb-12">
+        <div class="card card-custom">
+          <div class="card-body">
+            <h4 class="orange-title-custom">My User Information</h4>
+            <p class="card-text">Click below to update your information.</p>
+            <div class="row">
+              <div class="col-md-6" style="text-align:right">
+                <p>User ID:</p>
+                <p>UsernameD:</p>
+                <p>Name:</p>
+                <p>Email:</p>
+                <p>Pending Requests:</p>
+                <p>Total Requests:</p>
+              </div>
+              <div id="empinfo" class="col-md-6" style="text-align:left">
+
+              </div>
+            </div>
+
+          </div>
+          <div class="card-footer-custom">
+            <button type="button" class="btn btn-custom" data-toggle="modal" data-target="#editModal">
+              Edit
+            </button>
+          </div>
+
+          <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title orange-title-custom" id="exampleModalLabel">Edit Your Information</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <form action="UpdateInfoServlet" method='post'>
+                  <div class="modal-body" style="text-align:left">
+
+                    <div class="form-group">
+                      <label for="username">Username</label>
+                      <input id='updateusername' type="text" class="form-control" name="username">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="name">Your Name</label>
+                      <input id='updatename' type="text" class="form-control" name="name">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="email">Email</label>
+                      <input id='updateemail' type="text" class="form-control" name="email">
+                    </div>
+
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- /.row -->
+    <!-- /.row -->
+
+  </div>
+  <!-- /.container -->
+
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; Employee Reimbursement System  2018</p>
+    </div>
+    <!-- /.container -->
+</footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="Resources/vendor/jquery/jquery.min.js"></script>
+  <script src="Resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+  <script src="Resources/js/userprofile.js"></script>
+</body>
+
+</html>

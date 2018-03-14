@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Create New Request</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="Resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+    <!-- Custom styles for this template -->
+    <link href="Resources/css/heroic-features.css" rel="stylesheet">
+    <link type="text/css" href="Resources/css/mycss.css" rel="stylesheet">
+    <!-- the below styling is for my user drop down in the nav bar -->
+    <style>
+      .dropdown-item {
+        color:#f16a24 !important;
+      }
+      .dropdown-item:hover {
+        color:black !important;
+      }
+    </style>
+  
+  </head>
+
+  <body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand navbar-cust-font" href="#">Employee Platform</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link navbar-cust-font" href="employeehome.html">Home
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item dropdown active">
+              <a class="nav-link dropdown-toggle navbar-cust-font" data-toggle="dropdown" href="#">
+                Requests
+                <span class="lnr lnr-file-empty"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li class="nav-item">
+                  <a class="nav-link dropdown-item" href="viewmyrequests.html">My Requests</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link dropdown-item " href="createrequest.html">Create Request</a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle navbar-cust-font" data-toggle="dropdown" href="#">
+                <span class="lnr lnr-user"></span>
+              </a>
+                <ul class="dropdown-menu">
+                  <li class="nav-item">
+                    <a class="nav-link dropdown-item navbar-cust-font" href="myprofile.html">My Profile</a>
+                  </li>
+                  <li class="nav-item">
+                      <form action="logoutservlet" method="get">
+                          <button type='submit' class="nav-link dropdown-item">Log Out</button>
+                      </form>
+                  </li>
+                </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+
+      <!-- Jumbotron Header -->
+      <header class="jumbotron-custom my-4 text-center">
+        <h1 class="display-3-custom">Submit a New Request</h1>
+        <p class="lead-custom">Fill out the form below in order to submit a new reimbursement request.</p>
+        <!-- <a href="#" class="btn btn-primary btn-lg">Call to action!</a> -->
+      </header>
+
+      <!-- Page Features -->
+      <div class="row text-center" style="margin: auto">
+
+        <div class="col-md-12">
+          <div class="card card-custom">
+            <div class="card-body">
+              <div class="row text-center">
+        
+                  <form style="padding-left:300px" class="" action="requestsubmitservlet" method="post" enctype="multipart/form-data">
+                    <!-- need to grab user information -->
+                      Reimbursement Type:
+                      <div>
+                        <input type="radio" name="requesttype" value="1"> Travel <br/>
+                        <input type="radio" name="requesttype" value="2"> Supplies <br/>
+                        <input type="radio" name="requesttype" value="3"> Client Relations <br/>
+                        <input type="radio" name="requesttype" value="4"> Meals <br/>
+                        <input type="radio" name="requesttype" value="5"> Other <br/>
+                      </div>
+    
+                      <div class="form-group">
+                        <label for="requestamount">Reimbursement Amount:</label>
+                        <input class="form-control" type="text" name="requestamount" required="required">
+                      </div>
+    
+                      <div class="form-group">
+                        <label for="requestamount">Description:</label>
+                        <textarea class="form-control" name="requestdescription"></textarea>
+                      </div>
+    
+                      <div class="form-group">
+                        <label for="receiptimage">Upload a receipt image:</label>
+                        <input type="file" name="receiptimage">
+                      </div>
+    
+                      <button type="submit" class="btn btn-custom btn-custom-hover">Submit</button>
+
+                  </form>
+              </div>
+              
+            </div>
+            <div class="card-footer-custom">
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+      <div class="container">
+          <p class="m-0 text-center text-white">Copyright &copy; Employee Reimbursement System  2018</p>
+      </div>
+      <!-- /.container -->
+  </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="Resources/vendor/jquery/jquery.min.js"></script>
+    <script src="Resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  </body>
+
+</html>

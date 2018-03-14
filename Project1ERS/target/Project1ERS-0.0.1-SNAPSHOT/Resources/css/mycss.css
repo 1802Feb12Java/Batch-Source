@@ -1,0 +1,160 @@
+.btn-custom {
+    color: #fff;
+    background-color: #f16a24;
+    border-color: #f16a24;
+    padding: 0 20px;
+}
+
+.btn-custom:hover {
+    color: #fff;
+    background-color: #f0571d;
+    border-color: #f0571d;
+    padding: 0 20px;
+}
+
+.btn-full-width{
+  width: 100%
+}
+
+.jumbotron-custom {
+    
+    padding: 2rem 1rem;
+    margin-bottom: 2rem;
+    background-color: #474C55;
+    border-radius: 0.3rem;
+  }
+
+  .display-3-custom {
+    font-family:FuturaStd-Heavy;
+    color: #fff;
+    font-size: 4.5rem;
+    font-weight: 300;
+    line-height: 1.2;
+  }
+
+  .orange-title-custom{
+    font-family:FuturaStd-Heavy;
+    color: #f16a24;
+    font-size: 2.5rem;
+    font-weight: 300;
+    line-height: 1.2;
+  }
+
+  .lead-custom {
+    font-family:FuturaStd-Book;
+    color: #fff;
+    font-size: 1.25rem;
+    font-weight: 300;
+  }
+
+  .card-footer-custom {
+    padding: 0.75rem 1.25rem;
+    background-color:#474C55;
+    border-top: 1px solid rgba(0, 0, 0, 0.125);
+  }
+
+  .card-custom {
+    font-family: FuturaStd-Book;
+  }
+
+  .navbar-cust-font{
+    font-family: FuturaStd-Book;
+  }
+
+
+  @font-face{
+    font-family: FuturaStd-Heavy;
+    src: url('../fonts/RevatureFonts/FuturaStd-Heavy.ttf');
+    /* src: local("Futura Std Medium"); */
+  }
+  
+  @font-face{
+    font-family: FuturaStd-Book;
+    src: url('../fonts/RevatureFonts/FuturaStd-Book.ttf');
+  }
+  
+  @font-face{
+    font-family: FuturaStd-BookOblique;
+    src: url('../Resources/fonts/RevatureFonts/FuturaStd-BookOblique.ttf');
+  }
+
+  /* Modal CSS */
+
+  /* Style the Image Used to Trigger the Modal */
+img[name="receiptimg"]{
+  padding: 5%;
+}
+a[name="receiptlink"] {
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+a[name="receiptlink"]:hover {
+  color: #f16a24;
+}
+
+/* The Modal (background) */
+.modal-custom {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /*Location of the box*/
+  /* padding: 20px; */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+
+/* Modal Content (Image) */
+.modal-content-custom {
+  margin: 15%;
+  display: block;
+  padding: 20%;
+  border: 1px solid #bbb;
+  border-radius: 4px;
+  width: 80%;
+  max-width: 700px;
+}
+
+/* Caption of Modal Image (Image Text) - Same Width as the Image */
+/* #caption {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+} */
+
+
+/* The Close Button */
+.close-custom {
+  position: absolute;
+  top: 15px; 
+  right: 35px; 
+  float: right;
+  color: #f16a24;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.close-custom:hover,
+.close-custom:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px){
+  .modal-content-custom {
+      width: 100%;
+  }
+}

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Manager Home Page</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="Resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+    <!-- Custom styles for this template -->
+    <link href="Resources/css/heroic-features.css" rel="stylesheet">
+    <link type="text/css" href="Resources/css/mycss.css" rel="stylesheet">
+
+    <link type="text/css" href="Resources/css/mytable.css" rel="stylesheet">
+    <!-- the below styling is for my user drop down in the nav bar -->
+    <style>
+        .dropdown-item {
+            color: #f16a24 !important;
+        }
+
+        .dropdown-item:hover {
+            color: black !important;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand navbar-cust-font" href="#">Manager Platform</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link navbar-cust-font" href="managerhome.html">Home
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle navbar-cust-font" data-toggle="dropdown" href="#">
+                            Requests
+                            <span class="lnr lnr-file-empty"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="nav-item">
+                                <a class="nav-link dropdown-item" href="viewrequests.html">View Requests</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link dropdown-item " href="resolverequests.html">Manage Requests</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown active">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
+                            <span class="lnr lnr-user"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="nav-item">
+                                <a class="nav-link dropdown-item" href="viewempinfo.html">View Employees</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link dropdown-item" href="managerprofile.html">My Profile</a>
+                            </li>
+                            <li class="nav-item">
+                                <form action="logoutservlet" method="get">
+                                    <button type='submit' class="nav-link dropdown-item ">Log Out</button>
+                                </form>
+
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <!-- Page Features -->
+        <div class="row text-center">
+
+            <div class="col-md-12 mb-12">
+                <div class="card card-custom">
+                    <div class="card-body">
+                        <h4 class="orange-title-custom">View Employee Profiles</h4>
+                        <p class="card-text">Click below to filter the displayed employee profiles.</p>
+                        <!-- make it so they can sort employees? make it so it displays number of requests -->
+                        <form id="userfilter">
+                            <input type='radio' id='filter1' name='viewfilter' value='1'> Employees
+                            <input type='radio' id='filter2' name='viewfilter' value='2'> Managers
+                            <input type='radio' id='filter3' name='viewfilter' value='3' checked='checked'> All
+                        </form>
+                    </div>
+                    <div class="card-footer-custom">
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+    <div class="container">
+
+        <table class="table100 ver1" style="border-radius:6px">
+            <div>
+                <thead style="border-radius:6px">
+                    <tr class="table100 ver1">
+                        <th>ID</th>
+                        <th>Username</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Requests</th>
+                    </tr>
+                </thead>
+
+            </div>
+
+            <div class="table100-body">
+
+                <tbody id='emplist'>
+
+                </tbody>
+
+            </div>
+        </table>
+    </div>
+
+
+
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+        <div class="container">
+            <p class="m-0 text-center text-white">Copyright &copy; Employee Reimbursement System  2018</p>
+        </div>
+        <!-- /.container -->
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="Resources/vendor/jquery/jquery.min.js"></script>
+    <script src="Resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="Resources/js/viewempinfo.js"></script>
+</body>
+
+</html>
