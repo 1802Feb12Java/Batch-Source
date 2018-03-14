@@ -26,7 +26,6 @@ public class UpdateEmployeeInfo extends HttpServlet {
      */
     public UpdateEmployeeInfo() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -52,7 +51,6 @@ public class UpdateEmployeeInfo extends HttpServlet {
 		}
 	
 		//update the user
-		System.out.println(user.getU_password());
 		try {
 			user.setU_firstName((String) employee.get("fname"));
 			user.setU_lastName((String) employee.get("lname"));

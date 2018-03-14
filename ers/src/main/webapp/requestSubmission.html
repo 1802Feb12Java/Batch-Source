@@ -1,0 +1,25 @@
+<div class="container-fluid bg">
+    <div class="row">
+        <div class="col-md-4 col-sm-4 col-xs-12"></div>
+        <div class="col-md-4 col-sm-4 col-xs-12">
+            <!--form start-->
+            <form id="requestForm">
+                <br><br><h1 class="h3 mb-3 font-weight-normal">Submission Request</h1><br>
+                <input type="radio" name="rType" value="Travel">
+                <label for="Travel">Travel Expenses</label><br>
+                <input type="radio" name="rType" value="Testing">
+                <label for="Testing">Testing Certifications</label><br>
+                <input type="radio" name="rType" value="Morty">
+                <label for="Morty">Morty Insurance</label><br>
+                <input type="radio" name="rType" value="Other" checked>
+                <label for="Other">Miscellaneous (Explain below)</label><br><br>
+                <label for="description" >Description</label>
+                <input type="text" class="form-control" name="description"><br>
+                <label for="amount">Amount requested</label>
+                <input type="number" class="form-control" name="amountRequested" required><br>
+                <button class="btn btn-lrg btn-warning btn-block" type="submit" value="submit">Submit Request</button>
+            </form>
+            <!--form end-->
+        </div>
+    <div class="col-md-4 col-sm-4 col-xs-12"></div></div>
+</div>     
