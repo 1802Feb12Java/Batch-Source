@@ -3,7 +3,6 @@ firstName = document.getElementById("firstName");
 lastName = document.getElementById("lastName");
 email = document.getElementById("email");
 userName = document.getElementById("userName");
-theButton = document.getElementById("confirmInfo").addEventListener("click", sendData);
 
 function fillInFields() {
     var req = new XMLHttpRequest();
@@ -33,9 +32,14 @@ function sendData() {
             var results = req.responseText;
             if (results == "SUCCESS") {
                 document.getElementById("success").removeAttribute("hidden");
+                document.getElementById("usernameFailure").hidden = true;
             }
-            if (results == "FAILURE") {
-                document.getElementById("failure").removeAttribute("hidden");
+            if (results == "USERNAME FAILURE") {
+                document.getElementById("usernameFailure").removeAttribute("hidden");
+                document.getElementById("emailFailure").hidden = true;
+            }
+            if (results == "EMAIL FAILURE") {
+                document.getElementById("emailFailure").removeAttribute("hidden");
             }
         }
     });

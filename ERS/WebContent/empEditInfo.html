@@ -99,18 +99,20 @@
             </ol>
             <div class="row">
                 <div class="col-md-4">
+                    
                     <div class="form-group">
                       <label for="firstName">First Name</label>
-                      <input type="text" name="firstName" id="firstName" class="form-control" placeholder="First Name">
+                      <input type="text" name="firstName" id="firstName" class="form-control" placeholder="First Name" />
                       <label for="lastName">Last Name</label>
-                      <input type="text" name="lastName" id="lastName" class="form-control" placeholder="Last Name">
+                      <input type="text" name="lastName" id="lastName" class="form-control" placeholder="Last Name" />
                       <label for="email">Email</label>
-                      <input type="text" name="email" id="email" class="form-control" placeholder="Email">
+                      <input type="text" name="email" id="email" class="form-control" placeholder="Email" />
                       <label for="username">User Name</label>
-                      <input type="text" name="username" id="userName" class="form-control" placeholder="UserName">
+                      <input type="text" name="username" id="userName" class="form-control" placeholder="UserName" />
+                      <label for="password">New Password</label>
                     </div>
-                    <button id="confirmInfo">Confirm New Info</button>
-                    <p><span id="failure" hidden>Failure. Try a new user name</span><span id="success" hidden>Success! Your info has been updated</span></p>
+                    <button id="confirmInfo">Edit Info</button>
+                    <p><span id="emailFailure" hidden>Sorry that email address is already taken.</span><span id="usernameFailure" hidden>Sorry. That username is already taken</span> <span id="success" hidden>Success! Your info has been updated</span></p>
                 </div>
             </div>
         </div>

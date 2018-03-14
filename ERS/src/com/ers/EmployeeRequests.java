@@ -15,11 +15,12 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 public class EmployeeRequests implements RequestsDAO {
-	
+	private LoginDAO loginDAO;
 	private Connection connection;
 	final static Logger logger = Logger.getLogger(EmployeeRequests.class);
 	public EmployeeRequests(Connection connection) {
 		this.connection = connection;
+		this.loginDAO = new LoginDAO(connection);
 	}
 	@Override
 	public int getNumberOfPendingRequests(int userId) {
@@ -197,42 +198,139 @@ public class EmployeeRequests implements RequestsDAO {
 		return results.toArray(new String[results.size()]);
 	}
 	
-	public String updateEmployee(int userId, String oldUserName, String newUserName, String firstName, 
-			String lastName, String email) {
+	public String updateEmployee(int userId, String column, String newValue) {
 		
-		//if new username is entered, validate that it is available
-		if (!newUserName.equals(oldUserName)) {
-			LoginDAO loginDAO = new LoginDAO(connection);
-			if (loginDAO.userNameExists(newUserName)) {
-				return "FAILURE";
+		//check if email or userName violate integrity constraints
+		if(column.equals("email")) {
+			if (loginDAO.emailExists(newValue)) {
+				return "EMAILFAIL";
 			}
 		}
 		
-		String updateEmployeeString = "UPDATE ERS_USERS SET U_USERNAME = ?, U_FIRSTNAME = ?, U_LASTNAME = ?, U_EMAIL = ? WHERE U_ID = ?";
+		if(column.equals("userName")) {
+			if (loginDAO.userNameExists(newValue)) {
+				return "USERNAMEFAIL";
+			}
+		}
+		
+		//do updates
+		int result = -1;
+		switch (column) {
+		case "firstName":
+			result = updateFirstName(userId, newValue);
+			break;
+			
+		case "lastName":
+			result = updateLastName(userId, newValue);
+			break;
+
+		case "userName":
+			result = updateUserName(userId, newValue);
+				break;
+				
+		case "email":
+			result = updateEmail(userId, newValue);
+			break;
+		case "password":
+			result = updatePassword(userId, newValue);
+			break;
+			
+		default:
+			break;
+		}
+		
+		if (result < 0) {
+			return "PUTFAIL";
+		}
+		
+		return "SUCCESS";
+		
+//		String updateEmployeeString = "UPDATE ERS_USERS SET U_USERNAME = ?, U_FIRSTNAME = ?, U_LASTNAME = ?, U_EMAIL = ? WHERE U_ID = ?";
+	}
+	
+	private int updateFirstName(int userId, String firstName) {
+		String updateEmployeeString = "UPDATE ERS_USERS SET U_FIRSTNAME = ? WHERE U_ID = ?";
+		int result = 0;
 		try {
-			PreparedStatement updateEmployeeQuery = connection.prepareStatement(updateEmployeeString);
-			updateEmployeeQuery.setString(1, newUserName);
-			updateEmployeeQuery.setString(2, firstName);
-			updateEmployeeQuery.setString(3, lastName);
-			updateEmployeeQuery.setString(4, email);
-			updateEmployeeQuery.setInt(5, userId);
-			
-			int result = updateEmployeeQuery.executeUpdate();
-			
-			if(result > 0) {
-				return "SUCCESS";
-			}
-			else {
-				return "FAILURE";
-			}
+			PreparedStatement updateQuery = connection.prepareStatement(updateEmployeeString);
+			updateQuery.setString(1, firstName);
+			updateQuery.setInt(2, userId);
+			result = updateQuery.executeUpdate();
 			
 		} catch (SQLException e) {
-			System.out.println("Error in " + this.getClass() + " Check log for stacktrace");
-			logger.error("SQL Error From: " + this.getClass());
+			logger.error("Error in: " + this.getClass());
 			logger.error(e.toString());
 		}
-
-		return "FAILURE";
+		
+		return result;
+	}
+	
+	private int updateLastName(int userId, String lastName) {
+		String updateEmployeeString = "UPDATE ERS_USERS SET U_LASTNAME = ? WHERE U_ID = ?";
+		int result = 0;
+		try {
+			PreparedStatement updateQuery = connection.prepareStatement(updateEmployeeString);
+			updateQuery.setString(1, lastName);
+			updateQuery.setInt(2, userId);
+			result = updateQuery.executeUpdate();
+			
+		} catch (SQLException e) {
+			logger.error("Error in: " + this.getClass());
+			logger.error(e.toString());
+		}
+		
+		return result;
+	}
+	
+	private int updateEmail(int userId, String email) {
+		String updateEmployeeString = "UPDATE ERS_USERS SET U_EMAIL = ? WHERE U_ID = ?";
+		int result = 0;
+		try {
+			PreparedStatement updateQuery = connection.prepareStatement(updateEmployeeString);
+			updateQuery.setString(1, email);
+			updateQuery.setInt(2, userId);
+			result = updateQuery.executeUpdate();
+			
+		} catch (SQLException e) {
+			logger.error("Error in: " + this.getClass());
+			logger.error(e.toString());
+		}
+		
+		return result;
+	}
+	
+	private int updateUserName(int userId, String userName) {
+		String updateEmployeeString = "UPDATE ERS_USERS SET U_USERNAME = ? WHERE U_ID = ?";
+		int result = 0;
+		try {
+			PreparedStatement updateQuery = connection.prepareStatement(updateEmployeeString);
+			updateQuery.setString(1, userName);
+			updateQuery.setInt(2, userId);
+			result = updateQuery.executeUpdate();
+			
+		} catch (SQLException e) {
+			logger.error("Error in: " + this.getClass());
+			logger.error(e.toString());
+		}
+		
+		return result;
+	}
+	
+	private int updatePassword(int userId, String password) {
+		String updateEmployeeString = "UPDATE ERS_USERS SET U_PASSWORD = ? WHERE U_ID = ?";
+		int result = 0;
+		try {
+			PreparedStatement updateQuery = connection.prepareStatement(updateEmployeeString);
+			updateQuery.setString(1, password);
+			updateQuery.setInt(2, userId);
+			result = updateQuery.executeUpdate();
+			
+		} catch (SQLException e) {
+			logger.error("Error in: " + this.getClass());
+			logger.error(e.toString());
+		}
+		
+		return result;
 	}
 	
 	//inner class to JSONify

@@ -1,5 +1,4 @@
 
-
 var cookieFromServer = document.cookie
 
 function parseCookie(key) {
@@ -24,4 +23,5 @@ function fillInCards() {
     }
   });
 }
+
 fillInCards();

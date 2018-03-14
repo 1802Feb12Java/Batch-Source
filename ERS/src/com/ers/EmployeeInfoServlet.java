@@ -22,14 +22,18 @@ public class EmployeeInfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = Logger.getLogger(EmployeeInfoServlet.class);
 	EmployeeRequests employeeRequests;
-    
+    LoginDAO loginDAO;
 	public EmployeeInfoServlet() {
         super();
         employeeRequests = new EmployeeRequests(DatabaseConnection.getDatabaseConnection());
-    }
+        loginDAO = new LoginDAO(DatabaseConnection.getDatabaseConnection());
+	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
+		if (session == null) {
+			response.sendRedirect("login.html");
+		}
 		int userId = (int) session.getAttribute("userid");
 		String[] info = employeeRequests.getEmployeeInfo(userId);
 		
@@ -44,26 +48,36 @@ public class EmployeeInfoServlet extends HttpServlet {
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
 		int userId = (int) session.getAttribute("userid");
-		String oldUserName = (String) session.getAttribute("username");
-		String newUserName = request.getParameter("userName");
-		String firstName = request.getParameter("firstName");
-		String lastName = request.getParameter("lastName");
-		String email = request.getParameter("email");
-		String result = employeeRequests.updateEmployee(userId, oldUserName, newUserName, firstName, lastName, email);
-		if (result.equals("FAILURE")) {
+		
+		String column = request.getParameter("column");
+		String newValue = request.getParameter("newValue");
+		
+		String result = employeeRequests.updateEmployee(userId, column, newValue);
+		if (result.equals("EMAILFAIL")) {
 			logger.info("PUT FAILURE FROM: " + this.getClass());
-			response.getWriter().write("FAILURE");
+			response.setStatus(401);
+		}
+		if (result.equals("USERNAMEFAIL")) {
+			logger.info("PUT FAILURE FROM: " + this.getClass());
+			response.setStatus(402);
 		}
 		else {
+			
 			//update first name in cookie
-			Cookie cookie = new Cookie("firstName", firstName);
-	        cookie.setMaxAge(60*60*24); //set cookie to live for one day
-	        response.addCookie(cookie);
+			if (column.equals("firstName")) {
+				Cookie cookie = new Cookie("firstName", newValue);
+		        cookie.setMaxAge(60*60*24); //set cookie to live for one day
+		        response.addCookie(cookie);
+			}
+			
+			//update username session variable
+			if(column.equals("userName")) {
+				 request.getSession(false).setAttribute("username", newValue);
+			}
 	        
-	        //update session variable
-	        request.getSession(false).setAttribute("username", newUserName);
-	        logger.info("PUT processed from: " + this.getClass());
-			response.getWriter().write("SUCCESS");
+	       
+	        logger.info("PUT successfully processed from: " + this.getClass());
+			response.setStatus(200);
 		}
 	}
 	

@@ -34,6 +34,10 @@ public class ManagerRequestViewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession(false);
+		if (session == null) {
+			response.sendRedirect("login.html");
+		}
 		String viewType = request.getParameter("viewType");
 		String employeeName = request.getParameter("employeeName");
 		

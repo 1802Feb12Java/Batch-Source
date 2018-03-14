@@ -20,73 +20,64 @@
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
 
-            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive"
-                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
-    
-                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-                        <a class="nav-link" href="empDash.html">
-                            <i class="fa fa-fw fa-dashboard"></i>
-                            <span class="nav-link-text">Employee Dashboard</span>
-                        </a>
-                    </li>
-    
-                    <!--requests panel-->
-                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
-                        <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents1" data-parent="#exampleAccordion">
-                            <i class="fa fa-usd"></i>
-                            <span class="nav-link-text">Reimbursment Requests</span>
-                        </a>
-                        <ul class="sidenav-second-level collapse" id="collapseComponents1">
-                            <li>
-                                <a href="empAddRequest.html">
-                                    <i class="fa fa-plus"></i> Add New</a>
-                            </li>
-                            <li>
-                                <a href="empViewRequests.html">
-                                    <i class="fa fa-credit-card-alt"></i> View Requests</a>
-                            </li>
-                        </ul>
-                    </li>
-    
-                    <!--employee panel-->
-                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
-                        <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents2" data-parent="#exampleAccordion">
-                            <i class="fa fa-info-circle"></i>
-                            <span class="nav-link-text">Your Information</span>
-                        </a>
-                        <ul class="sidenav-second-level collapse" id="collapseComponents2">
-                            <li>
-                                <a href="empViewInfo.html">
-                                    <i class="fa fa-list-alt"></i> View </a>
-                            </li>
-                            <li>
-                                <a href="empEditInfo.html">
-                                    <i class="fa fa-pencil"></i> Edit</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-                <ul class="navbar-nav sidenav-toggler">
-                    <li class="nav-item">
-                        <a class="nav-link text-center" id="sidenavToggler">
-                            <i class="fa fa-fw fa-angle-left"></i>
-                        </a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav ml-auto">
-    
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
-                            <i class="fa fa-fw fa-sign-out"></i>Logout</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-        <!--End Navigation elements-->
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+            aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+                    <a class="nav-link" href="empDash.html">
+                        <i class="fa fa-fw fa-dashboard"></i>
+                        <span class="nav-link-text">Employee Dashboard</span>
+                    </a>
+                </li>
+
+                <!--requests panel-->
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
+                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents1" data-parent="#exampleAccordion">
+                        <i class="fa fa-usd"></i>
+                        <span class="nav-link-text">Reimbursment Requests</span>
+                    </a>
+                    <ul class="sidenav-second-level collapse" id="collapseComponents1">
+                        <li>
+                            <a href="empAddRequest.html">
+                                <i class="fa fa-plus"></i> Add New</a>
+                        </li>
+                        <li>
+                            <a href="empViewRequests.html">
+                                <i class="fa fa-credit-card-alt"></i> View Requests</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!--employee panel-->
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="YourInfo">
+                    <a class="nav-link" href="empViewInfo.html">
+                        <i class="fa fa-info-circle"></i>
+                        <span class="nav-link-text"> View / Edit your Info</span>
+                    </a>
+                </li>
+
+            </ul>
+            <ul class="navbar-nav sidenav-toggler">
+                <li class="nav-item">
+                    <a class="nav-link text-center" id="sidenavToggler">
+                        <i class="fa fa-fw fa-angle-left"></i>
+                    </a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
+                        <i class="fa fa-fw fa-sign-out"></i>Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!--End Navigation elements-->
 
     <div class="content-wrapper">
         <div class="container-fluid">
@@ -98,67 +89,209 @@
                 <li class="breadcrumb-item active">View Your Info</li>
             </ol>
             <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                        <thead>
-                            <tr>
-                                <th class="text-center">First Name</th>
-                                <th class="text-center">Last Name</th>
-                                <th class="text-center">Email</th>
-                                <th class="text-center">User Name</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td id="firstName" class="text-center"></td>
-                                <td id="lastName" class="text-center"></td>
-                                <td id="email" class="text-center"></td>
-                                <td id="userName" class="text-center"></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-        </div>
-        <!-- /.container-fluid-->
-        <!-- /.content-wrapper-->
-        <footer class="sticky-footer">
-            <div class="container">
-                <div class="text-center">
-                    <small>Scott B.</small>
-                </div>
-            </div>
-        </footer>
-        <!-- Scroll to Top Button-->
-        <a class="scroll-to-top rounded" href="#page-top">
-            <i class="fa fa-angle-up"></i>
-        </a>
-        <!-- Logout Modal-->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th class="text-center">First Name</th>
+                            <th class="text-center">Last Name</th>
+                            <th class="text-center">Email</th>
+                            <th class="text-center">User Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td id="firstName" class="text-center tableData" data-toggle="modal" data-target="#firstNameModal"></td>
+                            <td id="lastName" class="text-center tableData" data-toggle="modal" data-target="#lastNameModal"></td>
+                            <td id="email" class="text-center tableData" data-toggle="modal" data-target="#emailModal"></td>
+                            <td id="userName" class="text-center tableData" data-toggle="modal" data-target="#userNameModal"></td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="4">
+                                <button class="btn btn-primary btn-block" id="changePassword" data-toggle="modal" data-target="#passwordModal">Change Password</button>
+                            </td>
+                        </tr>
+                        <tr class="results" hidden>
+                            <td class="results" id="resultCell" colspan="4" hidden>
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- firstName Modal -->
+                <div id="firstNameModal" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Enter New First Name</h4>
+                                <button type="button" class="close" data-dismiss="modal">
+                                    <i class="fa fa-window-close" aria-hidden="true"></i>
+                                </button>
+
+                            </div>
+                            <div class="modal-body">
+                                <input type="text" id="newValue">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default updateInfoBtn" id="firstName" data-dismiss="modal">Update Info</button>
+                            </div>
+                        </div>
+                        <!--End Modal View-->
+
                     </div>
-                    <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                    <div class="modal-footer">
-                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <a class="btn btn-primary" href="login.html">Logout</a>
+                </div>
+                <!--end Modal-->
+
+                <!-- lastName Modal -->
+                <div id="lastNameModal" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Enter New Last Name</h4>
+                                <button type="button" class="close" data-dismiss="modal">
+                                    <i class="fa fa-window-close" aria-hidden="true"></i>
+                                </button>
+
+                            </div>
+                            <div class="modal-body">
+                                <input type="text" id="newValue">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default updateInfoBtn" id="lastName" data-dismiss="modal">Update Info</button>
+                            </div>
+                        </div>
+                        <!--End Modal View-->
+
                     </div>
                 </div>
+                <!--end Modal-->
+
+                <!-- userName Modal -->
+                <div id="userNameModal" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Enter New User Name</h4>
+                                <button type="button" class="close" data-dismiss="modal">
+                                    <i class="fa fa-window-close" aria-hidden="true"></i>
+                                </button>
+
+                            </div>
+                            <div class="modal-body">
+                                <input type="text" id="newValue">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default updateInfoBtn" id="userName" data-dismiss="modal">Update Info</button>
+                            </div>
+                        </div>
+                        <!--End Modal View-->
+
+                    </div>
+                </div>
+                <!--end Modal-->
+
+                <!-- email Modal -->
+                <div id="emailModal" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Enter New Email</h4>
+                                <button type="button" class="close" data-dismiss="modal">
+                                    <i class="fa fa-window-close" aria-hidden="true"></i>
+                                </button>
+
+                            </div>
+                            <div class="modal-body">
+                                <input type="text" id="newValue">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default updateInfoBtn" id="email" data-dismiss="modal">Update Info</button>
+                            </div>
+                        </div>
+                        <!--End Modal View-->
+
+                    </div>
+                </div>
+                <!--end Modal-->
+
+                <!-- password Modal -->
+                <div id="passwordModal" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Enter New Password</h4>
+                                <button type="button" class="close" data-dismiss="modal">
+                                    <i class="fa fa-window-close" aria-hidden="true"></i>
+                                </button>
+
+                            </div>
+                            <div class="modal-body">
+                                <input type="password" id="passwordUpdateField" placeholder="Enter new password">
+                            </div>
+                            <div class="modal-body">
+                                <input type="password" id="passwordConfirm" placeholder="Confirm password">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default text-center" id="passwordUpdateBtn" data-dismiss="modal">Update Info</button>
+                            </div>
+                        </div>
+                        <!--End Modal View-->
+
+                    </div>
+                </div>
+                <!--end Modal-->
+
+                <!-- /.container-fluid-->
+                <!-- /.content-wrapper-->
+                <footer class="sticky-footer">
+                    <div class="container">
+                        <div class="text-center">
+                            <small>Scott B.</small>
+                        </div>
+                    </div>
+                </footer>
+                <!-- Scroll to Top Button-->
+                <a class="scroll-to-top rounded" href="#page-top">
+                    <i class="fa fa-angle-up"></i>
+                </a>
+                <!-- Logout Modal-->
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                            <div class="modal-footer">
+                                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                                <a class="btn btn-primary" href="login.html">Logout</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Controller Scripts-->
+                <script src="empViewInfo.js"></script>
+                <!-- Bootstrap core JavaScript-->
+                <script src="vendor/jquery/jquery.min.js"></script>
+                <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+                <!-- Core plugin JavaScript-->
+                <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+                <!-- Custom scripts for all pages-->
+                <script src="sb-admin.min.js"></script>
             </div>
-        </div>
-        <!--Controller Scripts-->
-        <script src="empViewInfo.js"></script>
-        <!-- Bootstrap core JavaScript-->
-        <script src="vendor/jquery/jquery.min.js"></script>
-        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <!-- Core plugin JavaScript-->
-        <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-        <!-- Custom scripts for all pages-->
-        <script src="sb-admin.min.js"></script>
-    </div>
 </body>
 
 </html>

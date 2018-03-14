@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import com.ers.Credentials;
 
 public class DatabaseConnection {
+		
 	public static Connection getDatabaseConnection() {
 		Connection dbConnection = null;
 		try {

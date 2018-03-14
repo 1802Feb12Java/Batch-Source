@@ -31,10 +31,13 @@ public class EmployeeRequestViewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		String viewType = request.getParameter("viewType");
 		String[] viewResults;
 		HttpSession session = request.getSession(false);
-		
+		if (session == null) {
+			response.sendRedirect("login.html");
+		}
 		int userId = (int) session.getAttribute("userid");
 		
 		switch (viewType) {
