@@ -49,21 +49,40 @@ let viewEInfo = function(){
 
     //Open the request with the parameters: (type, url/filename, async)
     xhr.open('GET', '/ers/ViewEmployeeInfo', true);
+    
 
     //create the function to handle the request
     xhr.onreadystatechange = function(){
         if(this.readyState == 4 && this.status == 200){
             let employeeJSON = JSON.parse(this.responseText);
-            test = employeeJSON.fname;
-            document.getElementById("page").innerHTML = test;
+            showCard(employeeJSON);
         };
     };
  
+
     //send the request
     xhr.send();
+
 };
 
+let showCard = function(employee){
+    let xhr = new XMLHttpRequest();
 
+    xhr.open('GET', '/ers/employeeCard.html', true);
+
+    xhr.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
+            document.getElementById("page").innerHTML = this.responseText;
+            document.getElementById("employeeName").textContent = employee.fname + " " + employee.lname +
+                    ", " + employee.role;
+            document.getElementsByName("fname")[0].placeholder=employee.fname;
+            document.getElementsByName("lname")[0].placeholder=employee.lname;
+            document.getElementsByName("email")[0].placeholder=employee.email;
+        }
+    }
+
+    xhr.send();
+}
 
 document.getElementById("submitReimbursement").addEventListener("click", submit);
 document.getElementById("viewEPending").addEventListener("click", viewEPending);
