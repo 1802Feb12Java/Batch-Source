@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="ersCSS.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+  <body>
+      
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+ 
+    
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">ERS</a>
+          </div>
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="./EmployeeHome.html">Home</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <span class="glyphicon glyphicon-user"></span>
+                    <span id = "username"> username </span>
+              		<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="./AccountInformation.html">Account Information <span class="divider"></span></a></li>
+                <li class="divider"></li>
+                <li><a href="./LogoutServlet"> <span class = "glyphicon glyphicon-off"></span> Log-Out</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      
+    <!-- setting up form with bootstrap -->
+    <form method = "post" action="SubmitReimbursementServlet" class="form-horizontal">
+            <div class = "col-sm-6"></div>
+            	<select name="types" class = "form-inline">
+                	<option value= "0">Travel</option>
+                	<option value="1">Business</option>
+                	<option value="2">Medical</option>
+            	</select>
+                <div class="form-inline">
+                        <label class = "control-label col-sm-5" for="amount">Amount: </label>
+                        <div class="col-sm-5">
+                            <input name = "amount" type ="text" class="form-control">
+                        </div>
+                    </div>
+                <div class="form-inline" id = "pad50">
+                    <label class = "control-label col-sm-5" for="description">Description: </label>
+                    <div class="col-sm-5">
+                        <textarea name="description" cols="50" rows="10"></textarea>
+                    </div>
+                </div>
+            <div class="form-inline" id = "pad50">
+                <label class = "control-label col-sm-5" for="button"></label>
+                <div class="col-sm-5">
+                    <button type="submit" class = "btn btn-primary">Submit Request</button>
+                </div>
+            </div>    
+        </form>
+</body>
+<script src="./resources/js/EmployeeHome.js"></script>
+</html>

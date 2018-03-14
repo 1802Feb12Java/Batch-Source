@@ -1,0 +1,16 @@
+body{
+	background-image: url("../img/backgroundIMG.jpg");
+    background-color: "blue";
+}
+
+button{
+    background-color:black !important;
+}
+
+#pad50{
+    position:relative; 
+    padding-bottom: 40px;
+}
+
+
+
