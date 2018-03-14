@@ -41,7 +41,12 @@ let submit = function(){
                 
                 description = document.getElementsByName("description")[0].value;
                 amount = document.getElementsByName("amountRequested")[0].value;
-                console.log(selectedButton + "," + description + "," + amount);
+
+                let request = '{"selection" : '+ selectedButton +', "description" : "' + description +
+                        '", "amount" : ' + amount + '}';
+
+                let test = JSON.parse(request);
+                console.log(test.selection + " " + test.description + test.amount);
             });
         };
     };
@@ -74,10 +79,8 @@ let viewEInfo = function(){
         };
     };
  
-
     //send the request
     xhr.send();
-
 };
 
 let showCard = function(employee){
