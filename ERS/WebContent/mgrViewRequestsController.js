@@ -3,6 +3,8 @@ document.getElementById("viewAll").addEventListener("click", getAllRequests);
 document.getElementById("viewApproved").addEventListener("click", getApprovedRequests);
 document.getElementById("empSelect").addEventListener("change", getRequestsByName);
 var currentView;
+var newImage;
+var imageModal = document.getElementById("imageModalBody");
 
 function getPendingRequests() {
     var results;
@@ -26,13 +28,25 @@ function getPendingRequests() {
             //create table rows
             var tableBody = document.getElementById("mgrRequestViewTableBody");
             tableBody.innerHTML = "";
+
+            if (results.length == 0) {
+                var tableRow = document.createElement("tr");
+                tableBody.appendChild(tableRow);
+                var emptyRow = document.createElement("td");
+                emptyRow.colSpan = 10;
+                emptyRow.classList.add("text-center");
+                emptyRow.textContent = "No Reimbursements Pending"
+                tableRow.appendChild(emptyRow);
+              }
+
             for (var i = 0; i < results.length; i++) {
                 var tableRow = document.createElement("tr");
                 tableBody.appendChild(tableRow);
-
                 //create holders for data
                 var id = document.createElement("td");
                 id.hidden = true;
+                var imageCol = document.createElement("td");
+                imageCol.hidden = true;
                 var amount = document.createElement("td")
                 var type = document.createElement("td");
                 var description = document.createElement("td");
@@ -47,6 +61,7 @@ function getPendingRequests() {
 
                 //append holders to table 
                 tableRow.appendChild(id);
+                tableRow.appendChild(imageCol);
                 tableRow.appendChild(amount);
                 tableRow.appendChild(type);
                 tableRow.appendChild(description);
@@ -64,10 +79,13 @@ function getPendingRequests() {
                 amount.textContent = requestObject.amount;
                 type.textContent = requestObject.type;
                 description.textContent = requestObject.description;
-                var imageData = document.createElement("img");
-                imageData.src = "data:image/png;base64," + requestObject.receipt;
-                imageData.classList.add("receipt");
-                receipt.appendChild(imageData);
+                imageCol.textContent = "data:image/png;base64," + requestObject.receipt;
+
+                var imageDataButton = document.createElement("button");
+                imageDataButton.classList.add("btn", "btn-info");
+                imageDataButton.innerText = "Click to View Receipt";
+                imageDataButton.addEventListener("click", viewReceipt);
+                receipt.appendChild(imageDataButton);
                 status.textContent = requestObject.status;
                 submitter.textContent = requestObject.requester;
                 dateSubmit.textContent = requestObject.timeStampRequest;
@@ -118,6 +136,17 @@ function getAllRequests() {
             //create table rows
             var tableBody = document.getElementById("mgrRequestViewTableBody");
             tableBody.innerHTML = "";
+
+            if (results.length == 0) {
+                var tableRow = document.createElement("tr");
+                tableBody.appendChild(tableRow);
+                var emptyRow = document.createElement("td");
+                emptyRow.colSpan = 10;
+                emptyRow.classList.add("text-center");
+                emptyRow.textContent = "No Reimbursement Data"
+                tableRow.appendChild(emptyRow);
+              }
+
             for (var i = 0; i < results.length; i++) {
                 var tableRow = document.createElement("tr");
                 tableBody.appendChild(tableRow);
@@ -125,6 +154,8 @@ function getAllRequests() {
                 //create holders for data
                 var id = document.createElement("td");
                 id.hidden = true;
+                var imageCol = document.createElement("td");
+                imageCol.hidden = true;
                 var amount = document.createElement("td")
                 var type = document.createElement("td");
                 var description = document.createElement("td");
@@ -139,6 +170,7 @@ function getAllRequests() {
 
                 //append holders to table 
                 tableRow.appendChild(id);
+                tableRow.appendChild(imageCol);
                 tableRow.appendChild(amount);
                 tableRow.appendChild(type);
                 tableRow.appendChild(description);
@@ -156,10 +188,13 @@ function getAllRequests() {
                 amount.textContent = requestObject.amount;
                 type.textContent = requestObject.type;
                 description.textContent = requestObject.description;
-                var imageData = document.createElement("img");
-                imageData.src = "data:image/png;base64," + requestObject.receipt;
-                imageData.classList.add("receipt");
-                receipt.appendChild(imageData);
+                imageCol.textContent = "data:image/png;base64," + requestObject.receipt;
+
+                var imageDataButton = document.createElement("button");
+                imageDataButton.classList.add("btn", "btn-info");
+                imageDataButton.innerText = "Click to View Receipt";
+                imageDataButton.addEventListener("click", viewReceipt);
+                receipt.appendChild(imageDataButton);
                 status.textContent = requestObject.status;
                 submitter.textContent = requestObject.requester;
                 dateSubmit.textContent = requestObject.timeStampRequest;
@@ -201,7 +236,6 @@ function getApprovedRequests() {
     req.addEventListener("load", function () {
         var tableBody = document.getElementById("mgrRequestViewTableBody");
         tableBody.innerHTML = "";
-
         //hide action buttons
         var actionElements = document.getElementsByClassName("action");
         for (var i = 0; i < actionElements.length; i++) {
@@ -214,6 +248,18 @@ function getApprovedRequests() {
             //create table rows
             var tableBody = document.getElementById("mgrRequestViewTableBody");
             tableBody.innerHTML = "";
+
+            if (results.length == 0) {
+                var tableRow = document.createElement("tr");
+                tableBody.appendChild(tableRow);
+                var emptyRow = document.createElement("td");
+                emptyRow.colSpan = 10;
+                emptyRow.classList.add("text-center");
+                emptyRow.textContent = "No Reimbursement Data"
+                tableRow.appendChild(emptyRow);
+              }
+              
+
             for (var i = 0; i < results.length; i++) {
                 var tableRow = document.createElement("tr");
                 tableBody.appendChild(tableRow);
@@ -221,6 +267,8 @@ function getApprovedRequests() {
                 //create holders for data
                 var id = document.createElement("td");
                 id.hidden = true;
+                var imageCol = document.createElement("td");
+                imageCol.hidden = true;
                 var amount = document.createElement("td")
                 var type = document.createElement("td");
                 var description = document.createElement("td");
@@ -230,11 +278,12 @@ function getApprovedRequests() {
                 var dateSubmit = document.createElement("td");
                 var resolvedBy = document.createElement("td");
                 var dateResolved = document.createElement("td");
-                //var action = document.createElement("td");
-                //action.classList.add("action");
+                var action = document.createElement("td");
+                action.classList.add("action");
 
                 //append holders to table 
                 tableRow.appendChild(id);
+                tableRow.appendChild(imageCol);
                 tableRow.appendChild(amount);
                 tableRow.appendChild(type);
                 tableRow.appendChild(description);
@@ -244,7 +293,7 @@ function getApprovedRequests() {
                 tableRow.appendChild(dateSubmit);
                 tableRow.appendChild(resolvedBy);
                 tableRow.appendChild(dateResolved);
-                //tableRow.appendChild(action);
+                tableRow.appendChild(action);
 
                 //parse data into table
                 var requestObject = results[i];
@@ -252,10 +301,13 @@ function getApprovedRequests() {
                 amount.textContent = requestObject.amount;
                 type.textContent = requestObject.type;
                 description.textContent = requestObject.description;
-                var imageData = document.createElement("img");
-                imageData.src = "data:image/png;base64," + requestObject.receipt;
-                imageData.classList.add("receipt");
-                receipt.appendChild(imageData);
+                imageCol.textContent = "data:image/png;base64," + requestObject.receipt;
+
+                var imageDataButton = document.createElement("button");
+                imageDataButton.classList.add("btn", "btn-info");
+                imageDataButton.innerText = "Click to View Receipt";
+                imageDataButton.addEventListener("click", viewReceipt);
+                receipt.appendChild(imageDataButton);
                 status.textContent = requestObject.status;
                 submitter.textContent = requestObject.requester;
                 dateSubmit.textContent = requestObject.timeStampRequest;
@@ -269,7 +321,6 @@ function getApprovedRequests() {
 function approveRequest() {
     var data = [];
     data = $(this).parent().siblings();
-    //data = data[0];
     var id = data[0].textContent;
 
     var req = new XMLHttpRequest();
@@ -287,7 +338,6 @@ function approveRequest() {
 function denyRequest() {
     var data = [];
     data = $(this).parent().siblings();
-    //data = data[0];
     var id = data[0].textContent;
 
     var req = new XMLHttpRequest();
@@ -327,7 +377,7 @@ function getRequestsByName() {
     currentView = getAllRequests;
     var req = new XMLHttpRequest();
     var empName = document.getElementById("empSelect").value;
-    req.open("GET", "http://localhost:8080/ERS/ManagerRequestViewServlet?viewType='NONE'&employeeName="+empName, true);
+    req.open("GET", "http://localhost:8080/ERS/ManagerRequestViewServlet?viewType='NONE'&employeeName=" + empName, true);
     req.send(null);
     req.addEventListener("load", function () {
         var tableBody = document.getElementById("mgrRequestViewTableBody");
@@ -345,13 +395,27 @@ function getRequestsByName() {
             //create table rows
             var tableBody = document.getElementById("mgrRequestViewTableBody");
             tableBody.innerHTML = "";
+
+            if (results.length == 0) {
+                var tableRow = document.createElement("tr");
+                tableBody.appendChild(tableRow);
+                var emptyRow = document.createElement("td");
+                emptyRow.colSpan = 10;
+                emptyRow.classList.add("text-center");
+                emptyRow.textContent = "No Reimbursement Data"
+                tableRow.appendChild(emptyRow);
+              }
+
             for (var i = 0; i < results.length; i++) {
                 var tableRow = document.createElement("tr");
                 tableBody.appendChild(tableRow);
 
+                //begin changes here
                 //create holders for data
                 var id = document.createElement("td");
                 id.hidden = true;
+                var imageCol = document.createElement("td");
+                imageCol.hidden = true;
                 var amount = document.createElement("td")
                 var type = document.createElement("td");
                 var description = document.createElement("td");
@@ -366,6 +430,7 @@ function getRequestsByName() {
 
                 //append holders to table 
                 tableRow.appendChild(id);
+                tableRow.appendChild(imageCol);
                 tableRow.appendChild(amount);
                 tableRow.appendChild(type);
                 tableRow.appendChild(description);
@@ -383,10 +448,14 @@ function getRequestsByName() {
                 amount.textContent = requestObject.amount;
                 type.textContent = requestObject.type;
                 description.textContent = requestObject.description;
-                var imageData = document.createElement("img");
-                imageData.src = "data:image/png;base64," + requestObject.receipt;
-                imageData.classList.add("receipt");
-                receipt.appendChild(imageData);
+                imageCol.textContent = "data:image/png;base64," + requestObject.receipt;
+
+                var imageDataButton = document.createElement("button");
+                imageDataButton.classList.add("btn", "btn-info");
+                imageDataButton.innerText = "Click to View Receipt";
+                imageDataButton.addEventListener("click", viewReceipt);
+                receipt.appendChild(imageDataButton);
+                //end changes
                 status.textContent = requestObject.status;
                 submitter.textContent = requestObject.requester;
                 dateSubmit.textContent = requestObject.timeStampRequest;
@@ -420,3 +489,21 @@ function getRequestsByName() {
 }
 
 fillEmployeeSelectBox();
+
+function viewReceipt() {
+    var data = [];
+    data = $(this).parent().siblings();
+    var imageString = data[1].textContent;
+    newImage = document.createElement("img");
+    newImage.src = imageString;
+    newImage.classList.add("receipt");
+
+    if (imageModal.hasChildNodes) {
+        imageModal.replaceChild(newImage, imageModal.childNodes[0]);
+    }
+    else {
+        imageModal.appendChild(newImage);
+    }
+
+    $('#imageModal').modal('show');
+}

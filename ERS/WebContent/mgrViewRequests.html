@@ -114,6 +114,7 @@
                             <thead>
                                 <tr>
                                     <th hidden>ID</th>
+                                    <th hidden>Image URI</th>
                                     <th>Amount</th>
                                     <th>Type</th>
                                     <th>Description</th>
@@ -161,12 +162,37 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <a class="btn btn-primary" href="http://localhost:8080/ERS/LogoutServlet">Logout</a>
                 </div>
             </div>
         </div>
     </div>
+<!-- image Modal -->
+<div id="imageModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
 
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Receipt Image</h4>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <i class="fa fa-window-close" aria-hidden="true"></i>
+                    </button>
+
+                </div>
+                <div class="modal-body" id="imageModalBody">
+                   
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default text-center" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+            <!--End Modal View-->
+
+        </div>
+    </div>
+    <!--end Modal-->
     <!-- Bootstrap core JavaScript-->
     <script src="mgrViewRequestsController.js"></script>
     <script src="vendor/jquery/jquery.min.js"></script>
