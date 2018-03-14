@@ -3,14 +3,14 @@
   
   <display-name>ProjectOne</display-name>
   
-  <welcome-file-list>
+  <!-- <welcome-file-list>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>
     <welcome-file>index.jsp</welcome-file>
     <welcome-file>default.html</welcome-file>
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
-  </welcome-file-list>
+  </welcome-file-list> -->
   
   <servlet>
     <servlet-name>login</servlet-name>
@@ -30,22 +30,76 @@
     <url-pattern>/session</url-pattern>
   </servlet-mapping>
   
-  <!-- <servlet>
-    <servlet-name>profile</servlet-name>
-    <servlet-class>com.revature.servlet.ProfileServlet</servlet-class>
+  <servlet>
+  	<servlet-name>adminDashboard</servlet-name>
+  	<servlet-class>com.revature.servlet.AdminDashboardServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>profile</servlet-name>
-    <url-pattern>/profile</url-pattern>
-  </servlet-mapping> -->
+  	<servlet-name>adminDashboard</servlet-name>
+  	<url-pattern>/admin-dashboard</url-pattern>
+  </servlet-mapping>
   
   <servlet>
-    <servlet-name>index</servlet-name>
-    <servlet-class>com.revature.servlet.ProfileServlet</servlet-class>
+  	<servlet-name>employeeDashboard</servlet-name>
+  	<servlet-class>com.revature.servlet.EmployeeDashboardServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>index</servlet-name>
-    <url-pattern>/index</url-pattern>
+  	<servlet-name>employeeDashboard</servlet-name>
+  	<url-pattern>/employee-dashboard</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+  	<servlet-name>reimbursements</servlet-name>
+  	<servlet-class>com.revature.servlet.ReimbursementsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>reimbursements</servlet-name>
+  	<url-pattern>/reimbursements</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+  	<servlet-name>getReimbursements</servlet-name>
+  	<servlet-class>com.revature.servlet.GetReimbursementsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>getReimbursements</servlet-name>
+  	<url-pattern>/get-reimbursements</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>users</servlet-name>
+  	<servlet-class>com.revature.servlet.AdminUsersServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>users</servlet-name>
+  	<url-pattern>/users</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>getUsers</servlet-name>
+  	<servlet-class>com.revature.servlet.GetUsersServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>getUsers</servlet-name>
+  	<url-pattern>/get-users</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+  	<servlet-name>employeeSession</servlet-name>
+  	<servlet-class>com.revature.servlet.EmployeeSessionServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>employeeSession</servlet-name>
+  	<url-pattern>/employee-session</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+  	<servlet-name>employeeReimbursements</servlet-name>
+  	<servlet-class>com.revature.servlet.EmployeeReimbursementsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>employeeReimbursements</servlet-name>
+  	<url-pattern>/employee-reimbursements</url-pattern>
   </servlet-mapping>
   
 </web-app>

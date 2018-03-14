@@ -42,8 +42,8 @@ public class ConnFactory {
             }
 
             String url = props.getProperty("url");
-            String dbusername = props.getProperty("user");
-            String password = props.getProperty("pass");
+            String dbusername = props.getProperty("usr");
+            String password = props.getProperty("pwd");
             conn = DriverManager.getConnection(url, dbusername, password);
             
 		} catch (SQLException e) {

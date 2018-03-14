@@ -10,9 +10,18 @@ import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 
+import com.revature.beans.User;
 import com.revature.util.ConnFactory;
 
 public class LoginServlet extends HttpServlet {
+	
+	static int userId;
+	static String username;
+	static String password;
+	static String firstName;
+	static String lastName;
+	static String email;
+	static int roleId;
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -26,29 +35,53 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		HttpSession session = req.getSession();
-		
 		resp.setContentType("text/html");
 		PrintWriter pw = resp.getWriter();
 		
-		String username = req.getParameter("username");
-		String password = req.getParameter("password");
+		String formUsername = req.getParameter("username");
+		String formPassword = req.getParameter("password");
+		String user = "";
 		
-		ConnFactory cf = new ConnFactory();
-		
-		try(Connection conn = cf.getConnection()) {
+		try {
+			// Create ConnFactory object
+			ConnFactory cf = new ConnFactory();
+			
+			// Create connection
+			Connection conn = cf.getConnection();
 			
 			// Create get user query
 			String sqlGet = "SELECT * FROM ers_users WHERE u_username = ?";
 			
-			// Instantiate ps
+			// Create PreparedStatement object
 			PreparedStatement ps = conn.prepareStatement(sqlGet);
 			
 			// Set username value in statement
-			ps.setString(1, username);
+			ps.setString(1, formUsername);
 			
+			// Create ResultSet object
 			ResultSet rs = ps.executeQuery();
-			if (rs.next()) {
-				resp.sendRedirect("index");
+			
+			// Perform checks and redirects
+			if(rs.next()) {
+				
+				username = rs.getString("u_username");
+				password = rs.getString("u_password");
+				int roleId = rs.getInt("ur_id");
+				int userId = rs.getInt("u_id");
+				
+				if(formPassword.equals(password)) {
+					if(roleId == 1) { 
+						session.setAttribute("username", username);
+						resp.sendRedirect("admin-dashboard");
+					} else {
+						session.setAttribute("username", username);
+						session.setAttribute("userId", userId);
+						resp.sendRedirect("employee-dashboard");
+					}
+				} else {
+					resp.sendRedirect("login");
+				}
+				
 			} else {
 				resp.sendRedirect("login");
 			}
@@ -57,22 +90,6 @@ public class LoginServlet extends HttpServlet {
 		} catch(SQLException e) {
 			e.printStackTrace();
 		}
-		
-		
-		
-//		if(password.equals("admin123")) {
-//			/*pw.println("Welcome, "+username);
-//			pw.println("<a href=\"Index.html\">Go back</a>");*/
-//			session.setAttribute("username", username);
-//			session.setAttribute("problem", null);
-//			resp.sendRedirect("index");
-//		} else {
-////			pw.println("Lol no");
-////			pw.println("<a href=\"Index.html\">Go back</a>");
-//			session.setAttribute("problem", "incorrect password");
-//			resp.sendRedirect("login");
-//			
-//		}
 		
 	}
 

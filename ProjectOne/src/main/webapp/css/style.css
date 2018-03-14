@@ -1,0 +1,54 @@
+#mainNav .navbar-collapse .navbar-sidenav > .nav-item .sidenav-second-level > li > a {
+	padding-top: 0.5em;
+	padding-bottom: 0.5em;
+}
+.table-hover tbody tr:hover {
+  	background-color: #c4ecff;
+  }
+  
+.lg-container {
+	padding-top: 12.5%;
+}
+.lg-margin {
+	margin-top: 0px !important;
+}
+.bg-custom {
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#606c88+51,3f4c6b+100 */
+	background: rgb(96,108,136); /* Old browsers */
+	background: -moz-linear-gradient(top,  rgba(96,108,136,1) 51%, rgba(63,76,107,1) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top,  rgba(96,108,136,1) 51%,rgba(63,76,107,1) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom,  rgba(96,108,136,1) 51%,rgba(63,76,107,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#606c88', endColorstr='#3f4c6b',GradientType=0 ); /* IE6-9 */
+}
+.form-control {
+  	min-height: 50px;
+  	border-radius: 0px;
+}
+.card-header {
+	background-color: #dce1e8;
+	border-radius: 0px !important;
+}
+.card-body {
+	padding: 1.75rem;
+}
+.c-card-top {
+	border: none;
+	border-radius: 0px;
+}
+.btn-login {
+	font-size: 20px;
+    border-radius: 0px;
+    background-color: #F06B33;
+    border: none;
+}
+.btn-login:hover {
+	background-color: #e55c27;
+}
+.login-input {
+	font-size: 16px;
+    font-weight: 300;
+    letter-spacing: .4px;
+}
+.customEmp {
+	font-size: 20px;
+}

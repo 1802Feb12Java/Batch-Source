@@ -6,15 +6,18 @@ import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 
-public class ProfileServlet extends HttpServlet {
+public class AdminDashboardServlet extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
 		resp.setContentType("text/html");
 		PrintWriter pw = resp.getWriter();
 		HttpSession session = req.getSession(false);
+		
 		if(session!=null && session.getAttribute("username") != null){
-			req.getRequestDispatcher("index.html").forward(req, resp);
+			
+			req.getRequestDispatcher("admin-dashboard.html").forward(req, resp);
 			/*
 			String username = (String) session.getAttribute("username");
 			req.getRequestDispatcher("Base.html").include(req, resp);
