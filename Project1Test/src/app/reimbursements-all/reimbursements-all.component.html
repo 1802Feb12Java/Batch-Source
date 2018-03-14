@@ -33,7 +33,7 @@
                   <td>{{r.id}}</td>
                   <td>{{r.amount | currency}}</td>
                   <td>{{r.description}}</td>
-                  <td *ngIf="r.base64receipt != undefined"><img [src]="'data:image/jpg;base64,'+r.base64receipt | safeHtml" width="200" height="400"/></td>
+                  <td *ngIf="r.base64receipt != undefined"><img [src]="'data:image/jpg;base64,'+r.base64receipt | safeHtml" id="receiptImage"/></td>
                   <td *ngIf="r.base64receipt == undefined">N/A</td>
                   <td id="timestampcolumn">{{r.submitted | date:'short'}}</td>
                   <td *ngIf="r.resolved != undefined" id="timestampcolumn">{{r.resolved | date:'short'}}</td>

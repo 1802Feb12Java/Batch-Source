@@ -132,7 +132,7 @@ public class ReimbursementDAOClass implements ReimbursementDAO {
     }
 	
 	public ArrayList<Reimbursement> getAllReimbursements() throws SQLException {
-		PreparedStatement ps = conn.prepareStatement("SELECT * FROM ERS_REIMBURSEMENTS");
+		PreparedStatement ps = conn.prepareStatement("SELECT * FROM ERS_REIMBURSEMENTS ORDER BY R_ID DESC");
 		ResultSet rs = ps.executeQuery();
 		ArrayList<Reimbursement> allReimbursements = new ArrayList<Reimbursement>();
 		while (rs.next()) {

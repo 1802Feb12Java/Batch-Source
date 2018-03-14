@@ -1,3 +1,8 @@
+#receiptImage {
+    width:  75px;
+    height: auto;
+}
+
 #myInput {
     background-position: 10px 12px; /* Position the search icon */
     font-size: 16px; /* Increase font-size */
