@@ -24,28 +24,35 @@ let submit = function(){
         if(this.readyState == 4 && this.status == 200){
             document.getElementById("page").innerHTML = this.responseText;
             let selectedButton = 5;
+            console.log("selected: " + selectedButton);
             let description = "";
             let amount = 0.00;
-            let radio = document.getElementsByName("rType");
-            console.log("Hi");
-            console.log(radio);
+
             document.getElementById("requestForm").addEventListener('submit', function(e){
                 e.preventDefault();
-                for (let i = 1; i <= 5; i++){
+                console.log("Submit button");
+                let radio = document.getElementsByName("rType");
+
+                for (let i = 0; i < 5; i++){
+                    console.log("for: " + i);
                     if(radio[i].checked){
-                        selectedButton = i;
+                        selectedButton = i + 1;
+                        console.log("selected now: " + selectedButton);
                         break;
                     }
                 }
-                
+                console.log("For loop complete");
+
                 description = document.getElementsByName("description")[0].value;
                 amount = document.getElementsByName("amountRequested")[0].value;
 
-                request = '{"selected" : ' + selectedButton + ', "description" : "' +
-                    description + '", "amount" : ' + amount + '}';
-                
-                let test = JSON.parse(request);
-                console.log(test.selection + " " + test.description + " " + test.amount);
+                console.log("Desc: " + description + " amount: " + amount + "selected: " +selectedButton);
+
+                request = '{"selected" : "' + selectedButton + '",' +
+                            '"description" :' +'"' + description + '",' +
+                            '"amount" : "' + amount + '"}';
+                console.log("Request looks like: " + request);
+
                 sendRequest(request);
             });
         };
@@ -56,7 +63,19 @@ let submit = function(){
 };
 
 let sendRequest = function(req) {
-    console.log(req);
+    let xhr = new XMLHttpRequest();
+    console.log("In send request with: " + req);
+    xhr.open('POST', '/ers/CreateReimbursement', true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+    console.log("After set req header: " + xhr.readyState);
+    xhr.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
+            console.log("Readystate change in sendRequest");
+        }
+    }
+
+    xhr.send(req);
+    console.log("After send: " + xhr.readyState);
 };
 
 let viewEPending = function(){
@@ -74,7 +93,7 @@ let viewEInfo = function(){
     //Open the request with the parameters: (type, url/filename, async)
     xhr.open('GET', '/ers/ViewEmployeeInfo', true);
     
-
+    console.log("View: " + xhr);
     //create the function to handle the request
     xhr.onreadystatechange = function(){
         if(this.readyState == 4 && this.status == 200){
@@ -126,12 +145,11 @@ let submitChange = function (emp){
     let xhr = new XMLHttpRequest();
 
     sendEmp = JSON.stringify(emp);
-    xhr.open("POST", "/ers/UpdateEmployeeInfo", true);
+    xhr.open('POST', '/ers/UpdateEmployeeInfo', true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
 
     xhr.onreadystatechange = function(){
         if(this.readyState == 4 && this.status == 200){
-            console.log("readychange")
             viewEInfo();
         }
     }

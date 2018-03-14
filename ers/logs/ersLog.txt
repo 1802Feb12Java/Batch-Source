@@ -2032,3 +2032,223 @@
 2018-03-14 11:09:56 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
 2018-03-14 11:09:56 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
 2018-03-14 11:09:57 - User 'js' logged in as employee.
+2018-03-14 11:13:52 - Attempted login with user name: js
+2018-03-14 11:13:52 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 11:13:54 - User js successfully logged in
+2018-03-14 11:13:54 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 11:13:55 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 11:13:55 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 11:13:56 - User 'js' logged in as employee.
+2018-03-14 11:21:21 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 11:21:29 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 11:21:30 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 11:21:31 - js updated user information.
+2018-03-14 11:21:31 - Jerry Smith updated user information
+2018-03-14 11:21:31 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 11:21:43 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 11:21:43 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 11:21:44 - js updated user information.
+2018-03-14 11:21:44 - Loser Smith updated user information
+2018-03-14 11:21:44 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 11:23:10 - Attempted login with user name: js
+2018-03-14 11:23:10 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 11:23:12 - User js successfully logged in
+2018-03-14 11:23:12 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 11:23:12 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 11:23:13 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 11:23:13 - User 'js' logged in as employee.
+2018-03-14 11:26:07 - Attempted login with user name: js
+2018-03-14 11:26:07 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 11:26:08 - User js successfully logged in
+2018-03-14 11:26:08 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 11:26:09 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 11:26:09 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 11:26:10 - User 'js' logged in as employee.
+2018-03-14 11:27:29 - Attempted login with user name: js
+2018-03-14 11:27:29 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 11:27:30 - User js successfully logged in
+2018-03-14 11:27:30 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 11:27:31 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 11:27:31 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 11:27:32 - User 'js' logged in as employee.
+2018-03-14 11:33:30 - Attempted login with user name: js
+2018-03-14 11:33:30 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 11:33:32 - User js successfully logged in
+2018-03-14 11:33:32 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 11:33:33 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 11:33:33 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 11:33:33 - User 'js' logged in as employee.
+2018-03-14 11:45:06 - Attempted login with user name: js
+2018-03-14 11:45:06 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 11:45:07 - User js successfully logged in
+2018-03-14 11:45:07 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 11:45:08 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 11:45:08 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 11:45:09 - User 'js' logged in as employee.
+2018-03-14 11:50:13 - Attempted login with user name: js
+2018-03-14 11:50:13 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 11:50:14 - User js successfully logged in
+2018-03-14 11:50:14 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 11:50:15 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 11:50:15 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 11:50:16 - User 'js' logged in as employee.
+2018-03-14 11:50:51 - Attempted login with user name: js
+2018-03-14 11:50:51 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 11:50:51 - User js successfully logged in
+2018-03-14 11:50:51 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 11:50:52 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 11:50:52 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 11:50:53 - User 'js' logged in as employee.
+2018-03-14 11:52:37 - Attempted login with user name: js
+2018-03-14 11:52:37 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 11:52:39 - User js successfully logged in
+2018-03-14 11:52:39 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 11:52:39 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 11:52:40 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 11:52:40 - User 'js' logged in as employee.
+2018-03-14 11:57:09 - Attempted login with user name: js
+2018-03-14 11:57:10 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 11:57:11 - User js successfully logged in
+2018-03-14 11:57:11 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 11:57:12 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 11:57:12 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 11:57:13 - User 'js' logged in as employee.
+2018-03-14 12:04:59 - Attempted login with user name: js
+2018-03-14 12:04:59 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 12:05:01 - User js successfully logged in
+2018-03-14 12:05:01 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 12:05:01 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 12:05:02 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 12:05:02 - User 'js' logged in as employee.
+2018-03-14 12:06:31 - Attempted login with user name: js
+2018-03-14 12:06:31 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 12:06:33 - User js successfully logged in
+2018-03-14 12:06:33 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 12:06:33 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 12:06:34 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 12:06:34 - User 'js' logged in as employee.
+2018-03-14 12:09:19 - Attempted login with user name: js
+2018-03-14 12:09:19 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 12:09:21 - User js successfully logged in
+2018-03-14 12:09:21 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 12:09:21 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 12:09:22 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 12:09:22 - User 'js' logged in as employee.
+2018-03-14 12:10:25 - Attempted login with user name: js
+2018-03-14 12:10:25 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 12:10:27 - User js successfully logged in
+2018-03-14 12:10:27 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 12:10:27 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 12:10:28 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 12:10:28 - User 'js' logged in as employee.
+2018-03-14 12:11:30 - Attempted login with user name: js
+2018-03-14 12:11:30 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 12:11:30 - User js successfully logged in
+2018-03-14 12:11:30 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 12:11:31 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 12:11:31 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 12:11:32 - User 'js' logged in as employee.
+2018-03-14 12:12:59 - Attempted login with user name: js
+2018-03-14 12:12:59 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 12:13:00 - User js successfully logged in
+2018-03-14 12:13:00 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 12:13:01 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 12:13:01 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 12:13:02 - User 'js' logged in as employee.
+2018-03-14 12:17:22 - Attempted login with user name: js
+2018-03-14 12:17:22 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 12:17:24 - User js successfully logged in
+2018-03-14 12:17:24 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 12:17:24 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 12:17:25 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 12:17:25 - User 'js' logged in as employee.
+2018-03-14 12:35:06 - Attempted login with user name: js
+2018-03-14 12:35:06 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 12:35:09 - User js successfully logged in
+2018-03-14 12:35:09 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 12:35:09 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 12:35:10 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 12:35:10 - User 'js' logged in as employee.
+2018-03-14 12:36:46 - Attempted login with user name: js
+2018-03-14 12:36:46 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 12:36:47 - User js successfully logged in
+2018-03-14 12:36:47 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 12:36:48 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 12:36:48 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 12:36:49 - User 'js' logged in as employee.
+2018-03-14 12:42:37 - Attempted login with user name: js
+2018-03-14 12:42:37 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 12:42:39 - User js successfully logged in
+2018-03-14 12:42:39 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 12:42:39 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 12:42:40 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 12:42:40 - User 'js' logged in as employee.
+2018-03-14 12:43:52 - Attempted login with user name: js
+2018-03-14 12:43:52 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 12:43:54 - User js successfully logged in
+2018-03-14 12:43:54 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 12:43:55 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 12:43:55 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 12:43:55 - User 'js' logged in as employee.
+2018-03-14 12:47:37 - Attempted login with user name: js
+2018-03-14 12:47:38 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 12:47:39 - User js successfully logged in
+2018-03-14 12:47:39 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 12:47:40 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 12:47:40 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 12:47:41 - User 'js' logged in as employee.
+2018-03-14 12:47:46 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 12:49:28 - Attempted login with user name: js
+2018-03-14 12:49:28 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 12:49:30 - User js successfully logged in
+2018-03-14 12:49:30 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 12:49:30 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 12:49:30 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 12:49:31 - User 'js' logged in as employee.
+2018-03-14 13:03:18 - Attempted login with user name: js
+2018-03-14 13:03:18 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 13:03:19 - User js successfully logged in
+2018-03-14 13:03:19 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 13:03:20 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 13:03:20 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 13:03:21 - User 'js' logged in as employee.
+2018-03-14 13:59:33 - Attempted login with user name: js
+2018-03-14 13:59:33 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 13:59:34 - User js successfully logged in
+2018-03-14 13:59:34 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 13:59:35 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 13:59:35 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 13:59:36 - User 'js' logged in as employee.
+2018-03-14 14:17:16 - Attempted login with user name: js
+2018-03-14 14:17:16 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 14:17:18 - User js successfully logged in
+2018-03-14 14:17:18 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 14:17:18 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 14:17:19 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 14:17:19 - User 'js' logged in as employee.
+2018-03-14 14:19:45 - Attempted login with user name: js
+2018-03-14 14:19:45 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 14:19:46 - User js successfully logged in
+2018-03-14 14:19:46 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 14:19:46 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 14:19:47 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 14:19:47 - User 'js' logged in as employee.
+2018-03-14 14:27:17 - Attempted login with user name: js
+2018-03-14 14:27:17 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 14:27:19 - User js successfully logged in
+2018-03-14 14:27:19 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 14:27:19 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 14:27:20 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 14:27:20 - User 'js' logged in as employee.
+2018-03-14 14:54:53 - Attempted login with user name: js
+2018-03-14 14:54:53 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 14:54:55 - User js successfully logged in
+2018-03-14 14:54:55 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 14:54:55 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 14:54:56 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 14:54:57 - User 'js' logged in as employee.
+2018-03-14 15:03:22 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 15:05:14 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 15:05:23 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 15:09:33 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.
+2018-03-14 15:10:32 - Connection to jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL succesful.

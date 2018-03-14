@@ -20,20 +20,17 @@ public class ReimbursementServices implements ReimbursementDAO{
 		CallableStatement cs = null;
 		
 		//prepare the call
-		String sql = "{CALL ADD_REIMBURSEMENT(?,?,?,?,?,?,?,?,?)}";
+		String sql = "{CALL ADD_REIMBURSEMENT(?,?,?,?,?,?,?)}";
 		cs = conn.prepareCall(sql);
 		
-		System.out.println("HERRO");
 		//populate the fields
 		cs.setDouble(1, reimbursement.getR_amount());
 		cs.setString(2, reimbursement.getR_description());
 		cs.setBlob(3, reimbursement.getR_receipt());
 		cs.setTimestamp(4,  reimbursement.getR_submitted());
-		cs.setTimestamp(5,  reimbursement.getR_resolved());
-		cs.setInt(6, reimbursement.getU_ID_Author());
-		cs.setInt(7, reimbursement.getU_ID_Resolver());
-		cs.setInt(8, reimbursement.getRt_Type());
-		cs.setInt(9, reimbursement.getRt_Status());
+		cs.setInt(5, reimbursement.getU_ID_Author());
+		cs.setInt(6, reimbursement.getRt_Type());
+		cs.setInt(7, reimbursement.getRt_Status());
 		
 		//execute the call
 		cs.executeUpdate();

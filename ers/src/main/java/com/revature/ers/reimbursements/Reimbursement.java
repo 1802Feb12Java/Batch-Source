@@ -12,7 +12,7 @@ public class Reimbursement {
 	private Timestamp r_submitted = Timestamp.valueOf(LocalDateTime.now());
 	private Timestamp r_resolved = null;
 	private int u_ID_Author;
-	private int u_ID_Resolver = 0;
+	private int u_ID_Resolver;
 	private int rt_Type;
 	private int rt_Status = 1;
 	
