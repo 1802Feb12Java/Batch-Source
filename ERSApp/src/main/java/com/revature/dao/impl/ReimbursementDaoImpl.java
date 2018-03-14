@@ -1,16 +1,13 @@
 package com.revature.dao.impl;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.io.IOUtils;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -22,8 +19,7 @@ public class ReimbursementDaoImpl implements ReimbursementDao {
 
 	private static final Logger logger = LogManager.getLogger(ReimbursementDaoImpl.class);
 
-	public void addReimbursement(Reimbursement reimbursement) throws SQLException {
-		Connection con = null;
+	public void addReimbursement(Connection con, Reimbursement reimbursement) throws SQLException {
 		PreparedStatement s = null;
 		String statement = "INSERT INTO ERS_REIMBURSEMENTS"
 				+ " (R_ID, R_AMOUNT, R_DESCRIPTION, R_RECEIPT, R_SUBMITTED, R_RESOLVED,"
@@ -32,14 +28,11 @@ public class ReimbursementDaoImpl implements ReimbursementDao {
 		logger.debug("Created SQL Statement = " + statement + "\nwith reimbursement " + reimbursement);
 
 		try {
-			con = ConnectionFactory.getInstance().getConnection();
 			s = con.prepareStatement(statement);
 			s.setInt(1, reimbursement.getReimbursementId());
 			s.setBigDecimal(2, reimbursement.getAmount());
 			s.setString(3, reimbursement.getDecription());
-			// InputStream in = new ByteArrayInputStream(reimbursement.getRecipt());
-			// s.setBinaryStream(3, in, reimbursement.getRecipt().length);
-			s.setNull(4, java.sql.Types.BLOB);
+			s.setBlob(4, reimbursement.getRecipt());
 			s.setTimestamp(5, reimbursement.getSubmitted());
 			s.setTimestamp(6, reimbursement.getResolved());
 			s.setInt(7, reimbursement.getAuthorId());
@@ -52,26 +45,23 @@ public class ReimbursementDaoImpl implements ReimbursementDao {
 		} finally {
 			if (s != null)
 				s.close();
-			if (con != null)
-				con.close();
 		}
 
 	}
 
-	public Reimbursement getReimbursement(int reimbursementId) throws SQLException {
-		Connection con = null;
+	public Reimbursement getReimbursement(Connection con, int reimbursementId) throws SQLException {
 		PreparedStatement s = null;
 		ResultSet rs = null;
 
 		String statement = "SELECT R.R_ID, R.R_AMOUNT, R.R_DESCRIPTION, R.R_RECEIPT, R.R_SUBMITTED, R.R_RESOLVED, R.U_ID_AUTHOR, R.U_ID_RESOLVER,\r\n"
-				+ "T.RT_TYPE, S.RS_STATUS FROM ERS_REIMBURSEMENTS R "
+				+ "T.RT_TYPE, S.RS_STATUS, U.U_FIRSTNAME, U.U_LASTNAME FROM ERS_REIMBURSEMENTS R "
 				+ " INNER JOIN ERS_REIMBURSEMENT_TYPE T ON R.RT_TYPE = T.RT_ID "
-				+ " INNER JOIN ERS_REIMBURSEMENT_STATUS S ON R.RT_STATUS = S.RS_ID " + "WHERE R_ID=?";
+				+ " INNER JOIN ERS_REIMBURSEMENT_STATUS S ON R.RT_STATUS = S.RS_ID "
+				+ " LEFT JOIN ERS_USERS U ON U.U_ID = R.U_ID_RESOLVER" + "WHERE R_ID=?";
 
 		logger.debug("Created SQL Statement: " + statement + " With R_ID " + reimbursementId);
 
 		try {
-			con = ConnectionFactory.getInstance().getConnection();
 			s = con.prepareStatement(statement);
 			s.setInt(1, reimbursementId);
 
@@ -85,15 +75,12 @@ public class ReimbursementDaoImpl implements ReimbursementDao {
 				s.close();
 			if (rs != null)
 				rs.close();
-			if (con != null)
-				con.close();
 		}
 
 		return null;
 	}
 
-	public void updateReimbursement(Reimbursement reimbursement) throws SQLException {
-		Connection con = null;
+	public void updateReimbursement(Connection con, Reimbursement reimbursement) throws SQLException {
 		PreparedStatement s = null;
 		String statement = "UPDATE ERS_REIMBURSEMENTS "
 				+ " SET R_AMOUNT=?, R_DESCRIPTION=?, R_RECEIPT=?, R_SUBMITTED=?, R_RESOLVED=?,"
@@ -102,12 +89,10 @@ public class ReimbursementDaoImpl implements ReimbursementDao {
 		logger.debug("Created SQL Statement = " + statement + "\nwith reimbursement " + reimbursement);
 
 		try {
-			con = ConnectionFactory.getInstance().getConnection();
 			s = con.prepareStatement(statement);
 			s.setBigDecimal(1, reimbursement.getAmount());
 			s.setString(2, reimbursement.getDecription());
-			InputStream in = new ByteArrayInputStream(reimbursement.getRecipt());
-			s.setBinaryStream(3, in, reimbursement.getRecipt().length);
+			s.setBlob(3, reimbursement.getRecipt());
 			s.setTimestamp(4, reimbursement.getSubmitted());
 			s.setTimestamp(5, reimbursement.getResolved());
 			s.setInt(6, reimbursement.getAuthorId());
@@ -128,8 +113,32 @@ public class ReimbursementDaoImpl implements ReimbursementDao {
 
 	}
 
-	public void deleteReimbursement(int reimbursementId) throws SQLException {
-		Connection con = null;
+	public void updateReimbursement(Connection con, int reimId, String status, int approverId, Timestamp resolved)
+			throws SQLException {
+		PreparedStatement s = null;
+		String statement = "UPDATE ERS_REIMBURSEMENTS " + " SET RT_STATUS=?, U_ID_RESOLVER=?, R_RESOLVED=? "
+				+ " WHERE R_ID = ?";
+
+		logger.debug("Created SQL Statement = " + statement + "\nwith to status" + statusValue(status) + " reimId "
+				+ reimId + " resolverid " + approverId + " timestamped " + resolved);
+
+		try {
+			s = con.prepareStatement(statement);
+			s.setInt(1, statusValue(status));
+			s.setInt(2, approverId);
+			s.setTimestamp(3, resolved);
+			s.setInt(4, reimId);
+
+			s.executeQuery();
+			logger.debug("Executed SQL Query");
+		} finally {
+			if (s != null)
+				s.close();
+		}
+
+	}
+
+	public void deleteReimbursement(Connection con, int reimbursementId) throws SQLException {
 		PreparedStatement s = null;
 		String statement = "DELETE FROM ERS_REIMBURSEMENTS" + " WHERE R_ID =?";
 
@@ -145,27 +154,24 @@ public class ReimbursementDaoImpl implements ReimbursementDao {
 		} finally {
 			if (s != null)
 				s.close();
-			if (con != null)
-				con.close();
 		}
 
 	}
 
-	public List<Reimbursement> getAllReimbursements() throws SQLException {
-		Connection con = null;
+	public List<Reimbursement> getAllReimbursements(Connection con) throws SQLException {
 		PreparedStatement s = null;
 		ResultSet rs = null;
 		List<Reimbursement> list = new ArrayList<>();
 
 		String statement = "SELECT R.R_ID, R.R_AMOUNT, R.R_DESCRIPTION, R.R_RECEIPT, R.R_SUBMITTED, R.R_RESOLVED, R.U_ID_AUTHOR, R.U_ID_RESOLVER,\r\n"
-				+ "T.RT_TYPE, S.RS_STATUS FROM ERS_REIMBURSEMENTS R "
+				+ "T.RT_TYPE, S.RS_STATUS, U.U_FIRSTNAME, U.U_LASTNAME FROM ERS_REIMBURSEMENTS R "
 				+ " INNER JOIN ERS_REIMBURSEMENT_TYPE T ON R.RT_TYPE = T.RT_ID"
-				+ " INNER JOIN ERS_REIMBURSEMENT_STATUS S ON R.RT_STATUS = S.RS_ID";
+				+ " INNER JOIN ERS_REIMBURSEMENT_STATUS S ON R.RT_STATUS = S.RS_ID"
+				+ " LEFT JOIN ERS_USERS U ON U.U_ID = R.U_ID_RESOLVER";
 
 		logger.debug("Created SQL Statement = " + statement);
 
 		try {
-			con = ConnectionFactory.getInstance().getConnection();
 			s = con.prepareStatement(statement);
 
 			rs = s.executeQuery();
@@ -177,30 +183,27 @@ public class ReimbursementDaoImpl implements ReimbursementDao {
 		} finally {
 			if (s != null)
 				s.close();
-			if (con != null)
-				con.close();
-			if (con != null)
-				con.close();
+			if (rs != null)
+				rs.close();
 		}
 
 		return list;
 	}
 
-	public List<Reimbursement> getAllReimbursements(String status) throws SQLException {
-		Connection con = null;
+	public List<Reimbursement> getAllReimbursements(Connection con, String status) throws SQLException {
 		PreparedStatement s = null;
 		ResultSet rs = null;
 		List<Reimbursement> list = new ArrayList<>();
 
 		String statement = "SELECT R.R_ID, R.R_AMOUNT, R.R_DESCRIPTION, R.R_RECEIPT, R.R_SUBMITTED, R.R_RESOLVED, R.U_ID_AUTHOR, R.U_ID_RESOLVER,\r\n"
-				+ "T.RT_TYPE, S.RS_STATUS FROM ERS_REIMBURSEMENTS R "
+				+ "T.RT_TYPE, S.RS_STATUS, U.U_FIRSTNAME, U.U_LASTNAME FROM ERS_REIMBURSEMENTS R "
 				+ " INNER JOIN ERS_REIMBURSEMENT_TYPE T ON R.RT_TYPE = T.RT_ID"
-				+ " INNER JOIN ERS_REIMBURSEMENT_STATUS S ON R.RT_STATUS = S.RS_ID" + " WHERE R.RT_STATUS =?";
+				+ " INNER JOIN ERS_REIMBURSEMENT_STATUS S ON R.RT_STATUS = S.RS_ID"
+				+ " LEFT JOIN ERS_USERS U ON U.U_ID = R.U_ID_RESOLVER" + " WHERE R.RT_STATUS =?";
 
 		logger.debug("Created SQL Statement = " + statement + "with status=" + status);
 
 		try {
-			con = ConnectionFactory.getInstance().getConnection();
 			s = con.prepareStatement(statement);
 			s.setInt(1, statusValue(status));
 
@@ -213,10 +216,8 @@ public class ReimbursementDaoImpl implements ReimbursementDao {
 		} finally {
 			if (s != null)
 				s.close();
-			if (con != null)
-				con.close();
-			if (con != null)
-				con.close();
+			if (rs != null)
+				rs.close();
 		}
 
 		return list;
@@ -233,26 +234,18 @@ public class ReimbursementDaoImpl implements ReimbursementDao {
 		reimbursement.setReimbursementId(rs.getInt("R_ID"));
 		reimbursement.setAmount(rs.getBigDecimal("R_AMOUNT"));
 		reimbursement.setDecription(rs.getString("R_DESCRIPTION"));
-		byte[] rec;
-		try {
-			InputStream bs = rs.getBinaryStream("R_RECEIPT");
-			if (bs != null) {
-				rec = IOUtils.toByteArray(bs);
-				reimbursement.setRecipt(rec);
-			}
-		} catch (IOException e) {
-			logger.error(e);
-		}
-
 		reimbursement.setSubmitted(rs.getTimestamp("R_SUBMITTED"));
 		reimbursement.setResolved(rs.getTimestamp("R_RESOLVED"));
 		reimbursement.setAuthorId(rs.getInt("U_ID_AUTHOR"));
 		reimbursement.setResolverId(rs.getInt("U_ID_RESOLVER"));
+		reimbursement.setResolverName(rs.getString("U_FIRSTNAME") + " " + rs.getString("U_LASTNAME"));
+		logger.debug("Reim name" + reimbursement.getResolverName());
 		// join on ERS_REIMBURSEMENTS_TYPE table to get type value
 		reimbursement.setType(rs.getString("RT_TYPE"));
 		logger.debug("Type fetched = " + rs.getString("RT_TYPE"));
 		// join on ERS_REIMBURSEMENTS_STATUS to get status value
 		reimbursement.setStatus(rs.getString("RS_STATUS"));
+
 		return reimbursement;
 
 	}
@@ -266,6 +259,7 @@ public class ReimbursementDaoImpl implements ReimbursementDao {
 		case "denied":
 			return 2;
 		default:
+			logger.error("No valid status passed " + status);
 			return -1;
 		}
 	}
@@ -281,6 +275,7 @@ public class ReimbursementDaoImpl implements ReimbursementDao {
 		case "other":
 			return 3;
 		default:
+			logger.error("No valid type passed " + type);
 			return -1;
 		}
 	}

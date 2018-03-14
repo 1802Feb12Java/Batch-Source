@@ -57,7 +57,7 @@ function ajaxPost()
 		//get form data
 		var formData = new FormData(document.getElementById("userForm"));
 		xhr.open("POST", url, true);
-		
+		console.log("form data ="+formData);
 		xhr.send(formData);
 		console.log("sent AJAX request");
 		

@@ -1,4 +1,4 @@
-package com.revature.servlets.filters;
+package com.revature.services.filters;
 
 import java.io.IOException;
 
@@ -15,27 +15,21 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import com.revature.beans.User;
+
 /**
- * Servlet Filter implementation class AuthenticateFilter
+ * Servlet Filter implementation class AdminFilter
  */
-public class AuthenticateFilter implements Filter {
-	private static final Logger logger = LogManager.getLogger(AuthenticateFilter.class);
+public class AdminFilter implements Filter {
+	private static final Logger logger = LogManager.getLogger(AdminFilter.class);
 
-	/**
-	 * Default constructor.
-	 */
-	public AuthenticateFilter() {
+	public AdminFilter() {
 	}
 
-	/**
-	 * @see Filter#destroy()
-	 */
 	public void destroy() {
-		// TODO Auto-generated method stub
 	}
 
 	/**
-	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
@@ -43,22 +37,22 @@ public class AuthenticateFilter implements Filter {
 		HttpServletResponse res = (HttpServletResponse) response;
 
 		HttpSession session = req.getSession(false);
+		if (session != null) {
+			User u = (User) session.getAttribute("user");
 
-		if (session == null || session.getAttribute("user") == null) { // checking whether the session exists
-			logger.info("Unauthorized access request");
-			res.sendRedirect(req.getContextPath() + "/login");
+			if (u != null && (u.getUserRole().toLowerCase().equals("manager")
+					|| u.getUserRole().toLowerCase().equals("admin"))) {
+				// pass the request along the filter chain
+				chain.doFilter(request, response);
+			}
 		} else {
-			// pass the request along the filter chain
-			chain.doFilter(request, response);
+			logger.debug("Unauthorized access request for admin pages");
+			res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+			res.sendRedirect(req.getContextPath() + "/login");
 		}
 	}
 
-	/**
-	 * @see Filter#init(FilterConfig)
-	 */
 	public void init(FilterConfig fConfig) throws ServletException {
-		logger.debug("Initialized Authentication Filter");
-
 	}
 
 }

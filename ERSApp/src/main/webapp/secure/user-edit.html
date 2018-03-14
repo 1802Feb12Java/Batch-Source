@@ -21,11 +21,11 @@
             <li><a href="home.html">Home</a></li>
             <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Reimbursements <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                  <li><a href="request-form.html">Submit</a></li>
-                  <li><a href="request-page">View</a></li>
+                  <li><a href="./request-form.html">Submit</a></li>
+                  <li><a href="./request-page.html">View</a></li>
               </ul>
             </li>
-            <li class="active"><a href="user-info.html">User Info</a></li>
+            <li><a href="./user-info.html">User Info</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right" id="logoutBtn">
             <li><a href="../login.html"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
@@ -34,42 +34,56 @@
       </nav>
           <br><br>
           <div class="container-fluid col-xs-8 col-xs-offset-1">
-		          <form id="userForm">
-		              <div class="form">
+	          <form id="userForm" method="post" action="/ERSApp/secure/user/update">
+	              <div class="form">
+                  
                             <div class="form-group">
                             <div class="">
-	                            <h2>User Information</h2>
-	                            <div class="pull-right">
-	                            <a href="user-edit.html" class="btn btn-secondary">Edit Info</a>
-                            	</div>
+                            <h2>User Information</h2>
                             </div>
-                           
                             </div>                
                             <div class="form-group">
                             <label for="Username">Username</label>
-                            <input type="text" class="form-control" name="username" id="username" disabled>
+                            <input type="text" class="form-control" name="username" id="username" required minlength="6" maxlength="36">
+                            </div>
+                                         
+                            <div class="form-group">
+                            <label for="Password">Password</label>
+                            <input type="password" class="form-control" id="password" name="password" required minlength="8" maxlength="36">
+                            </div>
+
+                            <div class="form-group">
+                              <label for="Retype-Password">Retype Password</label>
+                              <input type="password" class="form-control" id="retype-password" required minlength="8" maxlength="20"
+                              autofocus required title="This password must match the first">
                             </div>
     
                             <div class="form-group">
                             <label for="FirstName">First Name</label>
-                            <input type="text" class="form-control" id="firstname" name="firstname" disabled>
+                            <input type="text" class="form-control" id="firstname" name="firstname" required minlength="1" maxlength="30">
                             </div>
 
                             <div class="form-group">
                             <label for="LastName">Last Name</label>
-                            <input type="text" class="form-control" name="lastname" id="lastname" disabled>
+                            <input type="text" class="form-control" name="lastname" id="lastname" required minlength="1" maxlength="30">
                             </div>
 
                             <div class="form-group">
                             <label for="Email">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" disabled>
+                            <input type="email" class="form-control" id="email" name="email" required minlength="1" maxlength="100">
                             </div>
+    
                           
+                            <div class="form-group pull-right">
+                            <a href="./home.html" class="btn btn-secondary">Cancel</a>
+                            <button type="submit" class="btn btn-primary">Update</button>
+                            </div>
                     </div>
             </form>
           
-       <!--Footer-->
-       <br><br><br>
+      
+     <!--Footer-->
+     <br><br><br>
       <footer class="page-footer font-small blue-grey lighten-5 pt-0">
            <!--Contact column-->
            <div class="col-xl-1 dark-grey-text text-center">
@@ -89,7 +103,7 @@
           <!--/.Copyright -->
       </footer>
       <!--/.Footer-->
-    </div>
+      </div>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

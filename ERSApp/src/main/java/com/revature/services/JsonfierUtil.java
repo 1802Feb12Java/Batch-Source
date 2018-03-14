@@ -1,4 +1,4 @@
-package com.revature.servlets;
+package com.revature.services;
 
 import java.util.ArrayList;
 
@@ -22,9 +22,13 @@ public class JsonfierUtil {
 			obj.put("receipt", r.getRecipt());
 			obj.put("submitted", r.getSubmitted());
 			obj.put("resolved", r.getResolved());
-			obj.put("resolver", r.getResolverId());
+			obj.put("resolver", r.getResolverName());
 			obj.put("type", r.getType());
 			obj.put("status", r.getStatus());
+			// PICTURE PART
+			obj.put("receipt", r.getReimbursementId());
+			// need id
+			obj.put("reimId", r.getReimbursementId());
 
 			// put reim item in array
 			json.put(obj);
@@ -48,5 +52,19 @@ public class JsonfierUtil {
 			json.put(obj);
 		}
 		return json.toString();
+	}
+
+	/**
+	 * Gets firstname lastname from user obj and jsons it
+	 * 
+	 * @param u
+	 * @return
+	 */
+	public static String userJson(User u) {
+		JSONObject obj = new JSONObject();
+		obj.put("firstname", u.getFirstName());
+		obj.put("lastname", u.getLastName());
+
+		return obj.toString();
 	}
 }

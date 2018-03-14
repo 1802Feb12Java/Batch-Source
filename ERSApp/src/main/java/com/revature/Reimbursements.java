@@ -1,5 +1,8 @@
 package com.revature;
 
+import java.io.IOException;
+import java.sql.Blob;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -18,7 +21,7 @@ public class Reimbursements {
 	private static ReimbursementDaoImpl reimDao = new ReimbursementDaoImpl();
 	private static SpecialReimbursementDao sReimDao = new SpecialReimbursementDao();
 
-	public static boolean addReimbursement(Reimbursement reim) {
+	public static boolean addReimbursement(Connection con, Reimbursement reim) {
 
 		try {
 			// put in user PK
@@ -34,7 +37,7 @@ public class Reimbursements {
 			reim.setSubmitted(new Timestamp(System.currentTimeMillis()));
 			// set status to pending - 0
 			reim.setStatus("pending");
-			reimDao.addReimbursement(reim);
+			reimDao.addReimbursement(con, reim);
 
 		} catch (SQLException e) {
 			// log for now
@@ -48,9 +51,9 @@ public class Reimbursements {
 		return true;
 	}
 
-	public static Reimbursement getReimbursement(int reimId) {
+	public static Reimbursement getReimbursement(Connection con, int reimId) {
 		try {
-			return reimDao.getReimbursement(reimId);
+			return reimDao.getReimbursement(con, reimId);
 
 		} catch (SQLException e) {
 			// log for now
@@ -63,12 +66,27 @@ public class Reimbursements {
 		return null;
 	}
 
-	public static ArrayList<Reimbursement> getAllReimbursements(int userId) {
+	public static Blob getReceipt(Connection con, int reimId) {
+		try {
+			return sReimDao.getReceipt(con, reimId);
+
+		} catch (SQLException | IOException e) {
+			// log for now
+			logger.error("No Reimbursement Exists with the ID " + reimId);
+			logger.error(e.getMessage());
+		} finally {
+
+		}
+
+		return null;
+	}
+
+	public static ArrayList<Reimbursement> getAllReimbursements(Connection con, int userId) {
 		ArrayList<Reimbursement> reimbursements = new ArrayList<>();
 		try {
 			// get all the account numbers associated with the user from the
 			// USER_BANK_ACCOUNT Table
-			reimbursements = (ArrayList<Reimbursement>) sReimDao.getAllReimbursementsWithUserId(userId);
+			reimbursements = (ArrayList<Reimbursement>) sReimDao.getAllReimbursementsWithUserId(con, userId);
 
 		} catch (SQLException e) {
 			// log for now
@@ -80,9 +98,9 @@ public class Reimbursements {
 		return reimbursements;
 	}
 
-	public static boolean updateReimbursement(Reimbursement reim) {
+	public static boolean updateReimbursement(Connection con, Reimbursement reim) {
 		try {
-			reimDao.updateReimbursement(reim);
+			reimDao.updateReimbursement(con, reim);
 		} catch (SQLException e) {
 			// log for now
 			logger.error("SQL Error while updating reimbursement to " + reim);
@@ -95,11 +113,26 @@ public class Reimbursements {
 		return true;
 	}
 
-	public static boolean deleteReimbursement(int reimId) {
+	public static boolean updateReimbursementStatus(Connection con, int reimId, String status, int approverId) {
+		try {
+			reimDao.updateReimbursement(con, reimId, status, approverId, new Timestamp(System.currentTimeMillis()));
+		} catch (SQLException e) {
+			// log for now
+			logger.error("SQL Error while updating reimbursement " + reimId + " with status " + status);
+			logger.error(e.getMessage());
+			return false;
+		} finally {
+
+		}
+
+		return true;
+	}
+
+	public static boolean deleteReimbursement(Connection con, int reimId) {
 		try {
 
 			// delete user bank account entry
-			reimDao.deleteReimbursement(reimId);
+			reimDao.deleteReimbursement(con, reimId);
 
 			// // update transactions with this account
 			// ArrayList<Transaction> transactionList = (ArrayList<Transaction>)
@@ -134,9 +167,9 @@ public class Reimbursements {
 		return true;
 	}
 
-	public static List<Reimbursement> getAllReimbursements() {
+	public static List<Reimbursement> getAllReimbursements(Connection con) {
 		try {
-			return reimDao.getAllReimbursements();
+			return reimDao.getAllReimbursements(con);
 		} catch (SQLException e) {
 			// log for now
 			logger.error("SQL Error while fetching all reimbursements");
@@ -148,9 +181,9 @@ public class Reimbursements {
 		return null;
 	}
 
-	public static List<Reimbursement> getAllReimbursements(String status) {
+	public static List<Reimbursement> getAllReimbursements(Connection con, String status) {
 		try {
-			return reimDao.getAllReimbursements(status);
+			return reimDao.getAllReimbursements(con, status);
 		} catch (SQLException e) {
 			// log for now
 			logger.error("SQL Error while fetching all reimbursements");

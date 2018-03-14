@@ -1,5 +1,6 @@
 package com.revature.beans;
 
+import java.io.InputStream;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 
@@ -8,12 +9,12 @@ public class Reimbursement {
 	private int reimbursementId;
 	private BigDecimal amount;
 	private String decription;
-	// private Blob recipt;
-	private byte[] recipt;
+	private InputStream receipt;
 	private Timestamp submitted;
 	private Timestamp resolved;
 	private int authorId;
 	private int resolverId;
+	private String resolverName;
 	private String type;
 	private String status;
 
@@ -21,17 +22,34 @@ public class Reimbursement {
 
 	}
 
-	public Reimbursement(int reimbursementId, BigDecimal amount, String decription, byte[] recipt, Timestamp submitted,
-			Timestamp resolved, int authorId, int resolverId, String type, String status) {
+	public Reimbursement(int reimbursementId, BigDecimal amount, String decription, InputStream receipt,
+			Timestamp submitted, Timestamp resolved, int authorId, int resolverId, String type, String status) {
 		super();
 		this.reimbursementId = reimbursementId;
 		this.amount = amount;
 		this.decription = decription;
-		this.recipt = recipt;
+		this.receipt = receipt;
 		this.submitted = submitted;
 		this.resolved = resolved;
 		this.authorId = authorId;
 		this.resolverId = resolverId;
+		this.type = type;
+		this.status = status;
+	}
+
+	public Reimbursement(int reimbursementId, BigDecimal amount, String decription, InputStream receipt,
+			Timestamp submitted, Timestamp resolved, int authorId, int resolverId, String resolverName, String type,
+			String status) {
+		super();
+		this.reimbursementId = reimbursementId;
+		this.amount = amount;
+		this.decription = decription;
+		this.receipt = receipt;
+		this.submitted = submitted;
+		this.resolved = resolved;
+		this.authorId = authorId;
+		this.resolverId = resolverId;
+		this.resolverName = resolverName;
 		this.type = type;
 		this.status = status;
 	}
@@ -60,12 +78,12 @@ public class Reimbursement {
 		this.decription = decription;
 	}
 
-	public byte[] getRecipt() {
-		return recipt;
+	public InputStream getRecipt() {
+		return receipt;
 	}
 
-	public void setRecipt(byte[] recipt) {
-		this.recipt = recipt;
+	public void setRecipt(InputStream receipt) {
+		this.receipt = receipt;
 	}
 
 	public Timestamp getSubmitted() {
@@ -116,11 +134,20 @@ public class Reimbursement {
 		this.status = status;
 	}
 
+	public String getResolverName() {
+		return resolverName;
+	}
+
+	public void setResolverName(String resolverName) {
+		this.resolverName = resolverName;
+	}
+
 	@Override
 	public String toString() {
 		return "Reimbursement [reimbursementId=" + reimbursementId + ", amount=" + amount + ", decription=" + decription
-				+ ", recipt=" + recipt + ", submitted=" + submitted + ", resolved=" + resolved + ", authorId="
-				+ authorId + ", resolverId=" + resolverId + ", type=" + type + ", status=" + status + "]";
+				+ ", recipt=" + receipt + ", submitted=" + submitted + ", resolved=" + resolved + ", authorId="
+				+ authorId + ", resolverId=" + resolverId + ", resolverName=" + resolverName + ", type=" + type
+				+ ", status=" + status + "]";
 	}
 
 }

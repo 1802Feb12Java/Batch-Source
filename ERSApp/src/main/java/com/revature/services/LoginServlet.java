@@ -1,13 +1,19 @@
-package com.revature.servlets;
+package com.revature.services;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.nio.charset.StandardCharsets;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -19,6 +25,8 @@ public class LoginServlet extends HttpServlet {
 	private static final Logger logger = LogManager.getLogger(LoginServlet.class);
 
 	private static final long serialVersionUID = -9109911146582857848L;
+
+	private Connection con = com.revature.database.ConnectionFactory.getInstance().getConnection();
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		response.sendRedirect("/ERSApp/login.html");
@@ -34,7 +42,8 @@ public class LoginServlet extends HttpServlet {
 		String n = request.getParameter("username");
 		String p = request.getParameter("userpass");
 		logger.info("got username: " + n + ", password " + p);
-		User u = Users.getUser(n, p);
+		// DAO
+		User u = Users.getUser(con, n, p);
 
 		if (u != null) {
 			logger.info("Logged in user " + u);
@@ -47,11 +56,31 @@ public class LoginServlet extends HttpServlet {
 			}
 		} else {
 			logger.info("Unable to log user in");
-			request.setAttribute("error", "Unknown login, try again"); // Set error msg for ${error}
-			request.getRequestDispatcher("/login.html").forward(request, response); // Go back to login page.
+
+			// MANUAL SEND BACK
+			response.setContentType("text/html");
+
+			InputStream inputStream = getClass().getClassLoader().getResourceAsStream("login.html");
+
+			StringWriter writer = new StringWriter();
+			IOUtils.copy(inputStream, writer, StandardCharsets.UTF_8);
+			String loginPage = writer.toString();
+
+			out.print(loginPage);
+
 		}
 
 		out.close();
+	}
+
+	@Override
+	public void destroy() {
+		if (con != null)
+			try {
+				con.close();
+			} catch (SQLException e) {
+				logger.error(e);
+			}
 	}
 
 }

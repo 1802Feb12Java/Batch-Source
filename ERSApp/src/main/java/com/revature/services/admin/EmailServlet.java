@@ -1,4 +1,4 @@
-package com.revature.servlets;
+package com.revature.services.admin;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -21,21 +21,14 @@ import org.json.HTTP;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.revature.Users;
-import com.revature.beans.User;
-
 /**
- * Servlet implementation class EmailServlet
- * 
- * Emails people on reimbursement request update
+ * Servlet implementation class EmailServletA
  */
 public class EmailServlet extends HttpServlet {
 	private static final Logger logger = LogManager.getLogger(EmailServlet.class);
 	private static final String SENDER_EMAIL = "jrufox@gmail.com";
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 */
 	public EmailServlet() {
 		super();
 	}
@@ -44,17 +37,26 @@ public class EmailServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		logger.debug("Got a get req");
 	}
 
 	/**
-	 * Sends email to user with the id sent as param
+	 * Gets a post request to email a user either about a new account
+	 * 
+	 * or email their request got updated
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		logger.info("got a post req");
+		logger.debug("Received a POST Request");
+
+		// // PARAM APPROACH
+		// String emailTo = request.getParameter("emailTo");
+		// String emailBody = request.getParameter("emailBody");
+		//
+		// logger.debug(emailTo);
+		// logger.debug(emailBody);
 
 		// get the JSON from req
+		logger.debug("content type=" + request.getContentType());
 		StringBuffer jb = new StringBuffer();
 		JSONObject jsonObject = new JSONObject();
 		String line = null;
@@ -69,24 +71,28 @@ public class EmailServlet extends HttpServlet {
 		try {
 			jsonObject = HTTP.toJSONObject(jb.toString());
 		} catch (JSONException e) {
-			// crash and burn
 			logger.error("Error parsing JSON request string");
 		}
 		logger.debug("got json from req " + jsonObject);
+		logger.debug(jsonObject.keys().next());
+		// get to: and body from passed JSON
+		String emailTo = jsonObject.getString("emailTo");
 
-		// get user from db
-		int userId = jsonObject.getInt("userId");
-		User userSending = Users.getUser(userId);
-		if (userSending == null) {
-			logger.error("No user with id " + userId + " found");
-			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-			return;
-		}
-		logger.debug("Got user to email " + userSending);
+		String emailBody = jsonObject.getString("emailBody");
+
+		// // get user from db
+		// int userId = jsonObject.getInt("userId");
+		// User userSending = Users.getUser(userId);
+		// if (userSending == null) {
+		// logger.error("No user with id " + userId + " found");
+		// response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+		// return;
+		// }
+		// logger.debug("Got user to email " + userSending);
 
 		///// Email code from
 		///// https://www.tutorialspoint.com/java/java_sending_email.html
-		String to = userSending.getEmail();
+		// String to = userSending.getEmail();
 
 		String from = SENDER_EMAIL;
 		logger.debug("Sending email from " + SENDER_EMAIL);
@@ -111,13 +117,13 @@ public class EmailServlet extends HttpServlet {
 			message.setFrom(new InternetAddress(from));
 
 			// Set To: header field of the header.
-			message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+			message.addRecipient(Message.RecipientType.TO, new InternetAddress(emailTo));
 
 			// Set Subject: header field
 			message.setSubject("This is the Subject Line!");
 
 			// Now set the actual message
-			message.setText("This is actual message");
+			message.setText(emailBody);
 
 			// Send message
 			Transport.send(message);

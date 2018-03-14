@@ -1,5 +1,6 @@
 package com.revature;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -17,7 +18,7 @@ public class Users {
 
 	private static UserDaoImpl userDao = new UserDaoImpl();
 
-	public static boolean addUser(User user) {
+	public static boolean addUser(Connection con, User user) {
 		try {
 			// put in user PK
 			// get next sequence id
@@ -30,7 +31,7 @@ public class Users {
 			// generate user id's database side
 			user.setUserId(0);
 
-			userDao.addUser(user);
+			userDao.addUser(con, user);
 
 		} catch (SQLException e) {
 			// log for now
@@ -44,9 +45,9 @@ public class Users {
 		return true;
 	}
 
-	public static User getUser(int userId) {
+	public static User getUser(Connection con, int userId) {
 		try {
-			return userDao.getUser(userId);
+			return userDao.getUser(con, userId);
 
 		} catch (SQLException e) {
 			// log for now
@@ -59,9 +60,9 @@ public class Users {
 		return null;
 	}
 
-	public static User getUser(String username) {
+	public static User getUser(Connection con, String username) {
 		try {
-			return userDao.getUser(username);
+			return userDao.getUser(con, username);
 		} catch (SQLException e) {
 			// log for now
 			logger.error("No User Exists with the USERNAME " + username);
@@ -72,9 +73,9 @@ public class Users {
 		return null;
 	}
 
-	public static User getUser(String username, String password) {
+	public static User getUser(Connection con, String username, String password) {
 		try {
-			return userDao.getUser(username, password);
+			return userDao.getUser(con, username, password);
 		} catch (SQLException e) {
 			// log for now
 			logger.error("No User Exists with the USERNAME " + username + " and PASSWORD " + password);
@@ -85,10 +86,10 @@ public class Users {
 		return null;
 	}
 
-	public static boolean updateUser(User user) {
+	public static boolean updateUser(Connection con, User user) {
 
 		try {
-			userDao.updateUser(user);
+			userDao.updateUser(con, user);
 		} catch (SQLException e) {
 			// log for now
 			logger.error("SQL Error while updating user to " + user);
@@ -101,9 +102,9 @@ public class Users {
 		return true;
 	}
 
-	public static boolean deleteUser(int userId) {
+	public static boolean deleteUser(Connection con, int userId) {
 		try {
-			userDao.deleteUser(userId);
+			userDao.deleteUser(con, userId);
 		} catch (SQLException e) {
 			// log for now
 			logger.error("SQL Error while deleting user with ID " + userId);
@@ -116,9 +117,9 @@ public class Users {
 		return true;
 	}
 
-	public static boolean deleteUser(String username) {
+	public static boolean deleteUser(Connection con, String username) {
 		try {
-			userDao.deleteUser(username);
+			userDao.deleteUser(con, username);
 		} catch (SQLException e) {
 			// log for now
 			logger.error("SQL Error while deleting user with username " + username);
@@ -131,9 +132,9 @@ public class Users {
 		return true;
 	}
 
-	public static List<User> getAllUsers() {
+	public static List<User> getAllUsers(Connection con) {
 		try {
-			return userDao.getAllUsers();
+			return userDao.getAllUsers(con);
 		} catch (SQLException e) {
 			// log for now
 			logger.error("SQL Error while fetching all user");
@@ -145,9 +146,9 @@ public class Users {
 		return null;
 	}
 
-	public static List<User> getAllUsers(String role) {
+	public static List<User> getAllUsers(Connection con, String role) {
 		try {
-			return userDao.getAllUsers(role);
+			return userDao.getAllUsers(con, role);
 		} catch (SQLException e) {
 			// log for now
 			logger.error("SQL Error while fetching all users with role " + role);

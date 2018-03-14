@@ -12,16 +12,16 @@
   <filter>
     <display-name>AuthenticateFilter</display-name>
     <filter-name>AuthenticateFilter</filter-name>
-    <filter-class>com.revature.servlets.filters.AuthenticateFilter</filter-class>
+    <filter-class>com.revature.services.filters.AuthenticateFilter</filter-class>
   </filter>
   <filter>
     <display-name>AdminFilter</display-name>
     <filter-name>AdminFilter</filter-name>
-    <filter-class>com.revature.servlets.filters.AdminFilter</filter-class>
+    <filter-class>com.revature.services.filters.AdminFilter</filter-class>
   </filter>
   <filter-mapping>
     <filter-name>AdminFilter</filter-name>
-    <url-pattern>/secure/admin/*</url-pattern>
+    <url-pattern>/admin/*</url-pattern>
   </filter-mapping>
   <filter-mapping>
     <filter-name>AuthenticateFilter</filter-name>
@@ -30,43 +30,55 @@
   <servlet>
     <display-name>login</display-name>
     <servlet-name>login</servlet-name>
-    <servlet-class>com.revature.servlets.LoginServlet</servlet-class>
+    <servlet-class>com.revature.services.LoginServlet</servlet-class>
   </servlet>
   <servlet>
     <description></description>
     <display-name>LogoutServlet</display-name>
     <servlet-name>LogoutServlet</servlet-name>
-    <servlet-class>com.revature.servlets.LogoutServlet</servlet-class>
+    <servlet-class>com.revature.services.LogoutServlet</servlet-class>
   </servlet>
   <servlet>
     <description></description>
     <display-name>UserServlet</display-name>
     <servlet-name>UserServlet</servlet-name>
-    <servlet-class>com.revature.servlets.UserServlet</servlet-class>
+    <servlet-class>com.revature.services.user.UserServlet</servlet-class>
   </servlet>
   <servlet>
     <description></description>
     <display-name>RequestServlet</display-name>
     <servlet-name>RequestServlet</servlet-name>
-    <servlet-class>com.revature.servlets.RequestServlet</servlet-class>
+    <servlet-class>com.revature.services.user.RequestServlet</servlet-class>
   </servlet>
   <servlet>
     <description></description>
     <display-name>AllUserServlet</display-name>
     <servlet-name>AllUserServlet</servlet-name>
-    <servlet-class>com.revature.servlets.AllUserServlet</servlet-class>
+    <servlet-class>com.revature.services.admin.UsersServlet</servlet-class>
   </servlet>
   <servlet>
     <description></description>
     <display-name>EmailServlet</display-name>
     <servlet-name>EmailServlet</servlet-name>
-    <servlet-class>com.revature.servlets.EmailServlet</servlet-class>
+    <servlet-class>com.revature.services.admin.EmailServlet</servlet-class>
   </servlet>
   <servlet>
     <description></description>
     <display-name>AllRequestServlet</display-name>
     <servlet-name>AllRequestServlet</servlet-name>
-    <servlet-class>com.revature.servlets.AllRequestServlet</servlet-class>
+    <servlet-class>com.revature.services.admin.RequestsServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description></description>
+    <display-name>SessionServlet</display-name>
+    <servlet-name>SessionServlet</servlet-name>
+    <servlet-class>com.revature.services.SessionServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description></description>
+    <display-name>PhotoServlet</display-name>
+    <servlet-name>PhotoServlet</servlet-name>
+    <servlet-class>com.revature.services.PhotoServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>login</servlet-name>
@@ -74,7 +86,7 @@
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>LogoutServlet</servlet-name>
-    <url-pattern>/secure/logout/*</url-pattern>
+    <url-pattern>/*/logout/*</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>UserServlet</servlet-name>
@@ -90,11 +102,18 @@
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>EmailServlet</servlet-name>
-    <url-pattern>/secure/email</url-pattern>
+    <url-pattern>/email</url-pattern>
   </servlet-mapping>
-  
   <servlet-mapping>
     <servlet-name>AllRequestServlet</servlet-name>
     <url-pattern>/admin/request/*</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SessionServlet</servlet-name>
+    <url-pattern>/SessionServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>PhotoServlet</servlet-name>
+    <url-pattern>/PhotoServlet/*</url-pattern>
   </servlet-mapping>
 </web-app>

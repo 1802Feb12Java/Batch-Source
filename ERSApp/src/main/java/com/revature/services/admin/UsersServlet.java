@@ -1,6 +1,8 @@
-package com.revature.servlets;
+package com.revature.services.admin;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -13,36 +15,32 @@ import org.apache.log4j.Logger;
 
 import com.revature.Users;
 import com.revature.beans.User;
+import com.revature.services.JsonfierUtil;
 
 /**
- * Servlet implementation class AdminServlet
- * 
- * Used for managers to make manager-user-type filtered requests
- * 
- * ../secure/admin
+ * Servlet implementation class UserServletA
  */
-public class AllUserServlet extends HttpServlet {
-	private static final Logger logger = LogManager.getLogger(AllUserServlet.class);
+public class UsersServlet extends HttpServlet {
+	private static final Logger logger = LogManager.getLogger(UsersServlet.class);
 
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public AllUserServlet() {
+	private Connection con = com.revature.database.ConnectionFactory.getInstance().getConnection();
+
+	public UsersServlet() {
 		super();
 	}
 
 	/**
-	 *
+	 * Gets all employee users
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		logger.debug("got GET req");
+		logger.debug("Received GET Request");
 
 		// get all employees
-		ArrayList<User> reqs = (ArrayList<User>) Users.getAllUsers("Employee");
+		ArrayList<User> reqs = (ArrayList<User>) Users.getAllUsers(con, "Employee");
 
 		// jsonify them
 		// write string to response
@@ -56,11 +54,12 @@ public class AllUserServlet extends HttpServlet {
 	}
 
 	/**
-	 * Creates user
+	 * Posts a new user
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		logger.info("Got post req");
+
+		logger.debug("Received POST Request");
 
 		// go through post form fields
 		String username = (String) request.getParameter("username");
@@ -80,7 +79,7 @@ public class AllUserServlet extends HttpServlet {
 		User u = new User(0, username, password, firstName, lastName, email, userType);
 
 		// put user in db
-		if (!Users.addUser(u)) {
+		if (!Users.addUser(con, u)) {
 			response.getWriter().println("ERROR POST USER FAILED");
 			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 		} else {
@@ -88,25 +87,17 @@ public class AllUserServlet extends HttpServlet {
 		}
 
 		// redirect user back to home page
-		request.getRequestDispatcher("/home.html").forward(request, response);
+		response.sendRedirect("/ERSApp/admin/home.html");
 	}
 
-	protected void doDelete(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		logger.debug("DELETE request received");
-
-		// user session exists and user is manager
-		// get fields
-		String username = request.getParameter("username");
-		logger.debug("Deleting user with username " + username);
-
-		if (!Users.deleteUser(username)) {
-			logger.error("Unable to delete user with username " + username + " from database");
-			response.setStatus(HttpServletResponse.SC_EXPECTATION_FAILED);
-		} else {
-			logger.debug("Successfully deleted user");
-			response.setStatus(HttpServletResponse.SC_OK);
-		}
+	@Override
+	public void destroy() {
+		if (con != null)
+			try {
+				con.close();
+			} catch (SQLException e) {
+				logger.error(e);
+			}
 	}
 
 }
