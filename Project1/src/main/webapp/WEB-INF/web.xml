@@ -37,4 +37,34 @@
     <servlet-name>ReceiptServlet</servlet-name>
     <url-pattern>/Receipt</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AllReceiptServlet</display-name>
+    <servlet-name>AllReceiptServlet</servlet-name>
+    <servlet-class>com.revature.servlets.AllReceiptServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AllReceiptServlet</servlet-name>
+    <url-pattern>/AllReceipt</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ResTableServlet</display-name>
+    <servlet-name>ResTableServlet</servlet-name>
+    <servlet-class>com.revature.servlets.ResTableServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ResTableServlet</servlet-name>
+    <url-pattern>/ResTable</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>RemSubmitServlet</display-name>
+    <servlet-name>RemSubmitServlet</servlet-name>
+    <servlet-class>com.revature.servlets.RemSubmitServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RemSubmitServlet</servlet-name>
+    <url-pattern>/RemSubmit</url-pattern>
+  </servlet-mapping>
 </web-app>

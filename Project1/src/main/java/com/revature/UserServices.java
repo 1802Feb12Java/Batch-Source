@@ -136,8 +136,10 @@ public class UserServices implements UsersDAO{
 		return rems;
 	}
 	
+	//Gets all reimbursements from a specific user that have been resolved.
+	//Includes denied and approved
 	public ArrayList<Reimbursement> getApproved(Users u) throws SQLException {
-		String str = "SELECT * FROM ERS_REIMBURSEMENTS WHERE RT_STATUS=2 AND RT_AUTHOR = ?";
+		String str = "SELECT * FROM ERS_REIMBURSEMENTS WHERE (RT_STATUS=2 OR RT_STATUS=3) AND U_ID_AUTHOR = ?";
 		PreparedStatement ps = conn.prepareStatement(str);
 		ps.setInt(1, u.getId());
 		ResultSet rs = ps.executeQuery();
@@ -155,7 +157,7 @@ public class UserServices implements UsersDAO{
 	}
 
 	public ArrayList<Reimbursement> getAll(Users u) throws SQLException {
-		String str = "SELECT * FROM ERS_REIMBURSEMENTS WHERE RT_AUTHOR = ?";
+		String str = "SELECT * FROM ERS_REIMBURSEMENTS WHERE U_ID_AUTHOR = ?";
 		PreparedStatement ps = conn.prepareStatement(str);
 		ps.setInt(1, u.getId());
 		ResultSet rs = ps.executeQuery();

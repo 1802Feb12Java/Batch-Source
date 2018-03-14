@@ -19,7 +19,7 @@ public class JSONwork {
 			job.append("resolver", ar.get(i).getResolver());
 			job.append("time_submitted", ar.get(i).getTimeSubmitted());
 			job.append("time_resolved", ar.get(i).getTimeResolved());
-			job.append("", getStatus(ar.get(i).getStatus()));
+			job.append("status", getStatus(ar.get(i).getStatus()));
 			job.append("type", getType(ar.get(i).getType()));
 			job.append("receipt", ar.get(i).getReceipt());
 			//add the json obj to the array to send out
