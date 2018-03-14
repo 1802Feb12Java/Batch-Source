@@ -1,5 +1,6 @@
 package com.revature.services;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import org.json.JSONArray;
@@ -9,6 +10,7 @@ import com.revature.beans.Reimbursement;
 import com.revature.beans.User;
 
 public class JsonfierUtil {
+	private static SimpleDateFormat timeStampFormat = new SimpleDateFormat("hh:mm a MM/dd/yyyy");
 
 	public static String reimListJson(ArrayList<Reimbursement> list) {
 		JSONArray json = new JSONArray();
@@ -20,8 +22,9 @@ public class JsonfierUtil {
 			obj.put("amount", r.getAmount());
 			obj.put("description", r.getDecription());
 			obj.put("receipt", r.getRecipt());
-			obj.put("submitted", r.getSubmitted());
-			obj.put("resolved", r.getResolved());
+			// format times before putting them in
+			obj.put("submitted", timeStampFormat.format(r.getSubmitted()));
+			obj.put("resolved", timeStampFormat.format(r.getResolved()));
 			obj.put("resolver", r.getResolverName());
 			obj.put("type", r.getType());
 			obj.put("status", r.getStatus());

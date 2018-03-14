@@ -57,17 +57,23 @@ public class LoginServlet extends HttpServlet {
 		} else {
 			logger.info("Unable to log user in");
 
-			// MANUAL SEND BACK
-			response.setContentType("text/html");
+			// show error if bad username/pass
+			if (n != null) {
+				logger.info("Bad Login");
 
-			InputStream inputStream = getClass().getClassLoader().getResourceAsStream("login.html");
+				response.setContentType("text/html");
 
-			StringWriter writer = new StringWriter();
-			IOUtils.copy(inputStream, writer, StandardCharsets.UTF_8);
-			String loginPage = writer.toString();
+				InputStream inputStream = getClass().getClassLoader().getResourceAsStream("login-with-error.html");
 
-			out.print(loginPage);
+				StringWriter writer = new StringWriter();
+				IOUtils.copy(inputStream, writer, StandardCharsets.UTF_8);
+				String loginPage = writer.toString();
 
+				out.print(loginPage);
+
+			} else {// general URL send to login page
+				response.sendRedirect("/ERSApp/login.html");
+			}
 		}
 
 		out.close();
