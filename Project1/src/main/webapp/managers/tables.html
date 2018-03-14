@@ -51,7 +51,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="Profile.html">Employee Portal</a>
+                <a class="navbar-brand" href="profile.html">Manager Portal</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -91,14 +91,14 @@
                                 <!-- /input-group -->
                             </li>
                             <li>
-                                <a href="Profile.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                                <a href="profile.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                             </li>
                             
                             <li>
-                                <a href="Pending.html"><i class="fa fa-table fa-fw"></i> Reimbursements</a>
+                                <a href="./tables.html"><i class="fa fa-table fa-fw"></i> Reimbursements</a>
                             </li>
                             <li>
-                                <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Forms</a>
+                                <a href="./users.html"><i class="fa fa-table fa-fw"></i> Users</a>
                             </li>
                         </ul>
                     </div>
@@ -115,41 +115,6 @@
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
-            <div class="row">
-                    <div class="col-lg-12">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                All Reimbursements
-                            </div>
-                            <!-- /.panel-heading -->
-                            <div class="panel-body">
-                                <table width="100%" class="table table-striped table-bordered table-hover" id="alltable">
-                                    <thead>
-                                        <tr>
-                                            <th>Receipt ID</th>
-                                            <th>Amount</th>
-                                            <th>Description</th>
-                                            <th>Receipt</th>
-                                            <th>Time Submitted</th>
-                                            <th>Time Resolved</th>
-                                            <th>Author</th>
-                                            <th>Resolver</th>
-                                            <th>Status</th>
-                                            <th>Type</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                       
-                                    </tbody>
-                                </table>
-                                <!-- /.table-responsive -->
-                            </div>
-                            <!-- /.panel-body -->
-                        </div>
-                        <!-- /.panel -->
-                    </div>
-                    <!-- /.col-lg-12 -->
-                </div>
             <div class="row">
                 <div class="col-lg-12">
                     <div class="panel panel-default">
@@ -171,6 +136,7 @@
                                         <th>Resolver</th>
                                         <th>Status</th>
                                         <th>Type</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -221,49 +187,6 @@
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
-
-                <div class="row">
-                        <div class="col-lg-12">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    Submit a new Reimbursement
-                                </div>
-                                <!-- /.panel-heading -->
-                                <div class="panel-body">
-                                        <form role="form" action="/Project1/RemSubmit" method="post">
-                                            <fieldset>
-                                                <div class="form-group">
-                                                    <input class="form-control" placeholder="Amount" name="amount" autofocus required>
-                                                </div>
-                                                <div class="form-group">
-                                                    <input class="form-control" placeholder="Description" name="desc" value="" required>
-                                                </div>
-                                                <div class="form-group">
-                                                        <label for="type">Type:</label>
-                                                        <div class="form-check form-check-inline">
-                                                                <input type="radio" class="form-check-input"  id="business"
-                                                                   name="typechoice" value="1" required>
-                                                                  <label class="form-check-label" for="business">Business</label>
-                                                              
-                                                                  <input type="radio" class="form-check-input"  id="travel"
-                                                                   name="typechoice" value="2">
-                                                                  <label class="form-check-label" for="travel">Travel</label>
-                                                              
-                                                                  <input type="radio" class="form-check-input"  id="medical"
-                                                                   name="typechoice" value="3">
-                                                                  <label class="form-check-label" for="medical">Medical</label>
-                                                        </div>
-                                                      </div>
-                                                <input type="submit" value="RemSubmit" class="btn btn-lg btn-success btn-block">
-                                            </fieldset>
-                                        </form>
-                                </div>
-                                <!-- /.panel-body -->
-                            </div>
-                            <!-- /.panel -->
-                        </div>
-                        <!-- /.col-lg-12 -->
-                    </div>
         </div>
         <!-- /#page-wrapper -->
 
@@ -296,7 +219,7 @@
     });
     </script>
 
-    <script src="./pending.js"></script>
+    <script src="./tables.js"></script>
 
 
 </body>

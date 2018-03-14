@@ -8,10 +8,10 @@ import org.json.JSONObject;
 public class JSONwork {
 
 	public static String makeArrR(ArrayList<Reimbursement> ar) {
-		JSONArray jArr = new JSONArray();
-		JSONObject job = new JSONObject();
+		JSONArray jArr = new JSONArray();	
 		
 		for(int i = 0; i < ar.size(); i++) {
+			JSONObject job = new JSONObject();
 			job.append("R_ID", ar.get(i).getId());
 			job.append("amount", ar.get(i).getAmount());
 			job.append("description", ar.get(i).getDescription());

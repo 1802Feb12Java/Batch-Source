@@ -174,4 +174,36 @@ public class UserServices implements UsersDAO{
 		return rems;
 	}
 	
+	public ArrayList<Reimbursement> getPending() throws SQLException {
+		String str = "SELECT * FROM ERS_REIMBURSEMENTS WHERE RT_STATUS=1";
+		PreparedStatement ps = conn.prepareStatement(str);	
+		ResultSet rs = ps.executeQuery();
+		ArrayList<Reimbursement> rems = new ArrayList<Reimbursement>();
+		while(rs.next()) {
+			Reimbursement r = new Reimbursement(rs.getInt(1), rs.getDouble(2), rs.getString(5), 
+					rs.getInt(7), rs.getInt(9), rs.getInt(10));
+			r.setDescription(rs.getString(3));
+			rems.add(r);
+		}
+		
+		return rems;
+	}
+	
+	public ArrayList<Reimbursement> getApproved() throws SQLException {
+		String str = "SELECT * FROM ERS_REIMBURSEMENTS WHERE (RT_STATUS=2 OR RT_STATUS=3)";
+		PreparedStatement ps = conn.prepareStatement(str);
+		ResultSet rs = ps.executeQuery();
+		ArrayList<Reimbursement> rems = new ArrayList<Reimbursement>();
+		while(rs.next()) {
+			Reimbursement r = new Reimbursement(rs.getInt(1), rs.getDouble(2), rs.getString(5), 
+					rs.getInt(7), rs.getInt(9), rs.getInt(10));
+			r.setDescription(rs.getString(3));
+			r.setResolver(rs.getInt(8));
+			r.setTimeResolved(rs.getString(6));
+			rems.add(r);
+		}
+		
+		return rems;
+	}
+	
 }

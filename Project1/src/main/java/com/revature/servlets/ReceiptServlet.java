@@ -32,12 +32,21 @@ public class ReceiptServlet extends HttpServlet {
 		//grab the users obj from the session
 		Users u = (Users) request.getSession(false).getAttribute("userobj");
 		ArrayList<Reimbursement> r = new ArrayList<Reimbursement>();
+		//depending on the role, it will get the user's reimbursements or all reimbursements
+		if(u.getRoleID() == 2) {
 		try {
 			//gets all the pending reimbursements
 			r = us.getPending(u);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}} else {
+			try {
+				r = us.getPending();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 		String str = JSONwork.makeArrR(r);
