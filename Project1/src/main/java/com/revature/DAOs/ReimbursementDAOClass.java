@@ -135,7 +135,6 @@ public class ReimbursementDAOClass implements ReimbursementDAO {
 		PreparedStatement ps = conn.prepareStatement("SELECT * FROM ERS_REIMBURSEMENTS");
 		ResultSet rs = ps.executeQuery();
 		ArrayList<Reimbursement> allReimbursements = new ArrayList<Reimbursement>();
-		System.out.println("\n\nnew read --");
 		while (rs.next()) {
 			int id = rs.getInt(1);
 			double amount = rs.getDouble(2);

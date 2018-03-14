@@ -9,7 +9,7 @@
 		<div class="text-center" id="table">	
       <br>
       <h2>Reimbursement List</h2>
-			<input type="text" id="myInput" (keyup)="this.filterTable()" placeholder="Search by author ID's">
+			<input type="text" id="myInput" (keyup)="this.filterTable()" placeholder="Search by author name">
 
       <table id="myTable">
           <thead>
@@ -20,8 +20,8 @@
                   <th>Receipt</th>
                   <th id="timestampcolumn">Submitted</th>
                   <th id="timestampcolumn">Resolved</th>
-                  <th>Author ID</th>
-                  <th>Resolver ID</th>
+                  <th>Author</th>
+                  <th>Resolver</th>
                   <th>Type</th>
                   <th>Status</th>
                   <th id="buttoncolumnhead"></th>
@@ -33,13 +33,17 @@
                   <td>{{r.id}}</td>
                   <td>{{r.amount | currency}}</td>
                   <td>{{r.description}}</td>
-                  <td *ngIf="r.base64receipt != undefined"><img [src]="'data:image/jpg;base64,'+r.base64receipt | safeHtml" width="200" height="200"/></td>
+                  <td *ngIf="r.base64receipt != undefined"><img [src]="'data:image/jpg;base64,'+r.base64receipt | safeHtml" width="200" height="400"/></td>
                   <td *ngIf="r.base64receipt == undefined">N/A</td>
                   <td id="timestampcolumn">{{r.submitted | date:'short'}}</td>
                   <td *ngIf="r.resolved != undefined" id="timestampcolumn">{{r.resolved | date:'short'}}</td>
                   <td *ngIf="r.resolved == undefined" id="timestampcolumn">N/A</td>
-                  <td>{{r.authorId}}</td>
-                  <td *ngIf="r.resolved != undefined">{{r.resolverId}}</td>
+                <ng-container *ngFor="let e of empList">
+                  <td *ngIf="r.authorId==e.id">{{e.firstname}} {{e.lastname}}</td>
+                  <ng-container *ngIf="r.resolverId==e.id">
+                    <td *ngIf="r.resolved != undefined">{{e.firstname}} {{e.lastname}}</td>
+                  </ng-container>
+                </ng-container>
                   <td *ngIf="r.resolved == undefined">N/A</td>
                   <td *ngIf="r.typeId == 1">Business</td>
                   <td *ngIf="r.typeId == 2">Travel</td>
@@ -53,9 +57,6 @@
                       <input type='hidden' name='newstatus' value='2'>
                       <button class='btn btn-custom btn-full-width' type='submit'>Approve</button>
                     </form>
-                    <!-- <form>
-                      <button class='btn btn-custom btn-full-width' (click)=this.approve(r.id)>Approve</button>
-                    </form> -->
                   </td>
                   <td *ngIf="r.statusID === 1" id="buttoncolumn">
                     <form action='http://localhost:8080/Project1/reimbursements' method='post'>

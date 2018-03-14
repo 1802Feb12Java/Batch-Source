@@ -2,23 +2,22 @@
 
 
 <div class="text-center">
-  <br>
-  <h2>Reimbursement Application</h2>
-  <br>
+  <h2 id="head">Reimbursement Application</h2>
   <form action='http://localhost:8080/Project1/application' method='post' enctype="multipart/form-data">
-    Amount:<br>
-    <input type='text' name='amount' required><br><br>
-    Description:<br>
-    <input type='text' name='description' required><br><br>
-    Receipt (not required):<br>
-    <input type='file' name='receipt' accept='image/*'><br><br>
-    Type:<br>
-    <input type='radio' name='type' value='business' required><label>Business&emsp;</label>
-    <input type='radio' name='type' value='travel' required><label>Travel&emsp;</label>
-    <input type='radio' name='type' value='medical' required><label>Medical&emsp;</label>
-    <br><br>
-
-    <button type="submit">Submit</button>
+    <div id="formbg">
+      Amount:<br>
+      <input type='text' name='amount' required><br><br>
+      Description:<br>
+      <input type='text' name='description' required><br><br>
+      Receipt (not required):<br>
+      <input type='file' name='receipt' accept='image/*'><br><br>
+      Type:<br>
+      <input type='radio' name='type' value='business' required><label>Business&emsp;</label>
+      <input type='radio' name='type' value='travel' required><label>Travel&emsp;</label>
+      <input type='radio' name='type' value='medical' required><label>Medical&emsp;</label>
+      <br><br>
+      <button type="submit">Submit</button>
+    </div>
   </form>
 </div>
 

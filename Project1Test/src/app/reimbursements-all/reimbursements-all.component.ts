@@ -10,22 +10,36 @@ import { PARAMETERS } from '@angular/core/src/util/decorators';
 export class ReimbursementsAllComponent implements OnInit {
 
   reimbursementList: any = [];
+  empList: any = [];
 
   constructor(private client: HttpClient) { }
 
   ngOnInit() {
     this.client.get('http://localhost:8080/Project1/reimbursements', { withCredentials: true })
-   .subscribe(
-     (succ: any) => { 
-       this.reimbursementList = succ;
-       console.log(this.reimbursementList);
-       return this.reimbursementList;
-     },
-     err => {
-       alert('failed to retrieve reimbursements');
-     }
+      .subscribe(
+        (succ: any) => { 
+          this.reimbursementList = succ;
+          console.log(this.reimbursementList);
+          return this.reimbursementList;
+        },
+        err => {
+          alert('failed to retrieve reimbursements');
+        }
+    );
 
-   );
+    this.client.get('http://localhost:8080/Project1/employeeList', { withCredentials: true })
+    .subscribe(
+      (succ: any) => { 
+        this.empList = succ;
+        console.log(this.empList);
+        return this.empList;
+      },
+      err => {
+        alert('failed to retrieve reimbursements');
+      }
+    );
+
+  
   }
 
   filterTable() {

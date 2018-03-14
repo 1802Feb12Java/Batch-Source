@@ -1,3 +1,9 @@
+#welcomebg {
+    background-color: #e1e1e1;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
 #myInput {
     background-position: 10px 12px; /* Position the search icon */
     font-size: 16px; /* Increase font-size */
@@ -20,7 +26,7 @@
 #myTable th, #myTable td {
     border: 1px solid black; /* Add a grey border for cells */
     text-align: left; /* Left-align text */
-    padding: 12px; /* Add padding */
+    padding: 6px; /* Add padding */
 }
 
 #myTable tr.header, #myTable tr:hover {

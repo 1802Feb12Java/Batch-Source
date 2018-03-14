@@ -36,7 +36,7 @@
 #myTable th, #myTable td {
     border: 1px solid black; /* Add a grey border for cells */
     text-align: center; /* Left-align text */
-    padding: 12px; /* Add padding */
+    padding: 6px; /* Add padding */
 }
 
 #myTable tr.header, #myTable tr:hover {

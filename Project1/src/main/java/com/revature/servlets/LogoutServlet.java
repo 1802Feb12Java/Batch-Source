@@ -29,7 +29,7 @@ public class LogoutServlet extends HttpServlet {
 		HttpSession session = req.getSession(false);
 		if (session != null){
 			session.invalidate();
-			log.info("User logged out");
+			log.info("User logged out.");
 		}
 		resp.sendRedirect("http://localhost:4200/login");
 	}
