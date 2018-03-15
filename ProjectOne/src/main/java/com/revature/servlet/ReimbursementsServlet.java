@@ -47,7 +47,7 @@ public class ReimbursementsServlet extends HttpServlet {
 			Connection conn = cf.getConnection();
 			
 			// Create get user query
-			String sqlUpdate = "UPDATE ers_reimbursements SET rt_status=?, u_id_resolver=?, r_resolved=?, WHERE r_id=?";
+			String sqlUpdate = "UPDATE ers_reimbursements SET rt_status=?, u_id_resolver=?, r_resolved=? WHERE r_id=?";
 			
 			// Create PreparedStatement object
 			PreparedStatement ps = conn.prepareStatement(sqlUpdate);

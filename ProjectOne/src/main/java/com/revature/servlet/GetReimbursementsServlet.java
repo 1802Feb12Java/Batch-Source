@@ -23,10 +23,8 @@ public class GetReimbursementsServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         
 		HttpSession session = req.getSession(false);
-		PrintWriter pw = resp.getWriter();
 		resp.setContentType("application/json");
         ArrayList<String> reimbursements = new ArrayList<String>();
-
         Integer userId = (Integer) session.getAttribute("userId");
         String sqlGet = "";
 
@@ -81,7 +79,6 @@ public class GetReimbursementsServlet extends HttpServlet {
                 sqlGet += "ers_reimbursements.u_id_author = ers_users.u_id";
                 PreparedStatement ps = conn.prepareStatement(sqlGet);
                 ResultSet rs = ps.executeQuery();
-                int resolverId = 0;
                 while(rs.next()) {
                     int id = rs.getInt("r_id");
                     double amount = rs.getDouble("r_amount");
@@ -89,7 +86,7 @@ public class GetReimbursementsServlet extends HttpServlet {
                     byte[] receipt = rs.getBytes("r_receipt");
                     Date submitted = rs.getDate("r_submitted");
                     Date resolved = rs.getDate("r_resolved");
-                    resolverId = rs.getInt("u_id_resolver");
+                    int resolverId = rs.getInt("u_id_resolver");
                     String empFirst = rs.getString("u_firstname");
                     String empLast = rs.getString("u_lastname");
                     int rType = rs.getInt("rt_type");
@@ -113,14 +110,18 @@ public class GetReimbursementsServlet extends HttpServlet {
 
                     System.out.println(resolverId);
 
-                    sqlGet = "SELECT * FROM ers_users WHERE u_id = ?";
-                    ps = conn.prepareStatement(sqlGet);
-                    ps.setInt(1, resolverId);
+
+                    String sqlGetTwo = "SELECT * FROM ers_users WHERE u_id = ?";
+                    PreparedStatement psTwo = conn.prepareStatement(sqlGetTwo);
+                    psTwo.setInt(1, resolverId);
+                    ResultSet rsTwo = psTwo.executeQuery();
+
                     String resolverFirst = "";
                     String resolverLast = "";
-                    if(rs.next()) {
-                        resolverFirst = rs.getString("u_firstname");
-                        resolverLast = rs.getString("u_lastname");
+
+                    if(rsTwo.next()) {
+                        resolverFirst = rsTwo.getString("u_firstname");
+                        resolverLast = rsTwo.getString("u_lastname");
                     }
 
                     System.out.println(resolverFirst);
