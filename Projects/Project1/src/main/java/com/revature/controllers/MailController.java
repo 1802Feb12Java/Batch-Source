@@ -35,7 +35,7 @@ public class MailController {
 		String emailTo = "Loser" + " <" + emailAddress + ">";
 		formData.add("to", emailTo);
 		formData.add("subject", "Employee Reimbursement System - Forgot Password");
-		String emailText = "Hello, " + "!\n\nSucks. :( \n\nFrom,\nJustin Joseph\nProject 1 - Employee Reimbursement System";
+		String emailText = "Hello" + "!\n\nSucks. :( \n\nFrom,\nJustin Joseph\nProject 1 - Employee Reimbursement System";
 		formData.add("text", emailText);
 		return webResource.type(MediaType.APPLICATION_FORM_URLENCODED).post(ClientResponse.class, formData);
 	}
