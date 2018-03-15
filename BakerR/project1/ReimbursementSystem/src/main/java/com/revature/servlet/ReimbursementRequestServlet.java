@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -12,6 +13,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileItemFactory;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.io.IOUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -103,16 +110,59 @@ public class ReimbursementRequestServlet extends HttpServlet {
 			ReimbursementTypeDao rtDao = new ReimbursementTypeDao();
 			
 			// Get data
-			ReimbursementType rType = rtDao.getReimbursementTypeById(
-					Integer.parseInt(request.getParameter("rtype")));
-			rData.setType(rType);
-			rData.setAmount(new Double(
-					request.getParameter("r-amount")));
+			FileItemFactory fiFactory = new DiskFileItemFactory();
+			ServletFileUpload upload = new ServletFileUpload(fiFactory);
+			List<FileItem> fiList = upload.parseRequest(request);
 			
-			rData.setDescription(request.getParameter("desc-area"));
+			fiList.forEach((FileItem fi) -> {
+				try {
+					if(fi.isFormField()) {
+						
+						String name = fi.getFieldName();
+						String val = fi.getString();
+						
+						switch(name) {
+							case "rtype":
+								ReimbursementType rType = rtDao.getReimbursementTypeById(Integer.parseInt(val));
+								rData.setType(rType);
+								break;
+							case "r-amount":
+								rData.setAmount(new Double(val));
+								break;
+							case "desc-area":
+								rData.setDescription(val);
+								break;
+							default:
+								break;
+						} // end switch
+					} else {
+						byte[] receiptData = IOUtils.toByteArray(fi.getInputStream());
+						String receiptName = fi.getName();
+						rData.setReceipt(receiptData);
+						rData.setReceiptName(receiptName);
+					}
+					
+				} catch(SQLException | IOException ex) {
+				}
+			});
 			
-			// TODO receipt-file placeholder @ReimbursementRequestServlet
-//			String receiptStr = receipt
+//			ReimbursementType rType = rtDao.getReimbursementTypeById(
+//					Integer.parseInt(
+//							IOUtils.toString(request.getPart("rtype").getInputStream(), Charset.forName("UTF-8"))));
+//			rData.setType(rType);
+//			rData.setAmount(new Double(
+//					IOUtils.toString(request.getPart("r-amount").getInputStream(), Charset.forName("UTF-8"))));
+//			
+//			rData.setDescription(
+//					IOUtils.toString(request.getPart("desc-area").getInputStream(), Charset.forName("UTF-8")));
+//			
+//			
+//			// Get receipt data
+//			Part receiptPart = request.getPart("receipt-file");
+//			String filename = receiptPart.getSubmittedFileName();
+//			byte[] receiptBytes = IOUtils.toByteArray(receiptPart.getInputStream());
+//			rData.setReceiptName(filename);
+//			rData.setReceipt(receiptBytes);
 			
 			
 			// Server-side auto-fill info
@@ -123,10 +173,9 @@ public class ReimbursementRequestServlet extends HttpServlet {
 			
 			// Insert into Database
 			rDao.addNewReimbursement(rData);
-			
 			response.sendRedirect("home");
 			return;
-		} catch(SQLException | IOException ex) {
+		} catch(SQLException | IOException | FileUploadException ex) {
 			response.sendRedirect("home");
 			return;
 		}

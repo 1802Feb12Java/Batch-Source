@@ -3,11 +3,11 @@ package com.revature.servlet;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -129,7 +129,26 @@ public class UpdateReimbursementServlet extends HttpServlet {
 				   							  .attr("value", "Receipt").attr("disabled", true);
 			
 			
-			// TODO Check if receipt exists & enable receiptBtn if it exists.
+			// Enable download button if receipt exists.
+			try {
+				Map.Entry<String, Integer> receiptMetadata = rDao.getReceiptMetadata(r.getId());
+				
+				if(receiptMetadata != null) {
+				    final String[] units = {"B", "kB", "MB", "GB", "TB" };
+				    
+					// Calculate size.
+					double filesize = receiptMetadata.getValue();
+					int digitGroups = (int) (Math.log10(filesize)/Math.log10(1024));
+				    String filesizeStr = new DecimalFormat("#,##0.#")
+				    		.format(filesize/Math.pow(1024, digitGroups)) 
+				    		+ " " + units[digitGroups];
+					
+					receiptBtn.attr("disabled", false).attr("value", "Receipt (" + filesizeStr + ")");
+				}
+				
+			} catch(SQLException ex) {
+				// Do nothing.
+			}
 			
 			
 			Element fragRecord = recordFragDoc.selectFirst("#fragment .record");

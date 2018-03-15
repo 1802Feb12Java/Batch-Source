@@ -7,5 +7,5 @@ function passMatch() {
     }
 }
 
-document.querySelector('#new-password').onchange = passMatch;
-document.querySelector('#confirm-new-password').onchange = passMatch;
+document.querySelector('#new-password').oninput = passMatch;
+document.querySelector('#confirm-new-password').oninput = passMatch;

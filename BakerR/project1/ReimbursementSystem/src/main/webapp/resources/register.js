@@ -12,5 +12,5 @@ function passMatch() {
     }
 }
 
-document.querySelector('#password').onchange = passMatch;
-document.querySelector('#confirm-password').onchange = passMatch;
+document.querySelector('#password').oninput = passMatch;
+document.querySelector('#confirm-password').oninput = passMatch;

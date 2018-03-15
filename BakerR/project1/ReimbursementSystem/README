@@ -1,7 +1,30 @@
-Dependencies:
-    ojdbc8-12.2.0.1.jar
-    postgresql-42.2.1.jre7.jar
-    javax.servlet-api-4.0.0.jar
-    database.properties (located in src/main/resources)
-    rds-combined-ca-bundle.pem (if connecting to the database using SSL)
+PROJECT 1: ReimbursementSystem
+
+Used Dependencies:
+    Libraries:
+        ojdbc8-12.2.0.1.jar
+        postgresql-42.2.1.jre7.jar
+        javax.servlet-api-4.0.0.jar
+        jsoup-1.11.2.jar
+        commons-io-2.6.jar
+        commons-fileupload-1.3.3.jar
+    Servers:
+        Apache Tomcat v9.0 Server
+        PostgreSQL v10.1
+    Browsers Tested On:
+        Opera
+    
+
+Database-related files:
+    database.properties 
+        - located in src/main/resources
+        - If not connecting ot the database using SSL, comment out the SSL-related lines.
+    rds-combined-ca-bundle.pem (for connecting to the database using SSL)
+        - located in src/main/resources
+    DBCREATE.sql: Database creation script
+        -
+    
+Start page: <host>:<port>/reimbursement/
+        or  <host>:<port>/reimbursement/login
+        
 

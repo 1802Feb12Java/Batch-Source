@@ -10,19 +10,22 @@ public class Reimbursement implements Serializable {
 	private Double amount;
 	private String description;
 	private byte[] receipt;
+	private String receiptName;
 	private LocalDateTime submitted;
 	private LocalDateTime resolved;
 	private User author;
 	private User resolver;
 	private ReimbursementType type;
 	private ReimbursementStatus status;
-	public Reimbursement(Integer id, Double amount, String description, byte[] receipt, LocalDateTime submitted,
+	
+	public Reimbursement(Integer id, Double amount, String description, byte[] receipt, String receiptName, LocalDateTime submitted,
 			LocalDateTime resolved, User author, User resolver, ReimbursementType type, ReimbursementStatus status) {
 		super();
 		this.id = id;
 		this.amount = amount;
 		this.description = description;
 		this.receipt = receipt;
+		this.setReceiptName(receiptName);
 		this.submitted = submitted;
 		this.resolved = resolved;
 		this.author = author;
@@ -32,7 +35,7 @@ public class Reimbursement implements Serializable {
 	}
 	
 	public Reimbursement() {
-		this(null, null, null, null, null, null, null, null, null, null);
+		this(null, null, null, null, null, null, null, null, null, null, null);
 	}
 
 	public Integer getId() {
@@ -121,6 +124,14 @@ public class Reimbursement implements Serializable {
 				+ Arrays.toString(receipt) + ", submitted=" + submitted + ", resolved=" + resolved + ", author="
 				+ author + ", resolver=" + resolver + ", type=" + type + ", status=" + status + "]";
 	}
-	
+
+	public String getReceiptName() {
+		return receiptName;
+	}
+
+	public void setReceiptName(String receiptName) {
+		this.receiptName = receiptName;
+	}
+
 	
 }

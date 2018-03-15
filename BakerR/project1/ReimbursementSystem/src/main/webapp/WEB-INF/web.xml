@@ -100,4 +100,14 @@
     <servlet-name>UpdateReimbursementServlet</servlet-name>
     <url-pattern>/update-request</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description>Retrieves receipt from database</description>
+    <display-name>GetReceiptServlet</display-name>
+    <servlet-name>GetReceiptServlet</servlet-name>
+    <servlet-class>com.revature.servlet.GetReceiptServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetReceiptServlet</servlet-name>
+    <url-pattern>/get-receipt</url-pattern>
+  </servlet-mapping>
 </web-app>

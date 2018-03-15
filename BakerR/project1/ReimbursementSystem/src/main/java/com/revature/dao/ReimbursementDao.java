@@ -2,14 +2,14 @@ package com.revature.dao;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.sql.Blob;
 import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Types;
+import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.revature.bean.Reimbursement;
 import com.revature.bean.ReimbursementStatus;
@@ -328,27 +328,64 @@ public class ReimbursementDao {
 	}
 
 	/**
-	 * Gets the bytes of the receipt file. 
+	 * Gets the byte data and filename of the receipt file. 
 	 * @param id The ID of the reimbursement request the receipt belongs to. 
-	 * @return The receipt file's byte data.
+	 * @return A reimbursement with all fields null except for receiptName and receipt.
 	 * @throws SQLException	Caused by query or connection.
 	 */
-	public byte[] getReceipt(int id) throws SQLException {
+	public Reimbursement getReceipt(int id) throws SQLException {
 		byte[] receipt = null;
-		CallableStatement cs = null;
+		String name = null;
+		PreparedStatement ps = null;
+		Reimbursement r = new Reimbursement();
 		
 		try {
-			cs = cm.getConnection().prepareCall("{? = call get_receipt(?)}");
-			cs.registerOutParameter(1, Types.BLOB);
-			cs.setInt(2, id);
-			cs.execute();
-			Blob blob = cs.getBlob(1);
-			receipt = blob.getBytes(0, (int)(blob.length()));
+			ps = cm.getConnection().prepareStatement("SELECT * FROM get_receipt(?);");
+			ps.setInt(1, id);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			if(rs.next()) {
+			
+				receipt = rs.getBytes("data");
+				name = rs.getString("fname");
+			
+				r.setReceiptName(name);
+				r.setReceipt(receipt);
+			}
 		} finally {
-			if(cs != null) cs.close();
+			if(ps != null) ps.close();
 		}
 		
-		return receipt;
+		return r;
+	}
+	
+	/**
+	 * Gets the receipt filename and size from the database
+	 * @param id	Reimbursement ID to get the receipt from.
+	 * @return	Filename-Filesize pair if receipt exists. Otherwise, null.
+	 */
+	public Map.Entry<String, Integer> getReceiptMetadata(int id) throws SQLException {
+		Map.Entry<String, Integer> metadata = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		try {
+			ps = cm.getConnection().prepareStatement("SELECT * FROM get_receipt_metadata(?);");
+			ps.setInt(1, id);
+			rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				Integer filesize = rs.getInt("filesize");
+				String filename = rs.getString("filename");
+				
+				metadata = new AbstractMap.SimpleEntry<>(filename, filesize);
+			}
+		} finally {
+			if(rs != null) rs.close();
+			if(ps != null) ps.close();
+		}
+		return metadata;
 	}
 	
 	
@@ -364,13 +401,15 @@ public class ReimbursementDao {
 		CallableStatement cs = null;
 		
 		try {
-			cs = cm.getConnection().prepareCall("{call add_new_reimbursement(?, ?, ?, ?, ?, ?)}");
+			cs = cm.getConnection().prepareCall("{call add_new_reimbursement(?, ?, ?, ?, ?, ?, ?, ?)}");
 			cs.setBigDecimal(1, new BigDecimal(request.getAmount()));
 			cs.setString(2, request.getDescription());
 			cs.setTimestamp(3, java.sql.Timestamp.valueOf(request.getSubmitted()));
 			cs.setInt(4, request.getAuthor().getId());
 			cs.setInt(5, request.getType().getId());
 			cs.setInt(6, request.getStatus().getId());
+			cs.setBytes(7, request.getReceipt());
+			cs.setString(8, request.getReceiptName());
 			cs.execute();
 		} finally {
 			if(cs != null) cs.close();
@@ -429,13 +468,14 @@ public class ReimbursementDao {
 	 * @param receiptData	The byte data of the receipt to upload into the database.
 	 * @throws SQLException	Caused by query or connection.
 	 */
-	public void updateReceipt(int id, byte[] receiptData) throws SQLException {
+	public void updateReceipt(int id, byte[] receiptData, String receiptName) throws SQLException {
 		CallableStatement cs = null;
 		
 		try {
-			cs = cm.getConnection().prepareCall("{call update_receipt(?, ?)}");
+			cs = cm.getConnection().prepareCall("{call update_receipt(?, ?, ?)}");
 			cs.setInt(1, id);
 			cs.setBytes(2, receiptData);
+			cs.setString(3, receiptName);
 			cs.execute();
 		} finally {
 			if(cs != null) cs.close();
