@@ -32,21 +32,22 @@ public class ReimbursementServices extends LookupServices implements Reimburseme
     	callInsert.setString(2, r.getDescription());
     	
 //    	if(r.getReceipt().length <= 0) {
-    		callInsert.setNull(3,java.sql.Types.BLOB);
+		callInsert.setNull(3,java.sql.Types.BLOB);
 //    	}
 //    	else {
 //			Blob blob = conn.createBlob();
 //			blob.setBytes(1, r.getReceipt());
-		//    	callInsert.setBlob(3,new Blob(r.getReceipt()));
+//	    	callInsert.setBlob(3,new Blob(r.getReceipt()));
 //			callInsert.setBlob(3, blob); //SETTING BLOB HERE
 //    	}
-    	callInsert.setDate(4, r.getSubmitted());
-    	callInsert.setDate(5, r.getResolved());
+    	callInsert.setTimestamp(4, r.getSubmitted());
+    	callInsert.setTimestamp(5, r.getResolved());
     	callInsert.setInt(6, r.getAuthor());
-		callInsert.setNull(7,java.sql.Types.INTEGER);
+    	callInsert.setNull(7, java.sql.Types.INTEGER);
+//		callInsert.setInt(7,r.getResolver());
     	callInsert.setInt(8, r.getRType());
     	callInsert.setInt(9, r.getRStatus());
-    	
+    	System.out.println("In service: " + r.getRStatus());
     	//execute delete
     	callInsert.executeUpdate();
     } 
@@ -145,8 +146,8 @@ public class ReimbursementServices extends LookupServices implements Reimburseme
     	callUpdate.setDouble(2,r.getAmount());
     	callUpdate.setString(3,r.getDescription());
 //    	callUpdate.setBytes(4,r.getReceipt()); //SETTING BLOB HERE!!
-    	callUpdate.setDate(5,r.getSubmitted());
-    	callUpdate.setDate(6,r.getResolved());    	
+    	callUpdate.setTimestamp(5,r.getSubmitted());
+    	callUpdate.setTimestamp(6,r.getResolved());    	
     	callUpdate.setInt(7, r.getAuthor());
     	callUpdate.setInt(8,r.getResolver());
     	callUpdate.setInt(9, r.getRType());
@@ -177,8 +178,8 @@ public class ReimbursementServices extends LookupServices implements Reimburseme
     	ticket.setAmount(rs.getDouble(2));
     	ticket.setDescription(rs.getString(3));
 //    	ticket.setReceipt(rs.getBlob(4)); //SETTING BLOB HERE!!
-    	ticket.setSubmitted(rs.getDate(5));
-    	ticket.setResolved(rs.getDate(6));
+    	ticket.setSubmitted(rs.getTimestamp(5));
+    	ticket.setResolved(rs.getTimestamp(6));
     	ticket.setAuthor(rs.getInt(7));
     	ticket.setResolver(rs.getInt(8));
     	ticket.setRType(rs.getInt(9));

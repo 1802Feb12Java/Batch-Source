@@ -1,6 +1,6 @@
 package com.revature.bean;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 public class Reimbursement{
     //members
@@ -8,8 +8,8 @@ public class Reimbursement{
     private double amount;
     private String description;
     private byte[] receipt;
-    private Date submitted;
-    private Date resolved;
+    private Timestamp submitted;
+    private Timestamp resolved;
     private int author;
     private int resolver;
     private int rType; //Reimbursement type
@@ -45,7 +45,7 @@ public class Reimbursement{
 
     //parm Constructor
     public Reimbursement(int newRID, double newAmount, String newDescription,
-    					 Byte[] newReceipt, Date newSubmitted, Date newResolved, 
+    					 Byte[] newReceipt, Timestamp  newSubmitted, Timestamp  newResolved, 
     					 int newAuthor, int newResolver, int newRType, 
     					 int newRStatus){
         this.reimburseID = newRID;
@@ -77,11 +77,11 @@ public class Reimbursement{
         return this.receipt;
     }
 
-    public Date getSubmitted(){
+    public Timestamp  getSubmitted(){
         return this.submitted;
     }
 
-    public Date getResolved(){
+    public Timestamp  getResolved(){
         return this.resolved;
     }
 
@@ -118,11 +118,11 @@ public class Reimbursement{
         this.receipt = newReceipt;
     }
 
-    public void setSubmitted(Date newSubmitted){
+    public void setSubmitted(Timestamp  newSubmitted){
         this.submitted = newSubmitted;
     }
 
-    public void setResolved(Date newResolved){
+    public void setResolved(Timestamp  newResolved){
         this.resolved = newResolved;
     }
 

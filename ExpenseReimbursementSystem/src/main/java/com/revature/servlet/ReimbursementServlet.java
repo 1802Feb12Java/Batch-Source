@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -19,6 +21,8 @@ import com.revature.bean.helper.UpdateTicket;
 import com.revature.bean.helper.ViewTicket;
 import com.revature.services.ReimbursementServices;
 
+import oracle.sql.TIMESTAMP;
+
 public class ReimbursementServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -33,10 +37,11 @@ public class ReimbursementServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		//TODO: get sessionID to see who is current user
-		HttpSession session = request.getSession(false);
-		int sessionRole = (int)(session.getAttribute("roleID"));
+//		HttpSession session = request.getSession(false);
+//		int sessionRole = (int)(session.getAttribute("roleID"));
 //		int sessionID = 1;
 		try {
+			System.out.println("doPost received!");
 			//grab json from put body
 			BufferedReader reader = request.getReader();
 			
@@ -81,20 +86,20 @@ public class ReimbursementServlet extends HttpServlet {
 			PrintWriter out = response.getWriter();
 			//start of json response
 			out.println("{");
+			out.print("\"tickets\":[");
 			for(int i = 0; i < rl.size(); i++) {
 				Reimbursement r = rl.get(i);
 				
 				if(i==0) {
-					out.print("\"ticket" + i + "\":");
 					out.println(gson.toJson(r));
 				}
 				else {
-					out.print(",\n\"ticket" + i + "\":");
+					out.println(",");
 					out.println(gson.toJson(r));
 				}
 			}
 			//end of json response
-			out.println("}");
+			out.println("]}");
 			out.close();
 			
 		}
@@ -119,16 +124,25 @@ public class ReimbursementServlet extends HttpServlet {
 			BufferedReader reader = request.getReader();
 			//gson then convert from json to ut
 //			Gson gson = new Gson();
-			Gson gson = new GsonBuilder().setDateFormat("dd-MM-yyyy").create();
+			Gson gson = new Gson(); //Builder().setDateFormat("dd-MM-yyyy").create();
 			
 			UpdateTicket ut = gson.fromJson(reader, UpdateTicket.class);
 			String type = ut.getType();
 			
 			ReimbursementServices ts = new ReimbursementServices();
 			if(type.equals("submit")) { //call insert
+				Reimbursement ticket = ut.getTicket();
+				ticket.setSubmitted(Timestamp.valueOf( LocalDateTime.now()));
+				ticket.setReceipt(null);
+				ticket.setResolved(null);
+				ticket.setResolver(0);
+//				System.out.println(ticket.getRStatus());
+				ticket.setRType(1);
+				ticket.setRStatus(1);
+				System.out.println(ticket.toString());
 				ts.insertReimbursementTicket(ut.getTicket());
 			}
-			
+			System.out.println("Insert Ticket Completed!");
 			
 		}
 		catch (ClassNotFoundException e) {

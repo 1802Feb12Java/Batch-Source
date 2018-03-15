@@ -58,7 +58,7 @@ CREATE TABLE ers_reimbursements
     CONSTRAINT ers_u_id_resolver FOREIGN KEY (u_id_resolver) 
         REFERENCES ers_users (u_id),
     CONSTRAINT ers_rt_type FOREIGN KEY (rt_type) 
-            REFERENCES ers_reimbursement_type (rt_id),
+        REFERENCES ers_reimbursement_type (rt_id),
     CONSTRAINT ers_rt_status FOREIGN KEY (rt_status) 
         REFERENCES ers_reimbursement_status (rs_id)
 );
@@ -132,8 +132,15 @@ BEGIN
     (r_amount,r_description,r_receipt,r_submitted,r_resolved,
      u_id_author,u_id_resolver,rt_type,rt_status)
     VALUES 
-    (ticket_amount,ticket_description,ticket_receipt,ticket_submitted,ticket_resolved,
-     ticket_author,ticket_resolver,ticket_rtype,ticket_rstatus);
+    (ticket_amount,
+     ticket_description,
+     ticket_receipt,
+     ticket_submitted,
+     ticket_resolved,
+     ticket_author,
+     ticket_resolver,
+     ticket_rtype,
+     ticket_rstatus);
     COMMIT;
 END;
 /
@@ -179,8 +186,9 @@ END;
 
 --INSERT DUMMY DATA
 INSERT INTO ERS_REIMBURSEMENT_TYPE (RT_TYPE) VALUES ('travel');
-INSERT INTO ERS_REIMBURSEMENT_TYPE (RT_TYPE) VALUES ('medical');
 INSERT INTO ERS_REIMBURSEMENT_TYPE (RT_TYPE) VALUES ('business');
+INSERT INTO ERS_REIMBURSEMENT_TYPE (RT_TYPE) VALUES ('medical');
+INSERT INTO ERS_REIMBURSEMENT_TYPE (RT_TYPE) VALUES ('other');
 INSERT INTO ERS_REIMBURSEMENT_STATUS (RS_STATUS) VALUES ('pending');
 INSERT INTO ERS_REIMBURSEMENT_STATUS (RS_STATUS) VALUES ('approved');
 INSERT INTO ERS_REIMBURSEMENT_STATUS (RS_STATUS) VALUES ('denied');

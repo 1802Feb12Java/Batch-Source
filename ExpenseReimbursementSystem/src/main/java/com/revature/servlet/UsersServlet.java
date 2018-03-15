@@ -9,7 +9,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 import com.revature.bean.User;
@@ -28,9 +27,10 @@ public class UsersServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		try {
-			HttpSession session = request.getSession(false);
-			int sessionUser = (int)(session.getAttribute("userID"));
-			//int sessionUser = 1;
+			BufferedReader reader =request.getReader();
+			String s = reader.readLine().substring(8, 9);
+			System.out.println(s);
+			int sessionUser = Integer.parseInt(s);
 			//System.out.println("UserID from Session: " + request.getSession().getAttribute("userID"));
 			
 			//create gson for response
@@ -64,6 +64,7 @@ public class UsersServlet extends HttpServlet {
 	@Override
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
+		System.out.println("put receieved!");
 		//setup responses
 		PrintWriter out = response.getWriter();
 		//set response content type json
@@ -75,11 +76,12 @@ public class UsersServlet extends HttpServlet {
 			//gson object to translate json <-> object
 			Gson gson = new Gson();
 			User newUserInfo = gson.fromJson(reader, User.class);
-//			System.out.println(newUserInfo.toString());
+			System.out.println(newUserInfo.toString());
 			//call update operation
 			UserServices us = new UserServices();
 			us.updateUser(newUserInfo);
-			response.setStatus(200);
+			response.setStatus(211);
+			System.out.println("updated!");
 		}
 		catch(ClassNotFoundException e) {
 			e.printStackTrace();

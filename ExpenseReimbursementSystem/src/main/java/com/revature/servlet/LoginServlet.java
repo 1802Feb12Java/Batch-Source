@@ -55,6 +55,9 @@ public class LoginServlet extends HttpServlet {
 				session.setAttribute("userID", u.getUserID());
 				session.setAttribute("roleID", u.getRole());
 				
+				System.out.println("session userID: " + session.getAttribute("userID"));
+				
+				
 				if(u.getRole().equals("employee"))
 					response.setStatus(211);//success as employee
 				else if(u.getRole().equals("manager"))
