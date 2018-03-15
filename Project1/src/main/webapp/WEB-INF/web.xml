@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+  <display-name>Project1</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <servlet-name>LoginServlet</servlet-name>
+    <servlet-class>com.revature.servlets.LoginServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoginServlet</servlet-name>
+    <url-pattern>/Login</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ViewEmp</servlet-name>
+    <servlet-class>com.revature.servlets.ViewEmp </servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ViewEmp</servlet-name>
+    <url-pattern>/ViewEmp</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>sessionServlet</servlet-name>
+    <servlet-class>com.revature.servlets.sessionServlet </servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>sessionServlet</servlet-name>
+    <url-pattern>/Session</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>Request</servlet-name>
+    <servlet-class>com.revature.servlets.RequestServlet </servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Request</servlet-name>
+    <url-pattern>/Request</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>Resolve</servlet-name>
+    <servlet-class>com.revature.servlets.ResolveServlet </servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Resolve</servlet-name>
+    <url-pattern>/Resolve</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>PendingReqServlet</servlet-name>
+    <servlet-class>com.revature.servlets.PendingReqServlet </servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PendingReqServlet</servlet-name>
+    <url-pattern>/Pending</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ResolvedReqServlet</servlet-name>
+    <servlet-class>com.revature.servlets.ResolvedReqServlet </servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ResolvedReqServlet</servlet-name>
+    <url-pattern>/Resolved</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>LogoutServlet</servlet-name>
+    <servlet-class>com.revature.servlets.LogoutServlet </servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LogoutServlet</servlet-name>
+    <url-pattern>/Logout</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ViewInfo</display-name>
+    <servlet-name>ViewInfo</servlet-name>
+    <servlet-class>com.revature.servlets.ViewInfo</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ViewInfo</servlet-name>
+    <url-pattern>/ViewInfo</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>NewEmpServlet</display-name>
+    <servlet-name>NewEmpServlet</servlet-name>
+    <servlet-class>com.revature.servlets.NewEmpServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>NewEmpServlet</servlet-name>
+    <url-pattern>/NewEmpServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UpdateEmpServlet</display-name>
+    <servlet-name>UpdateEmpServlet</servlet-name>
+    <servlet-class>com.revature.servlets.UpdateEmpServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateEmpServlet</servlet-name>
+    <url-pattern>/UpdateEmpServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>logInfo</display-name>
+    <servlet-name>logInfo</servlet-name>
+    <servlet-class>com.revature.servlets.logInfo</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>logInfo</servlet-name>
+    <url-pattern>/logInfo</url-pattern>
+  </servlet-mapping>
+</web-app>

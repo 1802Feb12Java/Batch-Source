@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Employee Information</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="style1.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark py-lg-4" id="mainNav">
+        <!-- <div class="container"> -->
+            <a class="navbar-brand text-uppercase text-expanded font-weight-bold d-lg-none" href="#">Employee Information</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item px-lg-4">
+                        <a class="nav-link text-uppercase text-expanded title-link" href="EmployeeProfile.html">Profile</a>
+                    </li>
+                    <li class="nav-item px-lg-4">
+                        <a class="nav-link text-uppercase text-expanded title-link" href="EmployeeAbout.html">Personal Information</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+    <table id="myList" class="table">
+        <tr>
+            <th>ID</th>
+            <th>UserName</th>
+            <th>Password</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+        </tr>
+        <tr>
+            <th id="Me1"></th>
+            <th id="Me2"></th>
+            <th id="Me3"></th>
+            <th id="Me4"></th>
+            <th id="Me5"></th>
+            <th id="Me6"></th>
+        </tr>
+    </table>
+
+    <div id="accordion">
+
+        <div class="card">
+            <div class="card-header">
+                <a class="card-link" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                    Update Personal Information
+                </a>
+            </div>
+            <div id="collapseOne" class="collapse">
+                <div class="card-body">
+                    <form class="box" action="UpdateEmpServlet" method="post">
+                        <fieldset>
+                            <h2 class="section-heading mb-4">
+                                <span class="section-heading-upper">Enter your changes:</span>
+                            </h2>
+                            <div class="mb-3">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="usr">Username: </label>
+                                        <input id="usr1" type="text" name="usr" class="form-control">
+                                        <label for="psw">Password: </label>
+                                        <input id="psw1" type="text" name="psw" class="form-control">
+                                        <label for="fnm">First Name: </label>
+                                        <input id = "fnm1" type="text" name="fnm" class="form-control">
+                                        <label for="lnm">Last Name: </label>
+                                        <input id = "lnm1" type="text" name="lnm" class="form-control">
+                                        <label for="eml">Email: </label>
+                                        <input id = "eml1" type="text" name="eml" class="form-control">
+                                  
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <br>
+                        <div class="intro-button mx-auto">
+                            <input class="btn btn-primary btn-xl" type="submit" value="Submit">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <form class="box" action="Logout" method="post">
+            <div class="intro-button mx-auto">
+            <input class="btn btn-primary btn-xl" type="submit" value="Logout">
+        </div>
+    </form>
+
+    <!-- </div> -->
+
+</body>
+<script src="ajax.js"></script>
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+</html>
