@@ -133,4 +133,13 @@
 		<url-pattern>/updateoneuser</url-pattern>
 	</servlet-mapping>
 
+	<servlet>
+		<servlet-name>registration</servlet-name>
+		<servlet-class>com.revature.servlets.RegistrationServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>registration</servlet-name>
+		<url-pattern>/register</url-pattern>
+	</servlet-mapping>
+
 </web-app>

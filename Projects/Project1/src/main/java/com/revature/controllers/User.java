@@ -45,4 +45,9 @@ public class User {
 		return iud.getFirstName(username);
 	}
 
+	public static void register(String username, String password, String firstName, String lastName, String email)
+			throws SQLException {
+		iud.newUser(username, password, firstName, lastName, email);
+	}
+
 }

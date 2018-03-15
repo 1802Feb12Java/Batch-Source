@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.revature.controllers.User;
 
-public class UpdateUserServlet extends HttpServlet {
+public class RegistrationServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
@@ -18,16 +18,15 @@ public class UpdateUserServlet extends HttpServlet {
 		resp.addHeader("Access-Control-Allow-Origin", "*");
 		resp.setContentType("text/html;charset=utf-8");
 
-		String oldusername = req.getParameter("ousr");
-		String username = req.getParameter("user");
-		String password = req.getParameter("pass");
-		String firstName = req.getParameter("fnam");
-		String lastName = req.getParameter("lnam");
-		String email = req.getParameter("emal");
+		String username = req.getParameter("user1");
+		String password = req.getParameter("pass1");
+		String firstName = req.getParameter("fnam1");
+		String lastName = req.getParameter("lnam1");
+		String email = req.getParameter("emal1");
 
 		try {
-			User.updateUserInformation(oldusername, username, password, firstName, lastName, email);
-			req.getRequestDispatcher("/manager-update.html").forward(req, resp);
+			User.register(username, password, firstName, lastName, email);
+			req.getRequestDispatcher("/login.html").forward(req, resp);
 		} catch (SQLException e) {
 			resp.addHeader("isDone", "no");
 		}

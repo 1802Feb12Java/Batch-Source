@@ -1,5 +1,5 @@
 package com.revature.test;
-
+/*
 import static org.junit.Assert.*;
 
 import java.sql.SQLException;
@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import com.revature.controllers.Manager;
 import com.revature.controllers.User;
-import com.revature.dao.implementation.ConnFactory;
+import com.revature.dao.implementation.ConnFactory; */
 
 public class Project1Test {
 

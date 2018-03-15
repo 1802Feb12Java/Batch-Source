@@ -68,7 +68,7 @@ public class ImplementationUserDAO implements UserDAO {
 		if (rs2.next()) {
 			userRole = rs2.getString(1);
 		}
-		
+
 		log.info("Role for user [" + username + "] retreived");
 
 		c1.close();
@@ -131,6 +131,22 @@ public class ImplementationUserDAO implements UserDAO {
 		c5.close();
 		log.debug("Connection to database closed");
 		return firstName;
+	}
+
+	public void newUser(String newusername, String password, String firstName, String lastName, String email)
+			throws SQLException {
+		Connection c9 = ConnFactory.getInstance().getConnection();
+		PreparedStatement cs9 = c9.prepareCall("{call ADD_USER(?, ?, ?, ?, ?)}");
+
+		cs9.setString(1, newusername);
+		cs9.setString(2, password);
+		cs9.setString(3, firstName);
+		cs9.setString(4, lastName);
+		cs9.setString(5, email);
+		cs9.execute();
+		log.info("Attempted to register User [" + newusername + "]");
+		c9.close();
+		log.debug("Connection to database closed");
 	}
 
 }
