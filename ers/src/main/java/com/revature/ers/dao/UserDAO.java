@@ -18,5 +18,6 @@ public interface UserDAO {
 	//user identification and validation operations
 	public boolean validateUser(String u_userName, String u_password)throws SQLException;
 	public int getUserRole(String u_userName)throws SQLException;
+	public int getUserRole(int u_ID)throws SQLException;
 	public int getUserID(String u_userName)throws SQLException;
 }

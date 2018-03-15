@@ -1,8 +1,11 @@
 package com.revature.ers.jsonifiers;
 
+import java.util.ArrayList;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.revature.ers.reimbursements.Reimbursement;
 import com.revature.ers.users.User;
 
 public class ToJSON {
@@ -33,31 +36,29 @@ public class ToJSON {
 		return empList;
 	}
 	
-	public static JSONArray empPending(int u_ID) {
-		JSONObject reimbursement = new JSONObject();
-		JSONArray reimPending = new JSONArray();
+	public static JSONArray reimbursements(ArrayList<Reimbursement> list) {
+		if (list.isEmpty()) {
+			return null;
+		}
 		
-		return reimPending;
-	}
-	
-	public static JSONArray empResolved(int u_ID) {
-		JSONObject reimbursement = new JSONObject();
-		JSONArray reimResolved = new JSONArray();	
+		JSONObject current = new JSONObject();
+		JSONArray jArray = new JSONArray();
 		
-		return reimResolved;
-	}
-	
-	public static JSONArray allPending() {
-		JSONObject reimbursement = new JSONObject();
-		JSONArray reimPending = new JSONArray();
+		for (Reimbursement indexed : list) {
+			current.put("r_id", indexed.getR_id());
+			current.put("amount", indexed.getR_id());
+			current.put("description", indexed.getR_description());
+			current.put("receipt", indexed.getR_receipt());
+			current.put("submitted", indexed.getR_submitted());
+			current.put("resolved", indexed.getR_resolved());
+			current.put("author", indexed.getU_ID_Author());
+			current.put("resolver", indexed.getU_ID_Resolver());
+			current.put("type", indexed.getRt_Type());
+			current.put("status",  indexed.getRt_Status());
+			
+			jArray.put(current);
+		}
 		
-		return reimPending;		
-	}
-	
-	public static JSONArray allResolved() {
-		JSONObject reimbursement = new JSONObject();
-		JSONArray reimResolved = new JSONArray();
-		
-		return reimResolved;		
+		return jArray;
 	}	
 }

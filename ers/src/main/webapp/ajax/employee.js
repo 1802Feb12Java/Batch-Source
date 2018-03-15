@@ -22,17 +22,20 @@ let submit = function(){
     //create the function to handle the request
     xhr.onreadystatechange = function(){
         if(this.readyState == 4 && this.status == 200){
+            //get the request submission form and initialize the variables
             document.getElementById("page").innerHTML = this.responseText;
             let selectedButton = 5;
-            console.log("selected: " + selectedButton);
             let description = "";
             let amount = 0.00;
 
+            //add the event listener to the form submit
             document.getElementById("requestForm").addEventListener('submit', function(e){
+                //prevent the form from submitting via normal method
                 e.preventDefault();
                 console.log("Submit button");
                 let radio = document.getElementsByName("rType");
 
+                //locate the checked button and assign the value for backend usage
                 for (let i = 0; i < 5; i++){
                     console.log("for: " + i);
                     if(radio[i].checked){
@@ -41,18 +44,18 @@ let submit = function(){
                         break;
                     }
                 }
-                console.log("For loop complete");
 
+                //get the remaining values from the form fields
                 description = document.getElementsByName("description")[0].value;
                 amount = document.getElementsByName("amountRequested")[0].value;
 
-                console.log("Desc: " + description + " amount: " + amount + "selected: " +selectedButton);
-
+                //tediously formulate the JSON string by hand, follow up with several hours
+                //of debugging before it works.
                 request = '{"selected" : "' + selectedButton + '",' +
                             '"description" :' +'"' + description + '",' +
                             '"amount" : "' + amount + '"}';
-                console.log("Request looks like: " + request);
 
+                //pass the JSON-formatted string to the reimbursement request processor
                 sendRequest(request);
             });
         };
@@ -64,40 +67,63 @@ let submit = function(){
 
 let sendRequest = function(req) {
     let xhr = new XMLHttpRequest();
-    console.log("In send request with: " + req);
+
+    //open the requeset and set the header
     xhr.open('POST', '/ers/CreateReimbursement', true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-    console.log("After set req header: " + xhr.readyState);
     xhr.onreadystatechange = function(){
         if(this.readyState == 4 && this.status == 200){
-            console.log("Readystate change in sendRequest");
+            //call the submission form again to clear out the values
+            submit();
         }
     }
 
     xhr.send(req);
-    console.log("After send: " + xhr.readyState);
 };
 
 let viewEPending = function(){
-    console.log('View Employee Pending');
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', '/ers/GetPendingReimbursements', true);
+
+    xhr.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
+            let jArray = JSON.parse(this.responseText);
+            console.log(jArray);
+        }       
+    }
+    
+    xhr.send();
 };
 
 let viewEResolved = function(){
-    console.log('View Employee Resolved');
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', '/ers/GetResolvedReimbursements', true);
+
+    xhr.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
+            let jArray = JSON.parse(this.responseText);
+            console.log(jArray);
+        }       
+    }
+    
+    xhr.send();
 };
 
 let viewEInfo = function(){
     //create the XHR object
     let xhr = new XMLHttpRequest();
 
-    //Open the request with the parameters: (type, url/filename, async)
+    //get the employee values from the servlet
     xhr.open('GET', '/ers/ViewEmployeeInfo', true);
     
     console.log("View: " + xhr);
     //create the function to handle the request
     xhr.onreadystatechange = function(){
         if(this.readyState == 4 && this.status == 200){
+            //parse the string into a JSON object for convenience
             let employeeJSON = JSON.parse(this.responseText);
+
+            //pass the JSON object to the employee view/change information page
             showCard(employeeJSON);
         };
     };
@@ -113,6 +139,7 @@ let showCard = function(employee){
     xhr.onreadystatechange = function(){
 
         if(this.readyState == 4 && this.status == 200){
+            //assign the values to the appropriate fields and placeholders
             document.getElementById("page").innerHTML = this.responseText;
             document.getElementById("employeeName").textContent = employee.fname + " " + employee.lname +
                     ", " + employee.role;
@@ -120,6 +147,7 @@ let showCard = function(employee){
             document.getElementsByName("lname")[0].placeholder=employee.lname;
             document.getElementsByName("email")[0].placeholder=employee.email;
 
+            //add event listeners to update the JSON object when input is detected
             document.getElementsByName("fname")[0].addEventListener("input", function(){
                 employee.fname = document.getElementsByName("fname")[0].value;
             });
@@ -131,6 +159,8 @@ let showCard = function(employee){
                 employee.email = document.getElementsByName("email")[0].value;
             });
 
+            //add the custome event listener to the submit button, and pass the updated
+            //employee values to finalize the changes when the form is submitted
             document.getElementById("employeeInfo").addEventListener("submit", function(e){
                 e.preventDefault();
                 submitChange(employee);
@@ -144,12 +174,16 @@ let showCard = function(employee){
 let submitChange = function (emp){
     let xhr = new XMLHttpRequest();
 
+    //stringify the employee values to prepare to send ot the servlet
     sendEmp = JSON.stringify(emp);
+
+    //Post the form data to the servlet
     xhr.open('POST', '/ers/UpdateEmployeeInfo', true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
 
     xhr.onreadystatechange = function(){
         if(this.readyState == 4 && this.status == 200){
+            //call the updated employee view with the new fields in place
             viewEInfo();
         }
     }
@@ -157,6 +191,7 @@ let submitChange = function (emp){
     xhr.send(sendEmp);
 }
 
+//add the event listeners for the nav bar items
 document.getElementById("submitReimbursement").addEventListener("click", submit);
 document.getElementById("viewEPending").addEventListener("click", viewEPending);
 document.getElementById("viewEResolved").addEventListener("click", viewEResolved);

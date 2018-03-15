@@ -1,3 +1,6 @@
+.bg{background: url("../images/meeseeks.png") no-repeat; width: 100%; height: 100vh;}
+
+#top-border{background-color: #333}
 ul {
     list-style-type: none;
     margin: 0;
@@ -12,7 +15,7 @@ li {
 
 li a {
     display: block;
-    color: white;
+    color: whitesmoke;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
@@ -24,7 +27,7 @@ li a:hover {
 }
 
 .form-container{
-    border: 1px solid rgb(110, 20, 104);margin: 30px 40px; padding: 60px 50px; margin-top: 20vh;
+    border: 1px solid rgb(110, 20, 104);margin: 20px 40px 30px 40px; padding: 20px 40px 30px 40px; margin-top: 10vh;
     -webkit-box-shadow: -1px 4px 26px 11px rgba(0,0,0,0.77);
     -moz-box-shadow: -1px 4px 26px 11px rgba(0,0,0,0.77);
     box-shadow: -1px 4px 26px 11px rgba(0,0,0,0.77);
@@ -32,17 +35,34 @@ li a:hover {
     -moz-border-radius: 51px 51px 51px 51px;
     -webkit-border-radius: 51px 51px 51px 51px;
     border: 0px solid #000000;
+    background-color: rgb(27, 9, 77);
+    top: 0px;
 }
+
+.form-container2{
+    position: relative;
+    border: 1px solid rgb(110, 20, 104);margin: 20px 30px; padding: 30px 30px; margin-top:05vh;
+    -webkit-box-shadow: -1px 4px 26px 11px rgba(0,0,0,0.77);
+    -moz-box-shadow: -1px 4px 26px 11px rgba(0,0,0,0.77);
+    box-shadow: -1px 4px 26px 11px rgba(0,0,0,0.77);
+    border-radius: 51px 51px 51px 51px;
+    -moz-border-radius: 51px 51px 51px 51px;
+    -webkit-border-radius: 51px 51px 51px 51px;
+    border: 0px solid #000000;
+    background-color: rgb(27, 9, 77);
+    top: -100px;
+}
+
 .form-control{margin-top: 20px; margin-bottom: 10px;}
 
 .btn{margin-top: 20px;}
 
-.h3{color: whitesmoke;}
+.h3{color: rgb(199, 126, 16);}
 
 #page{
     background-color: #000000;
     width: 100%; height: 100vh;
-    color: whitesmoke;
+    color: orange;
     padding: 0;
     margin: 0;
 }

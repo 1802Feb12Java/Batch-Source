@@ -1,6 +1,7 @@
 package ers;
 import org.junit.Test;
 
+import com.revature.ers.reimbursements.ReimbursementServices;
 import com.revature.ers.users.User;
 import com.revature.ers.users.UserServices;
 import com.revature.ers.util.ConnFactory;
@@ -17,19 +18,19 @@ public class TestJunit {
 	UserServices us = new UserServices();
 	User testUser = new User();
 	
-   //@Test
+   @Test
    //tests that the connection factory is connecting to the database
-//   public void testConn() {
-//	   ConnFactory cf = new ConnFactory();
-//	  String result = "Failed";
-//	  
-//	  Connection conn = cf.getConnection();
-//	  
-//	  if (conn != null) {
-//		  result = "Conn Factory connected";
-//	  }
-//      assertEquals("Conn Factory connected", result);
-//   }//end testConn
+   public void testConn() {
+	   ConnFactory cf = new ConnFactory();
+	  String result = "Failed";
+	  
+	  Connection conn = cf.getConnection();
+	  
+	  if (conn != null) {
+		  result = "Conn Factory connected";
+	  }
+      assertEquals("Conn Factory connected", result);
+   }//end testConn
    
    //Populates user fields and attempts to add user, the actual test will take place in testGetPassword;
    //if the assertion comes back as valid, the user has been created
@@ -48,6 +49,7 @@ public class TestJunit {
 //		e.printStackTrace();
 //	}
 //   }
+   
    @Test
    //test user validation
    public void testGetPassword() { 
@@ -75,6 +77,16 @@ public class TestJunit {
    	System.out.println(testUser.getU_email());
    	
   }
+   
+   @Test
+   public void testGetPending() {
+	   ReimbursementServices r_s = new ReimbursementServices();
+	   try {
+		r_s.getPendingReimbursements(4, 2);
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+   }
 }
 
 
