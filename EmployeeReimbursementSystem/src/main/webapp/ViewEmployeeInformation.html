@@ -17,7 +17,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
  
-    
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
           <div class="navbar-header">
@@ -26,6 +25,12 @@
           <ul class="nav navbar-nav">
             <li class="active"><a href="./ManagerHome.html">Home</a></li>
           </ul>
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="./ViewEmployeeInformation.html">View Employee Information</a></li>
+          </ul>
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="./ManagerReimbursementView.html">View Reimbursements</a></li>
+          </ul>
           <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -33,7 +38,7 @@
                     <span id = "username"> username </span>
               		<span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a href="./AccountInformation.html">Account Information <span class="divider"></span></a></li>
+                <li><a href="./ManagerInformation.html">Account Information <span class="divider"></span></a></li>
                 <li class="divider"></li>
                 <li><a href="./LogoutServlet"> <span class = "glyphicon glyphicon-off"></span> Log-Out</a></li>
               </ul>
@@ -41,6 +46,9 @@
           </ul>
         </div>
       </nav>
+      
+      <a href = "./ViewEmployeeInformation.html">View Employee Information</a>
+      <a href = "./ManagerReimbursementView.html">View Pending Reimbursements</a>  
       
       <table class="table" style="background-color: white">
             <thead style="background-color: black;color: white">
@@ -62,4 +70,5 @@
 </body>
 <script src="./resources/js/EmployeeHome.js"></script>
 <script src="./resources/js/EmployeeTableInformation.js"></script>
+
 </html>

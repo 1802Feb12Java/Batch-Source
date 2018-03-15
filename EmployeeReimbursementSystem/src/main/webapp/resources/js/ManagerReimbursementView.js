@@ -3,8 +3,6 @@ var reimbursementInfo;
 
 //the argument magic holds the results
 function loadReimbursements(reimbursementInfo){
-    
-	console.log("point");
 	
 	for(i = 0; i < reimbursementInfo.length; i++){
 
@@ -27,7 +25,13 @@ function loadReimbursements(reimbursementInfo){
         cell4.innerHTML = reimbursementInfo[i].reimbursementTypeIDString;
         cell5.innerHTML = reimbursementInfo[i].description;
         cell6.innerHTML = reimbursementInfo[i].submitted;
-        cell7.innerHTML = reimbursementInfo[i].userIDResolverString;
+        
+        if(reimbursementInfo[i].userIDResolverString != "test"){
+        	cell7.innerHTML = reimbursementInfo[i].userIDResolverString;
+        }else{
+        	cell7.innerHTML = "UNRESOLVED";
+        }
+        
         cell8.innerHTML = reimbursementInfo[i].reimbursementTypeIDString;
         cell9.innerHTML = 
         	"<form method = \"post\" action=\"UpdateReimbursementServlet\" class=\"form-horizontal\">" +
@@ -45,11 +49,16 @@ function search(){
 	while (myNode.firstChild) {
 	    myNode.removeChild(myNode.firstChild);
 	}
+	var searchVal= document.getElementById('search').value
+	
+	var counter = 0;
 	
 	for(i = 0; i < reimbursementInfo.length; i++){
-		if(document.getElementById('search').value == reimbursementInfo[i].userIDAuthorString){
+		console.log(searchVal + " == " + reimbursementInfo[i].userIDAuthorString );
+		if(searchVal == reimbursementInfo[i].userIDAuthorString){
 			var table = document.getElementById("tableBody");
-	        var row = table.insertRow(i);
+	        var row = table.insertRow(counter);
+	        counter += 1;
 	        
 	        var cell1 = row.insertCell(0);
 	        var cell2 = row.insertCell(1);
@@ -67,7 +76,13 @@ function search(){
 	        cell4.innerHTML = reimbursementInfo[i].reimbursementTypeIDString;
 	        cell5.innerHTML = reimbursementInfo[i].description;
 	        cell6.innerHTML = reimbursementInfo[i].submitted;
-	        cell7.innerHTML = reimbursementInfo[i].userIDResolverString;
+	        
+	        if(reimbursementInfo[i].userIDResolverString != "test"){
+	        	cell7.innerHTML = reimbursementInfo[i].userIDResolverString;
+	        }else{
+	        	cell7.innerHTML = "UNRESOLVED";
+	        }
+	        
 	        cell8.innerHTML = reimbursementInfo[i].reimbursementTypeIDString;
 	        cell9.innerHTML = 
 	        	"<form method = \"post\" action=\"UpdateReimbursementServlet\" class=\"form-horizontal\">" +

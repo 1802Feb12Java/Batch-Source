@@ -39,7 +39,12 @@ public class UpdateAccountServlet extends HttpServlet{
 		req.getSession().setAttribute("user", user);
 		
 		try {
-			resp.sendRedirect("./AccountInformation.html");
+			if(user.getUserRoleID() == 1){
+				resp.sendRedirect("./ManagerInformation.html");
+			}
+			else {
+				resp.sendRedirect("./AccountInformation.html");
+			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

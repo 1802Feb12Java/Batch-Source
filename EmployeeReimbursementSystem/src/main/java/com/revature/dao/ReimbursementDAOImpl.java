@@ -308,8 +308,8 @@ public class ReimbursementDAOImpl implements ReimbursementDAO{
 			ps.setString(3, reimbursement.getDescription());
 			ps.setString(4, null);
 			ps.setDate(5, reimbursement.getSubmitted());
-			ps.setInt(6, reimbursement.getUserIDResolver());
-			ps.setInt(7, reimbursement.getUserIDAuthor());
+			ps.setInt(6, reimbursement.getUserIDAuthor());
+			ps.setInt(7, 0);
 			ps.setInt(8, reimbursement.getReimbursementTypeID());
 			ps.setInt(9, reimbursement.getReimbursementStatusID());
 				

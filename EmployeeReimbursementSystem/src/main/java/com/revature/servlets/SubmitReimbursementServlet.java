@@ -42,6 +42,9 @@ public class SubmitReimbursementServlet extends HttpServlet{
 		reimbursement.setReciept("NONE");
 		reimbursement.setAmount(Double.parseDouble(req.getParameter("amount")));
 		reimbursement.setDescription(req.getParameter("description"));
+		
+		System.out.println("UserID: "+ user.getUserID());
+		
 		reimbursement.setUserIDAuthor(user.getUserID());
 		reimbursement.setUserIDResolver(0);
 		reimbursement.setReimbursementTypeID(Integer.parseInt(req.getParameter("types")));
