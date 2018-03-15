@@ -12,7 +12,7 @@ public class Authenticate {
 
 	public static double validateAmount(String amountString) throws Exception {
 
-		double amount;
+/*		double amount;
 		try {
 			amount = Double.valueOf(amountString);
 			if (amount > 0) {
@@ -25,7 +25,8 @@ public class Authenticate {
 			return amount;
 		} catch (NumberFormatException e) {
 			throw new Exception();
-		}
+		}*/
+		return 0;
 	}
 
 	/*  */

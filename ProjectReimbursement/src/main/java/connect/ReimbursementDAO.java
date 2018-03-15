@@ -52,7 +52,8 @@ public class ReimbursementDAO {
 
 		Reimbursement reimb = new Reimbursement(pk, amount, null, null, description,
 		author, null, status, type);
-		// System.out.println("ReimbDao: insertReimb(): " + reimb);
+		
+		System.out.println("This is the riembursement: "+ reimb);
 		return reimb;
 	}
 

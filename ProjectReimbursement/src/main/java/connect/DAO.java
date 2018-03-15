@@ -79,12 +79,12 @@ public class DAO {
 			return reimb;
 		} catch (SQLException e) {
 			logger.error(e);
-			try {
-			conn.rollback();
-			} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-			}
+		//	try {
+		//	conn.rollback();
+		//	} catch (SQLException e1) {
+		//	// TODO Auto-generated catch block
+		//	e1.printStackTrace();
+		//	}
 		} finally {
 			try {
 				conn.close();
@@ -124,21 +124,25 @@ public class DAO {
 			dao.updateStatus(reimb_id, resolver, status_id, ts);
 			conn.commit();
 		} catch (SQLException e) {
-			try {
-				conn.rollback();
-			} catch (SQLException e1) {
+		//	try {
+		//		conn.rollback();
+		//	} catch (SQLException e1) {
 				// TODO Auto-generated catch block
-				e1.printStackTrace();
+		//		e1.printStackTrace();
+		//
 			}
-		} finally {
-			try {
-				conn.close();
-			} catch (SQLException e) {
+	//	} finally {
+	//		try {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+	//		} catch (SQLException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+		//		e.printStackTrace();
 			}
-		}
-	}
 
 	/* get list of all reimbursements */
 
