@@ -72,6 +72,7 @@ public class LoginServlet extends HttpServlet {
 				if(formPassword.equals(password)) {
 					if(roleId == 1) { 
 						session.setAttribute("username", username);
+						session.setAttribute("adminId", userId);
 						resp.sendRedirect("admin-dashboard");
 					} else {
 						session.setAttribute("username", username);

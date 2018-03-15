@@ -20,7 +20,8 @@ public class EmployeeDashboardServlet extends HttpServlet {
 		resp.setContentType("text/html");
 		HttpSession session = req.getSession(false);
 
-		if(session!=null && session.getAttribute("username") != null){
+
+		if(session!=null && !session.getAttribute("username").equals("jboud1217")){
 			req.getRequestDispatcher("employee-dashboard.html").forward(req, resp);
 		} else {
 			resp.sendRedirect("login");

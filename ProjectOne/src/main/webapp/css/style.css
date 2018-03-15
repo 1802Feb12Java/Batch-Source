@@ -50,3 +50,20 @@
 .customEmp {
 	font-size: 20px;
 }
+.dash-reimb:hover {
+	background-color: #175fb2;
+}
+.dash-users:hover {
+	background-color: #29843c;
+}
+.custom-card-body {
+    padding: 0.5rem 1.25rem;
+}
+.custom-count {
+	font-size: 3.5em;
+}
+.btn-custom {
+	padding-top: 2px;
+	padding-bottom: 2px;
+	width: 100%;
+}

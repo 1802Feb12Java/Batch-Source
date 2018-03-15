@@ -22,7 +22,6 @@ public class ReimbursementsServlet extends HttpServlet {
         HttpSession session = req.getSession();
 		
 		if(session!=null && session.getAttribute("username") != null){
-			
 			req.getRequestDispatcher("reimbursements.html").forward(req, resp);
 			
 		} else {
@@ -35,13 +34,10 @@ public class ReimbursementsServlet extends HttpServlet {
 		
 		HttpSession session = req.getSession();
 		resp.setContentType("text/html");
-		
-		// Done
-		String statusType = (String) session.getAttribute("status");
-		
+		Integer adminId = (Integer) session.getAttribute("adminId");
 		Integer rStatus = Integer.parseInt(req.getParameter("status"));
 		Integer rId = Integer.parseInt(req.getParameter("reimbursementId"));
-		
+
 		try {
 			
 			// Create ConnFactory object
@@ -51,14 +47,16 @@ public class ReimbursementsServlet extends HttpServlet {
 			Connection conn = cf.getConnection();
 			
 			// Create get user query
-			String sqlUpdate = "UPDATE ers_reimbursements SET rt_status = ? WHERE r_id = ?";
+			String sqlUpdate = "UPDATE ers_reimbursements SET rt_status=?, u_id_resolver=?, r_resolved=?, WHERE r_id=?";
 			
 			// Create PreparedStatement object
 			PreparedStatement ps = conn.prepareStatement(sqlUpdate);
 			
 			// Set username value in statement
 			ps.setInt(1, rStatus);
-			ps.setInt(2, rId);
+			ps.setInt(2, adminId);
+			ps.setDate(3, new java.sql.Date(new java.util.Date().getTime()));
+			ps.setInt(4, rId);
 			
 			// Execute update
 			int rowsUpdated = ps.executeUpdate();
