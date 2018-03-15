@@ -85,6 +85,41 @@ public class ReimbursementDAOImpl implements ReimbursementDAO{
 		return reimbursements;
 	}
 	
+	public Reimbursement getReimbursementByID(int id) {
+		// TODO Auto-generated method stub		
+		
+		Reimbursement reimbursement = new Reimbursement();
+		try {
+			Connection conn = ConnectionFactory.getInstance().getConnection();
+			PreparedStatement ps = conn.prepareStatement("SELECT * FROM ERS_REIMBURSEMENTS WHERE R_ID = ?");
+			
+			ps.setInt(1, id);
+			
+			ResultSet rs = ps.executeQuery();
+
+			if(rs.next()) {
+				reimbursement.setReiumbursementID(rs.getInt(1));
+				reimbursement.setAmount(rs.getDouble(2));
+				reimbursement.setDescription(rs.getString(3));
+				//reimbursement.setReciept("RECEIPT");
+				//reimbursement.setSubmitted("DATE");
+				reimbursement.setUserIDAuthor(rs.getInt(6));
+				reimbursement.setUserIDResolver(rs.getInt(7));
+				reimbursement.setReimbursementTypeID(rs.getInt(8));
+				reimbursement.setReimbursementStatusID(rs.getInt(9));
+			}
+			
+			return reimbursement;
+
+					
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("FAILED TO RETRIEVE REIMBURSEMENT");
+			}
+				
+		return null;
+	}
+	
 	public ArrayList<Reimbursement> getReimbursementsString() {
 		// TODO Auto-generated method stub
 		
@@ -241,19 +276,19 @@ public class ReimbursementDAOImpl implements ReimbursementDAO{
 		
 		try {
 			Connection conn = ConnectionFactory.getInstance().getConnection();
-			PreparedStatement ps = conn.prepareStatement("UPDATE ERS_USERS R_ID = ?, R_AMOUNT = ?, R_DESCRIPTION = ?, R_RECIEPT = ?,"
-					+ " R_SUBMITTED = ?, R_RESOLVED = ?, U_ID_AUTHOR = ?, U_ID_RESOLVER = ?, RT_TYPE = ?, RT_STATUS = ?");
+			PreparedStatement ps = conn.prepareStatement("UPDATE ERS_REIMBURSEMENTS SET R_ID = ?, R_AMOUNT = ?, R_DESCRIPTION = ?, R_RECEIPT = ?,"
+					+ " R_SUBMITTED = ?, U_ID_AUTHOR = ?, U_ID_RESOLVER = ?, RT_TYPE = ?, RT_STATUS = ? WHERE R_ID = ?");
 			
 			ps.setInt(1, reimbursement.getReiumbursementID());
 			ps.setDouble(2, reimbursement.getAmount());
 			ps.setString(3, reimbursement.getDescription());
 			ps.setString(4, reimbursement.getReciept());
 			ps.setString(5, reimbursement.getSubmitted());
-			ps.setString(6, reimbursement.getResolved());
-			ps.setInt(7, reimbursement.getUserIDAuthor());
-			ps.setInt(8, reimbursement.getUserIDResolver());
-			ps.setInt(9, reimbursement.getReimbursementTypeID());
-			ps.setInt(10, reimbursement.getReimbursementStatusID());
+			ps.setInt(6, reimbursement.getUserIDAuthor());
+			ps.setInt(7, reimbursement.getUserIDResolver());
+			ps.setInt(8, reimbursement.getReimbursementTypeID());
+			ps.setInt(9, reimbursement.getReimbursementStatusID());
+			ps.setInt(10, reimbursement.getReiumbursementID());
 				
 			ps.execute();
 		} catch (SQLException e) {
