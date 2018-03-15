@@ -1,0 +1,3 @@
+In Connection factory there is an absolute path to database.properties.  Change it to your absolute path.
+
+You can right click database.properties, view properties, and you should be able to copy paste the absolute path from there.
