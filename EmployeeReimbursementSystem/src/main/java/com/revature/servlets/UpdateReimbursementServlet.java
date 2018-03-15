@@ -58,15 +58,6 @@ public class UpdateReimbursementServlet extends HttpServlet{
 			reimbursementDao.updateReimbursement(reimbursement);
 		}
 		
-//		user.setUsername(req.getParameter("usernameText")); 
-//		user.setPassword(req.getParameter("passwordText"));
-//		user.setFirstName(req.getParameter("firstName"));
-//		user.setLastName(req.getParameter("lastName"));
-//		user.setEmail(req.getParameter("email"));
-//		
-//		userDAO.updateUser(user);
-//		req.getSession().setAttribute("user", user);
-		
 		try {
 			resp.sendRedirect("./ManagerReimbursementView.html");
 		} catch (IOException e) {

@@ -31,14 +31,12 @@ public class GetEmployeeAndReimbursements extends HttpServlet{
 		ArrayList<User> employees = new ArrayList<User>();
 		UserDAOImpl userDao = new UserDAOImpl();
 		
-		employees = userDao.getEmployees();
+		//employees = userDao.getEmployees();
 		
 		//pull user's reimbursements from DB
 		//reimbursements = reimbursementDao.getReimbursementsByUserID(user.getUserID());
 		reimbursements = reimbursementDao.getPendingWithName();
-		
-		System.out.println(reimbursements.size());
-		
+				
 		Gson gson = new GsonBuilder().create();
 		String json = gson.toJson(reimbursements);
 		

@@ -14,16 +14,13 @@ function loadReimbursements(reimbursementInfo){
         var cell4 = row.insertCell(3);
         var cell5 = row.insertCell(4);
         var cell6 = row.insertCell(5);
-        var cell7 = row.insertCell(6);
-        
         
         cell1.innerHTML = reimbursementInfo[i].reimbursementTypeIDString;
         cell2.innerHTML = reimbursementInfo[i].amount;
         cell3.innerHTML = "RECEIPT";
         cell4.innerHTML = reimbursementInfo[i].description;
-        cell5.innerHTML = "DATE";
+        cell5.innerHTML = reimbursementInfo[i].submitted;
         cell6.innerHTML = reimbursementInfo[i].userIDResolverString;
-        cell7.innerHTML = "RESOLVER";
         
 
     }

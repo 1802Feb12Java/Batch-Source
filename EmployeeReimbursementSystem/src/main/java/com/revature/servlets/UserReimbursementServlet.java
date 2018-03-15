@@ -29,7 +29,7 @@ public class UserReimbursementServlet extends HttpServlet{
 		
 		//pull user's reimbursements from DB
 		//reimbursements = reimbursementDao.getReimbursementsByUserID(user.getUserID());
-		reimbursements = reimbursementDao.getReimbursementsString();
+		reimbursements = reimbursementDao.getReimbursementsStringbyID(user.getUserID());
 		
 		System.out.println(reimbursements.size());
 		

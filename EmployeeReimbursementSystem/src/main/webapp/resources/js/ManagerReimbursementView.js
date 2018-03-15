@@ -16,15 +16,17 @@ function loadReimbursements(reimbursementInfo){
         var cell6 = row.insertCell(5);
         var cell7 = row.insertCell(6);
         var cell8 = row.insertCell(7);
+        var cell9 = row.insertCell(8);
         
         cell1.innerHTML = reimbursementInfo[i].userIDAuthorString;
         cell2.innerHTML = reimbursementInfo[i].amount;
         cell3.innerHTML = "RECEIPT";
         cell4.innerHTML = reimbursementInfo[i].reimbursementTypeIDString;
         cell5.innerHTML = reimbursementInfo[i].description;
-        cell6.innerHTML = "DATE";
+        cell6.innerHTML = reimbursementInfo[i].submitted;
         cell7.innerHTML = reimbursementInfo[i].userIDResolverString;
-        cell8.innerHTML = 
+        cell8.innerHTML = reimbursementInfo[i].reimbursementTypeIDString;
+        cell9.innerHTML = 
         	"<form method = \"post\" action=\"UpdateReimbursementServlet\" class=\"form-horizontal\">" +
         		"<div><button name = \"approve\" type=\"submit\" class=\"btn btn-primary\" value = "+reimbursementInfo[i].reiumbursementID+">Approve</button></div>" +
         		"<button name = \"deny\" type=\"submit\" class=\"btn btn-primary\" value = "+reimbursementInfo[i].reiumbursementID+">Deny</b>" +

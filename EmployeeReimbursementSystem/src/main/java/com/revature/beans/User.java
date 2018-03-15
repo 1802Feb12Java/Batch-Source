@@ -11,7 +11,7 @@ public class User {
 	private int userRoleID;
 	
 	public User() {
-		
+	
 	}
 
 	public int getUserID() {

@@ -166,5 +166,38 @@ public class UserDAOImpl implements UserDAO{
 		
 		return null;
 	}
+	
+	public User getByID(int id) {
+		try {
+			Connection conn = cf.getConnection();
+			PreparedStatement ps = conn.prepareStatement("SELECT * FROM ERS_USERS WHERE U_ID = ?");
+			
+			ps.setInt(1, id);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			//if we found a user
+			if(rs.next()) {
+				User user = new User();
+
+				user.setUserID(rs.getInt(1));
+				user.setUsername(rs.getString(2));
+				user.setPassword(rs.getString(3));
+				user.setFirstName(rs.getString(4));
+				user.setLastName(rs.getString(5));
+				user.setEmail(rs.getString(6));
+				user.setUserRoleID(rs.getInt(7));
+				
+				return user;
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
 
 }

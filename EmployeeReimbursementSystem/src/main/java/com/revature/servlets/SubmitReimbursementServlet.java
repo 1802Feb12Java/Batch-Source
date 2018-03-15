@@ -2,13 +2,16 @@ package com.revature.servlets;
 
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
+import java.nio.file.Paths;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -36,14 +39,22 @@ public class SubmitReimbursementServlet extends HttpServlet{
 		Reimbursement reimbursement = new Reimbursement();
 		ReimbursementDAOImpl reimbursementDao = new ReimbursementDAOImpl();
 		
-		reimbursement.setReiumbursementID(5);
+		reimbursement.setReciept("NONE");
 		reimbursement.setAmount(Double.parseDouble(req.getParameter("amount")));
 		reimbursement.setDescription(req.getParameter("description"));
 		reimbursement.setUserIDAuthor(user.getUserID());
 		reimbursement.setUserIDResolver(0);
 		reimbursement.setReimbursementTypeID(Integer.parseInt(req.getParameter("types")));
 		reimbursement.setReimbursementStatusID(0);		
-
-		reimbursementDao.addReimbursementNoImage(reimbursement);	
+		
+		reimbursementDao.addReimbursementNoImage(reimbursement);
+	
+		
+		try {
+			resp.sendRedirect("./EmployeeHome.html");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

@@ -1,12 +1,14 @@
 package com.revature.beans;
 
+import java.sql.Date;
+
 public class Reimbursement {
 
 	private int reiumbursementID;
 	private double amount;
 	private String description;
 	private String reciept;
-	private String submitted;
+	private Date submitted;
 	private String resolved;
 	private int userIDAuthor;
 	private int userIDResolver;
@@ -17,6 +19,16 @@ public class Reimbursement {
 	private String userIDResolverString;
 	private String reimbursementTypeIDString;
 	private String reimbursementStatusIDString;
+	
+	public Reimbursement() {
+		reiumbursementID = 1000000001;
+		//we are creating a date on creation
+		@SuppressWarnings("deprecation")
+		java.util.Date myDate = new java.util.Date();
+		java.sql.Date sqlDate = new java.sql.Date(myDate.getTime());
+		submitted = sqlDate;
+		System.out.println("ENTERED DATE" + submitted.toString());
+	}
 	
 	public String getUserIDAuthorString() {
 		return userIDAuthorString;
@@ -66,10 +78,10 @@ public class Reimbursement {
 	public void setReciept(String reciept) {
 		this.reciept = reciept;
 	}
-	public String getSubmitted() {
+	public Date getSubmitted() {
 		return submitted;
 	}
-	public void setSubmitted(String submitted) {
+	public void setSubmitted(Date submitted) {
 		this.submitted = submitted;
 	}
 	public String getResolved() {
@@ -102,6 +114,6 @@ public class Reimbursement {
 	public void setReimbursementStatusID(int reimbursementStatusID) {
 		this.reimbursementStatusID = reimbursementStatusID;
 	}
-	
-	
+		
 }
+

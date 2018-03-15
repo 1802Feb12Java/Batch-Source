@@ -35,8 +35,8 @@ public class Testing {
 		reimbursement.setReiumbursementID(0);
 		reimbursement.setAmount(100);
 		reimbursement.setDescription("Travel Expenses");
-		reimbursement.setReciept("IMG");
-		reimbursement.setSubmitted("2017-07-23");
+		//reimbursement.setReciept("IMG");
+		//reimbursement.setSubmitted("2017-07-23");
 		reimbursement.setUserIDAuthor(0);
 		reimbursement.setUserIDResolver(1);
 		reimbursement.setReimbursementTypeID(0);
