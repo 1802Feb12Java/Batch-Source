@@ -1,8 +1,12 @@
-var populatedRequests = false;
-document.getElementById("headingOne").addEventListener("click", function(){
+var populatedRequest = false;
+document.getElementById("headingOne").addEventListener('click', function(){
+    console.log("popreq: " + populatedRequest);
+    // getReimbursements(populatedRequest);
+    populatedRequest = true;
+    // console.log("popreq: " + populatedRequest);
+});
 
-    // console.log("saw click");
-    
+function getReimbursements(populatedRequests){
     var req = new XMLHttpRequest();
     // console.log("settng up request");
     req.open("GET", "http://localhost:8080/ProjectOne/allreimbursementservlet", true);
@@ -18,7 +22,7 @@ document.getElementById("headingOne").addEventListener("click", function(){
             }
         }
     });
-});
+}
 
 function populateRequestTable(respText){
     // console.log("Adding table");
@@ -50,6 +54,7 @@ function populateRequestTable(respText){
         </td>\
         <td id='Resolver'>"+ respText[i].resolver           +"</td>\
         <td id='Submitted'>"+ respText[i].submitted         +"</td>\
+        <td id='Submitted'>"+ respText[i].resovled         +"</td>\
         <td id='Description'>"+descript                     +"</td>\
         <td id='Receipt'>"+ "X"                             +"</td>\
         ";
@@ -69,9 +74,11 @@ function populateRequestTable(respText){
             console.log("tdstatus"+indexx);
 
             document.getElementById("tdstatus"+indexx).innerText = "Approved";
-            document.getElementById("reimbRow"+indexx).setAttribute("status","approved");
+            document.getElementById("tdstatus"+indexx).parentElement.setAttribute("status","Approved");
+            document.getElementById("reimbRow"+indexx).setAttribute("status","Approved");
         
             pendingButton(indexx, 1);
+            // getReimbursements(false);
             console.log("buttons should be hidden");
         });
 
@@ -81,8 +88,11 @@ function populateRequestTable(respText){
             this.setAttribute("style","display: none;");
             document.getElementById("approvebtn"+indexx).setAttribute("style","display: none;");
             document.getElementById("tdstatus"+indexx).innerText = "Denied";
-            document.getElementById("reimbRow"+indexx).setAttribute("status","denied");
+            document.getElementById("tdstatus"+indexx).parentElement.setAttribute("status","Rejected");
+
+            document.getElementById("reimbRow"+indexx).setAttribute("status","Rejected");
             pendingButton(indexx, -1);
+            // getReimbursements(false);
         });
 
     }
