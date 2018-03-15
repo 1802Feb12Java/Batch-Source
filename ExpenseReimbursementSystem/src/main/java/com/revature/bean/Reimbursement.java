@@ -1,6 +1,5 @@
 package com.revature.bean;
 
-import java.sql.Blob;
 import java.sql.Date;
 
 public class Reimbursement{
@@ -8,13 +7,13 @@ public class Reimbursement{
     private int reimburseID;
     private double amount;
     private String description;
-    private Blob receipt;
+    private byte[] receipt;
     private Date submitted;
     private Date resolved;
-    private User author;
-    private User resolver;
-    private String rType; //Reimbursement type
-    private String rStatus; //Reimbursement Status
+    private int author;
+    private int resolver;
+    private int rType; //Reimbursement type
+    private int rStatus; //Reimbursement Status
 
     //default Constructor
     public Reimbursement(){
@@ -24,10 +23,10 @@ public class Reimbursement{
         this.receipt = null;
         this.submitted = null;
         this.resolved = null;
-        this.author = new User();
-        this.resolver = new User();
-        this.rType = "";
-        this.rStatus = "";
+        this.author = 0;
+        this.resolver = 0;
+        this.rType = 0;
+        this.rStatus = 0;
     }
 
     //copy Constructor
@@ -46,13 +45,13 @@ public class Reimbursement{
 
     //parm Constructor
     public Reimbursement(int newRID, double newAmount, String newDescription,
-    					 Blob newReceipt, Date newSubmitted, Date newResolved, 
-    					 User newAuthor, User newResolver, String newRType, 
-    					 String newRStatus){
+    					 Byte[] newReceipt, Date newSubmitted, Date newResolved, 
+    					 int newAuthor, int newResolver, int newRType, 
+    					 int newRStatus){
         this.reimburseID = newRID;
         this.amount = newAmount;
         this.description = newDescription;
-        this.receipt = newReceipt;
+        this.receipt = null;
         this.submitted = newSubmitted;
         this.resolved = newResolved;
         this.author = newAuthor;
@@ -74,7 +73,7 @@ public class Reimbursement{
         return this.description;
     }
 
-    public Blob getReceipt(){
+    public byte[] getReceipt(){
         return this.receipt;
     }
 
@@ -86,19 +85,19 @@ public class Reimbursement{
         return this.resolved;
     }
 
-    public User getAuthor(){
+    public int getAuthor(){
         return this.author;
     }
 
-    public User getResolver(){
+    public int getResolver(){
         return this.resolver;
     }
     
-    public String getRType(){
+    public int getRType(){
         return this.rType;
     }
     
-    public String getRStatus(){
+    public int getRStatus(){
         return this.rStatus;
     }
 
@@ -115,7 +114,7 @@ public class Reimbursement{
         this.description = newDescription;
     }
 
-    public void setReceipt(Blob newReceipt){
+    public void setReceipt(byte[] newReceipt){
         this.receipt = newReceipt;
     }
 
@@ -127,19 +126,19 @@ public class Reimbursement{
         this.resolved = newResolved;
     }
 
-    public void setAuthor(User newAuthor){
+    public void setAuthor(int newAuthor){
         this.author = newAuthor;
     }
 
-    public void setResolver(User newResolver){
+    public void setResolver(int newResolver){
         this.resolver = newResolver;
     }
     
-    public void setRType(String newRType){
+    public void setRType(int newRType){
         this.rType = newRType;
     }
     
-    public void setRStatus(String newRStatus){
+    public void setRStatus(int newRStatus){
         this.rStatus = newRStatus;
     }
 
@@ -157,9 +156,9 @@ public class Reimbursement{
         
         s.append("Date Submitted: " + this.submitted + "\n" +
         		 "Date Resolved: " + this.resolved + "\n" + 
-        		 "Author: " + this.author.toString());
-        if(this.resolver != null){
-            s.append("Resolver: " + this.resolver.toString() + "\n");
+        		 "Author: " + this.author);
+        if(this.resolver != 0){
+            s.append("Resolver: " + this.resolver + "\n");
         }
         else{
             s.append("Resolver: N/A\n");

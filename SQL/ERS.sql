@@ -198,5 +198,19 @@ TO_DATE('2018-2-21 00:00:00','yyyy-mm-dd hh24:mi:ss'),
 TO_DATE('2018-2-21 00:00:00','yyyy-mm-dd hh24:mi:ss'),
 1,3,1,1);
 
+CALL insert_ticket(200.0,
+'ticket 2', 
+null,
+TO_DATE('2018-2-21 00:00:00','yyyy-mm-dd hh24:mi:ss'),
+TO_DATE('2018-2-21 00:00:00','yyyy-mm-dd hh24:mi:ss'),
+2,null,2,1);
+
 SELECT * FROM ers_users WHERE u_username='khsieh' AND u_password='pass';
 
+
+--drop tables
+DROP TABLE ERS_REIMBURSEMENTS;
+DROP TABLE ERS_USERS;
+DROP TABLE ERS_USER_ROLES;
+DROP TABLE ERS_REIMBURSEMENT_STATUS;
+DROP TABLE ERS_REIMBURSEMENT_TYPE;

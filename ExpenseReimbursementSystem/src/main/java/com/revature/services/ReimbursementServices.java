@@ -1,7 +1,13 @@
 package com.revature.services;
 
-import java.sql.*;
+import java.sql.Blob;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+
 import com.revature.bean.Reimbursement;
 import com.revature.dao.ReimbursementDAO;
 import com.revature.util.ConnManager;
@@ -24,13 +30,22 @@ public class ReimbursementServices extends LookupServices implements Reimburseme
     	//set up parameters
     	callInsert.setDouble(1, r.getAmount());
     	callInsert.setString(2, r.getDescription());
-    	callInsert.setBlob(3, r.getReceipt());
+    	
+//    	if(r.getReceipt().length <= 0) {
+    		callInsert.setNull(3,java.sql.Types.BLOB);
+//    	}
+//    	else {
+//			Blob blob = conn.createBlob();
+//			blob.setBytes(1, r.getReceipt());
+		//    	callInsert.setBlob(3,new Blob(r.getReceipt()));
+//			callInsert.setBlob(3, blob); //SETTING BLOB HERE
+//    	}
     	callInsert.setDate(4, r.getSubmitted());
     	callInsert.setDate(5, r.getResolved());
-    	callInsert.setInt(6, r.getAuthor().getUserID());
-    	callInsert.setInt(7, r.getResolver().getUserID());
-    	callInsert.setInt(8, this.lookupRTypeID(r.getRType()));
-    	callInsert.setInt(9, this.lookupRStatusID(r.getRStatus()));
+    	callInsert.setInt(6, r.getAuthor());
+		callInsert.setNull(7,java.sql.Types.INTEGER);
+    	callInsert.setInt(8, r.getRType());
+    	callInsert.setInt(9, r.getRStatus());
     	
     	//execute delete
     	callInsert.executeUpdate();
@@ -63,7 +78,7 @@ public class ReimbursementServices extends LookupServices implements Reimburseme
     	
     	//setup select
     	PreparedStatement selectPrepared = null;
-    	String selectString = "SELECT * FROM ers_reimbursements WHERE u_author_id=?";
+    	String selectString = "SELECT * FROM ers_reimbursements WHERE u_id_author=?";
     	
     	selectPrepared = conn.prepareStatement(selectString);
     	selectPrepared.setInt(1, uID);
@@ -129,13 +144,13 @@ public class ReimbursementServices extends LookupServices implements Reimburseme
     	callUpdate.setInt(1,r.getRID());
     	callUpdate.setDouble(2,r.getAmount());
     	callUpdate.setString(3,r.getDescription());
-    	callUpdate.setBlob(4,r.getReceipt());
+//    	callUpdate.setBytes(4,r.getReceipt()); //SETTING BLOB HERE!!
     	callUpdate.setDate(5,r.getSubmitted());
-    	callUpdate.setDate(6,r.getResolved());
-    	callUpdate.setInt(7,r.getAuthor().getUserID());
-    	callUpdate.setInt(8,r.getResolver().getUserID());
-    	callUpdate.setInt(9,this.lookupRTypeID(r.getRType()));
-    	callUpdate.setInt(10,this.lookupRStatusID(r.getRStatus()));
+    	callUpdate.setDate(6,r.getResolved());    	
+    	callUpdate.setInt(7, r.getAuthor());
+    	callUpdate.setInt(8,r.getResolver());
+    	callUpdate.setInt(9, r.getRType());
+    	callUpdate.setInt(10, r.getRStatus());
     	
     	//execute
     	callUpdate.executeUpdate();
@@ -161,14 +176,13 @@ public class ReimbursementServices extends LookupServices implements Reimburseme
     	ticket.setRID(rs.getInt(1));
     	ticket.setAmount(rs.getDouble(2));
     	ticket.setDescription(rs.getString(3));
-    	ticket.setReceipt(rs.getBlob(4));
+//    	ticket.setReceipt(rs.getBlob(4)); //SETTING BLOB HERE!!
     	ticket.setSubmitted(rs.getDate(5));
     	ticket.setResolved(rs.getDate(6));
-    	UserServices us = new UserServices();
-    	ticket.setAuthor(us.getUserByID(rs.getInt(7)));
-    	ticket.setResolver(us.getUserByID(rs.getInt(8)));
-    	ticket.setRType(this.lookupRType(rs.getInt(9)));
-    	ticket.setRStatus(this.lookupRStatus(rs.getInt(10)));
+    	ticket.setAuthor(rs.getInt(7));
+    	ticket.setResolver(rs.getInt(8));
+    	ticket.setRType(rs.getInt(9));
+    	ticket.setRStatus(rs.getInt(10));
     	
     	return ticket;
     	

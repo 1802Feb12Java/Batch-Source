@@ -9,7 +9,6 @@ Expense Reimbursement System
 -An Employee can view their resolved reimbursement requests -- tickets by status and author
 -An Employee can view their information -- user toString from user obj
 -An Employee can update their information --update user
--An Employee receives an email when one of their reimbursement requests is resolved (optional)
 
 -A Manager can login
 -A Manager can view the Manager Homepage
@@ -22,6 +21,7 @@ Expense Reimbursement System
 -A Manager can view reimbursement requests from a single Employee
 
 ------------------------------------------------------------------
+-An Employee receives an email when one of their reimbursement requests is resolved (optional)
 -A Manager can register an Employee, which sends the Employee an email with their username and temp password (optional)
 -An Employee can reset their password (Optional - tied with above functional requirement)
 
