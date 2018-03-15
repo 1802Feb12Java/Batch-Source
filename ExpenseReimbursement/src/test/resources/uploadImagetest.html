@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  </head>
+  <body>
+      <h1>image</h1>
+      <img src="logo.png" id="myImage">
+      <img id="result">
+      
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script>
+        function getBase64Image(img) {
+            // Create an empty canvas element
+            var canvas = document.createElement("canvas");
+            canvas.width = img.width;
+            canvas.height = img.height;
+
+            // Copy the image contents to the canvas
+            var ctx = canvas.getContext("2d");
+            ctx.drawImage(img, 0, 0);
+
+            // Get the data-URL formatted image
+            // Firefox supports PNG and JPEG. You could check img.src to guess the
+            // original format, but be aware the using "image/jpg" will re-encode the image.
+            var dataURL = canvas.toDataURL("image/png");
+
+            return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
+        }
+        function toDataURL(url, callback){
+            var xhr = new XMLHttpRequest();
+            xhr.open('get', url);
+            xhr.responseType = 'blob';
+            xhr.onload = function(){
+            var fr = new FileReader();
+            fr.onload = function(){
+                callback(this.result);
+            };
+            
+            fr.readAsDataURL(xhr.response); // async call
+            };
+            
+            xhr.send();
+        }
+        let myImage=document.getElementById("myImage");
+        toDataURL(myImage.src, function(dataURL){
+            result.src = dataURL;
+            
+            console.log(result.src);
+            // now just to show that passing to a canvas doesn't hold the same results
+            var canvas = document.createElement('canvas');
+            canvas.width = myImage.naturalWidth;
+            canvas.height = myImage.naturalHeight;
+            canvas.getContext('2d').drawImage(myImage, 0,0);
+            console.log(canvas.toDataURL() === dataURL); // false - not same data
+        });
+        
+    </script>
+  </body>
+</html>

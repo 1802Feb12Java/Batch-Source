@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+  <display-name>ExpenseReimbursement</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <description></description>
+    <display-name>Index</display-name>
+    <servlet-name>Index</servlet-name>
+    <servlet-class>com.revature.expensereimbursement.controller.servlet.Index</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Index</servlet-name>
+    <url-pattern>/Index</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Employee</display-name>
+    <servlet-name>Employee</servlet-name>
+    <servlet-class>com.revature.expensereimbursement.controller.servlet.Employee</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Employee</servlet-name>
+    <url-pattern>/Employee</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Manager</display-name>
+    <servlet-name>Manager</servlet-name>
+    <servlet-class>com.revature.expensereimbursement.controller.servlet.Manager</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Manager</servlet-name>
+    <url-pattern>/Manager</url-pattern>
+  </servlet-mapping>
+</web-app>
