@@ -1,0 +1,17 @@
+
+
+body{
+	font-family: 'Roboto', sans-serif;
+}
+
+.nav {
+	padding: 20px;
+}
+
+.nav-item	{
+	padding: 20px;
+}
+
+#welcome {
+	padding: 30px;
+}
