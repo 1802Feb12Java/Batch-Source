@@ -1,6 +1,6 @@
 package com.revature.services;
 
-import java.sql.Blob;
+//import java.sql.Blob;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -47,7 +47,7 @@ public class ReimbursementServices extends LookupServices implements Reimburseme
 //		callInsert.setInt(7,r.getResolver());
     	callInsert.setInt(8, r.getRType());
     	callInsert.setInt(9, r.getRStatus());
-    	System.out.println("In service: " + r.getRStatus());
+//    	System.out.println("In service: " + r.getRStatus());
     	//execute delete
     	callInsert.executeUpdate();
     } 
@@ -145,6 +145,7 @@ public class ReimbursementServices extends LookupServices implements Reimburseme
     	callUpdate.setInt(1,r.getRID());
     	callUpdate.setDouble(2,r.getAmount());
     	callUpdate.setString(3,r.getDescription());
+    	callUpdate.setNull(4, java.sql.Types.BLOB);
 //    	callUpdate.setBytes(4,r.getReceipt()); //SETTING BLOB HERE!!
     	callUpdate.setTimestamp(5,r.getSubmitted());
     	callUpdate.setTimestamp(6,r.getResolved());    	

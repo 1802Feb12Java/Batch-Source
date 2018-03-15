@@ -41,7 +41,7 @@ public class ReimbursementServlet extends HttpServlet {
 //		int sessionRole = (int)(session.getAttribute("roleID"));
 //		int sessionID = 1;
 		try {
-			System.out.println("doPost received!");
+//			System.out.println("doPost received!");
 			//grab json from put body
 			BufferedReader reader = request.getReader();
 			
@@ -123,13 +123,14 @@ public class ReimbursementServlet extends HttpServlet {
 			//grab json from put body
 			BufferedReader reader = request.getReader();
 			//gson then convert from json to ut
-//			Gson gson = new Gson();
 			Gson gson = new Gson(); //Builder().setDateFormat("dd-MM-yyyy").create();
 			
 			UpdateTicket ut = gson.fromJson(reader, UpdateTicket.class);
 			String type = ut.getType();
 			
 			ReimbursementServices ts = new ReimbursementServices();
+			System.out.println("In PUT!");
+			
 			if(type.equals("submit")) { //call insert
 				Reimbursement ticket = ut.getTicket();
 				ticket.setSubmitted(Timestamp.valueOf( LocalDateTime.now()));
@@ -139,10 +140,23 @@ public class ReimbursementServlet extends HttpServlet {
 //				System.out.println(ticket.getRStatus());
 				ticket.setRType(1);
 				ticket.setRStatus(1);
-				System.out.println(ticket.toString());
-				ts.insertReimbursementTicket(ut.getTicket());
+//				System.out.println(ticket.toString());
+//				ts.insertReimbursementTicket(ut.getTicket());
+				ts.insertReimbursementTicket(ticket);
+				System.out.println("Insert Ticket Completed!");
 			}
-			System.out.println("Insert Ticket Completed!");
+			else if(type.equals("update")) {
+				Reimbursement ticket = ut.getTicket();
+				System.out.println("Approving Ticket");
+				ticket.setResolved(Timestamp.valueOf( LocalDateTime.now()));
+				ticket.setResolver(3);
+				ticket.setRStatus(2);
+				ticket.setReceipt(null);
+				System.out.println(ticket.toString());
+				ts.updateTicket(ticket);
+				System.out.println("Update ticket complete");
+			}
+			
 			
 		}
 		catch (ClassNotFoundException e) {
