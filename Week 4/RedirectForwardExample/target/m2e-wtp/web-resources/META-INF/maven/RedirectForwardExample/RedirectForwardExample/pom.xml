@@ -28,8 +28,5 @@
 
 
 	</dependencies>
-<<<<<<< HEAD
-=======
   <packaging>war</packaging>
->>>>>>> 185f6824ebf50a0fc90e0b746551cd9136116ab0
 </project>

@@ -15,13 +15,21 @@ public class ProfileServlet extends HttpServlet {
 		HttpSession session = req.getSession(false);
 		if(session!=null && session.getAttribute("username") != null){
 			req.getRequestDispatcher("Profile.html").forward(req, resp);
+<<<<<<< HEAD
 			/*
+=======
+			
+>>>>>>> 185f6824ebf50a0fc90e0b746551cd9136116ab0
 			String username = (String) session.getAttribute("username");
 			req.getRequestDispatcher("Base.html").include(req, resp);
 			pw.println("Hello, "+username+". Welcome to your profile.");
 			pw.println("<a href=\"Index.html\">Go back!!</a>");
 			pw.write("</div></body></html>");
+<<<<<<< HEAD
 			*/
+=======
+			
+>>>>>>> 185f6824ebf50a0fc90e0b746551cd9136116ab0
 		} else {
 			resp.sendRedirect("login");
 		}
