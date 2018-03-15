@@ -10,7 +10,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private currUser: CurrentUserService, private router: Router) { }
+  constructor(private currUser: CurrentUserService) { }
 
   ngOnInit() {
     if(this.currUser.getCurrentUser() != null){
