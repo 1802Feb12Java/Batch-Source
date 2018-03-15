@@ -60,4 +60,44 @@
     <servlet-name>AccountListServlet</servlet-name>
     <url-pattern>/view-accts</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description>Handles account info updates</description>
+    <display-name>UpdateAccountServlet</display-name>
+    <servlet-name>UpdateAccountServlet</servlet-name>
+    <servlet-class>com.revature.servlet.UpdateAccountServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateAccountServlet</servlet-name>
+    <url-pattern>/update</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>Handles new reimbursement requests</description>
+    <display-name>ReimbursementRequestServlet</display-name>
+    <servlet-name>ReimbursementRequestServlet</servlet-name>
+    <servlet-class>com.revature.servlet.ReimbursementRequestServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ReimbursementRequestServlet</servlet-name>
+    <url-pattern>/request</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ReimbursementListServlet</display-name>
+    <servlet-name>ReimbursementListServlet</servlet-name>
+    <servlet-class>com.revature.servlet.ReimbursementListServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ReimbursementListServlet</servlet-name>
+    <url-pattern>/view-reimbursement</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UpdateReimbursementServlet</display-name>
+    <servlet-name>UpdateReimbursementServlet</servlet-name>
+    <servlet-class>com.revature.servlet.UpdateReimbursementServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateReimbursementServlet</servlet-name>
+    <url-pattern>/update-request</url-pattern>
+  </servlet-mapping>
 </web-app>

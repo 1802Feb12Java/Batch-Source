@@ -74,7 +74,7 @@ public class ReimbursementStatusDao {
 		try {
 			Connection conn = cm.getConnection();
 			
-			cs = conn.prepareCall("{? = call get_reimbursement_status_by_name(?)}");
+			cs = conn.prepareCall("{? = call get_reimbursement_status_id_by_name(?)}");
 			cs.registerOutParameter(1, Types.INTEGER);
 			cs.setString(2, name);
 			cs.execute();
@@ -96,7 +96,7 @@ public class ReimbursementStatusDao {
 	 * @return	A list of all found reimbursement statuses.
 	 * @throws SQLException	Error caused by connection.
 	 */
-	public List<ReimbursementStatus> getReimbursementTypes() throws SQLException {
+	public List<ReimbursementStatus> getReimbursementStatuses() throws SQLException {
 		List<ReimbursementStatus> statusList = new ArrayList<>();
 		PreparedStatement ps = null;
 		ResultSet rs = null;

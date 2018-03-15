@@ -4,24 +4,24 @@
     <div class="col"></div><!-- filler -->
     <div class="col-md text-center">
         <h1>Change Account Info</h1>
-        <form id="acct-info-form">
+        <form method="post" action="update?type=info" update-acct-info id="acct-info-form">
             <fieldset class="border rounded">
 
                 <fieldset class="border rounded">
                     <legend>Personal Info</legend>
                     <div class="form-group">
-                        <input type="text" class="form-control" name="firstname" id="lastname" placeholder="First Name" maxlength="30" required>
+                        <input type="text" class="form-control" name="firstname" id="lastname" placeholder="First Name" maxlength="30">
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" name="lastnamee" id="lastname" placeholder="Last Name" maxlength="30" required>
+                        <input type="text" class="form-control" name="lastname" id="lastname" placeholder="Last Name" maxlength="30">
                     </div>
                     <div class="form-group">
-                        <input type="email" class="form-control" name="email" id="email" placeholder="Email" maxlength="100" required>
+                        <input type="email" class="form-control" name="email" id="email" placeholder="Email" maxlength="100">
                     </div>
                 </fieldset>
 
                 <div class="form-group">
-                    <button type="button" name="submitChangesBtn" id="submitChangesBtn" class="btn btn-primary">Submit Changes</button>
+                    <button type="submit" name="submitChangesBtn" id="submitChangesBtn" class="btn btn-primary">Submit Changes</button>
                 </div>
 
             </fieldset>

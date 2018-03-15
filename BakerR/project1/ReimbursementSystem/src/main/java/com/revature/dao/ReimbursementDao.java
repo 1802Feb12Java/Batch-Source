@@ -1,6 +1,7 @@
 package com.revature.dao;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.sql.Blob;
 import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
@@ -47,25 +48,35 @@ public class ReimbursementDao {
 				Reimbursement r = new Reimbursement();
 				
 				// Basic fields.
-				r.setId(rSet.getInt("id"));
-				r.setAmount(rSet.getDouble("amount"));
-				r.setDescription(rSet.getString("description"));
-				r.setSubmitted(rSet.getTimestamp("submitted").toLocalDateTime());
-				r.setResolved(rSet.getTimestamp("resolved").toLocalDateTime());
+				r.setId(rSet.getInt("id")); // NOT NULL
+				r.setAmount(rSet.getDouble("amount")); // NOT NULL
+				r.setDescription(rSet.getString("description")); // NULLABLE
+				r.setSubmitted(rSet.getTimestamp("submitted").toLocalDateTime()); // NOT NULL
+				
+				java.sql.Timestamp resolvedTime = rSet.getTimestamp("resolved");
+				if(resolvedTime != null) {
+					r.setResolved(resolvedTime.toLocalDateTime()); // NULLABLE
+				}
 				
 				// Referenced fields.
 				User user;
-				user = userDao.getUserById(rSet.getInt("author_id"));
-				r.setAuthor(user);
 				
-				user = userDao.getUserById(rSet.getInt("resolver_id"));
-				r.setResolver(user);
+				user = userDao.getUserById(rSet.getInt("author_id"));
+				r.setAuthor(user); // NOT NULL
+				
+				
+				int resolverId = rSet.getInt("resolver_id");
+				if(resolverId != 0) {
+					user = userDao.getUserById(resolverId);
+					r.setResolver(user); // NULLABLE
+				}
+				
 				
 				ReimbursementType type = rtDao.getReimbursementTypeById(rSet.getInt("r_type"));
-				r.setType(type);
+				r.setType(type); // NOT NULL
 				
 				ReimbursementStatus status = rsDao.getReimbursementStatusById(rSet.getInt("r_status"));
-				r.setStatus(status);
+				r.setStatus(status); // NOT NULL
 				
 				rList.add(r);
 			}
@@ -97,25 +108,35 @@ public class ReimbursementDao {
 				Reimbursement r = new Reimbursement();
 				
 				// Basic fields.
-				r.setId(rSet.getInt("id"));
-				r.setAmount(rSet.getDouble("amount"));
-				r.setDescription(rSet.getString("description"));
-				r.setSubmitted(rSet.getTimestamp("submitted").toLocalDateTime());
-				r.setResolved(rSet.getTimestamp("resolved").toLocalDateTime());
+				r.setId(rSet.getInt("id")); // NOT NULL
+				r.setAmount(rSet.getDouble("amount")); // NOT NULL
+				r.setDescription(rSet.getString("description")); // NULLABLE
+				r.setSubmitted(rSet.getTimestamp("submitted").toLocalDateTime()); // NOT NULL
+				
+				java.sql.Timestamp resolvedTime = rSet.getTimestamp("resolved");
+				if(resolvedTime != null) {
+					r.setResolved(resolvedTime.toLocalDateTime()); // NULLABLE
+				}
 				
 				// Referenced fields.
 				User user;
-				user = userDao.getUserById(rSet.getInt("author_id"));
-				r.setAuthor(user);
 				
-				user = userDao.getUserById(rSet.getInt("resolver_id"));
-				r.setResolver(user);
+				user = userDao.getUserById(rSet.getInt("author_id"));
+				r.setAuthor(user); // NOT NULL
+				
+				
+				int resolverId = rSet.getInt("resolver_id");
+				if(resolverId != 0) {
+					user = userDao.getUserById(resolverId);
+					r.setResolver(user); // NULLABLE
+				}
+				
 				
 				ReimbursementType type = rtDao.getReimbursementTypeById(rSet.getInt("r_type"));
-				r.setType(type);
+				r.setType(type); // NOT NULL
 				
 				ReimbursementStatus status = rsDao.getReimbursementStatusById(rSet.getInt("r_status"));
-				r.setStatus(status);
+				r.setStatus(status); // NOT NULL
 				
 				rList.add(r);
 			}
@@ -147,25 +168,35 @@ public class ReimbursementDao {
 				Reimbursement r = new Reimbursement();
 				
 				// Basic fields.
-				r.setId(rSet.getInt("id"));
-				r.setAmount(rSet.getDouble("amount"));
-				r.setDescription(rSet.getString("description"));
-				r.setSubmitted(rSet.getTimestamp("submitted").toLocalDateTime());
-				r.setResolved(rSet.getTimestamp("resolved").toLocalDateTime());
+				r.setId(rSet.getInt("id")); // NOT NULL
+				r.setAmount(rSet.getDouble("amount")); // NOT NULL
+				r.setDescription(rSet.getString("description")); // NULLABLE
+				r.setSubmitted(rSet.getTimestamp("submitted").toLocalDateTime()); // NOT NULL
+				
+				java.sql.Timestamp resolvedTime = rSet.getTimestamp("resolved");
+				if(resolvedTime != null) {
+					r.setResolved(resolvedTime.toLocalDateTime()); // NULLABLE
+				}
 				
 				// Referenced fields.
 				User user;
-				user = userDao.getUserById(rSet.getInt("author_id"));
-				r.setAuthor(user);
 				
-				user = userDao.getUserById(rSet.getInt("resolver_id"));
-				r.setResolver(user);
+				user = userDao.getUserById(rSet.getInt("author_id"));
+				r.setAuthor(user); // NOT NULL
+				
+				
+				int resolverId = rSet.getInt("resolver_id");
+				if(resolverId != 0) {
+					user = userDao.getUserById(resolverId);
+					r.setResolver(user); // NULLABLE
+				}
+				
 				
 				ReimbursementType type = rtDao.getReimbursementTypeById(rSet.getInt("r_type"));
-				r.setType(type);
+				r.setType(type); // NOT NULL
 				
 				ReimbursementStatus status = rsDao.getReimbursementStatusById(rSet.getInt("r_status"));
-				r.setStatus(status);
+				r.setStatus(status); // NOT NULL
 				
 				rList.add(r);
 			}
@@ -197,25 +228,35 @@ public class ReimbursementDao {
 				Reimbursement r = new Reimbursement();
 				
 				// Basic fields.
-				r.setId(rSet.getInt("id"));
-				r.setAmount(rSet.getDouble("amount"));
-				r.setDescription(rSet.getString("description"));
-				r.setSubmitted(rSet.getTimestamp("submitted").toLocalDateTime());
-				r.setResolved(rSet.getTimestamp("resolved").toLocalDateTime());
+				r.setId(rSet.getInt("id")); // NOT NULL
+				r.setAmount(rSet.getDouble("amount")); // NOT NULL
+				r.setDescription(rSet.getString("description")); // NULLABLE
+				r.setSubmitted(rSet.getTimestamp("submitted").toLocalDateTime()); // NOT NULL
+				
+				java.sql.Timestamp resolvedTime = rSet.getTimestamp("resolved");
+				if(resolvedTime != null) {
+					r.setResolved(resolvedTime.toLocalDateTime()); // NULLABLE
+				}
 				
 				// Referenced fields.
 				User user;
-				user = userDao.getUserById(rSet.getInt("author_id"));
-				r.setAuthor(user);
 				
-				user = userDao.getUserById(rSet.getInt("resolver_id"));
-				r.setResolver(user);
+				user = userDao.getUserById(rSet.getInt("author_id"));
+				r.setAuthor(user); // NOT NULL
+				
+				
+				int resolverId = rSet.getInt("resolver_id");
+				if(resolverId != 0) {
+					user = userDao.getUserById(resolverId);
+					r.setResolver(user); // NULLABLE
+				}
+				
 				
 				ReimbursementType type = rtDao.getReimbursementTypeById(rSet.getInt("r_type"));
-				r.setType(type);
+				r.setType(type); // NOT NULL
 				
 				ReimbursementStatus status = rsDao.getReimbursementStatusById(rSet.getInt("r_status"));
-				r.setStatus(status);
+				r.setStatus(status); // NOT NULL
 				
 				rList.add(r);
 			}
@@ -247,25 +288,36 @@ public class ReimbursementDao {
 				r = new Reimbursement();
 				
 				// Basic fields.
-				r.setId(rSet.getInt("id"));
-				r.setAmount(rSet.getDouble("amount"));
-				r.setDescription(rSet.getString("description"));
-				r.setSubmitted(rSet.getTimestamp("submitted").toLocalDateTime());
-				r.setResolved(rSet.getTimestamp("resolved").toLocalDateTime());
+				r.setId(rSet.getInt("id")); // NOT NULL
+				r.setAmount(rSet.getDouble("amount")); // NOT NULL
+				r.setDescription(rSet.getString("description")); // NULLABLE
+				r.setSubmitted(rSet.getTimestamp("submitted").toLocalDateTime()); // NOT NULL
+				
+				java.sql.Timestamp resolvedTime = rSet.getTimestamp("resolved");
+				if(resolvedTime != null) {
+					r.setResolved(resolvedTime.toLocalDateTime()); // NULLABLE
+				}
 				
 				// Referenced fields.
 				User user;
-				user = userDao.getUserById(rSet.getInt("author_id"));
-				r.setAuthor(user);
 				
-				user = userDao.getUserById(rSet.getInt("resolver_id"));
-				r.setResolver(user);
+				user = userDao.getUserById(rSet.getInt("author_id"));
+				r.setAuthor(user); // NOT NULL
+				
+				
+				int resolverId = rSet.getInt("resolver_id");
+				if(resolverId != 0) {
+					user = userDao.getUserById(resolverId);
+					r.setResolver(user); // NULLABLE
+				}
+				
 				
 				ReimbursementType type = rtDao.getReimbursementTypeById(rSet.getInt("r_type"));
-				r.setType(type);
+				r.setType(type); // NOT NULL
 				
 				ReimbursementStatus status = rsDao.getReimbursementStatusById(rSet.getInt("r_status"));
-				r.setStatus(status);
+				r.setStatus(status); // NOT NULL
+				
 			}
 		} finally {
 			if(rSet != null) rSet.close();
@@ -313,7 +365,7 @@ public class ReimbursementDao {
 		
 		try {
 			cs = cm.getConnection().prepareCall("{call add_new_reimbursement(?, ?, ?, ?, ?, ?)}");
-			cs.setDouble(1, request.getAmount());
+			cs.setBigDecimal(1, new BigDecimal(request.getAmount()));
 			cs.setString(2, request.getDescription());
 			cs.setTimestamp(3, java.sql.Timestamp.valueOf(request.getSubmitted()));
 			cs.setInt(4, request.getAuthor().getId());
@@ -346,7 +398,7 @@ public class ReimbursementDao {
 		try {
 			cs = cm.getConnection().prepareCall("{call update_reimbursement(?, ?, ?, ?, ?, ?)}");
 			cs.setInt(1, id);
-			cs.setDouble(2, (req.getAmount() == null ? 
+			cs.setBigDecimal(2, new BigDecimal(req.getAmount() == null ? 
 					existingReq.getAmount() : req.getAmount()));
 			cs.setString(3, (req.getDescription() == null ? 
 					existingReq.getDescription() : req.getDescription()));

@@ -63,11 +63,11 @@ public class UserHomeServlet extends HttpServlet {
 		} else if(user.getRole().getRole().equalsIgnoreCase("employee")) {
 			Document htmlPage = Jsoup.parse(new File(webinfPath, "employee-base.html"), null);
 			Document htmlFragment = Jsoup.parse(new File(webinfPath, "employee-home.fragment.html"), null);
+			htmlPage.getElementById("user").empty().appendText(user.getUsername());
 			
 			Elements fragment = htmlFragment.getElementById("fragment").children();
 			
 			htmlPage.getElementById("content").append(fragment.outerHtml());
-			htmlPage.body().appendElement("script").attr("src", "resources/logout.js");
 			
 			response.getWriter().print(htmlPage.outerHtml());
 			
