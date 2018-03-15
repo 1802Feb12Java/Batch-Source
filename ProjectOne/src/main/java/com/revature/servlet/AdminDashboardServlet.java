@@ -2,11 +2,14 @@ package com.revature.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 
 public class AdminDashboardServlet extends HttpServlet {
+	
+	private static final Logger Log = Logger.getLogger(AdminDashboardServlet.class);
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -14,6 +17,8 @@ public class AdminDashboardServlet extends HttpServlet {
 		resp.setContentType("text/html");
 		PrintWriter pw = resp.getWriter();
 		HttpSession session = req.getSession(false);
+		
+		Log.info("Info to log");
 		
 		if(session!=null && session.getAttribute("username") != null){
 			

@@ -23,7 +23,8 @@ function populateUser(xhr) {
 function loadReimbursements(xhr) {
     
 	var reimbursements = JSON.parse(xhr.responseText);
-    var table = document.getElementById("reimbursements");
+	var table = document.getElementById("reimbursements");
+	var approveHtml, denyHtml;
 
     for(var i=0; i<reimbursements.length; i++) {
         var newrow = document.createElement("tr");
@@ -36,21 +37,32 @@ function loadReimbursements(xhr) {
         row.innerHTML += "<td>"+reimbursements[i].receipt+"</td>";
         row.innerHTML += "<td>"+reimbursements[i].submitted+"</td>";
         row.innerHTML += "<td>"+reimbursements[i].resolved+"</td>";
-        row.innerHTML += "<td>"+reimbursements[i].employee+"</td>";
+        row.innerHTML += "<td>"+reimbursements[i].person+"</td>";
         row.innerHTML += "<td>"+reimbursements[i].type+"</td>";
-        row.innerHTML += "<td>"+reimbursements[i].status+"</td>";
-        row.innerHTML += "<td>" +
-        					"<form action='reimbursements' method='POST'>" +
-        					"<input type='hidden' name='status' value='2'>" +
-        					"<input type='hidden' name='reimbursementId' value=" + reimbursements[i].id + ">" +
-        					"<button style='width:100%; padding:2px' class='btn btn-success btn-sm' type='submit'>Approve</button>" +
-        					"</form>" +
-        					"<form action='reimbursements' method='POST'>" +
-        					"<input type='hidden' name='status' value='3'>" +
-        					"<input type='hidden' name='reimbursementId' value=" + reimbursements[i].id + ">" +
-        					"<button style='width:100%; margin-top:4px; padding:2px' class='btn btn-danger btn-sm' type='submit'>Deny</button>" +
-        					"</form>" +
-        					"</td>";
+		row.innerHTML += "<td>"+reimbursements[i].status+"</td>";
+		
+		var status = reimbursements[i].status;
+		alert(status);
+		if(status == 'Pending' || status == 'Denied') {
+			approveHtml = "<form action='reimbursements' method='POST'>" +
+							"<input type='hidden' name='status' value='2'>" +
+							"<input type='hidden' name='reimbursementId' value=" + reimbursements[i].id + ">" +
+							"<button style='width:100%; padding:2px' class='btn btn-success btn-sm' type='submit'>Approve</button>" +
+							"</form>";
+		} else {
+			approveHtml = "";
+		}
+		if(status == 'Pending' || status == 'Approved') {
+			denyHtml = "<form action='reimbursements' method='POST'>" +
+						"<input type='hidden' name='status' value='3'>" +
+						"<input type='hidden' name='reimbursementId' value=" + reimbursements[i].id + ">" +
+						"<button style='width:100%; margin-top:4px; padding:2px' class='btn btn-danger btn-sm' type='submit'>Deny</button>" +
+						"</form>";
+		} else {
+			denyHtml = "";
+		}
+
+		row.innerHTML += "<td>" + approveHtml + denyHtml + "</td>";
 	}
 	
 	// load data table
@@ -85,9 +97,6 @@ function loadUsers(xhr) {
 	})
 }
 
-
-
-
 window.onload = function() {
 	
 	// Get logged in user
@@ -97,12 +106,12 @@ window.onload = function() {
 	var location = window.location.href;
 	
 	// run ajax request if on reimbursements page
-	if (location.indexOf("http://localhost:8080/ProjectOne/reimbursements") > -1) {
+	if (location.indexOf("ProjectOne/reimbursements") > -1) {
 		sendAjaxGet("http://localhost:8080/ProjectOne/get-reimbursements", loadReimbursements);
 	}
 	
 	// run ajax request if on users page
-	if (location.indexOf("http://localhost:8080/ProjectOne/users") > -1) {
+	if (location.indexOf("ProjectOne/users") > -1) {
 		sendAjaxGet("http://localhost:8080/ProjectOne/get-users", loadUsers);
 	}
 	

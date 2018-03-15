@@ -20,10 +20,6 @@
 	background: linear-gradient(to bottom,  rgba(96,108,136,1) 51%,rgba(63,76,107,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#606c88', endColorstr='#3f4c6b',GradientType=0 ); /* IE6-9 */
 }
-.form-control {
-  	min-height: 50px;
-  	border-radius: 0px;
-}
 .card-header {
 	background-color: #dce1e8;
 	border-radius: 0px !important;
@@ -47,7 +43,9 @@
 .login-input {
 	font-size: 16px;
     font-weight: 300;
-    letter-spacing: .4px;
+	letter-spacing: .4px;
+	min-height: 50px;
+	border-radius: 0px;
 }
 .customEmp {
 	font-size: 20px;

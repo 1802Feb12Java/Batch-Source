@@ -15,13 +15,13 @@ import com.revature.util.ConnFactory;
 
 public class LoginServlet extends HttpServlet {
 	
-	static int userId;
-	static String username;
-	static String password;
-	static String firstName;
-	static String lastName;
-	static String email;
-	static int roleId;
+	private int userId;
+	private String username;
+	private String password;
+	private String firstName;
+	private String lastName;
+	private String email;
+	private int roleId;
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
