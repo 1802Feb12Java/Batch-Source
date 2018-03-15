@@ -7,7 +7,7 @@ For Angular prart go to https://github.com/khsieh/revature-project1-ng
 should be able to do CORS with Angular running on port 4200 and Tomcat running java backend on port 8080  
 
 
-###Technologies used
+### Technologies used
 	Java 1.8  
 	git  
 	oracale SQL DB  
@@ -26,7 +26,7 @@ change paths in
   log4j.properties: "log4j.appender.file.File" to where you want the bank.log  
   com.revature.util.ConnFactory: "fileParth" to where the database.properties' path  
 
-###Technologies used  
+### Technologies used  
  	Log4j  
  	Java 1.8  
  	git  
