@@ -1,7 +1,6 @@
 package com.revature.controllers;
 
 import java.sql.SQLException;
-
 import com.revature.dao.implementation.ImplementationReimbursementDAO;
 
 public class Employee extends User {

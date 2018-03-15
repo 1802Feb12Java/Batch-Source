@@ -8,7 +8,10 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
+import org.apache.log4j.Logger;
+
 public class ConnFactory {
+	static Logger log = Logger.getLogger(ConnFactory.class.getName());
 	private static ConnFactory cf = null;
 
 	private ConnFactory() {
@@ -31,17 +34,18 @@ public class ConnFactory {
 			Class.forName(prop.getProperty("driver"));
 			conn = DriverManager.getConnection(prop.getProperty("url"), prop.getProperty("usr"),
 					prop.getProperty("pwd"));
+			log.debug("Connection to database created");
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			log.error("SQL Exception");
 			e.printStackTrace();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
+			log.error("File not found");
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			log.error("Can't read file");
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
+			log.error("Missing driver");
 			e.printStackTrace();
 		}
 		return conn;

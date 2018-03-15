@@ -4,7 +4,7 @@ function getTotalAppliedReimbursments() {
   xhr.onreadystatechange = function () {
     if (xhr.readyState == 4 && xhr.status == 200) {
       var amountData = JSON.parse(xhr.responseText);
-      var currentMax = 4000;
+      var currentMax = 1000;
       for (let w = 0; w < amountData.length; w++) {
         if (amountData[w] > currentMax) {
           currentMax = amountData[w];

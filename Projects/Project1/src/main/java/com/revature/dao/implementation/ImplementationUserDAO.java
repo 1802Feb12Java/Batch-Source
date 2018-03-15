@@ -6,22 +6,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import org.apache.log4j.Logger;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.revature.dao.UserDAO;
 
 public class ImplementationUserDAO implements UserDAO {
+	static Logger log = Logger.getLogger(ImplementationUserDAO.class.getName());
 
-	/**
-	 * Uses provided username and password to check database if user exists
-	 * 
-	 * @param username
-	 *            username of account being checked
-	 * @param password
-	 *            password of account being checked
-	 * @return True if username/password combination exists
-	 * @throws SQLException
-	 */
 	public boolean logIn(String username, String password) throws SQLException {
 		boolean canLogIn = false;
 		Connection c0 = ConnFactory.getInstance().getConnection();
@@ -32,24 +25,17 @@ public class ImplementationUserDAO implements UserDAO {
 
 		if (rs1.next()) {
 			canLogIn = true;
+			log.info("User [" + username + "] has logged in");
 		} else {
 			canLogIn = false;
+			log.debug("Failed login attempt");
 		}
 
 		c0.close();
+		log.debug("Connection to database closed");
 		return canLogIn;
 	}
 
-	/**
-	 * Uses provided username to return information from database relating to that
-	 * user
-	 * 
-	 * @param username
-	 *            username of user being viewed
-	 * @return an array corresponding to the information stored in the row on the
-	 *         database relating to the specified user
-	 * @throws SQLException
-	 */
 	public String[] getUserInformation(String username) throws SQLException {
 		String[] oneUser = new String[5];
 		Connection c4 = ConnFactory.getInstance().getConnection();
@@ -65,8 +51,9 @@ public class ImplementationUserDAO implements UserDAO {
 			oneUser[3] = rs1.getString(4);
 			oneUser[4] = rs1.getString(5);
 		}
-
+		log.info("Information for user [" + username + "] retreived");
 		c4.close();
+		log.debug("Connection to database closed");
 		return oneUser;
 	}
 
@@ -81,13 +68,16 @@ public class ImplementationUserDAO implements UserDAO {
 		if (rs2.next()) {
 			userRole = rs2.getString(1);
 		}
+		
+		log.info("Role for user [" + username + "] retreived");
 
 		c1.close();
+		log.debug("Connection to database closed");
 		return userRole;
 	}
 
-	public void updateInformation(String oldusername, String newusername, String password, String firstName, String lastName, String email)
-			throws SQLException {
+	public void updateInformation(String oldusername, String newusername, String password, String firstName,
+			String lastName, String email) throws SQLException {
 		Connection c3 = ConnFactory.getInstance().getConnection();
 		PreparedStatement cs3 = c3.prepareCall("{call UPDATE_ERS_USER(?, ?, ?, ?, ?, ?)}");
 		cs3.setString(1, oldusername);
@@ -97,7 +87,9 @@ public class ImplementationUserDAO implements UserDAO {
 		cs3.setString(5, lastName);
 		cs3.setString(6, email);
 		cs3.execute();
+		log.info("Information for user [" + oldusername + " / " + newusername + "] retreived");
 		c3.close();
+		log.debug("Connection to database closed");
 	}
 
 	public String getAllUsers() throws SQLException {
@@ -119,16 +111,9 @@ public class ImplementationUserDAO implements UserDAO {
 		}
 
 		String jsonFromJavaArrayList = gsonBuilder.toJson(userList);
-		// System.out.println(jsonFromJavaArrayList);
-
-		/*
-		 * for (int j = 0; j < userList.size(); j++) {
-		 * System.out.println("--------------------------------------------------");
-		 * String[] returnedList = userList.get(j); for (String s : returnedList) {
-		 * System.out.println(s); } }
-		 */
-
+		log.info("Information for all users retreived");
 		c4.close();
+		log.debug("Connection to database closed");
 		return jsonFromJavaArrayList;
 	}
 
@@ -142,7 +127,9 @@ public class ImplementationUserDAO implements UserDAO {
 		while (rs1.next()) {
 			firstName = rs1.getString(1);
 		}
+		log.info("First name for user [" + username + "] retreived");
 		c5.close();
+		log.debug("Connection to database closed");
 		return firstName;
 	}
 

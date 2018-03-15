@@ -13,16 +13,8 @@ public class Manager extends User {
 		return ird.getReimbursementsAll();
 	}
 
-	public static void viewPendingAll() throws SQLException {
-		ird.getPendingReimbursementsAll();
-	}
-
 	public static void approveOrDeny(int appId, int approveDeny, String approver) throws SQLException {
 		ird.approveDenyApplication(appId, approveDeny, approver);
-	}
-
-	public static void viewResolvedAll() throws SQLException {
-		ird.getResolvedAll();
 	}
 
 	public static String viewInformationAll() throws SQLException {
@@ -32,7 +24,7 @@ public class Manager extends User {
 	public static String totalCostReimbursments() throws SQLException {
 		return ird.getAppliedAmount();
 	}
-	
+
 	public static String totalApprovedReimbursments() throws SQLException {
 		return ird.getApprovedAmount();
 	}

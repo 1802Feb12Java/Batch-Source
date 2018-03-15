@@ -32,8 +32,8 @@ public class User {
 		return oneUserJSONArray;
 	}
 
-	public static void updateUserInformation(String oldusername, String username, String password, String firstName, String lastName,
-			String email) throws SQLException {
+	public static void updateUserInformation(String oldusername, String username, String password, String firstName,
+			String lastName, String email) throws SQLException {
 		iud.updateInformation(oldusername, username, password, firstName, lastName, email);
 	}
 
@@ -41,14 +41,6 @@ public class User {
 		return ird.getReimbursements(username);
 	}
 
-	public static void viewPending(String username) throws SQLException {
-		ird.getPendingReimbursements(username);
-	}
-
-	public static void viewResolved(String username) throws SQLException {
-		ird.getResolved(username);
-	}
-	
 	public static String viewFirstName(String username) throws SQLException {
 		return iud.getFirstName(username);
 	}

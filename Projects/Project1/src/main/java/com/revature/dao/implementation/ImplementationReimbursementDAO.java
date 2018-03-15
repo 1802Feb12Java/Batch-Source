@@ -7,11 +7,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import org.apache.log4j.Logger;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.revature.dao.ReimbursementDAO;
 
 public class ImplementationReimbursementDAO implements ReimbursementDAO {
+	static Logger log = Logger.getLogger(ImplementationReimbursementDAO.class.getName());
 
 	public void submitReimbursement(String username, double amount, String description, int type) throws SQLException {
 		Connection c0 = ConnFactory.getInstance().getConnection();
@@ -21,7 +24,9 @@ public class ImplementationReimbursementDAO implements ReimbursementDAO {
 		cs0.setString(3, description);
 		cs0.setInt(4, type);
 		cs0.execute();
+		log.info("User [" + username + "] submitted a reimbursement");
 		c0.close();
+		log.debug("Connection to database closed");
 	}
 
 	public String getReimbursementsAll() throws SQLException {
@@ -44,8 +49,9 @@ public class ImplementationReimbursementDAO implements ReimbursementDAO {
 		}
 
 		String jsonFromJavaArrayList = gsonBuilder.toJson(reimbursementList);
-
+		log.info("List of reimbursements viewed");
 		c1.close();
+		log.debug("Connection to database closed");
 		return jsonFromJavaArrayList;
 	}
 
@@ -70,129 +76,10 @@ public class ImplementationReimbursementDAO implements ReimbursementDAO {
 		}
 
 		String jsonFromJavaArrayList = gsonBuilder.toJson(reimbursementList);
-
+		log.info("User [" + user + "] has viewed their reimbursements");
 		c1.close();
+		log.debug("Connection to database closed");
 		return jsonFromJavaArrayList;
-	}
-
-	public ArrayList<String[]> getPendingReimbursementsAll() throws SQLException {
-		ArrayList<String[]> reimbursementList = new ArrayList<String[]>();
-		Connection c1 = ConnFactory.getInstance().getConnection();
-		String sqlQ = "SELECT DISTINCT R_ID, R_AMOUNT, R_DESCRIPTION, R_SUBMITTED, R_RESOLVED, U_ID_AUTHOR, U_ID_RESOLVER, RT_TYPE, RS_STATUS FROM ERS_REIMBURSEMENTS, ERS_USERS WHERE RS_STATUS<2 ORDER BY R_SUBMITTED DESC";
-		PreparedStatement ps1 = c1.prepareStatement(sqlQ);
-		ResultSet rs1 = ps1.executeQuery();
-
-		while (rs1.next()) {
-			String[] oneReimbursement = new String[9];
-			for (int i = 0; i < oneReimbursement.length; i++) {
-				try {
-					oneReimbursement[i] = rs1.getString(i + 1);
-				} catch (Exception e) {
-				}
-			}
-			reimbursementList.add(oneReimbursement);
-		}
-
-		for (int j = 0; j < reimbursementList.size(); j++) {
-			System.out.println("--------------------------------------------------");
-			String[] returnedList = reimbursementList.get(j);
-			for (String s : returnedList) {
-				System.out.println(s);
-			}
-		}
-		c1.close();
-		return reimbursementList;
-	}
-
-	public ArrayList<String[]> getPendingReimbursements(String user) throws SQLException {
-		ArrayList<String[]> reimbursementList = new ArrayList<String[]>();
-		Connection c1 = ConnFactory.getInstance().getConnection();
-		String sqlQ = "SELECT DISTINCT R_ID, R_AMOUNT, R_DESCRIPTION, R_SUBMITTED, R_RESOLVED, U_ID_AUTHOR, U_ID_RESOLVER, RT_TYPE, RS_STATUS FROM ERS_REIMBURSEMENTS, ERS_USERS WHERE U_USERNAME=? AND RS_STATUS<2 AND ERS_USERS.U_ID=ERS_REIMBURSEMENTS.U_ID_AUTHOR ORDER BY R_SUBMITTED DESC";
-		PreparedStatement ps1 = c1.prepareStatement(sqlQ);
-		ps1.setString(1, user);
-		ResultSet rs1 = ps1.executeQuery();
-
-		while (rs1.next()) {
-			String[] oneReimbursement = new String[9];
-			for (int i = 0; i < oneReimbursement.length; i++) {
-				try {
-					oneReimbursement[i] = rs1.getString(i + 1);
-				} catch (Exception e) {
-
-				}
-			}
-			reimbursementList.add(oneReimbursement);
-		}
-
-		for (int j = 0; j < reimbursementList.size(); j++) {
-			System.out.println("--------------------------------------------------");
-			String[] returnedList = reimbursementList.get(j);
-			for (String s : returnedList) {
-				System.out.println(s);
-			}
-		}
-		c1.close();
-		return reimbursementList;
-	}
-
-	public ArrayList<String[]> getResolvedAll() throws SQLException {
-		ArrayList<String[]> reimbursementList = new ArrayList<String[]>();
-		Connection c1 = ConnFactory.getInstance().getConnection();
-		String sqlQ = "SELECT DISTINCT R_ID, R_AMOUNT, R_DESCRIPTION, R_SUBMITTED, R_RESOLVED, U_ID_AUTHOR, U_ID_RESOLVER, RT_TYPE, RS_STATUS FROM ERS_REIMBURSEMENTS, ERS_USERS WHERE RS_STATUS>1 ORDER BY R_SUBMITTED DESC";
-		PreparedStatement ps1 = c1.prepareStatement(sqlQ);
-		ResultSet rs1 = ps1.executeQuery();
-
-		while (rs1.next()) {
-			String[] oneReimbursement = new String[9];
-			for (int i = 0; i < oneReimbursement.length; i++) {
-				try {
-					oneReimbursement[i] = rs1.getString(i + 1);
-				} catch (Exception e) {
-				}
-			}
-			reimbursementList.add(oneReimbursement);
-		}
-
-		for (int j = 0; j < reimbursementList.size(); j++) {
-			System.out.println("--------------------------------------------------");
-			String[] returnedList = reimbursementList.get(j);
-			for (String s : returnedList) {
-				System.out.println(s);
-			}
-		}
-		c1.close();
-		return reimbursementList;
-	}
-
-	public ArrayList<String[]> getResolved(String user) throws SQLException {
-		ArrayList<String[]> reimbursementList = new ArrayList<String[]>();
-		Connection c1 = ConnFactory.getInstance().getConnection();
-		String sqlQ = "SELECT DISTINCT R_ID, R_AMOUNT, R_DESCRIPTION, R_SUBMITTED, R_RESOLVED, U_ID_AUTHOR, U_ID_RESOLVER, RT_TYPE, RS_STATUS FROM ERS_REIMBURSEMENTS, ERS_USERS WHERE U_USERNAME=? AND RS_STATUS>1 AND ERS_USERS.U_ID=ERS_REIMBURSEMENTS.U_ID_AUTHOR ORDER BY R_SUBMITTED DESC";
-		PreparedStatement ps1 = c1.prepareStatement(sqlQ);
-		ps1.setString(1, user);
-		ResultSet rs1 = ps1.executeQuery();
-
-		while (rs1.next()) {
-			String[] oneReimbursement = new String[9];
-			for (int i = 0; i < oneReimbursement.length; i++) {
-				try {
-					oneReimbursement[i] = rs1.getString(i + 1);
-				} catch (Exception e) {
-
-				}
-			}
-			reimbursementList.add(oneReimbursement);
-		}
-
-		for (int j = 0; j < reimbursementList.size(); j++) {
-			System.out.println("--------------------------------------------------");
-			String[] returnedList = reimbursementList.get(j);
-			for (String s : returnedList) {
-				System.out.println(s);
-			}
-		}
-		c1.close();
-		return reimbursementList;
 	}
 
 	public void uploadImage() throws SQLException {
@@ -208,7 +95,16 @@ public class ImplementationReimbursementDAO implements ReimbursementDAO {
 		cs6.setString(3, approver);
 		cs6.execute();
 
+		String forLogging = "";
+		if (approveDeny == 3) {
+			forLogging = "denied";
+		} else {
+			forLogging = "approved";
+		}
+		log.info("Reimbursement [" + reqId + "] " + forLogging + " by manager [" + approver + "]");
+
 		c6.close();
+		log.debug("Connection to database closed");
 	}
 
 	public String getAppliedAmount() throws SQLException {
@@ -232,10 +128,12 @@ public class ImplementationReimbursementDAO implements ReimbursementDAO {
 		}
 
 		c7.close();
+		log.debug("Connection to database closed");
 		String jsonFromJava = gsonBuilder.toJson(totals);
+		log.info("Calculated total of reimbursements applied for");
 		return jsonFromJava;
 	}
-	
+
 	public String getApprovedAmount() throws SQLException {
 		double[] totals = new double[12];
 		Gson gsonBuilder = new GsonBuilder().create();
@@ -257,7 +155,9 @@ public class ImplementationReimbursementDAO implements ReimbursementDAO {
 		}
 
 		c7.close();
+		log.debug("Connection to database closed");
 		String jsonFromJava = gsonBuilder.toJson(totals);
+		log.info("Calculated total of reimbursements approved");
 		return jsonFromJava;
 	}
 
