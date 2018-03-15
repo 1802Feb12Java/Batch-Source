@@ -18,13 +18,25 @@ Used Dependencies:
 Database-related files:
     database.properties 
         - located in src/main/resources
-        - If not connecting ot the database using SSL, comment out the SSL-related lines.
+        - If not connecting to the database using SSL, comment out the SSL-related lines.
     rds-combined-ca-bundle.pem (for connecting to the database using SSL)
         - located in src/main/resources
     DBCREATE.sql: Database creation script
-        -
+        - database creation script
+        
     
 Start page: <host>:<port>/reimbursement/
         or  <host>:<port>/reimbursement/login
-        
 
+        
+Note about DB:
+To view PostgreSQL databases in Oracle SQL Developer...
+    1) Tools > Preferences > Database > Third Party JDBC Drivers
+        > Add Entry... > [path to postgresql-42.2.1.jre7.jar]
+    2) Create New Database Connection
+        - Connection Name: ...
+        - Username: [database username]
+        - Password: [database password]
+        - Select PostgreSQL
+            - Hostname: [url]/[Database Name/SID]?
+            - Port: [port, default is 5432]
