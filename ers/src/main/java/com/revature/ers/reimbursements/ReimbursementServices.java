@@ -62,11 +62,15 @@ public class ReimbursementServices implements ReimbursementDAO{
 		
 		else {
 			reimbursement.setR_amount(rs.getDouble("R_AMOUNT"));
+			System.out.println(rs.getDouble("R_AMOUNT"));
 			reimbursement.setR_description(rs.getString("R_DESCRIPTION"));
+			System.out.println(rs.getString("R_DESCRIPTION"));
 			reimbursement.setR_receipt(rs.getBlob("R_RECEIPT"));
 			reimbursement.setR_submitted(rs.getTimestamp("R_SUBMITTED"));
+			System.out.println(rs.getTimestamp("R_SUBMITTED"));
 			reimbursement.setR_resolved(rs.getTimestamp("R_RESOLVED"));
 			reimbursement.setU_ID_Author(rs.getInt("U_ID_AUTHOR"));
+			System.out.println(rs.getInt("U_ID_AUTHOR"));
 			reimbursement.setU_ID_Resolver(rs.getInt("U_ID_RESOLVER"));
 			reimbursement.setRt_Type(rs.getInt("RT_TYPE"));
 			reimbursement.setRt_Status(rs.getInt("RT_STATUS"));
@@ -104,19 +108,16 @@ public class ReimbursementServices implements ReimbursementDAO{
 		ArrayList <Reimbursement> reimbursements = new ArrayList<Reimbursement>();
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		Reimbursement reimbursement = new Reimbursement();
 	
 		//prepare the statement
 		if(ur_role == 1) {
 			//view all pending for managers
-			System.out.println("Hello manager");
 			String sql = "SELECT * FROM ERS_REIMBURSEMENTS WHERE RT_STATUS=?";
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, 1);
 		}
 		else {
 			//review pending for employee
-			System.out.println("Hello employee");
 			String sql = "SELECT * FROM ERS_REIMBURSEMENTS WHERE U_ID_AUTHOR=? AND RT_STATUS=?";
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1,ur_id);
@@ -126,20 +127,23 @@ public class ReimbursementServices implements ReimbursementDAO{
 		//execute the query
 		rs = ps.executeQuery();
 
-		if(!rs.next()) {
-			return null;
-		}
 		while(rs.next()) {
+			Reimbursement reimbursement = new Reimbursement();
 			reimbursement.setR_id(rs.getInt("R_ID"));
 			reimbursement.setR_amount(rs.getDouble("R_AMOUNT"));
 			reimbursement.setR_description(rs.getString("R_DESCRIPTION"));
 			reimbursement.setR_receipt(rs.getBlob("R_RECEIPT"));
-			reimbursement.setR_submitted(rs.getTimestamp("R_RESOLVED"));
+			reimbursement.setR_submitted(rs.getTimestamp("R_SUBMITTED"));
 			reimbursement.setR_resolved(rs.getTimestamp("R_RESOLVED"));
 			reimbursement.setRt_Type(rs.getInt("RT_TYPE"));
 			reimbursement.setRt_Status(rs.getInt("RT_STATUS"));
+			reimbursement.setU_ID_Author(rs.getInt("U_ID_AUTHOR"));
+			reimbursement.setU_ID_Resolver(rs.getInt("U_ID_RESOLVER"));
 			reimbursements.add(reimbursement);
-			System.out.println(reimbursement.getR_id());
+		}
+		System.out.println("in get pending");
+		for(Reimbursement i : reimbursements) {
+			System.out.println(i.getR_amount());
 		}
 		return reimbursements;
 	}

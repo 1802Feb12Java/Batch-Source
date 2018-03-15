@@ -40,13 +40,13 @@ public class ToJSON {
 		if (list.isEmpty()) {
 			return null;
 		}
-		
-		JSONObject current = new JSONObject();
+
 		JSONArray jArray = new JSONArray();
 		
 		for (Reimbursement indexed : list) {
+			JSONObject current = new JSONObject();
 			current.put("r_id", indexed.getR_id());
-			current.put("amount", indexed.getR_id());
+			current.put("amount", indexed.getR_amount());
 			current.put("description", indexed.getR_description());
 			current.put("receipt", indexed.getR_receipt());
 			current.put("submitted", indexed.getR_submitted());

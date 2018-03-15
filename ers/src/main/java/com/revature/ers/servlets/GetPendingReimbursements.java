@@ -41,23 +41,25 @@ public class GetPendingReimbursements extends HttpServlet {
 		ReimbursementServices rs = new ReimbursementServices();
 		UserServices us = new UserServices();
 		Integer u_ID = (Integer) request.getSession(false).getAttribute("userID");
+		Reimbursement test = new Reimbursement();
 
-		System.out.println("JABBASCRIP");
 		try {
 			int ur_role = us.getUserRole(u_ID.intValue());
 			list = rs.getPendingReimbursements(u_ID, ur_role);
+			System.out.println("Back from get pending");
 			for (Reimbursement i : list) {
-				System.out.println(i.getR_id() + i.getR_amount());
+				System.out.println(i.getR_id());
 			}
+			JSONArray jArray = ToJSON.reimbursements(list);
+			
+			PrintWriter pw = response.getWriter();
+			pw.print(jArray.toString());
 		} catch (SQLException e) {
 			log.error("Unable to get the reimbursements");
 			e.printStackTrace();
 		}
 		
-		JSONArray jArray = ToJSON.reimbursements(list);
-		
-		PrintWriter pw = response.getWriter();
-		pw.print(jArray.toString());
+
 	}
 
 }

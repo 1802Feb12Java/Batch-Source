@@ -88,7 +88,7 @@ let viewEPending = function(){
     xhr.onreadystatechange = function(){
         if(this.readyState == 4 && this.status == 200){
             let jArray = JSON.parse(this.responseText);
-            console.log(jArray);
+            viewTable(jArray);
         }       
     }
     
@@ -102,7 +102,7 @@ let viewEResolved = function(){
     xhr.onreadystatechange = function(){
         if(this.readyState == 4 && this.status == 200){
             let jArray = JSON.parse(this.responseText);
-            console.log(jArray);
+            viewTable(jArray);
         }       
     }
     
@@ -131,6 +131,43 @@ let viewEInfo = function(){
     //send the request
     xhr.send();
 };
+
+let viewTable = function(arr){
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', '/ers/table.html', true);
+    xhr.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
+            console.log(arr);
+            document.getElementById("page").innerHTML = this.responseText;
+            table = document.getElementById("table");
+            for(let i = 0; i < arr.length; i++){
+                var row = table.insertRow(1);
+                var cell1 = row.insertCell(0);
+                cell1.innerHTML = arr[i] ["type"];
+                var cell2 = row.insertCell(0);
+                cell2.innerHTML = arr[i] ["status"];
+                var cell3 = row.insertCell(0);
+                cell3.innerHTML = arr[i] ["resolver"];
+                var cell4 = row.insertCell(0);
+                cell4.innerHTML = arr[i] ["author"];
+                var cell5 = row.insertCell(0);
+                cell5.innerHTML = arr[i] ["resolved"];
+                var cell6 = row.insertCell(0);
+                cell6.innerHTML = arr[i] ["submitted"];
+                var cell7 = row.insertCell(0);
+                cell7.innerHTML = arr[i] ["receipt"];
+                var cell8 = row.insertCell(0);
+                cell8.innerHTML = arr[i] ["description"];
+                var cell9 = row.insertCell(0);
+                cell9.innerHTML = arr[i] ["amount"];
+                var cell10 = row.insertCell(0);
+                cell10.innerHTML = arr[i] ["r_id"];
+            }
+        }
+    }
+
+    xhr.send();
+}
 
 let showCard = function(employee){
     let xhr = new XMLHttpRequest();
