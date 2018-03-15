@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Request</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="./styles/adminrequest.css">
+    <link rel="stylesheet" href="./styles/navbar.css">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  </head>
+  <body>
+
+    <!-- Navigation bar using Bootstrap -->
+    <div class="navbar">
+        <a href="adminlogin.html">Home</a>
+        <a href="admininfo.html">Profile</a>
+        <!-- <a href="successfulLogin.html">Home</a> -->
+
+        <!-- <a hidden href="login.html">Login</a> -->
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Administrator
+          </button>
+          <div class="dropdown-menu" id="ReimbursementDropdown">
+            <a class="dropdown-item" href="adminrequest.html">Request</a>
+          </div>
+        </div> 
+      </div>
+
+      <div>
+          <h4> Requests Information</h4>
+      </div>
+        <!-- form for search buttons -->
+        <div id = "divcenter">
+          <!-- <form action="" class="form-actions" method="post"> -->
+            <div>
+                <button type="submit" onclick="displayInfo('pending')" method="get" id="showpendingbutton" name="showpendingbutton" class="btn btn-info">Show all pending applications</button>
+                <button type="submit"  onclick="displayInfo('approve')"  method="get"  id="showapprovedbutton" name="showapprovedbutton" class="btn btn-info">Show all approved applications</button>    
+                <button type="submit"  onclick="displayInfo('denied')"  method="get"  id="showdeniedbutton" name="showdeniedbutton" class="btn btn-info">Show all denied applications</button>    
+                <button type="submit"  onclick="displayInfo('showemployee')"  method="get"  id="showallemployeebutton" name="showallemployeebutton" class="btn btn-info">Show all employees</button>    
+                  
+              </div>
+                <div>
+              <input type="text"  name="idtext" id="idtext" placeholder="enter an application id">
+                
+              <button type="submit" onclick="displayInfo('search1app')" method="get" id="searchoneapplicationbutton" name="searchoneapplicationbutton"class="btn btn-info">Search one application</button>
+              <input type="text"   name="userid" id="userid" placeholder="enter a user id">
+              <button type="submit"onclick="displayInfo('search1user')" method="get"  id="searchoneuserapplicationbutton" name="searchoneuserapplicationbutton" class="btn btn-info">Search one user's applications</button>
+          </div>
+               
+                  
+       
+                <form action="adminrequest" method="post">
+                        <input type="text"   name="applicationid" id="applicationid" placeholder="enter an application id to approve/deny request">
+                        <button type="submit" id="approvedrequest" name="approvedrequest" class="btn btn-info">Approve Request</button>
+                        <!-- <input type="text"   name="userid" id="userid" placeholder="enter a user id"> -->
+                        <button type="submit"  id="deniedRequest" name="deniedRequest" class="btn btn-info">Deny Request</button>
+                    </form>
+
+  
+              </div>
+           
+          <!-- </form> -->
+        <div>
+            
+            
+        </div>
+        <div id="placeholder">
+
+        </div>
+      
+        
+            
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="./scripts/adminrequest.js" ></script>
+    </body>
+
+</html>

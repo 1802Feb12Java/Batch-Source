@@ -1,0 +1,16 @@
+
+table, th, td{
+     width: 100%;
+     border: 2px solid black;
+     border-collapse: collapse;
+
+}
+th, td {
+    padding: 20px;
+}
+th {
+    text-align: center;
+}
+table {
+    border-spacing: 10px;
+}

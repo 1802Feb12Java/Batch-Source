@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Profile</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="./styles/successfulLoginCSS.css">
+    <link rel="stylesheet" href="./styles/navbar.css">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  </head>
+  <body onpageshow = "displayPersonalInfo()">
+
+    <!-- Navigation bar using Bootstrap -->
+    <div class="navbar">
+        <a href="successfulLogin.html">Home</a>
+        <a href="admininfo.html">Profile</a>
+        <!-- <a href="successfulLogin.html">Home</a> -->
+
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Adminstrator
+          </button>
+          <div class="dropdown-menu" id="Dropdown">
+            <a class="dropdown-item" href="adminrequest.html">Request</a>
+          </div>
+        </div> 
+      </div>
+      <!-- Display Profile -->
+      <div>
+          <h4> Profile</h4>
+          <p id="idholder"></p>
+          <p id = "usernameholder " ></p>
+          <p id="fnameholder"></p>
+          <p id="lnameholder"></p>
+          <p id="emailholder"></p>
+          <p>Choose options to edit profile: </p>
+          <!-- <p id="welcomeid">sdfsdf</p>
+          <p id="personalinfoid">sdfsdf</p>
+          <p id="">choose what you want to do</p> -->
+      </div>
+      <!-- Tab bar to edit profile -->
+      
+<div class="container">
+    <ul class="nav nav-tabs">
+      <li  class="active" ><a data-toggle="tab" href="#pass">Change Password</a></li>
+      <li ><a data-toggle="tab" href="#f">Change Firstname</a></li>
+      <li ><a data-toggle="tab" href="#l">Change Lastname</a></li>
+      <li ><a data-toggle="tab" href="#e">Change Email</a></li>
+
+    </ul>
+  
+    <div class="tab-content">
+      <!-- change password form -->
+      <div id="pass" class="tab-pane fade ">
+          <div>
+              <form id="passform" action="piservlet" method="post">
+                <!-- <label for="">Change Password</label> -->
+                <div class="form-group">
+                    <input type="password" name="oldpass" class="form-control" id="oldpass" placeholder="old password" minlength="6" maxlength="18" required>
+                    <input type="password" name="newpass"class="form-control"  id="newpass" placeholder="new password" minlength="6" maxlength="18" required>
+                </div>
+                <div>
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+              </form>
+            </div>
+      </div>
+      <!-- change first name form -->
+      <div id="f" class="tab-pan fade">
+        <div>
+          <form  action="piservlet" method="post">
+            <div class="form-group">
+              <input type="text" id="fname" name="fname" class="form-control"  placeholder="new first name" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+      </div>
+  <!-- change last name form -->
+      <div id="l" class="tab-pan fade" >
+        <div>
+          <form  action="piservlet" method="post">
+            <div class="form-group">
+              <input type="text" placeholder="new last name"  class="form-control" id="lname" name="lname" require>
+            </div>
+            <button type="submit"  class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+      </div>
+      <!-- change email form -->
+      <div id="e" class="tab-pan fade">
+        <div>
+          <form  action="piservlet" method="post" >
+            <div class="form-group">
+              <input type="text"  name="email" id="email" class="form-control" placeholder="new email address" required>
+            </div>
+            <button type="submit"   class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+
+      </div>
+
+
+
+    </div>     
+  </div>     
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="./scripts/personalinfoJS.js"></script>
+    </body>
+
+</html>

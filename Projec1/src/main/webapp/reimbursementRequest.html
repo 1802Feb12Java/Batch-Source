@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Reimbursement Request</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="./styles/requestCSS.css">
+    <link rel="stylesheet" href="./styles/navbar.css">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  </head>
+  <body>
+
+    <!-- Navigation bar using Bootstrap -->
+    <div class="navbar">
+      <a href="successfulLogin.html">Home</a>
+      <a href="personalinfo.html">Profile</a>
+      <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Reimbursement
+        </button>
+        <div class="dropdown-menu" id="ReimbursementDropdown">
+          <a class="dropdown-item" href="reimbursementRequest.html">Request</a>
+          <a class="dropdown-item" href="reimbursementStatus.html">Status</a>
+        </div>
+      </div> 
+    </div>
+        <!-- Forms for request -->
+        <div>
+            <form action="requestservlet" method="post" enctype="multipart/form-data">
+              <div id="paragraphDescription">
+                <h3> Reimbursement Request Form</h3>
+                <br>
+                  <p>
+                      Inorder to file for expense reimbursement, please fill out the form and submit your receipt as a picture. 
+                      Every fields are required!
+                  </p>
+              </div>
+              <div  class="form-group">
+                <label for="amount">Amount $ : </label>
+                <input type="number" step="0.01" class="form-control" name="amount" id="amount" required>
+              </div>
+              <div class="form-group">
+                <label for="description">Description for reimbursement :</label>
+                <input type="description" class="form-control" name="description" id="description" required>
+              </div>
+              <div class="form-group">
+                <label for="description">Type: </label>
+                <input type="description" class="form-control" name="type" id="type" required>
+              </div>
+              <div class="form-group">
+                  <label for=""></label>
+                  <input type="file" class="form-control-file" name="fileblob" id="fileblob" placeholder="" aria-describedby="fileHelpId" required>
+                </div>
+              <button type="submit" class="btn btn-default">Submit</button>
+            </form> 
+        </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    </body>
+</html>

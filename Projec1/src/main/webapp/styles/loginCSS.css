@@ -1,0 +1,19 @@
+
+/* display text centered */
+h3{
+    text-align: center;
+}
+/* centered form */
+form {
+    width:600px;
+    margin-left:auto;
+    margin-right:auto;
+
+}
+#wrongloginplaceholder{
+    text-align: center;
+    color: red;
+}
+#logoutButton{
+    position: absolute;
+}

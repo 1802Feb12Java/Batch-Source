@@ -1,0 +1,172 @@
+create table ers_user_roles (ur_id number, ur_role varchar2(40), primary key(ur_id) );
+
+create table ers_users (u_id number, u_username varchar2(40) NOT NULL, u_password varchar2(40) NOT NULL, u_firstname varchar2(30),
+                u_lastname varchar2(30), u_email varchar2(100), ur_id number,
+                primary key (u_id), foreign key (ur_id) references ers_user_roles(ur_id)
+                );
+  
+create table ers_reimbursment_status (rs_id number, rs_status varchar2(30), 
+            primary key (rs_id));
+
+create table ers_reimbursement_type(rt_id number, rt_type varchar2(30),
+        primary key(rt_id));
+create table ers_reimbursments (r_id number, r_amount number, r_description varchar2(100),
+                r_receipt blob, r_submitted timestamp , r_resolved timestamp, u_id_author number,
+                u_id_resolver number, rt_type number, rt_status number,
+                primary key (r_id),
+                foreign key (u_id_author) references ers_users(u_id),
+                foreign key (rt_type) references ers_reimbursement_type(rt_id),
+                foreign key (rt_status) references ers_reimbursment_status(rs_id),
+                foreign key (u_id_resolver) references ers_users(u_id)
+);
+
+----------------------------------- procedure to update user information
+create or replace procedure updateUser (user in varchar2, pass in varchar2, 
+        fname in varchar2, lname in varchar2, email in varchar2 ) IS
+begin
+    update ers_users set  u_username = user, u_password = pass, u_firstname = fname, u_lastname = lname, u_email = email;
+    end;
+    /
+    
+    CREATE SEQUENCE customers_seq
+ START WITH     1000
+ INCREMENT BY   1
+ NOCACHE
+ NOCYCLE;
+------------------------------ sequence for user id 
+create sequence idSequence
+start with 1
+increment by 1
+nocache;
+
+------------------------------ sequence for reimbursement 
+create sequence idReimbursement
+start with 1
+increment by 1
+nocache;
+------------------------------ sequence for type
+create sequence idType
+start with 1
+increment by 1
+nocache;
+------------------------------ sequence for status 
+create sequence idStatus
+start with 1
+increment by 1
+nocache;
+------------------------- CREATE REQUEST PROCEDURES-------------------------------------------
+-----------------------------------------------------------------------------------------------
+ create or replace procedure createRequest(type varchar2, amount number, description varchar2,
+           receipt blob, time1 timestamp, id_author number ) IS
+ begin
+    insert into ERS_Reimbursement_type values(idType.nextval,type);
+    insert into ERS_reimbursment_status values (idStatus.nextVal, 'Pending');
+    insert into ers_reimbursments values (idReimbursement.nextVal, amount, description, receipt,time1,null, id_author , null,
+                            idType.currval , idStatus.currval);
+    end;
+    /
+    -------------------------------------------- USER REQUEST VIEWS-------------------------
+---------------------------------------------------------------------------
+  select ers_reimbursments.r_id,ers_reimbursments.r_amount,ers_reimbursments.r_description, ers_reimbursments.r_submitted,
+    ers_reimbursments.r_resolved,ERS_REIMBURSMENTS.U_ID_RESOLVER , ers_reimbursment_status.rs_status,ers_reimbursement_type.rt_type from ers_reimbursments 
+  full outer join ers_reimbursment_status on ers_reimbursments.rt_status = ers_reimbursment_status.rs_id
+  full outer join ers_reimbursement_type on ers_reimbursments.rt_type = ers_reimbursement_type.rt_id 
+   where ers_reimbursments.u_id_author = 2;
+       -------------------------------------------- ADMIN REQUEST VIEWS-------------------------
+--------------------------------------------------------------------------- GET PENDING VIEW
+select ers_reimbursments.r_id,ers_reimbursments.r_amount,ers_reimbursments.r_description, ers_reimbursments.r_submitted, 
+       ers_reimbursments.r_resolved,ers_reimbursments.U_id_author,ers_reimbursments.U_ID_RESOLVER , ers_reimbursment_status.rs_status,ers_reimbursement_type.rt_type,  
+     ers_reimbursments.R_RECEIPT 
+   from ers_reimbursments 
+ full outer join ers_reimbursment_status on ers_reimbursments.rt_status = ers_reimbursment_status.rs_id 
+full outer join ers_reimbursement_type on ers_reimbursments.rt_type = ers_reimbursement_type.rt_id  
+     where ers_reimbursment_status.rs_status = 'Pending';
+     --------------------------------------------------------------------------- GET Approved VIEW
+select ers_reimbursments.r_id,ers_reimbursments.r_amount,ers_reimbursments.r_description, ers_reimbursments.r_submitted, 
+       ers_reimbursments.r_resolved,ers_reimbursments.U_id_author,ers_reimbursments.U_ID_RESOLVER , ers_reimbursment_status.rs_status,ers_reimbursement_type.rt_type,  
+     ers_reimbursments.R_RECEIPT 
+   from ers_reimbursments 
+ full outer join ers_reimbursment_status on ers_reimbursments.rt_status = ers_reimbursment_status.rs_id 
+full outer join ers_reimbursement_type on ers_reimbursments.rt_type = ers_reimbursement_type.rt_id  
+     where ers_reimbursment_status.rs_status != 'Pending';
+          --------------------------------------------------------------------------- GET 1 application VIEW
+select ers_reimbursments.r_id,ers_reimbursments.r_amount,ers_reimbursments.r_description, ers_reimbursments.r_submitted, 
+       ers_reimbursments.r_resolved,ers_reimbursments.U_id_author,ers_reimbursments.U_ID_RESOLVER , ers_reimbursment_status.rs_status,ers_reimbursement_type.rt_type,  
+     ers_reimbursments.R_RECEIPT 
+   from ers_reimbursments 
+ full outer join ers_reimbursment_status on ers_reimbursments.rt_status = ers_reimbursment_status.rs_id 
+full outer join ers_reimbursement_type on ers_reimbursments.rt_type = ers_reimbursement_type.rt_id  
+     where ers_reimbursments.r_id = 5;
+               --------------------------------------------------------------------------- GET applications for 1 user VIEW
+select ers_reimbursments.r_id,ers_reimbursments.r_amount,ers_reimbursments.r_description, ers_reimbursments.r_submitted, 
+       ers_reimbursments.r_resolved,ers_reimbursments.U_id_author,ers_reimbursments.U_ID_RESOLVER , ers_reimbursment_status.rs_status,ers_reimbursement_type.rt_type,  
+     ers_reimbursments.R_RECEIPT 
+   from ers_reimbursments 
+ full outer join ers_reimbursment_status on ers_reimbursments.rt_status = ers_reimbursment_status.rs_id 
+full outer join ers_reimbursement_type on ers_reimbursments.rt_type = ers_reimbursement_type.rt_id  
+     where ers_reimbursments.U_ID_AUTHOR = 1;
+       
+------------------------- Approve ACCOUNT PROCEDURE-------------------------------------------
+----------------------------------------------------------------------------------------------- 
+create or replace procedure approvedRequest(id in number, time in timestamp, resolverid in number) IS
+begin
+    update ERS_REIMBURSMENT_STATUS set rs_status = 'Approved' where rs_id = id;
+        update ERS_REIMBURSMENTS set r_resolved = time, u_id_resolver = resolverId where ERS_REIMBURSMENTS.r_id = id;
+
+    end;
+    /
+    
+    ------------------------ Deny request
+    create or replace procedure deniedRequest(id in number, time in timestamp, resolverid in number) IS
+begin
+    update ERS_REIMBURSMENT_STATUS set rs_status = 'Denied' where rs_id = id;
+    update ERS_REIMBURSMENTS set r_resolved = time, u_id_resolver = resolverId where ERS_REIMBURSMENTS.r_id = id;
+    end;
+    /
+------------------------- UPDATE ACCOUNT PROCEDURES-------------------------------------------
+-----------------------------------------------------------------------------------------------
+ -------------------- update pass-----------
+ create or replace procedure updatePass(pass in varchar2) IS
+ begin
+    update ers_users set u_password = pass;
+    end;
+    /
+------------------------ update fname--------------
+create or replace procedure updateFname (fname in varchar2) is 
+begin
+    update ers_users set u_firstname = fname;
+    end;
+    /
+----------------------update lname--------------
+create or replace procedure updateLname(lname in varchar2) is
+begin
+    update ers_users set u_lastname = lname;
+    end;
+    /
+-------------------------update email---------------
+create or replace procedure updateEmail (email in varchar2) is 
+begin
+    update ers_users set u_email = email;
+    end;
+    /
+
+    -----------------------------------------------------Select all employees
+    select ERS_USERS.u_id, ERS_USERS.u_username, ERS_USERS.u_firstname, ERS_USERS.u_lastname, ERS_USERS.u_email from ERS_USERS 
+    LEFT JOIN  ers_user_roles
+    on ERS_USERS.ur_id = ers_user_roles.UR_ID
+    where ers_user_roles.ur_role = 'user';
+--------------------------------------------------------------------
+insert into  ers_user_roles values(1, 'admin');
+insert into ers_users values(1, 'nnguyen', 'nnguyen', 'nicole', 'nguyen', 'abc@yahoo.com',1);
+insert into  ers_user_roles values(3, 'admin');
+insert into ers_users values(3, 'admin1', 'admin1', 'nicole', 'nguyen', 'abc12345@yahoo.com',3);
+insert into  ers_user_roles values(2, 'user');
+insert into ers_users values(2, 'nnguyen1', 'nnguyen1', 'nicole', 'nguyen', 'abc123@yahoo.com',2);
+insert into  ers_user_roles values(4, 'user');
+insert into ers_users values(4, 'employee1', 'employee1', 'Danny', 'Smith', 'dsmith243@yahoo.com',4);
+insert into  ers_user_roles values(5, 'user');
+insert into ers_users values(5, 'employee2', 'employee2', 'Cindy', 'Crawford', 'CindyCC02@gmail.com',5);
+
+
+
+Select * from ers_user_roles;

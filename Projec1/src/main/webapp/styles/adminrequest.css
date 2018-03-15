@@ -1,0 +1,21 @@
+
+/* display text centered */
+h4{
+    text-align: center;
+}
+
+center buttons
+#divcenter{
+    margin: 0;
+    background-color: transparent;
+    text-align: center;
+}
+
+ table{
+    display: table;
+    border-collapse: separate;
+    border-spacing: 2px;
+    border-color: gray;
+ }
+ 
+ 
