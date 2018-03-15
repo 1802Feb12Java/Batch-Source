@@ -1,7 +1,6 @@
 package com.revature.dao;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 public interface ReimbursementDAO {
 	// Create
@@ -10,18 +9,10 @@ public interface ReimbursementDAO {
 	// Read
 	String getReimbursementsAll() throws SQLException;
 
-	ArrayList<String[]> getReimbursements(String user) throws SQLException;
-
-	ArrayList<String[]> getPendingReimbursementsAll() throws SQLException;
-
-	ArrayList<String[]> getPendingReimbursements(String user) throws SQLException;
-
-	ArrayList<String[]> getResolvedAll() throws SQLException;
-
-	ArrayList<String[]> getResolved(String user) throws SQLException;
+	String getReimbursements(String user) throws SQLException;
 
 	// Update
 	void uploadImage() throws SQLException;
 
-	void approveDenyApplication(int appId, int approveDeny) throws SQLException;
+	void approveDenyApplication(int appId, int approveDeny, String approver) throws SQLException;
 }

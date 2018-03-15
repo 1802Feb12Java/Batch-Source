@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
 import com.revature.dao.UserDAO;
 
 public class ImplementationUserDAO implements UserDAO {
@@ -67,10 +66,6 @@ public class ImplementationUserDAO implements UserDAO {
 			oneUser[4] = rs1.getString(5);
 		}
 
-		for (String s : oneUser) {
-			System.out.println(s);
-		}
-
 		c4.close();
 		return oneUser;
 	}
@@ -91,15 +86,16 @@ public class ImplementationUserDAO implements UserDAO {
 		return userRole;
 	}
 
-	public void updateInformation(String username, String password, String firstName, String lastName, String email)
+	public void updateInformation(String oldusername, String newusername, String password, String firstName, String lastName, String email)
 			throws SQLException {
 		Connection c3 = ConnFactory.getInstance().getConnection();
-		PreparedStatement cs3 = c3.prepareCall("{call UPDATE_ERS_USER(?, ?, ?, ?, ?)}");
-		cs3.setString(1, username);
-		cs3.setString(2, password);
-		cs3.setString(3, firstName);
-		cs3.setString(4, lastName);
-		cs3.setString(5, email);
+		PreparedStatement cs3 = c3.prepareCall("{call UPDATE_ERS_USER(?, ?, ?, ?, ?, ?)}");
+		cs3.setString(1, oldusername);
+		cs3.setString(2, newusername);
+		cs3.setString(3, password);
+		cs3.setString(4, firstName);
+		cs3.setString(5, lastName);
+		cs3.setString(6, email);
 		cs3.execute();
 		c3.close();
 	}
@@ -121,20 +117,33 @@ public class ImplementationUserDAO implements UserDAO {
 			oneUser[4] = rs1.getString(5);
 			userList.add(oneUser);
 		}
-		
-		String jsonFromJavaArrayList = gsonBuilder.toJson(userList);
-		//System.out.println(jsonFromJavaArrayList);
 
-		/* for (int j = 0; j < userList.size(); j++) {
-			System.out.println("--------------------------------------------------");
-			String[] returnedList = userList.get(j);
-			for (String s : returnedList) {
-				System.out.println(s);
-			}
-		} */
-		
+		String jsonFromJavaArrayList = gsonBuilder.toJson(userList);
+		// System.out.println(jsonFromJavaArrayList);
+
+		/*
+		 * for (int j = 0; j < userList.size(); j++) {
+		 * System.out.println("--------------------------------------------------");
+		 * String[] returnedList = userList.get(j); for (String s : returnedList) {
+		 * System.out.println(s); } }
+		 */
+
 		c4.close();
 		return jsonFromJavaArrayList;
+	}
+
+	public String getFirstName(String username) throws SQLException {
+		Connection c5 = ConnFactory.getInstance().getConnection();
+		String sqlQ = "SELECT DISTINCT U_FIRSTNAME FROM ERS_USERS WHERE U_USERNAME=?";
+		PreparedStatement ps2 = c5.prepareStatement(sqlQ);
+		ps2.setString(1, username);
+		ResultSet rs1 = ps2.executeQuery();
+		String firstName = "";
+		while (rs1.next()) {
+			firstName = rs1.getString(1);
+		}
+		c5.close();
+		return firstName;
 	}
 
 }

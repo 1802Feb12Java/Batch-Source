@@ -16,14 +16,13 @@ public class LogInServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		resp.addHeader("Access-Control-Allow-Origin", "*");
 		HttpSession session = req.getSession();
 		String role = (String) session.getAttribute("role");
 		if (!(role == null)) {
 			String forwardPage = role + ".html";
-			// req.getRequestDispatcher(forwardPage).forward(req, resp);
-			resp.sendRedirect(forwardPage);
+			req.getRequestDispatcher(forwardPage).forward(req, resp);
 		} else {
-			// req.getRequestDispatcher("login.html").forward(req, resp);
 			resp.sendRedirect("login.html");
 		}
 	}
@@ -31,6 +30,7 @@ public class LogInServlet extends HttpServlet {
 	// redirect to correct page on successful logged in
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		resp.addHeader("Access-Control-Allow-Origin", "*");
 		HttpSession session = req.getSession();
 		String role = "wrong";
 
@@ -45,19 +45,16 @@ public class LogInServlet extends HttpServlet {
 		} catch (SQLException e) {
 			System.out.println("SQL Exception");
 		}
-		// System.out.println(role);
 
 		if (role.equals("employee") || role.equals("manager")) {
+			session.setAttribute("role", role);
+			session.setAttribute("user", username);
+			String webpage = role + ".html";
+			req.getRequestDispatcher(webpage).forward(req, resp);
 		} else {
-			// req.getRequestDispatcher("login.html").forward(req, resp);
 			resp.sendRedirect("login.html");
 		}
 
-		session.setAttribute("role", role);
-		session.setAttribute("user", username);
-		String webpage = role + ".html";
-		// req.getRequestDispatcher(webpage).forward(req, resp);
-		resp.sendRedirect(webpage);
 	}
 
 }

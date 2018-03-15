@@ -78,12 +78,41 @@
 				<li class="breadcrumb-item">
 					<a href="manager.html">Dashboard</a>
 				</li>
-				<li class="breadcrumb-item active">My Dashboard</li>
+				<li class="breadcrumb-item">
+					<a>Users</a>
+				</li>
+				<li class="breadcrumb-item active">View Users</li>
 			</ol>
-			<!-- Area Chart Example-->
+			<!-- Example DataTables Card-->
 			<div class="card mb-3">
+				<div class="card-header">
+					<i class="fa fa-table"></i> User Information
+				</div>
 				<div class="card-body">
-					<canvas id="myAreaChart" width="100%" height="30"></canvas>
+					<div class="table-responsive">
+						<table class="table table-bordered" id="dataTable">
+							<thead>
+								<tr>
+									<th>Username</th>
+									<th>First Name</th>
+									<th>Last Name</th>
+									<th>Email</th>
+									<th>Role</th>
+								</tr>
+							</thead>
+							<tfoot>
+								<tr>
+									<th>Username</th>
+									<th>First Name</th>
+									<th>Last Name</th>
+									<th>Email</th>
+									<th>Role</th>
+								</tr>
+							</tfoot>
+							<tbody id="userTableBodyStart">
+							</tbody>
+						</table>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -92,7 +121,7 @@
 		<footer class="sticky-footer">
 			<div class="container">
 				<div class="text-center">
-					<small>Copyright © Justin Joseph and
+					<small>Copyright © Justin Joseph and 
 						<a href="LICENSE.txt">Blackrock Digital LLC</a> 2018
 					</small>
 				</div>
@@ -138,7 +167,7 @@
 		<script src="js/sb-admin-datatables.js"></script>
 		<script src="js/sb-admin-charts.js"></script>
 		<!-- Created scripts -->
-		<script src="js/functionality-m.js"></script>
+		<script src="js/functionality-mv.js"></script>
 	</div>
 </body>
 

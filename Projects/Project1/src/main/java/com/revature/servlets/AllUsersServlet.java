@@ -15,9 +15,9 @@ public class AllUsersServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
-	// Return information of all users
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		resp.addHeader("Access-Control-Allow-Origin", "*");
 		String jsa = null;
 
 		try {

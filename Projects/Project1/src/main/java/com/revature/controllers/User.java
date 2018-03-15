@@ -32,13 +32,13 @@ public class User {
 		return oneUserJSONArray;
 	}
 
-	public static void updateUserInformation(String username, String password, String firstName, String lastName,
+	public static void updateUserInformation(String oldusername, String username, String password, String firstName, String lastName,
 			String email) throws SQLException {
-		iud.updateInformation(username, password, firstName, lastName, email);
+		iud.updateInformation(oldusername, username, password, firstName, lastName, email);
 	}
 
-	public static void viewReimbursementRequests(String username) throws SQLException {
-		ird.getReimbursements(username);
+	public static String viewReimbursementRequests(String username) throws SQLException {
+		return ird.getReimbursements(username);
 	}
 
 	public static void viewPending(String username) throws SQLException {
@@ -47,6 +47,10 @@ public class User {
 
 	public static void viewResolved(String username) throws SQLException {
 		ird.getResolved(username);
+	}
+	
+	public static String viewFirstName(String username) throws SQLException {
+		return iud.getFirstName(username);
 	}
 
 }
