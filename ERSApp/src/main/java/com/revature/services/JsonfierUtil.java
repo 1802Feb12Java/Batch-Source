@@ -24,7 +24,10 @@ public class JsonfierUtil {
 			obj.put("receipt", r.getRecipt());
 			// format times before putting them in
 			obj.put("submitted", timeStampFormat.format(r.getSubmitted()));
-			obj.put("resolved", timeStampFormat.format(r.getResolved()));
+			if (r.getResolved() != null)
+				obj.put("resolved", timeStampFormat.format(r.getResolved()));
+			else
+				obj.put("resolved", "null");
 			obj.put("resolver", r.getResolverName());
 			obj.put("type", r.getType());
 			obj.put("status", r.getStatus());

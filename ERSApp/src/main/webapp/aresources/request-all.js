@@ -55,7 +55,7 @@ function fillInFields(requests) {
 				let statusVal = req[keys[colJ]];
 				c.className = getStatusClass(statusVal);
 				//set which column the status is in
-				statusColNum = (keys.length - colJ) + 1;
+				statusColNum = (keys.length - colJ) - 1;
 
 				c.innerHTML = statusVal;
 
@@ -63,15 +63,13 @@ function fillInFields(requests) {
 				//putting in two buttons for approve/deny
 				//after status col
 				//make a new cell for appr/deny buttons
-				let e = r.insertCell(0);
-
 				//only show/make if request has a 'pending' status
 				if (statusVal == 'Pending') {
 					let approveBtn = "ApproveButton" + colJ;
 					let denyBtn = "denyButton" + colJ;
 
 					//make approve/deny buttons
-					e.innerHTML = '<button class="btn btn-success btn-xs my-xs-btn"'
+					c.innerHTML = '<button class="btn btn-success btn-xs my-xs-btn"'
 						+ ' type="button" id="' + approveBtn + '">'
 						+ 'Approve</button> <button class="btn btn-danger btn-xs my-xs-btn"'
 						+ ' type="button" id="' + denyBtn + '">'
@@ -80,7 +78,7 @@ function fillInFields(requests) {
 					//get reim id
 					let reimId = req["receipt"];
 
-					let rowN = (rowI + 1);
+					let rowN = (keys.length - colJ);
 					//set button listeners
 					document.getElementById(approveBtn).onclick =
 						function () {
@@ -140,7 +138,7 @@ function fillInFields(requests) {
 		h.onclick = function () { sortTable(sortCol); }
 	}
 	//blank cell for approve/deny
-	hRow.insertCell(0);
+	//hRow.insertCell(0);
 
 }
 
