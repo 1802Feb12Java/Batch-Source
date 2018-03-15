@@ -7,6 +7,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.revature.controllers.MailController;
 import com.revature.controllers.User;
 
 public class RegistrationServlet extends HttpServlet {
@@ -26,6 +28,9 @@ public class RegistrationServlet extends HttpServlet {
 
 		try {
 			User.register(username, password, firstName, lastName, email);
+			if (User.getRole(username).equals("employee")) {
+				MailController.SendSimpleMessage(firstName, username, password, email);
+			}
 			req.getRequestDispatcher("/login.html").forward(req, resp);
 		} catch (SQLException e) {
 			resp.addHeader("isDone", "no");

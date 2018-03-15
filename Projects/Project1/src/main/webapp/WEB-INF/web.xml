@@ -141,5 +141,14 @@
 		<servlet-name>registration</servlet-name>
 		<url-pattern>/register</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>forgotPassword</servlet-name>
+		<servlet-class>com.revature.servlets.ForgotServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>forgotPassword</servlet-name>
+		<url-pattern>/forgot</url-pattern>
+	</servlet-mapping>
 
 </web-app>
