@@ -9,11 +9,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
+
+import com.revature.beans.Employee;
 import com.revature.beans.User;
 import com.revature.dao.UserDAOImpl;
 
 public class LoginServlet extends HttpServlet{
-	
 	/**
 	 * 
 	 */
