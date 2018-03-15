@@ -79,4 +79,34 @@
     <servlet-name>ApproveServlet</servlet-name>
     <url-pattern>/ApproveServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DenyServlet</display-name>
+    <servlet-name>DenyServlet</servlet-name>
+    <servlet-class>com.revature.servlets.DenyServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DenyServlet</servlet-name>
+    <url-pattern>/DenyServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UserTableServlet</display-name>
+    <servlet-name>UserTableServlet</servlet-name>
+    <servlet-class>com.revature.servlets.UserTableServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UserTableServlet</servlet-name>
+    <url-pattern>/UserTable</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UserInfoServlet</display-name>
+    <servlet-name>UserInfoServlet</servlet-name>
+    <servlet-class>com.revature.servlets.UserInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UserInfoServlet</servlet-name>
+    <url-pattern>/UserInfoServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

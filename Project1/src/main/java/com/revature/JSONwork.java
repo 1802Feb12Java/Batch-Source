@@ -31,9 +31,9 @@ public class JSONwork {
 	
 	public static String makeArrU(ArrayList<Users> u) {
 		JSONArray jArr = new JSONArray();
-		JSONObject job = new JSONObject();
 		
 		for(int i = 0; i < u.size(); i++) {
+			JSONObject job = new JSONObject();
 			job.append("firstname", u.get(i).getfName());
 			job.append("lastname", u.get(i).getlName());
 			job.append("U_ID", u.get(i).getId());
@@ -46,6 +46,20 @@ public class JSONwork {
 		}
 		
 		return jArr.toString();
+	}
+	
+	public static String makeU(Users u) {
+		
+			JSONObject job = new JSONObject();
+			job.append("fullname", u.getfName() + " " + u.getlName());
+			job.append("U_ID", u.getId());
+			job.append("email", u.getEmail());
+			job.append("username", u.getUsername());
+			job.append("password", "**********");
+			job.append("role", getRole(u.getRoleID()));
+			//add the json obj to the array to send out
+		
+		return job.toString();
 	}
 	
 	public static String getStatus(int i) {
