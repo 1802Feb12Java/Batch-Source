@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Expense Reimbursement System</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles/MoreCoolStyles.css">
+    <link rel="stylesheet" href="styles/loginstuff.css">
+    <style>
+        .form-signin {
+            max-width: 420px;
+            padding: 30px 38px 66px;
+            margin: 0 auto;
+            color: antiquewhite;
+            background-color: rgb(36, 35, 37);
+            border: 3px dotted rgba(212, 208, 208, 0.719);  
+            text-align: center;
+        }
+    </style>
+</head>
+  <body>
+      
+        <div class="box">
+            <p id="user"></p>
+            <h2>Submit Request</h2>
+         </div>
+
+         <div class="wrapper">
+             <div class="row">
+                 <div class='col-md-4'></div>
+                 <div class='col-md-4'>
+                    <form action='submit' method='post' class="form-signin">
+                         Enter amount:  <br/>    <input type='number' step='.01' min='0' name='amount'><br/><br/>
+                         Enter description:<br/> <input type='text' name='descrip'><br/><br/>
+                         Enter type number: <br/>
+                         (1=Travel, 2=Food, 3=Supplies, 4=Other)<br/>
+                         <input type='number' min='1' max='4' name='type'><br/><br/>
+                        <button class='btn btn-custom btn-full-width' type='submit'>Submit</button>
+                    </form>
+                 </div>
+                 <div class='col-md-4'></div>
+             </div>
+         </div>
+
+         <button class='btn btn-custom btn-full-width' type='submit'><a href="Profile.html">go back</a></button>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="scripts/check.js"></script>
+    <!--script src="put javascript file here"></script-->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>
