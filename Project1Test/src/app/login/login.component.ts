@@ -10,10 +10,11 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private currUser: CurrentUserService) { }
+  constructor(private currUser: CurrentUserService, private router: Router) { }
 
   ngOnInit() {
     if(this.currUser.getCurrentUser() != null){
+      window.location.href='http://localhost:8080/Project1/logout';
       sessionStorage.clear();
       alert("You have been logged out. Have a great day!");
     }

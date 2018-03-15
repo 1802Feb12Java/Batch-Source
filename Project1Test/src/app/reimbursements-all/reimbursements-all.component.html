@@ -36,6 +36,8 @@
               <td *ngIf="r.resolved == undefined" id="timestampcolumn">N/A</td>
             <ng-container *ngFor="let e of empList">
               <td *ngIf="r.authorId==e.id">{{e.firstname}} {{e.lastname}}</td>
+            </ng-container>
+            <ng-container *ngFor="let e of empList">
               <ng-container *ngIf="r.resolverId==e.id">
                 <td *ngIf="r.resolved != undefined">{{e.firstname}} {{e.lastname}}</td>
               </ng-container>

@@ -13,6 +13,7 @@ export class LoggedInGuard implements CanActivate {
         return true;
       }
       this.router.navigate(['/login']);
+      
       alert("You must be logged in to view this page");
       return false;
     }
