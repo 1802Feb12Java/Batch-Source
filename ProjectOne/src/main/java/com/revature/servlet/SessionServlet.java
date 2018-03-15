@@ -7,11 +7,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
-//import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.apache.log4j.Logger;
 
 import com.revature.util.ConnFactory;
 
@@ -21,6 +22,8 @@ import com.revature.util.ConnFactory;
 //@WebServlet("/SessionServlet")
 public class SessionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	Logger logger = Logger.getLogger(AdminDashboardServlet.class);
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -58,7 +61,7 @@ public class SessionServlet extends HttpServlet {
 			} catch(SQLException e) {
 				e.printStackTrace();
 			}
-
+			logger.info("Writing admin session info in JSON format");
 			response.getWriter().write("{\"username\":\"" + session.getAttribute("username") + "\"," + "\"reimbursementsCount\":\"" + reimbursementsCount + "\"," + "\"usersCount\":\"" + usersCount + "\"}"); 
 		} else {
 			response.setContentType("application/json");

@@ -18,10 +18,13 @@ import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.log4j.Logger;
 
 import com.revature.util.ConnFactory;
 
 public class EmployeeReimbursementsServlet extends HttpServlet {
+	
+	Logger logger = Logger.getLogger(AdminDashboardServlet.class);
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -105,9 +108,9 @@ public class EmployeeReimbursementsServlet extends HttpServlet {
 			ps.setInt(7, 1);
 			
 			// Execute update
-			int rowsUpdated = ps.executeUpdate();
-			if(rowsUpdated > 0) {
-				// Update successful
+			int rowsInserted = ps.executeUpdate();
+			if(rowsInserted > 0) {
+				logger.info("Inserted new employee reimbursement request to ers_reimbursements table");
 			}
 			
 		} catch(SQLException e) {

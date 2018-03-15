@@ -10,18 +10,22 @@ import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 
+import org.apache.log4j.Logger;
+
 import com.revature.util.ConnFactory;
 
 public class EmployeeDashboardServlet extends HttpServlet {
+	
+	Logger logger = Logger.getLogger(AdminDashboardServlet.class);
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		resp.setContentType("text/html");
 		HttpSession session = req.getSession(false);
-
-
-		if(session!=null && !session.getAttribute("username").equals("jboud1217")){
+		
+		if(session!=null && session.getAttribute("username") != null){
+			logger.info("Validating employee session and redirecting to /employee-dashboard");
 			req.getRequestDispatcher("employee-dashboard.html").forward(req, resp);
 		} else {
 			resp.sendRedirect("login");
@@ -60,7 +64,7 @@ public class EmployeeDashboardServlet extends HttpServlet {
 			// Execute update
 			int rowsUpdated = ps.executeUpdate();
 			if(rowsUpdated > 0) {
-				// Update successful
+				logger.info("Updated employee info successfully");
 			}
 			
 		} catch(SQLException e) {

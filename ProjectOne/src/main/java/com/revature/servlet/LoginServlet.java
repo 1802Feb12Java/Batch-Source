@@ -1,32 +1,26 @@
 package com.revature.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 
-import com.revature.beans.User;
 import com.revature.util.ConnFactory;
 
 public class LoginServlet extends HttpServlet {
 	
-	private int userId;
 	private String username;
 	private String password;
-	private String firstName;
-	private String lastName;
-	private String email;
-	private int roleId;
+	private Logger logger = Logger.getLogger(LoginServlet.class);
+
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		HttpSession session = req.getSession();
-		PrintWriter pw = resp.getWriter();
 		resp.setContentType("text/html");
 		req.getRequestDispatcher("login.html").include(req, resp);
 	}
@@ -36,11 +30,9 @@ public class LoginServlet extends HttpServlet {
 		
 		HttpSession session = req.getSession();
 		resp.setContentType("text/html");
-		PrintWriter pw = resp.getWriter();
 		
 		String formUsername = req.getParameter("username");
 		String formPassword = req.getParameter("password");
-		String user = "";
 		
 		try {
 			// Create ConnFactory object
@@ -71,10 +63,12 @@ public class LoginServlet extends HttpServlet {
 				
 				if(formPassword.equals(password)) {
 					if(roleId == 1) { 
+						logger.info("Logging in admin");
 						session.setAttribute("username", username);
 						session.setAttribute("adminId", userId);
 						resp.sendRedirect("admin-dashboard");
 					} else {
+						logger.info("Logging in employee");
 						session.setAttribute("username", username);
 						session.setAttribute("userId", userId);
 						resp.sendRedirect("employee-dashboard");
