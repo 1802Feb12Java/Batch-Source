@@ -109,4 +109,24 @@
     <servlet-name>UserInfoServlet</servlet-name>
     <url-pattern>/UserInfoServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>NewEmailServlet</display-name>
+    <servlet-name>NewEmailServlet</servlet-name>
+    <servlet-class>com.revature.servlets.NewEmailServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>NewEmailServlet</servlet-name>
+    <url-pattern>/NewEmailServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>NewPasswordServlet</display-name>
+    <servlet-name>NewPasswordServlet</servlet-name>
+    <servlet-class>com.revature.servlets.NewPasswordServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>NewPasswordServlet</servlet-name>
+    <url-pattern>/NewPasswordServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

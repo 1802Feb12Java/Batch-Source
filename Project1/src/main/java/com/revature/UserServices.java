@@ -36,6 +36,7 @@ public class UserServices implements UsersDAO{
 		cs.setInt(1, u.getId());
 		cs.setString(2, u.getPassword());
 		cs.execute();
+		
 	}
 
 	public void updateUserEmail(Users u) throws SQLException {

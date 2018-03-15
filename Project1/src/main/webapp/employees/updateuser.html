@@ -107,16 +107,17 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
+                    <br>
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             Change Email
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-                                <form role="form" action="/Project1/NewEmail" method="post">
+                                <form role="form" action="/Project1/NewEmailServlet" method="post">
                                     <fieldset>
                                         <div class="form-group">
-                                            <input class="form-control" placeholder="New Email" name="newpass"  required>
+                                            <input class="form-control" placeholder="New Email" name="newemail"  required>
                                         </div>
                                         <input type="submit" value="Submit" class="btn btn-lg btn-success btn-block">
                                     </fieldset>
@@ -128,12 +129,13 @@
             </div>
             <div class="row">
                 <div class="col-lg-12">
+                        <div class="panel panel-default">
                     <div class="panel-heading">
                         Change Password
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
-                            <form role="form" action="/Project1/NewPassword" method="post">
+                            <form role="form" action="/Project1/NewPasswordServlet" method="post">
                                 <fieldset>
                                     <div class="form-group">
                                         <input class="form-control" placeholder="Old Password" name="oldpass" autofocus required>
@@ -144,6 +146,7 @@
                                     <input type="submit" value="Submit" class="btn btn-lg btn-success btn-block">
                                 </fieldset>
                             </form>
+                            </div>
                     </div>
                 </div>
             </div>

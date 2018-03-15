@@ -1,5 +1,5 @@
 function loadError(name){
-    document.getElementById("error.msg").style.visibility = "visible";
+    document.getElementById("errormsg").style.visibility = "visible";
 }
 
 function getError(){
@@ -16,7 +16,7 @@ function getError(){
         }
     }
     //Step 3! Open requests/connections
-    xhr.open("POST", "/Project1/Login", true);
+    xhr.open("POST", "/Project1/login", true);
     //Step 4! Send Request
     xhr.send();
 }

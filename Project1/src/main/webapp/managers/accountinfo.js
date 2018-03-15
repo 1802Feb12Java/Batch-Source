@@ -1,4 +1,6 @@
 function loadInfo(user){
+    console.log(user);
+    console.log(user.fullname);
     document.getElementById("fullname").innerHTML = user.fullname;
     document.getElementById("username").innerHTML = user.username;
     document.getElementById("email").innerHTML = user.email;
@@ -13,7 +15,7 @@ function getInfo(){
         console.log("Roll tide");
         if(xhr.readyState==4 && xhr.status==200){
             console.log(xhr.responseText);
-            var user = xhr.responseText;
+            var user = JSON.parse(xhr.responseText);
             loadInfo(user);
         }
     }
