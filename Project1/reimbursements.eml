@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component LANGUAGE_LEVEL="JDK_1_8" inheritJdk="true">
+	<output-test url="file://$MODULE_DIR$/target/test-classes"/>
+	<contentEntry url="file://$MODULE_DIR$">
+		<excludeFolder url="file://$MODULE_DIR$/target"/>
+	</contentEntry>
+	<lib name="Maven: javax.servlet:servlet-api:2.5" scope="PROVIDED"/>
+	<levels>
+		<level name="Maven: javax.servlet:servlet-api:2.5" value="project"/>
+		<level name="Maven: com.oracle:ojdbc7:12.1.0.2" value="project"/>
+		<level name="Maven: log4j:log4j:1.2.17" value="project"/>
+		<level name="Maven: commons-fileupload:commons-fileupload:1.3.1" value="project"/>
+		<level name="Maven: commons-io:commons-io:2.2" value="project"/>
+	</levels>
+</component>
