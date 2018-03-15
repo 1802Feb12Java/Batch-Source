@@ -32,5 +32,9 @@ public class Manager extends User {
 	public static String totalCostReimbursments() throws SQLException {
 		return ird.getAppliedAmount();
 	}
+	
+	public static String totalApprovedReimbursments() throws SQLException {
+		return ird.getApprovedAmount();
+	}
 
 }

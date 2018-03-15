@@ -1,6 +1,7 @@
 window.onload = function () {
     getFirstName();
     getTotalAppliedReimbursments();
+    getTotalApprovedReimbursments();
 };
 
 function getFirstName() {

@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.revature.controllers.Manager;
 
-public class TotalOfAppliedReimbursements extends HttpServlet {
+public class TotalOfApprovedReimbursements extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
@@ -21,7 +21,7 @@ public class TotalOfAppliedReimbursements extends HttpServlet {
 		String jsa = null;
 
 		try {
-			jsa = Manager.totalCostReimbursments();
+			jsa = Manager.totalApprovedReimbursments();
 		} catch (SQLException e) {
 		}
 

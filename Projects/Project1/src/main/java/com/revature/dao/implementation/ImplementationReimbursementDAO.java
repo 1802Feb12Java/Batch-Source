@@ -28,7 +28,7 @@ public class ImplementationReimbursementDAO implements ReimbursementDAO {
 		ArrayList<String[]> reimbursementList = new ArrayList<String[]>();
 		Gson gsonBuilder = new GsonBuilder().create();
 		Connection c1 = ConnFactory.getInstance().getConnection();
-		String sqlQ = "SELECT DISTINCT A.R_ID, A.R_AMOUNT, A.R_DESCRIPTION, A.R_SUBMITTED, A.R_RESOLVED, B.U_USERNAME, C.U_USERNAME, D.RT_TYPE, E.RS_STATUS FROM ERS_REIMBURSEMENTS A INNER JOIN ERS_USERS B ON A.U_ID_AUTHOR=B.U_ID INNER JOIN ERS_USERS C ON A.U_ID_RESOLVER=C.U_ID INNER JOIN ERS_REIMBURSEMENT_TYPE D ON A.RT_TYPE=D.RT_ID INNER JOIN ERS_REIMBURSEMENT_STATUS E ON A.RS_STATUS=E.RS_ID ORDER BY R_SUBMITTED DESC";
+		String sqlQ = "SELECT R.R_ID, R.R_AMOUNT, R.R_DESCRIPTION, R.R_SUBMITTED, R.R_RESOLVED, U.U_USERNAME, U2.U_USERNAME, T.RT_TYPE, S.RS_STATUS FROM ERS_REIMBURSEMENTS R LEFT OUTER JOIN ERS_USERS U2 ON U2.U_ID=R.U_ID_RESOLVER INNER JOIN ERS_REIMBURSEMENT_STATUS S ON S.RS_ID=R.RS_STATUS INNER JOIN ERS_REIMBURSEMENT_TYPE T ON T.RT_ID=R.RT_TYPE INNER JOIN ERS_USERS U ON U.U_ID=R.U_ID_AUTHOR ORDER BY R.R_SUBMITTED DESC";
 		PreparedStatement ps1 = c1.prepareStatement(sqlQ);
 		ResultSet rs1 = ps1.executeQuery();
 
@@ -53,7 +53,7 @@ public class ImplementationReimbursementDAO implements ReimbursementDAO {
 		ArrayList<String[]> reimbursementList = new ArrayList<String[]>();
 		Gson gsonBuilder = new GsonBuilder().create();
 		Connection c1 = ConnFactory.getInstance().getConnection();
-		String sqlQ = "SELECT DISTINCT A.R_ID, A.R_AMOUNT, A.R_DESCRIPTION, A.R_SUBMITTED, A.R_RESOLVED, B.U_USERNAME, D.RT_TYPE, E.RS_STATUS FROM ERS_REIMBURSEMENTS A INNER JOIN ERS_USERS C ON A.U_ID_AUTHOR=C.U_ID INNER JOIN ERS_REIMBURSEMENT_TYPE D ON A.RT_TYPE=D.RT_ID INNER JOIN ERS_REIMBURSEMENT_STATUS E ON A.RS_STATUS=E.RS_ID INNER JOIN ERS_USERS B ON A.U_ID_RESOLVER=B.U_ID WHERE A.U_ID_AUTHOR=(SELECT U_ID FROM ERS_USERS WHERE U_USERNAME=?) ORDER BY R_SUBMITTED DESC";
+		String sqlQ = "SELECT R.R_ID, R.R_AMOUNT, R.R_DESCRIPTION, R.R_SUBMITTED, R.R_RESOLVED, U2.U_USERNAME, T.RT_TYPE, S.RS_STATUS FROM ERS_REIMBURSEMENTS R LEFT OUTER JOIN ERS_USERS U2 ON U2.U_ID=R.U_ID_RESOLVER INNER JOIN ERS_REIMBURSEMENT_STATUS S ON S.RS_ID=R.RS_STATUS INNER JOIN ERS_REIMBURSEMENT_TYPE T ON T.RT_ID=R.RT_TYPE INNER JOIN ERS_USERS U ON U.U_ID=R.U_ID_AUTHOR WHERE U.U_USERNAME=? ORDER BY R.R_SUBMITTED DESC";
 		PreparedStatement ps1 = c1.prepareStatement(sqlQ);
 		ps1.setString(1, user);
 		ResultSet rs1 = ps1.executeQuery();
@@ -215,6 +215,31 @@ public class ImplementationReimbursementDAO implements ReimbursementDAO {
 		double[] totals = new double[12];
 		Gson gsonBuilder = new GsonBuilder().create();
 		String sqlq = "SELECT SUM(R_AMOUNT) FROM ERS_REIMBURSEMENTS WHERE EXTRACT(YEAR FROM R_SUBMITTED)=(SELECT TO_CHAR(sysdate, 'YYYY') FROM DUAL) AND EXTRACT(MONTH FROM R_SUBMITTED)=?";
+		Connection c7 = ConnFactory.getInstance().getConnection();
+		PreparedStatement ps7 = c7.prepareStatement(sqlq);
+
+		for (int i = 1; i <= 12; i++) {
+			ps7.setInt(1, i);
+			ResultSet rs7 = ps7.executeQuery();
+
+			while (rs7.next()) {
+				if (rs7.getString(1) != null) {
+					totals[i - 1] = Double.valueOf(rs7.getString(1));
+				} else {
+					totals[i - 1] = 0;
+				}
+			}
+		}
+
+		c7.close();
+		String jsonFromJava = gsonBuilder.toJson(totals);
+		return jsonFromJava;
+	}
+	
+	public String getApprovedAmount() throws SQLException {
+		double[] totals = new double[12];
+		Gson gsonBuilder = new GsonBuilder().create();
+		String sqlq = "SELECT SUM(R_AMOUNT) FROM ERS_REIMBURSEMENTS WHERE EXTRACT(YEAR FROM R_SUBMITTED)=(SELECT TO_CHAR(sysdate, 'YYYY') FROM DUAL) AND RS_STATUS=2 AND EXTRACT(MONTH FROM R_SUBMITTED)=?";
 		Connection c7 = ConnFactory.getInstance().getConnection();
 		PreparedStatement ps7 = c7.prepareStatement(sqlq);
 

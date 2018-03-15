@@ -89,6 +89,15 @@
 	</servlet-mapping>
 
 	<servlet>
+		<servlet-name>totalApproved</servlet-name>
+		<servlet-class>com.revature.servlets.TotalOfApprovedReimbursements</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>totalApproved</servlet-name>
+		<url-pattern>/totalapproved</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
 		<servlet-name>firstName</servlet-name>
 		<servlet-class>com.revature.servlets.FirstNameServlet</servlet-class>
 	</servlet>
