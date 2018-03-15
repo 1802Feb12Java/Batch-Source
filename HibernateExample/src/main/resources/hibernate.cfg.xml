@@ -10,6 +10,7 @@
 		<property name="hibernate.connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
 		<property name="hibernate.dialect.">org.hibernate.dialect.Oracle10gDialect</property>
 		<property name="hibernate.show_sql">true</property>
+		<property name="hibernate.hbm2ddl.auto">create</property>
 		<mapping class="com.revature.beans.Guitar"></mapping>
 	</session-factory>
 </hibernate-configuration>

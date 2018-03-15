@@ -100,6 +100,7 @@ BEGIN
 END;
 /
 
+
 --UPDATE PROCEDURES
 --Update User
 CREATE OR REPLACE PROCEDURE UPDATE_USER(
@@ -142,4 +143,8 @@ CALL ADD_USER('js', 'pathetic', 'Jerry', 'Smith', 'ImJerrySmith@Citadel.com', 2)
 CALL ADD_USER('bs', 'morecomplete', 'Beth', 'Smith', 'EquineSurgeon@Citadel.com', 2);
 CALL ADD_USER('ss', 'summerissafe', 'Summer', 'Smith', 'KeepSummerSafe@Citadel.com', 2);
 CALL ADD_USER('tinyrick', 'imtinyrick', 'Tiny', 'Rick', 'TinyRick@Citadel.com', 2);
+
+INSERT INTO ERS_REIMBURSEMENTS("R_ID", "R_AMOUNT", "R_DESCRIPTION", "R_RECEIPT", "R_SUBMITTED", "U_ID_AUTHOR", "RT_TYPE", "RT_STATUS")
+    VALUES(56, 322.35, "Test resolved", null, 14-MAR-18 06.13.18.316000000 PM, 4, 1, 2);
+
 

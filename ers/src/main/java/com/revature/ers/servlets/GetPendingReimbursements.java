@@ -46,10 +46,7 @@ public class GetPendingReimbursements extends HttpServlet {
 		try {
 			int ur_role = us.getUserRole(u_ID.intValue());
 			list = rs.getPendingReimbursements(u_ID, ur_role);
-			System.out.println("Back from get pending");
-			for (Reimbursement i : list) {
-				System.out.println(i.getR_id());
-			}
+
 			JSONArray jArray = ToJSON.reimbursements(list);
 			
 			PrintWriter pw = response.getWriter();

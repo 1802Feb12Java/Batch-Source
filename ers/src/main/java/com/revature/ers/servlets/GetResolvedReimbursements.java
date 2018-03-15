@@ -41,22 +41,20 @@ public class GetResolvedReimbursements extends HttpServlet {
 		ReimbursementServices rs = new ReimbursementServices();
 		UserServices us = new UserServices();
 		Integer u_ID = (Integer) request.getSession(false).getAttribute("userID");
+		Reimbursement test = new Reimbursement();
 
 		try {
 			int ur_role = us.getUserRole(u_ID.intValue());
 			list = rs.getResolvedReimbursements(u_ID, ur_role);
-			for (Reimbursement i : list) {
-				System.out.println(i.getR_id() + i.getR_amount());
-			}
+
+			JSONArray jArray = ToJSON.reimbursements(list);
+			
+			PrintWriter pw = response.getWriter();
+			pw.print(jArray.toString());
 		} catch (SQLException e) {
+			log.error("Unable to get the reimbursements");
 			e.printStackTrace();
 		}
-		
-		JSONArray jArray = ToJSON.reimbursements(list);
-		
-		PrintWriter pw = response.getWriter();
-		pw.print(jArray.toString());
 	}
-
 }
 

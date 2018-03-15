@@ -37,9 +37,8 @@ public class Guitar {
 	}
 	
 	
-	public Guitar(int id, String make, String model, int numOfStrings, String color, double cost) {
+	public Guitar(String make, String model, int numOfStrings, String color, double cost) {
 		super();
-		this.id = id;
 		this.make = make;
 		this.model = model;
 		this.numOfStrings = numOfStrings;
@@ -48,12 +47,7 @@ public class Guitar {
 	}
 
 
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
+
 	public String getMake() {
 		return make;
 	}
