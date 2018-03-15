@@ -46,7 +46,9 @@ public class GetResolvedReimbursements extends HttpServlet {
 		try {
 			int ur_role = us.getUserRole(u_ID.intValue());
 			list = rs.getResolvedReimbursements(u_ID, ur_role);
-
+			for (Reimbursement i : list) {
+				System.out.println(i.getR_id());
+			}
 			JSONArray jArray = ToJSON.reimbursements(list);
 			
 			PrintWriter pw = response.getWriter();
