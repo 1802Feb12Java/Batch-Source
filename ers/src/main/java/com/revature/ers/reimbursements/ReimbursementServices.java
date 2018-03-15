@@ -152,10 +152,9 @@ public class ReimbursementServices implements ReimbursementDAO{
 		//establish the connection
 		ConnFactory cf = new ConnFactory();
 		Connection conn = cf.getConnection();
-		ArrayList <Reimbursement> reimbursements = null;
+		ArrayList <Reimbursement> reimbursements = new ArrayList<Reimbursement>();
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		Reimbursement reimbursement = new Reimbursement();
 		
 		//prepare the statement
 		if(ur_role == 1) {
@@ -178,6 +177,7 @@ public class ReimbursementServices implements ReimbursementDAO{
 		rs = ps.executeQuery();
 
 		while(rs.next()) {
+			Reimbursement reimbursement = new Reimbursement();
 			reimbursement.setR_id(rs.getInt("R_ID"));
 			reimbursement.setR_amount(rs.getDouble("R_AMOUNT"));
 			reimbursement.setR_description(rs.getString("R_DESCRIPTION"));
@@ -187,7 +187,6 @@ public class ReimbursementServices implements ReimbursementDAO{
 			reimbursement.setRt_Type(rs.getInt("RT_TYPE"));
 			reimbursement.setRt_Status(rs.getInt("RT_STATUS"));
 			reimbursements.add(reimbursement);
-			System.out.println(reimbursement.getR_id());
 		}
 		return reimbursements;
 	}

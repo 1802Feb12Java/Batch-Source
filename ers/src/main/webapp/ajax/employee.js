@@ -115,8 +115,7 @@ let viewEInfo = function(){
 
     //get the employee values from the servlet
     xhr.open('GET', '/ers/ViewEmployeeInfo', true);
-    
-    console.log("View: " + xhr);
+
     //create the function to handle the request
     xhr.onreadystatechange = function(){
         if(this.readyState == 4 && this.status == 200){
