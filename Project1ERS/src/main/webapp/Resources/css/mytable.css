@@ -103,8 +103,8 @@
   }
   
   .table100.ver1 .table100-body tr:nth-child(even) {
-    /* background-color: #f8f6ff; */
-    background-color: #f5bea3;
+    background-color: #f8f6ff;
+    /* background-color: #f5bea3; */
   }
 
   .table100.ver1 {
