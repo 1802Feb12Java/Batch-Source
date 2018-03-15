@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { User } from '../models/user';
 import { CurrentUserService } from '../shared/current-user.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-manager-home',
@@ -15,9 +16,10 @@ export class ManagerHomeComponent implements OnInit {
   private sessionID: any;
   private allowed: boolean = false;
 
-  constructor(private client: HttpClient, private router: Router, private currUser: CurrentUserService) { }
+  constructor(private client: HttpClient, private router: Router, private currUser: CurrentUserService, private title: Title) { }
 
   ngOnInit() {
+    this.title.setTitle('Manager Home');
     this.client.get('http://localhost:8080/Project1/session', { withCredentials: true })
    .subscribe(
      (succ: any) => {

@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { CurrentUserService } from '../shared/current-user.service';
 import { User } from '../models/user';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-employee-home',
@@ -16,9 +17,10 @@ export class EmployeeHomeComponent implements OnInit {
   reimbursementList: Array<any> = [];
   allowed: boolean = false;
 
-  constructor(private client: HttpClient, private router: Router, private currUser: CurrentUserService) { }
+  constructor(private client: HttpClient, private router: Router, private currUser: CurrentUserService, private title: Title) { }
 
   ngOnInit() {
+    this.title.setTitle('Employee Home');
     this.client.get('http://localhost:8080/Project1/session', { withCredentials: true })
    .subscribe(
      (succ: any) => {

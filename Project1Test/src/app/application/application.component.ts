@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-application',
@@ -10,9 +11,10 @@ export class ApplicationComponent implements OnInit {
 
   sessionID: number;
 
-  constructor(private client: HttpClient) { }
+  constructor(private client: HttpClient, private title: Title) { }
 
   ngOnInit() {
+    this.title.setTitle('Reimbursement Application');
     this.client.get('http://localhost:8080/Project1/session', { withCredentials: true })
    .subscribe(
      (succ: any) => {

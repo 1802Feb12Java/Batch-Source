@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { PARAMETERS } from '@angular/core/src/util/decorators';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-reimbursements-all',
@@ -12,9 +13,10 @@ export class ReimbursementsAllComponent implements OnInit {
   reimbursementList: any = [];
   empList: any = [];
 
-  constructor(private client: HttpClient) { }
+  constructor(private client: HttpClient, private title: Title) { }
 
   ngOnInit() {
+    this.title.setTitle('Reimbursement List');
     this.client.get('http://localhost:8080/Project1/reimbursements', { withCredentials: true })
       .subscribe(
         (succ: any) => { 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-update-user',
@@ -12,9 +13,10 @@ export class UpdateUserComponent implements OnInit {
   empList: Array<any> = [];
   currentUser: any = {};
 
-  constructor(private client: HttpClient) { }
+  constructor(private client: HttpClient, private title: Title) { }
 
   ngOnInit() {
+    this.title.setTitle('Update Info');
     this.client.get('http://localhost:8080/Project1/session', { withCredentials: true })
    .subscribe(
      (succ: any) => {
