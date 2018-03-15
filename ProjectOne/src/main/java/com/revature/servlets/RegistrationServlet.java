@@ -21,7 +21,7 @@ public class RegistrationServlet extends HttpServlet {
 		Employee emp = new Employee(req.getParameter("username"),
 				req.getParameter("password"),
 				req.getParameter("email"));
-		System.out.println("Params: " + req.getParameter("username") + ", " + req.getParameter("password"));
+//		System.out.println("Params: " + req.getParameter("username") + ", " + req.getParameter("password"));
 		try {
 			EmpDAO.getInstance().addUserToTable(emp);
 			

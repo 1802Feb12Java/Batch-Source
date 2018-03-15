@@ -20,4 +20,141 @@
   	<url-pattern>/registrationservlet</url-pattern>
   </servlet-mapping>
   
+  
+   <servlet>
+  	<servlet-name>loginservlet</servlet-name>
+  	<servlet-class> com.revature.servlets.LoginServlet</servlet-class>
+  
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>loginservlet</servlet-name>
+  	<url-pattern>/loginservlet</url-pattern>
+  </servlet-mapping>
+  
+  
+  <servlet>
+  	<servlet-name>employeehomeservlet</servlet-name>
+  	<servlet-class> com.revature.servlets.EmployeeHomeServlet</servlet-class>
+  
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>employeehomeservlet</servlet-name>
+  	<url-pattern>/employeehomeservlet</url-pattern>
+  </servlet-mapping>
+  
+  
+  <servlet>
+  	<servlet-name>viewrequestservlet</servlet-name>
+  	<servlet-class> com.revature.servlets.ViewRequestServlet</servlet-class>
+  
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>viewrequestservlet</servlet-name>
+  	<url-pattern>/viewrequestservlet</url-pattern>
+  </servlet-mapping>
+  
+  
+   <servlet>
+  	<servlet-name>logoutservlet</servlet-name>
+  	<servlet-class> com.revature.servlets.LogoutServlet</servlet-class>
+  
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>logoutservlet</servlet-name>
+  	<url-pattern>/logoutservlet</url-pattern>
+  </servlet-mapping>
+  
+  
+  <servlet>
+  	<servlet-name>employeereimbursementtableservlet</servlet-name>
+  	<servlet-class> com.revature.servlets.EmployeeReimbursementTableServlet</servlet-class>
+  
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>employeereimbursementtableservlet</servlet-name>
+  	<url-pattern>/employeereimbursementtableservlet</url-pattern>
+  </servlet-mapping>
+  
+  
+  <servlet>
+  	<servlet-name>newreimbursementservlet</servlet-name>
+  	<servlet-class> com.revature.servlets.NewReimbursementServlet</servlet-class>
+  
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>newreimbursementservlet</servlet-name>
+  	<url-pattern>/newreimbursementservlet</url-pattern>
+  </servlet-mapping>
+  
+  
+   <servlet>
+  	<servlet-name>viewprofileservlet</servlet-name>
+  	<servlet-class> com.revature.servlets.ViewProfileServlet</servlet-class>
+  
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>viewprofileservlet</servlet-name>
+  	<url-pattern>/viewprofileservlet</url-pattern>
+  </servlet-mapping>
+  	
+  	<servlet>
+  	<servlet-name>editprofileservlet</servlet-name>
+  	<servlet-class> com.revature.servlets.EditProfileServlet</servlet-class>
+  
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>editprofileservlet</servlet-name>
+  	<url-pattern>/editprofileservlet</url-pattern>
+  	</servlet-mapping>
+  	
+  	
+  		<servlet>
+  	<servlet-name>allreimbursementservlet</servlet-name>
+  	<servlet-class> com.revature.servlets.AllReimbursementTableServlet</servlet-class>
+  
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>allreimbursementservlet</servlet-name>
+  	<url-pattern>/allreimbursementservlet</url-pattern>
+  	</servlet-mapping>
+  	
+  	
+  <servlet>
+	  	<servlet-name>managerhomeservlet</servlet-name>
+	  	<servlet-class> com.revature.servlets.ManagerHomeServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>managerhomeservlet</servlet-name>
+  	<url-pattern>/managerhomeservlet</url-pattern>
+  </servlet-mapping>
+  	
+
+	<servlet>
+	  	<servlet-name>approvereimbursementservlet</servlet-name>
+	  	<servlet-class> com.revature.servlets.ApproveReimbursementServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>approvereimbursementservlet</servlet-name>
+  	<url-pattern>/approvereimbursementservlet</url-pattern>
+  </servlet-mapping>
+
+
+	<servlet>
+	  	<servlet-name>allemployeeservlet</servlet-name>
+	  	<servlet-class> com.revature.servlets.AllEmployeesTableServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>allemployeeservlet</servlet-name>
+  	<url-pattern>/allemployeeservlet</url-pattern>
+  </servlet-mapping>
+
+	<servlet>
+	  	<servlet-name>employeereimbursementservlet</servlet-name>
+	  	<servlet-class> com.revature.servlets.EmployeeReimbursementServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>employeereimbursementservlet</servlet-name>
+  	<url-pattern>/employeereimbursementservlet</url-pattern>
+  </servlet-mapping>
+
 </web-app>

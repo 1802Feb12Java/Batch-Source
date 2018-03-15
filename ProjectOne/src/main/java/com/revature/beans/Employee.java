@@ -1,5 +1,7 @@
 package com.revature.beans;
 
+import java.util.ArrayList;
+
 public class Employee implements User {
 
 	private String username;
@@ -8,6 +10,8 @@ public class Employee implements User {
 	private String email;
 	private String firstname;
 	private String lastname;
+	
+	private ArrayList<Reimbursement> reimbursements;
 	
 	public Employee() {
 		super();
@@ -68,6 +72,24 @@ public class Employee implements User {
 	public String getFirstname() {
 		// TODO Auto-generated method stub
 		return this.firstname;
+	}
+	public ArrayList<Reimbursement> getReimbursements() {
+		return reimbursements;
+	}
+	public void setReimbursements(ArrayList<Reimbursement> reimbursements) {
+		this.reimbursements = reimbursements;
+	}
+	public void setEmpId(Integer empId) {
+		this.empId = empId;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
 	}
 	
 	

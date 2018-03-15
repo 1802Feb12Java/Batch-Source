@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
+
+</head>
+  <body>
+      <div class="row">
+          <div class="col-md-4"></div>
+            <h1 align="center">Employee Home Page</h1>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Dropdown
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                    <button id="DPbtn1" class="dropdown-item" type="button">View Profile</button>
+                    <button id="DPbtn2" class="dropdown-item" type="button">Edit Profile</button>
+                    <form action="/ProjectOne/logoutservlet" method="GET">
+                        <button id="DPbtn3" class="dropdown-item" type="submit">Logout</button>
+                    </form>
+                </div>
+            </div>
+      </div>
+      <br>
+      <!-- Hidden Profile Information -->
+    <div class="row">
+        
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                    <div id="profile" style="display: block;">
+            <form action="editprofileservlet" method="POST">
+                <p id="userUsername">username</p>
+                <p id="userFirstname">first name</p>
+                <input id="profileFirstname" name="profileFirstname" style="display: none;" placeholder="Enter new Firstname"></input>
+                <p id="userLastname">last name</p>
+                <input id="profileLastname" name="profileLastname" style="display: none;" placeholder="Enter new Lastname"></input>
+                <p id="userEmail">email</p>
+                <input id="profileEmail" name="profileEmail" style="display: none;" placeholder="Enter new Email"></input>
+                <button id="profileEdit" name="profileEdit" type="submit" style="display: none">Submit Changes</button>
+            </form>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+    </div>
+      <br>
+      <!--START OF TABLES -->
+      <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8" id="accordion" role="tablist" aria-multiselectable="true">
+        <div class="card">
+            <div class="card-header" role="tab" id="headingOne">
+            <h5 class="mb-0">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                Reimbursement Requests
+                </a>
+                
+            </h5>
+            </div>
+
+            <div id="collapseOne" class="collapse in" role="tabpanel" aria-labelledby="headingOne">
+                <table id="table1" class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Request ID</th>
+                            <th scope="col">Type</th>
+                            <th scope='col'>Amount</th>
+                            <th scope="col">Submitted</th>
+                            <th scope="col">Descripion</th>
+                            <th scope="col">Receipt</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table1body">
+                        <!-- <tr>
+                            <th scope="row">1</th>
+                            <td id-"testResp">Mark</td>
+                            <td>Otto</td>
+                            <td>@mdo</td>
+                        </tr> -->
+                       
+                    </tbody>
+                </table>
+                <div align="center">
+                        <!-- <button align id="addReimburse" type="button">
+                            Submit new Reimbursement</button> -->
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" role="tab" id="headingTwo">
+            <h5 class="mb-0">
+                <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                Submit a new Request
+                </a>
+            </h5>
+            </div>
+            <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
+            <div class="card-block">
+                <div class='form-group'>
+                        <div class="row">
+                            <div class="col-md-4 mx-auto">
+                                <form action="newreimbursementservlet" method="GET" enctype="multipart/form-data">
+                                    
+                                    Reimbursement Type: <select class="form-control" id="reimbType" name="reimbType">
+                                        <option value="0">Travel</option>
+                                        <option value="1">Food</option>
+                                        <option value="2">Misc</option>
+                                        <option value="3">Gas</option>
+                                        <option value="4">5th</option>
+                                        <option value="5">6th</option>
+                                    </select>
+                                    <br>
+                                    <label for="amount">Enter the amount for your reimbursement</label>
+                                    <br>
+                                    <input type="text" name="amount" id="amount" placeholder="$ 00.00">
+                                    <br>
+                                    <label for="description">Please a short description</label>
+                                    <br>
+                                    <input type="text" name="description" id="description" placeholder="description">
+                                    <br>
+                                    <div class="container">
+                                            <div class="row">    
+                                                <div class="col-md-6">  
+                                                    <!-- image-preview-filename input [CUT FROM HERE]-->
+                                                    <!-- <div class="input-group image-preview"> -->
+                                                        <!-- <input type="text" class="form-control image-preview-filename" disabled="disabled" style="display: none;"> don't give a name === doesn't send on POST/GET -->
+                                                        <span class="input-group-btn">
+                                                            <!-- image-preview-clear button -->
+                                                            <!-- <button type="button" class="btn btn-default image-preview-clear" style="display:none;">
+                                                                <span class="glyphicon glyphicon-remove"></span> Clear
+                                                            </button> -->
+                                                            <!-- image-preview-input -->
+                                                            <div class="btn btn-default image-preview-input">
+                                                                <!-- <span class="glyphicon glyphicon-folder-open"></span> -->
+                                                                <span class="image-preview-input-title" style="display:none">Browse</span>
+                                                                <input type="file" accept="image/png, image/jpeg, image/gif" name="imageinput"/> <!-- rename it -->
+                                                            </div>
+                                                        </span>
+                                                    <!-- </div>/input-group image-preview [TO HERE]  -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <br>
+                                    <div class="row">
+                                        <button type="submit">Submit Reimbursement</button>                                    </div>
+                                    
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            </div>
+        </div>
+        <!-- <div class="card">
+            <div class="card-header" role="tab" id="headingThree">
+            <h5 class="mb-0">
+                <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                Collapsible Group Item #3
+                </a>
+            </h5>
+            </div>
+            <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree">
+            <div class="card-block">
+                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+            </div>
+            </div>
+        </div> -->
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+      <!--p align="center" id="doingthings" name="doingthings">Doing things</p>
+      <div class='form-group'>
+            <div class="row">
+                <div class="col-md-4 mx-auto">
+                    <form action="viewrequestservlet" method="POST">
+                        <label for="InputT">Enter Something</label>
+                        <br>
+                        <input type="text" name="inputt" id="inputt" placeholder="inputt">
+                        <br>
+                        
+                        <div class="row">
+                            <button type="submit">get username</button>
+                        </div>
+                        
+                    </form>
+                </div>
+            </div>
+            <button align="center" id="employeeHBtn">Get Username</button>
+        </div-->
+       
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="employeeHome.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+</body>
+</html>

@@ -1,5 +1,7 @@
 package com.revature.beans;
 
+import java.util.ArrayList;
+
 public interface User {
 
 	public String toString();
@@ -13,5 +15,6 @@ public interface User {
 	public String getEmail();
 	public String getLastname();
 	public String getFirstname();
-	
+	public ArrayList<Reimbursement> getReimbursements();
+	public void setReimbursements(ArrayList<Reimbursement> reimbursements);
 }
