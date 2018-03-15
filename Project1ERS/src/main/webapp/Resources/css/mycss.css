@@ -40,6 +40,34 @@
     line-height: 1.2;
   }
 
+  .login100-form-title-custom {
+    /* font-family: Ubuntu-Bold; */
+    font-family: FuturaStd-Heavy;
+    font-size: 50px;
+    color: #474C55;
+    line-height: 1.2;
+    text-align: center;
+    /* text-transform: uppercase; */
+  
+    display: block;
+  }
+  
+  .container-login-custom{
+    
+    background-color:  #fff;
+    width: 100%;  
+  min-height: 100vh;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  }
+
   .lead-custom {
     font-family:FuturaStd-Book;
     color: #fff;
@@ -157,4 +185,29 @@ a[name="receiptlink"]:hover {
   .modal-content-custom {
       width: 100%;
   }
+}
+
+.input100-custom {
+  /* font-family: Ubuntu-Regular; */
+  font-family: FuturaStd-Book;
+  font-size: 10px;
+  color: #555555;
+  line-height: 1.2;
+
+  display: block;
+  width: 100%;
+  height: 50px;
+  background: transparent;
+  padding: 0 10px 0 80px;
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
+}
+
+.input-radio-custom{
+  height: 20px;
+  display: block;
+  text-align: center;
+  padding: 0;
 }

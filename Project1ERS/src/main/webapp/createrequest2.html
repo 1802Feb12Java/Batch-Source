@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Submit A New Request</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="Resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+    <!-- Custom styles for this template -->
+    <link href="Resources/css/heroic-features.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="Resources/css/util.css">
+    <link rel="stylesheet" type="text/css" href="Resources/css/main.css">
+
+    <link type="text/css" href="Resources/css/mycss.css" rel="stylesheet">
+    <!-- the below styling is for my user drop down in the nav bar -->
+    <style>
+        .dropdown-item {
+            color: #f16a24 !important;
+        }
+
+        .dropdown-item:hover {
+            color: black !important;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand navbar-cust-font" href="#">Employee Platform</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link navbar-cust-font" href="employeehome.html">Home
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown active">
+                        <a class="nav-link dropdown-toggle navbar-cust-font" data-toggle="dropdown" href="#">
+                            Requests
+                            <span class="lnr lnr-file-empty"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="nav-item">
+                                <a class="nav-link dropdown-item" href="viewmyrequests.html">My Requests</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link dropdown-item " href="createrequest2.html">Create Request</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle navbar-cust-font" data-toggle="dropdown" href="#">
+                            <span class="lnr lnr-user"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="nav-item">
+                                <a class="nav-link dropdown-item navbar-cust-font" href="myprofile.html">My Profile</a>
+                            </li>
+                            <li class="nav-item">
+                                <form action="logoutservlet" method="get">
+                                    <button type='submit' class="nav-link dropdown-item">Log Out</button>
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <!-- Jumbotron Header -->
+        <header class="jumbotron-custom my-4 text-center">
+            <h1 class="display-3-custom">Submit a New Request</h1>
+            <p class="lead-custom">Fill out the form below in order to submit a new reimbursement request.</p>
+            <!-- <a href="#" class="btn btn-primary btn-lg">Call to action!</a> -->
+        </header>
+
+        <!-- Page Features -->
+        <div class="row text-center" style="margin: auto">
+
+            <div class="limiter" >
+                <div class="container-login-custom">
+                    <div class="row text-center">
+                        <div class="wrap-login100 " style="background-color: #fff">
+                            <!-- <span class="login100-form-title-custom" style="padding-bottom: 20px">New Request</span> -->
+
+                            <form class="login100-form validate-form" action="requestsubmitservlet" method="post" enctype="multipart/form-data" style="border: 2px solid #474C55;">
+
+                                <div class="row" data-validate="Make A Selection"  style="padding-top:30px">
+                                    <div class="col-md-12"><span class="orange-title-custom">Type</span></div>
+                                    
+                                </div>
+                                <div class="row wrap-input100 validate-input" data-validate="Make A Selection">
+                                    <div class="col-md-2" style="left:11%">
+                                        <input class="input100 input-radio-custom" type="radio" name="requesttype" value="1"> Travel
+                                    </div>
+                                    <div class="col-md-2" style="left:11%">
+                                        <input class="input100 input-radio-custom" type="radio" name="requesttype" value="2">Supplies
+                                    </div>
+                                    <div class="col-md-2" style="left:11%">
+                                        <input class="input100 input-radio-custom" type="radio" name="requesttype" value="3"> Client Relations
+                                    </div>
+
+                                    <div class="col-md-2" style="left:11%">
+                                        <input class="input100 input-radio-custom" type="radio" name="requesttype" value="4"> Meals
+                                    </div>
+                                    <div class="col-md-2" style="left:11%">
+                                        <input class="input100 input-radio-custom" type="radio" name="requesttype" value="5"> Other
+                                    </div>
+
+                                </div>
+
+                                <div class="wrap-input100 validate-input" data-validate="Enter amount">
+                                    <span class="orange-title-custom">Amount</span>
+                                    <input class="input100" type="text" name="requestamount" placeholder="00.00">
+                                    <span class="focus-input100"></span>
+                                </div>
+
+                                <div class="wrap-input100 validate-input" data-validate="Enter description">
+                                    <span class="orange-title-custom">Description</span>
+                                    <input class="input100" type="text" name="requestdescription" placeholder="Reason for Request">
+                                    <span class="focus-input100"></span>
+                                </div>
+
+                                <div class="wrap-input100 validate-input" data-validate="Choose a Photo" >
+                                        <span class="orange-title-custom">Select Receipt Image</span>
+                                    <input class="input100" type="file" name="receiptimage"  style="padding-top:30px; height:100%">
+                                </div>
+
+                                <div class="container-login100-form-btn m-t-32" style="height:100%; padding-bottom:10%">
+                                    <button class="login100-form-btn">
+                                        Submit
+                                    </button>
+                                </div>
+
+                            </form>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+        <div class="container">
+            <p class="m-0 text-center text-white">Copyright &copy; Employee Reimbursement System 2018</p>
+        </div>
+        <!-- /.container -->
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="Resources/vendor/jquery/jquery.min.js"></script>
+    <script src="Resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="Resources/js/main.js"></script>
+</body>
+
+</html>

@@ -96,7 +96,7 @@
             <div class="card-body">
               <div class="row text-center">
         
-                  <form style="padding-left:300px" class="" action="requestsubmitservlet" method="post" enctype="multipart/form-data">
+                  <form style="padding-left:300px" class="validate-form" action="requestsubmitservlet" method="post" enctype="multipart/form-data">
                     <!-- need to grab user information -->
                       Reimbursement Type:
                       <div>
@@ -109,12 +109,12 @@
     
                       <div class="form-group">
                         <label for="requestamount">Reimbursement Amount:</label>
-                        <input class="form-control" type="text" name="requestamount" required="required">
+                        <input class="form-control" type="text" name="requestamount" required="required" data-validation="Enter Amount">
                       </div>
     
                       <div class="form-group">
-                        <label for="requestamount">Description:</label>
-                        <textarea class="form-control" name="requestdescription"></textarea>
+                        <label for="requestdescription">Description:</label>
+                        <textarea class="form-control" name="requestdescription" required="required" data-validation="Enter a Description"></textarea>
                       </div>
     
                       <div class="form-group">
