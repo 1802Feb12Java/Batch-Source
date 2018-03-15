@@ -1,6 +1,7 @@
 #receiptImage {
     width:  75px;
     height: auto;
+    cursor: zoom-in;
 }
 
 #myInput {

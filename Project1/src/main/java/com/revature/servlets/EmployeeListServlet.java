@@ -9,8 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.DAOs.UserDAOClass;
 import com.revature.beans.User;
@@ -21,18 +19,6 @@ public class EmployeeListServlet extends HttpServlet {
 	ConnectionFactory cf = ConnectionFactory.getInstance();
 	private UserDAOClass userDao = new UserDAOClass(cf.getConnection());
 	private static final long serialVersionUID = 1L;
-	private static final Logger log = Logger.getLogger(EmployeeListServlet.class);
-
-//	@Override
-//    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        super.service(req, resp);
-//        resp.addHeader("Access-Control-Allow-Origin", "http://localhost:4200");
-//        resp.addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE, HEAD");
-//        resp.addHeader("Access-Control-Allow-Headers",
-//                "Origin, Methods, Credentials, X-Requested-With, Content-Type, Accept");
-//        resp.addHeader("Access-Control-Allow-Credentials", "true");
-//        resp.setContentType("application/json");
-//	}
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -44,7 +30,6 @@ public class EmployeeListServlet extends HttpServlet {
 			userList = userDao.getAllUsers();
 			ObjectMapper om = new ObjectMapper();
 			String json = om.writeValueAsString(userList);
-//			log.info("Employee list JSON sent");
 			resp.getWriter().write(json);
 		} catch (SQLException e) {
 			e.printStackTrace();

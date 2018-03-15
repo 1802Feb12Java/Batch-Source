@@ -1,8 +1,5 @@
 package com.revature.servlets;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -20,6 +17,7 @@ import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+
 import org.apache.log4j.Logger;
 
 import com.revature.DAOs.ReimbursementDAOClass;
@@ -34,17 +32,6 @@ public class ApplicationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final Logger log = Logger.getLogger(ApplicationServlet.class);
 
-//	@Override
-//    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//		super.service(req, resp);
-//        resp.addHeader("Access-Control-Allow-Origin", "http://localhost:4200");
-//        resp.addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE, HEAD");
-//        resp.addHeader("Access-Control-Allow-Headers",
-//                "Origin, Methods, Credentials, X-Requested-With, Content-Type, Accept");
-//        resp.addHeader("Access-Control-Allow-Credentials", "true");
-//        resp.setContentType("application/json");
-//	}
-	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		

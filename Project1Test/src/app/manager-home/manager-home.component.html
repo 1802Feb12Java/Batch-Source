@@ -1,8 +1,11 @@
-<br><br>
+<ng-container *ngIf="this.allowed">
+	<app-header></app-header>
+	<br><br>
 
-<div class="jumbotron jumbotron-fluid">
-	<div class="container">
-		<h1 class="display-3" id="heading">Hi, unknown user!</h1>
-		<p class="lead">Please use the links above in order to do whatever you'd like.</p>
+	<div class="jumbotron jumbotron-fluid">
+		<div class="container">
+			<h1 class="display-3" id="heading">Hi, unknown user!</h1>
+			<p class="lead">Please use the links above in order to do whatever you'd like.</p>
+		</div>
 	</div>
-</div>
+</ng-container>

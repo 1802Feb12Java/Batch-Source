@@ -1,37 +1,20 @@
-<title>Reimbursement application</title>
+<app-header *ngIf="this.sessionID == 1"></app-header>
+<app-emp-header *ngIf="this.sessionID == 2"></app-emp-header>
 
-
-<div class="text-center">
-  <br>
-  <h2>Updating Personal Info</h2>
-  <br>
+<div class="form_main text-center">
+  <h4 class="heading">Updating Personal Info</h4>
   <form action='http://localhost:8080/Project1/updateInfo' method='post'>
-    First name:<br>
-    <input type='text' name='firstname' required><br>
+    <input type='text' name='firstname' placeholder=" First name" required><br>
     Currently: "{{currentUser.firstname}}"<br><br>
-    Last name:<br>
-    <input type='text' name='lastname' required><br>
+    <input type='text' name='lastname' placeholder=" Last name" required><br>
     Currently: "{{currentUser.lastname}}"<br><br>
-    Username:<br>
-    <input type='text' name='username' required><br>
+    <input type='text' name='username' placeholder=" Username" required><br>
     Currently: "{{currentUser.username}}"<br><br>
-    Password:<br>
-    <input type='password' name='password' required><br><br>
-    Email:<br>
-    <input type='text' name='email' required><br>
+    <input type='password' name='password' placeholder=" Password" required><br>
+    <i>Not displayed for your safety</i><br><br>
+    <input type='text' name='email' placeholder=" Email" required><br>
     Currently: "{{currentUser.email}}"<br><br>
 
-    <button type="submit">Submit</button>
+    <input type="submit" value="submit" name="submit" class="txt2">
   </form>
 </div>
-
-
-
-
-		<!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

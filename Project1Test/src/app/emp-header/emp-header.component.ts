@@ -3,11 +3,11 @@ import { HttpClient } from '@angular/common/http';
 import { CurrentUserService } from '../shared/current-user.service';
 
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  selector: 'app-emp-header',
+  templateUrl: './emp-header.component.html',
+  styleUrls: ['./emp-header.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class EmpHeaderComponent implements OnInit {
 
   constructor(private client: HttpClient, private currUser: CurrentUserService) { }
 

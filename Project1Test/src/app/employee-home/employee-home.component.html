@@ -1,70 +1,75 @@
-<div class="text-center">
-    <br>
-    <div id="welcomebg">
-        <div class="container">
-            <h1 class="display-3" id='welcome'>Hi, unknown user!</h1>
-            <p class="lead">You may use the first four links in the navbar above. You can click the others to find out what happens.</p>
+<ng-container *ngIf="this.allowed">
+    <app-header *ngIf="this.sessionID == 1"></app-header>
+    <app-emp-header *ngIf="this.sessionID == 2"></app-emp-header>
+
+    <div class="text-center">
+        <br>
+        <div id="welcomebg">
+            <div class="container">
+                <h1 class="display-3" id='welcome'>Hi, unknown user!</h1>
+                <p class="lead">Please use the links above in order to do whatever you'd like. Your information is displayed below.</p>
+            </div>
+        </div>
+        <br>
+
+        <div class="text-center" id="table">	
+
+            <h3>Your Information <a class="btn btn-outline-primary btn-sm" href="updateInfo" role="button">Update</a></h3>
+            <table id="myTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <ng-container *ngFor="let e of empList">
+                    <tr *ngIf="e.id==this.sessionID">
+                        <td>{{e.id}}</td>
+                        <td>{{e.firstname}} {{e.lastname}}</td>
+                        <td>{{e.username}}</td>
+                        <td>{{e.email}}</td>
+                    </tr>
+                </ng-container>
+                </tbody>
+            </table>		
+
+
+
+            <br>
+            <h3>Your Reimbursement List</h3>
+            <table id="myTable">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Amount</th>
+                        <th>Description</th>
+                        <th>Submitted</th>
+                        <th>Resolved</th>
+                        <th>Type</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <ng-container *ngFor="let r of reimbursementList">
+                    <tr *ngIf="r.authorId==this.sessionID">
+                    <td>{{r.amount | currency}}</td>
+                    <td>{{r.description}}</td>
+                    <td>{{r.submitted | date:'short'}}</td>
+                    <td *ngIf="r.resolved != undefined">{{r.resolved | date:'short'}}</td>
+                    <td *ngIf="r.resolved == undefined">N/A</td>
+                    <td *ngIf="r.typeId == 1">Business</td>
+                    <td *ngIf="r.typeId == 2">Travel</td>
+                    <td *ngIf="r.typeId == 3">Medical</td>
+                    <td *ngIf="r.statusID == 1"><button class="btn btn-warning btn-sm">Pending</button></td>
+                    <td *ngIf="r.statusID == 2"><button class="btn btn-success btn-sm">Approved</button></td>
+                    <td *ngIf="r.statusID == 3"><button class="btn btn-danger btn-sm">Denied</button></td>
+                    </tr>
+                </ng-container>
+                </tbody>
+            </table>		
         </div>
     </div>
     <br>
-
-    <div class="text-center" id="table">	
-
-        <h3>Your Information <a class="btn btn-outline-primary btn-sm" href="updateInfo" role="button">Update</a></h3>
-        <table id="myTable">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Username</th>
-                    <th>Email</th>
-                </tr>
-            </thead>
-            <tbody>
-              <ng-container *ngFor="let e of empList">
-                <tr *ngIf="e.id==this.sessionID">
-                    <td>{{e.id}}</td>
-                    <td>{{e.firstname}} {{e.lastname}}</td>
-                    <td>{{e.username}}</td>
-                    <td>{{e.email}}</td>
-                </tr>
-              </ng-container>
-            </tbody>
-        </table>		
-
-
-
-        <br>
-        <h3>Your Reimbursement List</h3>
-        <table id="myTable">
-            <thead class="thead-dark">
-                <tr>
-                    <th>Amount</th>
-                    <th>Description</th>
-                    <th>Submitted</th>
-                    <th>Resolved</th>
-                    <th>Type</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody>
-              <ng-container *ngFor="let r of reimbursementList">
-                <tr *ngIf="r.authorId==this.sessionID">
-                  <td>{{r.amount | currency}}</td>
-                  <td>{{r.description}}</td>
-                  <td>{{r.submitted | date:'short'}}</td>
-                  <td *ngIf="r.resolved != undefined">{{r.resolved | date:'short'}}</td>
-                  <td *ngIf="r.resolved == undefined">N/A</td>
-                  <td *ngIf="r.typeId == 1">Business</td>
-                  <td *ngIf="r.typeId == 2">Travel</td>
-                  <td *ngIf="r.typeId == 3">Medical</td>
-                  <td *ngIf="r.statusID == 1"><button class="btn btn-warning btn-sm">Pending</button></td>
-                  <td *ngIf="r.statusID == 2"><button class="btn btn-success btn-sm">Approved</button></td>
-                  <td *ngIf="r.statusID == 3"><button class="btn btn-danger btn-sm">Denied</button></td>
-                </tr>
-              </ng-container>
-            </tbody>
-        </table>		
-      </div>
-  </div>
-  <br>
+</ng-container>

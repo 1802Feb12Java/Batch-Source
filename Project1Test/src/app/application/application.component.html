@@ -1,33 +1,23 @@
-<title>Reimbursement application</title>
+<app-header *ngIf="this.sessionID == 1"></app-header>
+<app-emp-header *ngIf="this.sessionID == 2"></app-emp-header>
 
-
-<div class="text-center">
-  <h2 id="head">Reimbursement Application</h2>
+<div class="form_main text-center">
+  <br>
+  <h4 class="heading">Reimbursement Application</h4>
   <form action='http://localhost:8080/Project1/application' method='post' enctype="multipart/form-data">
-    <div id="formbg">
+    <div>
       Amount:<br>
       <input type='text' name='amount' required><br><br>
       Description:<br>
       <input type='text' name='description' required><br><br>
       Receipt (not required):<br>
-      <input type='file' name='receipt' accept='image/*'><br><br>
+      <input type='file' name='receipt' class="btn btn-warning" accept='image/*'><br><br>
       Type:<br>
       <input type='radio' name='type' value='business' required><label>Business&emsp;</label>
       <input type='radio' name='type' value='travel' required><label>Travel&emsp;</label>
       <input type='radio' name='type' value='medical' required><label>Medical&emsp;</label>
       <br><br>
-      <button type="submit">Submit</button>
+      <input type="submit" value="submit" name="submit" class="txt2">
     </div>
   </form>
 </div>
-
-
-
-
-		<!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

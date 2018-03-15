@@ -10,7 +10,6 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import org.apache.commons.codec.binary.Base64;
-import org.apache.log4j.Logger;
 
 import com.revature.beans.Reimbursement;
 

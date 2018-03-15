@@ -37,9 +37,10 @@ export class ReimbursementsAllComponent implements OnInit {
       err => {
         alert('failed to retrieve reimbursements');
       }
-    );
-
-  
+    );  
+    document.getElementById("modal01").onkeydown = function() {
+      document.getElementById("modal01").style.display='none';
+    }
   }
 
   filterTable() {
@@ -63,21 +64,19 @@ export class ReimbursementsAllComponent implements OnInit {
     }
   }
 
-  // params: HttpParams = new HttpParams();
+  onClick(r_id) {
+    for(let r of this.reimbursementList){
+      if(r.id == r_id){
+        document.getElementById("img01")["src"] = "data:image/jpg;base64,"+r.base64receipt;
+      }
+    }
+    document.getElementById("modal01").style.display = "block";
+  }
 
-  // approve(reimbID: number){
-  //   console.log(reimbID);
-  //   // this.params = this.params.append('reqid', reimbID.toString());
-  //   // this.params = this.params.append('newstatus', '2');
-  //   this.client.post("http://localhost:8080/Project1/reimbursements", 
-  //     {
-  //       "reqId": reimbID,
-  //       "newstatus": 2
-  //     }).subscribe(
-  //       (val) => {
-  //           console.log("POST call successful value returned in body", 
-  //                       val);
-  //       });
-  //   // this.ngOnInit();
-  // }
+  escPress(e: KeyboardEvent){
+    console.log(e.keyCode);
+    if(e.keyCode == 27){
+      document.getElementById("modal01").style.display = 'none';
+    }
+  }
 }

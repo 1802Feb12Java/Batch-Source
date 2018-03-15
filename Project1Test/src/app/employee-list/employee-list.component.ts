@@ -16,9 +16,9 @@ export class EmployeeListComponent implements OnInit {
     this.client.get('http://localhost:8080/Project1/employeeList', { withCredentials: true })
    .subscribe(
      (succ: any) => {
-       this.empList = succ;
-       console.log(this.empList);   
-       return this.empList;
+        this.empList = succ;
+        console.log(this.empList);   
+        return this.empList;
      },
      err => {
        alert('failed to retrieve employees');

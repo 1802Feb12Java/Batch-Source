@@ -23,22 +23,7 @@ public class ReimbursementsServlet extends HttpServlet {
 	private ConnectionFactory cf = ConnectionFactory.getInstance();
 	private ReimbursementDAOClass reDao = new ReimbursementDAOClass(cf.getConnection());
 	private static final Logger log = Logger.getLogger(ReimbursementsServlet.class);
-	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-
-//	@Override
-//    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//		resp.addHeader("Access-Control-Allow-Origin", "http://localhost:4200");
-//        resp.addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE, HEAD");
-//        resp.addHeader("Access-Control-Allow-Headers",
-//                "Origin, Methods, Credentials, X-Requested-With, Content-Type, Accept");
-//        resp.addHeader("Access-Control-Allow-Credentials", "true");
-//		super.service(req, resp);
-//        resp.setContentType("application/json");
-//	}
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

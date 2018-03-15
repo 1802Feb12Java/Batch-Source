@@ -38,8 +38,7 @@ public class LoginServlet extends HttpServlet {
 		HttpSession session = req.getSession();
 		
 		FrontController.addHeader(resp);
-		resp.setContentType("text/html");
-		PrintWriter pw = resp.getWriter();
+		resp.setContentType("application/json");
 		
 		String username = req.getParameter("username");
 		String password = req.getParameter("password");
@@ -73,11 +72,13 @@ public class LoginServlet extends HttpServlet {
 				if(allUsers.get(indexOfUser).getRoleId() == 1) {	//if manager
 					session.setAttribute("role", "manager");
 					log.info("Manager logged in. User ID = "+session.getAttribute("uid"));
+					resp.getWriter().write("{\"uid\":\""+allUsers.get(indexOfUser).getId()+"\",\"role\":\"manager\"}");
 					resp.sendRedirect("http://localhost:4200/managerHome");
 				}
 				else {	//if employee
 					session.setAttribute("role", "employee");
 					log.info("Employee logged in. User ID = "+session.getAttribute("uid"));
+					resp.getWriter().write("{\"uid\":\""+allUsers.get(indexOfUser).getId()+"\",\"role\":\"employee\"}");
 					resp.sendRedirect("http://localhost:4200/employeeHome");
 				}
 			}

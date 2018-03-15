@@ -13,6 +13,11 @@ import { HeaderComponent } from './header/header.component';
 import { EmployeeListComponent } from './employee-list/employee-list.component';
 import { UpdateUserComponent } from './update-user/update-user.component';
 import { ImagePipePipe } from './image-pipe.pipe';
+import { EmpHeaderComponent } from './emp-header/emp-header.component';
+import { LoggedInGuard } from './logged-in.guard';
+import { ManagerGuard } from './manager.guard';
+import { CurrentUserService } from './shared/current-user.service';
+import { User } from './models/user';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,23 +29,29 @@ import { ImagePipePipe } from './image-pipe.pipe';
     HeaderComponent,
     EmployeeListComponent,
     UpdateUserComponent,
-    ImagePipePipe
+    ImagePipePipe,
+    EmpHeaderComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     RouterModule.forRoot([
       {path: 'login', component: LoginComponent},
-      {path: 'reimbursements', component: ReimbursementsAllComponent},
+      {path: 'reimbursements', component: ReimbursementsAllComponent, canActivate: [LoggedInGuard, ManagerGuard]},
       {path: 'employeeHome', component: EmployeeHomeComponent},
       {path: 'managerHome', component: ManagerHomeComponent},
-      {path: 'application', component: ApplicationComponent},
-      {path: 'employeeList', component: EmployeeListComponent},
-      {path: 'updateInfo', component: UpdateUserComponent},
-      {path: '**', pathMatch: 'full', redirectTo:'login'}
+      {path: 'application', component: ApplicationComponent, canActivate: [LoggedInGuard]},
+      {path: 'employeeList', component: EmployeeListComponent, canActivate: [LoggedInGuard, ManagerGuard]},
+      {path: 'updateInfo', component: UpdateUserComponent, canActivate: [LoggedInGuard]},
+      {path: '**', pathMatch: 'full', redirectTo:'employeeHome'},
+      {path: '', component: LoginComponent}
     ])
   ],
-  providers: [],
+  providers: [
+    LoggedInGuard, 
+    ManagerGuard,
+    CurrentUserService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
