@@ -108,9 +108,6 @@ public class GetReimbursementsServlet extends HttpServlet {
                         rStatusTwo = "Denied";
                     }
 
-                    System.out.println(resolverId);
-
-
                     String sqlGetTwo = "SELECT * FROM ers_users WHERE u_id = ?";
                     PreparedStatement psTwo = conn.prepareStatement(sqlGetTwo);
                     psTwo.setInt(1, resolverId);
@@ -123,9 +120,6 @@ public class GetReimbursementsServlet extends HttpServlet {
                         resolverFirst = rsTwo.getString("u_firstname");
                         resolverLast = rsTwo.getString("u_lastname");
                     }
-
-                    System.out.println(resolverFirst);
-                    System.out.println(resolverLast);
 
                     String encodedReceipt = Base64.encodeBase64String(receipt);
                     
