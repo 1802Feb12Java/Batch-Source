@@ -17,9 +17,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import org.json.HTTP;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 /**
  * Servlet implementation class EmailServletA
@@ -48,17 +45,9 @@ public class EmailServlet extends HttpServlet {
 			throws ServletException, IOException {
 		logger.debug("Received a POST Request");
 
-		// // PARAM APPROACH
-		// String emailTo = request.getParameter("emailTo");
-		// String emailBody = request.getParameter("emailBody");
-		//
-		// logger.debug(emailTo);
-		// logger.debug(emailBody);
-
 		// get the JSON from req
-		logger.debug("content type=" + request.getContentType());
+		// logger.debug("content type=" + request.getContentType());
 		StringBuffer jb = new StringBuffer();
-		JSONObject jsonObject = new JSONObject();
 		String line = null;
 		try {
 			BufferedReader reader = request.getReader();
@@ -68,17 +57,24 @@ public class EmailServlet extends HttpServlet {
 			logger.error(e);
 		}
 
-		try {
-			jsonObject = HTTP.toJSONObject(jb.toString());
-		} catch (JSONException e) {
-			logger.error("Error parsing JSON request string");
-		}
-		logger.debug("got json from req " + jsonObject);
-		logger.debug(jsonObject.keys().next());
-		// get to: and body from passed JSON
-		String emailTo = jsonObject.getString("emailTo");
+		// // PARAM APPROACH
+		String req = jb.toString();
+		String emailTo = req.substring(req.indexOf("emailTo"), req.indexOf("&"));
+		String emailBody = req.substring(req.indexOf("emailBody"), req.length());
 
-		String emailBody = jsonObject.getString("emailBody");
+		logger.debug(emailTo);
+		logger.debug(emailBody);
+		// try {
+		// jsonObject = HTTP.toJSONObject(jb.toString());
+		// } catch (JSONException e) {
+		// logger.error("Error parsing JSON request string");
+		// }
+		// logger.debug("got json from req " + jsonObject);
+		// logger.debug(jsonObject.keys().next());
+		// get to: and body from passed JSON
+		// String emailTo = jsonObject.getString("emailTo");
+		//
+		// String emailBody = jsonObject.getString("emailBody");
 
 		// // get user from db
 		// int userId = jsonObject.getInt("userId");

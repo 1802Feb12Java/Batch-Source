@@ -115,7 +115,7 @@ public class RequestsServlet extends HttpServlet {
 
 		// update the reimbursement with matching id
 		if (Reimbursements.updateReimbursementStatus(con, reimId, status, approverId)) {
-			logger.debug("Updated reim");
+			logger.debug("Updated reim with status " + status);
 			response.setStatus(HttpServletResponse.SC_OK);
 		} else {
 			logger.error("Unable to update reim status");

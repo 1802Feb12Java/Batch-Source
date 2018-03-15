@@ -65,30 +65,33 @@ function fillInFields(requests) {
 				//make a new cell for appr/deny buttons
 				//only show/make if request has a 'pending' status
 				if (statusVal == 'Pending') {
-					let approveBtn = "ApproveButton" + colJ;
-					let denyBtn = "denyButton" + colJ;
+					let approveBtn = "ApproveButton" + rowI;
+					let denyBtn = "denyButton" + rowI;
 
 					//make approve/deny buttons
 					c.innerHTML = '<button class="btn btn-success btn-xs my-xs-btn"'
 						+ ' type="button" id="' + approveBtn + '">'
 						+ 'Approve</button> <button class="btn btn-danger btn-xs my-xs-btn"'
 						+ ' type="button" id="' + denyBtn + '">'
-						+ 'Deny</button>';
+						+ 'Deny</button> ';
 
 					//get reim id
 					let reimId = req["receipt"];
+					console.log('reimid='+reimId);
 
-					let rowN = (keys.length - colJ);
+					let rowN = rowI;
 					//set button listeners
 					document.getElementById(approveBtn).onclick =
 						function () {
-							onRowClick(reimId, rowN, "Approved");
+							onRowClick(reimId, "Approved", c);
 
 						};
+						console.log('set approved listener on'+approveBtn);
 					document.getElementById(denyBtn).onclick =
 						function () {
-							onRowClick(reimId, rowN, "Denied");
+							onRowClick(reimId, "Denied", c );
 						};
+						console.log('set approved listener on'+denyBtn);
 				}
 			}//add button for receipt col - to view image
 			else if (keys[colJ] == 'receipt') {//add button into
@@ -143,11 +146,23 @@ function fillInFields(requests) {
 }
 
 //Updates reimId and updates status col
-function onRowClick(reimId, rowNum, decision) {
+function onRowClick(reimId, decision, col) {
 	//make and ajax call to update reimbursemetn status
 	console.log("starting AJAX request to fill in user reqs");
 
 	var xhr = new XMLHttpRequest();
+//	var xhrEmail = new XMLHttpRequest();
+	
+//	//EMAIL
+//	xhrEmail.onreadystatechange = function () {
+//
+//		if (this.readyState == 4 && this.status == 200) {
+//			console.log("Response " + xhr.responseText);
+//
+//		}
+//	};
+	
+	//-E
 
 	xhr.onreadystatechange = function () {
 
@@ -155,15 +170,12 @@ function onRowClick(reimId, rowNum, decision) {
 			console.log("Response " + xhr.responseText);
 
 			//successful, update row color
-			console.log("Updating row " + rowNum + ", Col " + statusColNum);
-
-			let cellUpdate = reqTbl.rows[rowNum].cells[statusColNum];
 
 			//set column attributes
-			cellUpdate.className = getStatusClass(decision);
-			cellUpdate.innerHTML = decision;
+			col.className = getStatusClass(decision);
+			col.innerHTML = decision;
 
-			console.log("updated cell status" + cellUpdate);
+			console.log("updated cell status" + col);
 		}
 	};
 
@@ -171,6 +183,12 @@ function onRowClick(reimId, rowNum, decision) {
 	console.log("POST AJAX Call to URL: " + url);
 	xhr.open("POST", url, true);
 	console.log("Sending reimId " + reimId);
+//	//EMAIL
+//	xhrEmail.open("POST", "/ERSApp/email", true);
+////	xhr.setRequestHeader("Content-type", "application/json");
+//	var myJ = 'emailTo=jrufox@gmail.com&emailBody=yo';
+//	xhrEmail.send(myJ);
+	
 	//set type
 	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");//application/x-www-form-urlencoded Content Type
 	//	let tempJson = '{ "reimId":' + reimId+ '}';
