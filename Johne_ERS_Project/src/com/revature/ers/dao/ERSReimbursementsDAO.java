@@ -89,7 +89,8 @@ public class ERSReimbursementsDAO implements ERSReimbursementsInterface{
 		String sql = "SELECT R_ID, R_AMOUNT, R_DESCRIPTION, R_RECEIPT, R_SUBMITTED, R_RESOLVED, RT_TYPE, RS_STATUS, "
 				+ "E_ID, AUTHOR_FIRSTNAME, AUTHOR_LASTNAME, " + 
 				"M_ID, APPROVER_FIRSTNAME, APPROVER_LASTNAME " + 
-				"FROM view_reimbursements";
+				"FROM view_reimbursements "
+				+ "WHERE R_ID = " + r_id;
 		try {
 			Connection conn = cf.getConnection();
 			PreparedStatement ps = conn.prepareStatement(sql);
@@ -97,7 +98,7 @@ public class ERSReimbursementsDAO implements ERSReimbursementsInterface{
 			
 			if(rs.next()) {
 				Reimbursements reim = new Reimbursements();
-				reim.setR_id(rs.getInt("R_ID"));
+				reim.setR_id(r_id);
 				reim.setR_amount(rs.getDouble("R_AMOUNT"));
 				reim.setDescription(rs.getString("R_DESCRIPTION"));
 				reim.setR_receipt(rs.getBlob("R_RECEIPT"));
@@ -109,8 +110,10 @@ public class ERSReimbursementsDAO implements ERSReimbursementsInterface{
 				reim.setAuthor_firstname(rs.getString("AUTHOR_FIRSTNAME"));
 				reim.setAuthor_lastname(rs.getString("AUTHOR_LASTNAME"));
 				
+				
 				return reim;
 			}
+			
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
