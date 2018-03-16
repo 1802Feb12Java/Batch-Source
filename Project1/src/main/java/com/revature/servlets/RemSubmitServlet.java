@@ -38,7 +38,7 @@ public class RemSubmitServlet extends HttpServlet {
 		Reimbursement r = new Reimbursement(a, description, u.getId(), t);
 		try {
 			rs.addReimbursement(r);
-			response.sendRedirect("Project1/employees/Pending.html");
+			response.sendRedirect("employees/Pending.html");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
