@@ -8,9 +8,9 @@ Click [here](http://josephjustn-ec2.ddns.net/Project1/) to go to the DNS hostnam
 
 For employee account login, can change information via administrator account
 
-Adminstrator Login
-### Username: admin
-### Password: passw0rd
+###Adminstrator Login
+Username: admin
+Password: passw0rd
 
 ## JUnit Testing
 
