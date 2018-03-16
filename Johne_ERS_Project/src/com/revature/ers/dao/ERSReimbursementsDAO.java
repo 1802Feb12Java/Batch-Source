@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -70,6 +71,10 @@ public class ERSReimbursementsDAO implements ERSReimbursementsInterface{
 			ps.setDouble(1, re.getR_amount());
 			ps.setString(2, re.getDescription());
 			ps.setBlob(3, re.getR_receipt());
+			
+			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+			re.setR_submitted(timestamp);
+			
 			ps.setTimestamp(4, re.getR_submitted());
 			ps.setTimestamp(5, re.getR_resolved());
 			ps.setInt(6, re.getU_id_author());

@@ -19,7 +19,7 @@
 			<a href="employeePages/employeeHomepage.jsp">Home</a>
 		</li>
 		<li class="nav-item">
-			<a href="">Reimbursement Form</a>
+			<a href="SubmitReimbursement" name="formLink">Reimbursement Form</a>
 		</li>
 		<li class="nav-item">
 			<a href="Signout">Logout</a>

@@ -79,4 +79,14 @@
     <servlet-name>EditStatus</servlet-name>
     <url-pattern>/EditStatus</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SubmitReimbursement</display-name>
+    <servlet-name>SubmitReimbursement</servlet-name>
+    <servlet-class>com.revature.ers.controller.AddReimbursementServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SubmitReimbursement</servlet-name>
+    <url-pattern>/SubmitReimbursement</url-pattern>
+  </servlet-mapping>
 </web-app>
