@@ -138,10 +138,11 @@ public class ReimbursementServlet extends HttpServlet {
 				ticket.setResolved(null);
 				ticket.setResolver(0);
 //				System.out.println(ticket.getRStatus());
-				ticket.setRType(1);
+//				ticket.setRType(1);
 				ticket.setRStatus(1);
 //				System.out.println(ticket.toString());
 //				ts.insertReimbursementTicket(ut.getTicket());
+				System.out.println(ticket.toString());
 				ts.insertReimbursementTicket(ticket);
 				System.out.println("Insert Ticket Completed!");
 			}

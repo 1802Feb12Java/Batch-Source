@@ -195,9 +195,14 @@ INSERT INTO ERS_REIMBURSEMENT_STATUS (RS_STATUS) VALUES ('denied');
 INSERT INTO ers_user_roles (UR_ROLES) VALUES ('employee');
 INSERT INTO ers_user_roles (UR_ROLES) VALUES ('manager');
 
-CALL insert_user('khsieh','pass','kevin','hsieh','kevin@gmail.com',1);
-CALL insert_user('hello','world','jimm','wong','jimbo@gmail.com',1);
-CALL insert_user('admin','password','admin','admin','admin@gmail.com',2);
+CALL insert_user('ArcJ','JNRP','Jaun','Arc','jaun@jnrp.com',1);
+CALL insert_user('NikosP','JNRP','Pyrrha','Nikos','pyrrha@jnrp.com',1);
+CALL insert_user('ValkyrieN','JNRP','Nora','Valkyrie','nora@jnrp.com',1);
+CALL insert_user('RoseR','RWBY','Ruby','Rose','ruby@rwby.com',1);
+CALL insert_user('SchneeW','RWBY','Weiss','Schnee','weiss@rwby.com',1);
+CALL insert_user('Neo','icecream','Neo','Politan','neo@grimm.com',1);
+CALL insert_user('SustraiE','imtheone','Emerald','Sustrai','emerald@grimm.com',1);
+CALL insert_user('roll','tide','Matt','Knighten','admin@revature.com',2);
 
 CALL insert_ticket(35.0,
 'Hello World', 
