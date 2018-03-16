@@ -17,3 +17,7 @@ pass: employee1
 --------------------
 user: employee2
 pass: employee2
+------------------------------------------------------------------
+HOW TO RUN APPILICATION:
+1 - Under configure build path - take out odbj8.jar
+2 - Under ConnFactory class - replace the absolute path to the project's absolute path for database.properties file
