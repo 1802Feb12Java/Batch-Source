@@ -97,6 +97,7 @@ insert into ers_reimbursement_type values (3, 'medical');
 
 insert into ers_users values(useridsequence.nextval, 'joe', '@@', 'Jim', 'George', 'joe@email.com', 1);  --manager
 insert into ers_users values(useridsequence.nextval, 'jim', '@!', 'Joe', 'Bob', 'jim@email.com', 2);  --employee
+insert into ers_users values(useridsequence.nextval, 'jack', '@@', 'Jack', 'Hoff', 'jack@email.com', 1);  --manager
 
 insert into ers_reimbursements values(reimbursementidsequence.nextval, 20.50, 'desc1', null, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 2, 1, 1, 3);
 insert into ers_reimbursements values(reimbursementidsequence.nextval, 91.13, 'desc2', null, CURRENT_TIMESTAMP, null, 1, null, 2, 1);
