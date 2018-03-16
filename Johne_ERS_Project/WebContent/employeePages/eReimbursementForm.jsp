@@ -14,6 +14,18 @@
 </head>
 <body>
     
+	<ul class="nav justify-content-end">
+		<li class="nav-item">
+			<a href="employeePages/employeeHomepage.jsp">Home</a>
+		</li>
+		<li class="nav-item">
+			<a href="SubmitReimbursement" name="formLink">Reimbursement Form</a>
+		</li>
+		<li class="nav-item">
+			<a href="Signout">Logout</a>
+		</li>
+	
+	</ul>
 	
 	<form action="SubmitReimbursement" method="POST" id="rForm">
 		<table>
