@@ -1,7 +1,7 @@
 var populatedRequest = false;
 document.getElementById("headingOne").addEventListener('click', function(){
-    console.log("popreq: " + populatedRequest);
-    // getReimbursements(populatedRequest);
+    // console.log("popreq: " + populatedRequest);
+    getReimbursements(populatedRequest);
     populatedRequest = true;
     // console.log("popreq: " + populatedRequest);
 });
