@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eclipse-userlibraries>
+  <library name="Maven: com.oracle:ojdbc7:12.1.0.2">
+    <archive path="C:/Users/tanne/.m2/repository/com/oracle/ojdbc7/12.1.0.2/ojdbc7-12.1.0.2.jar" />
+  </library>
+  <library name="Maven: commons-fileupload:commons-fileupload:1.3.1">
+    <archive path="C:/Users/tanne/.m2/repository/commons-fileupload/commons-fileupload/1.3.1/commons-fileupload-1.3.1.jar" />
+  </library>
+  <library name="Maven: commons-io:commons-io:2.2">
+    <archive path="C:/Users/tanne/.m2/repository/commons-io/commons-io/2.2/commons-io-2.2.jar" />
+  </library>
+  <library name="Maven: javax.servlet:servlet-api:2.5">
+    <archive path="C:/Users/tanne/.m2/repository/javax/servlet/servlet-api/2.5/servlet-api-2.5.jar" />
+  </library>
+  <library name="Maven: log4j:log4j:1.2.17">
+    <archive path="C:/Users/tanne/.m2/repository/log4j/log4j/1.2.17/log4j-1.2.17.jar" />
+  </library>
+</eclipse-userlibraries>
+

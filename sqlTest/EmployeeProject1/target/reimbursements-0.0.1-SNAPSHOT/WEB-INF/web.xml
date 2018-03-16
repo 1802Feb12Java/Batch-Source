@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
+  <display-name>reimbursements</display-name>
+  <welcome-file-list>
+    <welcome-file>Index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+  <servlet-name>Login</servlet-name>
+<servlet-class>com.talanian.servlets.Login</servlet-class>
+</servlet>
+
+
+<servlet-mapping>
+	<servlet-name>Login</servlet-name>
+	<url-pattern>/Login</url-pattern>
+</servlet-mapping>
+<servlet>
+  <servlet-name>Register</servlet-name>
+<servlet-class>com.talanian.servlets.Register</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>Register</servlet-name>
+	<url-pattern>/Register</url-pattern>
+</servlet-mapping>
+<servlet>
+    <servlet-name>Update</servlet-name>
+    <servlet-class>com.talanian.servlets.Update</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>Update</servlet-name>
+    <url-pattern>/Update</url-pattern>
+</servlet-mapping>
+<servlet>
+  <servlet-name>Submit</servlet-name>
+<servlet-class>com.talanian.servlets.Submit</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>Submit</servlet-name>
+	<url-pattern>/Submit</url-pattern>
+</servlet-mapping>
+<servlet>
+  <servlet-name>Approve</servlet-name>
+<servlet-class>com.talanian.servlets.Approve</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>Approve</servlet-name>
+	<url-pattern>/Approve</url-pattern>
+</servlet-mapping>
+<servlet>
+  <servlet-name>Deny</servlet-name>
+<servlet-class>com.talanian.servlets.Deny</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>Deny</servlet-name>
+	<url-pattern>/Deny</url-pattern>
+</servlet-mapping>
+<servlet>
+  <servlet-name>Manage</servlet-name>
+<servlet-class>com.talanian.servlets.Manage</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>Manage</servlet-name>
+	<url-pattern>/Manage</url-pattern>
+</servlet-mapping>
+
+    <servlet>
+        <servlet-name>images</servlet-name>
+        <servlet-class>com.talanian.servlets.Image</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>images</servlet-name>
+        <url-pattern>/images/*</url-pattern>
+    </servlet-mapping>
+</web-app>
