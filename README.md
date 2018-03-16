@@ -1,10 +1,25 @@
 #Revature Training program Batch 1802-feb12  
-This branch contains notes/examples, assignments, and projects from the Revature training program.  
+This branch contains notes/examples, assignments, and projects from the Revature training program by Kevin Hsieh from Batch 1802.  
 
 ## Project 1 - Expense Reimbursement System
 
 For Angular prart go to https://github.com/khsieh/revature-project1-ng  
 should be able to do CORS with Angular running on port 4200 and Tomcat running java backend on port 8080  
+
+### Instructions to build
+#### setup Server
+1. Go to ExpenseReimbursementSystem directory
+2. Load the folder as a project in SprintToolSuite  
+3. Run as server using Tomcat8.5
+
+#### setup Client
+1. Go to https://github.com/khsieh/revature-project1-ng and download the project
+2. Load the project in Visual Studio Code
+3. execute `npm install` for node_modules
+4. Execute 	`ng serve`
+
+#### Using the application
+1. Once both server and client are setup go to `localhost:4200/` in your browswer
 
 
 ### Technologies used

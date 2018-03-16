@@ -37,7 +37,7 @@ public class UsersServlet extends HttpServlet {
 			Gson gson = new Gson();
 			//create userServices 
 			UserServices us = new UserServices();
-			//call select
+			//call select			
 			User u = us.getUserByID(sessionUser);
 			//setup response
 			response.setContentType("application/json");
