@@ -41,7 +41,7 @@ public class ConnectionFlexion {
      try {
 
          connection = DriverManager.getConnection(
-                 "jdbc:oracle:thin:@feb12usf.ccvmvbzmtg8b.us-east-1.rds.amazonaws.com:1521:ORCL", "starkjosh", "mattsfav1");
+                 "jdbc:oracle:thin:@feb12usf.cm8tgifn5vn0.us-east-2.rds.amazonaws.com:1521:ORCL", "starkjosh", "mattsfav1");
 
      } catch (SQLException e) {
 
