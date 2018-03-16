@@ -53,7 +53,7 @@ public class ReimbursementDaoImpl implements ReimbursementDao {
 		PreparedStatement s = null;
 		ResultSet rs = null;
 
-		String statement = "SELECT R.R_ID, R.R_AMOUNT, R.R_DESCRIPTION, R.R_RECEIPT, R.R_SUBMITTED, R.R_RESOLVED, R.U_ID_AUTHOR, R.U_ID_RESOLVER,\r\n"
+		String statement = "SELECT R.R_ID, R.R_AMOUNT, R.R_DESCRIPTION, R.R_RECEIPT, R.R_SUBMITTED, R.R_RESOLVED, R.U_ID_AUTHOR, R.U_ID_RESOLVER, "
 				+ "T.RT_TYPE, S.RS_STATUS, U.U_FIRSTNAME, U.U_LASTNAME FROM ERS_REIMBURSEMENTS R "
 				+ " INNER JOIN ERS_REIMBURSEMENT_TYPE T ON R.RT_TYPE = T.RT_ID "
 				+ " INNER JOIN ERS_REIMBURSEMENT_STATUS S ON R.RT_STATUS = S.RS_ID "
@@ -163,11 +163,12 @@ public class ReimbursementDaoImpl implements ReimbursementDao {
 		ResultSet rs = null;
 		List<Reimbursement> list = new ArrayList<>();
 
-		String statement = "SELECT R.R_ID, R.R_AMOUNT, R.R_DESCRIPTION, R.R_RECEIPT, R.R_SUBMITTED, R.R_RESOLVED, R.U_ID_AUTHOR, R.U_ID_RESOLVER,\r\n"
-				+ "T.RT_TYPE, S.RS_STATUS, U.U_FIRSTNAME, U.U_LASTNAME FROM ERS_REIMBURSEMENTS R "
-				+ " INNER JOIN ERS_REIMBURSEMENT_TYPE T ON R.RT_TYPE = T.RT_ID"
-				+ " INNER JOIN ERS_REIMBURSEMENT_STATUS S ON R.RT_STATUS = S.RS_ID"
-				+ " LEFT JOIN ERS_USERS U ON U.U_ID = R.U_ID_RESOLVER";
+		String statement = "SELECT R.R_ID, R.R_AMOUNT, R.R_DESCRIPTION, R.R_RECEIPT, R.R_SUBMITTED, R.R_RESOLVED, R.U_ID_AUTHOR, R.U_ID_RESOLVER, "
+				+ "	T.RT_TYPE, S.RS_STATUS, U.U_FIRSTNAME, U.U_LASTNAME, U2.U_FIRSTNAME AS A_FIRST, U2.U_LASTNAME AS A_LAST FROM ERS_REIMBURSEMENTS R "
+				+ " INNER JOIN ERS_REIMBURSEMENT_TYPE T ON R.RT_TYPE = T.RT_ID "
+				+ " INNER JOIN ERS_REIMBURSEMENT_STATUS S ON R.RT_STATUS = S.RS_ID "
+				+ " LEFT JOIN ERS_USERS U ON U.U_ID = R.U_ID_RESOLVER"
+				+ " LEFT JOIN ERS_USERS U2 ON U2.U_ID = R.U_ID_AUTHOR";
 
 		logger.debug("Created SQL Statement = " + statement);
 
@@ -195,10 +196,11 @@ public class ReimbursementDaoImpl implements ReimbursementDao {
 		ResultSet rs = null;
 		List<Reimbursement> list = new ArrayList<>();
 
-		String statement = "SELECT R.R_ID, R.R_AMOUNT, R.R_DESCRIPTION, R.R_RECEIPT, R.R_SUBMITTED, R.R_RESOLVED, R.U_ID_AUTHOR, R.U_ID_RESOLVER,\r\n"
-				+ "T.RT_TYPE, S.RS_STATUS, U.U_FIRSTNAME, U.U_LASTNAME FROM ERS_REIMBURSEMENTS R "
+		String statement = "SELECT R.R_ID, R.R_AMOUNT, R.R_DESCRIPTION, R.R_RECEIPT, R.R_SUBMITTED, R.R_RESOLVED, R.U_ID_AUTHOR, R.U_ID_RESOLVER, "
+				+ "T.RT_TYPE, S.RS_STATUS, U.U_FIRSTNAME, U.U_LASTNAME, U2.U_FIRSTNAME AS A_FIRST, U2.U_LASTNAME AS A_LAST  FROM ERS_REIMBURSEMENTS R "
 				+ " INNER JOIN ERS_REIMBURSEMENT_TYPE T ON R.RT_TYPE = T.RT_ID"
 				+ " INNER JOIN ERS_REIMBURSEMENT_STATUS S ON R.RT_STATUS = S.RS_ID"
+				+ " LEFT JOIN ERS_USERS U2 ON U2.U_ID = R.U_ID_AUTHOR"
 				+ " LEFT JOIN ERS_USERS U ON U.U_ID = R.U_ID_RESOLVER" + " WHERE R.RT_STATUS =?";
 
 		logger.debug("Created SQL Statement = " + statement + "with status=" + status);
@@ -245,6 +247,8 @@ public class ReimbursementDaoImpl implements ReimbursementDao {
 		logger.debug("Type fetched = " + rs.getString("RT_TYPE"));
 		// join on ERS_REIMBURSEMENTS_STATUS to get status value
 		reimbursement.setStatus(rs.getString("RS_STATUS"));
+		// set author name
+		reimbursement.setAuthorName(rs.getString("A_FIRST") + " " + rs.getString("A_LAST"));
 
 		return reimbursement;
 

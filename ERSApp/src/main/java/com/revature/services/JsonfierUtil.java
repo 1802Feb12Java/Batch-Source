@@ -19,7 +19,7 @@ public class JsonfierUtil {
 		// put in all displayable/useful fields
 		for (Reimbursement r : list) {
 			obj = new JSONObject();
-			obj.put("amount", r.getAmount());
+			obj.put("amount", "$" + r.getAmount().setScale(2).toPlainString());
 			obj.put("description", r.getDecription());
 			obj.put("receipt", r.getRecipt());
 			// format times before putting them in
@@ -35,6 +35,9 @@ public class JsonfierUtil {
 			obj.put("receipt", r.getReimbursementId());
 			// need id
 			obj.put("reimId", r.getReimbursementId());
+
+			// GET EMP NAMES MISSING REQ
+			obj.put("author", r.getAuthorName());
 
 			// put reim item in array
 			json.put(obj);

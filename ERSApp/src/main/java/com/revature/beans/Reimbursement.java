@@ -13,6 +13,7 @@ public class Reimbursement {
 	private Timestamp submitted;
 	private Timestamp resolved;
 	private int authorId;
+	private String authorName;
 	private int resolverId;
 	private String resolverName;
 	private String type;
@@ -23,7 +24,8 @@ public class Reimbursement {
 	}
 
 	public Reimbursement(int reimbursementId, BigDecimal amount, String decription, InputStream receipt,
-			Timestamp submitted, Timestamp resolved, int authorId, int resolverId, String type, String status) {
+			Timestamp submitted, Timestamp resolved, int authorId, String authorName, int resolverId,
+			String resolverName, String type, String status) {
 		super();
 		this.reimbursementId = reimbursementId;
 		this.amount = amount;
@@ -32,7 +34,9 @@ public class Reimbursement {
 		this.submitted = submitted;
 		this.resolved = resolved;
 		this.authorId = authorId;
+		this.authorName = authorName;
 		this.resolverId = resolverId;
+		this.resolverName = resolverName;
 		this.type = type;
 		this.status = status;
 	}
@@ -142,12 +146,28 @@ public class Reimbursement {
 		this.resolverName = resolverName;
 	}
 
+	public InputStream getReceipt() {
+		return receipt;
+	}
+
+	public void setReceipt(InputStream receipt) {
+		this.receipt = receipt;
+	}
+
+	public String getAuthorName() {
+		return authorName;
+	}
+
+	public void setAuthorName(String authorName) {
+		this.authorName = authorName;
+	}
+
 	@Override
 	public String toString() {
 		return "Reimbursement [reimbursementId=" + reimbursementId + ", amount=" + amount + ", decription=" + decription
-				+ ", recipt=" + receipt + ", submitted=" + submitted + ", resolved=" + resolved + ", authorId="
-				+ authorId + ", resolverId=" + resolverId + ", resolverName=" + resolverName + ", type=" + type
-				+ ", status=" + status + "]";
+				+ ", receipt=" + receipt + ", submitted=" + submitted + ", resolved=" + resolved + ", authorId="
+				+ authorId + ", authorName=" + authorName + ", resolverId=" + resolverId + ", resolverName="
+				+ resolverName + ", type=" + type + ", status=" + status + "]";
 	}
 
 }
