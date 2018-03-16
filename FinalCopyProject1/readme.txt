@@ -1,5 +1,9 @@
-username: talanianj
-password: password
+Database username: talanianj
+Database password: password
+
+Default user for application:
+  Username: TEST_USER
+  password: test
 
 Tomcat v8.5
 Oracle JDBC 7
