@@ -14,9 +14,9 @@ public class MailController {
 		Client client = Client.create();
 		client.addFilter(new HTTPBasicAuthFilter("api", "key-085149de6bc68240388483ba6d2db0c3"));
 		WebResource webResource = client
-				.resource("https://api.mailgun.net/v3/sandbox3b5f57cb6cf2418b9a6f23bc77d53352.mailgun.org/messages");
+				.resource("https://api.mailgun.net/v3/justinjoseph.ga/messages");
 		MultivaluedMapImpl formData = new MultivaluedMapImpl();
-		formData.add("from", "Mailgun Sandbox <postmaster@sandbox3b5f57cb6cf2418b9a6f23bc77d53352.mailgun.org>");
+		formData.add("from", "Justin Joseph <postmaster@justinjoseph.ga>");
 		String emailTo = firstName + " <" + emailAddress + ">";
 		formData.add("to", emailTo);
 		formData.add("subject", "Employee Reimbursement System - Registration");
@@ -29,9 +29,9 @@ public class MailController {
 		Client client = Client.create();
 		client.addFilter(new HTTPBasicAuthFilter("api", "key-085149de6bc68240388483ba6d2db0c3"));
 		WebResource webResource = client
-				.resource("https://api.mailgun.net/v3/sandbox3b5f57cb6cf2418b9a6f23bc77d53352.mailgun.org/messages");
+				.resource("https://api.mailgun.net/v3/justinjoseph.ga/messages");
 		MultivaluedMapImpl formData = new MultivaluedMapImpl();
-		formData.add("from", "Mailgun Sandbox <postmaster@sandbox3b5f57cb6cf2418b9a6f23bc77d53352.mailgun.org>");
+		formData.add("from", "Justin Joseph <postmaster@justinjoseph.ga>");
 		String emailTo = "Loser" + " <" + emailAddress + ">";
 		formData.add("to", emailTo);
 		formData.add("subject", "Employee Reimbursement System - Forgot Password");
