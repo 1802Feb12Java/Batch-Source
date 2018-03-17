@@ -4,6 +4,7 @@ When building the sql string for the prepared statement, if
 is changed to 
 			String sql = "SELECT * FROM ERS_REIMBURSEMENTS WHERE U_ID_AUTHOR=? AND RT_STATUS=? OR RT_STATUS=?";
 The test entries that are resolved will show up.  (Discovered 3/17 6:13p)
+The only test entries that were put in did not include an author ID, so only the managers will be able to view anything in the resolved table as it currently stands.
 
 
 SQL file: Project1.sql
