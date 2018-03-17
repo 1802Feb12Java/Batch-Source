@@ -1,0 +1,3 @@
+#!/bin/bash
+
+psql -h pgsql.chpmycag1sts.us-east-2.rds.amazonaws.com -p 5432 -U wamuu -d PGSQL

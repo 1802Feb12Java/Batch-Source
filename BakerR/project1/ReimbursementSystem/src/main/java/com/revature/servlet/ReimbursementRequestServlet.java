@@ -137,9 +137,11 @@ public class ReimbursementRequestServlet extends HttpServlet {
 						} // end switch
 					} else {
 						byte[] receiptData = IOUtils.toByteArray(fi.getInputStream());
-						String receiptName = fi.getName();
-						rData.setReceipt(receiptData);
-						rData.setReceiptName(receiptName);
+						if(receiptData != null && receiptData.length > 0) {
+							String receiptName = fi.getName();
+							rData.setReceipt(receiptData);
+							rData.setReceiptName(receiptName);
+						}
 					}
 					
 				} catch(SQLException | IOException ex) {

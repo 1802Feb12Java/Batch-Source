@@ -1,0 +1,5 @@
+select r_id, r_amount, r_description, (r_receipt is not null) as has_receipt,
+       length(r_receipt) as receipt_size, r_receipt_name, r_submitted, u_id_author,
+       r_resolved, u_id_resolver, rt_type, rt_status
+    from ers_reimbursements;
+    

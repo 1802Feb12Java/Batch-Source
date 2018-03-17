@@ -109,7 +109,7 @@ public class ReimbursementListServlet extends HttpServlet {
 			try {
 				Map.Entry<String, Integer> receiptMetadata = rDao.getReceiptMetadata(r.getId());
 				
-				if(receiptMetadata != null) {
+				if(receiptMetadata != null && receiptMetadata.getValue() > 0) {
 				    final String[] units = {"B", "kB", "MB", "GB", "TB" };
 				    
 					// Calculate size.
