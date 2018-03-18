@@ -1,4 +1,5 @@
-package main.java;
+package com.revature.servlet;
+import com.revature.dao.Dao;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -24,14 +25,12 @@ import org.json.simple.JSONObject;
 /**
  * Servlet implementation class Ers_servlet
  */
-@WebServlet("/Ers_servlet")
-public class Ers_servlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
+@WebServlet("/ErsServlet")
+public class ErsServlet extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Ers_servlet() {
+    public ErsServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,18 +38,31 @@ public class Ers_servlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException{
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
-		response.setContentType("text/html");
-		RequestDispatcher rd = request.getRequestDispatcher("ERS_Login.html");
-		rd.include(request, response);
+		//response.setContentType("text/html");
+		
+
+//		try {
+//			 request.getRequestDispatcher("/index.html").forward(request, response);
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		try {
+			response.sendRedirect("/ErsServlet.html");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException{
 		// TODO Auto-generated method stub
 		Dao conn = new Dao();
 		Connection con = conn.connectionFactory();
@@ -91,18 +103,38 @@ public class Ers_servlet extends HttpServlet {
 			if(usernameCk == "admin" && passwordCk == "password")
 			{
 				RequestDispatcher rd = request.getRequestDispatcher("ERS_Manager.html");
-				rd.include(request, response);
+				try {
+					rd.include(request, response);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 			else if(usernameCk == auth.get(1) && passwordCk == auth.get(2))
 			{
 				RequestDispatcher rd = request.getRequestDispatcher("ERS_Employee.html");
-				rd.include(request, response);
+				try {
+					rd.include(request, response);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 			else
 			{
-				response.getWriter().append("Invalid password").append(request.getContextPath());
+				try {
+					response.getWriter().append("Invalid password").append(request.getContextPath());
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				RequestDispatcher rd = request.getRequestDispatcher("ERS_userInformation.html");
-				rd.include(request, response);
+				try {
+					rd.include(request, response);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 			
 		}
@@ -165,7 +197,13 @@ public class Ers_servlet extends HttpServlet {
 				{
 					buff = rs.getString(i);
 					json = (JSONObject) json.put(nameProperties.get(i-1), buff);
-					PrintWriter out = response.getWriter();
+					PrintWriter out = null;
+					try {
+						out = response.getWriter();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					out.print(json);
 					out.flush();
 					i++;
@@ -199,7 +237,13 @@ public class Ers_servlet extends HttpServlet {
 				{
 					buff = rs.getString(i);
 					json = (JSONObject) json.put(properties.get(i-1),buff);
-					PrintWriter out = response.getWriter();
+					PrintWriter out = null;
+					try {
+						out = response.getWriter();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					out.print(json);
 					out.flush();
 					i++;
@@ -247,7 +291,13 @@ public class Ers_servlet extends HttpServlet {
 				{
 					buff = rs.getString(i);
 					json = (JSONObject) json.put(properties.get(i-1), buff);
-					PrintWriter out = response.getWriter();
+					PrintWriter out = null;
+					try {
+						out = response.getWriter();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					out.print(json.toString());
 					out.flush();
 					i++;
@@ -262,14 +312,14 @@ public class Ers_servlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPut(HttpServletRequest, HttpServletResponse)
 	 */
-	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException{
 		// TODO Auto-generated method stub
 	}
 
 	/**
 	 * @see HttpServlet#doDelete(HttpServletRequest, HttpServletResponse)
 	 */
-	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException{
 		// TODO Auto-generated method stub
 	}
 
