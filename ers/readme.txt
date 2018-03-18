@@ -1,4 +1,4 @@
-*****NOTE:  View resolved reimbursements WILL work with one change to the GetResolvedReimbursements DAO:
+*****NOTE:  View resolved reimbursements WILL work with one change to the GetResolvedReimbursements DAO in com.revature.reimbursements.ReimbursementServices:
 When building the sql string for the prepared statement, if 
 			String sql = "SELECT * FROM ERS_REIMBURSEMENTS WHERE U_ID_AUTHOR=? AND RT_STATUS=? AND RT_STATUS=?";
 is changed to 
