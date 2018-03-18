@@ -1,4 +1,4 @@
-./MavenExample/*
-./MavenJDBCTest/*
+./MavenExample/**
+./MavenJDBCTest/**
 
 

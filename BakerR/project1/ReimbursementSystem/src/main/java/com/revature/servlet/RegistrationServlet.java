@@ -2,6 +2,7 @@ package com.revature.servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Properties;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -31,6 +32,13 @@ public class RegistrationServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Properties servletProps = ServletProperties.getProperties();
+		
+		if(servletProps != null) {
+			request.setCharacterEncoding(servletProps.getProperty("request.enc"));
+			response.setCharacterEncoding(servletProps.getProperty("response.enc"));
+		}
+		
 		HttpSession session = request.getSession(false);
 		
 		if(session != null) {
@@ -44,6 +52,13 @@ public class RegistrationServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Properties servletProps = ServletProperties.getProperties();
+		
+		if(servletProps != null) {
+			request.setCharacterEncoding(servletProps.getProperty("request.enc"));
+			response.setCharacterEncoding(servletProps.getProperty("response.enc"));
+		}
+		
 		// Create new user.
 		try {
 			UserDao userDao = new UserDao();

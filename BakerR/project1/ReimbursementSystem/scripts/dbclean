@@ -1,0 +1,6 @@
+-- removes things created by dbcreate
+drop table ers_reimbursements;
+drop table ers_users;
+drop table ers_reimbursement_status;
+drop table ers_reimbursement_type;
+drop table ers_user_roles;

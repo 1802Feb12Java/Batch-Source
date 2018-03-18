@@ -2,8 +2,8 @@ PROJECT 1: ReimbursementSystem
 
 Used Dependencies:
     Libraries:
-        ojdbc8-12.2.0.1.jar
-        postgresql-42.2.1.jre7.jar
+        *ojdbc8-12.2.0.1.jar
+        *postgresql-42.2.1.jre7.jar
         javax.servlet-api-4.0.0.jar
         jsoup-1.11.2.jar
         commons-io-2.6.jar
@@ -14,22 +14,70 @@ Used Dependencies:
     Browsers Tested On:
         Opera
     
-
+    * These jars are expected to be placed in <tomcat>/lib/ folder.
+    
+Start page: <host>:<port>/reimbursement/
+        or  <host>:<port>/reimbursement/login
+        
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Database-related files:
     database.properties 
         - located in src/main/resources
         - If not connecting to the database using SSL, comment out the SSL-related lines.
     rds-combined-ca-bundle.pem (for connecting to the database using SSL)
         - located in src/main/resources
-    DBCREATE.sql: Database creation script
-        - database creation script
+    Scripts:
+        - located in ./scripts/
+        - [aws-pgsql]
+            - script for logging into AWS PostgreSQL database in command line (using psql)
+        - [local-pgsql]
+            - script for logging into localhost PostgreSQL database in command line (using psql)
+        - [dbcreate]
+            - installs extensions, tables, fixed table entries, and functions/procedures
+        - [dbclean]
+            - drops all tables and functions created by [dbcreate]
+        - [dispall]
+            - displays info about all the records in the tables
+        - [dispusr]
+            - displays the user table
+        - [dispr]
+            - displays reimbursement table info
+            - info is modified slightly to show more useful info about the receipt data
         
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+[psql] command line options notes:
+    - [-h host]: database server host, default is localhost
+    - [-p port]: database port, default is 5432
+    - [-U username]: database username
+    - [-d sid/database name]: name of the database (SID)
     
-Start page: <host>:<port>/reimbursement/
-        or  <host>:<port>/reimbursement/login
-
+[psql] some useful commands:
+    - \i <script file>
+        - runs the given SQL script
+    - \connect <database name>
+        - connects to the specified database
+    - \? 
+        - lists commands & info about them
+    - \d[+] [name]
+        - lists all databases, provides more info if [+] is specified
+        - if [name] is specified, shows info about the specified database
+    - \df [pattern]
+        - lists functions in database
+        - the list is filtered by the given [pattern] if provided; accepts wildcards
+    - \dn [pattern]
+        - list schemas
+    - \dp [pattern]
+        - list table/view/sequence access privileges
+    - \dy [pattern]
+        - list event triggers
+    - \l
+        - list databases
+    - \! [command]
+        - execute shell command
+    - \q
+        - Exits psql
         
-Note about DB:
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 To view PostgreSQL databases in Oracle SQL Developer...
     1) Tools > Preferences > Database > Third Party JDBC Drivers
         > Add Entry... > [path to postgresql-42.2.1.jre7.jar]
@@ -40,3 +88,5 @@ To view PostgreSQL databases in Oracle SQL Developer...
         - Select PostgreSQL
             - Hostname: [url]/[Database Name/SID]?
             - Port: [port, default is 5432]
+        
+

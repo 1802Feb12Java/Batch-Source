@@ -2,8 +2,10 @@ package com.revature.servlet;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Properties;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -38,6 +40,13 @@ public class AccountListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Properties servletProps = ServletProperties.getProperties();
+		
+		if(servletProps != null) {
+			request.setCharacterEncoding(servletProps.getProperty("request.enc"));
+			response.setCharacterEncoding(servletProps.getProperty("response.enc"));
+		}
+		
 		ServletContext ctx = getServletContext();
 		File webinfDir = new File(ctx.getRealPath("WEB-INF"));
 		HttpSession session = request.getSession(false);
@@ -120,10 +129,14 @@ public class AccountListServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Properties servletProps = ServletProperties.getProperties();
+		
+		if(servletProps != null) {
+			request.setCharacterEncoding(servletProps.getProperty("request.enc"));
+			response.setCharacterEncoding(servletProps.getProperty("response.enc"));
+		}
+		
 		doGet(request, response); // forward to GET
-		
-		
-		
 	}
 
 }

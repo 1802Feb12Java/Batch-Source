@@ -1,8 +1,10 @@
 package com.revature.servlet;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.Properties;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -30,6 +32,13 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Properties servletProps = ServletProperties.getProperties();
+		
+		if(servletProps != null) {
+			request.setCharacterEncoding(servletProps.getProperty("request.enc"));
+			response.setCharacterEncoding(servletProps.getProperty("response.enc"));
+		}
+		
 		HttpSession session = request.getSession(false);
 		if(session == null) {
 			request.getRequestDispatcher("WEB-INF/login.html").forward(request, response);
@@ -42,6 +51,13 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Properties servletProps = ServletProperties.getProperties();
+		
+		if(servletProps != null) {
+			request.setCharacterEncoding(servletProps.getProperty("request.enc"));
+			response.setCharacterEncoding(servletProps.getProperty("response.enc"));
+		}
+		
 		response.setContentType("text/plain");
 		PrintWriter out = response.getWriter();
 		HttpSession session = request.getSession(false);

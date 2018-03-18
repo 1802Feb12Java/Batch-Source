@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -43,6 +44,13 @@ public class UpdateReimbursementServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Properties servletProps = ServletProperties.getProperties();
+		
+		if(servletProps != null) {
+			request.setCharacterEncoding(servletProps.getProperty("request.enc"));
+			response.setCharacterEncoding(servletProps.getProperty("response.enc"));
+		}
+		
 		HttpSession session = request.getSession(false);
 		User user;
 		

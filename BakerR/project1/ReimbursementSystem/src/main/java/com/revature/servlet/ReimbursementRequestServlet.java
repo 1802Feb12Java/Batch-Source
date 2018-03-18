@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Properties;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -49,6 +50,13 @@ public class ReimbursementRequestServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Properties servletProps = ServletProperties.getProperties();
+		
+		if(servletProps != null) {
+			request.setCharacterEncoding(servletProps.getProperty("request.enc"));
+			response.setCharacterEncoding(servletProps.getProperty("response.enc"));
+		}
+		
 		HttpSession session = request.getSession(false);
 		ServletContext ctx = getServletContext();
 		File webinfPath = new File(ctx.getRealPath("WEB-INF"));
@@ -90,6 +98,13 @@ public class ReimbursementRequestServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Properties servletProps = ServletProperties.getProperties();
+		
+		if(servletProps != null) {
+			request.setCharacterEncoding(servletProps.getProperty("request.enc"));
+			response.setCharacterEncoding(servletProps.getProperty("response.enc"));
+		}
+		
 		// Submit a new reimbursement request.
 		HttpSession session = request.getSession(false);
 		User user;
