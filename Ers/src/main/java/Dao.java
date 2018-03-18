@@ -7,12 +7,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.servlet.http.Cookie;
+
 public class Dao {
-	String a;
-	String b;
-	String c;
-	String d;
-	String e;
+	String username;
+	String password;
+	String firstname;
+	String lastname;
+	String email;
 	String amount;
 	String description;
 	String blob;
@@ -29,26 +31,29 @@ public class Dao {
 	}
 	public Dao(String a, String b)
 	{
-		this.a = a;
-		this.b = b;
+		this.username = a;
+		this.password = b;
+		this.firstname = a;
+		this.password = b;
 	}
-	public Dao(String firstname, String lastname, String c)
+	public Dao(String firstname, String lastname, String status)
 	{
-		this.a = firstname;
-		this.b = lastname;
-		this.c = c;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.status = status;
 		
 	}
 	public Dao(String username, String password, String firstname, String lastname, String email)
 	{
-		this.a = username;
-		this.b = password;
-		this.c = firstname;
-		this.d = lastname;
-		this.e = email;
+		this.username = username;
+		this.password = password;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.email = email;
 	}
-	public void connectionFactory()
+	public Connection connectionFactory()
 	{
+		Connection con = null;
 		ArrayList <String> properties = new ArrayList<>();
 		properties.add("jdbc:oracle:thin:@mydb.cfosdhdadqxy.us-east-2.rds.amazonaws.com:1521:orcl");
 		properties.add("icealys");
@@ -63,33 +68,35 @@ public class Dao {
 			e.printStackTrace();
 		}
 	      try {
-			Connection con = DriverManager.getConnection(url,username,password);
+			con = DriverManager.getConnection(url,username,password);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	      System.out.println("Remote connection successful.");
+	      return con;
 	}
-	public ResultSet sendRe(Connection con, String username, String password) throws SQLException
+	public ResultSet sendRe(Connection con, String usernameCk, String passwordCk) throws SQLException
 	{
-		//get cookies
 		ResultSet rs = null;
+		//get cookies
 		
 		PreparedStatement pst = con.prepareStatement
 		("UPDATE ERS_REIMBURSEMENTS"
 		 +"SET R_ID = ?, R_AMOUNT = ?, R_DESCRIPTION = ?, R_RECEIPT = ?"
 		 +"RS_STATUS = ?, U_ID_RESOLVER = ?, RS_RE_ID = ?"
 		 +"WHERE U_USERNAME = ? AND U_PASSWORD = ?"
-		 +"AND ERS_USER.U_ID = ERS_REIMBURSEMENTS.U_RE_ID");
+		 +"AND ERS_USER.U_ID = ERS_REIMBURSEMENTS.U_RE_ID"
+		 +"AND ERS_RE_STATUS.RS_ID = ERS_REIMBURSEMENTS.RS_RE_ID");
 		pst.setString(1, "R_ID.NEXTVAL");
 		pst.setString(2, this.amount);
 		pst.setString(3, this.description);
 		pst.setString(4, this.blob);
-		pst.setString(5, this.c);
+		pst.setString(5, this.status);
 		pst.setString(6, "U_ID_RESOLVER.NEXTVAL");
 		pst.setString(7, "RS_RE_ID.NEXTVAL");
-		pst.setString(8, username);
-		pst.setString(9, password);
+		pst.setString(8, usernameCk);
+		pst.setString(9, passwordCk);
 		pst.executeQuery();
 		
 		PreparedStatement pst2 = con.prepareStatement
@@ -100,7 +107,8 @@ public class Dao {
 		 +"AND ERS_RE_STATUS.RS_ID = ERS_REIMBURSEMENTS.RS_RE_ID");
 		pst2.setString(1, username);
 		pst2.setString(2, password);
-		return rs = pst2.executeQuery();
+		rs = pst2.executeQuery();
+		return rs;
 	}
 	public ResultSet login(Connection con) throws SQLException
 	{
@@ -109,8 +117,8 @@ public class Dao {
 		("SELECT U_USERNAME, U_PASSWORD"
 		 +"FROM ERS_USERS"
 		 +"WHERE U_USERNAME = ? AND U_PASSWORD = ?");
-		pst.setString(1, this.a);
-		pst.setString(2, this.b);
+		pst.setString(1, this.username);
+		pst.setString(2, this.password);
 		rs = pst.executeQuery();
 		return rs;
 	}
@@ -124,9 +132,9 @@ public class Dao {
 		 +"AND ERS_USERS.U_ID = ERS_REIMBURSEMENTS.U_RE_ID"
 		 +"AND ERS_RE_STATUS.RS_ID = ERS_REIMBURSEMENTS.RS_RE_ID");
 		pst.setString(1, "RS_ID.NEXTVAL");
-		pst.setString(2, this.c);
-		pst.setString(3, this.a);
-		pst.setString(4, this.b);
+		pst.setString(2, this.status);
+		pst.setString(3, this.firstname);
+		pst.setString(4, this.lastname);
 		pst.executeQuery();
 	}
 	public ResultSet displayEmp(Connection con) throws SQLException
@@ -135,8 +143,8 @@ public class Dao {
 		("SELECT U_USERNAME, U_PASSWORD"
 		 +"FROM ERS_USERS"
 		 +"WHERE U_FIRSTNAME = ? AND U_LASTNAME = ?");
-		pst.setString(1, this.a);
-		pst.setString(2, this.b);
+		pst.setString(1, this.firstname);
+		pst.setString(2, this.lastname);
 		ResultSet rs = null;
 		rs = pst.executeQuery();
 		ArrayList<String> arrayBuff = new ArrayList<>();
@@ -156,8 +164,8 @@ public class Dao {
 		 +"AND ERS_RE_STATUS.RS_ID = ERS_REIMBURSEMENTS.RS_RE_ID");
 		pst2.setString(1, arrayBuff.get(1));
 		pst2.setString(2, arrayBuff.get(2));
-		return rs = pst2.executeQuery();
-		
+		rs = pst2.executeQuery();
+		return rs;
 	}
 	public ResultSet getEmp(Connection con) throws SQLException
 	{
@@ -166,36 +174,37 @@ public class Dao {
 		("SELECT U_FIRSTNAME, U_LASTNAME"
 		 +"FROM ERS_USERS"
 		 +"WHERE ERS_USERS.UR_ID = ERS_USER_ROLES.UR_ROLES_ID");
-		return rs = pst.executeQuery();
+		rs = pst.executeQuery();
+		return rs;
 	}
-	public void createUser(Connection con, String username, String password) throws SQLException
+	public void createUser(Connection con, String usernameCk, String passwordCk) throws SQLException
 	{
 		//Get cookies
 		PreparedStatement pst = con.prepareStatement
 		("INSERT INTO ERS_USERS"
 		 +"VALUES (U_ID = ?, U_USERNAME = ?, U_PASSWORD = ?, U_FIRSTNAME = ?, U_LASTNAME = ?, U_EMAIL = ?)");
 		pst.setString(1, "U_ID.NEXTVAL");
-		pst.setString(2, username);
-		pst.setString(3, password);
-		pst.setString(4, this.a);
-		pst.setString(5, this.b);
-		pst.setString(6, this.c);
+		pst.setString(2, usernameCk);
+		pst.setString(3, passwordCk);
+		pst.setString(4, this.firstname);
+		pst.setString(5, this.lastname);
+		pst.setString(6, this.email);
 		pst.executeQuery();
 	}
-	public void updateUser(Connection con, String username, String password) throws SQLException
+	public void updateUser(Connection con, String usernameCk, String passwordCk) throws SQLException
 	{
 		//Get cookies
 		PreparedStatement pst = con.prepareStatement
 		("UPDATE ERS_USERS"
 		 +"SET U_USERNAME = ?, U_PASSWORD = ?, U_FIRSTNAME = ?, U_LASTNAME = ?, U_EMAIL = ?"
 		 +"WHERE U_USERNAME = ? AND U_PASSWORD = ?");
-		pst.setString(1, this.a);
-		pst.setString(2, this.b);
-		pst.setString(3, this.c);
-		pst.setString(4, this.d);
-		pst.setString(5, this.e);
-		pst.setString(6, username);
-		pst.setString(7, password);
+		pst.setString(1, this.username);
+		pst.setString(2, this.password);
+		pst.setString(3, this.firstname);
+		pst.setString(4, this.lastname);
+		pst.setString(5, this.email);
+		pst.setString(6, usernameCk);
+		pst.setString(7, passwordCk);
 		pst.executeQuery();
 	}
 	public String getAmount() {
