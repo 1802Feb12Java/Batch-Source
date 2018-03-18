@@ -9,28 +9,29 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import DAO.DAO;
 import objects.Reimbursement;
+import objects.User;
 
 /**
- * Servlet implementation class ViewRiemMan
+ * Servlet implementation class UserDetails
  */
-@WebServlet("/ViewRiemMan")
-public class ViewRiemMan extends HttpServlet {
+@WebServlet("/UserDetails")
+public class UserDetails extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final Logger logger = LogManager.getLogger(ViewRiem.class);
-   
+
 	
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ViewRiemMan() {
+    public UserDetails() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,46 +40,33 @@ public class ViewRiemMan extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-
+		
 		logger.info("Servlet is working");
+		
 		try {
 
-			List<Reimbursement> list = DAO.getAllReimbs();
-			System.out.println("*****************List contains "+list);
-			JSONArray reimb = new JSONArray();
-			Timestamp ts = null;
-			
-			for (int i = 0; i < list.size(); i++) {
+			User a = DAO.getUser("spiderman");
+			JSONArray user_info = new JSONArray();
+			JSONObject obj2 = new JSONObject();
 
-				JSONObject obj = new JSONObject();
-				Reimbursement r = list.get(i);
-				System.out.println("The object is: "+r);
-				
-				ts = new Timestamp(System.currentTimeMillis());
-				
-				obj.append("date_submitted", ts);
-				obj.append("date_resolved", null);
-				obj.append("first_name", r.getAuthor_id().getFirst_name());
-				obj.append("last_name", r.getAuthor_id().getLast_name());
-				obj.append("request_type", "Food");//r.getType_id().getType());
-				obj.append("description", r.getDescription());
-				obj.append("amount", r.getAmount());
-				obj.append("status", "Pending"); //r.getStatus_id().status);
-				obj.append("request_resolver", ""); //r.getResolver_id().getFullName());
-				obj.append("request_id", r.getId());
-
-				reimb.put(obj);
-			}
-
+			obj2.append("user_id", a.getUser_id());
+			obj2.append("username", a.getUsername());
+			obj2.append("password", "********");
+			obj2.append("fname", a.getFirst_name());
+			obj2.append("lname", a.getLast_name());
+			obj2.append("email", a.getEmail());
+	
+			user_info.put(obj2);
 			response.setContentType("application/json");
-			response.getWriter().print(reimb.toString());
-			logger.info(reimb);
+			response.getWriter().print(user_info.toString());
+			logger.info(user_info);
 
+			logger.info("Servlet is working");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 	}
 
 	/**

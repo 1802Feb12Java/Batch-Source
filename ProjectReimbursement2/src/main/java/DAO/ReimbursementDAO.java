@@ -33,9 +33,9 @@ public class ReimbursementDAO {
 		System.out.println("ReimbDao: reached insertReimb()");
 
 		String sql = "INSERT INTO ERS_REIMBURSEMENT("
-				+ " REQUEST_ID, FIRST_NAME, LAST_NAME, AMOUNT, DESCRIPTION, DATE_SUBMITTED, DATE_RESOLVED, REQUEST_RESOLVER, RECEIPT, STATUS)" + "VALUES(?,?,?,?,?,?,?,?,?,?)";
+				+ " REQUEST_ID, FIRST_NAME, LAST_NAME, AMOUNT, DESCRIPTION, RECEIPT, STATUS, DATE_SUBMITTED, DATE_RESOLVED, REQUEST_RESOLVER)" + "VALUES(?,?,?,?,?,?,?,?,?,?)";
 
-		PreparedStatement stmt = conn.prepareStatement(sql);// sql, new String[] { "REIMB_ID" });
+		PreparedStatement stmt = conn.prepareStatement(sql);
 		Timestamp ts = new Timestamp(System.currentTimeMillis());
 		
 		stmt.setInt(1, type.type_id);
@@ -43,18 +43,19 @@ public class ReimbursementDAO {
 		stmt.setString(3, author.getLast_name());
 		stmt.setDouble(4, amount);
 		stmt.setString(5, description);
-		stmt.setTimestamp(6, ts);
-		stmt.setTimestamp(7, null);
-		stmt.setInt(8, 0);
-		stmt.setNull(9, java.sql.Types.BLOB);
-		stmt.setString(10, status.getStatus());
+		stmt.setNull(6, java.sql.Types.BLOB);
+		stmt.setString(7, status.getStatus());
+		stmt.setTimestamp(8, ts);
+		stmt.setTimestamp(9, null);
+		stmt.setInt(10, 0);										//	ERROR LIES HERE
+
 		ResultSet rs = stmt.executeQuery();
 
 		if (rs.next())
 			rs.next();
 		int pk = rs.getInt(1);
 
-		Reimbursement reimb = new Reimbursement(pk, amount, null, null, description,
+		Reimbursement reimb = new Reimbursement(pk, amount, ts, null, description,
 		author, null, status, type);
 		
 		System.out.println("This is the riembursement: "+ reimb);
@@ -67,22 +68,7 @@ public class ReimbursementDAO {
 
 		List<Reimbursement> list = new ArrayList<Reimbursement>();
 		
-		// String sql = "SELECT REQUEST_ID, AMOUNT," + " s.REIMB_STATUS_ID,
-		// s.REIMB_STATUS,"
-		// + " t.REIMB_TYPE_ID, t.REIMB_TYPE," + " DESCRIPTION," + " auth.ERS_USERS_ID
-		// AS AUTHOR_ID,"
-		// + " auth.ERS_USERNAME AS AUTHOR_USERNAME," + " auth.USER_FIRST_NAME AS
-		// AUTHOR_FIRST_NAME,"
-		// + " auth.USER_LAST_NAME AS AUTHOR_LAST_NAME," + " auth.USER_EMAIL AS
-		// AUTHOR_EMAIL,"
-		// + " res.ERS_USERS_ID AS RESOLVER_ID," + " res.ERS_USERNAME AS
-		// RESOLVER_USERNAME," + " FROM REQUESTS r"
-		// + " JOIN ERS_REIMBURSEMENT_TYPE t" + " ON r.REIMB_TYPE_ID = t.REIMB_TYPE_ID"
-		// + " JOIN ERS_REIMBURSEMENT_STATUS s" + " ON r.REIMB_STATUS_ID =
-		// s.REIMB_STATUS_ID"
-		// + " LEFT JOIN ERS_USERS auth" + " ON r.REIMB_AUTHOR = auth.ERS_USERS_ID" + "
-		// LEFT join ers_users res";
-		String sql = "select * from REQUESTS";
+		String sql = "select * from ERS_REIMBURSEMENT";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		ResultSet rs = stmt.executeQuery();
 		mapReimbs(rs, list);
@@ -94,20 +80,6 @@ public class ReimbursementDAO {
 	/* SQL - get list of reimbursements of one user, given user id */
 
 	public List<Reimbursement> getReimbByAuthor(int author_id) throws SQLException {
-/*
-		List<Reimbursement> results = new ArrayList<Reimbursement>();
-		String sql = "SELECT REIMB_ID, REIMB_AMOUNT," + " s.REIMB_STATUS_ID, s.REIMB_STATUS,"
-				+ " t.REIMB_TYPE_ID, t.REIMB_TYPE," + " REIMB_DESCRIPTION, REIMB_SUBMITTED, REIMB_RESOLVED,"
-				+ " auth.ERS_USERS_ID AS AUTHOR_ID," + " auth.ERS_USERNAME AS AUTHOR_USERNAME,"
-				+ " auth.USER_FIRST_NAME AS AUTHOR_FIRST_NAME," + " auth.USER_LAST_NAME AS AUTHOR_LAST_NAME,"
-				+ " auth.USER_EMAIL AS AUTHOR_EMAIL," + " res.ERS_USERS_ID AS RESOLVER_ID,"
-				+ " res.ERS_USERNAME AS RESOLVER_USERNAME," + " res.USER_FIRST_NAME AS RESOLVER_FIRST_NAME,"
-				+ " res.USER_LAST_NAME AS RESOLVER_LAST_NAME," + " res.USER_EMAIL AS RESOLVER_EMAIL"
-				+ " FROM ERS_REIMBURSEMENT r" + " JOIN ERS_REIMBURSEMENT_TYPE t"
-				+ " ON r.REIMB_TYPE_ID = t.REIMB_TYPE_ID" + " JOIN ERS_REIMBURSEMENT_STATUS s"
-				+ " ON r.REIMB_STATUS_ID = s.REIMB_STATUS_ID" + " LEFT JOIN ERS_USERS auth"
-				+ " ON r.REIMB_AUTHOR = auth.ERS_USERS_ID" + " LEFT join ers_users res"
-				+ " ON r.reimb_resolver = res.ERS_USERS_ID" + " WHERE r.REIMB_AUTHOR = ?"; */
 		
 		String sql = "SELECT * FROM REQUESTS WHERE REQUEST_ID=?";
 		
@@ -136,10 +108,6 @@ public class ReimbursementDAO {
 			amount = rs.getDouble("AMOUNT");
 			//author = setUser(rs, true);
 			System.out.println("got amount and id");
-			// status = new RequestStatus(rs.getInt("REIMB_STATUS_ID"),
-			// rs.getString("REIMB_STATUS"));
-			// type = new RequestType(rs.getInt("REIMB_TYPE_ID"),
-			// rs.getString("REIMB_TYPE"));
 			description = rs.getString("DESCRIPTION");
 			System.out.println("git des");
 			author = new User();

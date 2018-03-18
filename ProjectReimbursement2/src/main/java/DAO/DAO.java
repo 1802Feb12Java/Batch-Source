@@ -217,7 +217,7 @@ public class DAO {
 
 	/* locate user in memory by their username */
 
-	public User getUser(String username) {
+	public static User getUser(String username) {
 		try {
 			System.out.println("in the method getUser()");
 			UserDAO dao = new UserDAO(getConnection());

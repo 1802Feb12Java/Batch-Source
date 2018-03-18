@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -15,7 +16,9 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import DAO.DAO;
+import DAO.UserDAO;
 import objects.Reimbursement;
+import objects.User;
 
 /**
  * Servlet implementation class ViewRiem
@@ -41,6 +44,8 @@ public class ViewRiem extends HttpServlet {
 			throws ServletException, IOException {
 
 		logger.info("Servlet is working");
+		Timestamp ts = new Timestamp(System.currentTimeMillis());
+		
 		try {
 
 			List<Reimbursement> list = DAO.getAllReimbs();
@@ -50,19 +55,22 @@ public class ViewRiem extends HttpServlet {
 
 				JSONObject obj = new JSONObject();
 				Reimbursement r = list.get(i);
+				System.out.println("R and contents: "+r);
 				obj.append("request_type", "Food");//r.getType_id().getType());
 				obj.append("description", r.getDescription());
 				obj.append("amount", r.getAmount());
-				obj.append("status", "Pending");
+				obj.append("status", "Pending");//r.getStatus_id().status);
 				obj.append("request_id", r.getId());
+				obj.append("date_submitted", ts);
+				obj.append("date_resolved", r.getDate_resolved());
+				obj.append("request_resolver", "Bob");//r.getResolver_id().getFullName());
 
 				reimb.put(obj);
 			}
 
 			response.setContentType("application/json");
 			response.getWriter().print(reimb.toString());
-			logger.info(reimb);
-
+			logger.info(reimb);			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

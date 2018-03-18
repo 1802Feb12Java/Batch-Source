@@ -46,25 +46,25 @@ function FillTable(JSONarray){
 		console.log("hello");
 		
 		var call = row.insertCell(0);
-		call.innerHTML = reimb["date_submitted"];
+		call.innerHTML = reimb["request_id"];	
 		call = row.insertCell(1);
-		call.innerHTML = reimb["date_resolved"];
-		call = row.insertCell(2);
 		call.innerHTML = reimb["first_name"];
-		call = row.insertCell(3);
+		call = row.insertCell(2);
 		call.innerHTML = reimb["last_name"];
-		call = row.insertCell(4);
+		call = row.insertCell(3);
 		call.innerHTML = reimb["request_type"];
-		call = row.insertCell(5);
+		call = row.insertCell(4);
 		call.innerHTML = reimb["description"];
-		call = row.insertCell(6);
+		call = row.insertCell(5);
 		call.innerHTML = reimb["amount"];
-		call = row.insertCell(7);
+		call = row.insertCell(6);
 		call.innerHTML = reimb["status"];
+		call = row.insertCell(7);
+		call.innerHTML = reimb["date_submitted"];
 		call = row.insertCell(8);
+		call.innerHTML = reimb["date_resolved"];
+		call = row.insertCell(9);
 		call.innerHTML = reimb["request_resolver"];		
-		call = row.insertCell(8);
-		call.innerHTML = reimb["request_id"];		
 		
 		
 		row.onclick = function(){

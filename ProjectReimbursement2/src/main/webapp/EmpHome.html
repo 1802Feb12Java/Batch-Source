@@ -48,22 +48,42 @@
 			<table id = "employee-table" class="table table-bordered">
 				<thead>
 					<tr>
+						<th>	Request ID		</th>
 						<th>	Request Type	</th>
 						<th>	Description		</th>
 						<th>	Amount			</th>
 						<th>	Status			</th>
-						<th>	Resolver Name	</th>
+						<th>	Date Submitted	</th>
+						<th>	Date Resolved	</th>
+						<th>	Request Resolver</th>
 					</tr>
 				</thead>
 			</table>
 		</div>
-	
+		
+		<div>
+			<h2> User Details: </h2>
+		</div>
+	<div>
+			<table id = "user-details" class="table table-bordered">
+				<thead>
+					<tr>
+						<th>	User ID		</th>
+						<th>	Username	</th>
+						<th>	Password		</th>
+						<th>	First Name			</th>
+						<th>	Last Name			</th>
+						<th>	Email	</th>
+					</tr>
+				</thead>
+			</table>
+		</div>
 		<div>
 			<a href="/ers/newRequestServlet" class="btn btn-primary" role="button">Submit New Request</a>
 		</div>
 	</div>
 	
-						<form style="float: right;" action="LogoutServlet" method = "POST">
+				<form style="float: right;" action="LogoutServlet" method = "POST">
 				<button type="submit" name="denyReimb" 
 						/>Logout</button>
 				</form>

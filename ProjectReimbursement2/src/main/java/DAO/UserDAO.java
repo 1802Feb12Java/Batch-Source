@@ -142,7 +142,7 @@ public class UserDAO {
 	
 	/* SQL - get user and their role, given their username */
 
-	public User getUser(String username) {
+	public  User getUser(String username) {
 		
 		User user = null;
 		String sql = "SELECT *" 
