@@ -26,7 +26,7 @@ public class AdminUsersServlet extends HttpServlet {
         resp.setContentType("text/html");
         HttpSession session = req.getSession();
 		
-		if(session!=null && session.getAttribute("username") != null){
+		if(session!=null){
 			logger.info("Validating admin session and redirecting to /users");
 			req.getRequestDispatcher("users.html").forward(req, resp);
 			

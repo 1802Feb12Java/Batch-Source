@@ -25,7 +25,8 @@ public class UserServices implements UserDao {
 	
 	public void insertNewUser(int roleId, String firstName, String lastName, String email, String username, String password) {
 		
-		try(Connection conn = cf.getConnection()) {
+		try {
+			Connection conn = cf.getConnection();
 			
 			// create statement
 			String sqlInsert = "INSERT INTO bank_user(id, role_id, first_name, last_name, email, username, password) ";
@@ -54,7 +55,8 @@ public class UserServices implements UserDao {
 	
 	public User getUserByUsername(String username) {
 		
-		try(Connection conn = cf.getConnection()) {
+		try {
+			Connection conn = cf.getConnection();
 			
 			// Create get user query
 			String sqlGet = "SELECT * FROM bank_user WHERE username = ?";
@@ -89,9 +91,10 @@ public class UserServices implements UserDao {
 		return null;
 	}
 	
-	@Override
 	public User getUser(int id) throws SQLException {
-		try(Connection conn = cf.getConnection()) {
+		
+		try {
+			Connection conn = cf.getConnection();
 			
 			// Create get user query
 			String sqlGet = "SELECT * FROM bank_user WHERE id = ?";
@@ -130,7 +133,8 @@ public class UserServices implements UserDao {
 		List<User> users = new ArrayList<User>();
 		User user = null;
 		
-		try(Connection conn = cf.getConnection()) {
+		try {
+			Connection conn = cf.getConnection();
 			
 			// create statement
 			String sqlGet = "SELECT * FROM bank_user ORDER BY last_name";
@@ -162,7 +166,8 @@ public class UserServices implements UserDao {
 
 	public void updateUser(int in_id, String updateColumn, String updateValue) {
 		
-		try(Connection conn = cf.getConnection()) {
+		try {
+			Connection conn = cf.getConnection();
 			
 			// Create get user query
 			String sqlGet = "UPDATE user SET ? = ? WHERE id = ?";
@@ -190,10 +195,10 @@ public class UserServices implements UserDao {
 		
 	}
 
-	@Override
 	public void deleteUser(int id) throws SQLException {
 		
-		try(Connection conn = cf.getConnection()) {
+		try {
+			Connection conn = cf.getConnection();
 			
 			// Update query
 			String sqlUpdate = "DELETE FROM bank_user WHERE id = ?";
@@ -215,10 +220,10 @@ public class UserServices implements UserDao {
 		
 	}
 
-	@Override
 	public void updateUser(User user) throws SQLException {
 		
-		try(Connection conn = cf.getConnection()) {
+		try {
+			Connection conn = cf.getConnection();
 			
 			// Update query
 			String sqlUpdate = "UPDATE bank_user SET id=?, role_id=?, first_name=?, last_name=?, email=?, username=?, password=? ";

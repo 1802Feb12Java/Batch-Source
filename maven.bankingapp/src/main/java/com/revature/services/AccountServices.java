@@ -18,10 +18,10 @@ public class AccountServices implements AccountDao {
 	ConnFactory cf = new ConnFactory();
 	
 
-	@Override
 	public void insertNewAccount(int is_approved, double balance) throws SQLException {
 		
-		try(Connection conn = cf.getConnection()) {
+		try {
+			Connection conn = cf.getConnection();
 			
 			// create statement
 			String sqlInsert = "INSERT INTO bank_account(ID, IS_APPROVED, BALANCE) ";
@@ -45,12 +45,12 @@ public class AccountServices implements AccountDao {
 		
 	}
 
-	@Override
 	public Account getAccount(int id) throws SQLException {
 		
 		Account account = null;
 		
-		try(Connection conn = cf.getConnection()) {
+		try {
+			Connection conn = cf.getConnection();
 			
 			// Create get user query
 			String sqlGet = "SELECT * FROM bank_account WHERE id = ?";
@@ -80,13 +80,13 @@ public class AccountServices implements AccountDao {
 		return null;
 	}
 
-	@Override
 	public List<Account> retrieveAllAccounts() throws SQLException {
 		
 		List<Account> accounts = new ArrayList<Account>();
 		Account account = null;
 		
-		try(Connection conn = cf.getConnection()) {
+		try {
+			Connection conn = cf.getConnection();
 			
 			// create statement
 			String sqlGet = "SELECT * FROM bank_account ORDER BY id DESC";
@@ -112,10 +112,10 @@ public class AccountServices implements AccountDao {
 		return null;
 	}
 
-	@Override
 	public void updateAccount(Account account) throws SQLException {
 		
-		try(Connection conn = cf.getConnection()) {
+		try {
+			Connection conn = cf.getConnection();
 			
 			// Update query
 			String sqlUpdate = "UPDATE bank_account SET id=?, is_approved=?, balance=?";
@@ -141,15 +141,14 @@ public class AccountServices implements AccountDao {
 		
 	}
 
-	@Override
 	public void deleteAccount(int accountId) throws SQLException {
 		
 	}
 
-	@Override
 	public boolean pendingAccount() throws SQLException {
 		
-		try(Connection conn = cf.getConnection()) {
+		try {
+			Connection conn = cf.getConnection();
 			
 			// Create get user query
 			String sqlGet = "SELECT * FROM bank_account WHERE is_approved = ?";
