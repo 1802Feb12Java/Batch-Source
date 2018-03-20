@@ -1,0 +1,16 @@
+@Path("/item")
+public class ItemServices{
+
+@Inject
+ItemDAO itemDao;
+
+@GET
+@Path("{id}")
+@Produces(APPLICATION_XML)
+public Item get(@PathParam("id"), Long id){
+Item item = itemDAO.findById(id);
+if (item==null)
+throw new exception;
+return item;
+}
+

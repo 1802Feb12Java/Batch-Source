@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="GUITAR")
@@ -25,6 +26,9 @@ public class Guitar implements Serializable{
 	private int id;
 	
 	@Column(name="MAKE")
+	@Size(min = 4,
+	max = 255,
+	message = "Make is required, maximum 255 characters")
 	private String make;
 	
 	@Column(name="MODEL")
