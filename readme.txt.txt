@@ -1,1 +1,2 @@
-JavaScript homework is in JavaScript_HW1 folder
+ERS project 1 is in /ers directory
+see ers/readme.txt for details
