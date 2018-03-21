@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd"
+		default-init-method="defaultInit" default-destroy-method="defaultDestroy">
+
+	<bean name="bearWithSetter" class="com.revature.beans.BearWithSetter"
+		scope="prototype">
+		<property name="cave" ref="cave" /> <!-- ref is the name of the bean to be injected -->
+	</bean>	<!-- name is the name of the field in the bean -->
+	<bean name="bearWithConstructor" class="com.revature.beans.BearWithConstructor" 
+		scope="prototype">
+		<constructor-arg ref="cave"></constructor-arg>
+	</bean>			
+	<bean name="bearWithAutowiringByType" class="com.revature.beans.BearWithAutowiringByType"
+		scope="prototype" autowire="byType"></bean>	
+	<bean name="bearWithAutowiringByName" class="com.revature.beans.BearWithAutowiringByName"
+		scope="prototype" autowire="byName"></bean>
+	<bean name="cave" class="com.revature.beans.Cave">
+		<property name="id" value="50" />
+		<property name="name" value="HoweCaverns" /> 
+	</bean>
+	<context:component-scan base-package="com.revature.beans"></context:component-scan>
+
+</beans>
