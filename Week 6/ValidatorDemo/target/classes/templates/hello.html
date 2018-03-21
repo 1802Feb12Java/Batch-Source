@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Hello there</title>
+  </head>
+  
+  <body>
+    <p th:text="'flavor: ' + ${iceCream.flavor}"/>
+    <p th:text="'scoops: ' + ${iceCream.scoops}"/>
+  
+	  <form action="#" th:action="@{/hello}" th:object="${iceCream}" method="post">
+	      Flavor: <input type="text" th:field="*{flavor}" />
+	      <p th:if="${#fields.hasErrors('flavor')}" th:errors="*{flavor}">
+	        Flavor Error
+	      </p>
+	      
+	      <br/>
+	      
+	      Scoops: <input type="text" th:field="*{scoops}" />
+	      <p th:if="${#fields.hasErrors('scoops')}" th:errors="*{scoops}">
+	        Scoops Error
+	      </p>
+	      
+	      <button type="submit">Submit</button>
+	    </form>
+  </body>
+</html>
