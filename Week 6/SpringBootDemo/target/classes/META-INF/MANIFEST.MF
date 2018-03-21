@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Implementation-Title: SpringBootDemo
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: Revature
+Implementation-Vendor-Id: com.revature
+Build-Jdk: 1.8.0_152
+Implementation-URL: http://projects.spring.io/spring-boot/SpringBootDe
+ mo/
+Created-By: Maven Integration for Eclipse
+Implementation-Vendor: Pivotal Software, Inc.
+

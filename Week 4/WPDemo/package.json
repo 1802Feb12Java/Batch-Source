@@ -1,0 +1,16 @@
+{
+  "name": "wpdemo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./src/js/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dist-build": "webpack -p --display-modules --progress"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^4.1.1",
+    "webpack-cli": "^2.0.10"
+  }
+}
