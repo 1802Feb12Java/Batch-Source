@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>RequestReimbursement</title>
+</head>
+<body>
+
+<form action= "/Reimbursements/Request" method="post">
+	<fieldset>
+		Amount:<br>
+		$<input type ="text" name ="amount" placeholder="Amount" required><br>
+		Description:<br>
+		<input type ="text" name ="description" placeholer="Description"><br>
+		Upload a Receipt:
+		<input type ="file" name = "receipt"><br>
+		Type:<br>
+		<fieldset>
+		<input type ="radio" name = "type" required>Buisness
+		<input type ="radio" name = "type">Travel 
+		<input type ="radio" name = "type">Medical
+		</fieldset>
+		<br><input type = "submit">
+	</fieldset>
+</form>
+
+</body>
+</html>
