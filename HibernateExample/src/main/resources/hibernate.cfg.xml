@@ -3,6 +3,7 @@
 <hibernate-configuration>
 	<session-factory>
 		<property name="hibernate.connection.url">
+<<<<<<< HEAD
 		jdbc:oracle:thin:@homeworkdb.cfvoenvyiyrk.us-east-2.rds.amazonaws.com:1521:ORCL
 		</property>
 		<property name="hibernate.connection.username">greenk</property>
@@ -13,4 +14,22 @@
 		<property name="hibernate.hbm2ddl.auto">create</property>
 		<mapping class="com.revature.beans.Guitar"></mapping>
 	</session-factory>
+=======
+			jdbc:oracle:thin:@feb12usf.ccjzasyyhpja.us-east-2.rds.amazonaws.com:1521:ORCL
+		</property>
+		<property name="hibernate.connection.username">mattk</property>
+		<property name="hibernate.connection.password">ihatejosh</property>
+		<property name="hibernate.connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
+		<property name="hibernate.dialect">
+			org.hibernate.dialect.Oracle10gDialect
+		</property>
+		<property name="hibernate.show_sql">true</property>
+		<property name="hibernate.hbm2ddl.auto">
+			create
+			<!-- update,create-drop,validate, create -->
+		</property>
+		<mapping class="com.revature.beans.Guitar" />
+	</session-factory>
+
+>>>>>>> KnightenM
 </hibernate-configuration>
