@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Implementation-Title: SpringRestServer
 Implementation-Version: 0.0.1-SNAPSHOT
-Built-By: Revature
+Built-By: josep
 Implementation-Vendor-Id: com.revature
-Build-Jdk: 1.8.0_152
+Build-Jdk: 1.8.0_162
 Implementation-URL: http://projects.spring.io/spring-boot/SpringRestSe
  rver/
 Created-By: Maven Integration for Eclipse
