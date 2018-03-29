@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Built-By: jboud1217
+Build-Jdk: 9.0.4
+Implementation-Title: SpringDemo
+Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Vendor-Id: com.revature
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/SpringDemo
+Created-By: Maven Integration for Eclipse
+
