@@ -49,6 +49,8 @@ public class FlashCardCtrl {
 	@HystrixCommand(fallbackMethod="fcBackUp")
 	public FlashCard fc(){
 		System.out.println("fcRestEndpoints: " + fcRestEndpoints);
+		String badURL = "http://localhost:8080/getFc";
+		String slightlyBetterURL = "http://flashcard-service-2/getFc";
 		String url = "http://" + fcRestEndpoints + "/getFc";
 		FlashCard fc = restTemplate.getForObject(url, FlashCard.class);
 		return fc;

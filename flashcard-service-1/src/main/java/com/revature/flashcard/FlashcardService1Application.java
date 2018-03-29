@@ -5,6 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+
 
 @EnableCircuitBreaker
 @EnableEurekaClient
@@ -38,7 +40,9 @@ public class FlashcardService1Application {
 	 * 			-set server port
 	 * 			-set eureka properties
 	 * 			-create endpoints
-	 * @Value
+	 * 			-@Value https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-external-config.html
+	 * 				allows dynamic domain injection through a properties file
+	 * 
 	 * 		FlashCard Eureka (Service Discovery)
 	 * 			-create bootstrap.yml and provide spring application name
 	 * 			-add @EableEurekaServer
@@ -53,10 +57,15 @@ public class FlashcardService1Application {
 	 * 		
 	 * 		NEW
 	 *		FlashCard-Config-Server
-	 *			?
-	 *
-	 * 		Hystrix added
-	 * 			?
+	 *			-only flashcard-service-2 is using config client for this example
+	 *			-setup @EnableConfigServer, clients only need the dependency NO Annotation
+	 *			-add the property of spring.cloud.config.server.git.uri=
+	 *			-other services will need in bootstrap.yml the spring cloud config uri: 
+	 *					which is the location to config server e.g. http://localhost:9000
+	 *		
+	 * 		Hystrix added flashcard-service-1
+	 * 			-each service needs @EnableCircuitBreaker
+	 * 			-@HystrixCommand(fallbackMethod="fcBackUp")
 	 * 
 	 * 		Short-cuts
 	 * 			alt + up/down = move line
