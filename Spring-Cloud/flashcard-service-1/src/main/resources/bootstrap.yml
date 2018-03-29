@@ -1,0 +1,4 @@
+spring:
+  application:
+    name: flashcard-service-1
+    
