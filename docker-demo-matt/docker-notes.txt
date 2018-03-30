@@ -1,0 +1,24 @@
+Create a Dockerfile
+    add your instructions e.g. FROM, EXPOSE, CMD etc
+
+Build an image from a Dockerfile
+    e.g. docker build -t fc-eureka .
+
+Start/Run a container from an image
+    e.g. docker run -p host-port-number:Dockerfile-exposed-port-number -d image-name
+        docker run -p 8761:8761 -d fc-eureka 
+            -p = --publish aka port number..
+            -d = --detached aka run this process in the background
+
+
+docker swarm init --advertise-addr
+docker stack deploy -c docker-compose.yml fc-stack
+                                            stack-name
+docker stack rm fc-stack
+
+docker commands:
+    docker images -lists out images on machine
+    docker inspect <image-id> -json data of the image like ports exposed, cmds
+    docker ps -process status aka containers that are running
+    docker ps -a for all containers, even stopped
+    docker logs <container-id> -displays the console logs of that container, good for debugging

@@ -1,0 +1,11 @@
+Welcome to docker
+    using AWS Linux EC2
+Getting Setup
+1. update EC2: sudo yum update -yum
+2. install docker: sudo yum install docker -y
+3. start docker: sudo service docker start 
+    or stop with: sudo service docker stop
+4. get permissions to use docker: sudo usermod -a -G docker ec2-user
+        *note this requires a restart*
+5. duplicate / restart session then run: docker info
+        *should display the docker information instead of permission denied*

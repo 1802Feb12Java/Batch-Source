@@ -1,0 +1,86 @@
+version: '3'
+services:
+  flashcard-service:
+    image: skrevature/flashcard-service
+    deploy:
+      replicas: 5
+    # depends_on: 
+    #   - fs-config
+      # restart_policy:
+        # condition: on-failure
+    ports:
+      - "8000:8000"
+    networks:
+      - flashcard
+  fs-service-2:
+    image: skrevature/flashcard-service-2
+    deploy:
+      replicas: 5
+    # depends_on: 
+    #   - fs-config
+      # restart_policy:
+        # condition: on-failure
+    ports:
+      - "8001:8001"
+    networks:
+      - flashcard
+    # container_name: flashcard-service-2
+  fs-eureka:
+      image: skrevature/eureka
+      deploy:
+        replicas: 3
+      # depends_on: 
+      # - fs-config
+        # restart_policy:
+          # condition: on-failure
+      ports:
+        - "8761:8761"
+      networks:
+        - flashcard
+      # container_name: flashcard-eureka
+  fs-zuul:
+      image: skrevature/zuul
+      deploy:
+        replicas: 3
+      # depends_on: 
+      #   - fs-config
+        # restart_policy:
+          # condition: on-failure
+      ports:
+        - "8765:8765"
+      networks:
+        - flashcard
+        # container_name: flashcard-zuul
+networks:
+  flashcard:
+    
+
+
+    #      - "8001:8001"
+    #  - "8002:8002"
+    #  - "8003:8003"
+    #  - "8004:8004"
+    #  - "8765:8765"
+    #  - "8761:8761"
+# Example:
+#     version: "3"
+# services:
+
+#   vote:
+#     image: dockersamples/examplevotingapp_vote:before
+#     ports:
+#       - 5000:80
+#     networks:
+#       - frontend
+#     deploy:
+#       replicas: 2
+#       update_config:
+#         parallelism: 1
+#         delay: 10s
+#       restart_policy:
+#         condition: on-failure
+#       placement:
+#         constraints: [node.role == worker]
+  
+# networks:
+#   frontend:
