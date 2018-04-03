@@ -1,0 +1,77 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.revature</groupId>
+  <artifactId>soapeater</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>soapeater</name>
+  
+  
+  <properties>
+    <cxf.version>3.2.4</cxf.version>
+  </properties>
+  
+  <dependencies>
+    <dependency>
+	    <groupId>org.apache.cxf</groupId>
+	    <artifactId>cxf-rt-frontend-jaxws</artifactId>
+	    <version>${cxf.version}</version>
+    </dependency>
+    
+    <dependency>
+        <groupId>org.apache.cxf</groupId>
+        <artifactId>cxf-rt-transports-http</artifactId>
+        <version>${cxf.version}</version>
+    </dependency>
+    
+  </dependencies>
+  
+  <build>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-eclipse-plugin</artifactId>
+            <configuration>
+                <projectNameTemplate>[artifactId]-[version]</projectNameTemplate>
+                <wtpmanifest>true</wtpmanifest>
+                <wtpapplicationxml>true</wtpapplicationxml>
+                <wtpversion>2.0</wtpversion>                
+            </configuration>
+        </plugin>
+        
+        <plugin>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-codegen-plugin</artifactId>
+            <version>${cxf.version}</version>
+            <executions>
+                <execution>
+                    <phase>generate-sources</phase>
+                    <goals>
+                        <goal>wsdl2java</goal>
+                    </goals>
+                    
+                    <configuration>
+                        <sourceRoot>${basedir}/src/main/java</sourceRoot>
+                        <wsdlOptions>
+                            <wsdlOption>
+                                <wsdl>http://localhost:8080/soapgreeting/greetingservice?wsdl</wsdl>
+                                <extraargs>
+                                    <extraarg>-client</extraarg>
+                                </extraargs>
+                            </wsdlOption>
+                        </wsdlOptions>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
+        
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <configuration>
+                <source>1.8</source>
+                <source>1.8</source>
+            </configuration>
+        </plugin>
+    </plugins>
+  </build>
+</project>
