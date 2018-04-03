@@ -1,4 +1,4 @@
-#Revature Training program Batch 1802-feb12  
+# Revature Training program Batch 1802-feb12  
 This branch contains notes/examples, assignments, and projects from the Revature training program by Kevin Hsieh from Batch 1802.  
 
 ## Project 1 - Expense Reimbursement System
